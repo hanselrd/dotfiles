@@ -19,6 +19,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tomasiser/vim-code-dark'
+Plugin 'bling/vim-bufferline'
 
 call vundle#end()
 filetype plugin indent on
