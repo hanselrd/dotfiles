@@ -48,6 +48,28 @@ syntax enable
 set number
 colorscheme codedark
 
+" indentation
+set tabstop=8
+set softtabstop=0
+set expandtab
+set shiftwidth=4
+set smarttab
+
+" highlight whitespace
+set list
+set listchars=
+"set listchars+=eol:↲
+set listchars+=tab:→\
+set listchars+=trail:∙
+set listchars+=extends:»
+set listchars+=precedes:«
+set listchars+=nbsp:⣿
+set showbreak=↪\
+if has('patch-7.4.710')
+    set listchars+=space:𐄙
+endif
+
+
 " search down into subfolders
 " provides tab-completion for all file-related tasks
 set path+=**
