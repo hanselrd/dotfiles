@@ -69,7 +69,6 @@ if has('patch-7.4.710')
     set listchars+=space:𐄙
 endif
 
-
 " search down into subfolders
 " provides tab-completion for all file-related tasks
 set path+=**
