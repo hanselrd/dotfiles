@@ -65,9 +65,9 @@ set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:⣿
 set showbreak=↪\
-if has('patch-7.4.710')
-    set listchars+=space:𐄙
-endif
+"if has('patch-7.4.710')
+"    set listchars+=space:𐄙
+"endif
 
 " search down into subfolders
 " provides tab-completion for all file-related tasks

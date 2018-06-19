@@ -169,6 +169,9 @@ bar {
         status_command i3status
 }
 
+# Disable window borders
+for_window [class="^.*"] border pixel 1
+
 # Redshift
 exec --no-startup-id redshift
 
@@ -185,7 +188,7 @@ exec xinput set-prop 12 279 1
 bindsym $mod+Shift+x exec i3lock -c 000000
 
 # Screenshot
-bindsym Print exec gnome-screenshot -i 
+bindsym Print exec gnome-screenshot -i
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
