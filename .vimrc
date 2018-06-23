@@ -8,7 +8,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'itchyny/lightline.vim'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
@@ -19,27 +18,38 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tomasiser/vim-code-dark'
-Plugin 'bling/vim-bufferline'
+Plugin 'mgee/lightline-bufferline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'itchyny/vim-gitbranch'
 
 call vundle#end()
 filetype plugin indent on
 
 " lightline
 set laststatus=2
+set showtabline=2
 set noshowmode
-
-" syntastic
-set statusline+=%warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
 
 " vim-javascript
 let g:javascript_plugin_jsdoc=1
+
+" lightline-bufferline
+let g:lightline#bufferline#show_number=1
+let g:lightline#bufferline#shorten_path=0
+let g:lightline#bufferline#unnamed='[No Name]'
+
+let g:lightline={
+    \ 'active': {
+    \   'left': [['mode', 'paste'],
+    \            ['gitbranch', 'readonly', 'filename', 'modified']]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ }
+    \ }
+let g:lightline.tabline={'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand={'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type={'buffers': 'tabsel'}
 
 " enable syntax highlighting
 syntax enable
@@ -66,7 +76,7 @@ set listchars+=precedes:«
 set listchars+=nbsp:⣿
 set showbreak=↪\
 "if has('patch-7.4.710')
-"    set listchars+=space:𐄙
+"   set listchars+=space:𐄙
 "endif
 
 " search down into subfolders
@@ -84,5 +94,3 @@ let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_altv=1
 let g:netrw_liststyle=3
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
