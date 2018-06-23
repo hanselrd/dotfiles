@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-sudo dnf install i3 i3lock feh network-manager-applet xbacklight -y
+sudo dnf install i3 i3lock feh network-manager-applet xbacklight zsh -y
+
+#chsh -s /usr/bin/bash
+#chsh -s /usr/bin/zsh
 
 cp -R wallpaper.jpg ~/Pictures/wallpaper.jpg
 
