@@ -21,6 +21,7 @@ Plugin 'tomasiser/vim-code-dark'
 Plugin 'mgee/lightline-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/vim-gitbranch'
+Plugin 'rhysd/vim-clang-format'
 
 call vundle#end()
 filetype plugin indent on
@@ -50,6 +51,15 @@ let g:lightline={
 let g:lightline.tabline={'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand={'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type={'buffers': 'tabsel'}
+
+" vim-clang-format
+let g:clang_format#style_options={
+    \ "Standard": "C++11",
+    \ "BreakBeforeBraces": "Attach",
+    \ "AccessModifierOffset": -4,
+    \ "AllowShortIfStatementsOnASingleLine": "true"
+    \ }
+autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " enable syntax highlighting
 syntax enable
