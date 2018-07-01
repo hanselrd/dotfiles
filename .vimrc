@@ -8,10 +8,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'itchyny/lightline.vim'
-Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'editorconfig/editorconfig-vim'
@@ -22,6 +20,9 @@ Plugin 'mgee/lightline-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'rhysd/vim-clang-format'
+if v:version >= 800
+    Plugin 'maralla/completor.vim'
+endif
 
 call vundle#end()
 filetype plugin indent on
@@ -30,9 +31,6 @@ filetype plugin indent on
 set laststatus=2
 set showtabline=2
 set noshowmode
-
-" vim-javascript
-let g:javascript_plugin_jsdoc=1
 
 " lightline-bufferline
 let g:lightline#bufferline#show_number=1
@@ -54,12 +52,18 @@ let g:lightline.component_type={'buffers': 'tabsel'}
 
 " vim-clang-format
 let g:clang_format#style_options={
-    \ "Standard": "C++11",
+    \ "Standard": "Cpp11",
     \ "BreakBeforeBraces": "Attach",
     \ "AccessModifierOffset": -4,
     \ "AllowShortIfStatementsOnASingleLine": "true"
     \ }
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
+
+" completor
+let g:completor_clang_binary = '/usr/bin/clang'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " enable syntax highlighting
 syntax enable
