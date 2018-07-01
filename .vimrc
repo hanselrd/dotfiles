@@ -57,7 +57,7 @@ let g:clang_format#style_options={
     \ "AccessModifierOffset": -4,
     \ "AllowShortIfStatementsOnASingleLine": "true"
     \ }
-autocmd FileType c,cpp,objc ClangFormatAutoEnable
+"autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " completor
 let g:completor_clang_binary = '/usr/bin/clang'
