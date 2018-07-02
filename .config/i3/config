@@ -186,7 +186,7 @@ exec nm-applet
 exec xinput set-prop 12 279 1
 
 # Lock screen
-bindsym $mod+Shift+x exec i3lock -c 000000 -e
+bindsym $mod+Shift+x exec scrot /tmp/screen.png && convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png && i3lock -e -i /tmp/screen.png
 
 # Screenshot
 bindsym Print exec gnome-screenshot -i
