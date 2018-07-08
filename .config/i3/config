@@ -170,7 +170,7 @@ bar {
 }
 
 # Disable window borders
-#for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 1
 
 # Redshift
 exec --no-startup-id redshift -t 5500:1200 -l 40.7128:-74.0060
