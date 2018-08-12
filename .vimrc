@@ -12,7 +12,7 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
-Plugin 'editorconfig/editorconfig-vim'
+Plugin 'sgur/vim-editorconfig'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tomasiser/vim-code-dark'
@@ -110,3 +110,6 @@ let g:netrw_altv=1
 let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+" nice to haves
+cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
