@@ -27,8 +27,9 @@ class Offsets(gdb.Command):
             if last_field != None and last_field.bitsize == 0 and ((last_field.bitpos / 8) + last_field.type.sizeof) != (field.bitpos / 8):
                 tmp1 = int(last_field.bitpos / 8) + last_field.type.sizeof
                 tmp2 = int(field.bitpos / 8) - tmp1
+                code = stype.strip_typedefs().code
                 # unions cause a padding false-positive
-                if tmp2 > 0:
+                if code is not gdb.TYPE_CODE_UNION:
                     print(textwrap_indent('__pad__; => {} [{} padding]'.format(tmp1, tmp2), ' ' * 4 * (indent + 1)))
                     padding += tmp2
             code = field.type.strip_typedefs().code
@@ -42,11 +43,12 @@ class Offsets(gdb.Command):
         if last_field != None and last_field.bitsize == 0 and ((last_field.bitpos / 8) + last_field.type.sizeof) != stype.sizeof:
             tmp4 = int(last_field.bitpos / 8) + last_field.type.sizeof
             tmp5 = stype.sizeof - tmp4
-            print(textwrap_indent('__pad__; => {} [{} padding]'.format(tmp4, tmp5), ' ' * 4 * (indent + 1)))
-            padding += tmp5
+            code = stype.strip_typedefs().code
+            if code is not gdb.TYPE_CODE_UNION:
+                print(textwrap_indent('__pad__; => {} [{} padding]'.format(tmp4, tmp5), ' ' * 4 * (indent + 1)))
+                padding += tmp5
 
         if sfield is None:
-            pass
             print(textwrap_indent('}}; [{}] ({} padding)'.format(stype.sizeof, padding), ' ' * 4 * indent))
         else:
             tmp6 = int(sfield.bitpos / 8)
