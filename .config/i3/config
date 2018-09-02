@@ -174,7 +174,7 @@ bar {
 for_window [class="^.*"] border pixel 1
 
 # Display
-exec_always --no-startup-id xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 280x1080 --rotate normal --output VGA1 --off
+exec_always --no-startup-id xrandr --output HDMI1 --mode 1360x768 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x768 --rotate normal --output VGA1 --off
 
 # Redshift
 exec --no-startup-id redshift -t 5500:2500 -l 40.7128:-74.0060
