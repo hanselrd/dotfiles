@@ -187,7 +187,7 @@ exec_always --no-startup-id feh --bg-scale ~/.backgrounds/0006.jpg
 exec --no-startup-id nm-applet
 
 # Enable tap to click
-exec --no-startup-id xinput set-prop 12 279 1
+exec --no-startup-id xinput set-prop 13 297 1
 
 # Lock screen
 bindsym $mod+Shift+x exec --no-startup-id scrot /tmp/screen.png && convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png && i3lock -e -i /tmp/screen.png
@@ -196,9 +196,10 @@ bindsym $mod+Shift+x exec --no-startup-id scrot /tmp/screen.png && convert /tmp/
 bindsym Print exec --no-startup-id gnome-screenshot -i
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks | grep "Name" | cut -d " " -f 2-) +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks | grep "Name" | cut -d " " -f 2-) -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl list sinks | grep "Name" | cut -d " " -f 2-) toggle
+bindsym $mod+Shift+s exec --no-startup-id [[ $(pacmd list-cards | grep "active profile" | cut -d " " -f 3-) = "<output:analog-stereo+input:analog-stereo>" ]] && pactl set-card-profile 0 "output:hdmi-stereo+input:analog-stereo" || pactl set-card-profile 0 "output:analog-stereo+input:analog-stereo"
 
 # Screen brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id  xbacklight -inc 5
