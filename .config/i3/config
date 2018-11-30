@@ -187,6 +187,8 @@ exec_always --no-startup-id feh --bg-scale ~/.backgrounds/0006.jpg
 exec --no-startup-id nm-applet
 
 # Enable tap to click
+exec --no-startup-id xinput set-prop 12 279 1
+exec --no-startup-id xinput set-prop 12 285 1
 exec --no-startup-id xinput set-prop 13 297 1
 
 # Lock screen
