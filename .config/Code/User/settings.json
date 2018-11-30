@@ -21,6 +21,9 @@
     "[typescriptreact]": {
         "editor.formatOnSave": true
     },
+    "[json]": {
+        "editor.formatOnSave": true
+    },
     "[rust]": {
         "editor.formatOnSave": true
     },
@@ -33,11 +36,13 @@
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },
-    "prettier.singleQuote": true,
+    // "prettier.singleQuote": true,
+    "prettier.requireConfig": true,
     "workbench.iconTheme": "material-icon-theme",
     "editor.fontFamily": "'Operator Mono Lig'",
     "editor.fontLigatures": true,
     "editor.fontWeight": "500",
     "terminal.integrated.fontFamily": "'Operator Mono Lig'",
-    "terminal.integrated.fontWeight": "bold"
+    "terminal.integrated.fontWeight": "bold",
+    "window.zoomLevel": 0
 }
