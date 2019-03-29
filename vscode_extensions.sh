@@ -3,7 +3,6 @@
 code --install-extension bungcip.better-toml
 code --install-extension codehz.chaiscript-syntax
 code --install-extension EditorConfig.EditorConfig
-code --install-extension esbenp.prettier-vscode
 code --install-extension josef.rouge-theme
 code --install-extension jpoissonnier.vscode-styled-components
 code --install-extension kumar-harsh.graphql-for-vscode
@@ -22,7 +21,6 @@ code --install-extension slevesque.vscode-hexdump
 code --install-extension smkamranqadri.vscode-bolt-language
 code --install-extension toba.vsfire
 code --install-extension twxs.cmake
-code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension vscode-ext.sync-rsync
 code --install-extension vscodevim.vim
 code --install-extension waderyan.gitblame

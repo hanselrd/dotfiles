@@ -8,10 +8,16 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'itchyny/lightline.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
+Plugin 'editorconfig/editorconfig-vim'
 "Plugin 'sgur/vim-editorconfig'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
@@ -31,6 +37,17 @@ filetype plugin indent on
 set laststatus=2
 set showtabline=2
 set noshowmode
+
+" vim-javascript
+let g:javascript_plugin_jsdoc=1
+
+" emmet-vim
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings={
+    \ 'javascript.jsx' : {
+    \   'extends': 'jsx',
+    \ },
+    \ }
 
 " lightline-bufferline
 let g:lightline#bufferline#show_number=1
@@ -60,16 +77,19 @@ let g:clang_format#style_options={
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " completor
-let g:completor_clang_binary = '/usr/bin/clang'
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+if v:version >= 800
+    let g:completor_clang_binary = '/usr/bin/clang'
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+endif
 
 " enable syntax highlighting
 syntax enable
 
 " line numbers and color
 set number
+set hlsearch
 colorscheme codedark
 
 " indentation
@@ -78,6 +98,8 @@ set softtabstop=0
 set expandtab
 set shiftwidth=4
 set smarttab
+set backspace=indent,eol,start
+set tw=0
 
 " highlight whitespace
 set list

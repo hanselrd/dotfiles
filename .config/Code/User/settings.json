@@ -4,44 +4,15 @@
     "files.associations": {
         "*.tpp": "cpp"
     },
-    "[css]": {
-        "editor.formatOnSave": true
-    },
-    "[javascript]": {
-        "editor.formatOnSave": true
-    },
-    "[javascriptreact]": {
-        "editor.formatOnSave": true
-    },
-    "[typescript]": {
-        "editor.formatOnSave": true
-    },
-    "[typescriptreact]": {
-        "editor.formatOnSave": true
-    },
-    "[json]": {
-        "editor.formatOnSave": true
-    },
-    "[python]": {
-       "editor.formatOnSave": true 
-    },
-    "[rust]": {
-        "editor.formatOnSave": true
-    },
-    "[c]": {
-        "editor.formatOnSave": true,
-    },
-    "[cpp]": {
-        "editor.formatOnSave": true,
-    },
+    "editor.formatOnSave": true,
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },
-    "prettier.requireConfig": true,
     "workbench.iconTheme": "material-icon-theme",
     "editor.fontFamily": "'Operator Mono Lig'",
     "editor.fontLigatures": true,
     "editor.fontWeight": "500",
     "terminal.integrated.fontFamily": "'Operator Mono Lig'",
-    "terminal.integrated.fontWeight": "bold"
+    "terminal.integrated.fontWeight": "bold",
+    // "sync-rsync.onSave": true
 }
