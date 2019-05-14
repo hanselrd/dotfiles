@@ -1,0 +1,17 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "files.associations": {
+        "*.tpp": "cpp"
+    },
+    "editor.formatOnSave": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "editor.fontFamily": "Operator Mono Lig",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "bold",
+    "terminal.integrated.fontFamily": "Operator Mono Lig",
+    "terminal.integrated.fontWeight": "bold",
+    "workbench.colorTheme": "Rouge",
+    "workbench.iconTheme": "material-icon-theme"
+}
