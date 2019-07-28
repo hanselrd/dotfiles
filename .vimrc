@@ -12,8 +12,11 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'rust-lang/rust.vim'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -24,6 +27,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tomasiser/vim-code-dark'
+Plugin 'morhetz/gruvbox'
 Plugin 'mgee/lightline-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/vim-gitbranch'
@@ -42,6 +46,12 @@ set noshowmode
 
 " vim-javascript
 let g:javascript_plugin_jsdoc=1
+
+" rust.vim
+let g:rustfmt_autosave=1
+
+" asyncrun
+"autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
 
 " emmet-vim
 let g:user_emmet_leader_key='<Tab>'
@@ -91,8 +101,11 @@ syntax enable
 
 " line numbers and color
 set number
+set relativenumber
 set hlsearch
-colorscheme codedark
+"colorscheme codedark
+colorscheme gruvbox
+set background=dark
 
 " indentation
 set tabstop=8

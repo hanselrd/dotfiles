@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+code-insiders --install-extension aaron-bond.better-comments
 code-insiders --install-extension bungcip.better-toml
 code-insiders --install-extension codehz.chaiscript-syntax
 code-insiders --install-extension eamodio.gitlens
 code-insiders --install-extension EditorConfig.EditorConfig
 code-insiders --install-extension josef.rouge-theme
 code-insiders --install-extension jpoissonnier.vscode-styled-components
+code-insiders --install-extension justusadam.language-haskell
 code-insiders --install-extension kumar-harsh.graphql-for-vscode
 code-insiders --install-extension mikestead.dotenv
 code-insiders --install-extension ms-python.python
@@ -20,6 +22,8 @@ code-insiders --install-extension nepaul.editorconfiggenerator
 code-insiders --install-extension PKief.material-icon-theme
 code-insiders --install-extension primalmotion.primal
 code-insiders --install-extension rust-lang.rust
+code-insiders --install-extension sbrink.elm
+code-insiders --install-extension shardulm94.trailing-spaces
 code-insiders --install-extension shd101wyy.markdown-preview-enhanced
 code-insiders --install-extension sidneys1.gitconfig
 code-insiders --install-extension slevesque.shader
