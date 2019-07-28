@@ -67,6 +67,7 @@ let g:lightline#bufferline#shorten_path=0
 let g:lightline#bufferline#unnamed='[No Name]'
 
 let g:lightline={
+    \ 'colorscheme': 'wombat',
     \ 'active': {
     \   'left': [['mode', 'paste'],
     \            ['gitbranch', 'readonly', 'filename', 'modified']]
