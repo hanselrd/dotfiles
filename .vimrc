@@ -33,6 +33,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-commentary'
 if v:version >= 800
     Plugin 'maralla/completor.vim'
 endif
