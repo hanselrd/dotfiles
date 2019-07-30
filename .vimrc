@@ -16,7 +16,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'skywind3000/asyncrun.vim'
-Plugin 'w0rp/ale'
+"Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -32,6 +32,7 @@ Plugin 'mengelbrecht/lightline-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'rhysd/vim-clang-format'
+Plugin 'tpope/vim-vinegar'
 if v:version >= 800
     Plugin 'maralla/completor.vim'
 endif
@@ -142,12 +143,13 @@ set wildmenu
 command! MakeTags !ctags -R .
 
 " tweaks for file browsing
-let g:netrw_banner=0
-let g:netrw_browse_split=4
-let g:netrw_altv=1
-let g:netrw_liststyle=3
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+"let g:netrw_banner=0
+"let g:netrw_browse_split=4
+"let g:netrw_altv=1
+"let g:netrw_liststyle=3
+"let g:netrw_list_hide=netrw_gitignore#Hide()
+"let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_fastbrowse=0
 
 " nice to haves
 cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
