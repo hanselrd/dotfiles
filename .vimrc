@@ -156,4 +156,11 @@ command! MakeTags !ctags -R .
 let g:netrw_fastbrowse=0
 
 " nice to haves
-cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
+"cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
+cnoremap w!! SudoWrite
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()

@@ -3,7 +3,10 @@
     "files.associations": {
         "*.tpp": "cpp"
     },
-    "editor.formatOnSave": true,
+    // "editor.formatOnSave": true,
+    "[rust]": {
+        "editor.formatOnSave": true
+    },
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },
@@ -13,5 +16,34 @@
     "terminal.integrated.fontFamily": "Operator Mono Lig",
     "terminal.integrated.fontWeight": "bold",
     "workbench.colorTheme": "Rouge",
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "telemetry.enableTelemetry": false,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/venv": true,
+        "**/env": true,
+        "**/build": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/bower_components/**": true,
+        "**/venv/**": true,
+        "**/env/**": true,
+        "env-*": true,
+        "**/build/**": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false
 }
