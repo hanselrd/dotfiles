@@ -127,6 +127,7 @@
             - { src: home/config/i3/config, dest: ~/.config/i3/config }
             - { src: home/config/i3status/config, dest: ~/.config/i3status/config }
             - { src: home/config/polybar/config, dest: ~/.config/polybar/config }
+            - { src: home/config/polybar/launch.sh, dest: ~/.config/polybar/launch.sh }
             - { src: home/fonts, dest: ~/.fonts }
             - { src: home/gdb, dest: ~/.gdb }
             - { src: home/gdbinit, dest: ~/.gdbinit }

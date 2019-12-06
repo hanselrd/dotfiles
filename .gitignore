@@ -1,1 +1,2 @@
 ansible-playbooks/extra-vars.yml
+template/home/fonts/.uuid
