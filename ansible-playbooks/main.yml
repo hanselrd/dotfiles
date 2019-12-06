@@ -109,10 +109,19 @@
             - { src: home/fonts, dest: ~/.fonts }
             - { src: home/gdb, dest: ~/.gdb }
             - { src: home/gdbinit, dest: ~/.gdbinit }
-            - { src: home/gitconfig, dest: ~/.gitconfig }
             - { src: home/tmux.conf, dest: ~/.tmux.conf }
             - { src: home/tmux.line, dest: ~/.tmux.line }
             - { src: home/urxvt, dest: ~/.urxvt }
             - { src: home/vimrc, dest: ~/.vimrc }
             - { src: home/Xresources, dest: ~/.Xresources }
             - { src: home/zshrc, dest: ~/.zshrc }
+
+      - name: "Generate files"
+        become: yes
+        become_user: "{{ user }}"
+        template:
+            src: "/home/{{ user }}/.dotfiles/template/{{ item.src }}"
+            dest: "{{ item.dest }}"
+            force: yes
+        loop:
+            - { src: home/gitconfig.j2, dest: ~/.gitconfig }
