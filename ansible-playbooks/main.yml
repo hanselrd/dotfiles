@@ -15,7 +15,6 @@
         become: yes
         dnf:
             name:
-                - @development-tools
                 - ImageMagick
                 - SDL2-devel
                 - SDL2_image-devel
