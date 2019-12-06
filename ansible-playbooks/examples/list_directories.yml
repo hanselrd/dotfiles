@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+      - name: List root home directory
+        become: yes
+        command: ls -al ~
+        register: output
+      - debug:
+          var: output.stdout_lines
+
+      - name: "List {{ user }} home directory"
+        become: yes
+        become_user: "{{ user }}"
+        command: ls -al ~
+        register: output
+      - debug:
+          var: output.stdout_lines
+

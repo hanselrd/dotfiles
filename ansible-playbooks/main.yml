@@ -1,0 +1,118 @@
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+      - name: "Enable gregw/i3desktop repo"
+        become: yes
+        command: dnf copr enable gregw/i3desktop -y
+        register: output
+      - debug:
+          var: output.stdout_lines
+
+      - name: Install packages
+        become: yes
+        dnf:
+            name:
+                - ImageMagick
+                # - SDL2-devel
+                # - SDL2_image-devel
+                # - SDL2_mixer-devel
+                # - SDL2_net-devel
+                # - SDL2_ttf-devel
+                - arandr
+                - clang
+                - clang-tools-extra
+                - cmake
+                - ctags
+                # - dmenu
+                - feh
+                - gcc-g++
+                - htop
+                - i3-gaps
+                - i3lock
+                - i3status
+                - network-manager-applet
+                - ninja-build
+                - openvpn
+                - redshift
+                - rofi
+                - rxvt-unicode-256color
+                - scrot
+                # - tiled
+                # - tlp
+                # - tlp-rdw
+                - tmux
+                # - valgrind
+                - vim-enhanced
+                - xbacklight
+                - xclip
+                - xrandr
+                - zsh
+            state: present
+
+      - name: Upgrade all packages
+        become: yes
+        dnf:
+            name: "*"
+            state: latest
+
+      - name: Git checkout Tmux Plugin Manager
+        become: yes
+        become_user: "{{ user }}"
+        git:
+            repo: https://github.com/tmux-plugins/tpm.git
+            dest: ~/.tmux/plugins/tpm
+
+      - name: Git checkout Oh My Zsh
+        become: yes
+        become_user: "{{ user }}"
+        git:
+            repo: https://github.com/ohmyzsh/ohmyzsh.git
+            dest: ~/.oh-my-zsh
+
+      - name: Git checkout zsh-autosuggestions
+        become: yes
+        become_user: "{{ user }}"
+        git:
+            repo: https://github.com/zsh-users/zsh-autosuggestions.git
+            dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+      - name: "Git checkout dotfiles to {{ user }}'s ~/.dotfiles"
+        become: yes
+        become_user: "{{ user }}"
+        git:
+            repo: https://github.com/hanselrd/dotfiles.git
+            dest: ~/.dotfiles
+
+      - name: "Copy ~/.dotfiles/template/root to /"
+        become: yes
+        copy:
+            src: "/home/{{ user }}/.dotfiles/template/{{ item.src }}"
+            dest: "{{ item.dest }}"
+            remote_src: yes
+            force: yes
+        loop:
+            - { src: root/etc/X11/xorg.conf, dest: /etc/X11/xorg.conf }
+
+      - name: "Symlink ~/.dotfiles/template/home to ~"
+        become: yes
+        become_user: "{{ user }}"
+        file:
+            src: "~/.dotfiles/template/{{ item.src }}"
+            dest: "{{ item.dest }}"
+            state: link
+            force: yes
+        loop:
+            - { src: home/backgrounds, dest: ~/.backgrounds }
+            - { src: home/config/i3/config, dest: ~/.config/i3/config }
+            - { src: home/config/i3status/config, dest: ~/.config/i3status/config }
+            - { src: home/fonts, dest: ~/.fonts }
+            - { src: home/gdb, dest: ~/.gdb }
+            - { src: home/gdbinit, dest: ~/.gdbinit }
+            - { src: home/gitconfig, dest: ~/.gitconfig }
+            - { src: home/tmux.conf, dest: ~/.tmux.conf }
+            - { src: home/tmux.line, dest: ~/.tmux.line }
+            - { src: home/urxvt, dest: ~/.urxvt }
+            - { src: home/vimrc, dest: ~/.vimrc }
+            - { src: home/Xresources, dest: ~/.Xresources }
+            - { src: home/zshrc, dest: ~/.zshrc }
