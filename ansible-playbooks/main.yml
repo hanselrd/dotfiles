@@ -1,3 +1,5 @@
+  # sudo ansible-playbook ansible-playbooks/main.yml --extra-vars "@ansible-playbooks/extra-vars.yml"
+
 - hosts: localhost
   gather_facts: no
 
