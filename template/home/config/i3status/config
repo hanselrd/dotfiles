@@ -19,6 +19,8 @@ general {
         interval = 5
 }
 
+#https://apps.timwhitlock.info/emoji/tables/unicode
+
 #order += "ipv6"
 order += "disk /"
 order += "wireless _first_"
@@ -28,6 +30,7 @@ order += "battery all"
 order += "cpu_usage"
 order += "cpu_temperature all"
 order += "load"
+order += "memory"
 order += "volume master"
 order += "tztime local"
 
@@ -80,6 +83,11 @@ cpu_temperature all {
 load {
         # format = "L: %1min"
         format = "🔃%1min"
+}
+
+memory {
+        # format = "M: %used/%total"
+        format = "📒%used/%total"
 }
 
 volume master {
