@@ -53,6 +53,7 @@ let g:javascript_plugin_jsdoc=1
 let g:rustfmt_autosave=1
 
 " tmuxline
+let g:tmuxline_preset='full'
 let g:tmuxline_powerline_separators=0
 
 " asyncrun
