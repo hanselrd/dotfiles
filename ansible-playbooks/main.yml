@@ -46,6 +46,7 @@
                 - ninja-build
                 - openvpn
                 - pulseaudio-libs-devel
+                - ranger
                 - redshift
                 - rofi
                 - rxvt-unicode-256color
@@ -122,11 +123,13 @@
             state: link
             force: yes
         loop:
+            - { src: home/Xresources, dest: ~/.Xresources }
             - { src: home/backgrounds, dest: ~/.backgrounds }
             - { src: home/config/i3/config, dest: ~/.config/i3/config }
             - { src: home/config/i3status/config, dest: ~/.config/i3status/config }
             - { src: home/config/polybar/config, dest: ~/.config/polybar/config }
             - { src: home/config/polybar/launch.sh, dest: ~/.config/polybar/launch.sh }
+            - { src: home/config/rofi/config, dest: ~/.config/rofi/config }
             - { src: home/fonts, dest: ~/.fonts }
             - { src: home/gdb, dest: ~/.gdb }
             - { src: home/gdbinit, dest: ~/.gdbinit }
@@ -134,7 +137,6 @@
             - { src: home/tmux.line, dest: ~/.tmux.line }
             - { src: home/urxvt, dest: ~/.urxvt }
             - { src: home/vimrc, dest: ~/.vimrc }
-            - { src: home/Xresources, dest: ~/.Xresources }
             - { src: home/zshrc, dest: ~/.zshrc }
 
       - name: "Generate files"
