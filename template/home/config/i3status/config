@@ -32,50 +32,66 @@ order += "volume master"
 order += "tztime local"
 
 disk "/" {
-        format = "%avail"
+        # format = "%avail"
+        format = "💾 %avail"
 }
 
 wireless _first_ {
-        format_up = "W: (%quality at %essid, %bitrate) %ip"
-        format_down = "W: down"
+        # format_up = "W: (%quality at %essid, %bitrate) %ip"
+        # format_down = "W: OFF"
+        format_up = "📶 (%quality at %essid, %bitrate) %ip"
+        format_down = "📶 OFF"
 }
 
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+        # format_up = "E: %ip (%speed)"
+        # format_down = "E: OFF"
+        format_up = "📟 %ip (%speed)"
+        format_down = "📟 OFF"
 }
 
 path_exists VPN {
         # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        # format = "VPN: ON"
+        # format_down = "VPN: OFF"
+        format = "🔒 ON"
+        format_down = "🔒 OFF"
         path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
 battery all {
-        format = "%status %percentage %remaining"
+        # format = "%status %percentage %remaining"
+        format = "🔋 %status %percentage %remaining"
         hide_seconds = true
         integer_battery_capacity = true
 }
 
 cpu_usage {
-        format = "U: %usage"
+        # format = "U: %usage"
+        format = "💻 %usage"
 }
 
 cpu_temperature all {
-        format = "T: %degrees C"
+        # format = "T: %degrees °C"
+        format = "🔥 %degrees °C"
 }
 
 load {
-        format = "L: %1min"
+        # format = "L: %1min"
+        format = "🔃 %1min"
 }
 
 volume master {
-        format = "V: %volume"
-        format_muted = "V: muted (%volume)"
+        # format = "V: %volume"
+        # format_muted = "V: MUTED (%volume)"
+        format = "🔊 %volume"
+        format_muted = "🔊 MUTED (%volume)"
         device = "default"
 }
 
 tztime local {
        #format = "%Y-%m-%d %H:%M:%S"
-       format = "%a %m/%d/%Y %r"
+       # format = "%a %m/%d/%Y %r"
+       format = "📅 %a %m/%d/%Y %r ⏰"
 }
