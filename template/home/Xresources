@@ -54,7 +54,8 @@ URxvt.fading: 0
 URxvt.cursorBlink: true
 ! hard contrast: *background: #1d2021
 *background: #1d2021
-URxvt.depth: 32
+!URxvt.depth: 32
+URxvt.depth: 24
 URxvt.background: [90]#1d2021
 !*background: #282828
 ! soft contrast: *background: #32302f
