@@ -178,7 +178,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
-client.focused          #282828 #282828 #FFFFFF #282828   #282828
+client.focused          #928374 #928374 #FFFFFF #928374   #928374
 client.focused_inactive #282828 #282828 #FFFFFF #282828   #282828
 client.unfocused        #282828 #282828 #FFFFFF #282828   #282828
 client.urgent           #CC241D #CC241D #FFFFFF #CC241D   #CC241D
@@ -209,7 +209,7 @@ bar {
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Disable window titles
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 3
 # smart_borders on
 
 # Gaps
