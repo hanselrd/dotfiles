@@ -60,10 +60,11 @@ ZSH_THEME="geoffgarside"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  zsh-autosuggestions
   git
   man
-  nvm
-  node
+  # nvm
+  # node
 )
 
 source $ZSH/oh-my-zsh.sh
