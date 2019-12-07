@@ -179,8 +179,8 @@ bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
 client.focused          #282828 #282828 #FFFFFF #282828   #282828
-client.focused_inactive #928374 #928374 #FFFFFF #928374   #928374
-client.unfocused        #928374 #928374 #FFFFFF #928374   #928374
+client.focused_inactive #282828 #282828 #FFFFFF #282828   #282828
+client.unfocused        #282828 #282828 #FFFFFF #282828   #282828
 client.urgent           #CC241D #CC241D #FFFFFF #CC241D   #CC241D
 client.placeholder      #000000 #000000 #FFFFFF #000000   #000000
 
@@ -231,7 +231,7 @@ exec --no-startup-id redshift -t 5500:2500 -l 40.7128:-74.0060
 bindsym $mod+Shift+u exec --no-startup-id killall redshift
 
 # Wallpaper
-exec --no-startup-id feh --bg-scale $HOME/.backgrounds/0006.jpg
+exec --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
 
 # Lock screen
 bindsym $mod+Shift+x exec --no-startup-id scrot /tmp/screen.png && convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png && i3lock -e -i /tmp/screen.png
