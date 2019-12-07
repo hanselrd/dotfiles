@@ -178,8 +178,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
-client.focused          #458588 #458588 #FFFFFF #458588   #458588
-client.focused_inactive #282828 #282828 #FFFFFF #282828   #282828
+client.focused          #282828 #282828 #FFFFFF #282828   #282828
+client.focused_inactive #928374 #928374 #FFFFFF #928374   #928374
 client.unfocused        #928374 #928374 #FFFFFF #928374   #928374
 client.urgent           #CC241D #CC241D #FFFFFF #CC241D   #CC241D
 client.placeholder      #000000 #000000 #FFFFFF #000000   #000000
@@ -197,7 +197,7 @@ bar {
                 statusline #FFFFFF
                 separator  #666666
 
-                focused_workspace  #458588 #458588 #FFFFFF
+                focused_workspace  #928374 #928374 #FFFFFF
                 active_workspace   #282828 #282828 #FFFFFF
                 inactive_workspace #282828 #282828 #AAAAAA
                 urgent_workspace   #CC241D #CC241D #FFFFFF
@@ -209,7 +209,7 @@ bar {
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Disable window titles
-for_window [class=".*"] border pixel 5
+for_window [class=".*"] border pixel 4
 # smart_borders on
 
 # Gaps
