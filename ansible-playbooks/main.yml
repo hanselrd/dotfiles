@@ -4,9 +4,9 @@
   gather_facts: no
 
   tasks:
-      - name: "Enable gregw/i3desktop repo"
+      - name: "Enable nforro/i3-gaps repo"
         become: yes
-        command: dnf copr enable gregw/i3desktop -y
+        command: dnf copr enable nforro/i3-gaps -y
         register: output
       - debug:
           var: output.stdout_lines
