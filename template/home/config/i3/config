@@ -43,7 +43,9 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt256c
+set $terminal urxvt256c
+set $terminal_run urxvt256c -e
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -242,3 +244,6 @@ bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | g
 # Screen brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+
+# Program shortcuts
+bindsym $mod+Shift+Return exec $terminal_run ranger
