@@ -34,6 +34,7 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'rhysd/vim-clang-format'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
+Plug 'chrisbra/Colorizer'
 if v:version >= 800
     Plug 'maralla/completor.vim'
 endif
@@ -92,6 +93,11 @@ let g:clang_format#style_options={
     \ "AllowShortIfStatementsOnASingleLine": "true"
     \ }
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
+
+" Colorizer
+" let g:colorizer_auto_color = 1
+" let g:colorizer_auto_filetype = 'css,html'
+let g:colorizer_disable_bufleave = 1
 
 " completor
 if v:version >= 800
