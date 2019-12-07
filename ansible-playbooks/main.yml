@@ -11,6 +11,20 @@
       - debug:
           var: output.stdout_lines
 
+      - name: "Enable jstanek/ports repo"
+        become: yes
+        command: dnf copr enable jstanek/ports -y
+        register: output
+      - debug:
+          var: output.stdout_lines
+
+      - name: "Enable balamurali27/betterlockscreen repo"
+        become: yes
+        command: dnf copr enable balamurali27/betterlockscreen -y
+        register: output
+      - debug:
+          var: output.stdout_lines
+
       - name: Install packages
         become: yes
         dnf:
@@ -45,6 +59,7 @@
                 # - xrandr
                 - ImageMagick
                 - arandr
+                - betterlockscreen
                 - clang
                 - clang-tools-extra
                 - cmake
@@ -55,7 +70,6 @@
                 - htop
                 - i3-gaps
                 - i3-ipc
-                - i3lock
                 - i3status
                 - network-manager-applet
                 - ninja-build
