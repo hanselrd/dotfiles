@@ -29,6 +29,7 @@
         become: yes
         dnf:
             name:
+                # - ImageMagick
                 # - SDL2-devel
                 # - SDL2_image-devel
                 # - SDL2_mixer-devel
@@ -45,6 +46,7 @@
                 # - libnl3-devel
                 # - pulseaudio-libs-devel
                 # - pulseaudio-utils
+                # - scrot
                 # - tiled
                 # - tlp
                 # - tlp-rdw
@@ -57,7 +59,6 @@
                 # - xcb-util-wm-devel
                 # - xcb-util-xrm-devel
                 # - xrandr
-                - ImageMagick
                 - arandr
                 - betterlockscreen
                 - clang
@@ -77,8 +78,9 @@
                 - ranger
                 - redshift
                 - rofi
+                - rpmconf
                 - rxvt-unicode-256color
-                - scrot
+                - symlinks
                 - tmux
                 - vim-enhanced
                 - xbacklight
