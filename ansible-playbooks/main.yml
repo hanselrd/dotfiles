@@ -29,6 +29,7 @@
                 - clang
                 - clang-tools-extra
                 - cmake
+                - compton
                 - ctags
                 - dmenu
                 - feh
@@ -125,6 +126,7 @@
         loop:
             - { src: home/Xresources, dest: ~/.Xresources }
             - { src: home/backgrounds, dest: ~/.backgrounds }
+            - { src: home/compton.conf, dest: ~/.compton.conf }
             - { src: home/config/i3/config, dest: ~/.config/i3/config }
             - { src: home/config/i3status/config, dest: ~/.config/i3status/config }
             - { src: home/config/polybar/config, dest: ~/.config/polybar/config }

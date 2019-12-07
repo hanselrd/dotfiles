@@ -186,8 +186,8 @@ bar {
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Disable window borders
-for_window [class=".*"] border pixel 2
-smart_borders on
+for_window [class=".*"] border pixel 0
+# smart_borders on
 
 # Gaps
 gaps outer 10
@@ -195,6 +195,9 @@ gaps inner 10
 
 # Display
 # exec --no-startup-id xrandr ...
+
+# Compton
+exec --no-startup-id compton
 
 # Eable tap to click
 # exec --no-startup-id xinput ...
