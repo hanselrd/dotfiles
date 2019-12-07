@@ -1,5 +1,5 @@
 # This tmux statusbar config was created by tmuxline.vim
-# on Mon, 29 Jul 2019
+# on Fri, 06 Dec 2019
 
 set -g status-justify "left"
 set -g status "on"
@@ -15,7 +15,7 @@ set -g status-left-length "100"
 setw -g window-status-activity-style "none"
 setw -g window-status-separator ""
 setw -g window-status-style "none,fg=colour248,bg=colour238"
-set -g status-left "#[fg=colour238,bg=colour117] #S #[fg=colour117,bg=colour238,nobold,nounderscore,noitalics]"
-set -g status-right "#[fg=colour240,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour247,bg=colour240] %Y-%m-%d  %H:%M #[fg=colour244,bg=colour240,nobold,nounderscore,noitalics]#[fg=colour238,bg=colour244] #h "
-setw -g window-status-format "#[fg=colour248,bg=colour238] #I #[fg=colour248,bg=colour238] #W "
-setw -g window-status-current-format "#[fg=colour238,bg=colour240,nobold,nounderscore,noitalics]#[fg=colour252,bg=colour240] #I #[fg=colour252,bg=colour240] #W #[fg=colour240,bg=colour238,nobold,nounderscore,noitalics]"
+set -g status-left "#[fg=colour238,bg=colour117] #S #[fg=colour117,bg=colour238,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=colour240,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour247,bg=colour240] %Y-%m-%d | %H:%M #[fg=colour244,bg=colour240,nobold,nounderscore,noitalics]#[fg=colour238,bg=colour244] #h "
+setw -g window-status-format "#[fg=colour248,bg=colour238] #I |#[fg=colour248,bg=colour238] #W "
+setw -g window-status-current-format "#[fg=colour238,bg=colour240,nobold,nounderscore,noitalics]#[fg=colour252,bg=colour240] #I |#[fg=colour252,bg=colour240] #W #[fg=colour240,bg=colour238,nobold,nounderscore,noitalics]"

@@ -15,23 +15,41 @@
         become: yes
         dnf:
             name:
+                # - SDL2-devel
+                # - SDL2_image-devel
+                # - SDL2_mixer-devel
+                # - SDL2_net-devel
+                # - SDL2_ttf-devel
+                # - alsa-lib-devel
+                # - autoconf
+                # - automake
+                # - cairo-devel
+                # - dmenu
+                # - jsoncpp-devel
+                # - libcurl-devel
+                # - libmpdclient-devel
+                # - libnl3-devel
+                # - pulseaudio-libs-devel
+                # - pulseaudio-utils
+                # - tiled
+                # - tlp
+                # - tlp-rdw
+                # - valgrind
+                # - wireless-tools-devel
+                # - xcb-proto
+                # - xcb-util-cursor-devel
+                # - xcb-util-devel
+                # - xcb-util-image-devel
+                # - xcb-util-wm-devel
+                # - xcb-util-xrm-devel
+                # - xrandr
                 - ImageMagick
-                - SDL2-devel
-                - SDL2_image-devel
-                - SDL2_mixer-devel
-                - SDL2_net-devel
-                - SDL2_ttf-devel
-                - alsa-lib-devel
                 - arandr
-                - autoconf
-                - automake
-                - cairo-devel
                 - clang
                 - clang-tools-extra
                 - cmake
                 - compton
                 - ctags
-                - dmenu
                 - feh
                 - gcc-g++
                 - htop
@@ -39,35 +57,18 @@
                 - i3-ipc
                 - i3lock
                 - i3status
-                - jsoncpp-devel
-                - libcurl-devel
-                - libmpdclient-devel
-                - libnl3-devel
                 - network-manager-applet
                 - ninja-build
                 - openvpn
-                - pulseaudio-libs-devel
                 - ranger
                 - redshift
                 - rofi
                 - rxvt-unicode-256color
                 - scrot
-                - tiled
-                - tlp
-                - tlp-rdw
                 - tmux
-                - valgrind
                 - vim-enhanced
-                - wireless-tools-devel
                 - xbacklight
-                - xcb-proto
-                - xcb-util-cursor-devel
-                - xcb-util-devel
-                - xcb-util-image-devel
-                - xcb-util-wm-devel
-                - xcb-util-xrm-devel
                 - xclip
-                - xrandr
                 - zsh
             state: present
 
