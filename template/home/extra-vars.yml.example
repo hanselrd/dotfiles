@@ -1,5 +1,5 @@
 # Home directory
-dotfiles_user:
+dotfiles_user: delacruz
 
 # Git
 dotfiles_git_user_email:
