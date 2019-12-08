@@ -97,12 +97,34 @@ dotfiles_i3status_color_good:     "{{ dotfiles_color_green }}"
 dotfiles_i3status_color_degraded: "{{ dotfiles_color_yellow }}"
 dotfiles_i3status_color_bad:      "{{ dotfiles_color_red }}"
 
+# xfce4-terminal
+# general
+dotfiles_xfce4_terminal_background:         "{{ dotfiles_color_background_hard }}"
+dotfiles_xfce4_terminal_foreground:         "{{ dotfiles_color_foreground }}"
+dotfiles_xfce4_terminal_tab_activity_color: "#BF4040"
+# colors
+dotfiles_xfce4_color_palette0:              "{{ dotfiles_color_darkred }}"
+dotfiles_xfce4_color_palette1:              "{{ dotfiles_color_darkgreen }}"
+dotfiles_xfce4_color_palette2:              "{{ dotfiles_color_darkyellow }}"
+dotfiles_xfce4_color_palette3:              "{{ dotfiles_color_darkblue }}"
+dotfiles_xfce4_color_palette4:              "{{ dotfiles_color_darkmagenta }}"
+dotfiles_xfce4_color_palette5:              "{{ dotfiles_color_darkcyan }}"
+dotfiles_xfce4_color_palette6:              "{{ dotfiles_color_lightgrey }}"
+dotfiles_xfce4_color_palette7:              "{{ dotfiles_color_darkgrey }}"
+dotfiles_xfce4_color_palette8:              "{{ dotfiles_color_red }}"
+dotfiles_xfce4_color_palette9:              "{{ dotfiles_color_green }}"
+dotfiles_xfce4_color_palette10:             "{{ dotfiles_color_yellow }}"
+dotfiles_xfce4_color_palette11:             "{{ dotfiles_color_blue }}"
+dotfiles_xfce4_color_palette12:             "{{ dotfiles_color_magenta }}"
+dotfiles_xfce4_color_palette13:             "{{ dotfiles_color_cyan }}"
+dotfiles_xfce4_color_palette14:             "{{ dotfiles_color_white }}"
+
 # URxvt
 # general
 dotfiles_urxvt_cursor_color:    "{{ dotfiles_color_cursor }}"
 dotfiles_urxvt_scroll_color:    "{{ dotfiles_color_scroll }}"
 dotfiles_urxvt_background:      "{{ dotfiles_color_background_hard }}"
-dotfiles_urxvt_foreground:      "{{ dotfiles_color_white }}"
+dotfiles_urxvt_foreground:      "{{ dotfiles_color_foreground }}"
 # colors
 dotfiles_urxvt_color0:          "{{ dotfiles_color_black }}"
 dotfiles_urxvt_color8:          "{{ dotfiles_color_darkgrey }}"
