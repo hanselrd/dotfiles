@@ -1,9 +1,9 @@
 # Home directory
-dotfiles_user: bob
+dotfiles_user:
 
 # Git
-dotfiles_git_user_email: bob@bob.com
-dotfiles_git_user_name: Bob Smith
+dotfiles_git_user_email:
+dotfiles_git_user_name:
 
 # Color palette
 dotfiles_color_black:       "#282828"
@@ -66,14 +66,44 @@ dotfiles_i3_client_placeholder_child_border:      "#000000"
 dotfiles_i3_client_background:                    "#FFFFFF"
 
 # i3bar
+# general
+dotfiles_i3bar_background:                    "{{ dotfiles_color_background_hard }}"
+dotfiles_i3bar_statusline:                    "#FFFFFF"
+dotfiles_i3bar_separator:                     "#666666"
+# focused_workspace
+dotfiles_i3bar_focused_workspace_border:      "{{ dotfiles_color_darkgrey }}"
+dotfiles_i3bar_focused_workspace_background:  "{{ dotfiles_color_darkgrey }}"
+dotfiles_i3bar_focused_workspace_text:        "#FFFFFF"
+# active_workspace
+dotfiles_i3bar_active_workspace_border:       "{{ dotfiles_color_black }}"
+dotfiles_i3bar_active_workspace_background:   "{{ dotfiles_color_black }}"
+dotfiles_i3bar_active_workspace_text:         "#FFFFFF"
+# inactive_workspace
+dotfiles_i3bar_inactive_workspace_border:     "{{ dotfiles_color_black }}"
+dotfiles_i3bar_inactive_workspace_background: "{{ dotfiles_color_black }}"
+dotfiles_i3bar_inactive_workspace_text:       "#AAAAAA"
+# urgent_workspace
+dotfiles_i3bar_urgent_workspace_border:       "{{ dotfiles_color_darkred }}"
+dotfiles_i3bar_urgent_workspace_background:   "{{ dotfiles_color_darkred }}"
+dotfiles_i3bar_urgent_workspace_text:         "#FFFFFF"
+# binding_mode
+dotfiles_i3bar_binding_mode_border:           "{{ dotfiles_color_darkred }}"
+dotfiles_i3bar_binding_mode_background:       "{{ dotfiles_color_darkred }}"
+dotfiles_i3bar_binding_mode_text:             "#FFFFFF"
 
 # i3status
+# general
+dotfiles_i3status_color_good:     "{{ dotfiles_color_green }}"
+dotfiles_i3status_color_degraded: "{{ dotfiles_color_yellow }}"
+dotfiles_i3status_color_bad:      "{{ dotfiles_color_red }}"
 
 # URxvt
+# general
 dotfiles_urxvt_cursor_color:    "{{ dotfiles_color_cursor }}"
 dotfiles_urxvt_scroll_color:    "{{ dotfiles_color_scroll }}"
 dotfiles_urxvt_background:      "{{ dotfiles_color_background_hard }}"
 dotfiles_urxvt_foreground:      "{{ dotfiles_color_white }}"
+# colors
 dotfiles_urxvt_color0:          "{{ dotfiles_color_black }}"
 dotfiles_urxvt_color8:          "{{ dotfiles_color_darkgrey }}"
 dotfiles_urxvt_color1:          "{{ dotfiles_color_darkred }}"
