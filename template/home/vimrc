@@ -100,8 +100,8 @@ let g:clang_format#style_options={
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " Colorizer
-" let g:colorizer_auto_color = 1
-" let g:colorizer_auto_filetype = 'css,html'
+"let g:colorizer_auto_color = 1
+"let g:colorizer_auto_filetype = 'css,html'
 let g:colorizer_disable_bufleave = 1
 
 " completor
@@ -118,6 +118,7 @@ set relativenumber
 set hlsearch
 "colorscheme codedark
 colorscheme gruvbox
+set cursorline
 set background=dark
 
 " indentation

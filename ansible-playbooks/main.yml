@@ -1,29 +1,29 @@
-  # sudo ansible-playbook ansible-playbooks/main.yml --extra-vars "@ansible-playbooks/extra-vars.yml"
+  # sudo ansible-playbook ansible-playbooks/main.yml --extra-vars "@template/home/extra-vars.yml"
 
 - hosts: localhost
   gather_facts: no
 
   tasks:
-      - name: "Enable nforro/i3-gaps repo"
-        become: yes
-        command: dnf copr enable nforro/i3-gaps -y
-        register: output
-      - debug:
-          var: output.stdout_lines
+      # - name: "Enable nforro/i3-gaps repo"
+      #   become: yes
+      #   command: dnf copr enable nforro/i3-gaps -y
+      #   register: output
+      # - debug:
+      #     var: output.stdout_lines
 
-      - name: "Enable jstanek/ports repo"
-        become: yes
-        command: dnf copr enable jstanek/ports -y
-        register: output
-      - debug:
-          var: output.stdout_lines
+      # - name: "Enable jstanek/ports repo"
+      #   become: yes
+      #   command: dnf copr enable jstanek/ports -y
+      #   register: output
+      # - debug:
+      #     var: output.stdout_lines
 
-      - name: "Enable balamurali27/betterlockscreen repo"
-        become: yes
-        command: dnf copr enable balamurali27/betterlockscreen -y
-        register: output
-      - debug:
-          var: output.stdout_lines
+      # - name: "Enable balamurali27/betterlockscreen repo"
+      #   become: yes
+      #   command: dnf copr enable balamurali27/betterlockscreen -y
+      #   register: output
+      # - debug:
+      #     var: output.stdout_lines
 
       - name: Install packages
         become: yes
@@ -72,6 +72,7 @@
                 - i3-gaps
                 - i3-ipc
                 - i3status
+                - neofetch
                 - network-manager-applet
                 - ninja-build
                 - openvpn
@@ -96,36 +97,37 @@
 
       - name: Git checkout Tmux Plugin Manager
         become: yes
-        become_user: "{{ user }}"
+        become_user: "{{ dotfiles_user }}"
         git:
             repo: https://github.com/tmux-plugins/tpm.git
             dest: ~/.tmux/plugins/tpm
 
       - name: Git checkout Oh My Zsh
         become: yes
-        become_user: "{{ user }}"
+        become_user: "{{ dotfiles_user }}"
         git:
             repo: https://github.com/ohmyzsh/ohmyzsh.git
             dest: ~/.oh-my-zsh
 
       - name: Git checkout zsh-autosuggestions
         become: yes
-        become_user: "{{ user }}"
+        become_user: "{{ dotfiles_user }}"
         git:
             repo: https://github.com/zsh-users/zsh-autosuggestions.git
             dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-      - name: "Git checkout dotfiles to {{ user }}'s ~/.dotfiles"
+      - name: "Git checkout dotfiles to {{ dotfiles_user }}'s ~/.dotfiles"
         become: yes
-        become_user: "{{ user }}"
+        become_user: "{{ dotfiles_user }}"
         git:
             repo: https://github.com/hanselrd/dotfiles.git
             dest: ~/.dotfiles
+            update: no
 
       - name: "Copy ~/.dotfiles/template/root to /"
         become: yes
         copy:
-            src: "/home/{{ user }}/.dotfiles/template/{{ item.src }}"
+            src: "/home/{{ dotfiles_user }}/.dotfiles/template/{{ item.src }}"
             dest: "{{ item.dest }}"
             remote_src: yes
             force: yes
@@ -134,7 +136,7 @@
 
       - name: "Symlink ~/.dotfiles/template/home to ~"
         become: yes
-        become_user: "{{ user }}"
+        become_user: "{{ dotfiles_user }}"
         file:
             src: "~/.dotfiles/template/{{ item.src }}"
             dest: "{{ item.dest }}"
@@ -156,6 +158,7 @@
             - { src: home/fonts, dest: ~/.fonts }
             - { src: home/gdb, dest: ~/.gdb }
             - { src: home/gdbinit, dest: ~/.gdbinit }
+            - { src: home/gtkrc-2.0, dest: ~/.gtkrc-2.0 }
             - { src: home/tmux.conf, dest: ~/.tmux.conf }
             - { src: home/tmux.line, dest: ~/.tmux.line }
             - { src: home/urxvt, dest: ~/.urxvt }
@@ -164,10 +167,11 @@
 
       - name: "Generate files"
         become: yes
-        become_user: "{{ user }}"
+        become_user: "{{ dotfiles_user }}"
         template:
-            src: "/home/{{ user }}/.dotfiles/template/{{ item.src }}"
+            src: "/home/{{ dotfiles_user }}/.dotfiles/template/{{ item.src }}"
             dest: "{{ item.dest }}"
             force: yes
         loop:
+            - { src: home/extra-vars.yml, dest: ~/.extra-vars.yml }
             - { src: home/gitconfig.j2, dest: ~/.gitconfig }
