@@ -143,6 +143,7 @@
             state: link
             force: yes
         loop:
+            # - { src: home/config/xfce4/terminal/terminalrc, dest: ~/.config/xfce4/terminal/terminalrc }
             - { src: home/Xresources, dest: ~/.Xresources }
             - { src: home/backgrounds, dest: ~/.backgrounds }
             - { src: home/compton.conf, dest: ~/.compton.conf }
@@ -154,7 +155,6 @@
             - { src: home/config/polybar/launch.sh, dest: ~/.config/polybar/launch.sh }
             - { src: home/config/ranger/rc.conf, dest: ~/.config/ranger/rc.conf }
             - { src: home/config/rofi/config, dest: ~/.config/rofi/config }
-            - { src: home/config/xfce4/terminal/terminalrc, dest: ~/.config/xfce4/terminal/terminalrc }
             - { src: home/fonts, dest: ~/.fonts }
             - { src: home/gdb, dest: ~/.gdb }
             - { src: home/gdbinit, dest: ~/.gdbinit }
@@ -173,5 +173,6 @@
             dest: "{{ item.dest }}"
             force: yes
         loop:
+            # - { src: home/gitconfig.j2, dest: ~/.gitconfig }
+            - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.config/xfce4/terminal/terminalrc }
             - { src: home/extra-vars.yml, dest: ~/.extra-vars.yml }
-            - { src: home/gitconfig.j2, dest: ~/.gitconfig }
