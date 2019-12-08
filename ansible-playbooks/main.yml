@@ -143,10 +143,10 @@
             state: link
             force: yes
         loop:
+            # - { src: home/Xresources, dest: ~/.Xresources }
             # - { src: home/config/i3/config, dest: ~/.config/i3/config }
             # - { src: home/config/i3status/config, dest: ~/.config/i3status/config }
             # - { src: home/config/xfce4/terminal/terminalrc, dest: ~/.config/xfce4/terminal/terminalrc }
-            - { src: home/Xresources, dest: ~/.Xresources }
             - { src: home/backgrounds, dest: ~/.backgrounds }
             - { src: home/compton.conf, dest: ~/.compton.conf }
             - { src: home/config/gtk-3.0/bookmarks, dest: ~/.config/gtk-3.0/bookmarks }
@@ -174,6 +174,7 @@
             force: yes
         loop:
             # - { src: home/gitconfig.j2, dest: ~/.gitconfig }
+            - { src: home/Xresources.j2, dest: ~/.Xresources }
             - { src: home/config/i3/config.j2, dest: ~/.config/i3/config }
             - { src: home/config/i3status/config.j2, dest: ~/.config/i3status/config }
             - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.config/xfce4/terminal/terminalrc }
