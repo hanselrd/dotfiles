@@ -150,7 +150,11 @@
         loop:
             # - { src: home/gitconfig.j2, dest: ~/.gitconfig }
             - { src: home/Xresources.j2, dest: ~/.Xresources }
+            - { src: home/Xresources.j2, dest: ~/.dotfiles/template/home/Xresources } # copy
             - { src: home/config/i3/config.j2, dest: ~/.config/i3/config }
+            - { src: home/config/i3/config.j2, dest: ~/.dotfiles/template/home/config/i3/config } # copy
             - { src: home/config/i3status/config.j2, dest: ~/.config/i3status/config }
+            - { src: home/config/i3status/config.j2, dest: ~/.dotfiles/template/home/config/i3status/config } # copy
             - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.config/xfce4/terminal/terminalrc }
+            - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.dotfiles/template/home/config/xfce4/terminal/terminalrc } # copy
             - { src: home/dotfiles-vars.yml, dest: ~/.dotfiles-vars.yml }
