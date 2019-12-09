@@ -1,29 +1,20 @@
-  # sudo ansible-playbook ansible-playbooks/main.yml --extra-vars "@template/home/extra-vars.yml"
+  # sudo ansible-playbook ansible-playbooks/main.yml --extra-vars "@template/home/dotfiles-vars.yml"
 
 - hosts: localhost
   gather_facts: no
 
   tasks:
-      # - name: "Enable nforro/i3-gaps repo"
-      #   become: yes
-      #   command: dnf copr enable nforro/i3-gaps -y
-      #   register: output
-      # - debug:
-      #     var: output.stdout_lines
-
-      # - name: "Enable jstanek/ports repo"
-      #   become: yes
-      #   command: dnf copr enable jstanek/ports -y
-      #   register: output
-      # - debug:
-      #     var: output.stdout_lines
-
-      # - name: "Enable balamurali27/betterlockscreen repo"
-      #   become: yes
-      #   command: dnf copr enable balamurali27/betterlockscreen -y
-      #   register: output
-      # - debug:
-      #     var: output.stdout_lines
+      - name: "Enable COPR repos"
+        become: yes
+        command: "dnf copr enable {{ item }} -y"
+        register: output
+        loop:
+            - balamurali27/betterlockscreen
+            - jstanek/ports
+            - nforro/i3-gaps
+      - debug:
+            msg: "{{ item.stdout_lines }}"
+        with_items: "{{ output.results }}"
 
       - name: Install packages
         become: yes
@@ -95,34 +86,18 @@
             name: "*"
             state: latest
 
-      - name: Git checkout Tmux Plugin Manager
+      - name: Git checkout repos
         become: yes
         become_user: "{{ dotfiles_user }}"
         git:
-            repo: https://github.com/tmux-plugins/tpm.git
-            dest: ~/.tmux/plugins/tpm
-
-      - name: Git checkout Oh My Zsh
-        become: yes
-        become_user: "{{ dotfiles_user }}"
-        git:
-            repo: https://github.com/ohmyzsh/ohmyzsh.git
-            dest: ~/.oh-my-zsh
-
-      - name: Git checkout zsh-autosuggestions
-        become: yes
-        become_user: "{{ dotfiles_user }}"
-        git:
-            repo: https://github.com/zsh-users/zsh-autosuggestions.git
-            dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-
-      - name: "Git checkout dotfiles to {{ dotfiles_user }}'s ~/.dotfiles"
-        become: yes
-        become_user: "{{ dotfiles_user }}"
-        git:
-            repo: https://github.com/hanselrd/dotfiles.git
-            dest: ~/.dotfiles
-            update: no
+            repo: "{{ item.repo }}"
+            dest: "{{ item.dest }}"
+            update: "{{ item.update | bool }}"
+        loop:
+            - { repo: "https://github.com/hanselrd/dotfiles.git", dest: ~/.dotfiles, update: no }
+            - { repo: "https://github.com/ohmyzsh/ohmyzsh.git", dest: ~/.oh-my-zsh, update: yes }
+            - { repo: "https://github.com/tmux-plugins/tpm.git", dest: ~/.tmux/plugins/tpm, update: yes }
+            - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions, update: yes }
 
       - name: "Copy ~/.dotfiles/template/root to /"
         become: yes
@@ -178,4 +153,4 @@
             - { src: home/config/i3/config.j2, dest: ~/.config/i3/config }
             - { src: home/config/i3status/config.j2, dest: ~/.config/i3status/config }
             - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.config/xfce4/terminal/terminalrc }
-            - { src: home/extra-vars.yml, dest: ~/.extra-vars.yml }
+            - { src: home/dotfiles-vars.yml, dest: ~/.dotfiles-vars.yml }
