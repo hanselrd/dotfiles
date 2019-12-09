@@ -69,7 +69,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-#neofetch
+#source ~/.bashrc > /dev/null 2>&1
+#neofetch --disable packages
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
