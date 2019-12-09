@@ -39,9 +39,9 @@ disk "/" {
 }
 
 wireless _first_ {
-        # format_up = "W: (%quality at %essid, %bitrate) %ip"
+        # format_up = "W: (%quality at %essid) %ip"
         # format_down = "W: OFF"
-        format_up = "📶(%quality at %essid, %bitrate) %ip"
+        format_up = "📶(%quality at %essid) %ip"
         format_down = "📶OFF"
 }
 

@@ -26,7 +26,9 @@ order += "disk /"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "path_exists VPN"
+{% if dotfiles_configuration == "home" %}
 order += "battery all"
+{% endif %}
 order += "cpu_usage"
 order += "cpu_temperature all"
 order += "load"
@@ -63,12 +65,14 @@ path_exists VPN {
         path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
+{% if dotfiles_configuration == "home" %}
 battery all {
         # format = "%status %percentage %remaining"
         format = "🔋%status %percentage %remaining"
         hide_seconds = true
         integer_battery_capacity = true
 }
+{% endif %}
 
 cpu_usage {
         # format = "U: %usage"

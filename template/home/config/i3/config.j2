@@ -33,10 +33,17 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+{% if dotfiles_configuration == "home" %}
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+{% elif dotfiles_configuration == "work" %}
+bindsym F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym F9 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym F12 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+{% endif %}
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -206,10 +213,32 @@ bar {
                 urgent_workspace   {{ dotfiles_i3bar_urgent_workspace_border }} {{ dotfiles_i3bar_urgent_workspace_background }} {{ dotfiles_i3bar_urgent_workspace_text }}
                 binding_mode       {{ dotfiles_i3bar_binding_mode_border }} {{ dotfiles_i3bar_binding_mode_background }} {{ dotfiles_i3bar_binding_mode_text }}
         }
+{% if dotfiles_configuration == "work" %}
+        output HDMI1
+{% endif %}
         status_command i3status
         position top
 }
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+{%if dotfiles_configuration == "work" %}
+bar {
+        colors {
+                background {{ dotfiles_i3bar_background }}
+                statusline {{ dotfiles_i3bar_statusline }}
+                separator  {{ dotfiles_i3bar_separator }}
+
+#               class              border  bground text
+                focused_workspace  {{ dotfiles_i3bar_focused_workspace_border }} {{ dotfiles_i3bar_focused_workspace_background }} {{ dotfiles_i3bar_focused_workspace_text }}
+                active_workspace   {{ dotfiles_i3bar_active_workspace_border }} {{ dotfiles_i3bar_active_workspace_background }} {{ dotfiles_i3bar_active_workspace_text }}
+                inactive_workspace {{ dotfiles_i3bar_inactive_workspace_border }} {{ dotfiles_i3bar_inactive_workspace_background }} {{ dotfiles_i3bar_inactive_workspace_text }}
+                urgent_workspace   {{ dotfiles_i3bar_urgent_workspace_border }} {{ dotfiles_i3bar_urgent_workspace_background }} {{ dotfiles_i3bar_urgent_workspace_text }}
+                binding_mode       {{ dotfiles_i3bar_binding_mode_border }} {{ dotfiles_i3bar_binding_mode_background }} {{ dotfiles_i3bar_binding_mode_text }}
+        }
+        output HDMI2
+        status_command i3status -c $HOME/.config/i3status/config-sm
+        position top
+}
+{% endif %}
 
 # Disable window titles
 for_window [class=".*"] border pixel 3
@@ -223,6 +252,10 @@ set $launcher $HOME/.scripts/launcher.sh
 
 # Display
 # exec --no-startup-id xrandr ...
+{% if dotfiles_configuration == "home" %}
+{% elif dotfiles_configuration == "work" %}
+exec_always --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate left --output HDMI1 --mode 1920x1080 --pos 0x400 --rotate normal --output VIRTUAL1 --off --output DP1 --off
+{% endif %}
 
 # Compton
 exec_always --no-startup-id $launcher compton
@@ -236,9 +269,9 @@ exec --no-startup-id xinput set-prop $(xinput list | grep "SynPS/2 Synaptics Tou
 
 # Redshift
 {% if dotfiles_configuration == "home" %}
-exec_always --no-startup-id $launcher redshift -t 5500:2500 -l 40.7128:-74.0060
+exec_always --no-startup-id $launcher redshift -P -t 5500:2500 -l 40.7128:-74.0060
 {% elif dotfiles_configuration == "work" %}
-exec_always --no-startup-id $launcher redshift -O 3500
+exec_always --no-startup-id $launcher redshift -P -O 3500
 {% endif %}
 bindsym $mod+Shift+u exec --no-startup-id killall -q redshift
 
@@ -246,14 +279,19 @@ bindsym $mod+Shift+u exec --no-startup-id killall -q redshift
 exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
 
 # Lock screen
-bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -l dimblur
+bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -t "Type password to unlock" -l dimblur
 
 # Update cache
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
 
 # Screen brightness
+{% if dotfiles_configuration == "home" %}
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+{% elif dotfiles_configuration == "work" %}
+bindsym F2 exec --no-startup-id xbacklight -inc 5
+bindsym F3 exec --no-startup-id xbacklight -dec 5
+{% endif %}
 
 # Program shortcuts
 bindsym $mod+Shift+Return exec $terminal_run ranger
