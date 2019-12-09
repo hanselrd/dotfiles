@@ -134,6 +134,7 @@
             - { src: home/gdb, dest: ~/.gdb }
             - { src: home/gdbinit, dest: ~/.gdbinit }
             - { src: home/gtkrc-2.0, dest: ~/.gtkrc-2.0 }
+            - { src: home/scripts, dest: ~/.scripts }
             - { src: home/tmux.conf, dest: ~/.tmux.conf }
             - { src: home/tmux.line, dest: ~/.tmux.line }
             - { src: home/urxvt, dest: ~/.urxvt }

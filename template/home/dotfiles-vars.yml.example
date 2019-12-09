@@ -1,6 +1,9 @@
 # Home directory
 dotfiles_user: delacruz
 
+# Configuration
+dotfiles_configuration: home # home/work
+
 # Git
 dotfiles_git_user_email:
 dotfiles_git_user_name:

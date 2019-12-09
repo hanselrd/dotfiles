@@ -219,22 +219,24 @@ for_window [class=".*"] border pixel 3
 gaps outer 10
 gaps inner 10
 
+set $launcher $HOME/.scripts/launcher.sh
+
 # Display
 # exec --no-startup-id xrandr ...
 
 # Compton
-exec --no-startup-id compton
+exec_always --no-startup-id $launcher compton
 
 # Eable tap to click
 # exec --no-startup-id xinput ...
 exec --no-startup-id xinput set-prop $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
 
 # Redshift
-exec --no-startup-id redshift -t 5500:2500 -l 40.7128:-74.0060
-bindsym $mod+Shift+u exec --no-startup-id killall redshift
+exec_always --no-startup-id $launcher redshift -t 5500:2500 -l 40.7128:-74.0060
+bindsym $mod+Shift+u exec --no-startup-id killall -q redshift
 
 # Wallpaper
-exec --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
 
 # Lock screen
 bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -l dimblur
