@@ -42,10 +42,11 @@ disk "/" {
 }
 
 wireless _first_ {
-        # format_up = "W: (%quality at %essid, %bitrate) %ip"
+        # format_up = "W: %quality %essid %ip (%bitrate)"
         # format_down = "W: OFF"
-        format_up = "📶(%quality at %essid, %bitrate) %ip"
+        format_up = "📶%quality %essid %ip (%bitrate)"
         format_down = "📶OFF"
+        format_quality = "%d%s"
 }
 
 ethernet _first_ {
@@ -92,6 +93,7 @@ load {
 memory {
         # format = "M: %used/%total"
         format = "📒%used/%total"
+        memory_used_method = memavailable
 }
 
 volume master {

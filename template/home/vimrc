@@ -8,11 +8,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'rust-lang/rust.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'edkolev/tmuxline.vim'
 Plug 'skywind3000/asyncrun.vim'
@@ -36,6 +31,18 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'chrisbra/Colorizer'
 Plug 'chrisbra/unicode.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'christoomey/vim-titlecase'
+Plug 'christoomey/vim-sort-motion'
+Plug 'christoomey/vim-system-copy'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-line'
+Plug 'takac/vim-hardtime'
+Plug 'easymotion/vim-easymotion'
 if v:version >= 800
     Plug 'maralla/completor.vim'
 endif
@@ -59,6 +66,13 @@ let g:tmuxline_powerline_separators=0
 
 " asyncrun
 "autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
+
+" junegunn/fzf.vim
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>h :History<CR>
+nnoremap <Leader>t :BTags<CR>
+nnoremap <Leader>T :Tags<CR>
 
 " emmet-vim
 let g:user_emmet_leader_key='<Tab>'
@@ -103,6 +117,18 @@ let g:clang_format#style_options={
 "let g:colorizer_auto_color = 1
 "let g:colorizer_auto_filetype = 'css,html'
 let g:colorizer_disable_bufleave = 1
+
+" christoomey/vim-system-copy
+let g:system_copy#copy_command='xclip -sel clipboard'
+let g:system_copy#paste_command='xclip -sel clipboard -o'
+
+" takac/vim-hardtime
+let g:hardtime_default_on = 0
+let g:list_of_normal_keys = []
+let g:list_of_visual_keys = []
+let g:list_of_insert_keys = []
+let g:list_of_disabled_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:hardtime_timeout = 5000
 
 " completor
 if v:version >= 800
