@@ -284,6 +284,10 @@ bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -t "Type password to 
 # Update cache
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
 
+# Screenshot
+exec_always --no-startup-id flameshot config -t false
+bindsym --release Print exec flameshot gui
+
 # Screen brightness
 {% if dotfiles_configuration == "home" %}
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5

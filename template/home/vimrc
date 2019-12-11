@@ -11,14 +11,13 @@ Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'edkolev/tmuxline.vim'
 Plug 'skywind3000/asyncrun.vim'
-"Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
-"Plug 'sgur/vim-editorconfig'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomasiser/vim-code-dark'
@@ -55,10 +54,10 @@ set showtabline=2
 set noshowmode
 
 " vim-javascript
-let g:javascript_plugin_jsdoc=1
+"let g:javascript_plugin_jsdoc=1
 
 " rust.vim
-let g:rustfmt_autosave=1
+"let g:rustfmt_autosave=1
 
 " tmuxline
 let g:tmuxline_preset='full'
@@ -66,6 +65,9 @@ let g:tmuxline_powerline_separators=0
 
 " asyncrun
 "autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
+
+" dense-analysis/ale
+let g:ale_linters_explicit = 1
 
 " junegunn/fzf.vim
 nnoremap <C-p> :Files<CR>
@@ -77,8 +79,14 @@ nnoremap <Leader>T :Tags<CR>
 " emmet-vim
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings={
-    \ 'javascript.jsx' : {
+    \ 'javascript' : {
     \   'extends': 'jsx',
+    \ },
+    \ 'typescript' : {
+    \   'extends': 'tsx',
+    \ },
+    \ 'typescriptreact' : {
+    \   'extends': 'tsx',
     \ },
     \ }
 
@@ -105,12 +113,12 @@ let g:lightline.component_type={'buffers': 'tabsel'}
 autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 
 " vim-clang-format
-let g:clang_format#style_options={
-    \ "Standard": "Cpp11",
-    \ "BreakBeforeBraces": "Attach",
-    \ "AccessModifierOffset": -4,
-    \ "AllowShortIfStatementsOnASingleLine": "true"
-    \ }
+"let g:clang_format#style_options={
+"    \ "Standard": "Cpp11",
+"    \ "BreakBeforeBraces": "Attach",
+"    \ "AccessModifierOffset": -4,
+"    \ "AllowShortIfStatementsOnASingleLine": "true"
+"    \ }
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " Colorizer
@@ -123,11 +131,12 @@ let g:system_copy#copy_command='xclip -sel clipboard'
 let g:system_copy#paste_command='xclip -sel clipboard -o'
 
 " takac/vim-hardtime
-let g:hardtime_default_on = 0
+let g:hardtime_default_on = 1
 let g:list_of_normal_keys = []
 let g:list_of_visual_keys = []
 let g:list_of_insert_keys = []
-let g:list_of_disabled_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+"let g:list_of_disabled_keys = ['<Up>', '<Down>', '<Left>', '<Right>', '<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
+let g:list_of_disabled_keys = ['<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
 let g:hardtime_timeout = 5000
 
 " completor
@@ -145,6 +154,7 @@ set hlsearch
 "colorscheme codedark
 colorscheme gruvbox
 set cursorline
+set colorcolumn=100
 set background=dark
 
 " indentation

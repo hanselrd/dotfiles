@@ -33,10 +33,10 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym F9 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym F12 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -206,10 +206,28 @@ bar {
                 urgent_workspace   #CC241D #CC241D #FFFFFF
                 binding_mode       #CC241D #CC241D #FFFFFF
         }
+        output HDMI1
         status_command i3status
         position top
 }
 
+bar {
+        colors {
+                background #1D2021
+                statusline #FFFFFF
+                separator  #666666
+
+#               class              border  bground text
+                focused_workspace  #928374 #928374 #FFFFFF
+                active_workspace   #282828 #282828 #FFFFFF
+                inactive_workspace #282828 #282828 #AAAAAA
+                urgent_workspace   #CC241D #CC241D #FFFFFF
+                binding_mode       #CC241D #CC241D #FFFFFF
+        }
+        output HDMI2
+        status_command i3status -c $HOME/.config/i3status/config-sm
+        position top
+}
 
 # Disable window titles
 for_window [class=".*"] border pixel 3
@@ -223,16 +241,16 @@ set $launcher $HOME/.scripts/launcher.sh
 
 # Display
 # exec --no-startup-id xrandr ...
+exec_always --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate left --output HDMI1 --mode 1920x1080 --pos 0x400 --rotate normal --output VIRTUAL1 --off --output DP1 --off
 
 # Compton
 exec_always --no-startup-id $launcher compton
 
 # Eable tap to click
 # exec --no-startup-id xinput ...
-exec --no-startup-id xinput set-prop $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
 
 # Redshift
-exec_always --no-startup-id $launcher redshift -P -t 5500:2500 -l 40.7128:-74.0060
+exec_always --no-startup-id $launcher redshift -P -O 3500
 bindsym $mod+Shift+u exec --no-startup-id killall -q redshift
 
 # Wallpaper
@@ -244,9 +262,13 @@ bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -t "Type password to 
 # Update cache
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
 
+# Screenshot
+exec_always --no-startup-id flameshot config -t false
+bindsym --release Print exec flameshot gui
+
 # Screen brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym F2 exec --no-startup-id xbacklight -inc 5
+bindsym F3 exec --no-startup-id xbacklight -dec 5
 
 # Program shortcuts
 bindsym $mod+Shift+Return exec $terminal_run ranger
