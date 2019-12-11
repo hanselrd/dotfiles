@@ -1,10 +1,10 @@
-  # sudo ansible-playbook ansible-playbooks/main.yml --extra-vars "@template/home/dotfiles-vars.yml"
+  # sudo ansible-playbook $HOME/.dotfiles/ansible-playbooks/main.yml --extra-vars "@$HOME/.dotfiles/template/home/dotfiles-vars.yml"
 
 - hosts: localhost
   gather_facts: no
 
   tasks:
-      - name: "Enable COPR repos"
+      - name: Enable COPR repos
         become: yes
         command: "dnf copr enable {{ item }} -y"
         register: output
@@ -99,7 +99,15 @@
             - { repo: "https://github.com/tmux-plugins/tpm.git", dest: ~/.tmux/plugins/tpm, update: yes }
             - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions, update: yes }
 
-      - name: "Copy ~/.dotfiles/template/root to /"
+      - name: Create directories in / before copy
+        become: yes
+        file:
+            path: "{{ item }}"
+            state: directory
+        loop:
+            - /etc/X11
+
+      - name: Copy ~/.dotfiles/template/root to /
         become: yes
         copy:
             src: "/home/{{ dotfiles_user }}/.dotfiles/template/{{ item.src }}"
@@ -109,7 +117,19 @@
         loop:
             - { src: root/etc/X11/xorg.conf, dest: /etc/X11/xorg.conf }
 
-      - name: "Symlink ~/.dotfiles/template/home to ~"
+      - name: Create directories in ~ before symlink
+        become: yes
+        become_user: "{{ dotfiles_user }}"
+        file:
+            path: "{{ item }}"
+            state: directory
+        loop:
+            # - ~/.config/polybar
+            - ~/.config/gtk-3.0
+            - ~/.config/ranger
+            - ~/.config/rofi
+
+      - name: Symlink ~/.dotfiles/template/home to ~
         become: yes
         become_user: "{{ dotfiles_user }}"
         file:
@@ -137,7 +157,19 @@
             - { src: home/vimrc, dest: ~/.vimrc }
             - { src: home/zshrc, dest: ~/.zshrc }
 
-      - name: "Generate files"
+      - name: Create directories in ~ before generate
+        become: yes
+        become_user: "{{ dotfiles_user }}"
+        file:
+            path: "{{ item }}"
+            state: directory
+        loop:
+            - ~/.config/i3
+            - ~/.config/i3status
+            - ~/.config/rofi
+            - ~/.config/xfce4/terminal
+
+      - name: Generate files
         become: yes
         become_user: "{{ dotfiles_user }}"
         template:
