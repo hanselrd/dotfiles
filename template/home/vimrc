@@ -7,76 +7,120 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'itchyny/lightline.vim'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'edkolev/tmuxline.vim'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'dense-analysis/ale'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'tomasiser/vim-code-dark'
-Plug 'morhetz/gruvbox'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'tpope/vim-fugitive'
-Plug 'itchyny/vim-gitbranch'
-Plug 'rhysd/vim-clang-format'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-commentary'
 Plug 'chrisbra/Colorizer'
 Plug 'chrisbra/unicode.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'christoomey/vim-titlecase'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-system-copy'
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-line'
-Plug 'takac/vim-hardtime'
+Plug 'christoomey/vim-titlecase'
+Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-user'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'maralla/completor.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'morhetz/gruvbox'
+Plug 'rhysd/vim-clang-format'
+Plug 'sheerun/vim-polyglot'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'takac/vim-hardtime'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-scripts/ReplaceWithRegister'
+
 if v:version >= 800
-    Plug 'maralla/completor.vim'
 endif
 
 call plug#end()
 
-" lightline
-set laststatus=2
-set showtabline=2
-set noshowmode
+" START PLUGIN CONFIGURATION
 
-" vim-javascript
-"let g:javascript_plugin_jsdoc=1
+" Plug 'airblade/vim-gitgutter'
 
-" rust.vim
-"let g:rustfmt_autosave=1
+" Plug 'chrisbra/Colorizer'
+"let g:colorizer_auto_color = 1
+"let g:colorizer_auto_filetype = 'css,html'
+let g:colorizer_disable_bufleave = 1
 
-" tmuxline
+" Plug 'chrisbra/unicode.vim'
+
+" Plug 'christoomey/vim-sort-motion'
+
+" Plug 'christoomey/vim-system-copy'
+let g:system_copy#copy_command='xclip -sel clipboard'
+let g:system_copy#paste_command='xclip -sel clipboard -o'
+
+" Plug 'christoomey/vim-titlecase'
+
+" Plug 'dense-analysis/ale'
+let g:ale_linters_explicit = 1
+
+" Plug 'easymotion/vim-easymotion'
+
+" Plug 'editorconfig/editorconfig-vim'
+
+" Plug 'edkolev/tmuxline.vim'
 let g:tmuxline_preset='full'
 let g:tmuxline_powerline_separators=0
 
-" asyncrun
-"autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
+" Plug 'itchyny/lightline.vim'
+set laststatus=2
+set noshowmode
+let g:lightline={
+    \ 'colorscheme': 'deus',
+    \ 'active': {
+    \   'left': [['mode', 'paste'],
+    \            ['gitbranch', 'readonly', 'filename', 'modified']]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ }
+    \ }
 
-" dense-analysis/ale
-let g:ale_linters_explicit = 1
+" Plug 'itchyny/vim-gitbranch'
 
-" junegunn/fzf.vim
+" Plug 'junegunn/fzf'
+
+" Plug 'junegunn/fzf.vim'
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>T :Tags<CR>
 
-" emmet-vim
+" Plug 'kana/vim-textobj-entire'
+
+" Plug 'kana/vim-textobj-indent'
+
+" Plug 'kana/vim-textobj-line'
+
+" Plug 'kana/vim-textobj-user'
+
+" Plug 'ludovicchabant/vim-gutentags'
+
+" Plug 'maralla/completor.vim'
+let g:completor_clang_binary = '/usr/bin/clang'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+" Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings={
     \ 'javascript' : {
@@ -90,29 +134,21 @@ let g:user_emmet_settings={
     \ },
     \ }
 
-" lightline-bufferline
-let g:lightline#bufferline#show_number=1
+" Plug 'mengelbrecht/lightline-bufferline'
+set showtabline=2
+let g:lightline#bufferline#show_number=3
 let g:lightline#bufferline#shorten_path=0
 let g:lightline#bufferline#unnamed='[No Name]'
-
-let g:lightline={
-    \ 'colorscheme': 'wombat',
-    \ 'active': {
-    \   'left': [['mode', 'paste'],
-    \            ['gitbranch', 'readonly', 'filename', 'modified']]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'fugitive#head'
-    \ }
-    \ }
-let g:lightline.tabline={'left': [['buffers']], 'right': [['close']]}
+let g:lightline#bufferline#number_map = {
+\ 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴',
+\ 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹'}
+let g:lightline.tabline={'left': [['buffers']], 'right': [['']]}
 let g:lightline.component_expand={'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type={'buffers': 'tabsel'}
 
-" vim-commentary
-autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+" Plug 'morhetz/gruvbox'
 
-" vim-clang-format
+" Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
 "    \ "Standard": "Cpp11",
 "    \ "BreakBeforeBraces": "Attach",
@@ -121,16 +157,12 @@ autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 "    \ }
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
-" Colorizer
-"let g:colorizer_auto_color = 1
-"let g:colorizer_auto_filetype = 'css,html'
-let g:colorizer_disable_bufleave = 1
+" Plug 'sheerun/vim-polyglot'
 
-" christoomey/vim-system-copy
-let g:system_copy#copy_command='xclip -sel clipboard'
-let g:system_copy#paste_command='xclip -sel clipboard -o'
+" Plug 'skywind3000/asyncrun.vim'
+"autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
 
-" takac/vim-hardtime
+" Plug 'takac/vim-hardtime'
 let g:hardtime_default_on = 1
 let g:list_of_normal_keys = []
 let g:list_of_visual_keys = []
@@ -139,13 +171,26 @@ let g:list_of_insert_keys = []
 let g:list_of_disabled_keys = ['<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
 let g:hardtime_timeout = 5000
 
-" completor
-if v:version >= 800
-    let g:completor_clang_binary = '/usr/bin/clang'
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-endif
+" Plug 'terryma/vim-multiple-cursors'
+
+" Plug 'tmux-plugins/vim-tmux'
+
+" Plug 'tomasiser/vim-code-dark'
+
+" Plug 'tpope/vim-commentary'
+autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+
+" Plug 'tpope/vim-eunuch'
+
+" Plug 'tpope/vim-fugitive'
+
+" Plug 'tpope/vim-surround'
+
+" Plug 'tpope/vim-vinegar'
+
+" Plug 'vim-scripts/ReplaceWithRegister'
+
+" END PLUGIN CONFIGURATION
 
 " line numbers and color
 set number
