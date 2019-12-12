@@ -7,6 +7,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+"Plug 'maralla/completor.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/Colorizer'
 Plug 'chrisbra/unicode.vim'
@@ -26,7 +27,6 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'maralla/completor.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'morhetz/gruvbox'
@@ -155,7 +155,7 @@ let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-html', 'coc-css'
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
-autocmd FileType vim execute 'silent! CocDisable'
+"autocmd FileType vim execute 'silent! CocDisable'
 
 " Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
@@ -208,7 +208,16 @@ set hlsearch
 "colorscheme codedark
 colorscheme gruvbox
 set cursorline
-set colorcolumn=100
+"set colorcolumn=100
+fun! ToggleCC()
+    if &cc == ''
+        set cc=100
+    else
+        set cc=
+    endif
+endfun
+command! ToggleCC call ToggleCC()
+nnoremap <Leader>cc :ToggleCC<CR>
 set background=dark
 
 " indentation
