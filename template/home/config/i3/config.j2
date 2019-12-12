@@ -290,11 +290,11 @@ bindsym --release Print exec flameshot gui
 
 # Screen brightness
 {% if dotfiles_configuration == "home" %}
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id brightlight -p -i 5
+bindsym XF86MonBrightnessDown exec --no-startup-id brightlight -p -d 5
 {% elif dotfiles_configuration == "work" %}
-bindsym F2 exec --no-startup-id xbacklight -inc 5
-bindsym F3 exec --no-startup-id xbacklight -dec 5
+bindsym F2 exec --no-startup-id brightlight -p -i 5
+bindsym F3 exec --no-startup-id brightlight -p -d 5
 {% endif %}
 
 # Program shortcuts
