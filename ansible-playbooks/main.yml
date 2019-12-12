@@ -52,6 +52,7 @@
                 # - xrandr
                 - arandr
                 - betterlockscreen
+                - brightlight
                 - clang
                 - clang-tools-extra
                 - cmake
@@ -76,7 +77,6 @@
                 - symlinks
                 - tmux
                 - vim-enhanced
-                - xbacklight
                 - xclip
                 - zsh
             state: present
@@ -100,23 +100,23 @@
             - { repo: "https://github.com/tmux-plugins/tpm.git", dest: ~/.tmux/plugins/tpm, update: yes }
             - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions, update: yes }
 
-      - name: Create directories in / before copy
-        become: yes
-        file:
-            path: "{{ item }}"
-            state: directory
-        loop:
-            - /etc/X11
+      # - name: Create directories in / before copy
+      #   become: yes
+      #   file:
+      #       path: "{{ item }}"
+      #       state: directory
+      #   loop:
+      #       - /etc/X11
 
-      - name: Copy ~/.dotfiles/template/root to /
-        become: yes
-        copy:
-            src: "/home/{{ dotfiles_user }}/.dotfiles/template/{{ item.src }}"
-            dest: "{{ item.dest }}"
-            remote_src: yes
-            force: yes
-        loop:
-            - { src: root/etc/X11/xorg.conf, dest: /etc/X11/xorg.conf }
+      # - name: Copy ~/.dotfiles/template/root to /
+      #   become: yes
+      #   copy:
+      #       src: "/home/{{ dotfiles_user }}/.dotfiles/template/{{ item.src }}"
+      #       dest: "{{ item.dest }}"
+      #       remote_src: yes
+      #       force: yes
+      #   loop:
+      #       - { src: root/etc/X11/xorg.conf, dest: /etc/X11/xorg.conf }
 
       - name: Create directories in ~ before symlink
         become: yes
