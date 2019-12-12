@@ -31,6 +31,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/vim-clang-format'
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim'
@@ -154,6 +155,7 @@ let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-html', 'coc-css'
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
+autocmd FileType vim execute 'silent! CocDisable'
 
 " Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
@@ -254,9 +256,9 @@ let g:netrw_fastbrowse=0
 " nice to haves
 "cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
 cnoremap w!! SudoWrite
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-command! TrimWhitespace call TrimWhitespace()
+"fun! TrimWhitespace()
+"    let l:save = winsaveview()
+"    keeppatterns %s/\s\+$//e
+"    call winrestview(l:save)
+"endfun
+"command! TrimWhitespace call TrimWhitespace()
