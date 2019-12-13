@@ -138,7 +138,7 @@ let g:user_emmet_settings={
 
 " Plug 'mengelbrecht/lightline-bufferline'
 set showtabline=2
-let g:lightline#bufferline#show_number=3
+let g:lightline#bufferline#show_number=1
 let g:lightline#bufferline#shorten_path=0
 let g:lightline#bufferline#unnamed='[No Name]'
 let g:lightline#bufferline#number_map = {
