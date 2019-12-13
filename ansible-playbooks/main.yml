@@ -129,6 +129,7 @@
             - ~/.config/gtk-3.0
             - ~/.config/ranger
             - ~/.config/rofi
+            - ~/.vim
 
       - name: Symlink ~/.dotfiles/template/home to ~
         become: yes
@@ -155,6 +156,7 @@
             - { src: home/tmux.conf, dest: ~/.tmux.conf }
             - { src: home/tmux.line, dest: ~/.tmux.line }
             - { src: home/urxvt, dest: ~/.urxvt }
+            - { src: home/vim/coc-settings.json, dest: ~/.vim/coc-settings.json }
             - { src: home/vimrc, dest: ~/.vimrc }
             - { src: home/zshrc, dest: ~/.zshrc }
 

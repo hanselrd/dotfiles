@@ -155,7 +155,6 @@ let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-html', 'coc-css'
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
-"autocmd FileType vim execute 'silent! CocDisable'
 
 " Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
