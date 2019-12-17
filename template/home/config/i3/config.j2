@@ -33,7 +33,7 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-{% if dotfiles_configuration == "home" %}
+{% if dotfiles_configuration == "laptop" %}
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
@@ -252,7 +252,7 @@ set $launcher $HOME/.scripts/launcher.sh
 
 # Display
 # exec --no-startup-id xrandr ...
-{% if dotfiles_configuration == "home" %}
+{% if dotfiles_configuration == "laptop" %}
 {% elif dotfiles_configuration == "work" %}
 exec_always --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate left --output HDMI1 --mode 1920x1080 --pos 0x400 --rotate normal --output VIRTUAL1 --off --output DP1 --off
 {% endif %}
@@ -262,13 +262,13 @@ exec_always --no-startup-id $launcher compton
 
 # Eable tap to click
 # exec --no-startup-id xinput ...
-{% if dotfiles_configuration == "home" %}
+{% if dotfiles_configuration == "laptop" %}
 exec --no-startup-id xinput set-prop $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
 {% elif dotfiles_configuration == "work" %}
 {% endif %}
 
 # Redshift
-{% if dotfiles_configuration == "home" %}
+{% if dotfiles_configuration == "laptop" %}
 exec_always --no-startup-id $launcher redshift -P -t 5500:2500 -l 40.7128:-74.0060
 {% elif dotfiles_configuration == "work" %}
 exec_always --no-startup-id $launcher redshift -P -O 3500
@@ -289,7 +289,7 @@ exec_always --no-startup-id flameshot config -t false
 bindsym --release Print exec flameshot gui
 
 # Screen brightness
-{% if dotfiles_configuration == "home" %}
+{% if dotfiles_configuration == "laptop" %}
 bindsym XF86MonBrightnessUp exec --no-startup-id brightlight -p -i 5
 bindsym XF86MonBrightnessDown exec --no-startup-id brightlight -p -d 5
 {% elif dotfiles_configuration == "work" %}
