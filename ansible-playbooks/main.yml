@@ -9,6 +9,7 @@
         command: "dnf copr enable {{ item }} -y"
         register: output
         loop:
+            - atim/i3status-rust
             - balamurali27/betterlockscreen
             - jstanek/ports
             - nforro/i3-gaps
@@ -64,7 +65,8 @@
                 - htop
                 - i3-gaps
                 - i3-ipc
-                - i3status
+                - i3status-rust
+                - lm_sensors
                 - neofetch
                 - network-manager-applet
                 - ninja-build
@@ -180,15 +182,19 @@
             dest: "{{ item.dest }}"
             force: yes
         loop:
+            # - { src: home/config/i3status/config-sm.j2, dest: ~/.config/i3status/config-sm }
+            # - { src: home/config/i3status/config-sm.j2, dest: ~/.dotfiles/template/home/config/i3status/config-sm } # copy
+            # - { src: home/config/i3status/config.j2, dest: ~/.config/i3status/config }
+            # - { src: home/config/i3status/config.j2, dest: ~/.dotfiles/template/home/config/i3status/config } # copy
             # - { src: home/gitconfig.j2, dest: ~/.gitconfig }
             - { src: home/Xresources.j2, dest: ~/.Xresources }
             - { src: home/Xresources.j2, dest: ~/.dotfiles/template/home/Xresources } # copy
             - { src: home/config/i3/config.j2, dest: ~/.config/i3/config }
             - { src: home/config/i3/config.j2, dest: ~/.dotfiles/template/home/config/i3/config } # copy
-            - { src: home/config/i3status/config-sm.j2, dest: ~/.config/i3status/config-sm }
-            - { src: home/config/i3status/config-sm.j2, dest: ~/.dotfiles/template/home/config/i3status/config-sm } # copy
-            - { src: home/config/i3status/config.j2, dest: ~/.config/i3status/config }
-            - { src: home/config/i3status/config.j2, dest: ~/.dotfiles/template/home/config/i3status/config } # copy
+            - { src: home/config/i3status/config-sm.toml.j2, dest: ~/.config/i3status/config-sm.toml }
+            - { src: home/config/i3status/config-sm.toml.j2, dest: ~/.dotfiles/template/home/config/i3status/config-sm.toml } # copy
+            - { src: home/config/i3status/config.toml.j2, dest: ~/.config/i3status/config.toml }
+            - { src: home/config/i3status/config.toml.j2, dest: ~/.dotfiles/template/home/config/i3status/config.toml } # copy
             - { src: home/config/rofi/theme.rasi.j2, dest: ~/.config/rofi/theme.rasi }
             - { src: home/config/rofi/theme.rasi.j2, dest: ~/.dotfiles/template/home/config/rofi/theme.rasi } # copy
             - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.config/xfce4/terminal/terminalrc }
