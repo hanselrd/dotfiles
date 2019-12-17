@@ -83,8 +83,10 @@ icons = true
 clickable = true
 interval = 5
 
+{% if dotfiles_configuration == "laptop" %}
 [[block]]
 block = "backlight"
+{% endif %}
 
 [[block]]
 block = "sound"
