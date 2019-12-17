@@ -4,14 +4,14 @@ icons = "awesome"
 name = "modern"
 [theme.overrides]
 idle_bg = "{{ dotfiles_color_black }}"
-idle_fg = "{{ dotfiles_color_white }}"
-info_bg = "{{ dotfiles_color_blue }}"
+idle_fg = "{{ dotfiles_color_brightwhite }}"
+info_bg = "{{ dotfiles_color_brightblue }}"
 info_fg = "{{ dotfiles_color_black }}"
-good_bg = "{{ dotfiles_color_green }}"
+good_bg = "{{ dotfiles_color_brightgreen }}"
 good_fg = "{{ dotfiles_color_black }}"
-warning_bg = "{{ dotfiles_color_yellow }}"
+warning_bg = "{{ dotfiles_color_brightyellow }}"
 warning_fg = "{{ dotfiles_color_black }}"
-critical_bg = "{{ dotfiles_color_red }}"
+critical_bg = "{{ dotfiles_color_brightred }}"
 critical_fg = "{{ dotfiles_color_black }}"
 separator = "\ue0b2"
 # seperator_bg = "auto"
@@ -39,7 +39,7 @@ graph_up = false
 speed_down = false
 interval = 5
 
-{% if dotfiles_configuration == "home" %}
+{% if dotfiles_configuration == "laptop" %}
 [[block]]
 block = "battery"
 interval = 10
@@ -78,6 +78,7 @@ block = "backlight"
 [[block]]
 block = "sound"
 step_width = 5
+show_volume_when_muted = true
 
 [[block]]
 block = "uptime"
