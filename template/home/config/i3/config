@@ -206,6 +206,7 @@ bar {
                 urgent_workspace   #CC241D #CC241D #FFFFFF
                 binding_mode       #CC241D #CC241D #FFFFFF
         }
+        tray_padding 4
         status_command i3status-rs $HOME/.config/i3status/config.toml
         position top
 }

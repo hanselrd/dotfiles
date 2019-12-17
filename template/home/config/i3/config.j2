@@ -216,6 +216,7 @@ bar {
 {% if dotfiles_configuration == "work" %}
         output HDMI1
 {% endif %}
+        tray_padding 4
         status_command i3status-rs $HOME/.config/i3status/config.toml
         position top
 }
@@ -235,6 +236,7 @@ bar {
                 binding_mode       {{ dotfiles_i3bar_binding_mode_border }} {{ dotfiles_i3bar_binding_mode_background }} {{ dotfiles_i3bar_binding_mode_text }}
         }
         output HDMI2
+        tray_output none
         status_command i3status-rs $HOME/.config/i3status/config-sm.toml
         position top
 }
