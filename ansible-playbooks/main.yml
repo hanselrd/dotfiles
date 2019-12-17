@@ -98,6 +98,7 @@
             update: "{{ item.update | bool }}"
         loop:
             - { repo: "https://github.com/hanselrd/dotfiles.git", dest: ~/.dotfiles, update: no }
+            - { repo: "https://github.com/nvm-sh/nvm.git", dest: ~/.nvm, update: yes }
             - { repo: "https://github.com/ohmyzsh/ohmyzsh.git", dest: ~/.oh-my-zsh, update: yes }
             - { repo: "https://github.com/tmux-plugins/tpm.git", dest: ~/.tmux/plugins/tpm, update: yes }
             - { repo: "https://github.com/zsh-users/zsh-autosuggestions.git", dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions, update: yes }
