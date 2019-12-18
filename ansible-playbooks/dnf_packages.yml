@@ -1,0 +1,80 @@
+- name: Enable COPR repos (dnf)
+  become: yes
+  command:
+      cmd: "dnf copr enable {{ item }} -y"
+      warn: no
+  register: output
+  loop:
+      - atim/i3status-rust
+      - balamurali27/betterlockscreen
+      - jstanek/ports
+      - nforro/i3-gaps
+- debug:
+      msg: "{{ item.stdout_lines }}"
+  loop: "{{ output.results|flatten(levels=1) }}"
+
+- name: Install packages (dnf)
+  become: yes
+  dnf:
+      name:
+          # - ImageMagick
+          # - SDL2-devel
+          # - SDL2_image-devel
+          # - SDL2_mixer-devel
+          # - SDL2_net-devel
+          # - SDL2_ttf-devel
+          # - alsa-lib-devel
+          # - autoconf
+          # - automake
+          # - cairo-devel
+          # - dmenu
+          # - jsoncpp-devel
+          # - libcurl-devel
+          # - libmpdclient-devel
+          # - libnl3-devel
+          # - pulseaudio-libs-devel
+          # - pulseaudio-utils
+          # - scrot
+          # - tiled
+          # - tlp
+          # - tlp-rdw
+          # - valgrind
+          # - wireless-tools-devel
+          # - xcb-proto
+          # - xcb-util-cursor-devel
+          # - xcb-util-devel
+          # - xcb-util-image-devel
+          # - xcb-util-wm-devel
+          # - xcb-util-xrm-devel
+          # - xrandr
+          - arandr
+          - betterlockscreen
+          - brightlight
+          - clang
+          - clang-tools-extra
+          - cmake
+          - compton
+          - ctags
+          - feh
+          - flameshot
+          - gcc-g++
+          - htop
+          - i3-gaps
+          - i3-ipc
+          - i3status-rust
+          - lm_sensors
+          - neofetch
+          - network-manager-applet
+          - ninja-build
+          - openvpn
+          - ranger
+          - redshift
+          - rofi
+          - rpmconf
+          - rxvt-unicode-256color
+          - symlinks
+          - tmux
+          - vim-enhanced
+          - xclip
+          - zsh
+      state: present
