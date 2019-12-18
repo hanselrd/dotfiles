@@ -53,7 +53,6 @@
           - clang
           - clang-tools-extra
           - cmake
-          - compton
           - ctags
           - feh
           - flameshot
@@ -67,6 +66,7 @@
           - network-manager-applet
           - ninja-build
           - openvpn
+          - picom
           - ranger
           - redshift
           - rofi
