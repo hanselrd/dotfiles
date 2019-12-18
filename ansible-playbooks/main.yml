@@ -1,93 +1,22 @@
   # sudo ansible-playbook $HOME/.dotfiles/ansible-playbooks/main.yml --extra-vars "@$HOME/.dotfiles/template/home/dotfiles-vars.yml"
 
 - hosts: localhost
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
-      - name: Enable COPR repos
-        become: yes
-        command: "dnf copr enable {{ item }} -y"
-        register: output
-        loop:
-            - atim/i3status-rust
-            - balamurali27/betterlockscreen
-            - jstanek/ports
-            - nforro/i3-gaps
-      - debug:
-            msg: "{{ item.stdout_lines }}"
-        with_items: "{{ output.results }}"
+      - name: Install packages (dnf)
+        include_tasks: dnf_packages.yml
+        when: ansible_pkg_mgr == "dnf"
 
-      - name: Install packages
-        become: yes
-        dnf:
-            name:
-                # - ImageMagick
-                # - SDL2-devel
-                # - SDL2_image-devel
-                # - SDL2_mixer-devel
-                # - SDL2_net-devel
-                # - SDL2_ttf-devel
-                # - alsa-lib-devel
-                # - autoconf
-                # - automake
-                # - cairo-devel
-                # - dmenu
-                # - jsoncpp-devel
-                # - libcurl-devel
-                # - libmpdclient-devel
-                # - libnl3-devel
-                # - pulseaudio-libs-devel
-                # - pulseaudio-utils
-                # - scrot
-                # - tiled
-                # - tlp
-                # - tlp-rdw
-                # - valgrind
-                # - wireless-tools-devel
-                # - xcb-proto
-                # - xcb-util-cursor-devel
-                # - xcb-util-devel
-                # - xcb-util-image-devel
-                # - xcb-util-wm-devel
-                # - xcb-util-xrm-devel
-                # - xrandr
-                - arandr
-                - betterlockscreen
-                - brightlight
-                - clang
-                - clang-tools-extra
-                - cmake
-                - compton
-                - ctags
-                - feh
-                - flameshot
-                - gcc-g++
-                - htop
-                - i3-gaps
-                - i3-ipc
-                - i3status-rust
-                - lm_sensors
-                - neofetch
-                - network-manager-applet
-                - ninja-build
-                - openvpn
-                - ranger
-                - redshift
-                - rofi
-                - rpmconf
-                - rxvt-unicode-256color
-                - symlinks
-                - tmux
-                - vim-enhanced
-                - xclip
-                - zsh
-            state: present
+      - name: Install packages (pacman)
+        include_tasks: pacman_packages.yml
+        when: ansible_pkg_mgr == "pacman"
 
-      - name: Upgrade all packages
-        become: yes
-        dnf:
-            name: "*"
-            state: latest
+      # - name: Upgrade all packages
+      #   become: yes
+      #   package:
+      #       name: "*"
+      #       state: latest
 
       - name: Git checkout repos
         become: yes
@@ -95,7 +24,7 @@
         git:
             repo: "{{ item.repo }}"
             dest: "{{ item.dest }}"
-            update: "{{ item.update | bool }}"
+            update: "{{ item.update|bool }}"
         loop:
             - { repo: "https://github.com/hanselrd/dotfiles.git", dest: ~/.dotfiles, update: no }
             - { repo: "https://github.com/nvm-sh/nvm.git", dest: ~/.nvm, update: yes }

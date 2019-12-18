@@ -1,0 +1,47 @@
+- name: Create ~/.aur directory
+  become: yes
+  become_user: "{{ dotfiles_user }}"
+  file:
+      path: ~/.aur
+      state: directory
+
+- name: Install AUR packages
+  include_tasks: aur_helper.yml
+  loop:
+      - betterlockscreen
+      - i3status-rust
+      - yay
+  loop_control:
+      loop_var: outer_item
+
+- name: Install packages (pacman)
+  become: yes
+  pacman:
+      name:
+          # - brightlight
+          - arandr
+          - clang
+          - cmake
+          - ctags
+          - feh
+          - flameshot
+          - gcc
+          - git
+          - htop
+          - i3-gaps
+          - lm_sensors
+          - neofetch
+          - network-manager-applet
+          - ninja
+          - openvpn
+          - picom
+          - ranger
+          - redshift
+          - rofi
+          - rxvt-unicode
+          - tmux
+          - urxvt-perls
+          - vim
+          - xclip
+          - zsh
+      state: present
