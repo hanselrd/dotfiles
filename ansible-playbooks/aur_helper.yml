@@ -1,4 +1,4 @@
-- name: "Git checkout {{ outer_item }} from AUR"
+- name: "Git checkout {{ outer_item }} from AUR (aur_helper.yml)"
   become: yes
   become_user: "{{ dotfiles_user }}"
   git:
@@ -6,7 +6,7 @@
       dest: "~/.aur/{{ outer_item }}"
       update: yes
 
-- name: "Install {{ outer_item }} from AUR"
+- name: "Install {{ outer_item }} from AUR (aur_helper.yml)"
   become: yes
   become_user: "{{ dotfiles_user }}"
   command:

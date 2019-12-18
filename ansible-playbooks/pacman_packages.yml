@@ -1,11 +1,11 @@
-- name: Create ~/.aur directory
+- name: Create ~/.aur directory (pacman_packages.yml)
   become: yes
   become_user: "{{ dotfiles_user }}"
   file:
       path: ~/.aur
       state: directory
 
-- name: Install AUR packages
+- name: Include aur_helper.yml (pacman_packages.yml)
   include_tasks: aur_helper.yml
   loop:
       - betterlockscreen
@@ -14,7 +14,7 @@
   loop_control:
       loop_var: outer_item
 
-- name: Install packages (pacman)
+- name: Install packages (pacman_packages.yml)
   become: yes
   pacman:
       name:

@@ -1,4 +1,4 @@
-- name: Enable COPR repos (dnf)
+- name: Enable COPR repos (dnf_packages.yml)
   become: yes
   command:
       cmd: "dnf copr enable {{ item }} -y"
@@ -13,7 +13,7 @@
       msg: "{{ item.stdout_lines }}"
   loop: "{{ output.results|flatten(levels=1) }}"
 
-- name: Install packages (dnf)
+- name: Install packages (dnf_packages.yml)
   become: yes
   dnf:
       name:

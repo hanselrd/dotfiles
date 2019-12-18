@@ -4,11 +4,11 @@
   gather_facts: yes
 
   tasks:
-      - name: Install packages (dnf)
+      - name: Include dnf_packages.yml
         include_tasks: dnf_packages.yml
         when: ansible_pkg_mgr == "dnf"
 
-      - name: Install packages (pacman)
+      - name: Include pacman_packages.yml
         include_tasks: pacman_packages.yml
         when: ansible_pkg_mgr == "pacman"
 
