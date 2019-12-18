@@ -47,6 +47,7 @@
           # - xcb-util-wm-devel
           # - xcb-util-xrm-devel
           # - xrandr
+          - ShellCheck
           - arandr
           - betterlockscreen
           - brightlight

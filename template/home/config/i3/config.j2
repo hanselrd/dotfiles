@@ -159,8 +159,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+set $scripts $HOME/.scripts
+
 # resize window (you can also use the mouse for that)
-mode "resize" {
+set $mode_resize Resize
+mode "$mode_resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -183,8 +186,76 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+bindsym $mod+r mode "$mode_resize"
 
-bindsym $mod+r mode "resize"
+# Edit gaps
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: ([+|-|0]) local, (Shift+[+|-|0]) global
+set $mode_gaps_inner Inner Gaps: ([+|-|0]) local, (Shift+[+|-|0]) global
+mode "$mode_gaps" {
+        bindsym o mode "$mode_gaps_outer"
+        bindsym i mode "$mode_gaps_inner"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+Shift+g mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0 gaps outer current set 0
+
+        bindsym Shift+plus gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0 gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+Shift+g mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0 gaps inner current set 0
+
+        bindsym Shift+plus gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0 gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+Shift+g mode "default"
+}
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+# Set shutdown, restart and locking features
+set $mode_system System: (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+        bindsym l exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" lock, mode "default"
+        bindsym e exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" exit, mode "default"
+        bindsym s exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" suspend, mode "default"
+        bindsym h exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" hibernate, mode "default"
+        bindsym r exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" reboot, mode "default"
+        bindsym Shift+s exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" shutdown, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+x mode "default"
+}
+bindsym $mod+x mode "$mode_system"
+
+# Restart i3 and others inplace
+set $mode_restart Restart: (1) i3, (2) picom, (3) redshift
+mode "$mode_restart" {
+        bindsym 1 exec --no-startup-id i3-msg restart, mode "default"
+        bindsym 2 exec --no-startup-id $scripts/df_picom "{{ dotfiles_configuration }}" restart, mode "default"
+        bindsym 3 exec --no-startup-id $scripts/df_redshift "{{ dotfiles_configuration }}" restart, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        # bindsym $mod+Shift+r mode "default"
+}
+# bindsym $mod+Shift+r mode "$mode_restart"
 
 # class                 border  bground text    indicator child_border
 client.focused          {{ dotfiles_i3_client_focused_border }} {{ dotfiles_i3_client_focused_background }} {{ dotfiles_i3_client_focused_text }} {{ dotfiles_i3_client_focused_indicator }}   {{ dotfiles_i3_client_focused_child_border }}
@@ -250,8 +321,6 @@ for_window [class=".*"] border pixel 3
 gaps outer 10
 gaps inner 10
 
-set $launcher $HOME/.scripts/launcher.sh
-
 # Display
 # exec --no-startup-id xrandr ...
 {% if dotfiles_configuration == "laptop" %}
@@ -260,7 +329,7 @@ exec_always --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 
 {% endif %}
 
 # Picom
-exec_always --no-startup-id $launcher picom --config $HOME/.picom.conf
+exec_always --no-startup-id $scripts/df_picom "{{ dotfiles_configuration }}" start
 
 # Eable tap to click
 # exec --no-startup-id xinput ...
@@ -270,18 +339,14 @@ exec --no-startup-id xinput set-prop $(xinput list | grep "SynPS/2 Synaptics Tou
 {% endif %}
 
 # Redshift
-{% if dotfiles_configuration == "laptop" %}
-exec_always --no-startup-id $launcher redshift -P -t 5500:2500 -l 40.7128:-74.0060
-{% elif dotfiles_configuration == "work" %}
-exec_always --no-startup-id $launcher redshift -P -O 3500
-{% endif %}
-bindsym $mod+Shift+u exec --no-startup-id killall -q redshift
+exec_always --no-startup-id $scripts/df_redshift "{{ dotfiles_configuration }}" start
+bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ dotfiles_configuration }}" stop
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
 
 # Lock screen
-bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -t "Type password to unlock" -l dimblur
+bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" lock
 
 # Update cache
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
