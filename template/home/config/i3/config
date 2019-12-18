@@ -225,8 +225,8 @@ set $launcher $HOME/.scripts/launcher.sh
 # Display
 # exec --no-startup-id xrandr ...
 
-# Compton
-exec_always --no-startup-id $launcher compton
+# Picom
+exec_always --no-startup-id $launcher picom --config $HOME/.picom.conf
 
 # Eable tap to click
 # exec --no-startup-id xinput ...
