@@ -1,0 +1,61 @@
+#!/usr/bin/env sh
+
+# $1 = {{ dotfiles_configuration }}
+case "$1" in
+    extract)
+        if [ -f "$2" ]; then
+            case "$2" in
+                *.tar.bz2)
+                    tar xjf "$2"
+                    ;;
+                *.tar.gz)
+                    tar xzf "$2"
+                    ;;
+                *.bz2)
+                    bunzip2 "$2"
+                    ;;
+                *.rar)
+                    unrar "$2"
+                    ;;
+                *.gz)
+                    gunzip "$2"
+                    ;;
+                *.tar)
+                    tar xf "$2"
+                    ;;
+                *.tbz2)
+                    tar xjf "$2"
+                    ;;
+                *.tgz)
+                    tar xzf "$2"
+                    ;;
+                *.zip)
+                    unzip "$2"
+                    ;;
+                *.Z)
+                    uncompress "$2"
+                    ;;
+                *.7z)
+                    7z "$2"
+                    ;;
+                *)
+                    echo "Usage: $0 {archive <method>|extract} <file>"
+                    echo "$2 not supported"
+                    exit 3
+                    ;;
+            esac
+        else
+            echo "Usage: $0 {archive <method>|extract} <file>"
+            echo "$2 is not a valid file"
+            exit 2
+        fi
+        ;;
+    archive)
+        echo "not supported"
+        ;;
+    *)
+        echo "Usage: $0 {archive <method>|extract} <file>"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac
