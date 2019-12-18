@@ -10,6 +10,7 @@
   loop:
       - betterlockscreen
       - i3status-rust
+      - urxvt-font-size-git
       - yay
   loop_control:
       loop_var: outer_item
@@ -19,6 +20,19 @@
   pacman:
       name:
           # - brightlight
+          # - noto-fonts
+          # - terminus-font
+          # - ttf-dejavu
+          # - ttf-droid
+          # - ttf-font-awesome
+          # - ttf-freefont
+          # - ttf-inconsolata
+          # - ttf-liberation
+          # - ttf-roboto
+          # - ttf-ubuntu-font-family
+          - alsa-lib
+          - alsa-plugins
+          - alsa-utils
           - arandr
           - clang
           - cmake
@@ -29,11 +43,14 @@
           - git
           - htop
           - i3-gaps
+          - lightdm
+          - lightdm-gtk-greeter
           - lm_sensors
           - neofetch
           - network-manager-applet
           - ninja
           - openvpn
+          - pavucontrol
           - picom
           - ranger
           - redshift
@@ -43,5 +60,8 @@
           - urxvt-perls
           - vim
           - xclip
+          - xorg-apps
+          - xorg-server
+          - xorg-xinit
           - zsh
       state: present
