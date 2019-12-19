@@ -1,3 +1,7 @@
+# Ignore
+ansible-playbooks/vars/**/*.yml
 tags
-template/home/dotfiles-vars.yml
 template/home/fonts/.uuid
+
+# Allow
+!ansible-playbooks/vars/**/*.yml.example

@@ -1,15 +1,18 @@
-  # sudo ansible-playbook $HOME/.dotfiles/ansible-playbooks/main.yml --extra-vars "@$HOME/.dotfiles/template/home/dotfiles-vars.yml"
+  # sudo ansible-playbook $HOME/.dotfiles/ansible-playbooks/main.yml
 
 - hosts: localhost
   gather_facts: yes
 
   tasks:
-      - name: Include dnf_packages.yml
-        include_tasks: dnf_packages.yml
+      - name: Include vars/dotfiles.yml
+        include_vars: vars/dotfiles.yml
+
+      - name: Include tasks/dnf_packages.yml
+        include_tasks: tasks/dnf_packages.yml
         when: ansible_pkg_mgr == "dnf"
 
-      - name: Include pacman_packages.yml
-        include_tasks: pacman_packages.yml
+      - name: Include tasks/pacman_packages.yml
+        include_tasks: tasks/pacman_packages.yml
         when: ansible_pkg_mgr == "pacman"
 
       # - name: Upgrade all packages
@@ -84,6 +87,7 @@
             - { src: home/gdbinit, dest: ~/.gdbinit }
             - { src: home/gtkrc-2.0, dest: ~/.gtkrc-2.0 }
             - { src: home/picom.conf, dest: ~/.picom.conf }
+            - { src: home/screenlayout, dest: ~/.screenlayout }
             - { src: home/scripts, dest: ~/.scripts }
             - { src: home/tmux.conf, dest: ~/.tmux.conf }
             - { src: home/tmux.line, dest: ~/.tmux.line }
@@ -116,7 +120,6 @@
             # - { src: home/config/i3status/config-sm.j2, dest: ~/.dotfiles/template/home/config/i3status/config-sm } # copy
             # - { src: home/config/i3status/config.j2, dest: ~/.config/i3status/config }
             # - { src: home/config/i3status/config.j2, dest: ~/.dotfiles/template/home/config/i3status/config } # copy
-            # - { src: home/gitconfig.j2, dest: ~/.gitconfig }
             - { src: home/Xresources.j2, dest: ~/.Xresources }
             - { src: home/Xresources.j2, dest: ~/.dotfiles/template/home/Xresources } # copy
             - { src: home/config/i3/config.j2, dest: ~/.config/i3/config }
@@ -129,4 +132,4 @@
             - { src: home/config/rofi/theme.rasi.j2, dest: ~/.dotfiles/template/home/config/rofi/theme.rasi } # copy
             - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.config/xfce4/terminal/terminalrc }
             - { src: home/config/xfce4/terminal/terminalrc.j2, dest: ~/.dotfiles/template/home/config/xfce4/terminal/terminalrc } # copy
-            - { src: home/dotfiles-vars.yml, dest: ~/.dotfiles-vars.yml }
+            - { src: home/gitconfig.j2, dest: ~/.gitconfig }

@@ -233,9 +233,9 @@ mode "$mode_system" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+x mode "default"
+        bindsym $mod+Shift+x mode "default"
 }
-bindsym $mod+x mode "$mode_system"
+bindsym $mod+Shift+x mode "$mode_system"
 
 # Restart i3 and others inplace
 set $mode_restart Restart: (1) i3, (2) picom, (3) redshift
@@ -292,7 +292,7 @@ gaps outer 10
 gaps inner 10
 
 # Display
-# exec --no-startup-id xrandr ...
+exec_always --no-startup-id $scripts/df_xrandr "laptop" default
 
 # Picom
 exec_always --no-startup-id $scripts/df_picom "laptop" start
@@ -309,7 +309,7 @@ bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "laptop" stop
 exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
 
 # Lock screen
-bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "laptop" lock
+# bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "laptop" lock
 
 # Update cache
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
