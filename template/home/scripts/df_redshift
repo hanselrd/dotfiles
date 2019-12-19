@@ -17,6 +17,7 @@ case "$1" in
                 esac
                 ;;
             stop)
+                redshift -x
                 killall -q redshift
                 ;;
             *)
