@@ -240,9 +240,9 @@ mode "$mode_system" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+x mode "default"
+        bindsym $mod+Shift+x mode "default"
 }
-bindsym $mod+x mode "$mode_system"
+bindsym $mod+Shift+x mode "$mode_system"
 
 # Restart i3 and others inplace
 set $mode_restart Restart: (1) i3, (2) picom, (3) redshift
@@ -322,11 +322,7 @@ gaps outer 10
 gaps inner 10
 
 # Display
-# exec --no-startup-id xrandr ...
-{% if dotfiles_configuration == "laptop" %}
-{% elif dotfiles_configuration == "work" %}
-exec_always --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate left --output HDMI1 --mode 1920x1080 --pos 0x400 --rotate normal --output VIRTUAL1 --off --output DP1 --off
-{% endif %}
+exec_always --no-startup-id $scripts/df_xrandr "{{ dotfiles_configuration }}" default
 
 # Picom
 exec_always --no-startup-id $scripts/df_picom "{{ dotfiles_configuration }}" start
@@ -346,7 +342,7 @@ bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ dotfiles_conf
 exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
 
 # Lock screen
-bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" lock
+# bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ dotfiles_configuration }}" lock
 
 # Update cache
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache

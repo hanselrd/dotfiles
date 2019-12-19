@@ -1,8 +1,8 @@
 # Home directory
-dotfiles_user: delacruz
+dotfiles_user:
 
-# Configuration
-dotfiles_configuration: laptop # laptop/work
+# Configuration (laptop/work)
+dotfiles_configuration:
 
 # Git
 dotfiles_git_user_email:
