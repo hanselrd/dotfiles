@@ -1,3 +1,4 @@
+---
 palette:
   black:         &palette_black         "#282828"
   brightblack:   &palette_brightblack   "#928374"

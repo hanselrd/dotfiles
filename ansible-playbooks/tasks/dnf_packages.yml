@@ -1,3 +1,4 @@
+---
 - name: Enable COPR repos (dnf_packages.yml)
   become: yes
   command:
