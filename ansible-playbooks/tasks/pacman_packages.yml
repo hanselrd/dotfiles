@@ -1,3 +1,4 @@
+---
 - name: Create ~/.aur directory (pacman_packages.yml)
   become: yes
   become_user: "{{ dotfiles_user }}"

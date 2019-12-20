@@ -1,5 +1,5 @@
-  # sudo ansible-playbook $HOME/.dotfiles/ansible-playbooks/main.yml
-
+---
+# sudo ansible-playbook $HOME/.dotfiles/ansible-playbooks/main.yml
 - hosts: localhost
   gather_facts: yes
 

@@ -1,3 +1,4 @@
+---
 - name: "Git checkout {{ outer_item }} from AUR (aur_helper.yml)"
   become: yes
   become_user: "{{ dotfiles_user }}"
