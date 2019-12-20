@@ -81,7 +81,6 @@
             # - { src: home/config/polybar/config, dest: ~/.config/polybar/config }
             # - { src: home/config/polybar/launch.sh, dest: ~/.config/polybar/launch.sh }
             - { src: home/backgrounds, dest: ~/.backgrounds }
-            - { src: home/config/gtk-3.0/bookmarks, dest: ~/.config/gtk-3.0/bookmarks }
             - { src: home/config/gtk-3.0/settings.ini, dest: ~/.config/gtk-3.0/settings.ini }
             - { src: home/config/ranger/rc.conf, dest: ~/.config/ranger/rc.conf }
             - { src: home/config/rofi/config, dest: ~/.config/rofi/config }
