@@ -4,8 +4,11 @@
   gather_facts: yes
 
   tasks:
-      - name: Include vars/dotfiles.yml
-        include_vars: vars/dotfiles.yml
+      - name: Include vars/env.yml
+        include_vars: vars/env.yml
+
+      # - name: Include vars/theme.yml
+      #   include_vars: vars/theme.yml
 
       - name: Include tasks/dnf_packages.yml
         include_tasks: tasks/dnf_packages.yml
