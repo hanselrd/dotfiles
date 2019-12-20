@@ -186,6 +186,7 @@ let g:hardtime_timeout = 5000
 " Plug 'tomasiser/vim-code-dark'
 
 " Plug 'tpope/vim-commentary'
+autocmd FileType jinja2 setlocal commentstring={#\ %s\ #}
 autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 
 " Plug 'tpope/vim-eunuch'
