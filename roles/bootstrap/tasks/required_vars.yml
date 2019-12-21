@@ -1,0 +1,81 @@
+---
+# tasks file for bootstrap
+
+- include_tasks: required_vars/check_defined.yml
+  loop:
+    - bootstrap_cache_dir
+    - bootstrap_configuration
+    - bootstrap_git_user_email
+    - bootstrap_git_user_name
+    - bootstrap_root_dir
+    - bootstrap_temp_dir
+    - bootstrap_theme
+    - bootstrap_user
+    - bootstrap_user_dir
+  loop_control:
+    loop_var: variable_item
+
+- name: "Check if bootstrap_cache_dir ({{ bootstrap_cache_dir }}) exists"
+  stat:
+    path: "{{ bootstrap_cache_dir }}"
+  register: bootstrap_cache_dir_stat
+
+- name: "Create bootstrap_cache_dir ({{ bootstrap_cache_dir }}), if it does not exist"
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  file:
+    path: "{{ bootstrap_cache_dir }}"
+    state: directory
+  when: bootstrap_cache_dir_stat.stat.exists == False
+
+- name: "Check if bootstrap_configuration ({{ bootstrap_configuration }}) is valid"
+  fail:
+    msg: bootstrap_configuration is not valid, expected (laptop|work)
+  when:
+    - bootstrap_configuration != "laptop"
+    - bootstrap_configuration != "work"
+
+- name: "Check if bootstrap_root_dir ({{ bootstrap_root_dir }}) exists"
+  stat:
+    path: "{{ bootstrap_root_dir }}"
+  register: bootstrap_root_dir_stat
+
+- name: "Create bootstrap_root_dir ({{ bootstrap_root_dir }}), if it does not exist"
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  file:
+    path: "{{ bootstrap_root_dir }}"
+    state: directory
+  when: bootstrap_root_dir_stat.stat.exists == False
+
+- name: "Check if bootstrap_temp_dir ({{ bootstrap_temp_dir }}) exists"
+  stat:
+    path: "{{ bootstrap_temp_dir }}"
+  register: bootstrap_temp_dir_stat
+
+- name: "Create bootstrap_temp_dir ({{ bootstrap_temp_dir }}), if it does not exist"
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  file:
+    path: "{{ bootstrap_temp_dir }}"
+    state: directory
+  when: bootstrap_temp_dir_stat.stat.exists == False
+
+- name: "Check if bootstrap_theme ({{ bootstrap_theme }}) is valid"
+  fail:
+    msg: bootstrap_theme is not valid, expected (default)
+  when:
+    - bootstrap_theme != "default"
+
+- name: "Check if bootstrap_user_dir ({{ bootstrap_user_dir }}) exists"
+  stat:
+    path: "{{ bootstrap_user_dir }}"
+  register: bootstrap_user_dir_stat
+
+- name: "Create bootstrap_user_dir ({{ bootstrap_user_dir }}), if it does not exist"
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  file:
+    path: "{{ bootstrap_user_dir }}"
+    state: directory
+  when: bootstrap_user_dir_stat.stat.exists == False

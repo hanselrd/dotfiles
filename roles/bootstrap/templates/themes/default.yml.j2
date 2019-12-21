@@ -1,0 +1,162 @@
+---
+{% set palette_black         = "#282828" %}
+{% set palette_brightblack   = "#928374" %}
+{% set palette_red           = "#CC241D" %}
+{% set palette_brightred     = "#FB4934" %}
+{% set palette_green         = "#98971A" %}
+{% set palette_brightgreen   = "#B8BB26" %}
+{% set palette_yellow        = "#D79921" %}
+{% set palette_brightyellow  = "#FABD2F" %}
+{% set palette_blue          = "#458588" %}
+{% set palette_brightblue    = "#83A598" %}
+{% set palette_magenta       = "#B16286" %}
+{% set palette_brightmagenta = "#D3869B" %}
+{% set palette_cyan          = "#689D6A" %}
+{% set palette_brightcyan    = "#8EC07C" %}
+{% set palette_white         = "#A89984" %}
+{% set palette_brightwhite   = "#EBDBB2" %}
+bootstrap_theme_palette:
+  black:         &palette_black         "{{ palette_black }}"
+  brightblack:   &palette_brightblack   "{{ palette_brightblack }}"
+  red:           &palette_red           "{{ palette_red }}"
+  brightred:     &palette_brightred     "{{ palette_brightred }}"
+  green:         &palette_green         "{{ palette_green }}"
+  brightgreen:   &palette_brightgreen   "{{ palette_brightgreen }}"
+  yellow:        &palette_yellow        "{{ palette_yellow }}"
+  brightyellow:  &palette_brightyellow  "{{ palette_brightyellow }}"
+  blue:          &palette_blue          "{{ palette_blue }}"
+  brightblue:    &palette_brightblue    "{{ palette_brightblue }}"
+  magenta:       &palette_magenta       "{{ palette_magenta }}"
+  brightmagenta: &palette_brightmagenta "{{ palette_brightmagenta }}"
+  cyan:          &palette_cyan          "{{ palette_cyan }}"
+  brightcyan:    &palette_brightcyan    "{{ palette_brightcyan }}"
+  white:         &palette_white         "{{ palette_white }}"
+  brightwhite:   &palette_brightwhite   "{{ palette_brightwhite }}"
+
+bootstrap_theme_background_hard: &background_hard "#1D2021"
+bootstrap_theme_background:      &background      "{{ palette_black }}"
+bootstrap_theme_background_soft: &background_soft "#32302F"
+bootstrap_theme_foreground:      &foreground      "{{ palette_brightwhite }}"
+
+bootstrap_theme_i3:
+  client_focused:          &i3_client_focused
+    border:                *palette_brightblack
+    background:            *palette_brightblack
+    text:                  "#FFFFFF"
+    indicator:             *palette_brightblack
+    child_border:          *palette_brightblack
+  client_focused_inactive: &i3_client_focused_inactive
+    <<:                    *i3_client_focused
+    border:                *palette_black
+    background:            *palette_black
+    indicator:             *palette_black
+    child_border:          *palette_black
+  client_unfocused:        &i3_client_unfocused
+    <<:                    *i3_client_focused_inactive
+  client_urgent:           &i3_client_urgent
+    <<:                    *i3_client_focused
+    border:                *palette_red
+    background:            *palette_red
+    indicator:             *palette_red
+    child_border:          *palette_red
+  client_placeholder:      &i3_client_placeholder
+    <<:                    *i3_client_focused
+    border:                "#000000"
+    background:            "#000000"
+    indicator:             "#000000"
+    child_border:          "#000000"
+
+  client_background:       &i3_client_background       "#FFFFFF"
+
+bootstrap_theme_i3bar:
+  background:         *background_hard
+  statusline:         "#FFFFFF"
+  separator:          "#666666"
+
+  focused_workspace:   *i3_client_focused
+  active_workspace:    *i3_client_focused_inactive
+  inactive_workspace:
+    <<:                *i3_client_unfocused
+    text:              "#AAAAAA"
+  urgent_workspace:    *i3_client_urgent
+  binding_mode:        *i3_client_urgent
+
+bootstrap_theme_i3status:
+  good:                *palette_green
+  degraded:            *palette_yellow
+  bad:                 *palette_red
+
+  idle_bg:             *palette_black
+  idle_fg:             *palette_brightwhite
+  info_bg:             *palette_blue
+  info_fg:             *palette_black
+  good_bg:             *palette_green
+  good_fg:             *palette_black
+  warning_bg:          *palette_yellow
+  warning_fg:          *palette_black
+  critical_bg:         *palette_red
+  critical_fg:         *palette_black
+  alternating_tint_bg: "#111111"
+  alternating_tint_fg: "#000000"
+
+bootstrap_theme_xfce4_terminal:
+  background:   *background_hard
+  foreground:   *foreground
+  tab_activity: "#BF4040"
+
+  palette:      &xfce4_terminal_palette
+    color0:     *palette_black
+    color8:     *palette_brightblack
+    color1:     *palette_red
+    color9:     *palette_brightred
+    color2:     *palette_green
+    color10:    *palette_brightgreen
+    color3:     *palette_yellow
+    color11:    *palette_brightyellow
+    color4:     *palette_blue
+    color12:    *palette_brightblue
+    color5:     *palette_magenta
+    color13:    *palette_brightmagenta
+    color6:     *palette_cyan
+    color14:    *palette_brightcyan
+    color7:     *palette_white
+    color15:    *palette_brightwhite
+
+bootstrap_theme_urxvt:
+  background: *background_hard
+  foreground: *foreground
+  scroll:     "#AAAAAA"
+  cursor:     "#AAAAAA"
+
+  palette:
+    <<:       *xfce4_terminal_palette
+    color24:  "#076678"
+    color66:  "#427B58"
+    color88:  "#9D0006"
+    color96:  "#8F3F71"
+    color100: "#79740E"
+    color108: "#8EC07C"
+    color109: "#83A598"
+    color130: "#AF3A03"
+    color136: "#B57614"
+    color142: "#B8BB26"
+    color167: "#FB4934"
+    color175: "#D3869B"
+    color208: "#FE8019"
+    color214: "#FABD2F"
+    color223: "#EBDBB2"
+    color228: "#F2E5BC"
+    color229: "#FBF1C7"
+    color230: "#F9F5D7"
+    color234: "#1D2021"
+    color235: "#282828"
+    color236: "#32302F"
+    color237: "#3C3836"
+    color239: "#504945"
+    color241: "#665C54"
+    color243: "#7C6F64"
+    color244: "#928374"
+    color245: "#928374"
+    color246: "#A89984"
+    color248: "#BDAE93"
+    color250: "#D5C4A1"

@@ -1,3 +1,2 @@
-ansible-playbooks/vars/env.yml
+roles/bootstrap/files/home/fonts/.uuid
 tags
-template/home/fonts/.uuid

@@ -1,0 +1,41 @@
+---
+# tasks file for bootstrap
+
+- name: "Create directories in ({{ bootstrap_user_dir }}) before symlink"
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  file:
+    path: "{{ bootstrap_user_dir }}/.{{ item }}"
+    state: directory
+  loop:
+    - config/gtk-3.0
+    - config/ranger
+    - config/rofi
+    - vim
+
+- name: "Symlink files to ({{ bootstrap_user_dir }})"
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  file:
+    src: "{{ role_path }}/files/home/{{ item }}"
+    dest: "{{ bootstrap_user_dir }}/.{{ item }}"
+    state: link
+    force: yes
+  loop:
+    - backgrounds
+    - config/gtk-3.0/settings.ini
+    - config/ranger/rc.conf
+    - config/rofi/config
+    - fonts
+    - gdb
+    - gdbinit
+    - gtkrc-2.0
+    - picom.conf
+    - screenlayout
+    - scripts
+    - tmux.conf
+    - tmux.line
+    - urxvt
+    - vim/coc-settings.json
+    - vimrc
+    - zshrc
