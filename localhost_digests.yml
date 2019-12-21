@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - debug:
+        msg: "Starting digests"
+
+    - name: Generate digests for laptop configuration
+      include_role:
+        name: bootstrap
+      vars:
+        bootstrap_cache_dir: digests/configuration_laptop/cache_dir
+        bootstrap_configuration: laptop
+        bootstrap_git_user_email: digests@digests.com
+        bootstrap_git_user_name: Dig Digest
+        bootstrap_root_dir: digests/configuration_laptop/root_dir
+        bootstrap_temp_dir: digests/configuration_laptop/temp_dir
+        bootstrap_theme: default
+        bootstrap_user: root
+        bootstrap_user_dir: digests/configuration_laptop/user_dir
+
+    - name: Generate digests for work configuration
+      include_role:
+        name: bootstrap
+      vars:
+        bootstrap_cache_dir: digests/configuration_work/cache_dir
+        bootstrap_configuration: work
+        bootstrap_git_user_email: digests@digests.com
+        bootstrap_git_user_name: Dig Digest
+        bootstrap_root_dir: digests/configuration_work/root_dir
+        bootstrap_temp_dir: digests/configuration_work/temp_dir
+        bootstrap_theme: default
+        bootstrap_user: root
+        bootstrap_user_dir: digests/configuration_work/user_dir
+
+    - debug:
+        msg: "Ending digests"
