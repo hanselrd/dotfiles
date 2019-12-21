@@ -6,7 +6,9 @@
   tasks:
     # - debug:
     #     msg: "Starting roles"
+
     - include_role:
         name: bootstrap
+
     # - debug:
     #     msg: "Ending roles"
