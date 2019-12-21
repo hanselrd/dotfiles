@@ -81,4 +81,3 @@
       - xclip
       - zsh
     state: present
-
