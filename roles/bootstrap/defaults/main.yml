@@ -1,0 +1,6 @@
+---
+# defaults file for bootstrap
+
+bootstrap_root_dir: /
+bootstrap_temp_dir: /tmp
+bootstrap_theme: default

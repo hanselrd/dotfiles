@@ -1,0 +1,10 @@
+---
+# tasks file for bootstrap
+
+- name: Check if required variables are defined
+  fail:
+    msg: "{{ variable_item }} is not defined"
+  when: vars[variable_item] is not defined
+
+- debug:
+    var: "{{ variable_item }}"
