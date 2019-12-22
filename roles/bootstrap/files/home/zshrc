@@ -71,6 +71,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 #source ~/.bashrc > /dev/null 2>&1
 #neofetch --disable packages
+export GIT_ASKPASS=
+export SSH_ASKPASS=
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
