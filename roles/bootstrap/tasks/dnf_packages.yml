@@ -31,6 +31,7 @@
       # - cairo-devel
       # - dmenu
       # - i3-ipc
+      # - i3status-rs    remove copr and use this fedora 31+
       # - jsoncpp-devel
       # - libcurl-devel
       # - libmpdclient-devel
