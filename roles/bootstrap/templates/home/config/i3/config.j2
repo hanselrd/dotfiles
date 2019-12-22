@@ -330,7 +330,7 @@ exec_always --no-startup-id $scripts/df_picom "{{ bootstrap_configuration }}" st
 # Eable tap to click
 # exec --no-startup-id xinput ...
 {% if bootstrap_configuration == "laptop" %}
-exec --no-startup-id xinput set-prop $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep "SynPS/2 Synaptics TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
+exec --no-startup-id xinput set-prop $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
 {% elif bootstrap_configuration == "work" %}
 {% endif %}
 
