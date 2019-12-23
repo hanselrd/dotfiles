@@ -36,7 +36,6 @@
       # - libcurl-devel
       # - libmpdclient-devel
       # - libnl3-devel
-      # - ninja-build
       # - pulseaudio-libs-devel
       # - pulseaudio-utils
       # - scrot
@@ -69,6 +68,11 @@
       - lm_sensors
       - neofetch
       - network-manager-applet
+      - ninja-build
+      - numix-gtk-theme
+      - numix-icon-theme
+      - numix-icon-theme-circle
+      - numix-icon-theme-square
       - openvpn
       - picom
       - ranger
