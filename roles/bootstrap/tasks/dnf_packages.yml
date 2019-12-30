@@ -20,11 +20,6 @@
   dnf:
     name:
       # - ImageMagick
-      # - SDL2-devel
-      # - SDL2_image-devel
-      # - SDL2_mixer-devel
-      # - SDL2_net-devel
-      # - SDL2_ttf-devel
       # - alsa-lib-devel
       # - autoconf
       # - automake
@@ -51,6 +46,11 @@
       # - xcb-util-wm-devel
       # - xcb-util-xrm-devel
       # - xrandr
+      - SDL2-devel
+      - SDL2_image-devel
+      - SDL2_mixer-devel
+      - SDL2_net-devel
+      - SDL2_ttf-devel
       - ShellCheck
       - arandr
       - betterlockscreen
