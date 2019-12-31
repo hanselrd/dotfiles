@@ -59,6 +59,8 @@
       - clang-tools-extra
       - cmake
       - ctags
+      - dnf-plugins-extras-tracer
+      - dnf-plugin-system-upgrade
       - feh
       - flameshot
       - gcc-g++
