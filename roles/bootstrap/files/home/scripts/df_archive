@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# cd "$(dirname "$0")" || exit
+
+case "$1" in
+    encrypt|decrypt)
+        case "$1" in
+            encrypt)
+                output_archive=$2
+                shift 2
+                tar -cvpzf - "$@" --one-file-system | gpg --pinentry-mode=loopback --symmetric --cipher-algo=aes256 -o "$output_archive"
+                ;;
+            decrypt)
+                if [ ! -d "$3" ]; then
+                    mkdir -p "$3"
+                fi
+                if [ ! -f "$2" ]; then
+                    echo "$2 not found"
+                    exit 2
+                fi
+                gpg --pinentry-mode=loopback -d "$2" | tar -xvpzf - -C "$3"
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {encrypt|decrypt} {encrypt|decrypt:archive} {encrypt:directories...|decrypt:directory}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac
