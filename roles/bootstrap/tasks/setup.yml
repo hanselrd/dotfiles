@@ -1,0 +1,20 @@
+---
+# tasks file for bootstrap
+
+- name: Change shell to zsh
+  command: "chsh -s /usr/bin/zsh {{ bootstrap_user }}"
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
+
+- name: Install latest Node LTS version
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  shell: |
+    . {{ bootstrap_user_dir }}/.zshrc
+    nvm install --lts --latest-npm
+  args:
+    executable: /usr/bin/zsh
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
