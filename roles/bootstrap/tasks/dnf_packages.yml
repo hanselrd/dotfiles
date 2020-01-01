@@ -58,8 +58,8 @@
       - clang-tools-extra
       - cmake
       - ctags
-      - dnf-plugins-extras-tracer
       - dnf-plugin-system-upgrade
+      - dnf-plugins-extras-tracer
       - feh
       - flameshot
       - gcc-g++
@@ -82,6 +82,7 @@
       - rpmconf
       - rxvt-unicode-256color
       - symlinks
+      - timeshift
       - tmux
       - vim-enhanced
       - xclip
