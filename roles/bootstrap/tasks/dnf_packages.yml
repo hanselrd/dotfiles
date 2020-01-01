@@ -16,7 +16,6 @@
   loop: "{{ output.results | flatten(levels=1) }}"
 
 - name: Install packages
-  become: yes
   dnf:
     name:
       # - ImageMagick

@@ -13,3 +13,5 @@
 - include_tasks: symlink.yml
 
 - include_tasks: generate.yml
+
+- include_tasks: setup.yml
