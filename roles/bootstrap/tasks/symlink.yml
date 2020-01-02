@@ -11,6 +11,7 @@
     - config/gtk-3.0
     - config/ranger
     - config/rofi
+    - oh-my-zsh/custom/themes
     - vim
 
 - name: "Symlink files to ({{ bootstrap_user_dir }})"
@@ -30,6 +31,7 @@
     - gdb
     - gdbinit
     - gtkrc-2.0
+    - oh-my-zsh/custom/themes/dieter.zsh-theme
     - picom.conf
     - screenlayout
     - scripts
