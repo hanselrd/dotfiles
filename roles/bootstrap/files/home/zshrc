@@ -79,6 +79,22 @@ export SSH_ASKPASS=
 
 export KEYTIMEOUT=1
 
+if [[ "$ZSH_THEME" == "dieter" ]]; then
+    # if [[ "$MODE_INDICATOR" == "" ]]; then
+        # MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
+        MODE_INDICATOR="%{$fg_bold[magenta]%}<%{$reset_color%}%{$fg[magenta]%}<<%{$reset_color%}"
+    # fi
+
+    function vi_mode_prompt_info() {
+        echo "${${VI_KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+    }
+
+    # if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
+        # RPS1='$(vi_mode_prompt_info)'
+        RPS1='$(vi_mode_prompt_info) ${return_code}'
+    # fi
+fi
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
