@@ -2,7 +2,7 @@
 # tasks file for bootstrap
 
 - name: Change shell to zsh
-  command: "chsh -s /usr/bin/zsh {{ bootstrap_user }}"
+  command: "chsh -s /bin/zsh {{ bootstrap_user }}"
   register: output
 - debug:
     msg: "{{ output.stdout_lines }}"
