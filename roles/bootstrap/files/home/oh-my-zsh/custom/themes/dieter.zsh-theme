@@ -45,7 +45,7 @@ function locked_idle_prompt_info() {
     fi
 }
 
-PROMPT='$(locked_idle_prompt_info)${time} ${user}${host} ${pwd} $(git_prompt_info)'
+PROMPT='$(locked_idle_prompt_info)${time} ${user}${host%%.*} ${pwd} $(git_prompt_info)'
 
 MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$reset_color%}"
 

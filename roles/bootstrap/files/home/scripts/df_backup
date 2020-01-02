@@ -8,10 +8,10 @@ case "$1" in
     home|root)
         case "$1" in
             home)
-                "$HOME/.scripts/df_archive" encrypt "$(printf "%s_HOME_%s_BACKUP.tar.gz" "$archive_basename" "$USER")" "$HOME/Desktop" "$HOME/Documents" "$HOME/Downloads" "$HOME/Music" "$HOME/Pictures" "$HOME/Public" "$HOME/Templates" "$HOME/Videos"
+                "$HOME/.scripts/df_archive" encrypt "$(printf "%s_HOME_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")" "$HOME/Desktop" "$HOME/Documents" "$HOME/Downloads" "$HOME/Music" "$HOME/Pictures" "$HOME/Public" "$HOME/Templates" "$HOME/Videos"
                 ;;
             root)
-                "/home/$SUDO_USER/.scripts/df_archive" encrypt "$(printf "%s_ROOT_%s_BACKUP.tar.gz" "$archive_basename" "$SUDO_USER")" /etc
+                "$HOME/.scripts/df_archive" encrypt "$(printf "%s_ROOT_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")" /etc
                 ;;
         esac
         ;;
