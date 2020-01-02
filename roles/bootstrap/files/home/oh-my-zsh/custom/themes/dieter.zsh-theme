@@ -47,7 +47,7 @@ function locked_idle_prompt_info() {
 
 PROMPT='$(locked_idle_prompt_info)${time} ${user}${host%%.*} ${pwd} $(git_prompt_info)'
 
-MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$reset_color%}"
+MODE_INDICATOR="%{$fg_bold[magenta]%}❮%{$reset_color%}%{$fg[magenta]%}❮❮%{$reset_color%}"
 
 function vi_mode_prompt_info() {
     echo "${${VI_KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
@@ -61,7 +61,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%} %{$fg[yellow]%}?%{$fg[green]%}%{$rese
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
 
 # elaborate exitcode on the right when >0
-return_code_enabled="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+return_code_enabled="%(?..%{$fg[red]%}%? ⬣%{$reset_color%})"
 return_code_disabled=
 return_code=$return_code_enabled
 
