@@ -25,7 +25,9 @@
   shell: |
     . {{ bootstrap_user_dir }}/.zshrc
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
+    rustup component add rls rust-analysis rust-src
     rustup update
+    cargo install cargo-edit || true
   args:
     executable: /usr/bin/zsh
     warn: no

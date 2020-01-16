@@ -56,9 +56,9 @@ call plug#end()
 " Plug 'airblade/vim-gitgutter'
 
 " Plug 'chrisbra/Colorizer'
-"let g:colorizer_auto_color = 1
-"let g:colorizer_auto_filetype = 'css,html'
-let g:colorizer_disable_bufleave = 1
+"let g:colorizer_auto_color=1
+"let g:colorizer_auto_filetype='css,html'
+let g:colorizer_disable_bufleave=1
 
 " Plug 'chrisbra/unicode.vim'
 
@@ -71,7 +71,7 @@ let g:system_copy#paste_command='xclip -sel clipboard -o'
 " Plug 'christoomey/vim-titlecase'
 
 " Plug 'dense-analysis/ale'
-let g:ale_linters_explicit = 1
+let g:ale_linters_explicit=1
 
 " Plug 'easymotion/vim-easymotion'
 
@@ -115,9 +115,10 @@ nnoremap <Leader>T :Tags<CR>
 " Plug 'kana/vim-textobj-user'
 
 " Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_cache_dir='~/.cache/gutentags'
 
 " Plug 'maralla/completor.vim'
-let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_clang_binary='/usr/bin/clang'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
@@ -141,7 +142,7 @@ set showtabline=2
 let g:lightline#bufferline#show_number=1
 let g:lightline#bufferline#shorten_path=0
 let g:lightline#bufferline#unnamed='[No Name]'
-let g:lightline#bufferline#number_map = {
+let g:lightline#bufferline#number_map={
 \ 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴',
 \ 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹'}
 let g:lightline.tabline={'left': [['buffers']], 'right': [['']]}
@@ -157,7 +158,7 @@ set hidden
 set updatetime=300
 "set shortmess+=c
 "set signcolumn=yes
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-tailwindcss', 'coc-prettier', 'coc-python', 'coc-markdownlint']
+let g:coc_global_extensions=['coc-json', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-tailwindcss', 'coc-prettier', 'coc-python', 'coc-markdownlint', 'coc-rls']
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
@@ -177,13 +178,13 @@ nmap <Leader>f <Plug>(coc-format-selected)
 "autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
 
 " Plug 'takac/vim-hardtime'
-let g:hardtime_default_on = 1
-let g:list_of_normal_keys = []
-let g:list_of_visual_keys = []
-let g:list_of_insert_keys = []
-"let g:list_of_disabled_keys = ['<Up>', '<Down>', '<Left>', '<Right>', '<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
-let g:list_of_disabled_keys = ['<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
-let g:hardtime_timeout = 5000
+let g:hardtime_default_on=1
+let g:list_of_normal_keys=[]
+let g:list_of_visual_keys=[]
+let g:list_of_insert_keys=[]
+"let g:list_of_disabled_keys=['<Up>', '<Down>', '<Left>', '<Right>', '<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
+let g:list_of_disabled_keys=['<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
+let g:hardtime_timeout=5000
 
 " Plug 'terryma/vim-multiple-cursors'
 
