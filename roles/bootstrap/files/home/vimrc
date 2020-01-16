@@ -115,7 +115,7 @@ nnoremap <Leader>T :Tags<CR>
 " Plug 'kana/vim-textobj-user'
 
 " Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_cache_dir='~/.cache/gutentags'
+"let g:gutentags_cache_dir='~/.cache/gutentags'
 
 " Plug 'maralla/completor.vim'
 let g:completor_clang_binary='/usr/bin/clang'
