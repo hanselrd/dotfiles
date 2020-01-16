@@ -18,3 +18,17 @@
   register: output
 - debug:
     msg: "{{ output.stdout_lines }}"
+
+- name: Install latest Rust toolchain
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  shell: |
+    . {{ bootstrap_user_dir }}/.zshrc
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
+    rustup update
+  args:
+    executable: /usr/bin/zsh
+    warn: no
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
