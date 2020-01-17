@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["rust", "javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "coc.preferences.formatOnSaveFiletypes": ["rust"],//, "javascript", "javascriptreact", "typescript", "typescriptreact"],
     "git.addGBlameToBufferVar": true,
     "git.branchCharacter": ""
 }
