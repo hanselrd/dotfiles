@@ -123,7 +123,12 @@ function! LightlineGitBranch() abort
 endfunction!
 function! LightlineGitBlame() abort
     let blame = get(b:, 'coc_git_blame', '')
-    return winwidth(0) > 120 ? blame : ''
+    if !empty(blame)
+        return trim(split(blame, ')')[0], '(')
+    else
+        return ''
+    endif
+    "return winwidth(0) > 100 ? blame : ''
 endfunction
 
 " Plug 'itchyny/vim-gitbranch'
@@ -298,7 +303,7 @@ set listchars+=precedes:«
 set listchars+=nbsp:⣿
 set showbreak=↪\
 "if has('patch-7.4.710')
-"   set listchars+=space:𐄙
+"    set listchars+=space:𐄙
 "endif
 
 " search down into subfolders
