@@ -116,7 +116,7 @@ nnoremap <Leader>T :Tags<CR>
 
 " Plug 'ludovicchabant/vim-gutentags'
 "let g:gutentags_cache_dir='~/.cache/gutentags'
-let g:gutentags_file_list_command = {
+let g:gutentags_file_list_command={
     \ 'markers': {
     \   '.git': 'git ls-files',
     \   '.hg': 'hg files',
