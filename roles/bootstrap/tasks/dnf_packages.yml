@@ -74,6 +74,7 @@
       - numix-icon-theme
       - numix-icon-theme-circle
       - numix-icon-theme-square
+      - openssl-devel
       - openvpn
       - picom
       - ranger
