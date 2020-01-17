@@ -109,13 +109,18 @@ let g:lightline={
     \ },
     \ 'component': {
     \   'charvaluehex': '0x%B',
-    \   'gitbranch': "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}",
     \ },
     \ 'component_function': {
     \   '_gitbranch': 'fugitive#head',
+    \   'gitbranch': 'LightlineGitBranch',
     \   'gitblame': 'LightlineGitBlame',
     \ }
     \ }
+function! LightlineGitBranch() abort
+    let g_status = get(g:, 'coc_git_status', '')
+    let b_status = get(b:, 'coc_git_status', '')
+    return g_status . b_status
+endfunction!
 function! LightlineGitBlame() abort
     let blame = get(b:, 'coc_git_blame', '')
     return winwidth(0) > 120 ? blame : ''
