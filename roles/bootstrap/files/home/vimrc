@@ -20,7 +20,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
@@ -134,14 +134,21 @@ endfunction
 
 " Plug 'itchyny/vim-gitbranch'
 
-" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
 " Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <Leader>fs :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>h :History<CR>
-nnoremap <Leader>t :BTags<CR>
+nnoremap <Leader>L :Lines<CR>
+nnoremap <Leader>l :BLines<CR>
 nnoremap <Leader>T :Tags<CR>
+nnoremap <Leader>t :BTags<CR>
+nnoremap <Leader>w :Windows<CR>
+nnoremap <Leader>h :History<CR>
+nnoremap <Leader>C :Commits<CR>
+nnoremap <Leader>c :BCommits<CR>
+nnoremap <Leader>ft :Filetypes<CR>
 
 " Plug 'kana/vim-textobj-entire'
 
@@ -203,6 +210,7 @@ set updatetime=300
 "set signcolumn=yes
 let g:coc_global_extensions=[
      \ 'coc-css',
+     \ 'coc-emmet',
      \ 'coc-git',
      \ 'coc-html',
      \ 'coc-json',
@@ -212,12 +220,16 @@ let g:coc_global_extensions=[
      \ 'coc-rls',
      \ 'coc-svelte',
      \ 'coc-tailwindcss',
+     \ 'coc-tslint-plugin',
      \ 'coc-tsserver',
+     \ 'coc-highlight',
      \ 'coc-yaml',
+     \ 'coc-yank',
      \ ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
