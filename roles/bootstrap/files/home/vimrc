@@ -137,8 +137,8 @@ endfunction
 " Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
 " Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>fs :Files<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>g :GFiles<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>L :Lines<CR>
 nnoremap <Leader>l :BLines<CR>
