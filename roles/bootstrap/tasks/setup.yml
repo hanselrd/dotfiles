@@ -28,6 +28,8 @@
     rustup component add rls rust-analysis rust-src
     rustup update
     cargo install cargo-tree cargo-edit || true
+    mkdir -p {{ bootstrap_user_dir }}/.config/rustfmt
+    rustfmt --print-config default {{ bootstrap_user_dir }}/.config/rustfmt/rustfmt.toml
   args:
     executable: /usr/bin/zsh
     warn: no
