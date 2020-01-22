@@ -27,7 +27,7 @@
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
     rustup component add rls rust-analysis rust-src
     rustup update
-    cargo install cargo-tree cargo-edit || true
+    cargo install cargo-tree cargo-edit wasm-pack || true
     mkdir -p {{ bootstrap_user_dir }}/.config/rustfmt
     rustfmt --print-config default {{ bootstrap_user_dir }}/.config/rustfmt/rustfmt.toml
   args:
