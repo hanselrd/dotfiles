@@ -2,7 +2,7 @@
 
 # cd "$(dirname "$0")" || exit
 
-archive_basename=$(date +"%Y%m%d%H%M%N_$(neofetch model | cut -d ' ' -f 2- | sed 's/ *$//g' | tr ' ' _ | tr '[:lower:]' '[:upper:]')")
+archive_basename=$(date +"%Y%m%d_%H%M%N_$(neofetch model | cut -d ' ' -f 2- | sed 's/ *$//g' | tr ' ' _ | tr '[:lower:]' '[:upper:]')")
 
 case "$1" in
     home|root)
