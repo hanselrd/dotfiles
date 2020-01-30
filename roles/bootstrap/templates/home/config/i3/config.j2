@@ -340,6 +340,7 @@ bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ bootstrap_con
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
+exec_always --no-startup-id xfconf-query --channel xfce4-desktop --list | grep last-image | while read prop; do xfconf-query --channel xfce4-desktop --property $prop --set $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2); done
 
 # Lock screen
 # bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ bootstrap_configuration }}" lock

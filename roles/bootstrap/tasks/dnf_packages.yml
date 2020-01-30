@@ -67,7 +67,6 @@
       - htop
       - i3-gaps
       - i3status-rust
-      - lightdm-gtk-greeter-settings
       - lm_sensors
       - neofetch
       - network-manager-applet
@@ -84,6 +83,7 @@
       - rofi
       - rpmconf
       - rxvt-unicode-256color
+      - slick-greeter
       - strace
       - symlinks
       - timeshift
