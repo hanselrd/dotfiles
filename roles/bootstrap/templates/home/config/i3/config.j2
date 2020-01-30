@@ -159,7 +159,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-set $scripts $HOME/.scripts
+set $scripts {{ bootstrap_root_dir }}/usr/local/bin
 
 # resize window (you can also use the mouse for that)
 set $mode_resize Resize
@@ -339,14 +339,14 @@ exec_always --no-startup-id $scripts/df_redshift "{{ bootstrap_configuration }}"
 bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ bootstrap_configuration }}" stop
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-scale $HOME/.backgrounds/0003.jpg
-exec_always --no-startup-id xfconf-query --channel xfce4-desktop --list | grep last-image | while read prop; do xfconf-query --channel xfce4-desktop --property $prop --set $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2); done
+exec_always --no-startup-id feh --bg-scale {{ bootstrap_root_dir }}/usr/local/share/backgrounds/0003.jpg
+exec_always --no-startup-id xfconf-query --channel xfce4-desktop --list | grep last-image | while read prop; do xfconf-query --channel xfce4-desktop --property $prop --set $(cat ~/.fehbg | grep backgrounds | cut -d " " -f 3 | cut -d "'" -f 2); done
 
 # Lock screen
 # bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ bootstrap_configuration }}" lock
 
 # Update cache
-bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep .backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
+bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
 
 # Screenshot
 exec_always --no-startup-id flameshot config -t false

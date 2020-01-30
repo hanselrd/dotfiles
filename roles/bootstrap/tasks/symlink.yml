@@ -23,21 +23,39 @@
     state: link
     force: yes
   loop:
-    - backgrounds
+    # - backgrounds
+    # - fonts
+    # - scripts
     - config/gtk-3.0/settings.ini
     - config/ranger/rc.conf
     - config/rofi/config
-    - fonts
     - gdb
     - gdbinit
     - gtkrc-2.0
     - oh-my-zsh/custom/themes/dieter.zsh-theme
     - picom.conf
     - screenlayout
-    - scripts
     - tmux.conf
     - tmux.line
     - urxvt
     - vim/coc-settings.json
     - vimrc
     - zshrc
+
+- name: "Create directories in ({{ bootstrap_root_dir }}) before symlink"
+  file:
+    path: "{{ bootstrap_root_dir }}/{{ item }}"
+    state: directory
+  loop:
+    - usr/local/share
+
+- name: "Symlink files to ({{ bootstrap_root_dir }})"
+  file:
+    src: "{{ role_path }}/files/root/{{ item }}"
+    dest: "{{ bootstrap_root_dir }}/{{ item }}"
+    state: link
+    force: yes
+  loop:
+    - usr/local/bin
+    - usr/local/share/backgrounds
+    - usr/local/share/fonts
