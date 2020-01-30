@@ -54,6 +54,7 @@
       - arandr
       - betterlockscreen
       - brightlight
+      - chromium
       - clang
       - clang-tools-extra
       - cmake
