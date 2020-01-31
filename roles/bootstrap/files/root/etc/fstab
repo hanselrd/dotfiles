@@ -1,7 +1,7 @@
 
 #
 # /etc/fstab
-# Created by anaconda on Wed Jan 29 18:57:52 2020
+# Created by anaconda on Fri Jan 31 11:01:24 2020
 #
 # Accessible filesystems, by reference, are maintained under '/dev/disk/'.
 # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
@@ -9,10 +9,12 @@
 # After editing this file, run 'systemctl daemon-reload' to update systemd
 # units generated from this file.
 #
-UUID=cf0e89c0-6f6f-41fc-9dd6-bffaaf68e5b1 /                       btrfs   subvol=@,x-systemd.device-timeout=0 0 0
-UUID=845d69cd-d54e-4779-ba42-4b64f1dc1211 /boot                   ext4    defaults 1 2
-UUID=A412-C2B4                            /boot/efi               vfat    umask=0077,shortname=winnt 0 2
-UUID=cf0e89c0-6f6f-41fc-9dd6-bffaaf68e5b1 /btrfs                  btrfs   defaults,x-systemd.device-timeout=0 0 0
-UUID=cf0e89c0-6f6f-41fc-9dd6-bffaaf68e5b1 /home                   btrfs   subvol=@home,x-systemd.device-timeout=0 0 0
+UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /                       btrfs   subvol=@,x-systemd.device-timeout=0 0 0
+UUID=9f935bcb-7308-4102-abaf-7f63dc140a35 /boot                   ext4    defaults 1 2
+UUID=E7F3-DDAB                            /boot/efi               vfat    umask=0077,shortname=winnt 0 2
+UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /btrfs                  btrfs   defaults,x-systemd.device-timeout=0 0 0
+UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /home                   btrfs   subvol=@home,x-systemd.device-timeout=0 0 0
+UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /shared                 btrfs   subvol=@shared,x-systemd.device-timeout=0 0 0
+UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /snapshots              btrfs   subvol=@snapshots,x-systemd.device-timeout=0 0 0
 /btrfs/timeshift-btrfs                    /timeshift              none    defaults,bind 0 0
 /dev/mapper/fedora_vg-swap                none                    swap    defaults,x-systemd.device-timeout=0 0 0
