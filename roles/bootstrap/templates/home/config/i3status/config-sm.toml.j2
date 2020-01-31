@@ -24,7 +24,7 @@ block = "disk_space"
 path = "/"
 alias = "/"
 info_type = "available"
-unit = "GB"
+unit = "GiB"
 interval = 20
 
 [[block]]
@@ -95,8 +95,8 @@ interval = 1
 
 [[block]]
 block = "memory"
-format_mem = "{Mug}GB/{MTg}GB {Mupi}%"
-format_swap = "{SUg}GB/{STg}GB {SUpi}%"
+format_mem = "{Mug}/{MTg} ({Mup}%) GiB"
+format_swap = "{SUg}/{STg} ({SUp}%) GiB"
 display_type = "memory"
 icons = true
 clickable = true
