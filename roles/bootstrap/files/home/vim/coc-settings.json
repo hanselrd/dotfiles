@@ -2,5 +2,17 @@
     "coc.preferences.formatOnSaveFiletypes": ["rust"],//, "javascript", "javascriptreact", "typescript", "typescriptreact"],
     "git.addGBlameToBufferVar": true,
     "git.branchCharacter": "",
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    },
     "python.jediEnabled": false
 }
