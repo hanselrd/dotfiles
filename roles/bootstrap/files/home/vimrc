@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'itchyny/vim-gitbranch'
 "Plug 'maralla/completor.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'antoyo/vim-licenses'
 Plug 'chrisbra/Colorizer'
 Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
@@ -54,6 +55,10 @@ call plug#end()
 " START PLUGIN CONFIGURATION
 
 " Plug 'airblade/vim-gitgutter'
+
+" Plug 'antoyo/vim-licenses'
+let g:licenses_copyright_holders_name='Hansel De La Cruz'
+"let g:licenses_authors_name='Hansel De La Cruz'
 
 " Plug 'chrisbra/Colorizer'
 "let g:colorizer_auto_color=1
