@@ -247,6 +247,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " Plug 'sheerun/vim-polyglot'
+autocmd BufNewFile,BufRead *.tpp,*.ipp set syntax=cpp
 
 " Plug 'skywind3000/asyncrun.vim'
 "autocmd BufWritePost *.ts,*.tsx AsyncRun -post=checktime npm run format %
