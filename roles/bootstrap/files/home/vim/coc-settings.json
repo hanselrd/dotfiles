@@ -15,9 +15,14 @@
         //}
         "clangd": {
             "command": "clangd",
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
             "args": ["--background-index"],
-            "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".git/", ".hg/"],
-            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"]
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".git/", ".hg/"]
+        },
+        "elmLS": {
+            "command": "elm-language-server",
+            "filetypes": ["elm"],
+            "rootPatterns": ["elm.json"]
         }
     },
     "python.jediEnabled": false

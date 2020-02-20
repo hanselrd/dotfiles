@@ -36,3 +36,21 @@
   register: output
 - debug:
     msg: "{{ output.stdout_lines }}"
+
+- name: Install latest Elm version
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  # shell: |
+  #   curl -L -o {{ bootstrap_temp_dir }}/elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz
+  #   gunzip {{ bootstrap_temp_dir }}/elm.gz
+  #   chmod +x {{ bootstrap_temp_dir }}/elm
+  #   mv {{ bootstrap_temp_dir }}/elm /usr/local/bin
+  shell: |
+    . {{ bootstrap_user_dir }}/.zshrc
+    npm install -g elm elm-format elm-test @elm-tooling/elm-language-server
+  args:
+    executable: /usr/bin/zsh
+    warn: no
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
