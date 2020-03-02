@@ -48,6 +48,7 @@
   shell: |
     . {{ bootstrap_user_dir }}/.zshrc
     npm install -g elm elm-format elm-test @elm-tooling/elm-language-server
+    npm update -g
   args:
     executable: /usr/bin/zsh
     warn: no
