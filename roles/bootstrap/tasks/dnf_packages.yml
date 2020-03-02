@@ -11,6 +11,7 @@
     - balamurali27/betterlockscreen
     - jstanek/ports
     - nforro/i3-gaps
+    - petersen/stack
 - debug:
     msg: "{{ item.stdout_lines }}"
   loop: "{{ output.results | flatten(levels=1) }}"
@@ -65,6 +66,7 @@
       - feh
       - flameshot
       - gcc-g++
+      - haskell-platform
       - htop
       - i3-gaps
       - i3status-rust
@@ -85,6 +87,7 @@
       - rpmconf
       - rxvt-unicode-256color
       - slick-greeter
+      - stack
       - strace
       - symlinks
       - timeshift
