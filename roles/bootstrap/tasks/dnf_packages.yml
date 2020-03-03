@@ -24,6 +24,7 @@
       # - autoconf
       # - automake
       # - cairo-devel
+      # - ccls
       # - dmenu
       # - i3-ipc
       # - i3status-rs    remove copr and use this fedora 31+
@@ -55,7 +56,6 @@
       - arandr
       - betterlockscreen
       - brightlight
-      - ccls
       - chromium
       - clang
       - clang-tools-extra
@@ -70,7 +70,9 @@
       - htop
       - i3-gaps
       - i3status-rust
+      - libicu-devel
       - lm_sensors
+      - ncurses-devel
       - neofetch
       - network-manager-applet
       - ninja-build
@@ -94,5 +96,6 @@
       - tmux
       - vim-enhanced
       - xclip
+      - zlib-devel
       - zsh
     state: present
