@@ -9,6 +9,7 @@
     dest: "{{ bootstrap_user_dir }}/.{{ item.dest }}"
     update: yes
   loop:
+      - { repo: "https://github.com/haskell/haskell-ide-engine.git", dest: haskell-ide-engine }
       - { repo: "https://github.com/nvm-sh/nvm.git", dest: nvm }
       - { repo: "https://github.com/ohmyzsh/ohmyzsh.git", dest: oh-my-zsh }
       - { repo: "https://github.com/tmux-plugins/tpm.git", dest: tmux/plugins/tpm }
