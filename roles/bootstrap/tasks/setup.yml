@@ -56,18 +56,18 @@
 - debug:
     msg: "{{ output.stdout_lines }}"
 
-- name: Install latest Haskell toolchain
-  become: yes
-  become_user: "{{ bootstrap_user }}"
-  shell: |
-    . {{ bootstrap_user_dir }}/.zshrc
-    stack upgrade
-    stack install ghcid
-    stack ./install.hs hie
-  args:
-    chdir: "{{ bootstrap_user_dir }}/.haskell-ide-engine"
-    executable: /usr/bin/zsh
-    warn: no
-  register: output
-- debug:
-    msg: "{{ output.stdout_lines }}"
+# - name: Install latest Haskell toolchain
+#   become: yes
+#   become_user: "{{ bootstrap_user }}"
+#   shell: |
+#     . {{ bootstrap_user_dir }}/.zshrc
+#     stack upgrade
+#     stack install ghcid
+#     stack ./install.hs hie
+#   args:
+#     chdir: "{{ bootstrap_user_dir }}/.haskell-ide-engine"
+#     executable: /usr/bin/zsh
+#     warn: no
+#   register: output
+# - debug:
+#     msg: "{{ output.stdout_lines }}"
