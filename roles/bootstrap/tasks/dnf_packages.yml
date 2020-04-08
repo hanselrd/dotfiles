@@ -82,6 +82,7 @@
       - numix-icon-theme-square
       - openssl-devel
       - openvpn
+      - pgmodeler
       - picom
       - ranger
       - redshift
