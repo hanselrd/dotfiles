@@ -66,6 +66,7 @@
       - feh
       - flameshot
       - gcc-g++
+      - glfw-devel
       - haskell-platform
       - htop
       - i3-gaps
