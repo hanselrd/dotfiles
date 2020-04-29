@@ -86,6 +86,7 @@
       - openvpn
       - pgmodeler
       - picom
+      - python3-devel
       - ranger
       - redshift
       - rofi
