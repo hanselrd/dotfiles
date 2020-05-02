@@ -7,7 +7,6 @@
     warn: no
   register: output
   loop:
-    - atim/i3status-rust
     - balamurali27/betterlockscreen
     - jstanek/ports
     - nforro/i3-gaps
@@ -27,7 +26,6 @@
       # - ccls
       # - dmenu
       # - i3-ipc
-      # - i3status-rs    remove copr and use this fedora 31+
       # - jsoncpp-devel
       # - libcurl-devel
       # - libmpdclient-devel
@@ -71,7 +69,7 @@
       - haskell-platform
       - htop
       - i3-gaps
-      - i3status-rust
+      - i3status-rs
       - libicu-devel
       - lm_sensors
       - ncurses-devel
@@ -91,7 +89,7 @@
       - redshift
       - rofi
       - rpmconf
-      - rxvt-unicode-256color
+      - rxvt-unicode
       - slick-greeter
       - stack
       - strace

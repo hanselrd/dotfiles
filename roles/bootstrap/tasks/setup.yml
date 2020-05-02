@@ -19,6 +19,18 @@
 - debug:
     msg: "{{ output.stdout_lines }}"
 
+- name: Install latest Python packages
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  shell: |
+    . {{ bootstrap_user_dir }}/.zshrc
+    pip install --upgrade --user pipenv black cmake-format
+  args:
+    executable: /usr/bin/zsh
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
+
 - name: Install latest Rust toolchain
   become: yes
   become_user: "{{ bootstrap_user }}"
