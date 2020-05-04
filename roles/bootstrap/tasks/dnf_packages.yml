@@ -52,6 +52,7 @@
       - SDL2_ttf-devel
       - ShellCheck
       - arandr
+      - bashtop
       - betterlockscreen
       - brightlight
       - ccache
