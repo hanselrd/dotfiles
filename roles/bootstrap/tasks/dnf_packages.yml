@@ -73,6 +73,7 @@
       - i3status-rs
       - libicu-devel
       - lm_sensors
+      - lynx
       - ncurses-devel
       - neofetch
       - network-manager-applet
