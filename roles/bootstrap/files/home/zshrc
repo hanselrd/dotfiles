@@ -78,6 +78,7 @@ setopt nonomatch
 export GIT_ASKPASS=
 export SSH_ASKPASS=
 alias rmnm="find . -name 'node_modules' -type d -print -prune -exec rm -rf '{}' +"
+alias ?="lynx https://google.com"
 
 export KEYTIMEOUT=1
 

@@ -56,6 +56,8 @@
     state: link
     force: yes
   loop:
+    # - etc/lynx.lss
+    - etc/lynx-site.cfg
     - usr/local/bin
     - usr/local/share/backgrounds
     - usr/local/share/fonts
