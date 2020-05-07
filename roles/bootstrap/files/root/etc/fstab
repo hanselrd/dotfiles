@@ -16,5 +16,5 @@ UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /btrfs                  btrfs   defaul
 UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /home                   btrfs   subvol=@home,x-systemd.device-timeout=0 0 0
 UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /shared                 btrfs   subvol=@shared,x-systemd.device-timeout=0 0 0
 # UUID=b70d11b3-ddf6-4025-938b-e9b5a97c66f6 /snapshots              btrfs   subvol=@snapshots,x-systemd.device-timeout=0 0 0
-# /btrfs/timeshift-btrfs                    /timeshift              none    defaults,bind 0 0
+/btrfs/timeshift-btrfs                    /timeshift              none    defaults,bind 0 0
 /dev/mapper/fedora_vg-swap                none                    swap    defaults,x-systemd.device-timeout=0 0 0
