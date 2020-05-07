@@ -7,6 +7,19 @@
 - debug:
     msg: "{{ output.stdout_lines }}"
 
+- name: Generate public/private rsa key pair
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  shell: |
+    . {{ bootstrap_user_dir }}/.zshrc
+    ssh-keygen -t rsa -b 4096 -N "" -f {{ bootstrap_user_dir }}/.ssh/id_rsa
+  args:
+    executable: /usr/bin/zsh
+    creates: "{{ bootstrap_user_dir }}/.ssh/id_rsa"
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
+
 - name: Install latest Node LTS version
   become: yes
   become_user: "{{ bootstrap_user }}"
