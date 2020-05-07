@@ -7,9 +7,9 @@
     warn: no
   register: output
   loop:
+    # - nforro/i3-gaps
     - balamurali27/betterlockscreen
     - jstanek/ports
-    - nforro/i3-gaps
     - petersen/stack
 - debug:
     msg: "{{ item.stdout_lines }}"
@@ -25,6 +25,7 @@
       # - cairo-devel
       # - ccls
       # - dmenu
+      # - i3-gaps
       # - i3-ipc
       # - jsoncpp-devel
       # - libcurl-devel
@@ -69,7 +70,7 @@
       - glfw-devel
       - haskell-platform
       - htop
-      - i3-gaps
+      - i3
       - i3status-rs
       - libicu-devel
       - lm_sensors
