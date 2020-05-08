@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+<!-- #!/usr/bin/env sh -->
 
 # Verify the boot mode
 ls /sys/firmware/efi/efivars
@@ -62,6 +62,9 @@ fallocate -l 4G /mnt/.swap/swapfile
 chmod 600 /mnt/.swap/swapfile
 mkswap /mnt/.swap/swapfile
 swapon /mnt/.swap/swapfile
-# echo "/.swap/swapfile none swap defaults 0 0" >> /etc/fstab
-# swapoff /.swap/swapfile
-# rm -rf /.swap/swapfile
+<!-- echo "/.swap/swapfile none swap defaults 0 0" >> /etc/fstab -->
+<!-- swapoff /.swap/swapfile -->
+<!-- rm -rf /.swap/swapfile -->
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
