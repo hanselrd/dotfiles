@@ -350,7 +350,7 @@ exec_always --no-startup-id xfconf-query --channel xfce4-desktop --list | grep l
 # bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ bootstrap_configuration }}" lock
 
 # Update cache
-bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep backgrounds | cut -d " " -f 3 | cut -d "'" -f 2) && fc-cache
+bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep backgrounds | cut -d " " -f 4 | cut -d "'" -f 2) && fc-cache
 
 # Screenshot
 exec_always --no-startup-id flameshot config -t false
