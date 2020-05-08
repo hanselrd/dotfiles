@@ -68,3 +68,7 @@ swapon /mnt/.swap/swapfile
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+reflector --verbose --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --country France --country Germany --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose -c Germany -c Italy -c Netherlands --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
