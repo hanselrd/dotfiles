@@ -57,7 +57,7 @@ mount -o compress=zstd,subvol=@arch-snapshots /dev/mapper/cryptroot /mnt/.snapsh
 mount -o compress=zstd,subvol=@arch-swap /dev/mapper/cryptroot /mnt/.swap
 truncate -s 0 /mnt/.swap/swapfile
 chattr +C /mnt/.swap/swapfile
-btrfs property set /mnt/.swap/swapfile
+btrfs property set /mnt/.swap/swapfile compression none
 fallocate -l 4G /mnt/.swap/swapfile
 chmod 600 /mnt/.swap/swapfile
 mkswap /mnt/.swap/swapfile

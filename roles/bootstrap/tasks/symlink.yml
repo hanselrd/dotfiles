@@ -8,6 +8,7 @@
     path: "{{ bootstrap_user_dir }}/.{{ item }}"
     state: directory
   loop:
+    - ccache
     - config/gtk-3.0
     - config/ranger
     - config/rofi
@@ -26,6 +27,7 @@
     # - backgrounds
     # - fonts
     # - scripts
+    - ccache/ccache.conf
     - config/gtk-3.0/settings.ini
     - config/ranger/rc.conf
     - config/rofi/config
