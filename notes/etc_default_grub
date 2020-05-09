@@ -1,5 +1,5 @@
 GRUB_TIMEOUT=5
-GRUB_DISTRIBUTION="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
 GRUB_DEFAULT=0
 GRUB_SAVEDEFAULT=false
 GRUB_DISABLE_SUBMENU=true
