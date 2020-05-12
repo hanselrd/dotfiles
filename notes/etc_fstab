@@ -12,6 +12,7 @@
 UUID=c44f46e0-8b7b-4068-93fd-5f438edc764c /                       btrfs   subvol=@,x-systemd.device-timeout=0 0 0
 UUID=c44f46e0-8b7b-4068-93fd-5f438edc764c /.btrfs                 btrfs   defaults,x-systemd.device-timeout=0 0 0
 UUID=c44f46e0-8b7b-4068-93fd-5f438edc764c /.shared                btrfs   subvol=@shared,x-systemd.device-timeout=0 0 0
+UUID=c44f46e0-8b7b-4068-93fd-5f438edc764c /.snapshots             btrfs   subvol=.snapshots,x-systemd.device-timeout=0 0 0
 UUID=c44f46e0-8b7b-4068-93fd-5f438edc764c /.swap                  btrfs   subvol=@swap,x-systemd.device-timeout=0 0 0
 UUID=AA65-F462                            /boot/efi               vfat    umask=0077,shortname=winnt 0 2
 UUID=c44f46e0-8b7b-4068-93fd-5f438edc764c /home                   btrfs   subvol=@home,x-systemd.device-timeout=0 0 0

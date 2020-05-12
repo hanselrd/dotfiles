@@ -35,6 +35,7 @@
       # - pulseaudio-utils
       # - scrot
       # - tiled
+      # - timeshift
       # - tlp
       # - tlp-rdw
       # - valgrind
@@ -88,16 +89,17 @@
       - pgmodeler
       - picom
       - python3-devel
+      - python3-dnf-plugin-snapper
       - ranger
       - redshift
       - rofi
       - rpmconf
       - rxvt-unicode
       - slick-greeter
+      - snapper
       - stack
       - strace
       - symlinks
-      - timeshift
       - tmux
       - vim-enhanced
       - xclip
