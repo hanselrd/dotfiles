@@ -73,7 +73,7 @@ format = "{percentage}% {time}"
 
 [[block]]
 block = "custom"
-command = "{{ bootstrap_root_dir }}/usr/local/bin/df_power_now"
+command = ''' printf ' ' && {{ bootstrap_root_dir }}/usr/local/bin/df_power_now '''
 interval = 1
 {% endif %}
 
