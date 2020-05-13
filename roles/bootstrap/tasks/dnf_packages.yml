@@ -1,6 +1,18 @@
 ---
 # tasks file for bootstrap
 
+- name: Install rpmfusion repos
+  shell:
+    cmd: "dnf install https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-$(rpm -E %fedora).noarch.rpm -y"
+    warn: no
+  register: output
+  loop:
+    - free
+    - nonfree
+- debug:
+    msg: "{{ item.stdout_lines }}"
+  loop: "{{ output.results | flatten(levels=1) }}"
+
 - name: Enable COPR repos
   command:
     cmd: "dnf copr enable {{ item }} -y"
@@ -67,6 +79,7 @@
       - dnf-plugins-extras-tracer
       - feh
       - flameshot
+      - fuse-exfat
       - gcc-g++
       - glfw-devel
       - haskell-platform
