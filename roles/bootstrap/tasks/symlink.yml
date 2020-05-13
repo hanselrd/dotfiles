@@ -50,6 +50,7 @@
     state: directory
   loop:
     - usr/local/share
+    - usr/local/bin
 
 - name: "Symlink files to ({{ bootstrap_root_dir }})"
   file:
@@ -59,7 +60,16 @@
     force: yes
   loop:
     # - etc/lynx.lss
+    # - usr/local/bin/df_arex
     - etc/lynx-site.cfg
-    - usr/local/bin
+    - usr/local/bin/df_archive
+    - usr/local/bin/df_backup
+    - usr/local/bin/df_exit
+    - usr/local/bin/df_launcher
+    - usr/local/bin/df_passphrase
+    - usr/local/bin/df_picom
+    - usr/local/bin/df_power_now
+    - usr/local/bin/df_redshift
+    - usr/local/bin/df_xrandr
     - usr/local/share/backgrounds
     - usr/local/share/fonts

@@ -26,13 +26,14 @@ alias = "/"
 info_type = "available"
 unit = "GiB"
 interval = 20
+show_percentage = false
 
 [[block]]
 block = "net"
 device = "wlp0s20f3"
 ssid = false
 signal_strength = true
-ip = true
+ip = false
 speed_up = false
 speed_down = false
 graph_up = false
@@ -72,7 +73,7 @@ format = "{percentage}% {time}"
 
 [[block]]
 block = "custom"
-command = "{{ bootstrap_root_dir }}/usr/local/bin/df_power_now"
+command = ''' printf ' ' && {{ bootstrap_root_dir }}/usr/local/bin/df_power_now '''
 interval = 1
 {% endif %}
 
