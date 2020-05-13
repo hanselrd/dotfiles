@@ -63,6 +63,13 @@ dracut --force
 # ll .keys
 # cd ..
 
+# Install snapper
+dnf install snapper python3-dnf-plugin-snapper
+sudo snapper --config=root create-config /
+sudo snapper --config=root create --description="Initial"
+sudo snapper --config=home create-config /home
+sudo snapper --config=home create --description="Initial"
+
 # Reinstall grub
 dnf reinstall grub2-efi shim grub2-tools
 echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
