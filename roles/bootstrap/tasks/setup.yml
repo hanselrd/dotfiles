@@ -36,6 +36,18 @@
 - debug:
     msg: "{{ output.stdout_lines }}"
 
+- name: Configure snapper
+  shell: |
+    snapper --config=root create-config /
+    snapper --config=root create --description="Initial"
+    snapper --config=home create-config /home
+    snapper --config=home create --description="Initial"
+  args:
+    creates: "{{ bootstrap_root_dir }}/etc/snapper/configs/root"
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
+
 - name: Change shell to zsh
   command: "chsh -s /bin/zsh {{ bootstrap_user }}"
   register: output
