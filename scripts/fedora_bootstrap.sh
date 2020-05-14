@@ -77,3 +77,9 @@ grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 
 # Install git and ansible
 dnf install git ansible -y
+
+# Set up mounts
+# Set up grub
+# Set up snapper
+# Install git and ansible
+# Reboot

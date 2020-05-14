@@ -25,6 +25,11 @@
   shell: |
     dd if=/dev/random of={{ bootstrap_root_dir }}/.keys/cryptbtrfs.keyfile iflag=fullblock bs=512 count=8
     chmod 000 {{ bootstrap_root_dir }}/.keys/cryptbtrfs.keyfile
+    if [ "{{ ansible_pkg_mgr }}" == "dnf" ]; then
+        echo 'install_items+="/.keys/cryptbtrfs.keyfile"' >> {{ bootstrap_root_dir }}/etc/dracut.conf
+        sed -i 's/none/\/.keys\/cryptbtrfs.keyfile/g' {{ bootstrap_root_dir }}/etc/crypttab
+        dracut --force
+    fi
   args:
     creates: "{{ bootstrap_root_dir }}/.keys/cryptbtrfs.keyfile"
   register: output
