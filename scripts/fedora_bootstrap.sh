@@ -79,7 +79,9 @@ grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 dnf install git ansible -y
 
 # Set up mounts
+# Set up dnf fastestmirror and deltarpm
 # Set up grub
-# Set up snapper
 # Install git and ansible
 # Reboot
+# Bootstrap
+# Change /.swap/swapfile size
