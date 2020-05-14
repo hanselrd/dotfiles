@@ -42,6 +42,7 @@
     - urxvt
     - vim/coc-settings.json
     - vimrc
+    - xinitrc
     - zshrc
 
 - name: "Create directories in ({{ bootstrap_root_dir }}) before symlink"

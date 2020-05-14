@@ -25,7 +25,7 @@ font xft:Iosevka Term Heavy 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -50,8 +50,13 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
+{% if ansible_pkg_mgr == "dnf" %}
 set $terminal urxvt256c
 set $terminal_run urxvt256c -e
+{% else %}
+set $terminal urxvt
+set $terminal_run urxvt -e
+{% endif %}
 bindsym $mod+Return exec $terminal
 
 # kill focused window
@@ -353,16 +358,27 @@ exec_always --no-startup-id xfconf-query --channel xfce4-desktop --list | grep l
 bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u $(cat ~/.fehbg | grep backgrounds | cut -d " " -f 4 | cut -d "'" -f 2) && fc-cache
 
 # Screenshot
-exec_always --no-startup-id flameshot config -t false
+exec --no-startup-id flameshot
+exec --no-startup-id flameshot config -t false
 bindsym --release Print exec flameshot gui
 
 # Screen brightness
+{% if ansible_pkg_mgr == "dnf" %}
 {% if bootstrap_configuration == "laptop" %}
 bindsym XF86MonBrightnessUp exec --no-startup-id brightlight -p -i 5
 bindsym XF86MonBrightnessDown exec --no-startup-id brightlight -p -d 5
 {% elif bootstrap_configuration == "work" %}
 bindsym F2 exec --no-startup-id brightlight -p -i 5
 bindsym F3 exec --no-startup-id brightlight -p -d 5
+{% endif %}
+{% else %}
+{% if bootstrap_configuration == "laptop" %}
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+{% elif bootstrap_configuration == "work" %}
+bindsym F2 exec --no-startup-id xbacklight -inc 5
+bindsym F3 exec --no-startup-id xbacklight -dec 5
+{% endif %}
 {% endif %}
 
 # Program shortcuts

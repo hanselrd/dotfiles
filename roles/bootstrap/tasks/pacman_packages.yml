@@ -1,0 +1,93 @@
+---
+# tasks file for bootstrap
+
+- name: Install packages
+  pacman:
+    name:
+      # - alsa-utils
+      # - ansible
+      # - base
+      # - base-devel
+      # - btrfs-progs
+      # - efibootmgr
+      # - git
+      # - grub
+      # - grub-btrfs
+      # - intel-ucode
+      # - linux
+      # - linux-firmware
+      # - linux-headers
+      # - network-manager-applet
+      # - networkmanager
+      # - snap-pac
+      # - snapper
+      # - tlp
+      # - tlp-rdw
+      # - vim
+      # - xorg-xinit
+      - arandr
+      - bashtop
+      - ccache
+      - chromium
+      - clang
+      - cmake
+      - ctags
+      - feh
+      - flameshot
+      - glfw-x11
+      - htop
+      - i3-gaps
+      - lxappearance
+      - lynx
+      - neofetch
+      - ninja
+      - openssh
+      - openvpn
+      - picom
+      - pulseaudio
+      - python-pip
+      - ranger
+      - redshift
+      - reflector
+      - rofi
+      - rxvt-unicode
+      - sdl2
+      - sdl2_image
+      - sdl2_mixer
+      - sdl2_net
+      - sdl2_ttf
+      - shellcheck
+      - strace
+      - tmux
+      - tree
+      - udisks2
+      - upower
+      - xorg
+      - xorg-apps
+      - xorg-drivers
+      - xorg-fonts
+      - zsh
+    state: present
+
+- name: Remove packages
+  pacman:
+    name:
+      - xf86-input-synaptics
+    state: absent
+
+- name: Install AUR packages
+  become: yes
+  become_user: "{{ bootstrap_user }}"
+  command: "yay -S {{ item }} --noconfirm"
+  register: output
+  loop:
+    # - snap-pac-grub
+    - betterlockscreen
+    - i3status-rust
+    - numix-gtk-theme
+    - numix-icon-theme-pack-git
+    - pgmodeler
+    - ttf-font-awesome-4
+- debug:
+    msg: "{{ item.stdout_lines }}"
+  loop: "{{ output.results | flatten(levels=1) }}"
