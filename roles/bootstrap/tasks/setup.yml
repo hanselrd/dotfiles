@@ -8,7 +8,7 @@
     if [ "$(findmnt -no FSTYPE -T {{ bootstrap_root_dir }}/.swap)" == "btrfs" ]; then
         btrfs property set {{ bootstrap_root_dir }}/.swap/swapfile compression none
     fi
-    fallocate -l 4G {{ bootstrap_root_dir }}/.swap/swapfile
+    fallocate -l 1M {{ bootstrap_root_dir }}/.swap/swapfile
     chmod 600 {{ bootstrap_root_dir }}/.swap/swapfile
     mkswap {{ bootstrap_root_dir }}/.swap/swapfile
     swapon {{ bootstrap_root_dir }}/.swap/swapfile
