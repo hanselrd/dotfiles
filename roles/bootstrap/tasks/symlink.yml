@@ -49,8 +49,9 @@
     path: "{{ bootstrap_root_dir }}/{{ item }}"
     state: directory
   loop:
-    - usr/local/share
+    - etc
     - usr/local/bin
+    - usr/local/share
 
 - name: "Symlink files to ({{ bootstrap_root_dir }})"
   file:
