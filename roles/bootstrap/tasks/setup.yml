@@ -1,6 +1,36 @@
 ---
 # tasks file for bootstrap
 
+- name: Create swapfile
+  shell: |
+    truncate -s 0 {{ bootstrap_root_dir }}/.swap/swapfile
+    chattr +C {{ bootstrap_root_dir }}/.swap/swapfile
+    if [ "$(findmnt -no FSTYPE -T {{ bootstrap_root_dir }}/.swap)" == "btrfs" ]; then
+        btrfs property set {{ bootstrap_root_dir }}/.swap/swapfile compression none
+    fi
+    fallocate -l 4G {{ bootstrap_root_dir }}/.swap/swapfile
+    chmod 600 {{ bootstrap_root_dir }}/.swap/swapfile
+    mkswap {{ bootstrap_root_dir }}/.swap/swapfile
+    swapon {{ bootstrap_root_dir }}/.swap/swapfile
+    echo "/.swap/swapfile none swap defaults 0 0" >> {{ bootstrap_root_dir }}/etc/fstab
+    echo "vm.swappiness=10" >> {{ bootstrap_root_dir }}/etc/sysctl.conf
+    systemctl daemon-reload
+  args:
+    creates: "{{ bootstrap_root_dir }}/.swap/swapfile"
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
+
+- name: Create keys
+  shell: |
+    dd if=/dev/random of={{ bootstrap_root_dir }}/.keys/cryptbtrfs.keyfile iflag=fullblock bs=512 count=8
+    chmod 000 {{ bootstrap_root_dir }}/.keys/cryptbtrfs.keyfile
+  args:
+    creates: "{{ bootstrap_root_dir }}/.keys/cryptbtrfs.keyfile"
+  register: output
+- debug:
+    msg: "{{ output.stdout_lines }}"
+
 - name: Change shell to zsh
   command: "chsh -s /bin/zsh {{ bootstrap_user }}"
   register: output
@@ -12,6 +42,7 @@
   become_user: "{{ bootstrap_user }}"
   shell: |
     . {{ bootstrap_user_dir }}/.zshrc
+    mkdir -p {{ bootstrap_user_dir }}/.ssh
     ssh-keygen -t rsa -b 4096 -N "" -f {{ bootstrap_user_dir }}/.ssh/id_rsa
   args:
     executable: /usr/bin/zsh

@@ -40,7 +40,7 @@ fallocate -l 4G /.swap/swapfile
 chmod 600 /.swap/swapfile
 mkswap /.swap/swapfile
 swapon /.swap/swapfile
-echo "/.swap/swapfile                           none                    swap    defaults 1 0" >> /etc/fstab
+echo "/.swap/swapfile                           none                    swap    defaults 0 0" >> /etc/fstab
 systemctl daemon-reload
 
 # Create keys
