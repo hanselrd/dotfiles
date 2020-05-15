@@ -81,13 +81,13 @@
   command: "yay -S {{ item }} --noconfirm"
   register: output
   loop:
-    # - snap-pac-grub
     - betterlockscreen
     - i3status-rust
     - numix-gtk-theme
     - numix-icon-theme-pack-git
     - pgmodeler
     - rxvt-unicode-pixbuf
+    - snap-pac-grub
     - ttf-font-awesome-4
 - debug:
     msg: "{{ item.stdout_lines }}"
