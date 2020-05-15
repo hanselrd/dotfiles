@@ -19,6 +19,7 @@
       # - linux-headers
       # - network-manager-applet
       # - networkmanager
+      # - os-prober
       # - snap-pac
       # - snapper
       # - tlp
@@ -50,7 +51,6 @@
       - redshift
       - reflector
       - rofi
-      - rxvt-unicode
       - sdl2
       - sdl2_image
       - sdl2_mixer
@@ -87,6 +87,7 @@
     - numix-gtk-theme
     - numix-icon-theme-pack-git
     - pgmodeler
+    - rxvt-unicode-pixbuf
     - ttf-font-awesome-4
 - debug:
     msg: "{{ item.stdout_lines }}"
