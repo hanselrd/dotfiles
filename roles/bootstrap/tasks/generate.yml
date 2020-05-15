@@ -8,10 +8,10 @@
     path: "{{ bootstrap_user_dir }}/.{{ item }}"
     state: directory
   loop:
+    # - config/xfce4/terminal
     - config/i3
     - config/i3status
     - config/rofi
-    - config/xfce4/terminal
 
 - name: "Generate files to ({{ bootstrap_user_dir }})"
   become: yes
@@ -23,10 +23,10 @@
   loop:
     # - config/i3status/config
     # - config/i3status/config-sm
+    # - config/xfce4/terminal/terminalrc
     - Xresources
     - config/i3/config
     - config/i3status/config-sm.toml
     - config/i3status/config.toml
     - config/rofi/theme.rasi
-    - config/xfce4/terminal/terminalrc
     - gitconfig
