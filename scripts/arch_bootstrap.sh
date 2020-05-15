@@ -64,6 +64,8 @@ pacstrap /mnt \
     linux \
     linux-firmware \
     linux-headers \
+    linux-lts \
+    linux-lts-headers \
     network-manager-applet \
     networkmanager \
     os-prober \
