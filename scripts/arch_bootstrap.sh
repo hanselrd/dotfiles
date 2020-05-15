@@ -126,6 +126,7 @@ uuid=$(lsblk -no UUID /dev/sda2 | head -n 1)
 sed -i 's/loglevel=3 quiet/loglevel=3/g' /etc/default/grub
 sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=/.keys/cryptbtrfs.keyfile"/g' /etc/default/grub
 sed -i 's/#GRUB_ENABLE_CRYPTODISK=y/GRUB_ENABLE_CRYPTODISK=y/g' /etc/default/grub
+echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
