@@ -43,6 +43,7 @@
     - vim/coc-settings.json
     - vimrc
     - xinitrc
+    - zprofile
     - zshrc
 
 - name: "Create directories in ({{ bootstrap_root_dir }}) before symlink"
