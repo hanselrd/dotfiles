@@ -47,7 +47,7 @@ swapon /mnt/.swap/swapfile
 
 echo "Select the mirrors"
 pacman -S reflector --noconfirm
-reflector --country="United States" --age=12 --sort=rate --save=/etc/pacman.d/mirrorlist
+reflector --country="United States" --age=12 --protocol=https --sort=rate --save=/etc/pacman.d/mirrorlist
 pacman -Syyy --noconfirm
 
 echo "Install essential packages"
