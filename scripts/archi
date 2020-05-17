@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+select_disk() {
+    items=$(lsblk -d -p -n -l -o NAME,SIZE -e 7,11)
+    options=()
+    IFS_ORIG=$IFS
+    IFS=$'\n'
+    for item in ${items}; do
+        options+=("${item}" "")
+    done
+    IFS=$IFS_ORIG
+    result=$(whiptail --title "Select disk drive to use" --menu "" 0 0 0 \
+        "${options[@]}" \
+        3>&1 1>&2 2>&3)
+    if [ "$?" != 0 ]; then
+        return 1
+    fi
+    echo "${result%%\ *}"
+    return 0
+}
+
+# color=$(whiptail --inputbox "What is your favorite color\n\nhey?" 8 78 --title "Example dialog" 3>&1 1>&2 2>&3)
+
+main_menu
+select_disk
+
+# if (whiptail --title "Humble Title" --yesno "Do you like theta?" 10 20); then
+#     echo "Yes"
+# else
+#     echo "No"
+# fi
