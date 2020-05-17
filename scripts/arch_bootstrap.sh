@@ -82,8 +82,8 @@ ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 
 echo "Localization"
-sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
-sed -i 's/#en_US ISO-8859-1/en_US ISO-8859-1/g' /etc/locale.gen
+sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
+sed -i '/en_US ISO-8859-1/s/^#//g' /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
@@ -113,7 +113,7 @@ useradd -mG wheel delacruz
 passwd delacruz
 
 echo "Update sudoers for wheel group"
-sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers
+sed -i '/%wheel ALL=(ALL) ALL/s/^# //g' /etc/sudoers
 
 echo "Snapper"
 snapper --no-dbus --config=root create-config /
@@ -123,17 +123,17 @@ snapper --no-dbus --config=home create --description="Initial"
 
 echo "Boot loader"
 uuid=$(lsblk -no UUID /dev/sda2 | head -n 1)
-sed -i 's/loglevel=3 quiet/loglevel=3/g' /etc/default/grub
-sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=/.keys/cryptbtrfs.keyfile"/g' /etc/default/grub
-sed -i 's/#GRUB_ENABLE_CRYPTODISK=y/GRUB_ENABLE_CRYPTODISK=y/g' /etc/default/grub
+sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g' /etc/default/grub
+sed -i '/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=\/.keys\/cryptbtrfs.keyfile"/g' /etc/default/grub
+sed -i '/GRUB_ENABLE_CRYPTODISK=y/s/^#//g' /etc/default/grub
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Set Pacman Options"
-sed -i 's/#Color/Color/g' /etc/pacman.conf
-sed -i 's/#CheckSpace/CheckSpace/g' /etc/pacman.conf
-sed -i 's/#VerbosePkgLists/VerbosePkgLists/g' /etc/pacman.conf
+sed -i '/Color/s/^#//g' /etc/pacman.conf
+sed -i '/CheckSpace/s/^#//g' /etc/pacman.conf
+sed -i '/VerbosePkgLists/s/^#//g' /etc/pacman.conf
 
 echo "Exit chroot"
 exit
