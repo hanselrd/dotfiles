@@ -87,7 +87,7 @@
     - i3status-rust
     - numix-gtk-theme
     - numix-icon-theme-pack-git
-    - pgmodeler
+      # - pgmodeler
     - rxvt-unicode-pixbuf
     - snap-pac-grub
     - ttf-font-awesome-4

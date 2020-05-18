@@ -124,7 +124,7 @@ snapper --no-dbus --config=home create --description="Initial"
 echo "Boot loader"
 uuid=$(lsblk -no UUID /dev/sda2 | head -n 1)
 sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g' /etc/default/grub
-sed -i '/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=\/.keys\/cryptbtrfs.keyfile"/g' /etc/default/grub
+sed -i "/GRUB_CMDLINE_LINUX=/s/\".*\"/\"rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=\/.keys\/cryptbtrfs.keyfile\"/g" /etc/default/grub
 sed -i '/GRUB_ENABLE_CRYPTODISK=y/s/^#//g' /etc/default/grub
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
@@ -135,29 +135,26 @@ sed -i '/Color/s/^#//g' /etc/pacman.conf
 sed -i '/CheckSpace/s/^#//g' /etc/pacman.conf
 sed -i '/VerbosePkgLists/s/^#//g' /etc/pacman.conf
 
+echo "Change to user"
+sudo su delacruz
+
+echo "Install yay"
+cd /.shared
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+
+echo "Clone dotfiles"
+cd ..
+git clone https://hanselrd@github.com/hanselrd/dotfiles.git
+
 echo "Exit chroot"
 exit
 EOF
 
 echo "Chroot"
+chmod +x /mnt/bootstrap.sh
 arch-chroot /mnt /bootstrap.sh
 
 echo "Cleanup chroot bootstrap"
 rm -rf /mnt/bootstrap.sh
-
-# Install yay
-# cd /.shared
-# git clone https://aur.archlinux.org/yay.git
-# cd yay
-# makepkg -si --noconfirm
-
-# Update system
-# sudo pacman -Syu
-# sudo pacman -Fy
-
-# Bootstrap dotfiles
-# cd /.shared
-# git clone https://hanselrd@github.com/hanselrd/dotfiles.git
-# cd dotfiles
-# Add roles/bootstrap/vars/main.yml variables
-# sudo ansible-playbook localhost.yml
