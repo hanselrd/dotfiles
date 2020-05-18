@@ -60,6 +60,7 @@
       - tree
       - udisks2
       - upower
+      - xdg-user-dirs
       - xorg
       - xorg-apps
       - xorg-drivers
