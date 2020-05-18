@@ -36,7 +36,7 @@ umount /mnt
 echo "Mount partitions"
 mount -o compress=lzo,subvol=@ /dev/mapper/cryptbtrfs /mnt
 mkdir -p /mnt/{efi,home,.shared,.swap,.keys}
-mount /dev/sda1 /mnt/efi
+mount "$efi_device" /mnt/efi
 mount -o compress=lzo,subvol=@home /dev/mapper/cryptbtrfs /mnt/home
 mount -o compress=lzo,subvol=@shared /dev/mapper/cryptbtrfs /mnt/.shared
 mount -o compress=lzo,subvol=@swap /dev/mapper/cryptbtrfs /mnt/.swap
@@ -88,7 +88,7 @@ pacstrap /mnt \
 echo "Fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 
-uuid=$(lsblk -no UUID /dev/sda2 | head -n 1)
+uuid=$(lsblk -no UUID "$crypt_device" | head -n 1)
 
 cat <<EOF >> /mnt/bootstrap.sh
 echo "Time zone"
@@ -103,15 +103,15 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
 echo "Network configuration"
 echo "arch" >> /etc/hostname
-echo -e "127.0.0.1\tlocalhost\n" >> /etc/hosts
-echo -e "::1\t\tlocalhost\n" >> /etc/hosts
-echo -e "127.0.1.1\tarch.localdomain\tarch\n" >> /etc/hosts
+echo -e "127.0.0.1\tlocalhost" >> /etc/hosts
+echo -e "::1\t\tlocalhost" >> /etc/hosts
+echo -e "127.0.1.1\tarch.localdomain\tarch" >> /etc/hosts
 systemctl enable NetworkManager
 
 echo "Create LUKS key"
 dd if=/dev/random of=/.keys/cryptbtrfs.keyfile iflag=fullblock bs=512 count=8
 chmod 000 /.keys/cryptbtrfs.keyfile
-cryptsetup luksAddKey /dev/sda2 /.keys/cryptbtrfs.keyfile
+cryptsetup luksAddKey "$crypt_device" /.keys/cryptbtrfs.keyfile
 
 echo "Initramfs"
 sed -i 's/^BINARIES=(.*)/BINARIES=(\/usr\/bin\/btrfs)/g' /etc/mkinitcpio.conf
