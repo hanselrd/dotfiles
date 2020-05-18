@@ -148,18 +148,18 @@ sed -i '/Color/s/^#//g' /etc/pacman.conf
 sed -i '/CheckSpace/s/^#//g' /etc/pacman.conf
 sed -i '/VerbosePkgLists/s/^#//g' /etc/pacman.conf
 
-echo "Change to user"
-sudo su "$user"
+# echo "Change to user"
+# sudo su "$user"
 
-echo "Install yay"
-cd /.shared || exit
-git clone https://aur.archlinux.org/yay.git
-cd yay || exit
-makepkg -si --noconfirm
+# echo "Install yay"
+# cd /.shared || exit
+# git clone https://aur.archlinux.org/yay.git
+# cd yay || exit
+# makepkg -si --noconfirm
 
-echo "Clone dotfiles"
-cd ..
-git clone https://hanselrd@github.com/hanselrd/dotfiles.git
+# echo "Clone dotfiles"
+# cd ..
+# git clone https://hanselrd@github.com/hanselrd/dotfiles.git
 
 echo "Exit chroot"
 exit
