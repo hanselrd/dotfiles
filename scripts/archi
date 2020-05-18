@@ -80,8 +80,8 @@ if [ "$(find /sys/firmware/efi/efivars -print 2>/dev/null | wc -l)" == 0 ]; then
     exit 1
 fi
 
-# device=$(prompt_menu "Select disk device to use for installation" "$(lsblk -d -p -n -l -o NAME,SIZE -e 7,11)")
-device=$(prompt_menu "Select disk device to use for installation" "/dev/sdb")
+device=$(prompt_menu "Select disk device to use for installation" "$(lsblk -d -p -n -l -o NAME,SIZE -e 7,11)")
+# device=$(prompt_menu "Select disk device to use for installation" "/dev/sdb")
 
 if (prompt_yesno "Would you like to wipe and partition ${device}?"); then
     wipefs -a -f "$device"
