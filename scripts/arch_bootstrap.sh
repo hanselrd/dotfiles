@@ -1,19 +1,37 @@
 #!/usr/bin/env bash
 
-# Assumes the following setup
+device="/dev/sda"
+efi_device="$device"1
+crypt_device="$device"2
+user=""
 
-# Mount       Device        Type
-# -----------------------------------------------
-# (/efi)      /dev/sdX1     EFI System Partition
-#             /dev/sdX2     LUKS (btrfs)
-#     (/)           @
-#     (/home)       @home
-#     (/.shared)    @shared
-#     (/.swap)      @swap
-#     (/.keys)      @keys
+echo "Verify the boot mode"
+ls -lh /sys/firmware/efi/efivars
 
-echo "Open LUKS container on /dev/sda2"
-cryptsetup luksOpen /dev/sda2 cryptbtrfs
+echo "Wipe device $device"
+wipefs -a -f "$device"
+
+echo "Partition device $device"
+echo -e "g\nn\n\n\n+1G\nt\n1\nn\n\n\n\nt\n\n20\nw" | fdisk "$device"
+
+echo "Format $efi_device with FAT32"
+mkfs.fat -F32 "$efi_device"
+
+echo "Create LUKS container on $crypt_device"
+cryptsetup luksFormat --type luks1 "$crypt_device"
+cryptsetup luksOpen "$crypt_device" cryptbtrfs
+
+echo "Format /dev/mapper/cryptbtrfs with BTRFS"
+mkfs.btrfs /dev/mapper/cryptbtrfs
+
+echo "Create BTRFS subvolumes"
+mount /dev/mapper/cryptbtrfs /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@shared
+btrfs subvolume create /mnt/@swap
+btrfs subvolume create /mnt/@keys
+umount /mnt
 
 echo "Mount partitions"
 mount -o compress=lzo,subvol=@ /dev/mapper/cryptbtrfs /mnt
@@ -25,12 +43,6 @@ mount -o compress=lzo,subvol=@swap /dev/mapper/cryptbtrfs /mnt/.swap
 mount -o compress=lzo,subvol=@keys /dev/mapper/cryptbtrfs /mnt/.keys
 chmod 777 /mnt/.shared
 
-echo "Verify the boot mode"
-ls /sys/firmware/efi/efivars
-
-echo "Connect to the internet"
-wifi-menu
-
 echo "Update the system clock"
 timedatectl set-ntp true
 
@@ -40,7 +52,7 @@ chattr +C /mnt/.swap/swapfile
 if [ "$(findmnt -no FSTYPE -T /mnt/.swap)" == "btrfs" ]; then
     btrfs property set /mnt/.swap/swapfile compression none
 fi
-fallocate -l $(free -g | grep "Mem" | awk '{printf("%d\n", $2+1)}')G /mnt/.swap/swapfile
+fallocate -l "$(free -g | grep "Mem" | awk '{printf("%d\n", $2+1)}')G" /mnt/.swap/swapfile
 chmod 600 /mnt/.swap/swapfile
 mkswap /mnt/.swap/swapfile
 swapon /mnt/.swap/swapfile
@@ -76,6 +88,8 @@ pacstrap /mnt \
 echo "Fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 
+uuid=$(lsblk -no UUID /dev/sda2 | head -n 1)
+
 cat <<EOF >> /mnt/bootstrap.sh
 echo "Time zone"
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
@@ -89,9 +103,9 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
 echo "Network configuration"
 echo "arch" >> /etc/hostname
-printf "127.0.0.1\tlocalhost\n" >> /etc/hosts
-printf "::1\t\tlocalhost\n" >> /etc/hosts
-printf "127.0.1.1\tarch.localdomain\tarch\n" >> /etc/hosts
+echo -e "127.0.0.1\tlocalhost\n" >> /etc/hosts
+echo -e "::1\t\tlocalhost\n" >> /etc/hosts
+echo -e "127.0.1.1\tarch.localdomain\tarch\n" >> /etc/hosts
 systemctl enable NetworkManager
 
 echo "Create LUKS key"
@@ -109,8 +123,8 @@ echo "Root password"
 passwd
 
 echo "User password"
-useradd -mG wheel delacruz
-passwd delacruz
+useradd -mG wheel "$user"
+passwd "$user"
 
 echo "Update sudoers for wheel group"
 sed -i '/%wheel ALL=(ALL) ALL/s/^# //g' /etc/sudoers
@@ -122,9 +136,8 @@ snapper --no-dbus --config=home create-config /home
 snapper --no-dbus --config=home create --description="Initial"
 
 echo "Boot loader"
-uuid=$(lsblk -no UUID /dev/sda2 | head -n 1)
 sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g' /etc/default/grub
-sed -i "/GRUB_CMDLINE_LINUX=/s/\".*\"/\"rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=\/.keys\/cryptbtrfs.keyfile\"/g" /etc/default/grub
+sed -i '/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name=$uuid=cryptbtrfs rd.luks.key=$uuid=\/.keys\/cryptbtrfs.keyfile"/g' /etc/default/grub
 sed -i '/GRUB_ENABLE_CRYPTODISK=y/s/^#//g' /etc/default/grub
 echo "GRUB_DISABLE_SUBMENU=y" >> /etc/default/grub
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
@@ -136,12 +149,12 @@ sed -i '/CheckSpace/s/^#//g' /etc/pacman.conf
 sed -i '/VerbosePkgLists/s/^#//g' /etc/pacman.conf
 
 echo "Change to user"
-sudo su delacruz
+sudo su "$user"
 
 echo "Install yay"
-cd /.shared
+cd /.shared || exit
 git clone https://aur.archlinux.org/yay.git
-cd yay
+cd yay || exit
 makepkg -si --noconfirm
 
 echo "Clone dotfiles"

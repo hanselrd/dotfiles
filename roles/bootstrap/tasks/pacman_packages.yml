@@ -4,7 +4,6 @@
 - name: Install packages
   pacman:
     name:
-      # - alsa-utils
       # - ansible
       # - base
       # - base-devel
@@ -24,10 +23,7 @@
       # - os-prober
       # - snap-pac
       # - snapper
-      # - tlp
-      # - tlp-rdw
       # - vim
-      # - xorg-xinit
       - arandr
       - bashtop
       - ccache
@@ -68,6 +64,7 @@
       - xorg-apps
       - xorg-drivers
       - xorg-fonts
+      - xorg-xinit
       - zsh
     state: present
 
@@ -83,11 +80,11 @@
   command: "yay -S {{ item }} --noconfirm"
   register: output
   loop:
+    # - pgmodeler
     - betterlockscreen
     - i3status-rust
     - numix-gtk-theme
     - numix-icon-theme-pack-git
-      # - pgmodeler
     - rxvt-unicode-pixbuf
     - snap-pac-grub
     - ttf-font-awesome-4
