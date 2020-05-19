@@ -214,7 +214,7 @@ arch-chroot /mnt locale-gen
 arch-chroot /mnt bash -c "echo 'LANG=$locale' >> /etc/locale.conf"
 
 hostname=$(prompt_inputbox "Enter your hostname" "arch")
-arch-chroot /mnt bash -c "echo 'arch' >> /etc/hostname"
+arch-chroot /mnt bash -c "echo '$hostname' >> /etc/hostname"
 # shellcheck disable=SC2129
 arch-chroot /mnt bash -c "echo -e '127.0.0.1\tlocalhost' >> /etc/hosts"
 arch-chroot /mnt bash -c "echo -e '::1\t\tlocalhost' >> /etc/hosts"
