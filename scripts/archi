@@ -212,6 +212,7 @@ locale=$(prompt_menu "Select locale" "$(grep "^[[:alnum:]]\|^#[[:alnum:]]" /etc/
 arch-chroot /mnt sed -i "/$locale/s/^#//g" /etc/locale.gen
 arch-chroot /mnt locale-gen
 arch-chroot /mnt bash -c "echo 'LANG=$locale' >> /etc/locale.conf"
+arch-chroot /mnt bash -c "echo 'LC_COLLATE=C' >> /etc/locale.conf"
 
 hostname=$(prompt_inputbox "Enter your hostname" "arch")
 arch-chroot /mnt bash -c "echo '$hostname' >> /etc/hostname"
