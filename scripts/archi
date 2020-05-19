@@ -262,8 +262,8 @@ arch-chroot /mnt sed -i '/%wheel ALL=(ALL) ALL/s/^# //g' /etc/sudoers
 prompt_msgbox "Updated sudoers for wheel group"
 
 arch-chroot /mnt sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g' /etc/default/grub
-uuid=$(lsblk -no UUID "$crypt_partition" | head -n 1)
 if [ "$cryptname" != "" ]; then
+    uuid=$(lsblk -no UUID "$crypt_partition" | head -n 1)
     arch-chroot /mnt sed -i '/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name='"$uuid"'='"$cryptname"' rd.luks.key='"$uuid"'=\/.keys\/'"$cryptname"'.keyfile"/g' /etc/default/grub
     arch-chroot /mnt sed -i '/GRUB_ENABLE_CRYPTODISK=y/s/^#//g' /etc/default/grub
 fi
