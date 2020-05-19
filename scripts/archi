@@ -243,7 +243,7 @@ while [ "$root_password" != "$root_password_again" ]; do
 done
 arch-chroot /mnt bash -c "echo 'root:$root_password' | chpasswd"
 
-user_name=$(promp_inputbox "Enter user name")
+user_name=$(prompt_inputbox "Enter user name")
 user_password=$(prompt_passwordbox "Enter $user_name password")
 user_password_again=$(prompt_passwordbox "Enter $user_name password again")
 while [ "$user_password" != "$user_password_again" ]; do
