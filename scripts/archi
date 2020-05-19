@@ -278,6 +278,10 @@ prompt_msgbox "Installed yay AUR helper"
 arch-chroot /mnt bash -c "cd /.shared && sudo -u $user_name git clone https://hanselrd@github.com/hanselrd/dotfiles.git"
 prompt_msgbox "Cloned dotfiles"
 
+arch-chroot /mnt rm -rf ~/.*_history
+arch-chroot /mnt sudo -u "$user_name" rm -rf ~/.*_history
+prompt_msgbox "Deleted shell history files"
+
 arch-chroot /mnt snapper --no-dbus --config=root create-config /
 arch-chroot /mnt snapper --no-dbus --config=root create --description="Initial"
 arch-chroot /mnt snapper --no-dbus --config=home create-config /home
