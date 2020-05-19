@@ -271,6 +271,13 @@ arch-chroot /mnt sed -i '/CheckSpace/s/^#//g' /etc/pacman.conf
 arch-chroot /mnt sed -i '/VerbosePkgLists/s/^#//g' /etc/pacman.conf
 prompt_msgbox "Set pacman options"
 
+arch-chroot /mnt bash -c "cd /.shared && sudo -u $user_name git clone https://aur.archlinux.org/yay.git"
+arch-chroot /mnt bash -c "cd /.shared/yay && sudo -u $user_name makepkg -sirc --noconfirm"
+prompt_msgbox "Installed yay AUR helper"
+
+arch-chroot /mnt bash -c "cd /.shared && sudo -u $user_name git clone https://hanselrd@github.com/hanselrd/dotfiles.git"
+prompt_msgbox "Cloned dotfiles"
+
 arch-chroot /mnt snapper --no-dbus --config=root create-config /
 arch-chroot /mnt snapper --no-dbus --config=root create --description="Initial"
 arch-chroot /mnt snapper --no-dbus --config=home create-config /home
