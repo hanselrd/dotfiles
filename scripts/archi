@@ -257,12 +257,6 @@ arch-chroot /mnt bash -c "echo '$user_name:$user_password' | chpasswd"
 arch-chroot /mnt sed -i '/%wheel ALL=(ALL) ALL/s/^# //g' /etc/sudoers
 prompt_msgbox "Updated sudoers for wheel group"
 
-arch-chroot /mnt snapper --no-dbus --config=root create-config /
-arch-chroot /mnt snapper --no-dbus --config=root create --description="Initial"
-arch-chroot /mnt snapper --no-dbus --config=home create-config /home
-arch-chroot /mnt snapper --no-dbus --config=home create --description="Initial"
-prompt_msgbox "Configured snapper"
-
 arch-chroot /mnt sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g' /etc/default/grub
 uuid=$(lsblk -no UUID "$crypt_partition" | head -n 1)
 arch-chroot /mnt sed -i '/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name='"$uuid"'='"$cryptname"' rd.luks.key='"$uuid"'=\/.keys\/'"$cryptname"'.keyfile"/g' /etc/default/grub
@@ -276,6 +270,12 @@ arch-chroot /mnt sed -i '/Color/s/^#//g' /etc/pacman.conf
 arch-chroot /mnt sed -i '/CheckSpace/s/^#//g' /etc/pacman.conf
 arch-chroot /mnt sed -i '/VerbosePkgLists/s/^#//g' /etc/pacman.conf
 prompt_msgbox "Set pacman options"
+
+arch-chroot /mnt snapper --no-dbus --config=root create-config /
+arch-chroot /mnt snapper --no-dbus --config=root create --description="Initial"
+arch-chroot /mnt snapper --no-dbus --config=home create-config /home
+arch-chroot /mnt snapper --no-dbus --config=home create --description="Initial"
+prompt_msgbox "Configured snapper"
 
 # umount -R /mnt
 # if [ "$cryptname" != "" ]; then
