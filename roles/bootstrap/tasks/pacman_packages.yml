@@ -83,7 +83,7 @@
   loop:
     # - pgmodeler
     - betterlockscreen
-    - i3status-rust
+    - i3status-rust-git
     - numix-gtk-theme
     - numix-icon-theme-pack-git
     - rxvt-unicode-pixbuf
