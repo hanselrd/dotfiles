@@ -116,6 +116,17 @@ show_volume_when_muted = true
 [[block]]
 block = "uptime"
 
+{% if ansible_pkg_mgr == "pacman" %}
+[[block]]
+block = "pacman"
+interval = 600
+format = "{both}"
+format_singular = "{both}"
+format_up_to_date = "{both}"
+critical_updates_regex = "(linux |linux-lts |linux-zen |linux-hardened )"
+aur_command = "yay -Qua"
+{% endif %}
+
 [[block]]
 block = "time"
 format = "%a %m/%d/%Y %r"
