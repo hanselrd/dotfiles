@@ -11,7 +11,7 @@
     - nonfree
 - debug:
     msg: "{{ item.stdout_lines }}"
-  loop: "{{ output.results | flatten(levels=1) }}"
+  loop: "{{ output.results }}"
 
 - name: Enable COPR repos
   command:
@@ -25,7 +25,7 @@
     - petersen/stack
 - debug:
     msg: "{{ item.stdout_lines }}"
-  loop: "{{ output.results | flatten(levels=1) }}"
+  loop: "{{ output.results }}"
 
 - name: Install packages
   dnf:

@@ -45,6 +45,8 @@
       - picom
       - pulseaudio
       - python-pip
+      - python-pywal
+      - python2
       - ranger
       - redshift
       - reflector
@@ -91,4 +93,4 @@
     - ttf-font-awesome-4
 - debug:
     msg: "{{ item.stdout_lines }}"
-  loop: "{{ output.results | flatten(levels=1) }}"
+  loop: "{{ output.results }}"

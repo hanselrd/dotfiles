@@ -17,6 +17,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-titlecase'
 Plug 'dense-analysis/ale'
+Plug 'dylanaraps/wal.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
@@ -47,10 +48,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/ReplaceWithRegister'
 
-if v:version >= 800
-endif
-
 call plug#end()
+
+if !empty(glob('~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim'))
+    silent !sed -i "s/''/'\#000000'/g" ~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim
+endif
 
 " START PLUGIN CONFIGURATION
 
@@ -78,6 +80,8 @@ let g:system_copy#paste_command='xclip -sel clipboard -o'
 " Plug 'dense-analysis/ale'
 let g:ale_linters_explicit=1
 
+" Plug 'dylanaraps/wal.vim'
+
 " Plug 'easymotion/vim-easymotion'
 
 " Plug 'editorconfig/editorconfig-vim'
@@ -91,7 +95,7 @@ let g:tmuxline_powerline_separators=0
 set laststatus=2
 set noshowmode
 let g:lightline={
-    \ 'colorscheme': 'deus',
+    \ 'colorscheme': 'wal',
     \ 'mode_map': {
     \   'n' : 'N',
     \   'i' : 'I',
@@ -239,6 +243,8 @@ vmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Plug 'ntpeters/vim-better-whitespace'
+
 " Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
 "    \ "Standard": "Cpp11",
@@ -290,7 +296,8 @@ set number
 set relativenumber
 set hlsearch
 "colorscheme codedark
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme wal
 set cursorline
 "set colorcolumn=100
 fun! ToggleCC()
