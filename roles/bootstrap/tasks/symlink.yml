@@ -10,6 +10,7 @@
   loop:
     - ccache
     - config/gtk-3.0
+    - config/picom
     - config/ranger
     - config/rofi
     - oh-my-zsh/custom/themes
@@ -29,13 +30,13 @@
     # - scripts
     - ccache/ccache.conf
     - config/gtk-3.0/settings.ini
+    - config/picom/picom.conf
     - config/ranger/rc.conf
-    - config/rofi/config
+    - config/rofi/config.rasi
     - gdb
     - gdbinit
     - gtkrc-2.0
     - oh-my-zsh/custom/themes/dieter.zsh-theme
-    - picom.conf
     - screenlayout
     - tmux.conf
     - tmux.line
