@@ -7,7 +7,7 @@ case "$1" in
     laptop|work)
         case "$2" in
             start|restart)
-                ./df_launcher picom --config "$HOME/.picom.conf"
+                ./df_launcher picom
                 ;;
             stop)
                 killall -q picom

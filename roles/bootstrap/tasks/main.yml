@@ -3,11 +3,11 @@
 
 - include_tasks: required_vars.yml
 
-- include_tasks: pacman_packages.yml
-  when: ansible_pkg_mgr == "pacman"
+# - include_tasks: pacman_packages.yml
+#   when: ansible_pkg_mgr == "pacman"
 
-- include_tasks: dnf_packages.yml
-  when: ansible_pkg_mgr == "dnf"
+# - include_tasks: dnf_packages.yml
+#   when: ansible_pkg_mgr == "dnf"
 
 - include_tasks: git_clone.yml
 
