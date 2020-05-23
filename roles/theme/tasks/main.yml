@@ -1,0 +1,24 @@
+---
+# tasks file for roles/theme
+
+- name: Create theme cache directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_cache_dir }}/dotfiles"
+    state: directory
+
+- name: "Generate theme file in ({{ user_cache_dir }}/dotfiles) using ({{ theme_name }})"
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ theme_name }}.yml.j2"
+    dest: "{{ user_cache_dir }}/dotfiles/theme.yml"
+    force: yes
+
+- name: Include theme variables
+  include_vars: "{{ user_cache_dir }}/dotfiles/theme.yml"
+
+- name: Export theme variables
+  set_fact:
+    theme_name: "{{ theme_name }}"

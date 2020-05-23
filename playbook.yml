@@ -1,0 +1,67 @@
+---
+# sudo ansible-playbook --diff -i inventory --limit laptop --tags all playbook.yml --extra-vars="user_id=delacruz user_email=test@test.com user_name='Hansel De La Cruz' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp"
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Check if variables are defined
+      fail:
+        msg: "{{ item }} must be defined (missing --extra-vars \"{{ item }}={{ item | upper }}\"?)"
+      when: vars[item] is not defined
+      loop:
+        - user_email
+        - user_id
+        - user_name
+      tags: always
+
+    - &anchor1
+      name: Register derived user variables
+      set_fact:
+        user_home_dir: "/home/{{ user_id }}"
+      tags: always
+    - <<: *anchor1
+      set_fact:
+        user_cache_dir: "{{ user_home_dir }}/.cache"
+    - <<: *anchor1
+      set_fact:
+        user_config_dir: "{{ user_home_dir }}/.config"
+    - <<: *anchor1
+      set_fact:
+        user_root_dir: "/"
+    - <<: *anchor1
+      set_fact:
+        user_temp_dir: "/tmp"
+
+    - name: Create user directories
+      become: yes
+      become_user: "{{ user_id }}"
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "{{ user_cache_dir }}"
+        - "{{ user_config_dir }}"
+        - "{{ user_home_dir }}"
+        - "{{ user_root_dir }}"
+        - "{{ user_temp_dir }}"
+      tags: always
+
+    - include_role:
+        name: theme
+        apply:
+          tags: always
+      tags: always
+
+    - include_role:
+        name: rofi
+        apply:
+          tags: rofi
+      tags: always
+
+    - include_role:
+        name: i3
+        apply:
+          tags: i3
+      tags: always
