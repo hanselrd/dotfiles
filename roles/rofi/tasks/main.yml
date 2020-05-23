@@ -1,0 +1,20 @@
+---
+# tasks file for roles/rofi
+
+- name: Create rofi config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/rofi"
+    state: directory
+
+- name: Generate rofi config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/rofi/{{ item }}"
+    force: yes
+  loop:
+    - config.rasi
+    - theme.rasi

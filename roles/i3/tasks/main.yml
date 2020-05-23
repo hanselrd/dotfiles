@@ -1,0 +1,19 @@
+---
+# tasks file for roles/i3
+
+- name: Create i3 config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/i3"
+    state: directory
+
+- name: Generate i3 config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/i3/{{ item }}"
+    force: yes
+  loop:
+    - config

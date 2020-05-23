@@ -1,0 +1,4 @@
+[all]
+laptop ansible_connection=local
+remote ansible_connection=local
+work ansible_connection=local

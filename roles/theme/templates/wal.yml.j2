@@ -1,0 +1,95 @@
+---
+
+theme_i3:
+  client_focused:          &i3_client_focused
+    border:                "$color4"
+    background:            "$color4"
+    text:                  "$foreground"
+    indicator:             "$color4"
+    child_border:          "$color4"
+  client_focused_inactive: &i3_client_focused_inactive
+    <<:                    *i3_client_focused
+    border:                "$background"
+    background:            "$background"
+    indicator:             "$background"
+    child_border:          "$background"
+  client_unfocused:        &i3_client_unfocused
+    <<:                    *i3_client_focused_inactive
+  client_urgent:           &i3_client_urgent
+    <<:                    *i3_client_focused
+    border:                "$color2"
+    background:            "$color2"
+    indicator:             "$color2"
+    child_border:          "$color2"
+  client_placeholder:      &i3_client_placeholder
+    <<:                    *i3_client_focused
+    border:                "#000000"
+    background:            "#000000"
+    indicator:             "#000000"
+    child_border:          "#000000"
+
+  client_background:       &i3_client_background       "#FFFFFF"
+
+theme_i3bar:
+  background:         "$background"
+  statusline:         "#FFFFFF"
+  separator:          "#666666"
+
+  focused_workspace:  *i3_client_focused
+  active_workspace:   *i3_client_focused_inactive
+  inactive_workspace:
+    <<:               *i3_client_unfocused
+    text:             "#AAAAAA"
+  urgent_workspace:   *i3_client_urgent
+  binding_mode:       *i3_client_urgent
+
+theme_i3status:
+  good:                "{color2}"
+  degraded:            "{color3}"
+  bad:                 "{color1}"
+
+  idle_bg:             "{background}"
+  idle_fg:             "{foreground}"
+  info_bg:             "{color4}"
+  info_fg:             "{background}"
+  good_bg:             "{color2}"
+  good_fg:             "{background}"
+  warning_bg:          "{color3}"
+  warning_fg:          "{background}"
+  critical_bg:         "{color1}"
+  critical_fg:         "{background}"
+  alternating_tint_bg: "#111111"
+  alternating_tint_fg: "#000000"
+
+theme_rofi:
+  background:                 "#000000"
+  foreground:                 "#000000"
+  active_background:          "#000000"
+  urgent_background:          "#000000"
+  selected_active_background: "#000000"
+  selected_normal_background: "#000000"
+  selected_urgent_background: "#000000"
+
+theme_urxvt:
+  background: "#000000"
+  foreground: "#000000"
+  scroll:     "#AAAAAA"
+  cursor:     "#000000"
+
+  palette:    &urxvt_palette
+    color0:   "#000000"
+    color8:   "#000000"
+    color1:   "#000000"
+    color9:   "#000000"
+    color2:   "#000000"
+    color10:  "#000000"
+    color3:   "#000000"
+    color11:  "#000000"
+    color4:   "#000000"
+    color12:  "#000000"
+    color5:   "#000000"
+    color13:  "#000000"
+    color6:   "#000000"
+    color14:  "#000000"
+    color7:   "#000000"
+    color15:  "#000000"
