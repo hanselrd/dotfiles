@@ -18,3 +18,19 @@
   loop:
     - config
     - config-sm
+
+- name: Prepare i3status config files
+  replace:
+    path: "{{ user_config_dir }}/i3status/{{ item.0 }}"
+    regexp: "{{ item.1.regexp }}"
+    replace: "{{ item.1.replace }}"
+  loop: "{{ configs | product(replaces) | list }}"
+  vars:
+    - configs:
+      - config
+      - config-sm
+    - replaces:
+      - { regexp: '({)', replace: '\1\1'  }
+      - { regexp: '(})', replace: '\1\1'  }
+      - { regexp: '@@(.+)@@', replace: '{\1}'  }
+  when: theme_name == "wal"

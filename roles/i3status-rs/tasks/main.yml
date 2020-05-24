@@ -18,3 +18,19 @@
   loop:
     - config-sm.toml
     - config.toml
+
+- name: Prepare i3status-rs config files
+  replace:
+    path: "{{ user_config_dir }}/i3status-rs/{{ item.0 }}"
+    regexp: "{{ item.1.regexp }}"
+    replace: "{{ item.1.replace }}"
+  loop: "{{ configs | product(replaces) | list }}"
+  vars:
+    - configs:
+      - config-sm.toml
+      - config.toml
+    - replaces:
+      - { regexp: '({)', replace: '\1\1'  }
+      - { regexp: '(})', replace: '\1\1'  }
+      - { regexp: '@@(.+)@@', replace: '{\1}'  }
+  when: theme_name == "wal"
