@@ -1,0 +1,36 @@
+---
+# tasks file for roles/gtk
+
+- name: Create gtk2 config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_home_dir }}"
+    state: directory
+
+- name: Generate gtk2 config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_home_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - gtkrc-2.0
+
+- name: Create gtk3 config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/gtk-3.0"
+    state: directory
+
+- name: Generate gtk3 config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/gtk-3.0/{{ item }}"
+    force: yes
+  loop:
+    - settings.ini

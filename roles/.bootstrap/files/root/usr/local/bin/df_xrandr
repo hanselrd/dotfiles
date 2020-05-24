@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+cd "$(dirname "$0")" || exit
+
+# $1 = {{ dotfiles_configuration }}
+case "$1" in
+    laptop|work)
+        case "$2" in
+            default)
+                if [ -f "$HOME/.screenlayout/default-$1.sh" ]; then
+                    "$HOME/.screenlayout/default-$1.sh"
+                else
+                    echo "No default screenlayout for $1 was found"
+                    exit 2
+                fi
+                ;;
+            *)
+                if [ -f "$HOME/.screenlayout/$2.sh" ]; then
+                    "$HOME/.screenlayout/$2.sh"
+                else
+                    echo "No screenlayout for $2 was found"
+                    exit 3
+                fi
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {{ dotfiles_configuration }} {default|<any>}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac

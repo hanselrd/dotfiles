@@ -1,0 +1,6 @@
+---
+# defaults file for roles/gtk
+
+gtk_theme: Numix
+gtk_icon_theme: Numix-Circle
+gtk_cursor_theme: Adwaita

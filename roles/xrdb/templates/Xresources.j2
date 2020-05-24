@@ -1,0 +1,84 @@
+! Extensions
+! ==========
+!
+URxvt*perl-ext-common: default,matcher,selection-to-clipboard,font-size
+
+! Fonts
+! =====
+!
+URxvt*font: xft:{{ theme_urxvt.font }}:size={{ theme_urxvt.font_size }}
+URxvt*allow_bold: true
+
+! Scrolling
+! =========
+!
+URxvt*saveLines: 10000
+URxvt*scrollBar: false
+URxvt*scrollStyle: rxvt
+URxvt*scrollBar_floating: true
+URxvt*scrollColor: {{ theme_urxvt.scroll }}
+URxvt*scrollBar_right: true
+URxvt*thickness: 12
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+
+! Interaction
+! ===========
+!
+URxvt*cutchars: "\"(),<>[]{}|'`"
+URxvt*url-launcher: xdg-open
+URxvt*matcher.button: 3
+
+! Key Bindings
+! ============
+!
+! Copy/Paste, same keys as gnome-terminal
+! https://stackoverflow.com/questions/39884093
+! Disable ISO 14755 unicode input so we can use Ctrl-Shift bindings
+URxvt*iso14755:        false
+URxvt*iso14755_52:     false
+! Disable Ctrl-Alt-c & Ctrl-Alt-v bindings (optional)
+URxvt*keysym.C-M-c:    builtin-string:
+URxvt*keysym.C-M-v:    builtin-string:
+! Bind Ctrl-Shift-c & Ctrl-Shift-v to copy and paste
+! I dont know why, but I needed to use hex keysym values to get it to work
+URxvt*keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt*keysym.C-S-0x56: eval:paste_clipboard
+
+! Theme/Colors
+! ===========
+!
+URxvt*background: {{ theme_urxvt.background }}
+URxvt*foreground: {{ theme_urxvt.foreground }}
+URxvt*cursorColor: {{ theme_urxvt.cursor }}
+URxvt*cursorBlink: true
+URxvt*fading: 0
+!URxvt*depth: 32
+URxvt*depth: 24
+! Black + DarkGrey
+URxvt*color0:  {{ theme_urxvt.palette.color0 }}
+URxvt*color8:  {{ theme_urxvt.palette.color8 }}
+! DarkRed + Red
+URxvt*color1:  {{ theme_urxvt.palette.color1 }}
+URxvt*color9:  {{ theme_urxvt.palette.color9 }}
+! DarkGreen + Green
+URxvt*color2:  {{ theme_urxvt.palette.color2 }}
+URxvt*color10: {{ theme_urxvt.palette.color10 }}
+! DarkYellow + Yellow
+URxvt*color3:  {{ theme_urxvt.palette.color3 }}
+URxvt*color11: {{ theme_urxvt.palette.color11 }}
+! DarkBlue + Blue
+URxvt*color4:  {{ theme_urxvt.palette.color4 }}
+URxvt*color12: {{ theme_urxvt.palette.color12 }}
+! DarkMagenta + Magenta
+URxvt*color5:  {{ theme_urxvt.palette.color5 }}
+URxvt*color13: {{ theme_urxvt.palette.color13 }}
+! DarkCyan + Cyan
+URxvt*color6:  {{ theme_urxvt.palette.color6 }}
+URxvt*color14: {{ theme_urxvt.palette.color14 }}
+! LightGrey + White
+URxvt*color7:  {{ theme_urxvt.palette.color7 }}
+URxvt*color15: {{ theme_urxvt.palette.color15 }}
+! Black color that will not be affected by bold highlighting
+URxvt*color66: {{ theme_urxvt.palette.color0 }}

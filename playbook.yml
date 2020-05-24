@@ -1,5 +1,5 @@
 ---
-# sudo ansible-playbook --diff -i inventory --limit laptop --tags all playbook.yml --extra-vars="user_id=delacruz user_email=test@test.com user_name='Hansel De La Cruz' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp"
+# sudo ansible-playbook --diff -i inventory --limit laptop playbook.yml --extra-vars "user_id=delacruz user_email=test@test.com user_name='Test Test' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp"
 
 - hosts: all
   gather_facts: yes
@@ -24,14 +24,8 @@
     - <<: *anchor1
       set_fact:
         user_cache_dir: "{{ user_home_dir }}/.cache"
-    - <<: *anchor1
-      set_fact:
         user_config_dir: "{{ user_home_dir }}/.config"
-    - <<: *anchor1
-      set_fact:
         user_root_dir: "/"
-    - <<: *anchor1
-      set_fact:
         user_temp_dir: "/tmp"
 
     - name: Create user directories
@@ -48,10 +42,35 @@
         - "{{ user_temp_dir }}"
       tags: always
 
+    - debug:
+        msg: "Running with: run_tags={{ ansible_run_tags }}, skip_tags={{ ansible_skip_tags }}"
+
     - include_role:
         name: theme
         apply:
           tags: always
+      tags: always
+
+    - include_role:
+        name: xinit
+        apply:
+          tags: xinit
+      tags: always
+
+    - include_role:
+        name: urxvt
+        apply:
+          tags:
+            - urxvt
+            - xrdb
+      tags: always
+
+    - include_role:
+        name: xrdb
+        apply:
+          tags:
+            - urxvt
+            - xrdb
       tags: always
 
     - include_role:
@@ -64,4 +83,46 @@
         name: i3
         apply:
           tags: i3
+      tags: always
+
+    - include_role:
+        name: i3status
+        apply:
+          tags: i3status
+      tags: always
+
+    - include_role:
+        name: i3status-rs
+        apply:
+          tags: i3status-rs
+      tags: always
+
+    - include_role:
+        name: backgrounds
+        apply:
+          tags: backgrounds
+      tags: always
+
+    - include_role:
+        name: fonts
+        apply:
+          tags: fonts
+      tags: always
+
+    - include_role:
+        name: bin
+        apply:
+          tags: bin
+      tags: always
+
+    - include_role:
+        name: gtk
+        apply:
+          tags: gtk
+      tags: always
+
+    - include_role:
+        name: git
+        apply:
+          tags: git
       tags: always

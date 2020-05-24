@@ -1,0 +1,19 @@
+---
+# tasks file for roles/git
+
+- name: Create git config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_home_dir }}"
+    state: directory
+
+- name: Generate git config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_home_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - gitconfig

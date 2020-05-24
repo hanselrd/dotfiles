@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+cd "$(dirname "$0")" || exit
+
+lock() {
+    betterlockscreen -t "Type password to unlock" -l dimblur
+}
+
+# $1 = {{ dotfiles_configuration }}
+case "$1" in
+    laptop|work)
+        case "$2" in
+            lock)
+                lock
+                ;;
+            exit)
+                i3-msg exit
+                ;;
+            suspend)
+                lock &
+                systemctl suspend
+                ;;
+            hibernate)
+                lock &
+                systemctl hibernate
+                ;;
+            reboot)
+                systemctl reboot
+                ;;
+            shutdown)
+                systemctl poweroff
+                ;;
+            *)
+                echo "Usage: $0 {{ dotfiles_configuration }} {lock|exit|suspend|hibernate|reboot|shutdown}"
+                echo "$2 not supported"
+                exit 2
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {{ dotfiles_configuration }} {lock|exit|suspend|hibernate|reboot|shutdown}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac

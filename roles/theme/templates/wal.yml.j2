@@ -1,6 +1,11 @@
 ---
 
+theme_font: &font "Iosevka Term Heavy"
+
 theme_i3:
+  font:                    *font
+  font_size:               10
+
   client_focused:          &i3_client_focused
     border:                "$color4"
     background:            "$color4"
@@ -62,6 +67,9 @@ theme_i3status:
   alternating_tint_fg: "#000000"
 
 theme_rofi:
+  font:                       *font
+  font_size:                  12
+
   background:                 "#000000"
   foreground:                 "#000000"
   active_background:          "#000000"
@@ -70,7 +78,14 @@ theme_rofi:
   selected_normal_background: "#000000"
   selected_urgent_background: "#000000"
 
+theme_gtk:
+  font:      *font
+  font_size: 10
+
 theme_urxvt:
+  font:       *font
+  font_size:  10
+
   background: "#000000"
   foreground: "#000000"
   scroll:     "#AAAAAA"
