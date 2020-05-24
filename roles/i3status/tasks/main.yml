@@ -18,6 +18,8 @@
   loop:
     - config
     - config-sm
+    - config-sm.toml
+    - config.toml
 
 - name: Prepare i3status config files
   replace:
@@ -29,6 +31,8 @@
     - configs:
       - config
       - config-sm
+      - config-sm.toml
+      - config.toml
     - replaces:
       - { regexp: '({)', replace: '\1\1'  }
       - { regexp: '(})', replace: '\1\1'  }
