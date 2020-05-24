@@ -2,3 +2,4 @@
 # defaults file for roles/theme
 
 theme_name: gruvbox
+theme_wallpaper: "{{ user_root_dir }}/usr/local/share/backgrounds/0007.jpg"

@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+cd "$(dirname "$0")" || exit
+
+# $1 = {{ dotfiles_configuration }}
+case "$1" in
+    laptop|work)
+        case "$2" in
+            start|restart)
+                ./df_launcher picom
+                ;;
+            stop)
+                killall -q picom
+                ;;
+            *)
+                echo "Usage: $0 {{ dotfiles_configuration }} {start|restart|stop}"
+                echo "$2 not supported"
+                exit 2
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {{ dotfiles_configuration }} {start|restart|stop}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac

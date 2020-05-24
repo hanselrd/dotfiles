@@ -22,3 +22,4 @@
 - name: Export theme variables
   set_fact:
     theme_name: "{{ theme_name }}"
+    theme_wallpaper: "{{ theme_wallpaper }}"

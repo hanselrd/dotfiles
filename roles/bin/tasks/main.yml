@@ -1,0 +1,24 @@
+---
+# tasks file for roles/bin
+
+- name: Create bin directory
+  file:
+    path: "{{ user_root_dir }}/usr/local/bin"
+    state: directory
+
+- name: Copy bin files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_root_dir }}/usr/local/bin/{{ item }}"
+    mode: 0755
+    force: yes
+  loop:
+    - df_archive
+    - df_backup
+    - df_exit
+    - df_launcher
+    - df_passphrase
+    - df_picom
+    - df_power_now
+    - df_redshift
+    - df_xrandr

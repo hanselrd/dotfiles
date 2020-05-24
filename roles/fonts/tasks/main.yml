@@ -1,0 +1,41 @@
+---
+# tasks file for roles/fonts
+
+- name: Create fonts directory
+  file:
+    path: "{{ user_root_dir }}/usr/local/share/fonts"
+    state: directory
+
+- name: Copy font files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_root_dir }}/usr/local/share/fonts/{{ item }}"
+    force: yes
+  loop:
+    - iosevka-term-bold.ttf
+    - iosevka-term-bolditalic.ttf
+    - iosevka-term-boldoblique.ttf
+    - iosevka-term-extrabold.ttf
+    - iosevka-term-extrabolditalic.ttf
+    - iosevka-term-extraboldoblique.ttf
+    - iosevka-term-extralight.ttf
+    - iosevka-term-extralightitalic.ttf
+    - iosevka-term-extralightoblique.ttf
+    - iosevka-term-heavy.ttf
+    - iosevka-term-heavyitalic.ttf
+    - iosevka-term-heavyoblique.ttf
+    - iosevka-term-italic.ttf
+    - iosevka-term-light.ttf
+    - iosevka-term-lightitalic.ttf
+    - iosevka-term-lightoblique.ttf
+    - iosevka-term-medium.ttf
+    - iosevka-term-mediumitalic.ttf
+    - iosevka-term-mediumoblique.ttf
+    - iosevka-term-oblique.ttf
+    - iosevka-term-regular.ttf
+    - iosevka-term-semibold.ttf
+    - iosevka-term-semibolditalic.ttf
+    - iosevka-term-semiboldoblique.ttf
+    - iosevka-term-thin.ttf
+    - iosevka-term-thinitalic.ttf
+    - iosevka-term-thinoblique.ttf

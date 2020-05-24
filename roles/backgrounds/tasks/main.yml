@@ -1,0 +1,21 @@
+---
+# tasks file for roles/backgrounds
+
+- name: Create backgrounds directory
+  file:
+    path: "{{ user_root_dir }}/usr/local/share/backgrounds"
+    state: directory
+
+- name: Copy background files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_root_dir }}/usr/local/share/backgrounds/{{ item }}"
+    force: yes
+  loop:
+    - 0001.jpg
+    - 0002.jpg
+    - 0003.jpg
+    - 0004.jpg
+    - 0005.jpg
+    - 0006.jpg
+    - 0007.jpg
