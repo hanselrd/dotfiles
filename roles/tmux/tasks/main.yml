@@ -1,0 +1,31 @@
+---
+# tasks file for roles/tmux
+
+- name: Create tmux directories
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ user_home_dir }}"
+    - "{{ user_home_dir }}/.tmux"
+
+- name: Copy tmux config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - tmux.conf
+
+- name: Copy tmux config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.tmux/{{ item }}"
+  loop:
+    - line.conf

@@ -363,7 +363,7 @@ exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" start
 bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" stop
 
 # Wallpaper/theme/lockscreen
-{% if "all" not in ansible_run_tags and "xinit" not in ansible_run_tags or "xinit" in ansible_skip_tags %}
+{% if ("all" not in ansible_run_tags and "xinit" not in ansible_run_tags) or "xinit" in ansible_skip_tags %}
 exec --no-startup-id feh --bg-scale "{{ background_path }}"
 {% if theme_name == "wal" %}
 exec --no-startup-id wal -n -i "{{ background_path }}"

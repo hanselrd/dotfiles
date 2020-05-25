@@ -1,0 +1,22 @@
+---
+# tasks file for roles/zsh
+
+- name: Create zsh directories
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ user_home_dir }}"
+
+- name: Generate zsh config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_home_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - zprofile
+    - zshrc
