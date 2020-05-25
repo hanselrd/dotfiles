@@ -8,11 +8,11 @@
     path: "{{ user_home_dir }}"
     state: directory
 
-- name: Copy xinit config files
+- name: Generate xinit config files
   become: yes
   become_user: "{{ user_id }}"
-  copy:
-    src: "{{ item }}"
+  template:
+    src: "{{ item }}.j2"
     dest: "{{ user_home_dir }}/.{{ item }}"
     force: yes
   loop:

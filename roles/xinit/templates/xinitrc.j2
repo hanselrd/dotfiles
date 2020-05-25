@@ -1,0 +1,10 @@
+if [ -f ~/.Xresources ]; then
+    xrdb -merge -I$HOME ~/.Xresources
+fi
+
+feh --bg-scale "{{ theme_wallpaper }}"
+{% if theme_name == "wal" %}
+wal -n -i "{{ theme_wallpaper }}"
+{% endif %}
+
+exec i3
