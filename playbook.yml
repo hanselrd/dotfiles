@@ -44,6 +44,7 @@
 
     - debug:
         msg: "Running with: run_tags={{ ansible_run_tags }}, skip_tags={{ ansible_skip_tags }}"
+      tags: always
 
     - include_role:
         name: theme

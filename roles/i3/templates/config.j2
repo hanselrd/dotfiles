@@ -346,12 +346,12 @@ gaps inner 10
 {% endif %}
 
 # Display
-exec_always --no-startup-id $scripts/df_xrandr "{{ inventory_hostname }}" default
+exec --no-startup-id $scripts/df_xrandr "{{ inventory_hostname }}" default
 
 # Picom
-exec_always --no-startup-id $scripts/df_picom "{{ inventory_hostname }}" start
+exec --no-startup-id $scripts/df_picom "{{ inventory_hostname }}" start
 
-# Eable tap to click
+# Enable tap to click
 # exec --no-startup-id xinput ...
 {% if inventory_hostname == "laptop" %}
 exec --no-startup-id xinput set-prop $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
@@ -359,21 +359,17 @@ exec --no-startup-id xinput set-prop $(xinput list | grep -E "Touchpad|TouchPad"
 {% endif %}
 
 # Redshift
-exec_always --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" start
+exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" start
 bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" stop
 
-# Wallpaper
+# Wallpaper/theme/lockscreen
+{% if "all" not in ansible_run_tags and "xinit" not in ansible_run_tags or "xinit" in ansible_skip_tags %}
+exec --no-startup-id feh --bg-scale "{{ theme_wallpaper }}"
 {% if theme_name == "wal" %}
-exec_always --no-startup-id wal -i {{ theme_wallpaper }}
-{% else %}
-exec_always --no-startup-id feh --bg-scale {{ theme_wallpaper }}
+exec --no-startup-id wal -n -i "{{ theme_wallpaper }}"
 {% endif %}
-
-# Lock screen
-# bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" lock
-
-# Update cache
-bindsym $mod+Shift+z exec --no-startup-id betterlockscreen -u {{ theme_wallpaper }} && fc-cache
+{% endif %}
+exec --no-startup-id betterlockscreen -u "{{ theme_wallpaper }}"
 
 # Screenshot
 exec --no-startup-id flameshot
