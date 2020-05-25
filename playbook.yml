@@ -121,3 +121,15 @@
         apply:
           tags: git
       tags: always
+
+    - include_role:
+        name: tmux
+        apply:
+          tags: tmux
+      tags: always
+
+    - include_role:
+        name: zsh
+        apply:
+          tags: zsh
+      tags: always

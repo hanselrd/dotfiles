@@ -1,0 +1,5 @@
+{% if ("all" in ansible_run_tags or "xinit" in ansible_run_tags) and "xinit" not in ansible_skip_tags %}
+if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+    exec startx
+fi
+{% endif %}
