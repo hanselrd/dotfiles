@@ -19,3 +19,8 @@
     - 0005.jpg
     - 0006.jpg
     - 0007.jpg
+
+- name: Export background variables
+  set_fact:
+    background_name: "{{ background_name }}"
+    background_path: "{{ user_root_dir }}/usr/local/share/backgrounds/{{ background_name }}"

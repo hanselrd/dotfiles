@@ -1,2 +1,4 @@
 ---
 # defaults file for roles/fonts
+
+font_name: iosevka

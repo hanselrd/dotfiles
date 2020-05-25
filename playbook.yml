@@ -53,6 +53,24 @@
       tags: always
 
     - include_role:
+        name: backgrounds
+        apply:
+          tags: backgrounds
+      tags: always
+
+    - include_role:
+        name: fonts
+        apply:
+          tags: fonts
+      tags: always
+
+    - include_role:
+        name: bin
+        apply:
+          tags: bin
+      tags: always
+
+    - include_role:
         name: xinit
         apply:
           tags: xinit
@@ -90,24 +108,6 @@
         name: i3status
         apply:
           tags: i3status
-      tags: always
-
-    - include_role:
-        name: backgrounds
-        apply:
-          tags: backgrounds
-      tags: always
-
-    - include_role:
-        name: fonts
-        apply:
-          tags: fonts
-      tags: always
-
-    - include_role:
-        name: bin
-        apply:
-          tags: bin
       tags: always
 
     - include_role:
