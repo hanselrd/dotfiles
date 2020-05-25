@@ -39,3 +39,25 @@
     - iosevka-term-thin.ttf
     - iosevka-term-thinitalic.ttf
     - iosevka-term-thinoblique.ttf
+
+- name: Create font cache directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_cache_dir }}/dotfiles"
+    state: directory
+
+- name: "Generate font file in ({{ user_cache_dir }}/dotfiles) using ({{ font_name }})"
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ font_name }}.yml.j2"
+    dest: "{{ user_cache_dir }}/dotfiles/font.yml"
+    force: yes
+
+- name: Include font variables
+  include_vars: "{{ user_cache_dir }}/dotfiles/font.yml"
+
+- name: Export font variables
+  set_fact:
+    font_name: "{{ font_name }}"

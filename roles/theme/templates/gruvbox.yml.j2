@@ -1,7 +1,5 @@
 ---
 
-theme_font: &font "Iosevka Term Heavy"
-
 {% set palette_black         = "#282828" %}
 {% set palette_brightblack   = "#928374" %}
 {% set palette_red           = "#CC241D" %}
@@ -42,9 +40,6 @@ theme_background_soft: &background_soft "#32302F"
 theme_foreground:      &foreground      "{{ palette_brightwhite }}"
 
 theme_i3:
-  font:                    *font
-  font_size:               10
-
   client_focused:          &i3_client_focused
     border:                *palette_brightblack
     background:            *palette_brightblack
@@ -106,9 +101,6 @@ theme_i3status:
   alternating_tint_fg: "#000000"
 
 theme_rofi:
-  font:                       *font
-  font_size:                  12
-
   background:                 *background_hard
   foreground:                 *foreground
   active_background:          *palette_brightblack
@@ -117,14 +109,7 @@ theme_rofi:
   selected_normal_background: *palette_brightblack
   selected_urgent_background: *palette_red
 
-theme_gtk:
-  font:      *font
-  font_size: 10
-
 theme_urxvt:
-  font:       *font
-  font_size:  10
-
   background: *background_hard
   foreground: *foreground
   scroll:     "#AAAAAA"
