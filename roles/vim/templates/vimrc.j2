@@ -54,9 +54,11 @@ if !empty(glob('~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim'))
     silent !sed -i "s/''/'\#000000'/g" ~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim
 endif
 
-autocmd VimEnter * Tmuxline lightline
-if !empty(glob('~/.tmux'))
-    autocmd VimEnter * TmuxlineSnapshot! ~/.tmux/line.conf
+if strlen($TMUX) && executable('tmux')
+    autocmd VimEnter * Tmuxline lightline
+    if !empty(glob('~/.tmux'))
+        autocmd VimEnter * TmuxlineSnapshot! ~/.tmux/line.conf
+    endif
 endif
 
 " START PLUGIN CONFIGURATION
