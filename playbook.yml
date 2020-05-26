@@ -123,6 +123,12 @@
       tags: always
 
     - include_role:
+        name: vim
+        apply:
+          tags: vim
+      tags: always
+
+    - include_role:
         name: tmux
         apply:
           tags: tmux
