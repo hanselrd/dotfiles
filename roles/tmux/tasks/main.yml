@@ -9,7 +9,6 @@
     state: directory
   loop:
     - "{{ user_home_dir }}"
-    - "{{ user_home_dir }}/.tmux"
 
 - name: Copy tmux config files
   become: yes
@@ -20,13 +19,3 @@
     force: yes
   loop:
     - tmux.conf
-
-- name: Copy tmux config files
-  become: yes
-  become_user: "{{ user_id }}"
-  copy:
-    src: "{{ item }}"
-    dest: "{{ user_home_dir }}/.tmux/{{ item }}"
-    force: yes
-  loop:
-    - line.conf
