@@ -1,0 +1,32 @@
+---
+# tasks file for roles/vim
+
+- name: Create vim directories
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ user_home_dir }}"
+    - "{{ user_home_dir }}/.vim"
+
+- name: Copy vim config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.vim/{{ item }}"
+    force: yes
+  loop:
+    - coc-settings.json
+
+- name: Generate vim config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_home_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - vimrc
