@@ -18,14 +18,11 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-{% if inventory_hostname == "remote" %}
-antigen theme candy
-{% else %}
+#antigen theme candy
 antigen theme denysdovhan/spaceship-prompt
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_12HR=true
 SPACESHIP_EXIT_CODE_SHOW=true
-{% endif %}
 
 antigen apply
 
