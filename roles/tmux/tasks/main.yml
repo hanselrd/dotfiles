@@ -27,5 +27,6 @@
   copy:
     src: "{{ item }}"
     dest: "{{ user_home_dir }}/.tmux/{{ item }}"
+    force: yes
   loop:
     - line.conf
