@@ -1,9 +1,9 @@
 # Setup Antigen
-if [ ! -f $HOME/.antigen/antigen.zsh ]; then
-    curl -fLo $HOME/.antigen/antigen.zsh --create-dirs \
+if [[ ! -f ~/.antigen/antigen.zsh ]]; then
+    curl -fLo ~/.antigen/antigen.zsh --create-dirs \
         https://git.io/antigen
 fi
-source $HOME/.antigen/antigen.zsh
+source ~/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
@@ -19,6 +19,43 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 
 antigen theme denysdovhan/spaceship-prompt
+SPACESHIP_PROMPT_ORDER=(
+{% if inventory_hostname == "remote" %}
+    custom
+{% endif %}
+    time
+    user
+    dir
+    host
+    git
+    exec_time
+    line_sep
+    vi_mode
+    jobs
+    exit_code
+    char
+)
+{% if inventory_hostname == "remote" %}
+spaceship_custom() {
+    [[ -f /var/lock/prevent_idle_terminate || -f /etc/idle_terminate_threshold ]] || return
+
+    local 'custom_status'
+
+    if [[ -f /var/lock/prevent_idle_terminate ]]; then
+        custom_status="LOCKED"
+    elif [[ -f /etc/idle_terminate_threshold ]]; then
+        custom_status="IDLE $(cat /etc/idle_terminate_threshold)"
+    fi
+
+    [[ -z "$custom_status" ]] && return
+
+    spaceship::section \
+        "red" \
+        "$SPACESHIP_PROMPT_DEFAULT_PREFIX" \
+        " $custom_status" \
+        "$SPACESHIP_PROMPT_DEFAULT_SUFFIX"
+}
+{% endif %}
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_12HR=true
 SPACESHIP_EXIT_CODE_SHOW=true
@@ -34,9 +71,9 @@ export PATH=/usr/lib/ccache/bin:/opt/llvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:
 
 {% if theme_name == "wal" %}
 # Load wal
-if [ -d $HOME/.cache/wal ]; then
-    (cat $HOME/.cache/wal/sequences &)
-    source $HOME/.cache/wal/colors-tty.sh
+if [[ -d ~/.cache/wal ]]; then
+    (cat ~/.cache/wal/sequences &)
+    source ~/.cache/wal/colors-tty.sh
 fi
 {% endif %}
 
