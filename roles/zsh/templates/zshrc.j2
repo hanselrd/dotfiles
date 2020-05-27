@@ -1,9 +1,9 @@
 # Setup Antigen
-if [[ ! -f ~/.antigen/antigen.zsh ]]; then
-    curl -fLo ~/.antigen/antigen.zsh --create-dirs \
+if [[ ! -f "$HOME/.antigen/antigen.zsh" ]]; then
+    curl -fLo "$HOME/.antigen/antigen.zsh" --create-dirs \
         https://git.io/antigen
 fi
-source ~/.antigen/antigen.zsh
+source "$HOME/.antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
@@ -64,23 +64,23 @@ antigen apply
 
 # Set PATH
 {% if inventory_hostname == "remote" %}
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/sources/opt/llvm7/bin:$PATH
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/sources/opt/llvm7/bin:$PATH"
 {% else %}
-export PATH=/usr/lib/ccache/bin:/opt/llvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH
+export PATH="/usr/lib/ccache/bin:/opt/llvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 {% endif %}
 
 {% if theme_name == "wal" %}
 # Load wal
-if [[ -d ~/.cache/wal ]]; then
-    (cat ~/.cache/wal/sequences &)
-    source ~/.cache/wal/colors-tty.sh
+if [[ -d "$HOME/.cache/wal" ]]; then
+    (cat "$HOME/.cache/wal/sequences" &)
+    source "$HOME/.cache/wal/colors-tty.sh"
 fi
 {% endif %}
 
 # User configuration
 setopt nonomatch
 {% if inventory_hostname == "remote" %}
-source ~/.bashrc > /dev/null 2>&1
+source "$HOME/.bashrc" > /dev/null 2>&1
 {% endif %}
 
 export KEYTIMEOUT=1
