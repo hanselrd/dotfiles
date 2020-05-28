@@ -53,12 +53,12 @@
     replace: "{{ item.1.replace }}"
   loop: "{{ configs | product(replaces) | list }}"
   vars:
-    - configs:
+    configs:
       - config
       - config-sm
       - config-sm.toml
       - config.toml
-    - replaces:
+    replaces:
       - { regexp: '({)', replace: '\1\1'  }
       - { regexp: '(})', replace: '\1\1'  }
       - { regexp: '@@(.+)@@', replace: '{\1}'  }

@@ -1,0 +1,103 @@
+---
+# tasks file for roles/packages
+
+- name: Install packages
+  pacman:
+    name:
+      # - ansible
+      # - base
+      # - base-devel
+      # - btrfs-progs
+      # - efibootmgr
+      # - git
+      # - grub
+      # - grub-btrfs
+      # - intel-ucode
+      # - linux
+      # - linux-firmware
+      # - linux-headers
+      # - linux-lts
+      # - linux-lts-headers
+      # - network-manager-applet
+      # - networkmanager
+      # - os-prober
+      # - snap-pac
+      # - snapper
+      # - vim
+      - arandr
+      - ccache
+      - chromium
+      - clang
+      - cmake
+      - ctags
+      - feh
+      - flameshot
+      - glfw-x11
+      - htop
+      - i3-gaps
+      - lxappearance
+      - lynx
+      - neofetch
+      - ninja
+      - openssh
+      - openvpn
+      - picom
+      - pulseaudio
+      - python-pip
+      - python-pywal
+      - python2
+      - ranger
+      - redshift
+      - reflector
+      - rofi
+      - sdl2
+      - sdl2_image
+      - sdl2_mixer
+      - sdl2_net
+      - sdl2_ttf
+      - shellcheck
+      - strace
+      - tmux
+      - tree
+      - udisks2
+      - upower
+      - xdg-user-dirs
+      - xorg
+      - xorg-apps
+      - xorg-drivers
+      - xorg-fonts
+      - xorg-xinit
+      - zsh
+    state: present
+
+- name: Remove packages
+  pacman:
+    name:
+      - xf86-input-synaptics
+    state: absent
+
+- name: Check if yay is installed
+  stat:
+    path: /usr/bin/yay
+  register: st_yay
+
+- name: Install AUR packages
+  become: yes
+  become_user: "{{ user_id }}"
+  command: "yay -S {{ packages | join(' ') }} --needed --noconfirm"
+  register: output_yay
+  vars:
+    packages:
+      # - pgmodeler
+      - betterlockscreen
+      - i3status-rust-git
+      - numix-gtk-theme
+      - numix-icon-theme-pack-git
+      - rxvt-unicode-pixbuf
+      - snap-pac-grub
+      - ttf-font-awesome-4
+  when: st_yay.stat.exists
+
+- debug:
+    msg: "{{ output_yay.stdout_lines }}"
+  when: st_yay.stat.exists
