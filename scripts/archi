@@ -262,7 +262,7 @@ arch-chroot /mnt bash -c "echo '$user_name:$user_password' | chpasswd"
 arch-chroot /mnt sed -i '/%wheel ALL=(ALL) ALL/s/^# //g' /etc/sudoers
 prompt_msgbox "Updated sudoers for wheel group"
 
-arch-chroot /mnt sed -i '/GRUB_DEFAULT=/s/0/"Advanced options for Arch Linux>Arch Linux, with Linux linux"/g' /etc/default/grub
+arch-chroot /mnt sed -i '/GRUB_DEFAULT=/s/0/"Arch Linux, with Linux linux"/g' /etc/default/grub
 arch-chroot /mnt sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g' /etc/default/grub
 if [ "$cryptname" != "" ]; then
     uuid=$(lsblk -no UUID "$crypt_partition" | head -n 1)
