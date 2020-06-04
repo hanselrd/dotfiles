@@ -308,8 +308,10 @@ autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 set number
 set relativenumber
 set hlsearch
+set background=dark
 {% if theme_name == "wal" %}
 colorscheme wal
+highlight Pmenu ctermbg=0 ctermfg=7
 {% else %}
 colorscheme gruvbox
 "colorscheme codedark
@@ -325,7 +327,6 @@ fun! ToggleCC()
 endfun
 command! ToggleCC call ToggleCC()
 nnoremap <Leader>cc :ToggleCC<CR>
-set background=dark
 set backupcopy=yes
 
 " indentation
