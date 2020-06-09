@@ -1,0 +1,19 @@
+---
+# tasks file for roles/picom
+
+- name: Create picom config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/picom"
+    state: directory
+
+- name: Copy picom config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_config_dir }}/picom/{{ item }}"
+    force: yes
+  loop:
+    - picom.conf

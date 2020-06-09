@@ -1,0 +1,26 @@
+---
+# tasks file for roles/rust
+
+- name: Create rustfmt config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/rustfmt"
+    state: directory
+
+- name: Install latest Rust toolchain
+  become: yes
+  become_user: "{{ user_id }}"
+  shell: |
+    . {{ user_home_dir }}/.zshrc
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
+    rustup component add rls rust-analysis rust-src
+    rustup update
+    cargo install cargo-tree cargo-edit cargo-expand wasm-pack || true
+    rustfmt --print-config default {{ user_config_dir }}/rustfmt/rustfmt.toml
+  args:
+    executable: /usr/bin/zsh
+  register: output_rust
+
+- debug:
+    msg: "{{ output_rust.stdout_lines }}"

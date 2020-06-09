@@ -1,0 +1,19 @@
+---
+# tasks file for roles/ranger
+
+- name: Create ranger config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/ranger"
+    state: directory
+
+- name: Copy ranger config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_config_dir }}/ranger/{{ item }}"
+    force: yes
+  loop:
+    - rc.conf

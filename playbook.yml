@@ -141,7 +141,61 @@
       tags: always
 
     - include_role:
+        name: chsh
+        apply:
+          tags: chsh
+      tags: always
+
+    - include_role:
         name: zsh
         apply:
           tags: zsh
+      tags: always
+
+    - include_role:
+        name: ssh
+        apply:
+          tags: ssh
+      tags: always
+
+    - include_role:
+        name: ccache
+        apply:
+          tags: ccache
+      tags: always
+
+    - include_role:
+        name: picom
+        apply:
+          tags: picom
+      tags: always
+
+    - include_role:
+        name: ranger
+        apply:
+          tags: ranger
+      tags: always
+
+    - include_role:
+        name: nodejs
+        apply:
+          tags: nodejs
+      tags: always
+
+    - include_role:
+        name: elm
+        apply:
+          tags: elm
+      tags: always
+
+    - include_role:
+        name: rust
+        apply:
+          tags: rust
+      tags: always
+
+    - include_role:
+        name: python
+        apply:
+          tags: python
       tags: always
