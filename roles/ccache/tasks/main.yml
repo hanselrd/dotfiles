@@ -1,0 +1,19 @@
+---
+# tasks file for roles/ccache
+
+- name: Create ccache directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_home_dir }}/.ccache"
+    state: directory
+
+- name: Copy ccache config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.ccache/{{ item }}"
+    force: yes
+  loop:
+    - ccache.conf

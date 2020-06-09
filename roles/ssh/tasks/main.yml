@@ -1,0 +1,18 @@
+---
+# tasks file for roles/ssh
+
+- name: Create ssh directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_home_dir }}/.ssh"
+    state: directory
+
+- name: Generate ssh keypair
+  become: yes
+  become_user: "{{ user_id }}"
+  openssh_keypair:
+    path: "{{ user_home_dir }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present

@@ -1,0 +1,15 @@
+---
+# tasks file for roles/python
+
+- name: Install latest Python packages
+  become: yes
+  become_user: "{{ user_id }}"
+  shell: |
+    . {{ user_home_dir }}/.zshrc
+    pip install --upgrade --user pipenv black cmake-format
+  args:
+    executable: /usr/bin/zsh
+  register: output_pip
+
+- debug:
+    msg: "{{ output_pip.stdout_lines }}"

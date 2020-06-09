@@ -1,0 +1,15 @@
+---
+# tasks file for roles/nodejs
+
+- name: Install latest Node LTS version
+  become: yes
+  become_user: "{{ user_id }}"
+  shell: |
+    . {{ user_home_dir }}/.zshrc
+    nvm install --lts --latest-npm
+  args:
+    executable: /usr/bin/zsh
+  register: output_nvm
+
+- debug:
+    msg: "{{ output_nvm.stdout_lines }}"

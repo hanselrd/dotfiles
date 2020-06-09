@@ -1,0 +1,16 @@
+---
+# tasks file for roles/elm
+
+- name: Install latest Elm version
+  become: yes
+  become_user: "{{ user_id }}"
+  shell: |
+    . {{ user_home_dir }}/.zshrc
+    npm install -g elm elm-format elm-test @elm-tooling/elm-language-server
+    npm update -g
+  args:
+    executable: /usr/bin/zsh
+  register: output_npm
+
+- debug:
+    msg: "{{ output_npm.stdout_lines }}"
