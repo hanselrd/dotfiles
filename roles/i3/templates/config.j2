@@ -230,20 +230,21 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 {% endif %}
 
 # Set shutdown, restart and locking features
-set $mode_system System: (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-        bindsym l exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" lock, mode "default"
-        bindsym e exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" exit, mode "default"
-        bindsym s exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" suspend, mode "default"
-        bindsym h exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" hibernate, mode "default"
-        bindsym r exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" reboot, mode "default"
-        bindsym Shift+s exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" shutdown, mode "default"
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+Shift+x mode "default"
-}
-bindsym $mod+Shift+x mode "$mode_system"
+#set $mode_system System: (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+#mode "$mode_system" {
+#        bindsym l exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" lock, mode "default"
+#        bindsym e exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" exit, mode "default"
+#        bindsym s exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" suspend, mode "default"
+#        bindsym h exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" hibernate, mode "default"
+#        bindsym r exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" reboot, mode "default"
+#        bindsym Shift+s exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" shutdown, mode "default"
+#
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#        bindsym $mod+Shift+x mode "default"
+#}
+#bindsym $mod+Shift+x mode "$mode_system"
+bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" $(echo -e 'lock\nexit\nsuspend\nhibernate\nreboot\nshutdown' | rofi -dmenu -p "power")
 
 # Restart i3 and others inplace
 set $mode_restart Restart: (1) i3, (2) picom, (3) redshift
