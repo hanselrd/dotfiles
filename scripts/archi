@@ -269,7 +269,7 @@ if [ "$cryptname" != "" ]; then
     arch-chroot /mnt sed -i '/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name='"$uuid"'='"$cryptname"' rd.luks.key='"$uuid"'=\/.keys\/'"$cryptname"'.keyfile"/g' /etc/default/grub
     arch-chroot /mnt sed -i '/GRUB_ENABLE_CRYPTODISK=y/s/^#//g' /etc/default/grub
 fi
-arch-chroot /mnt bash -c "echo 'GRUB_DISABLE_SUBMENU=y' >> /etc/default/grub"
+arch-chroot /mnt bash -c "echo -e '\nGRUB_DISABLE_SUBMENU=y' >> /etc/default/grub"
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --recheck
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 prompt_msgbox "Installed and configured boot loader"

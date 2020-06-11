@@ -12,7 +12,7 @@
   become: yes
   become_user: "{{ user_id }}"
   git:
-    repo: "https://github.com/majutsushi/urxvt-font-size"
+    repo: https://github.com/majutsushi/urxvt-font-size
     dest: "{{ user_cache_dir }}/dotfiles/urxvt-font-size"
     update: yes
 

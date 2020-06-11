@@ -199,3 +199,9 @@
         apply:
           tags: python
       tags: always
+
+    - include_role:
+        name: haskell
+        apply:
+          tags: haskell
+      tags: always

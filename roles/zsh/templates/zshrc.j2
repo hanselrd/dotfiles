@@ -69,6 +69,11 @@ export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/sources/opt/llvm7/bin:$PATH
 export PATH="/usr/lib/ccache/bin:/opt/llvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 {% endif %}
 
+# Load ghcup
+if [[ -f "$HOME/.ghcup/env" ]]; then
+    source "$HOME/.ghcup/env"
+fi
+
 {% if theme_name == "wal" %}
 # Load wal
 if [[ -d "$HOME/.cache/wal" ]]; then

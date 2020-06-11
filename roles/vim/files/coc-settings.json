@@ -28,7 +28,7 @@
             "command": "hie-wrapper",
             "filetypes": ["hs", "lhs", "haskell"],
             "args": ["--lsp"],
-            "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+            "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml"],
             "initializationOptions": {
                 "languageServerHaskell": {
                     "hLintOn": true
