@@ -84,7 +84,6 @@
       - fuse-exfat
       - gcc-g++
       - glfw-devel
-      - haskell-platform
       - htop
       - i3
       - i3status-rs
