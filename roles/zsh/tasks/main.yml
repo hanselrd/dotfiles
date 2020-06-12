@@ -19,4 +19,5 @@
     force: yes
   loop:
     - zprofile
+    - zshenv
     - zshrc
