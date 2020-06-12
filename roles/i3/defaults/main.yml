@@ -1,4 +1,2 @@
 ---
 # defaults file for roles/i3
-
-i3_use_xf86_keys: true

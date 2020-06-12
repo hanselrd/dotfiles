@@ -111,6 +111,12 @@
       tags: always
 
     - include_role:
+        name: sxhkd
+        apply:
+          tags: sxhkd
+      tags: always
+
+    - include_role:
         name: i3
         apply:
           tags: i3

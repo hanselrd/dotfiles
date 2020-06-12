@@ -1,0 +1,4 @@
+---
+# defaults file for roles/sxhkd
+
+sxhkd_use_xf86_keys: true

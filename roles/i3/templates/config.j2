@@ -33,6 +33,7 @@ font xft:{{ font_i3.name }} {{ font_i3.size }}
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
+{#
 {% if i3_use_xf86_keys %}
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
@@ -44,21 +45,20 @@ bindsym F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $ref
 bindsym F9 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym F12 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 {% endif %}
+#}
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-set $terminal i3-sensible-terminal
-set $terminal_run i3-sensible-terminal -e
-bindsym $mod+Return exec $terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec rofi -show run
+#bindsym $mod+d exec rofi -show run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -156,7 +156,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 set $scripts {{ user_root_dir }}/usr/local/bin
 
@@ -244,7 +244,7 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 #        bindsym $mod+Shift+x mode "default"
 #}
 #bindsym $mod+Shift+x mode "$mode_system"
-bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" $(echo -e 'lock\nexit\nsuspend\nhibernate\nreboot\nshutdown' | rofi -dmenu -p "power")
+#bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" $(echo -e 'lock\nexit\nsuspend\nhibernate\nreboot\nshutdown' | rofi -dmenu -p "power")
 
 # Restart i3 and others inplace
 set $mode_restart Restart: (1) i3, (2) picom, (3) redshift
@@ -374,9 +374,10 @@ gaps inner 10
 # Screenshot
 #exec --no-startup-id flameshot
 #exec --no-startup-id flameshot config -t false
-bindsym --release Print exec flameshot gui
+#bindsym --release Print exec flameshot gui
 
 # Screen brightness
+{#
 {% if ansible_pkg_mgr == "dnf" %}
 {% if i3_use_xf86_keys %}
 bindsym XF86MonBrightnessUp exec --no-startup-id brightlight -p -i 5
@@ -394,6 +395,7 @@ bindsym F2 exec --no-startup-id xbacklight -inc 5
 bindsym F3 exec --no-startup-id xbacklight -dec 5
 {% endif %}
 {% endif %}
+#}
 
 # Program shortcuts
-bindsym $mod+Shift+Return exec $terminal_run ranger
+#bindsym $mod+Shift+Return exec $terminal_run ranger
