@@ -5,7 +5,7 @@ cleanup_handler() {
     exit 0
 }
 
-trap 'cleanup_handler' TERM
+trap 'cleanup_handler' INT TERM
 
 # nm-applet
 nm-applet &
