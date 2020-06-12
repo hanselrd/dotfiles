@@ -29,7 +29,7 @@ font xft:{{ font_i3.name }} {{ font_i3.size }}
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -347,34 +347,33 @@ gaps inner 10
 {% endif %}
 
 # Display
-exec --no-startup-id $scripts/df_xrandr "{{ inventory_hostname }}" default
+#exec --no-startup-id $scripts/df_xrandr "{{ inventory_hostname }}" default
 
 # Picom
-exec --no-startup-id $scripts/df_picom "{{ inventory_hostname }}" start
+#exec --no-startup-id $scripts/df_picom "{{ inventory_hostname }}" start
 
 # Enable tap to click
 # exec --no-startup-id xinput ...
 {% if inventory_hostname == "laptop" %}
-exec --no-startup-id xinput set-prop $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
-{% elif inventory_hostname == "work" %}
+#exec --no-startup-id xinput set-prop $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
 {% endif %}
 
 # Redshift
-exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" start
-bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" stop
+#exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" start
+#bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" stop
 
 # Wallpaper/theme/lockscreen
 {% if ("all" not in ansible_run_tags and "xinit" not in ansible_run_tags) or "xinit" in ansible_skip_tags %}
-exec --no-startup-id feh --bg-scale "{{ background_path }}"
+#exec --no-startup-id feh --bg-scale "{{ background_path }}"
 {% if theme_name == "wal" %}
-exec --no-startup-id wal -n -i "{{ background_path }}"
+#exec --no-startup-id wal -n -i "{{ background_path }}"
 {% endif %}
 {% endif %}
-exec --no-startup-id betterlockscreen -u "{{ background_path }}"
+#exec --no-startup-id betterlockscreen -u "{{ background_path }}"
 
 # Screenshot
-exec --no-startup-id flameshot
-exec --no-startup-id flameshot config -t false
+#exec --no-startup-id flameshot
+#exec --no-startup-id flameshot config -t false
 bindsym --release Print exec flameshot gui
 
 # Screen brightness

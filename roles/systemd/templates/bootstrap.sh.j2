@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+
+cleanup_handler() {
+    pkill -P $$
+    exit 0
+}
+
+trap 'cleanup_handler' TERM
+
+# nm-applet
+nm-applet &
+
+# xrandr
+df_xrandr "{{ inventory_hostname }}" default &
+
+# picom
+df_picom "{{ inventory_hostname }}" start &
+
+{% if inventory_hostname == "laptop" %}
+# xinput (enable tab to click)
+xinput set-prop "$(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2)" "$(xinput list-props "$(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2)" | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1)" 1 &
+{% endif %}
+
+# redshift
+df_redshift "{{ inventory_hostname }}" start &
+
+# feh
+feh --bg-scale "{{ background_path }}" &
+
+{% if theme_name == "wal" %}
+# wal
+wal -n -i "{{ background_path }}" &
+{% endif %}
+
+# betterlockscreen (lockscreen)
+betterlockscreen -u "{{ background_path }}" &
+
+# flameshot
+flameshot &
+flameshot config -t false &
+
+while true; do
+    :
+done

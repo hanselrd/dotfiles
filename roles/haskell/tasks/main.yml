@@ -16,12 +16,19 @@
 - debug:
     msg: "{{ output_haskell.stdout_lines }}"
 
+- name: Create haskell cache directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_cache_dir }}/dotfiles/haskell"
+    state: directory
+
 - name: Clone haskell-ide-engine
   become: yes
   become_user: "{{ user_id }}"
   git:
     repo: https://github.com/haskell/haskell-ide-engine
-    dest: "{{ user_cache_dir }}/dotfiles/haskell-ide-engine"
+    dest: "{{ user_cache_dir }}/dotfiles/haskell/haskell-ide-engine"
     update: yes
 
 - name: Install haskell-ide-engine
@@ -32,7 +39,7 @@
     stack ./install.hs hie
   args:
     executable: /usr/bin/zsh
-    chdir: "{{ user_cache_dir }}/dotfiles/haskell-ide-engine"
+    chdir: "{{ user_cache_dir }}/dotfiles/haskell/haskell-ide-engine"
   register: output_stack
 
 - debug:

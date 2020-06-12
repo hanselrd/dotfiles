@@ -1,0 +1,50 @@
+---
+# tasks file for roles/systemd
+
+- name: Create systemd config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/systemd/user"
+    state: directory
+
+- name: Generate systemd units
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/systemd/user/{{ item }}"
+    force: yes
+  loop:
+    - bootstrap.service
+
+- name: Create systemd cache directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_cache_dir }}/dotfiles/systemd"
+    state: directory
+
+- name: Generate systemd scripts
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_cache_dir }}/dotfiles/systemd/{{ item }}"
+    mode: 0755
+    force: yes
+  loop:
+    - bootstrap.sh
+    - bootstrap_pre.sh
+
+- name: Enable systemd units
+  become: yes
+  become_user: "{{ user_id }}"
+  systemd:
+    name: "{{ item }}"
+    scope: user
+    enabled: yes
+    daemon-reload: yes
+    force: yes
+  loop:
+    - bootstrap.service
