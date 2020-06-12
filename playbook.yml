@@ -77,6 +77,12 @@
       tags: always
 
     - include_role:
+        name: systemd
+        apply:
+          tags: systemd
+      tags: always
+
+    - include_role:
         name: xinit
         apply:
           tags: xinit

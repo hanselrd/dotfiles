@@ -5,7 +5,7 @@
   become: yes
   become_user: "{{ user_id }}"
   file:
-    path: "{{ user_cache_dir }}/dotfiles"
+    path: "{{ user_cache_dir }}/dotfiles/urxvt"
     state: directory
 
 - name: Clone urxvt-font-size
@@ -13,7 +13,7 @@
   become_user: "{{ user_id }}"
   git:
     repo: https://github.com/majutsushi/urxvt-font-size
-    dest: "{{ user_cache_dir }}/dotfiles/urxvt-font-size"
+    dest: "{{ user_cache_dir }}/dotfiles/urxvt/urxvt-font-size"
     update: yes
 
 - name: Create urxvt extension directory
@@ -27,6 +27,6 @@
   become: yes
   become_user: "{{ user_id }}"
   copy:
-    src: "{{ user_cache_dir }}/dotfiles/urxvt-font-size/font-size"
+    src: "{{ user_cache_dir }}/dotfiles/urxvt/urxvt-font-size/font-size"
     dest: "{{ user_home_dir }}/.urxvt/ext/font-size"
     force: yes
