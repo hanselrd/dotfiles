@@ -7,6 +7,9 @@ cleanup_handler() {
 
 trap 'cleanup_handler' INT TERM
 
+# sxhkd
+sxhkd &
+
 # nm-applet
 nm-applet &
 

@@ -1,0 +1,37 @@
+super + shift + t
+    killall -SIGUSR1 sxhkd
+
+super + shift + {Return,e}
+    $TERMINAL -e zsh -c ". $HOME/.zshrc && {ranger,$EDITOR}"
+
+super + shift + z
+    $BROWSER
+
+super + {d,shift + w,shift + s}
+    rofi -show {run,window,ssh}
+
+super + shift + x
+    df_exit "{{ inventory_hostname }}" $(echo -e 'lock\nexit\nsuspend\nhibernate\nreboot\nshutdown' | rofi -dmenu -p "power")
+
+@Print
+    flameshot gui
+
+{% if sxhkd_use_xf86_keys %}
+XF86MonBrightness{Up,Down}
+    xbacklight -{inc,dec} 5
+
+XF86Audio{Lower,Raise}Volume
+    pactl set-sink-volume @DEFAULT_SINK@ {-,+}5%
+
+XF86Audio{_,Mic}Mute
+    pactl set-{sink,source}-mute @DEFAULT_{SINK,SOURCE}@ toggle
+{% else %}
+F{2,3}
+    xbacklight -{inc,dec} 5
+
+F{7,8}
+    pactl set-sink-volume @DEFAULT_SINK@ {-,+}5%
+
+F{9,12}
+    pactl set-{sink,source}-mute @DEFAULT_{SINK,SOURCE}@ toggle
+{% endif %}

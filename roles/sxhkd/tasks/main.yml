@@ -1,0 +1,19 @@
+---
+# tasks file for roles/sxhkd
+
+- name: Create sxhkd config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/sxhkd"
+    state: directory
+
+- name: Generate sxhkd config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/sxhkd/{{ item }}"
+    force: yes
+  loop:
+    - sxhkdrc

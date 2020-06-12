@@ -57,6 +57,7 @@
       - sdl2_ttf
       - shellcheck
       - strace
+      - sxhkd
       - tmux
       - tree
       - udisks2
