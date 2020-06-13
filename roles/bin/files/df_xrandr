@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")" || exit
 
-# $1 = {{ dotfiles_configuration }}
+# $1 = {{ inventory_hostname }}
 case "$1" in
     laptop|work)
         case "$2" in
@@ -25,7 +25,7 @@ case "$1" in
         esac
         ;;
     *)
-        echo "Usage: $0 {{ dotfiles_configuration }} {default|<any>}"
+        echo "Usage: $0 {{ inventory_hostname }} {default|<any>}"
         echo "$1 not supported"
         exit 1
         ;;

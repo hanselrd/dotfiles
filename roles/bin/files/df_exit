@@ -6,7 +6,7 @@ lock() {
     betterlockscreen -t "Type password to unlock" -l dimblur
 }
 
-# $1 = {{ dotfiles_configuration }}
+# $1 = {{ inventory_hostname }}
 case "$1" in
     laptop|work)
         case "$2" in
@@ -14,7 +14,7 @@ case "$1" in
                 lock
                 ;;
             exit)
-                i3-msg exit
+                killall -q i3
                 ;;
             suspend)
                 lock &
@@ -31,14 +31,14 @@ case "$1" in
                 systemctl poweroff
                 ;;
             *)
-                echo "Usage: $0 {{ dotfiles_configuration }} {lock|exit|suspend|hibernate|reboot|shutdown}"
+                echo "Usage: $0 {{ inventory_hostname }} {lock|exit|suspend|hibernate|reboot|shutdown}"
                 echo "$2 not supported"
                 exit 2
                 ;;
         esac
         ;;
     *)
-        echo "Usage: $0 {{ dotfiles_configuration }} {lock|exit|suspend|hibernate|reboot|shutdown}"
+        echo "Usage: $0 {{ inventory_hostname }} {lock|exit|suspend|hibernate|reboot|shutdown}"
         echo "$1 not supported"
         exit 1
         ;;

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# $1 = {{ dotfiles_configuration }}
+# $1 = {{ inventory_hostname }}
 case "$1" in
     extract)
         if [ -f "$2" ]; then
