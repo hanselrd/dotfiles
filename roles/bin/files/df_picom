@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")" || exit
 
-# $1 = {{ dotfiles_configuration }}
+# $1 = {{ inventory_hostname }}
 case "$1" in
     laptop|work)
         case "$2" in
@@ -13,14 +13,14 @@ case "$1" in
                 killall -q picom
                 ;;
             *)
-                echo "Usage: $0 {{ dotfiles_configuration }} {start|restart|stop}"
+                echo "Usage: $0 {{ inventory_hostname }} {start|restart|stop}"
                 echo "$2 not supported"
                 exit 2
                 ;;
         esac
         ;;
     *)
-        echo "Usage: $0 {{ dotfiles_configuration }} {start|restart|stop}"
+        echo "Usage: $0 {{ inventory_hostname }} {start|restart|stop}"
         echo "$1 not supported"
         exit 1
         ;;

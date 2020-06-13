@@ -16,7 +16,7 @@
     dest: "{{ user_config_dir }}/systemd/user/{{ item }}"
     force: yes
   loop:
-    - bootstrap.service
+    - bootstrapd.service
 
 - name: Create systemd cache directory
   become: yes
@@ -34,8 +34,8 @@
     mode: 0755
     force: yes
   loop:
-    - bootstrap.sh
-    - bootstrap_pre.sh
+    - bootstrapd.sh
+    - bootstrapd_pre.sh
 
 - name: Enable systemd units
   become: yes
@@ -47,4 +47,4 @@
     daemon-reload: yes
     force: yes
   loop:
-    - bootstrap.service
+    - bootstrapd.service

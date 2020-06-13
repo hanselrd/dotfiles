@@ -4,8 +4,8 @@ Description=Bootstrap Daemon
 [Service]
 Environment=DISPLAY=:0
 Environment=XAUTHORITY={{ user_home_dir }}/.Xauthority
-ExecStartPre={{ user_cache_dir }}/dotfiles/systemd/bootstrap_pre.sh
-ExecStart={{ user_cache_dir }}/dotfiles/systemd/bootstrap.sh
+ExecStartPre={{ user_cache_dir }}/dotfiles/systemd/bootstrapd_pre.sh
+ExecStart={{ user_cache_dir }}/dotfiles/systemd/bootstrapd.sh
 Restart=always
 
 [Install]
