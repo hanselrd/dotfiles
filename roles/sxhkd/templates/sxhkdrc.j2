@@ -1,6 +1,9 @@
 super + shift + t
     killall -SIGUSR1 sxhkd
 
+super + Return
+    $TERMINAL
+
 super + shift + {Return,e}
     $TERMINAL -e zsh -c ". $HOME/.zshrc && {ranger,$EDITOR}"
 
