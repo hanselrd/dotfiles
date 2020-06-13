@@ -13,39 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:monospace 8
 font xft:{{ font_i3.name }} {{ font_i3.size }}
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-#exec --no-startup-id nm-applet
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-{#
-{% if i3_use_xf86_keys %}
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-{% else %}
-bindsym F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym F9 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym F12 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-{% endif %}
-#}
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -57,12 +25,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec rofi -show run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec dmenu_run
 
 # change focus
 bindsym $mod+j focus left
@@ -114,6 +77,13 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -157,8 +127,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-set $scripts {{ user_root_dir }}/usr/local/bin
 
 # resize window (you can also use the mouse for that)
 set $mode_resize Resize
@@ -228,36 +196,6 @@ mode "$mode_gaps_inner" {
 }
 bindsym $mod+Shift+g mode "$mode_gaps"
 {% endif %}
-
-# Set shutdown, restart and locking features
-#set $mode_system System: (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-#mode "$mode_system" {
-#        bindsym l exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" lock, mode "default"
-#        bindsym e exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" exit, mode "default"
-#        bindsym s exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" suspend, mode "default"
-#        bindsym h exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" hibernate, mode "default"
-#        bindsym r exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" reboot, mode "default"
-#        bindsym Shift+s exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" shutdown, mode "default"
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#        bindsym $mod+Shift+x mode "default"
-#}
-#bindsym $mod+Shift+x mode "$mode_system"
-#bindsym $mod+Shift+x exec --no-startup-id $scripts/df_exit "{{ inventory_hostname }}" $(echo -e 'lock\nexit\nsuspend\nhibernate\nreboot\nshutdown' | rofi -dmenu -p "power")
-
-# Restart i3 and others inplace
-set $mode_restart Restart: (1) i3, (2) picom, (3) redshift
-mode "$mode_restart" {
-        bindsym 1 exec --no-startup-id i3-msg restart, mode "default"
-        bindsym 2 exec --no-startup-id $scripts/df_picom "{{ inventory_hostname }}" restart, mode "default"
-        bindsym 3 exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" restart, mode "default"
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        # bindsym $mod+Shift+r mode "default"
-}
-# bindsym $mod+Shift+r mode "$mode_restart"
 
 {% if theme_name == "wal" %}
 set_from_resource $background i3wm.background #F0F0F0
@@ -345,57 +283,3 @@ for_window [class=".*"] border pixel 3
 gaps outer 10
 gaps inner 10
 {% endif %}
-
-# Display
-#exec --no-startup-id $scripts/df_xrandr "{{ inventory_hostname }}" default
-
-# Picom
-#exec --no-startup-id $scripts/df_picom "{{ inventory_hostname }}" start
-
-# Enable tap to click
-# exec --no-startup-id xinput ...
-{% if inventory_hostname == "laptop" %}
-#exec --no-startup-id xinput set-prop $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) $(xinput list-props $(xinput list | grep -E "Touchpad|TouchPad" | cut -f 2 | cut -d "=" -f 2) | grep "libinput Tapping Enabled (" | cut -d " " -f 4 | cut -d "(" -f 2 | cut -d ")" -f 1) 1
-{% endif %}
-
-# Redshift
-#exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" start
-#bindsym $mod+Shift+u exec --no-startup-id $scripts/df_redshift "{{ inventory_hostname }}" stop
-
-# Wallpaper/theme/lockscreen
-{% if ("all" not in ansible_run_tags and "xinit" not in ansible_run_tags) or "xinit" in ansible_skip_tags %}
-#exec --no-startup-id feh --bg-scale "{{ background_path }}"
-{% if theme_name == "wal" %}
-#exec --no-startup-id wal -n -i "{{ background_path }}"
-{% endif %}
-{% endif %}
-#exec --no-startup-id betterlockscreen -u "{{ background_path }}"
-
-# Screenshot
-#exec --no-startup-id flameshot
-#exec --no-startup-id flameshot config -t false
-#bindsym --release Print exec flameshot gui
-
-# Screen brightness
-{#
-{% if ansible_pkg_mgr == "dnf" %}
-{% if i3_use_xf86_keys %}
-bindsym XF86MonBrightnessUp exec --no-startup-id brightlight -p -i 5
-bindsym XF86MonBrightnessDown exec --no-startup-id brightlight -p -d 5
-{% else %}
-bindsym F2 exec --no-startup-id brightlight -p -i 5
-bindsym F3 exec --no-startup-id brightlight -p -d 5
-{% endif %}
-{% else %}
-{% if i3_use_xf86_keys %}
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
-{% else %}
-bindsym F2 exec --no-startup-id xbacklight -inc 5
-bindsym F3 exec --no-startup-id xbacklight -dec 5
-{% endif %}
-{% endif %}
-#}
-
-# Program shortcuts
-#bindsym $mod+Shift+Return exec $terminal_run ranger
