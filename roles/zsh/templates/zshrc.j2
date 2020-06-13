@@ -91,6 +91,7 @@ source "$HOME/.bashrc" > /dev/null 2>&1
 alias vim="node -v > /dev/null 2>&1; vim"
 alias dryclean="find . \( -name 'node_modules' -o -name 'elm-stuff' -o -name 'target' -o -name 'build' -o -name 'dist' -o -name 'venv' \) -type d -print -prune"
 alias clean="find . \( -name 'node_modules' -o -name 'elm-stuff' -o -name 'target' -o -name 'build' -o -name 'dist' -o -name 'venv' \) -type d -print -prune -exec rm -rfI {} \;"
+alias trailingnewlines="find . -type f -exec sed -n '${/^$/F}' {} \;"
 alias ?="lynx https://google.com"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
