@@ -14,7 +14,7 @@ case "$1" in
                 lock
                 ;;
             exit)
-                killall -q i3
+                killall -q i3 dwm bspwm
                 ;;
             suspend)
                 lock &
