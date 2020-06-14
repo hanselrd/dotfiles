@@ -94,6 +94,7 @@
       - i3status-rust-git
       - numix-gtk-theme
       - numix-icon-theme-pack-git
+      - polybar
       - rxvt-unicode-pixbuf
       - snap-pac-grub
       - ttf-font-awesome-4

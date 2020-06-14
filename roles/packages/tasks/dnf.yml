@@ -101,6 +101,7 @@
       - openvpn
       - pgmodeler
       - picom
+      - polybar
       - python3-devel
       - python3-dnf-plugin-snapper
       - ranger

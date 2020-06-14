@@ -42,9 +42,66 @@
         - "{{ user_temp_dir }}"
       tags: always
 
+    - name: Register derived tag variables
+      set_fact:
+        "tag_{{ item }}": "{{ (('all' in ansible_run_tags or item in ansible_run_tags) and item not in ansible_skip_tags) | bool }}"
+      loop:
+        - backgrounds
+        - bin
+        - ccache
+        - chsh
+        - elm
+        - fonts
+        - git
+        - gtk
+        - haskell
+        - i3
+        - i3status
+        - nodejs
+        - packages
+        - picom
+        - python
+        - ranger
+        - rofi
+        - rust
+        - ssh
+        - sxhkd
+        - systemd
+        - theme
+        - tmux
+        - urxvt
+        - vim
+        - xinit
+        - xrdb
+        - zsh
+      tags: always
+
+    # - name: Check tags
+    #   fail:
+    #     # msg: "Failed with check={{ item.check }}, tags={{ item.tags }}"
+    #     # msg: "{{ item.tags | map('regex_replace', '^', 'tag_') | list }}"
+    #     msg: "{{ item.check }} {{ item.tags }}"
+    #   when: true
+    #   # when: ((item.check == "equal_one") and
+    # #         (("all" in ansible_run_tags and ansible_skip_tags | intersect(item.tags) | length < item.tags | length - 1) or
+    # #         (ansible_run_tags | intersect(item.tags) | length > 1))) or
+    # #         ((item.check == "all_or_none") and
+    # #         (("all" in ansible_run_tags and ansible_skip_tags | intersect(item.tags) | length != item.tags | length and ansible_skip_tags | intersect(item.tags) | length != 0) or
+    # #         (ansible_run_tags | intersect(item.tags) | length != item.tags | length and ansible_run_tags | intersect(item.tags) | length != 0)))
+    #   loop:
+    #     # - { check: all_or_none, tags: [i3, i3status] }
+    #     # - { check: equal_one, tags: [xinit] }
+    #     - { check: equal_one, tags: [i3, dwm, bspwm] }
+    #   vars:
+    #     checks:
+    #       - { type: 'equal_one', tags: [i3, dwm, bspwm] }
+    #   tags: always
+
     - debug:
         msg: "Running with: run_tags={{ ansible_run_tags }}, skip_tags={{ ansible_skip_tags }}"
       tags: always
+
+    # - meta: end_play
 
     - include_role:
         name: packages
@@ -55,7 +112,7 @@
     - include_role:
         name: theme
         apply:
-          tags: always
+          tags: theme
       tags: always
 
     - include_role:
@@ -91,17 +148,13 @@
     - include_role:
         name: urxvt
         apply:
-          tags:
-            - urxvt
-            - xrdb
+          tags: urxvt
       tags: always
 
     - include_role:
         name: xrdb
         apply:
-          tags:
-            - urxvt
-            - xrdb
+          tags: xrdb
       tags: always
 
     - include_role:
