@@ -291,7 +291,7 @@ let g:hardtime_timeout=5000
 
 " Plug 'tpope/vim-commentary'
 {% raw %}
-autocmd FileType jinja2 setlocal commentstring={#\ %s\ #}
+autocmd FileType jinja,jinja2 setlocal commentstring={#\ %s\ #}
 autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 {% endraw %}
 
