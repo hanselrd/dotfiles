@@ -1,12 +1,16 @@
-export BROWSER=chromium
 export EDITOR=vim
 export LESS=-R
 export PAGER=less
+{% if inventory_hostname != "remote" %}
+export BROWSER=chromium
 export TERMINAL=urxvt
 export VISUAL="$EDITOR"
+{% endif %}
 
 export GIT_ASKPASS=
 export KEYTIMEOUT=1
 export SSH_ASKPASS=
 
+{% if inventory_hostname != "remote" %}
 export SXHKD_SHELL=/bin/sh
+{% endif %}

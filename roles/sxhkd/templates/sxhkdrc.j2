@@ -19,7 +19,7 @@ super + shift + x
 @Print
     flameshot gui
 
-{% if sxhkd_use_xf86_keys %}
+{% if sxhkd_use_xf86_keys == true %}
 XF86MonBrightness{Up,Down}
     xbacklight -{inc,dec} 5
 
