@@ -48,8 +48,10 @@
       loop:
         - backgrounds
         - bin
+        - bspwm # missing
         - ccache
         - chsh
+        - dwm # missing
         - elm
         - fonts
         - git
@@ -63,6 +65,7 @@
         - python
         - ranger
         - rofi
+        - runit # missing
         - rust
         - ssh
         - sxhkd
@@ -76,26 +79,15 @@
         - zsh
       tags: always
 
-    # - name: Check tags
-    #   fail:
-    #     # msg: "Failed with check={{ item.check }}, tags={{ item.tags }}"
-    #     # msg: "{{ item.tags | map('regex_replace', '^', 'tag_') | list }}"
-    #     msg: "{{ item.check }} {{ item.tags }}"
-    #   when: true
-    #   # when: ((item.check == "equal_one") and
-    # #         (("all" in ansible_run_tags and ansible_skip_tags | intersect(item.tags) | length < item.tags | length - 1) or
-    # #         (ansible_run_tags | intersect(item.tags) | length > 1))) or
-    # #         ((item.check == "all_or_none") and
-    # #         (("all" in ansible_run_tags and ansible_skip_tags | intersect(item.tags) | length != item.tags | length and ansible_skip_tags | intersect(item.tags) | length != 0) or
-    # #         (ansible_run_tags | intersect(item.tags) | length != item.tags | length and ansible_run_tags | intersect(item.tags) | length != 0)))
-    #   loop:
-    #     # - { check: all_or_none, tags: [i3, i3status] }
-    #     # - { check: equal_one, tags: [xinit] }
-    #     - { check: equal_one, tags: [i3, dwm, bspwm] }
-    #   vars:
-    #     checks:
-    #       - { type: 'equal_one', tags: [i3, dwm, bspwm] }
-    #   tags: always
+    - name: Check tags
+      fail:
+        msg: "Failed with {{ item.msg }}"
+      when: not item.cond
+      loop:
+        - { cond: "{{ (tag_i3 and not tag_dwm and not tag_bspwm) or (not tag_i3 and tag_dwm and not tag_bspwm) or (not tag_i3 and not tag_dwm and tag_bspwm) or (not tag_i3 and not tag_dwm and not tag_bspwm) }}", msg: "i3, dwm and bspwm are mutually exclusive" }
+        - { cond: "{{ (tag_i3 and tag_i3status) or (not tag_i3 and not tag_i3status) }}", msg: "i3 and i3status must be specified together" }
+        - { cond: "{{ (tag_systemd and not tag_runit) or (not tag_systemd and tag_runit) or (not tag_systemd and not tag_runit) }}", msg: "systemd and runit are mutually exclusive" }
+      tags: always
 
     - debug:
         msg: "Running with: run_tags={{ ansible_run_tags }}, skip_tags={{ ansible_skip_tags }}"

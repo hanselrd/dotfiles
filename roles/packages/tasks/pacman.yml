@@ -50,6 +50,7 @@
       - redshift
       - reflector
       - rofi
+      - rxvt-unicode
       - sdl2
       - sdl2_image
       - sdl2_mixer
@@ -68,6 +69,7 @@
       - xorg-drivers
       - xorg-fonts
       - xorg-xinit
+      - youtube-dl
       - zsh
     state: present
 
@@ -90,12 +92,12 @@
   vars:
     packages:
       # - pgmodeler
+      # - rxvt-unicode-pixbuf
       - betterlockscreen
       - i3status-rust-git
       - numix-gtk-theme
       - numix-icon-theme-pack-git
       - polybar
-      - rxvt-unicode-pixbuf
       - snap-pac-grub
       - ttf-font-awesome-4
   when: st_yay.stat.exists
