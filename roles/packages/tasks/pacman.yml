@@ -35,6 +35,7 @@
       - glfw-x11
       - htop
       - i3-gaps
+      - libreoffice-fresh
       - lxappearance
       - lynx
       - neofetch
