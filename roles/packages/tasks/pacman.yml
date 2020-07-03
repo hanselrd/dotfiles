@@ -92,8 +92,10 @@
   register: output_yay
   vars:
     packages:
+      # - alltomp3-bin
       # - pgmodeler
       # - rxvt-unicode-pixbuf
+      # - spotify
       - betterlockscreen
       - i3status-rust-git
       - numix-gtk-theme
