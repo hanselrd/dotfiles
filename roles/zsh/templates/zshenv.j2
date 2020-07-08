@@ -2,7 +2,11 @@ export EDITOR=vim
 export LESS=-R
 export PAGER=less
 {% if inventory_hostname != "remote" %}
+{% if ansible_pkg_mgr == "pacman" %}
+export BROWSER=brave
+{% else %}
 export BROWSER=chromium
+{% endif %}
 export TERMINAL=urxvt
 export VISUAL="$EDITOR"
 {% endif %}

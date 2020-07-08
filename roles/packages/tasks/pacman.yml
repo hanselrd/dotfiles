@@ -8,6 +8,7 @@
       # - base
       # - base-devel
       # - btrfs-progs
+      # - chromium
       # - efibootmgr
       # - git
       # - grub
@@ -26,7 +27,6 @@
       # - vim
       - arandr
       - ccache
-      - chromium
       - clang
       - cmake
       - ctags
@@ -97,6 +97,7 @@
       # - rxvt-unicode-pixbuf
       # - spotify
       - betterlockscreen
+      - brave-bin
       - i3status-rust-git
       - numix-gtk-theme
       - numix-icon-theme-pack-git
