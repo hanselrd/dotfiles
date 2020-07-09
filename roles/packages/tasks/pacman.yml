@@ -30,9 +30,12 @@
       - clang
       - cmake
       - ctags
+      - cups
+      - cups-pdf
       - feh
       - flameshot
       - glfw-x11
+      - gutenprint
       - htop
       - i3-gaps
       - libreoffice-fresh
@@ -40,6 +43,7 @@
       - lynx
       - neofetch
       - ninja
+      - nmap
       - openssh
       - openvpn
       - picom
@@ -51,6 +55,7 @@
       - redshift
       - reflector
       - rofi
+      - rpmextract
       - rxvt-unicode
       - sdl2
       - sdl2_image
