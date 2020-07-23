@@ -46,6 +46,7 @@
       - nmap
       - openssh
       - openvpn
+      - pacman-contrib
       - picom
       - pulseaudio
       - python-pip
