@@ -6,7 +6,7 @@
   become_user: "{{ user_id }}"
   shell: |
     . {{ user_home_dir }}/.zshrc
-    pip install --upgrade --user pipenv black cmake-format
+    pip install --upgrade --user pipenv black cmakelang
   args:
     executable: /usr/bin/zsh
   register: output_pip
