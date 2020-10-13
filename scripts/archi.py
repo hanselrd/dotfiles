@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 import argparse
-import time
 import logging
+import shutil
 import subprocess
 import sys
+import time
 import typing
 
 
@@ -40,7 +41,21 @@ def shell(
             stdout=subprocess.PIPE if stdout else None,
             stderr=subprocess.PIPE if stderr else None,
         )
-        stdout, stderr = process.communicate()
+        if "whiptail" not in cmd:
+            start = time.time()
+            while True:
+                try:
+                    stdout, stderr = process.communicate(timeout=1)
+                    break
+                except subprocess.TimeoutExpired:
+                    elapsed = int(time.time() - start)
+                    if elapsed >= 1:
+                        columns, _ = shutil.get_terminal_size()
+                        progress = "=" * (elapsed % ((columns // 2) - 15))
+                        print(f"<{progress} {elapsed}s {progress}>".center(columns), end="\r", flush=True)
+                    continue
+        else:
+            stdout, stderr = process.communicate()
         if stdout:
             logging.info(f"  stdout=`{repr(stdout)}`")
         if stderr:
