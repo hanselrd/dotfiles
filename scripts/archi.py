@@ -296,7 +296,7 @@ if __name__ == "__main__":
 
     # Mount partitions and BTRFS subvolumes
     shell(f"mount -o compress=lzo,subvol=@ {BTRFS_PARTITION} /mnt", dryrun=args.dryrun)
-    shell("mkdir -p /mnt{efi,home,.shared,.swap,.keys}", dryrun=args.dryrun)
+    shell("mkdir -p /mnt/{efi,home,.shared,.swap,.keys}", dryrun=args.dryrun)
     shell(f"mount {EFI_PARTITION} /mnt/efi", dryrun=args.dryrun)
     shell(
         f"mount -o compress=lzo,subvol=@home {BTRFS_PARTITION} /mnt/home",
