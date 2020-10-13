@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import time
 import logging
 import subprocess
 import sys
@@ -39,23 +40,15 @@ def shell(
             stdout=subprocess.PIPE if stdout else None,
             stderr=subprocess.PIPE if stderr else None,
         )
-        stdout = []
-        stderr = []
-        while True:
-            stdout_line = process.stdout.readline() if "whiptail" not in cmd else ""
-            stderr_line = process.stderr.readline()
-            if stdout_line != "":
-                logging.info(f"  stdout=`{repr(stdout_line)}`")
-                stdout.append(stdout_line)
-            if stderr_line != "":
-                logging.info(f"  stderr=`{repr(stderr_line)}`")
-                stderr.append(stderr_line)
-            if stdout_line == "" and stderr_line == "" and process.poll() is not None:
-                break
+        stdout, stderr = process.communicate()
+        if stdout:
+            logging.info(f"  stdout=`{repr(stdout)}`")
+        if stderr:
+            logging.info(f"  stderr=`{repr(stderr)}`")
         return (
             process.returncode,
-            "".join(stdout).strip() if stdout else None,
-            "".join(stderr).strip() if stderr else None,
+            stdout.strip() if stdout else None,
+            stderr.strip() if stderr else None,
         )
 
 
