@@ -13,7 +13,6 @@ def shell(
     cmd: str,
     stdout: bool = True,
     stderr: bool = True,
-    interactive: bool = False,
     dryrun: bool = False,
 ) -> typing.Tuple[int, typing.Optional[str], typing.Optional[str]]:
     if dryrun:
@@ -28,9 +27,7 @@ def shell(
             stdout=subprocess.PIPE if stdout else None,
             stderr=subprocess.PIPE if stderr else None,
         )
-        if interactive:
-            stdout, stderr = process.communicate()
-        else:
+        if stdout:
             start = time.time()
             while True:
                 try:
@@ -47,6 +44,8 @@ def shell(
                             flush=True,
                         )
                     continue
+        else:
+            stdout, stderr = process.communicate()
         if stdout:
             logging.info(f"  stdout=`{repr(stdout)}`")
         if stderr:
@@ -62,18 +61,14 @@ class Prompt:
     @staticmethod
     def msgbox(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --msgbox '{text}' 0 0",
-            stdout=False,
-            interactive=True,
+            f"whiptail --title '{title}' --msgbox '{text}' 0 0", stdout=False
         )
         return rc, stderr
 
     @staticmethod
     def yesno(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --yesno '{text}' 0 0",
-            stdout=False,
-            interactive=True,
+            f"whiptail --title '{title}' --yesno '{text}' 0 0", stdout=False
         )
         return rc, stderr
 
@@ -84,16 +79,13 @@ class Prompt:
         rc, _, stderr = shell(
             f"whiptail --title '{title}' --inputbox '{text}' 0 0 '{default if default else str()}'",
             stdout=False,
-            interactive=True,
         )
         return rc, stderr
 
     @staticmethod
     def passwordbox(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --passwordbox '{text}' 8 0",
-            stdout=False,
-            interactive=True,
+            f"whiptail --title '{title}' --passwordbox '{text}' 8 0", stdout=False
         )
         return rc, stderr
 
@@ -108,7 +100,6 @@ class Prompt:
         rc, _, stderr = shell(
             f"whiptail --title '{title}' --default-item '{default if default else str()}' --menu '{text}' 0 0 0 {' '.join(choices)}",
             stdout=False,
-            interactive=True,
         )
         return rc, stderr
 
@@ -203,7 +194,7 @@ if __name__ == "__main__":
                     dryrun=args.dryrun,
                 )
             elif stderr == "manual":
-                shell(f"cfdisk {DISK}", interactive=True, dryrun=args.dryrun)
+                shell(f"cfdisk {DISK}", stdout=False, dryrun=args.dryrun)
         else:
             sys.exit(1)
 
