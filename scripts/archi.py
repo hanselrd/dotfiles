@@ -52,7 +52,11 @@ def shell(
                     if elapsed >= 1:
                         columns, _ = shutil.get_terminal_size()
                         progress = "=" * (elapsed % ((columns // 2) - 15))
-                        print(f"<{progress} {elapsed}s {progress}>".center(columns), end="\r", flush=True)
+                        print(
+                            f"<{progress} {elapsed}s {progress}>".center(columns),
+                            end="\r",
+                            flush=True,
+                        )
                     continue
         else:
             stdout, stderr = process.communicate()
@@ -410,7 +414,7 @@ if __name__ == "__main__":
         "ARCHI", "Select locale", stdout.split("\n"), "en_US.UTF-8 UTF-8"
     )
     if rc == 0:
-        LOCALE = stderr
+        LOCALE = stderr.split()[0]
         shell(
             f"arch-chroot /mnt sed -i '/{LOCALE}/s/^#//g' /etc/locale.gen",
             dryrun=args.dryrun,
