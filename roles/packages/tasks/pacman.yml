@@ -25,6 +25,7 @@
       # - snap-pac
       # - snapper
       # - vim
+      - android-tools
       - arandr
       - ccache
       - clang
