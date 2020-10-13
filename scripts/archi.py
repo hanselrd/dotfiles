@@ -416,7 +416,7 @@ if __name__ == "__main__":
     if rc == 0:
         LOCALE = stderr.split()[0]
         shell(
-            f"arch-chroot /mnt sed -i '/{LOCALE}/s/^#//g' /etc/locale.gen",
+            f"arch-chroot /mnt sed -i '/#{LOCALE}/s/^#//g' /etc/locale.gen",
             dryrun=args.dryrun,
         )
         shell(f"arch-chroot /mnt locale-gen", dryrun=args.dryrun)
