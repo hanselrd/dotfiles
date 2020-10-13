@@ -11,9 +11,9 @@ import typing
 
 def shell(
     cmd: str,
-    stdin: typing.Optional[str] = None,
     stdout: bool = True,
     stderr: bool = True,
+    interactive: bool = False,
     dryrun: bool = False,
 ) -> typing.Tuple[int, typing.Optional[str], typing.Optional[str]]:
     if dryrun:
@@ -21,27 +21,14 @@ def shell(
         return 0, None, None
     else:
         logging.info(f"cmd=`{repr(cmd)}`")
-        # result = subprocess.run(
-        #     cmd,
-        #     shell=True,
-        #     input=input.encode() if input else None,
-        #     stdout=subprocess.PIPE if stdout else None,
-        #     stderr=subprocess.PIPE if stderr else None,
-        # )
-        # return (
-        #     result.returncode,
-        #     result.stdout.decode().rstrip() if result.stdout else None,
-        #     result.stderr.decode().rstrip() if result.stderr else None,
-        # )
         process = subprocess.Popen(
             cmd,
             universal_newlines=True,
             shell=True,
-            stdin=stdin.encode() if stdin else None,
             stdout=subprocess.PIPE if stdout else None,
             stderr=subprocess.PIPE if stderr else None,
         )
-        if "whiptail" not in cmd:
+        if not interactive:
             start = time.time()
             while True:
                 try:
@@ -75,14 +62,18 @@ class Prompt:
     @staticmethod
     def msgbox(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --msgbox '{text}' 0 0", stdout=False
+            f"whiptail --title '{title}' --msgbox '{text}' 0 0",
+            stdout=False,
+            interactive=True,
         )
         return rc, stderr
 
     @staticmethod
     def yesno(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --yesno '{text}' 0 0", stdout=False
+            f"whiptail --title '{title}' --yesno '{text}' 0 0",
+            stdout=False,
+            interactive=True,
         )
         return rc, stderr
 
@@ -93,13 +84,16 @@ class Prompt:
         rc, _, stderr = shell(
             f"whiptail --title '{title}' --inputbox '{text}' 0 0 '{default if default else str()}'",
             stdout=False,
+            interactive=True,
         )
         return rc, stderr
 
     @staticmethod
     def passwordbox(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --passwordbox '{text}' 8 0", stdout=False
+            f"whiptail --title '{title}' --passwordbox '{text}' 8 0",
+            stdout=False,
+            interactive=True,
         )
         return rc, stderr
 
@@ -114,6 +108,7 @@ class Prompt:
         rc, _, stderr = shell(
             f"whiptail --title '{title}' --default-item '{default if default else str()}' --menu '{text}' 0 0 0 {' '.join(choices)}",
             stdout=False,
+            interactive=True,
         )
         return rc, stderr
 
@@ -208,7 +203,7 @@ if __name__ == "__main__":
                     dryrun=args.dryrun,
                 )
             elif stderr == "manual":
-                shell(f"cfdisk {DISK}", dryrun=args.dryrun)
+                shell(f"cfdisk {DISK}", interactive=True, dryrun=args.dryrun)
         else:
             sys.exit(1)
 
