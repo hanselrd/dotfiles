@@ -28,7 +28,9 @@ def shell(
             stdout=subprocess.PIPE if stdout else None,
             stderr=subprocess.PIPE if stderr else None,
         )
-        if not interactive:
+        if interactive:
+            stdout, stderr = process.communicate()
+        else:
             start = time.time()
             while True:
                 try:
@@ -45,8 +47,6 @@ def shell(
                             flush=True,
                         )
                     continue
-        else:
-            stdout, stderr = process.communicate()
         if stdout:
             logging.info(f"  stdout=`{repr(stdout)}`")
         if stderr:
