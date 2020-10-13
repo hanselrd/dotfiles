@@ -9,7 +9,7 @@ import typing
 
 def shell(
     cmd: str,
-    input: typing.Optional[str] = None,
+    stdin: typing.Optional[str] = None,
     stdout: bool = True,
     stderr: bool = True,
     dryrun: bool = False,
@@ -19,17 +19,43 @@ def shell(
         return 0, None, None
     else:
         logging.info(f"cmd=`{repr(cmd)}`")
-        result = subprocess.run(
+        # result = subprocess.run(
+        #     cmd,
+        #     shell=True,
+        #     input=input.encode() if input else None,
+        #     stdout=subprocess.PIPE if stdout else None,
+        #     stderr=subprocess.PIPE if stderr else None,
+        # )
+        # return (
+        #     result.returncode,
+        #     result.stdout.decode().rstrip() if result.stdout else None,
+        #     result.stderr.decode().rstrip() if result.stderr else None,
+        # )
+        process = subprocess.Popen(
             cmd,
+            universal_newlines=True,
             shell=True,
-            input=input.encode() if input else None,
+            stdin=stdin.encode() if stdin else None,
             stdout=subprocess.PIPE if stdout else None,
             stderr=subprocess.PIPE if stderr else None,
         )
+        stdout = []
+        stderr = []
+        while True:
+            stdout_line = process.stdout.readline() if "whiptail" not in cmd else ""
+            stderr_line = process.stderr.readline()
+            if stdout_line != "":
+                logging.info(f"  stdout=`{repr(stdout_line)}`")
+                stdout.append(stdout_line)
+            if stderr_line != "":
+                logging.info(f"  stderr=`{repr(stderr_line)}`")
+                stderr.append(stderr_line)
+            if stdout_line == "" and stderr_line == "" and process.poll() is not None:
+                break
         return (
-            result.returncode,
-            result.stdout.decode().rstrip() if result.stdout else None,
-            result.stderr.decode().rstrip() if result.stderr else None,
+            process.returncode,
+            "".join(stdout).strip() if stdout else None,
+            "".join(stderr).strip() if stderr else None,
         )
 
 
