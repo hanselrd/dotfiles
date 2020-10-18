@@ -1,0 +1,33 @@
+---
+# tasks file for roles/gdb
+
+- name: Create gdb directories
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ user_home_dir }}"
+    - "{{ user_home_dir }}/.gdb"
+
+- name: Copy gdb config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - gdbinit
+
+- name: Copy gdb script files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.gdb/{{ item }}"
+    force: yes
+  loop:
+    - offsetsof.py
+    - offsetsof_python2.py
