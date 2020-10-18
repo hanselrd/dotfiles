@@ -1,0 +1,23 @@
+---
+# tasks file for roles/xrandr
+
+- name: Create xrandr directories
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ user_home_dir }}"
+    - "{{ user_home_dir }}/.screenlayout"
+
+- name: Copy xrandr files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.screenlayout/{{ item }}"
+    mode: 0755
+    force: yes
+  loop:
+    - default-work.sh
