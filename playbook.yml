@@ -54,6 +54,7 @@
         - dwm # missing
         - elm
         - fonts
+        - gdb
         - git
         - gtk
         - haskell
@@ -75,6 +76,7 @@
         - urxvt
         - vim
         - xinit
+        - xrandr
         - xrdb
         - zsh
       tags: always
@@ -147,6 +149,18 @@
         name: xrdb
         apply:
           tags: xrdb
+      tags: always
+
+    - include_role:
+        name: xrandr
+        apply:
+          tags: xrandr
+      tags: always
+
+    - include_role:
+        name: gdb
+        apply:
+          tags: gdb
       tags: always
 
     - include_role:
