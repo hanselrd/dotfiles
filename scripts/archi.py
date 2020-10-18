@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import dataclasses
 import logging
 import shutil
 import subprocess
@@ -57,18 +58,24 @@ def shell(
         )
 
 
+class Constants:
+    BACKTITLE = "ARCHI - a fast, opinionated Arch Linux Installer"
+
+
 class Prompt:
     @staticmethod
     def msgbox(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --msgbox '{text}' 0 0", stdout=False
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --msgbox '{text}' 0 0",
+            stdout=False,
         )
         return rc, stderr
 
     @staticmethod
     def yesno(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --yesno '{text}' 0 0", stdout=False
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --yesno '{text}' 0 0",
+            stdout=False,
         )
         return rc, stderr
 
@@ -77,7 +84,7 @@ class Prompt:
         title: str, text: str, default: typing.Optional[str] = None
     ) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --inputbox '{text}' 0 0 '{default if default else str()}'",
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --inputbox '{text}' 0 0 '{default if default else str()}'",
             stdout=False,
         )
         return rc, stderr
@@ -85,20 +92,55 @@ class Prompt:
     @staticmethod
     def passwordbox(title: str, text: str) -> typing.Tuple[int, typing.Optional[str]]:
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --passwordbox '{text}' 8 0", stdout=False
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --passwordbox '{text}' 8 0",
+            stdout=False,
         )
         return rc, stderr
+
+    @dataclasses.dataclass(frozen=True)
+    class Item:
+        tag: str
+        description: str = ""
+        state: bool = False
 
     @staticmethod
     def menu(
         title: str,
         text: str,
-        choices: typing.List[str],
+        items: typing.List[Item],
         default: typing.Optional[str] = None,
     ) -> typing.Tuple[int, typing.Optional[str]]:
-        choices = [f"'{c}' ''" for c in choices]
+        items = [f"'{i.tag}' ' {i.description}'" for i in items]
         rc, _, stderr = shell(
-            f"whiptail --title '{title}' --default-item '{default if default else str()}' --menu '{text}' 0 0 0 {' '.join(choices)}",
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --default-item '{default if default else str()}' --menu '{text}' 0 0 0 {' '.join(items)}",
+            stdout=False,
+        )
+        return rc, stderr
+
+    @staticmethod
+    def checklist(
+        title: str, text: str, items: typing.List[Item]
+    ) -> typing.Tuple[int, typing.Optional[typing.List[str]]]:
+        items = [
+            f"'{i.tag}' ' {i.description}' '{'on' if i.state == True else 'off'}'"
+            for i in items
+        ]
+        rc, _, stderr = shell(
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --checklist '{text}' 0 0 0 {' '.join(items)}",
+            stdout=False,
+        )
+        return rc, [s.strip('"') for s in stderr.split('" "')] if stderr else None
+
+    @staticmethod
+    def radiolist(
+        title: str, text: str, items: typing.List[Item]
+    ) -> typing.Tuple[int, typing.Optional[str]]:
+        items = [
+            f"'{i.tag}' ' {i.description}' '{'on' if i.state == True else 'off'}'"
+            for i in items
+        ]
+        rc, _, stderr = shell(
+            f"whiptail --backtitle '{Constants.BACKTITLE}' --title '{title}' --radiolist '{text}' 0 0 0 {' '.join(items)}",
             stdout=False,
         )
         return rc, stderr
@@ -166,11 +208,15 @@ if __name__ == "__main__":
 
     # Select disk
     _, stdout, _ = shell("lsblk -d -p -n -l -o NAME,SIZE -e 7,11")
+    items = [
+        Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+        for s in [s.split() for s in stdout.split("\n")]
+    ]
     rc, stderr = Prompt.menu(
-        "ARCHI", "Select disk device to use for installation", stdout.split("\n")
+        "ARCHI", "Select disk device to use for installation", items
     )
     if rc == 0:
-        DISK = stderr.split()[0]
+        DISK = stderr
     else:
         sys.exit(1)
 
@@ -182,11 +228,12 @@ if __name__ == "__main__":
     # Partition disk
     rc, _ = Prompt.yesno("ARCHI", f"Would you like to partition {DISK}?")
     if rc == 0:
-        rc, stderr = Prompt.menu(
-            "ARCHI",
-            f"Select partition method for {DISK}",
-            ["automatic", "manual", "none"],
-        )
+        items = [
+            Prompt.Item(tag="automatic"),
+            Prompt.Item(tag="manual", description="(using cfdisk)"),
+            Prompt.Item(tag="none"),
+        ]
+        rc, stderr = Prompt.menu("ARCHI", f"Select partition method for {DISK}", items)
         if rc == 0:
             if stderr == "automatic":
                 shell(
@@ -199,19 +246,27 @@ if __name__ == "__main__":
             sys.exit(1)
 
     # Select LUKS container partition
+    items = [
+        Prompt.Item(tag="open an existing one"),
+        Prompt.Item(tag="create a new one"),
+    ]
     rc, stderr = Prompt.menu(
         "ARCHI",
         f"Would you like to open an existing LUKS container or create a new one on {DISK}?",
-        ["open an existing one", "create a new one"],
+        items,
     )
     if rc == 0:
         LUKS_CREATE = True if stderr == "create a new one" else False
         _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK} | tail -n +2")
+        items = [
+            Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+            for s in [s.split() for s in stdout.split("\n")]
+        ]
         rc, stderr = Prompt.menu(
-            "ARCHI", f"Select LUKS container partition on {DISK}", stdout.split("\n")
+            "ARCHI", f"Select LUKS container partition on {DISK}", items
         )
         if rc == 0:
-            LUKS_PARTITION = stderr.split()[0]
+            LUKS_PARTITION = stderr
             while True:
                 rc1, stderr1 = Prompt.passwordbox(
                     "ARCHI", "Enter LUKS container passphrase"
@@ -253,11 +308,13 @@ if __name__ == "__main__":
 
     # Select EFI partition
     _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK} | tail -n +2")
-    rc, stderr = Prompt.menu(
-        "ARCHI", f"Select EFI partition on {DISK}", stdout.split("\n")
-    )
+    items = [
+        Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+        for s in [s.split() for s in stdout.split("\n")]
+    ]
+    rc, stderr = Prompt.menu("ARCHI", f"Select EFI partition on {DISK}", items)
     if rc == 0:
-        EFI_PARTITION = stderr.split()[0]
+        EFI_PARTITION = stderr
         rc, _ = Prompt.yesno(
             "ARCHI", f"Would you like to reformat {EFI_PARTITION} using EFI?"
         )
@@ -268,11 +325,13 @@ if __name__ == "__main__":
 
     # Select BTRFS partition
     _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK} | tail -n +2")
-    rc, stderr = Prompt.menu(
-        "ARCHI", f"Select BTRFS partition on {DISK}", stdout.split("\n")
-    )
+    items = [
+        Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+        for s in [s.split() for s in stdout.split("\n")]
+    ]
+    rc, stderr = Prompt.menu("ARCHI", f"Select BTRFS partition on {DISK}", items)
     if rc == 0:
-        BTRFS_PARTITION = stderr.split()[0]
+        BTRFS_PARTITION = stderr
         rc, _ = Prompt.yesno(
             "ARCHI", f"Would you like to reformat {BTRFS_PARTITION} using BTRFS?"
         )
@@ -343,46 +402,72 @@ if __name__ == "__main__":
 
     # Update pacman mirrors
     shell("pacman -S reflector --noconfirm", dryrun=args.dryrun)
-    shell(
-        "reflector --country='United States' --age=12 --protocol=https --sort=rate --save=/etc/pacman.d/mirrorlist",
-        dryrun=args.dryrun,
+    _, stdout, _ = shell(
+        'reflector --list-countries | rev | awk \'{out=""; for(i=3;i<=NF;++i){out=out" "$i}; print $1,$2,out}\' | rev'
     )
-    shell("pacman -Syyy --noconfirm", dryrun=args.dryrun)
+    items = [
+        Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+        for s in [s.split("  ") for s in stdout.split("\n")]
+    ]
+    items = [
+        dataclasses.replace(i, state=True) if i.tag == "United States" else i
+        for i in items
+    ]
+    rc, stderr = Prompt.checklist("ARCHI", "Select pacman mirrors", items)
+    if rc == 0:
+        PACMAN_MIRRORS = stderr
+        shell(
+            f"reflector --country='{','.join(PACMAN_MIRRORS)}' --age=12 --protocol=https --sort=rate --save=/etc/pacman.d/mirrorlist",
+            dryrun=args.dryrun,
+        )
+        shell("pacman -Syyy --noconfirm", dryrun=args.dryrun)
+    else:
+        sys.exit(1)
 
     # Install essential packages
-    PACKAGES = [
-        "ansible",
-        "base",
-        "base-devel",
-        "btrfs-progs",
-        "efibootmgr",
-        "git",
-        "grub",
-        "grub-btrfs",
-        "intel-ucode",
-        "linux",
-        "linux-firmware",
-        "linux-headers",
-        "linux-lts",
-        "linux-lts-headers",
-        "network-manager-applet",
-        "networkmanager",
-        "os-prober",
-        "snap-pac",
-        "snapper",
-        "vim",
+    items = [
+        Prompt.Item(tag="amd-ucode"),
+        Prompt.Item(tag="ansible", state=True),
+        Prompt.Item(tag="base", state=True),
+        Prompt.Item(tag="base-devel", state=True),
+        Prompt.Item(tag="btrfs-progs", state=True),
+        Prompt.Item(tag="efibootmgr", state=True),
+        Prompt.Item(tag="git", state=True),
+        Prompt.Item(tag="grub", state=True),
+        Prompt.Item(tag="grub-btrfs", state=True),
+        Prompt.Item(tag="intel-ucode", state=True),
+        Prompt.Item(tag="linux", state=True),
+        Prompt.Item(tag="linux-firmware", state=True),
+        Prompt.Item(tag="linux-headers", state=True),
+        Prompt.Item(tag="linux-lts", state=True),
+        Prompt.Item(tag="linux-lts-headers", state=True),
+        Prompt.Item(tag="network-manager-applet", state=True),
+        Prompt.Item(tag="networkmanager", state=True),
+        Prompt.Item(tag="os-prober", state=True),
+        Prompt.Item(tag="snap-pac", state=True),
+        Prompt.Item(tag="snapper", state=True),
+        Prompt.Item(tag="vim", state=True),
     ]
-    shell(f"pacstrap /mnt {' '.join(PACKAGES)}", dryrun=args.dryrun)
+    rc, stderr = Prompt.checklist("ARCHI", "Select essential packages", items)
+    if rc == 0:
+        PACKAGES = stderr
+        shell(f"pacstrap /mnt {' '.join(PACKAGES)}", dryrun=args.dryrun)
+    else:
+        sys.exit(1)
 
     # Generate fstab
     shell("genfstab -U /mnt >> /mnt/etc/fstab", dryrun=args.dryrun)
 
     # Select time zone
     _, stdout, _ = shell("find /usr/share/zoneinfo -print")
+    items = [
+        Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+        for s in [s.split() for s in stdout.split("\n")]
+    ]
     rc, stderr = Prompt.menu(
         "ARCHI",
         "Select time zone",
-        stdout.split("\n"),
+        items,
         "/usr/share/zoneinfo/America/New_York",
     )
     if rc == 0:
@@ -396,11 +481,13 @@ if __name__ == "__main__":
     _, stdout, _ = shell(
         "grep '^[[:alnum:]]\|^#[[:alnum:]]' /etc/locale.gen | sed 's/#//g; s/ *$//g'"
     )
-    rc, stderr = Prompt.menu(
-        "ARCHI", "Select locale", stdout.split("\n"), "en_US.UTF-8 UTF-8"
-    )
+    items = [
+        Prompt.Item(tag=s[0], description=" ".join(s[1:]))
+        for s in [s.split() for s in stdout.split("\n")]
+    ]
+    rc, stderr = Prompt.menu("ARCHI", "Select locale", items, "en_US.UTF-8")
     if rc == 0:
-        LOCALE = stderr.split()[0]
+        LOCALE = stderr
         shell(
             f"arch-chroot /mnt sed -i '/#{LOCALE}/s/^#//g' /etc/locale.gen",
             dryrun=args.dryrun,
