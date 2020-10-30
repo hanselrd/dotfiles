@@ -19,6 +19,7 @@
       # - linux-headers
       # - linux-lts
       # - linux-lts-headers
+      # - lynx
       # - network-manager-applet
       # - networkmanager
       # - os-prober
@@ -41,10 +42,10 @@
       - i3-gaps
       - libreoffice-fresh
       - lxappearance
-      - lynx
       - neofetch
       - ninja
       - nmap
+      - openresolv
       - openssh
       - openvpn
       - pacman-contrib
@@ -101,6 +102,7 @@
     packages:
       # - alltomp3-bin
       # - pgmodeler
+      # - polybar
       # - rxvt-unicode-pixbuf
       # - spotify
       - betterlockscreen
@@ -108,7 +110,6 @@
       - i3status-rust-git
       - numix-gtk-theme
       - numix-icon-theme-pack-git
-      - polybar
       - snap-pac-grub
       - ttf-font-awesome-4
   when: st_yay.stat.exists
