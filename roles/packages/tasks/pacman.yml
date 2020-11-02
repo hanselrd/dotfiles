@@ -78,6 +78,7 @@
       - xorg-drivers
       - xorg-fonts
       - xorg-xinit
+      - xsel
       - youtube-dl
       - zsh
     state: present
