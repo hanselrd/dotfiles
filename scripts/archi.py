@@ -648,6 +648,10 @@ if __name__ == "__main__":
         dryrun=args.dryrun,
     )
     shell(
+        f"arch-chroot /mnt sed -i '/VerbosePkgLists/s/$/\nILoveCandy/g' /etc/pacman.conf",
+        dryrun=args.dryrun,
+    )
+    shell(
         "arch-chroot /mnt sed -i '/\[multilib\]/ {N; s/#//g}' /etc/pacman.conf",
         dryrun=args.dryrun,
     )
