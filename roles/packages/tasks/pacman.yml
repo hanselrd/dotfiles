@@ -61,7 +61,6 @@
       - reflector
       - rofi
       - rpm-tools
-      - rpmextract
       - rxvt-unicode
       - sdl2
       - sdl2_image
