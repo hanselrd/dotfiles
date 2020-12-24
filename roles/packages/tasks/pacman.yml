@@ -34,6 +34,7 @@
       - ctags
       - cups
       - cups-pdf
+      - dbeaver
       - feh
       - flameshot
       - glfw-x11
@@ -67,6 +68,7 @@
       - sdl2_net
       - sdl2_ttf
       - shellcheck
+      - sshfs
       - strace
       - sxhkd
       - tmux
