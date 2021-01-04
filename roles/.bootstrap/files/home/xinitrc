@@ -1,5 +1,0 @@
-if [ -f ~/.Xresources ]; then
-    xrdb -merge "$HOME/.Xresources"
-fi
-# wal -R
-exec i3
