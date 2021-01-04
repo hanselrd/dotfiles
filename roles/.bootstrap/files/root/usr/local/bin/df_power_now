@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-cd "$(dirname "$0")" || exit
-
-# awk '{print " " $1*10^-6 "W"}' /sys/class/power_supply/BAT0/power_now
-upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "energy-rate" | awk '{printf("%0.2f W\n", $2)}'

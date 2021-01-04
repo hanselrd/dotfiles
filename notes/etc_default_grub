@@ -1,9 +1,0 @@
-GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
-GRUB_DEFAULT=0
-GRUB_SAVEDEFAULT=false
-GRUB_DISABLE_SUBMENU=true
-GRUB_TERMINAL_OUTPUT="console"
-GRUB_CMDLINE_LINUX="rd.luks.uuid=18b10c6b-48df-4ffa-b8ca-d60ac9a5186e rhgb quiet"
-GRUB_DISABLE_RECOVERY="true"
-GRUB_ENABLE_CRYPTODISK=y
