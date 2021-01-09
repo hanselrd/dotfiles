@@ -276,9 +276,10 @@ bar {
 
 # Disable window titles
 for_window [class=".*"] border pixel 3
-# smart_borders on
 
 {% if ansible_pkg_mgr == "pacman" %}
+# smart_borders on
+
 # Gaps
 gaps outer 10
 gaps inner 10
