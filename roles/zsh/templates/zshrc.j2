@@ -59,7 +59,9 @@ spaceship_custom() {
 {% endif %}
 SPACESHIP_CHAR_SYMBOL="❱ "
 SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_FORMAT="%D{%Y-%m-%dT%T%z [%Z]}"
+{% raw %}
+SPACESHIP_TIME_FORMAT="%D{%Y-%m-%dT%T%z}"
+{% endraw %}
 # SPACESHIP_TIME_12HR=true
 SPACESHIP_EXIT_CODE_SHOW=true
 
