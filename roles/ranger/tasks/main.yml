@@ -8,11 +8,11 @@
     path: "{{ user_config_dir }}/ranger"
     state: directory
 
-- name: Copy ranger config files
+- name: Generate ranger config files
   become: yes
   become_user: "{{ user_id }}"
-  copy:
-    src: "{{ item }}"
+  template:
+    src: "{{ item }}.j2"
     dest: "{{ user_config_dir }}/ranger/{{ item }}"
     force: yes
   loop:
