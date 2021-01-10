@@ -26,6 +26,7 @@
       # - snap-pac
       # - snapper
       # - vim
+      - alacritty
       - android-tools
       - arandr
       - ccache
@@ -47,6 +48,8 @@
       - neofetch
       - ninja
       - nmap
+      - noto-fonts
+      - noto-fonts-emoji
       - openresolv
       - openssh
       - openvpn
@@ -75,6 +78,7 @@
       - tree
       - udisks2
       - upower
+      - w3m
       - xdg-user-dirs
       - xorg
       - xorg-apps
@@ -106,16 +110,16 @@
     packages:
       # - alltomp3-bin
       # - pgmodeler
-      # - polybar
       # - rxvt-unicode-pixbuf
       # - spotify
+      # - ttf-font-awesome-4
       - betterlockscreen
       - brave-bin
       - i3status-rust-git
       - numix-gtk-theme
       - numix-icon-theme-pack-git
+      - polybar
       - snap-pac-grub
-      - ttf-font-awesome-4
   when: st_yay.stat.exists
 
 - debug:

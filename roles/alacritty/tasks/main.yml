@@ -1,0 +1,69 @@
+---
+# tasks file for roles/alacritty
+
+- name: Create alacritty config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/alacritty"
+    state: directory
+
+- name: Generate alacritty config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/alacritty/{{ item }}"
+    force: yes
+  loop:
+    - alacritty.yml
+  when: theme_name != "wal"
+
+- name: Create alacritty config template directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/wal/templates"
+    state: directory
+  when: theme_name == "wal"
+
+- name: Generate alacritty config template files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/wal/templates/config-alacritty-{{ item }}"
+    force: yes
+  loop:
+    - alacritty.yml
+  when: theme_name == "wal"
+
+- name: Prepare alacritty config template files
+  become: yes
+  become_user: "{{ user_id }}"
+  replace:
+    path: "{{ user_config_dir }}/wal/templates/config-alacritty-{{ item.0 }}"
+    regexp: "{{ item.1.regexp }}"
+    replace: "{{ item.1.replace }}"
+  loop: "{{ configs | product(replaces) | list }}"
+  vars:
+    configs:
+      - alacritty.yml
+    replaces:
+      - { regexp: '({)', replace: '\1\1'  }
+      - { regexp: '(})', replace: '\1\1'  }
+      - { regexp: '@@(.+)@@', replace: '{\1}'  }
+  when: theme_name == "wal"
+
+- name: Link generated alacritty config files
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    src: "{{ user_cache_dir }}/wal/config-alacritty-{{ item }}"
+    dest: "{{ user_config_dir }}/alacritty/{{ item }}"
+    state: link
+    force: yes
+    follow: no
+  loop:
+    - alacritty.yml
+  when: theme_name == "wal"

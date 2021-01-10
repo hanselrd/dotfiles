@@ -70,7 +70,7 @@ theme_i3:
   client_background:       &i3_client_background       "#FFFFFF"
 
 theme_i3bar:
-  background:         *background_hard
+  background:         *background
   statusline:         "#FFFFFF"
   separator:          "#666666"
 
@@ -101,7 +101,7 @@ theme_i3status:
   alternating_tint_fg: "#000000"
 
 theme_rofi:
-  background:                 *background_hard
+  background:                 *background
   foreground:                 *foreground
   active_background:          *palette_brightblack
   urgent_background:          *palette_red
@@ -109,8 +109,30 @@ theme_rofi:
   selected_normal_background: *palette_brightblack
   selected_urgent_background: *palette_red
 
+theme_alacritty:
+  background: *background
+  foreground: *foreground
+
+  palette:    &alacritty_palette
+    color0:   *palette_black
+    color8:   *palette_brightblack
+    color1:   *palette_red
+    color9:   *palette_brightred
+    color2:   *palette_green
+    color10:  *palette_brightgreen
+    color3:   *palette_yellow
+    color11:  *palette_brightyellow
+    color4:   *palette_blue
+    color12:  *palette_brightblue
+    color5:   *palette_magenta
+    color13:  *palette_brightmagenta
+    color6:   *palette_cyan
+    color14:  *palette_brightcyan
+    color7:   *palette_white
+    color15:  *palette_brightwhite
+
 theme_urxvt:
-  background: *background_hard
+  background: *background
   foreground: *foreground
   scroll:     "#AAAAAA"
   cursor:     "#AAAAAA"

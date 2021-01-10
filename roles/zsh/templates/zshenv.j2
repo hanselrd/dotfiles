@@ -7,7 +7,11 @@ export BROWSER=brave
 {% else %}
 export BROWSER=chromium
 {% endif %}
+{% if tag_alacritty == true %}
+export TERMINAL=alacritty
+{% elif tag_urxvt == true %}
 export TERMINAL=urxvt
+{% endif %}
 export VISUAL="$EDITOR"
 {% endif %}
 

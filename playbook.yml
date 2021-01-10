@@ -1,5 +1,5 @@
 ---
-# sudo ansible-playbook --diff -i inventory --limit laptop --tags all playbook.yml --extra-vars "user_id=delacruz user_email=test@test.com user_name='Test Test' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp"
+# sudo ansible-playbook --diff -i inventory --limit laptop --tags all --skip-tags packages,nodejs,elm,rust,python,haskell,dwm,bspwm,runit playbook.yml --extra-vars "user_id=delacruz user_email=test@test.com user_name='Test Test' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp"
 
 - hosts: all
   gather_facts: yes
@@ -46,6 +46,7 @@
       set_fact:
         "tag_{{ item }}": "{{ (('all' in ansible_run_tags or item in ansible_run_tags) and item not in ansible_skip_tags) | bool }}"
       loop:
+        - alacritty
         - backgrounds
         - bin
         - bspwm # missing
@@ -89,6 +90,7 @@
         - { cond: "{{ (tag_i3 and not tag_dwm and not tag_bspwm) or (not tag_i3 and tag_dwm and not tag_bspwm) or (not tag_i3 and not tag_dwm and tag_bspwm) or (not tag_i3 and not tag_dwm and not tag_bspwm) }}", msg: "i3, dwm and bspwm are mutually exclusive" }
         - { cond: "{{ (tag_i3 and tag_i3status) or (not tag_i3 and not tag_i3status) }}", msg: "i3 and i3status must be specified together" }
         - { cond: "{{ (tag_systemd and not tag_runit) or (not tag_systemd and tag_runit) or (not tag_systemd and not tag_runit) }}", msg: "systemd and runit are mutually exclusive" }
+        - { cond: "{{ (tag_alacritty and not tag_urxvt) or (not tag_alacritty and tag_urxvt) or (not tag_alacritty and not tag_urxvt) }}", msg: "alacritty and urxvt are mutually exclusive" }
       tags: always
 
     - debug:
@@ -137,6 +139,12 @@
         name: xinit
         apply:
           tags: xinit
+      tags: always
+
+    - include_role:
+        name: alacritty
+        apply:
+          tags: alacritty
       tags: always
 
     - include_role:
