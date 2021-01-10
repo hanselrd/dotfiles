@@ -64,6 +64,8 @@ SPACESHIP_EXIT_CODE_SHOW=true
 
 antigen apply
 
+eval spaceship_vi_mode_enable
+
 # Set PATH
 {% if inventory_hostname == "remote" %}
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/sources/opt/llvm7/bin:$PATH"
