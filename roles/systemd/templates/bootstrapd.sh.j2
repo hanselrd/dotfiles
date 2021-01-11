@@ -32,7 +32,8 @@ feh --bg-scale "{{ background_path }}" &
 
 {% if theme_name == "wal" %}
 # wal
-wal -n -i "{{ background_path }}" &
+#wal -n -i "{{ background_path }}" &
+wal -f sexy-sexcolors &
 {% endif %}
 
 # betterlockscreen (lockscreen)
