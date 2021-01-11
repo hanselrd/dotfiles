@@ -7,16 +7,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'itchyny/vim-gitbranch'
-"Plug 'maralla/completor.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'antoyo/vim-licenses'
-Plug 'chrisbra/Colorizer'
+Plug 'ap/vim-css-color'
 Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-titlecase'
-Plug 'dense-analysis/ale'
 Plug 'dylanaraps/wal.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
@@ -32,6 +29,7 @@ Plug 'kovetskiy/sxhkd-vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim'
 Plug 'mengelbrecht/lightline-bufferline'
+Plug 'mg979/vim-visual-multi'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ntpeters/vim-better-whitespace'
@@ -39,7 +37,6 @@ Plug 'rhysd/vim-clang-format'
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'takac/vim-hardtime'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-commentary'
@@ -47,7 +44,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-scripts/ReplaceWithRegister'
 
 call plug#end()
 
@@ -59,10 +55,7 @@ call plug#end()
 let g:licenses_copyright_holders_name='{{ user_name }}'
 "let g:licenses_authors_name='{{ user_name }}'
 
-" Plug 'chrisbra/Colorizer'
-"let g:colorizer_auto_color=1
-"let g:colorizer_auto_filetype='css,html'
-let g:colorizer_disable_bufleave=1
+" Plug 'ap/vim-css-color'
 
 " Plug 'chrisbra/unicode.vim'
 
@@ -73,9 +66,6 @@ let g:colorizer_disable_bufleave=1
 "let g:system_copy#paste_command='xclip -sel clipboard -o'
 
 " Plug 'christoomey/vim-titlecase'
-
-" Plug 'dense-analysis/ale'
-let g:ale_linters_explicit=1
 
 " Plug 'dylanaraps/wal.vim'
 if !empty(glob('~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim'))
@@ -159,8 +149,6 @@ endfunction
 "    call lightline#colorscheme()
 "endfunction
 
-" Plug 'itchyny/vim-gitbranch'
-
 " Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
 " Plug 'junegunn/fzf.vim'
@@ -198,12 +186,6 @@ let g:gutentags_file_list_command={
     \ },
     \ }
 
-" Plug 'maralla/completor.vim'
-let g:completor_clang_binary='/usr/bin/clang'
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
 " Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings={
@@ -229,6 +211,8 @@ let g:lightline#bufferline#number_map={
 let g:lightline.tabline={'left': [['buffers']], 'right': [['']]}
 let g:lightline.component_expand={'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type={'buffers': 'tabsel'}
+
+" Plug 'mg979/vim-visual-multi'
 
 " Plug 'morhetz/gruvbox'
 let g:gruvbox_transparent_bg=1
@@ -299,8 +283,6 @@ let g:list_of_insert_keys=[]
 let g:list_of_disabled_keys=['<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
 let g:hardtime_timeout=5000
 
-" Plug 'terryma/vim-multiple-cursors'
-
 " Plug 'tmux-plugins/vim-tmux'
 
 " Plug 'tomasiser/vim-code-dark'
@@ -319,8 +301,6 @@ autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 
 " Plug 'tpope/vim-vinegar'
 
-" Plug 'vim-scripts/ReplaceWithRegister'
-
 " END PLUGIN CONFIGURATION
 
 " line numbers and color
@@ -335,7 +315,6 @@ set background=dark
 {# highlight Pmenu ctermbg=0 ctermfg=7 #}
 {# {% else %} #}
 colorscheme gruvbox
-"colorscheme codedark
 {# {% endif %} #}
 highlight Normal ctermbg=NONE
 highlight SignColumn ctermbg=NONE
@@ -347,9 +326,9 @@ highlight Pmenu ctermbg=0 ctermfg=7
 highlight PmenuSel ctermbg=8 ctermfg=15
 highlight Visual ctermbg=0 ctermfg=4
 highlight WildMenu ctermfg=4
-highlight GitGutterAdd ctermbg=0 ctermfg=2
-highlight GitGutterChange ctermbg=0 ctermfg=4
-highlight GitGutterDelete ctermbg=0 ctermfg=1
+"highlight GitGutterAdd ctermbg=0 ctermfg=2
+"highlight GitGutterChange ctermbg=0 ctermfg=4
+"highlight GitGutterDelete ctermbg=0 ctermfg=1
 
 "set colorcolumn=100
 fun! ToggleCC()
