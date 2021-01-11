@@ -101,11 +101,11 @@ endif
 set laststatus=2
 set noshowmode
 let g:lightline={
-{# {% if theme_name == "wal" %} #}
-{#     \ 'colorscheme': 'wal', #}
-{# {% else %} #}
+{% if theme_name == "wal" %}
+    \ 'colorscheme': 'wal',
+{% else %}
     \ 'colorscheme': '16color',
-{# {% endif %} #}
+{% endif %}
     \ 'mode_map': {
     \   'n' : 'N',
     \   'i' : 'I',
