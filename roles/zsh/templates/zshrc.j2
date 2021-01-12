@@ -95,6 +95,14 @@ setopt nonomatch
 source "$HOME/.bashrc" > /dev/null 2>&1
 {% endif %}
 
+rcp() {
+    rsync -avzP $1 $2
+}
+
+rmv() {
+    rsync -avzP --remove-source-files $1 $2
+}
+
 alias vi="vim -u NONE -U NONE -N -i NONE"
 alias dryclean="find . \( -name 'node_modules' -o -name 'elm-stuff' -o -name 'target' -o -name 'build' -o -name 'dist' -o -name 'venv' \) -type d -print -prune"
 alias clean="find . \( -name 'node_modules' -o -name 'elm-stuff' -o -name 'target' -o -name 'build' -o -name 'dist' -o -name 'venv' \) -type d -print -prune -exec rm -rfI {} \;"
