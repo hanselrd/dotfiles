@@ -64,6 +64,7 @@
       - reflector
       - rofi
       - rpm-tools
+      - rsync
       - rxvt-unicode
       - sdl2
       - sdl2_image
