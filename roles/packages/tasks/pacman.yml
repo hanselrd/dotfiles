@@ -118,6 +118,7 @@
       # - ttf-font-awesome-4
       - betterlockscreen
       - brave-bin
+      - downgrade
       - i3status-rust-git
       - numix-gtk-theme
       - numix-icon-theme-pack-git
