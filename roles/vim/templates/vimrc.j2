@@ -31,10 +31,12 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mg979/vim-visual-multi'
+Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/vim-clang-format'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'takac/vim-hardtime'
@@ -127,6 +129,8 @@ let g:lightline={
     \   '_gitbranch': 'fugitive#head',
     \   'gitbranch': 'LightlineGitBranch',
     \   'gitblame': 'LightlineGitBlame',
+    \   'fileformat': 'LightlineFileFormat',
+    \   'filetype': 'LightlineFileType',
     \ }
     \ }
 function! LightlineGitBranch() abort
@@ -142,6 +146,12 @@ function! LightlineGitBlame() abort
         return ''
     endif
     "return winwidth(0) > 100 ? blame : ''
+endfunction
+function! LightlineFileFormat() abort
+    return strlen(&fileformat) ? WebDevIconsGetFileFormatSymbol() . ' ' . &fileformat : WebDevIconsGetFileFormatSymbol()
+endfunction
+function! LightlineFileType() abort
+    return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : WebDevIconsGetFileTypeSymbol() . ' ' . 'no ft'
 endfunction
 "autocmd VimEnter * call SetupLightlineColors()
 "function SetupLightlineColors() abort
@@ -211,11 +221,14 @@ let g:lightline#bufferline#unnamed='[No Name]'
 let g:lightline#bufferline#number_map={
 \ 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴',
 \ 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹'}
+let g:lightline#bufferline#enable_devicons=1
 let g:lightline.tabline={'left': [['buffers']], 'right': [['']]}
 let g:lightline.component_expand={'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type={'buffers': 'tabsel'}
 
 " Plug 'mg979/vim-visual-multi'
+
+" Plug 'mhinz/vim-startify'
 
 " Plug 'morhetz/gruvbox'
 let g:gruvbox_transparent_bg=1
@@ -270,6 +283,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 "    \ "AllowShortIfStatementsOnASingleLine": "true"
 "    \ }
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
+
+" Plug 'ryanoasis/vim-devicons'
 
 " Plug 'sheerun/vim-polyglot'
 autocmd BufNewFile,BufRead *.tpp,*.ipp set filetype=cpp
@@ -335,13 +350,13 @@ highlight WildMenu ctermfg=4
 "highlight GitGutterDelete ctermbg=0 ctermfg=1
 
 "set colorcolumn=100
-fun! ToggleCC()
+function! ToggleCC()
     if &cc == ''
         set cc=100
     else
         set cc=
     endif
-endfun
+endfunction
 command! ToggleCC call ToggleCC()
 nnoremap <Leader>cc :ToggleCC<CR>
 set backupcopy=yes
@@ -392,10 +407,10 @@ let g:netrw_fastbrowse=0
 " nice to haves
 "cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
 cnoremap w!! SudoWrite
-"fun! TrimWhitespace()
+"function! TrimWhitespace()
 "    let l:save = winsaveview()
 "    keeppatterns %s/\s\+$//e
 "    call winrestview(l:save)
-"endfun
+"endfunction
 "command! TrimWhitespace call TrimWhitespace()
 cnoremap su!! %!sort <bar> uniq

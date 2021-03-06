@@ -1,5 +1,6 @@
 {
     "coc.preferences.formatOnSaveFiletypes": ["rust", "haskell"],//, "javascript", "javascriptreact", "typescript", "typescriptreact"],
+    /* "clangd.arguments": ["-j", "1"], */
     "git.addGBlameToBufferVar": true,
     "languageserver": {
         "elmLS": {
