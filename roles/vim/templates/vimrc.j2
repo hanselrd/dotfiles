@@ -393,7 +393,7 @@ set path+=**
 set wildmenu
 
 " create the `tags` file
-command! MakeTags !ctags -R .
+command! MakeTags !ctags --kinds-C++=+p --fields=+iaS --extras=+q -R . ~/.cache/CPM
 
 " tweaks for file browsing
 "let g:netrw_banner=0
