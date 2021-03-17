@@ -4,7 +4,7 @@ cd "$(dirname "$0")" || exit
 
 # $1 = {{ inventory_hostname }}
 case "$1" in
-    laptop|work)
+    desktop|laptop)
         case "$2" in
             start|restart)
                 ./df_launcher picom

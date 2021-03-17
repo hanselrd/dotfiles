@@ -4,15 +4,15 @@ cd "$(dirname "$0")" || exit
 
 # $1 = {{ inventory_hostname }}
 case "$1" in
-    laptop|work)
+    desktop|laptop)
         case "$2" in
             start|restart)
                 case "$1" in
+                    desktop)
+                        ./df_launcher redshift -P -O 3500
+                        ;;
                     laptop)
                         ./df_launcher redshift -P -t 5500:2500 -l 40.7128:-74.0060
-                        ;;
-                    work)
-                        ./df_launcher redshift -P -O 3500
                         ;;
                 esac
                 ;;

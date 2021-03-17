@@ -20,4 +20,4 @@
     mode: 0755
     force: yes
   loop:
-    - default-work.sh
+    - default-desktop.sh

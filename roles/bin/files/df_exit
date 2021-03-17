@@ -8,7 +8,7 @@ lock() {
 
 # $1 = {{ inventory_hostname }}
 case "$1" in
-    laptop|work)
+    desktop|laptop)
         case "$2" in
             lock)
                 lock
