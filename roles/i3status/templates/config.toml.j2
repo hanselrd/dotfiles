@@ -21,55 +21,29 @@ alternating_tint_fg = "{{ theme_i3status.alternating_tint_fg }}"
 
 [[block]]
 block = "disk_space"
-path = "/"
 alias = "/"
+format = "{icon}{available}G {percentage}"
 info_type = "available"
-unit = "GiB"
 interval = 20
-show_percentage = true
+path = "/"
+unit = "GiB"
 
 [[block]]
 block = "net"
-device = "wlp0s20f3"
-ssid = false
-signal_strength = true
-ip = true
-speed_up = false
-speed_down = false
-graph_up = false
-speed_down = false
+format = "{ip}"
+# format_alt = "{ipv6}"
 interval = 5
-hide_missing = true
-hide_inactive = true
-
-[[block]]
-block = "net"
-device = "wlp2s0"
-ssid = false
-signal_strength = true
-ip = true
-speed_up = false
-speed_down = false
-graph_up = false
-speed_down = false
-interval = 5
-hide_missing = true
-hide_inactive = true
 
 [[block]]
 block = "net"
 device = "tun0"
-speed_up = false
-speed_down = false
-graph_up = false
-speed_down = false
 interval = 5
 
 {% if inventory_hostname == "laptop" %}
 [[block]]
 block = "battery"
-interval = 10
 format = "{percentage}% {time}"
+interval = 10
 
 [[block]]
 block = "custom"
@@ -79,15 +53,15 @@ interval = 1
 
 [[block]]
 block = "cpu"
+format = "{barchart} {utilization} {frequency}"
 interval = 1
-format = "{barchart} {utilization}% {frequency}GHz"
 
 [[block]]
 block = "temperature"
-collapsed = false
-interval = 10
-format = "{max}°C"
 chip = "*-isa-*"
+collapsed = false
+format = "{max}°C"
+interval = 10
 
 [[block]]
 block = "load"
@@ -96,16 +70,17 @@ interval = 1
 
 [[block]]
 block = "memory"
+clickable = true
+display_type = "memory"
 format_mem = "{Mug}G/{MTg}G {Mupi}%"
 format_swap = "{SUg}G/{STg}G {SUpi}%"
-display_type = "memory"
-icons = true
-clickable = true
 interval = 5
 
 {% if inventory_hostname == "laptop" %}
 [[block]]
 block = "backlight"
+# invert_icons = true
+step_width = 5
 {% endif %}
 
 [[block]]
@@ -115,20 +90,21 @@ show_volume_when_muted = true
 
 [[block]]
 block = "uptime"
+interval = 60
 
 {% if ansible_pkg_mgr == "pacman" %}
 [[block]]
 block = "pacman"
-interval = 600
+aur_command = "yay -Qua"
+critical_updates_regex = "(linux |linux-lts |linux-zen |linux-hardened )"
 format = "{both}"
 format_singular = "{both}"
 format_up_to_date = "{both}"
-critical_updates_regex = "(linux |linux-lts |linux-zen |linux-hardened )"
-aur_command = "yay -Qua"
+interval = 600
 {% endif %}
 
 [[block]]
 block = "time"
 format = "%a %m/%d/%Y %r"
-timezone = "US/Eastern"
 interval = 1
+timezone = "US/Eastern"
