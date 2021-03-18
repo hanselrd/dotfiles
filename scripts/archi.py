@@ -403,7 +403,7 @@ if __name__ == "__main__":
     # Update pacman mirrors
     shell("pacman -S reflector --noconfirm", dryrun=args.dryrun)
     _, stdout, _ = shell(
-        'reflector --list-countries | rev | awk \'{out=""; for(i=3;i<=NF;++i){out=out" "$i}; print $1,$2,out}\' | rev'
+        'reflector --list-countries | tail -n +3 | rev | awk \'{out=""; for(i=3;i<=NF;++i){out=out" "$i}; print $1,$2,out}\' | rev'
     )
     items = [
         Prompt.Item(tag=s[0], description=" ".join(s[1:]))
