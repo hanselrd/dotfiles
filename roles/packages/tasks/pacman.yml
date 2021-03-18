@@ -58,6 +58,7 @@
       - openvpn
       - pacman-contrib
       - picom
+      - postgresql
       - pulseaudio
       - python-pip
       - python-pywal
