@@ -663,7 +663,7 @@ if __name__ == "__main__":
         dryrun=args.dryrun,
     )
     shell(
-        f"arch-chroot /mnt bash -c 'cd /.shared/yay && sudo -u {USER_NAME} makepg -sirc --noconfirm'",
+        f"arch-chroot /mnt bash -c 'cd /.shared/yay && sudo -u {USER_NAME} makepkg -sirc --noconfirm'",
         dryrun=args.dryrun,
     )
 

@@ -246,7 +246,7 @@ bar {
                 binding_mode       {{ theme_i3bar.binding_mode.border }} {{ theme_i3bar.binding_mode.background }} {{ theme_i3bar.binding_mode.text }}
         }
 {% if inventory_hostname == "desktop" %}
-        output HDMI-1
+        output HDMI1
 {% endif %}
         tray_padding 4
         status_command i3status-rs $HOME/.config/i3status/config.toml
@@ -267,7 +267,7 @@ bar {
                 urgent_workspace   {{ theme_i3bar.urgent_workspace.border }} {{ theme_i3bar.urgent_workspace.background }} {{ theme_i3bar.urgent_workspace.text }}
                 binding_mode       {{ theme_i3bar.binding_mode.border }} {{ theme_i3bar.binding_mode.background }} {{ theme_i3bar.binding_mode.text }}
         }
-        output HDMI-2
+        output HDMI2
         tray_output none
         status_command i3status-rs $HOME/.config/i3status/config-sm.toml
         position top
