@@ -626,7 +626,7 @@ if __name__ == "__main__":
         dryrun=args.dryrun,
     )
     shell(
-        f"arch-chroot /mnt bash -c 'echo -e \"\nGRUB_DISABLE_SUBMENU=y\" >> /etc/default/grub'",
+        f"arch-chroot /mnt sed -i '/GRUB_DISABLE_SUBMENU=y/s/^#//g' /etc/default/grub",
         dryrun=args.dryrun,
     )
     shell(
