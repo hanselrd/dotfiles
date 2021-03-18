@@ -80,6 +80,7 @@
       - tmux
       - tree
       - udisks2
+      - unzip
       - upower
       - w3m
       - xdg-user-dirs
