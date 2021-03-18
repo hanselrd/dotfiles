@@ -30,13 +30,15 @@ unit = "GiB"
 
 [[block]]
 block = "net"
-format = "{ip}"
 # format_alt = "{ipv6}"
+format = "{ip}"
 interval = 5
 
 [[block]]
 block = "net"
+# format_alt = "{ipv6}"
 device = "tun0"
+format = "{ip}"
 interval = 5
 
 {% if inventory_hostname == "laptop" %}
