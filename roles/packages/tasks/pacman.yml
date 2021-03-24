@@ -38,12 +38,14 @@
       - dbeaver
       - feh
       - flameshot
+      - gdb
       - glfw-x11
       - gutenprint
       - htop
       - i3-gaps
       - i3status-rust
       - libreoffice-fresh
+      - lldb
       - lxappearance
       - mesa-demos
       - neofetch
@@ -84,6 +86,7 @@
       - udisks2
       - unzip
       - upower
+      - vulkan-tools
       - w3m
       - xdg-user-dirs
       - xorg
