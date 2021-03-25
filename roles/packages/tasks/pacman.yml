@@ -83,6 +83,7 @@
       - sxhkd
       - tmux
       - tree
+      - ttf-liberation
       - udisks2
       - unzip
       - upower
