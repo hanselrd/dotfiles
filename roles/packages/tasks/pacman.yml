@@ -37,6 +37,7 @@
       - cups-pdf
       - dbeaver
       - feh
+      - ffmpeg
       - flameshot
       - gdb
       - glfw-x11
