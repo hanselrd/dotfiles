@@ -27,6 +27,7 @@
       # - snapper
       # - vim
       - alacritty
+      - alsa-utils
       - android-tools
       - arandr
       - ccache
