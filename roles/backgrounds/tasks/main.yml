@@ -20,6 +20,7 @@
     - 0006.jpg
     - 0007.jpg
     - 0008.jpg
+    - 0009.jpg
 
 - name: Export background variables
   set_fact:
