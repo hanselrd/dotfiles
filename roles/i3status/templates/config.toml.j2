@@ -22,11 +22,11 @@ alternating_tint_fg = "{{ theme_i3status.alternating_tint_fg }}"
 [[block]]
 block = "disk_space"
 alias = "/"
-format = "{icon}{available}G {percentage}"
+format = "{icon} {available} {percentage}"
 info_type = "available"
 interval = 20
 path = "/"
-unit = "GiB"
+unit = "GB"
 
 [[block]]
 block = "net"
@@ -62,7 +62,7 @@ interval = 1
 block = "temperature"
 chip = "*-isa-*"
 collapsed = false
-format = "{max}°C"
+format = "{max}"
 interval = 10
 
 [[block]]
@@ -74,8 +74,8 @@ interval = 1
 block = "memory"
 clickable = true
 display_type = "memory"
-format_mem = "{Mug}G/{MTg}G {Mupi}%"
-format_swap = "{SUg}G/{STg}G {SUpi}%"
+format_mem = "{mem_used}/{mem_total} {mem_used_percents:1}"
+format_swap = "{swap_used}/{swap_total} {swap_used_percents:1}"
 interval = 5
 
 {% if inventory_hostname == "laptop" %}
