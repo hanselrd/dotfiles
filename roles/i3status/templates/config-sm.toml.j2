@@ -22,23 +22,25 @@ alternating_tint_fg = "{{ theme_i3status.alternating_tint_fg }}"
 [[block]]
 block = "disk_space"
 alias = "/"
-format = "{icon} {available} {percentage}"
-info_type = "available"
+format = "{icon} {used}{percentage}"
+info_type = "used"
 interval = 20
 path = "/"
 unit = "GB"
+warning = 80
+alert = 90
 
 [[block]]
 block = "net"
-# format_alt = "{ipv6}"
 format = "{ip}"
+format_alt = "{ipv6}"
 interval = 5
 
 [[block]]
 block = "net"
-# format_alt = ""
 device = "tun0"
 format = ""
+format_alt = ""
 interval = 5
 
 {% if inventory_hostname == "laptop" %}
@@ -74,8 +76,8 @@ interval = 1
 block = "memory"
 clickable = true
 display_type = "memory"
-format_mem = "{mem_used}/{mem_total} {mem_used_percents:1}"
-format_swap = "{swap_used}/{swap_total} {swap_used_percents:1}"
+format_mem = "{mem_used} {mem_used_percents:1}"
+format_swap = "{swap_used} {swap_used_percents:1}"
 interval = 5
 
 {% if inventory_hostname == "laptop" %}
