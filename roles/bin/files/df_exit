@@ -3,7 +3,8 @@
 cd "$(dirname "$0")" || exit
 
 lock() {
-    betterlockscreen -t "Type password to unlock" -l dimblur
+    i3lock -c 000000ff --clock --radius=200 --ring-width=3 --inside-color=000000ff --ring-color=ffffffff --insidever-color=000000ff --ringver-color=3d9970ff --insidewrong-color=000000ff --ringwrong-color=ff4136ff --line-uses-inside --keyhl-color=3d9970ff --bshl-color=ff4136ff --separator-color=ffffffff --verif-color=3d9970ff --wrong-color=ff4136ff --layout-color=ffffffff --time-color=ffffffff --date-color=ffffffff --greeter-color=ffffffff --time-str="%T%z" --date-str="%Y-%m-%d" --verif-text="" --wrong-text="" --noinput-text="" --lock-text="" --lockfailed-text=""
+    # betterlockscreen -t "Type password to unlock" -l dimblur
 }
 
 # $1 = {{ inventory_hostname }}

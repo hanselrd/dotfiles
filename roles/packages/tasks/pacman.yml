@@ -123,13 +123,14 @@
   vars:
     packages:
       # - alltomp3-bin
+      # - betterlockscreen
       # - pgmodeler
       # - rxvt-unicode-pixbuf
       # - spotify
       # - ttf-font-awesome-4
-      - betterlockscreen
       - brave-bin
       - downgrade
+      - i3lock-color
       - numix-gtk-theme
       - numix-icon-theme-pack-git
       - polybar
