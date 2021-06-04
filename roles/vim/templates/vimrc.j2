@@ -7,6 +7,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'DingDean/wgsl.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'antoyo/vim-licenses'
 Plug 'chrisbra/Colorizer'
@@ -51,6 +52,8 @@ Plug 'tpope/vim-vinegar'
 call plug#end()
 
 " START PLUGIN CONFIGURATION
+
+" Plug 'DingDean/wgsl.vim'
 
 " Plug 'airblade/vim-gitgutter'
 
@@ -260,7 +263,7 @@ let g:coc_global_extensions=[
      \ 'coc-markdownlint',
      \ 'coc-prettier',
      \ 'coc-python',
-     \ 'coc-rls',
+     \ 'coc-rust-analyzer',
      \ 'coc-styled-components',
      \ 'coc-svelte',
      \ 'coc-tailwindcss',
