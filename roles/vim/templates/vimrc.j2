@@ -20,6 +20,7 @@ Plug 'dylanaraps/wal.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
@@ -42,45 +43,57 @@ Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'takac/vim-hardtime'
 Plug 'tmux-plugins/vim-tmux'
-Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
+syntax enable
+filetype plugin indent on
+set background=dark
+set backupcopy=yes
+set cmdheight=2
+set completeopt=menuone,noinsert,noselect
+set cursorline
+set encoding=utf-8
+set hidden
+set laststatus=2
+set nobackup
+set noshowmode
+set nowritebackup
+set number
+set relativenumber
+set shortmess+=c
+set spelllang=en_us
+set updatetime=300
+command! MakeTags !ctags --kinds-C++=+p --fields=+iaS --extras=+q -R . ~/.cache/CPM
+cnoremap su!! %!sort <bar> uniq
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
+
 " START PLUGIN CONFIGURATION
-
-" Plug 'DingDean/wgsl.vim'
-
-" Plug 'airblade/vim-gitgutter'
 
 " Plug 'antoyo/vim-licenses'
 let g:licenses_copyright_holders_name='{{ user_name }}'
-"let g:licenses_authors_name='{{ user_name }}'
-
-" Plug 'chrisbra/Colorizer'
-
-" Plug 'chrisbra/unicode.vim'
-
-" Plug 'christoomey/vim-sort-motion'
+let g:licenses_authors_name='{{ user_name }}'
 
 " Plug 'christoomey/vim-system-copy'
 "let g:system_copy#copy_command='xclip -sel clipboard'
 "let g:system_copy#paste_command='xclip -sel clipboard -o'
 
-" Plug 'christoomey/vim-titlecase'
-
-" Plug 'cstrahan/vim-capnp'
-
 " Plug 'dylanaraps/wal.vim'
 if !empty(glob('~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim'))
     silent !sed -i "s/''/'\#000000'/g" ~/.vim/plugged/wal.vim/autoload/lightline/colorscheme/wal.vim
 endif
-
-" Plug 'easymotion/vim-easymotion'
 
 " Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_exclude_patterns=['fugitive://.*', 'scp://.*']
@@ -96,8 +109,6 @@ if strlen($TMUX) && executable('tmux')
 endif
 
 " Plug 'itchyny/lightline.vim'
-set laststatus=2
-set noshowmode
 let g:lightline={
 {% if theme_name == "wal" %}
     \ 'colorscheme': 'wal',
@@ -165,8 +176,6 @@ endfunction
 "    call lightline#colorscheme()
 "endfunction
 
-" Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-
 " Plug 'junegunn/fzf.vim'
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>g :GFiles<CR>
@@ -180,16 +189,6 @@ nnoremap <Leader>h :History<CR>
 nnoremap <Leader>C :Commits<CR>
 nnoremap <Leader>c :BCommits<CR>
 nnoremap <Leader>ft :Filetypes<CR>
-
-" Plug 'kana/vim-textobj-entire'
-
-" Plug 'kana/vim-textobj-indent'
-
-" Plug 'kana/vim-textobj-line'
-
-" Plug 'kana/vim-textobj-user'
-
-" Plug 'kovetskiy/sxhkd-vim'
 
 " Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_enabled=0
@@ -229,10 +228,6 @@ let g:lightline.tabline={'left': [['buffers']], 'right': [['']]}
 let g:lightline.component_expand={'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type={'buffers': 'tabsel'}
 
-" Plug 'mg979/vim-visual-multi'
-
-" Plug 'mhinz/vim-startify'
-
 " Plug 'morhetz/gruvbox'
 let g:gruvbox_transparent_bg=1
 let g:gruvbox_contrast_dark='hard'
@@ -243,19 +238,28 @@ let g:gruvbox_termcolors=16
 if !empty(glob('~/.vim/plugged/gruvbox/colors/gruvbox.vim'))
     silent !sed -zi "s/\(  let s:aqua\[1\]   = 14\)\n\(  let s:fg1\[1\]    = 15\)/\1\n  let s:orange[1] = 3\n\2/g" ~/.vim/plugged/gruvbox/colors/gruvbox.vim
 endif
+colorscheme gruvbox
+highlight Normal ctermbg=NONE
+highlight SignColumn ctermbg=NONE
+highlight CursorLine ctermbg=4 ctermfg=0
+highlight CursorLineNr ctermbg=0 ctermfg=4
+highlight Folded ctermbg=0
+highlight VertSplit ctermbg=0
+highlight Pmenu ctermbg=0 ctermfg=7
+highlight PmenuSel ctermbg=8 ctermfg=15
+highlight Visual ctermbg=0 ctermfg=4
+highlight WildMenu ctermfg=4
+"highlight GitGutterAdd ctermbg=0 ctermfg=2
+"highlight GitGutterChange ctermbg=0 ctermfg=4
+"highlight GitGutterDelete ctermbg=0 ctermfg=1
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-set hidden
-"set nobackup
-"set nowritebackup
-set updatetime=300
-"set shortmess+=c
-"set signcolumn=yes
 let g:coc_global_extensions=[
      \ 'coc-clangd',
      \ 'coc-css',
      \ 'coc-emmet',
      \ 'coc-eslint',
+     \ 'coc-explorer',
      \ 'coc-git',
      \ 'coc-highlight',
      \ 'coc-html',
@@ -271,12 +275,35 @@ let g:coc_global_extensions=[
      \ 'coc-yaml',
      \ 'coc-yank',
      \ ]
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <Leader>f <Plug>(coc-format-selected)
+nnoremap <space>e :CocCommand explorer<CR>
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+xmap <Leader>f <Plug>(coc-format-selected)
 nmap <Leader>f <Plug>(coc-format-selected)
-autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Plug 'ntpeters/vim-better-whitespace'
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+autocmd CursorHold * silent call CocActionAsync('highlight')
+command! -nargs=0 Format :call CocAction('format')
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Plug 'rhysd/vim-clang-format'
 "let g:clang_format#style_options={
@@ -286,8 +313,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 "    \ "AllowShortIfStatementsOnASingleLine": "true"
 "    \ }
 "autocmd FileType c,cpp,objc ClangFormatAutoEnable
-
-" Plug 'ryanoasis/vim-devicons'
 
 " Plug 'sheerun/vim-polyglot'
 autocmd BufNewFile,BufRead *.tpp,*.ipp set filetype=cpp
@@ -304,10 +329,6 @@ let g:list_of_insert_keys=[]
 let g:list_of_disabled_keys=['<Insert>', '<Del>', '<Home>', '<End>', '<PageUp>', '<PageDown>']
 let g:hardtime_timeout=5000
 
-" Plug 'tmux-plugins/vim-tmux'
-
-" Plug 'tomasiser/vim-code-dark'
-
 " Plug 'tpope/vim-commentary'
 {% raw %}
 autocmd FileType jinja,jinja2,htmldjango setlocal commentstring={#\ %s\ #}
@@ -316,104 +337,6 @@ autocmd FileType capnp setlocal commentstring=#\ %s
 {% endraw %}
 
 " Plug 'tpope/vim-eunuch'
-
-" Plug 'tpope/vim-fugitive'
-
-" Plug 'tpope/vim-surround'
-
-" Plug 'tpope/vim-vinegar'
+cnoremap w!! SudoWrite
 
 " END PLUGIN CONFIGURATION
-
-" line numbers and color
-set number
-set relativenumber
-set hlsearch
-set incsearch
-set cursorline
-set background=dark
-{# {% if theme_name == "wal" %} #}
-{# colorscheme wal #}
-{# highlight Pmenu ctermbg=0 ctermfg=7 #}
-{# {% else %} #}
-colorscheme gruvbox
-{# {% endif %} #}
-highlight Normal ctermbg=NONE
-highlight SignColumn ctermbg=NONE
-highlight CursorLine ctermbg=4 ctermfg=0
-highlight CursorLineNr ctermbg=0 ctermfg=4
-highlight Folded ctermbg=0
-highlight VertSplit ctermbg=0
-highlight Pmenu ctermbg=0 ctermfg=7
-highlight PmenuSel ctermbg=8 ctermfg=15
-highlight Visual ctermbg=0 ctermfg=4
-highlight WildMenu ctermfg=4
-"highlight GitGutterAdd ctermbg=0 ctermfg=2
-"highlight GitGutterChange ctermbg=0 ctermfg=4
-"highlight GitGutterDelete ctermbg=0 ctermfg=1
-
-"set colorcolumn=100
-function! ToggleCC()
-    if &cc == ''
-        set cc=100
-    else
-        set cc=
-    endif
-endfunction
-command! ToggleCC call ToggleCC()
-nnoremap <Leader>cc :ToggleCC<CR>
-set backupcopy=yes
-set spelllang=en_us
-
-" indentation
-set tabstop=8
-set softtabstop=0
-set expandtab
-set shiftwidth=4
-set smarttab
-set backspace=indent,eol,start
-set tw=0
-
-" highlight whitespace
-set list
-set listchars=
-"set listchars+=eol:↲
-set listchars+=tab:→\
-set listchars+=trail:∙
-set listchars+=extends:»
-set listchars+=precedes:«
-set listchars+=nbsp:⣿
-set showbreak=↪\
-"if has('patch-7.4.710')
-"    set listchars+=space:𐄙
-"endif
-
-" search down into subfolders
-" provides tab-completion for all file-related tasks
-set path+=**
-
-" display all matching files when tab completing
-set wildmenu
-
-" create the `tags` file
-command! MakeTags !ctags --kinds-C++=+p --fields=+iaS --extras=+q -R . ~/.cache/CPM
-
-" tweaks for file browsing
-"let g:netrw_banner=0
-"let g:netrw_browse_split=4
-"let g:netrw_altv=1
-"let g:netrw_liststyle=3
-"let g:netrw_list_hide=netrw_gitignore#Hide()
-"let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_fastbrowse=0
-
-" nice to haves
-"cnoremap w!! execute 'silent! write !sudo tee % > /dev/null' <bar> edit!
-cnoremap w!! SudoWrite
-"function! TrimWhitespace()
-"    let l:save = winsaveview()
-"    keeppatterns %s/\s\+$//e
-"    call winrestview(l:save)
-"endfunction
-"command! TrimWhitespace call TrimWhitespace()
-cnoremap su!! %!sort <bar> uniq
