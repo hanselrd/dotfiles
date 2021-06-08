@@ -1,0 +1,58 @@
+---
+# tasks file for roles/vscode
+
+- name: Create vscode config directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/Code/User"
+    state: directory
+
+- name: Copy vscode config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_config_dir }}/Code/User/{{ item }}"
+    force: yes
+  loop:
+    - keybindings.json
+
+- name: Generate vscode config files
+  become: yes
+  become_user: "{{ user_id }}"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ user_config_dir }}/Code/User/{{ item }}"
+    force: yes
+  loop:
+    - settings.json
+
+- name: Install vscode extensions
+  become: yes
+  become_user: "{{ user_id }}"
+  shell: |
+    . {{ user_home_dir }}/.zshrc
+    code --install-extension --force {{ item }}
+  args:
+    executable: /usr/bin/zsh
+  loop:
+    - bungcip.better-toml
+    - CoenraadS.bracket-pair-colorizer-2
+    - eamodio.gitlens
+    - EditorConfig.EditorConfig
+    - josef.rouge-theme
+    - matklad.rust-analyzer
+    - ms-python.python
+    - ms-python.vscode-pylance
+    - ms-toolsai.jupyter
+    - ms-vscode-remote.remote-containers
+    - ms-vscode-remote.remote-ssh
+    - ms-vscode-remote.remote-wsl
+    - ms-vscode-remote.vscode-remote-extensionpack
+    - ms-vscode.cmake-tools
+    - ms-vscode.cpptools
+    - PKief.material-icon-theme
+    - twxs.cmake
+    - vscodevim.vim
+    - zhuangtongfa.material-theme

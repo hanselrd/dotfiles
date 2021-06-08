@@ -1,5 +1,5 @@
 ---
-# sudo ansible-playbook --diff -i inventory --limit laptop --tags all --skip-tags packages,nodejs,elm,rust,python,haskell,dwm,bspwm,runit,urxvt --extra-vars "user_id=delacruz user_email=test@test.com user_name='Test Test' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp" playbook.yml
+# sudo ansible-playbook --diff -i inventory --limit laptop --tags all --skip-tags packages,nodejs,elm,rust,python,haskell,dwm,bspwm,runit,urxvt,vscode --extra-vars "user_id=delacruz user_email=test@test.com user_name='Test Test' user_home_dir=/tmp/dotfiles/home user_cache_dir=/tmp/dotfiles/cache user_config_dir=/tmp/dotfiles/config user_root_dir=/tmp/dotfiles/root user_temp_dir=/tmp/dotfiles/temp" playbook.yml
 
 - hosts: all
   gather_facts: yes
@@ -76,6 +76,7 @@
         - tmux
         - urxvt
         - vim
+        - vscode
         - xinit
         - xrandr
         - xrdb
@@ -253,6 +254,12 @@
         name: ranger
         apply:
           tags: ranger
+      tags: always
+
+    - include_role:
+        name: vscode
+        apply:
+          tags: vscode
       tags: always
 
     - include_role:
