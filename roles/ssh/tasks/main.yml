@@ -16,3 +16,13 @@
     type: rsa
     size: 4096
     state: present
+
+- name: Copy ssh config files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_dir }}/.ssh/{{ item }}"
+    force: yes
+  loop:
+    - config
