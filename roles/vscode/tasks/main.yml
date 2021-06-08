@@ -33,7 +33,7 @@
   become_user: "{{ user_id }}"
   shell: |
     . {{ user_home_dir }}/.zshrc
-    code --install-extension --force {{ item }}
+    code --install-extension {{ item }} --force
   args:
     executable: /usr/bin/zsh
   loop:
