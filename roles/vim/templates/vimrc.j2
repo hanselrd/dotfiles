@@ -93,6 +93,7 @@ set showbreak=↪\
 "endif
 command! MakeTags !ctags --kinds-C++=+p --fields=+iaS --extras=+q -R . ~/.cache/CPM
 cnoremap su!! %!sort <bar> uniq
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 if has("nvim-0.5.0") || has("patch-8.1.1564")
     set signcolumn=number
