@@ -57,3 +57,5 @@
     - twxs.cmake
     - vscodevim.vim
     - zhuangtongfa.material-theme
+    - wwm.better-align
+    - wmaurer.change-case
