@@ -10,6 +10,7 @@
     "terminal.integrated.fontFamily": "{{ font_vscode.name }}",
     "terminal.integrated.fontWeight": "{{ font_vscode.style }}",
     "terminal.integrated.fontSize": {{ font_vscode.size }},
+    "vim.smartRelativeLine": true,
     "vim.leader": "\\",
     "vim.normalModeKeyBindings": [
         {
@@ -46,9 +47,7 @@
             ],
             "commands": [
                 "editor.action.sortLinesAscending",
-            ],
-            "after": [
-                "<esc>"
+                "extension.vim_escape",
             ]
         },
         {
@@ -57,18 +56,10 @@
                 "f"
             ],
             "commands": [
-                "editor.action.formatSelection"
-            ],
-            "after": [
-                "<esc>"
+                "editor.action.formatSelection",
+                "extension.vim_escape",
             ]
         },
-    ],
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
     ],
     "files.watcherExclude": {
         "**/.git/objects/**": true,
