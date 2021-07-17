@@ -15,6 +15,8 @@
     . {{ user_home_dir }}/.zshrc
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
     rustup component add rls rust-analysis rust-src
+    rustup default nightly
+    rustup default stable
     rustup update
     cargo install cargo-tree cargo-edit cargo-feature cargo-expand wasm-pack || true
     rustfmt --print-config default {{ user_config_dir }}/rustfmt/rustfmt.toml
