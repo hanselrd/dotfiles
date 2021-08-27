@@ -135,6 +135,7 @@
       - numix-icon-theme-pack-git
       - polybar
       - snap-pac-grub
+      - ventoy-bin
       - visual-studio-code-bin
   when: st_yay.stat.exists
 
