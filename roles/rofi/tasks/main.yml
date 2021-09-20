@@ -18,3 +18,22 @@
   loop:
     - config.rasi
     - theme.rasi
+
+- name: Create rofi config template directory
+  become: yes
+  become_user: "{{ user_id }}"
+  file:
+    path: "{{ user_config_dir }}/wal/templates"
+    state: directory
+  when: theme_name == "wal"
+
+- name: Copy default rofi config template files
+  become: yes
+  become_user: "{{ user_id }}"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_config_dir }}/wal/templates/{{ item }}"
+    force: yes
+  loop:
+    - colors-rofi-dark.rasi
+  when: theme_name == "wal"
