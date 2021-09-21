@@ -30,6 +30,8 @@
       - alsa-utils
       - android-tools
       - arandr
+      - archinstall
+      - archiso
       - ccache
       - clang
       - cmake
