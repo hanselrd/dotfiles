@@ -41,11 +41,14 @@
     - CoenraadS.bracket-pair-colorizer-2
     - eamodio.gitlens
     - EditorConfig.EditorConfig
+    - haskell.haskell
     - josef.rouge-theme
+    - justusadam.language-haskell
     - matklad.rust-analyzer
     - ms-python.python
     - ms-python.vscode-pylance
     - ms-toolsai.jupyter
+    - ms-toolsai.jupyter-keymap
     - ms-vscode-remote.remote-containers
     - ms-vscode-remote.remote-ssh
     - ms-vscode-remote.remote-wsl
@@ -56,6 +59,6 @@
     - PolyMeilex.wgsl
     - twxs.cmake
     - vscodevim.vim
-    - zhuangtongfa.material-theme
-    - wwm.better-align
     - wmaurer.change-case
+    - wwm.better-align
+    - zhuangtongfa.material-theme
