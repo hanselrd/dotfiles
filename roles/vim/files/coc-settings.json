@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["rust", "haskell"],//, "javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "coc.preferences.formatOnSaveFiletypes": ["rust", "haskell", "lhaskell"],//, "javascript", "javascriptreact", "typescript", "typescriptreact"],
     /* "clangd.arguments": ["-j", "1"], */
     "git.addGBlameToBufferVar": true,
     "languageserver": {
@@ -9,15 +9,10 @@
             "rootPatterns": ["elm.json"]
         },
         "haskell": {
-            "command": "hie-wrapper",
-            "filetypes": ["hs", "lhs", "haskell"],
+            "command": "haskell-language-server-wrapper",
             "args": ["--lsp"],
-            "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml"],
-            "initializationOptions": {
-                "languageServerHaskell": {
-                    "hLintOn": true
-                }
-            }
+            "filetypes": ["haskell", "lhaskell"],
+            "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"]
         }
     },
     "python.jediEnabled": false,

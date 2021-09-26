@@ -52,6 +52,7 @@
       - lldb
       - lxappearance
       - mesa-demos
+      - nasm
       - neofetch
       - ninja
       - nmap
@@ -135,6 +136,7 @@
       - i3lock-color
       - numix-gtk-theme
       - numix-icon-theme-pack-git
+      - objconv
       - polybar
       - snap-pac-grub
       - ventoy-bin

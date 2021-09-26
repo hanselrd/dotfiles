@@ -8,7 +8,11 @@
     . {{ user_home_dir }}/.zshrc
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | TMPDIR=/var/tmp BOOTSTRAP_HASKELL_NONINTERACTIVE=true sh
     curl -sSL https://get.haskellstack.org | sh || true
-    stack install ghcid
+    ghcup update
+    cabal update
+    stack update
+    ghcup install hls
+    cabal install ghcid
   args:
     executable: /usr/bin/zsh
   register: output_haskell
@@ -16,31 +20,31 @@
 - debug:
     msg: "{{ output_haskell.stdout_lines }}"
 
-- name: Create haskell cache directory
-  become: yes
-  become_user: "{{ user_id }}"
-  file:
-    path: "{{ user_cache_dir }}/dotfiles/haskell"
-    state: directory
+# - name: Create haskell cache directory
+#   become: yes
+#   become_user: "{{ user_id }}"
+#   file:
+#     path: "{{ user_cache_dir }}/dotfiles/haskell"
+#     state: directory
 
-- name: Clone haskell-ide-engine
-  become: yes
-  become_user: "{{ user_id }}"
-  git:
-    repo: https://github.com/haskell/haskell-ide-engine
-    dest: "{{ user_cache_dir }}/dotfiles/haskell/haskell-ide-engine"
-    update: yes
+# - name: Clone haskell-ide-engine
+#   become: yes
+#   become_user: "{{ user_id }}"
+#   git:
+#     repo: https://github.com/haskell/haskell-ide-engine
+#     dest: "{{ user_cache_dir }}/dotfiles/haskell/haskell-ide-engine"
+#     update: yes
 
-- name: Install haskell-ide-engine
-  become: yes
-  become_user: "{{ user_id }}"
-  shell: |
-    . {{ user_home_dir }}/.zshrc
-    stack ./install.hs hie
-  args:
-    executable: /usr/bin/zsh
-    chdir: "{{ user_cache_dir }}/dotfiles/haskell/haskell-ide-engine"
-  register: output_stack
+# - name: Install haskell-ide-engine
+#   become: yes
+#   become_user: "{{ user_id }}"
+#   shell: |
+#     . {{ user_home_dir }}/.zshrc
+#     stack ./install.hs hie
+#   args:
+#     executable: /usr/bin/zsh
+#     chdir: "{{ user_cache_dir }}/dotfiles/haskell/haskell-ide-engine"
+#   register: output_stack
 
-- debug:
-    msg: "{{ output_stack.stdout_lines }}"
+# - debug:
+#     msg: "{{ output_stack.stdout_lines }}"
