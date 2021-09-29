@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["rust", "haskell", "lhaskell"],//, "javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "coc.preferences.formatOnSaveFiletypes": ["rust"//, "haskell", "lhaskell", "javascript", "javascriptreact", "typescript", "typescriptreact"],
     /* "clangd.arguments": ["-j", "1"], */
     "git.addGBlameToBufferVar": true,
     "languageserver": {
