@@ -42,6 +42,7 @@
     - eamodio.gitlens
     - EditorConfig.EditorConfig
     - haskell.haskell
+    - jkiviluoto.tws
     - josef.rouge-theme
     - justusadam.language-haskell
     - matklad.rust-analyzer
