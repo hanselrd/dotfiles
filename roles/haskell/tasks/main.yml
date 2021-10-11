@@ -12,7 +12,7 @@
     cabal update
     stack update
     ghcup install hls
-    cabal install ghcid brittany
+    cabal install ghcid brittany ormolu
   args:
     executable: /usr/bin/zsh
   register: output_haskell
