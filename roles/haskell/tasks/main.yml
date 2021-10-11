@@ -8,7 +8,7 @@
     . {{ user_home_dir }}/.zshrc
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | TMPDIR=/var/tmp BOOTSTRAP_HASKELL_NONINTERACTIVE=true sh
     curl -sSL https://get.haskellstack.org | sh || true
-    ghcup update
+    ghcup upgrade
     cabal update
     stack update
     ghcup install hls
