@@ -12,7 +12,7 @@
     cabal update
     stack update
     ghcup install hls
-    cabal install ghcid brittany ormolu
+    cabal install ghcid brittany ormolu BNFC
   args:
     executable: /usr/bin/zsh
   register: output_haskell
