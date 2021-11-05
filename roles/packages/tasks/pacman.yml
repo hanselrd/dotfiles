@@ -39,6 +39,10 @@
       - cups
       - cups-pdf
       - dbeaver
+      - dhall
+      - dhall-lsp-server
+      - dhall-json
+      - dhall-yaml
       - feh
       - ffmpeg
       - flameshot
