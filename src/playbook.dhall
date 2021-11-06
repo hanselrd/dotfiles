@@ -16,6 +16,42 @@ let Role/equal = ./Role/equal.partial.dhall
 
 let env = (../build/environment.dhall).default
 
+let assertRolesDependencies =
+      let dependencies =
+            Prelude.List.concatMap
+              RoleConfig.Type
+              Role
+              ( \(roleConfig : RoleConfig.Type) ->
+                  if    roleConfig.enabled
+                  then  roleConfig.dependencies
+                  else  [] : List Role
+              )
+              env.roles
+
+      in    assert
+          :     Prelude.Bool.and
+                  ( Prelude.List.map
+                      RoleConfig.Type
+                      Bool
+                      ( \(roleConfig : RoleConfig.Type) ->
+                          let role = roleConfig.role
+
+                          in  Prelude.Bool.and
+                                ( Prelude.List.map
+                                    Role
+                                    Bool
+                                    ( \(depRole : Role) ->
+                                        if    Role/equal role depRole
+                                        then  roleConfig.enabled
+                                        else  True
+                                    )
+                                    dependencies
+                                )
+                      )
+                      env.roles
+                  )
+            ===  True
+
 let assertRolesConflicts =
       let conflicts =
             Prelude.List.concatMap
@@ -37,7 +73,7 @@ let assertRolesConflicts =
                           let role = roleConfig.role
 
                           in  if    roleConfig.enabled
-                              then  (Prelude.Bool.or
+                              then  Prelude.Bool.or
                                       ( Prelude.List.map
                                           Role
                                           Bool
@@ -45,7 +81,7 @@ let assertRolesConflicts =
                                               Role/equal role conflictRole
                                           )
                                           conflicts
-                                      ))
+                                      )
                               else  False
                       )
                       env.roles
