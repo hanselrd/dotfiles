@@ -8,9 +8,11 @@ let Prelude =
 
 let Role = ./Role.partial.dhall
 
-let RoleConfig = ./RoleConfig.partial.dhall
+let RoleConfig = ./Role/Config.partial.dhall
 
 let Role/toText = ./Role/toText.partial.dhall
+
+let Role/toMetadata = ./Role/toMetadata.partial.dhall
 
 let Role/equal = ./Role/equal.partial.dhall
 
@@ -23,7 +25,7 @@ let assertRolesDependencies =
               Role
               ( \(roleConfig : RoleConfig.Type) ->
                   if    roleConfig.enabled
-                  then  roleConfig.dependencies
+                  then  (Role/toMetadata roleConfig.role).dependencies
                   else  [] : List Role
               )
               env.roles
@@ -59,7 +61,7 @@ let assertRolesConflicts =
               Role
               ( \(roleConfig : RoleConfig.Type) ->
                   if    roleConfig.enabled
-                  then  roleConfig.conflicts
+                  then  (Role/toMetadata roleConfig.role).conflicts
                   else  [] : List Role
               )
               env.roles
