@@ -6,24 +6,26 @@ let Prelude =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/v21.0.0/Prelude/package.dhall
         sha256:46c48bba5eee7807a872bbf6c3cb6ee6c2ec9498de3543c5dcc7dd950e43999d
 
-let Role = ./Role.partial.dhall
+let Role = ./Lib/Role/Enum.partial.dhall
 
-let RoleConfig = ./Role/Config.partial.dhall
+let Role/Config = ./Lib/Role/Config/Record.partial.dhall
 
-let Role/toText = ./Role/toText.partial.dhall
+let Role/toText = ./Lib/Role/toText.partial.dhall
 
-let Role/toMetadata = ./Role/toMetadata.partial.dhall
+let Role/toMetadata = ./Lib/Role/toMetadata.partial.dhall
 
-let Role/equal = ./Role/equal.partial.dhall
+let Role/equal = ./Lib/Role/equal.partial.dhall
 
-let env = (../build/environment.dhall).default
+let Role/Config/sort = ./Lib/Role/Config/sort.partial.dhall
+
+let env = ../build/environment.dhall
 
 let assertRolesDependencies =
       let dependencies =
             Prelude.List.concatMap
-              RoleConfig.Type
+              Role/Config.Type
               Role
-              ( \(roleConfig : RoleConfig.Type) ->
+              ( \(roleConfig : Role/Config.Type) ->
                   if    roleConfig.enabled
                   then  (Role/toMetadata roleConfig.role).dependencies
                   else  [] : List Role
@@ -33,9 +35,9 @@ let assertRolesDependencies =
       in    assert
           :     Prelude.Bool.and
                   ( Prelude.List.map
-                      RoleConfig.Type
+                      Role/Config.Type
                       Bool
-                      ( \(roleConfig : RoleConfig.Type) ->
+                      ( \(roleConfig : Role/Config.Type) ->
                           let role = roleConfig.role
 
                           in  Prelude.Bool.and
@@ -57,9 +59,9 @@ let assertRolesDependencies =
 let assertRolesConflicts =
       let conflicts =
             Prelude.List.concatMap
-              RoleConfig.Type
+              Role/Config.Type
               Role
-              ( \(roleConfig : RoleConfig.Type) ->
+              ( \(roleConfig : Role/Config.Type) ->
                   if    roleConfig.enabled
                   then  (Role/toMetadata roleConfig.role).conflicts
                   else  [] : List Role
@@ -69,9 +71,9 @@ let assertRolesConflicts =
       in    assert
           :     Prelude.Bool.or
                   ( Prelude.List.map
-                      RoleConfig.Type
+                      Role/Config.Type
                       Bool
-                      ( \(roleConfig : RoleConfig.Type) ->
+                      ( \(roleConfig : Role/Config.Type) ->
                           let role = roleConfig.role
 
                           in  if    roleConfig.enabled
@@ -91,7 +93,7 @@ let assertRolesConflicts =
             ===  False
 
 let addIncludeRoleTask =
-      \(roleConfig : RoleConfig.Type) ->
+      \(roleConfig : Role/Config.Type) ->
         let roleText = Role/toText roleConfig.role
 
         in  if    roleConfig.enabled
@@ -125,12 +127,17 @@ in  [ Ansible.Play::{
                           ( toMap
                               { directories =
                                   Ansible.Vars.array
-                                    [ Ansible.Vars.string env.user_cache_dir
-                                    , Ansible.Vars.string env.user_config_dir
-                                    , Ansible.Vars.string env.user_home_dir
-                                    , Ansible.Vars.string env.user_root_dir
-                                    , Ansible.Vars.string env.user_temp_dir
-                                    ]
+                                    ( Prelude.List.map
+                                        Text
+                                        Ansible.Vars.Type
+                                        Ansible.Vars.string
+                                        [ env.user_cache_dir
+                                        , env.user_config_dir
+                                        , env.user_home_dir
+                                        , env.user_root_dir
+                                        , env.user_temp_dir
+                                        ]
+                                    )
                               }
                           )
                       )
@@ -139,10 +146,10 @@ in  [ Ansible.Play::{
               , Prelude.List.unpackOptionals
                   Ansible.Task.Type
                   ( Prelude.List.map
-                      RoleConfig.Type
+                      Role/Config.Type
                       (Optional Ansible.Task.Type)
                       addIncludeRoleTask
-                      env.roles
+                      (Role/Config/sort env.roles)
                   )
               ]
           )

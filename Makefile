@@ -18,7 +18,7 @@ OBJS := $(SRCS:$(SRCDIR)/%.dhall=$(OBJDIR)/%.yml)
 TOBJS := $(TEMPLATE_SRCS:$(SRCDIR)/%.template.dhall=$(OBJDIR)/%)
 ROBJS := $(RAW_SRCS:$(SRCDIR)/%=$(OBJDIR)/%)
 
-.PHONY: all lint format freeze clean
+.PHONY: all lint format freeze install test clean
 
 all: $(OBJS) $(TOBJS) $(ROBJS)
 
@@ -55,6 +55,12 @@ format:
 
 freeze:
 	@$(DHALLC) freeze $(SRCS) $(TEMPLATE_SRCS) $(PARTIAL_SRCS)
+
+install: all
+	@env --chdir=$(OBJDIR) ansible-playbook --diff -i inventory playbook.yml
+
+test: all
+	@env --chdir=$(OBJDIR) ansible-playbook --check --diff -i inventory playbook.yml
 
 clean:
 	@rm -rf $(OBJDIR)

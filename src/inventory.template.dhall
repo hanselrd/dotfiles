@@ -1,4 +1,4 @@
-let env = (../build/environment.dhall).default
+let env = ../build/environment.dhall
 
 in  ''
     [all]
