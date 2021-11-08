@@ -1,8 +1,8 @@
-let Role/Enum = ./Enum.partial.dhall
+let Role = ./Enum.partial.dhall
 
 let toText
-    : Role/Enum -> Text
-    = \(role : Role/Enum) ->
+    : Role -> Text
+    = \(role : Role) ->
         merge
           { Alacritty = "alacritty"
           , Backgrounds = "backgrounds"

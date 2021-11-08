@@ -6,9 +6,9 @@ let Prelude =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/v21.0.0/Prelude/package.dhall
         sha256:46c48bba5eee7807a872bbf6c3cb6ee6c2ec9498de3543c5dcc7dd950e43999d
 
-let Role/Enum = ../../../Lib/Role/Enum.partial.dhall
+let Role = ../../../Lib/Role/Enum.partial.dhall
 
-let Background/Enum = ../../../Lib/Background/Enum.partial.dhall
+let Background = ../../../Lib/Background/Enum.partial.dhall
 
 let Background/toText = ../../../Lib/Background/toText.partial.dhall
 
@@ -21,23 +21,23 @@ let mkRoleTasks = ../../mkRoleTasks.partial.dhall
 in  Prelude.List.concat
       Ansible.Task.Type
       [ mkRoleTasks
-          Role/Enum.Backgrounds
+          Role.Backgrounds
           [ Prelude.Map.keyValue
               (List Text)
               (Text/pathify "${env.user_root_dir}/usr/local/share/backgrounds")
               ( Prelude.List.map
-                  Background/Enum
+                  Background
                   Text
                   Background/toText
-                  [ Background/Enum.One
-                  , Background/Enum.Two
-                  , Background/Enum.Three
-                  , Background/Enum.Four
-                  , Background/Enum.Five
-                  , Background/Enum.Six
-                  , Background/Enum.Seven
-                  , Background/Enum.Eight
-                  , Background/Enum.Nine
+                  [ Background.One
+                  , Background.Two
+                  , Background.Three
+                  , Background.Four
+                  , Background.Five
+                  , Background.Six
+                  , Background.Seven
+                  , Background.Eight
+                  , Background.Nine
                   ]
               )
           ]

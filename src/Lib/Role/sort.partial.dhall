@@ -1,31 +1,31 @@
 let External/Prelude = ../External/Prelude.partial.dhall
 
-let Role/Enum = ./Enum.partial.dhall
+let Role = ./Enum.partial.dhall
 
 let Role/equal = ./equal.partial.dhall
 
 let Role/toMetadata = ./toMetadata.partial.dhall
 
 let Accumulator =
-      { edges : External/Prelude.Map.Type Role/Enum Role/Enum
-      , start : List Role/Enum
-      , sorted : List Role/Enum
+      { edges : External/Prelude.Map.Type Role Role
+      , start : List Role
+      , sorted : List Role
       }
 
 let sort
-    : List Role/Enum -> List Role/Enum
-    = \(xs : List Role/Enum) ->
+    : List Role -> List Role
+    = \(xs : List Role) ->
         let edges =
               External/Prelude.List.concatMap
-                Role/Enum
-                (External/Prelude.Map.Entry Role/Enum Role/Enum)
-                ( \(role : Role/Enum) ->
+                Role
+                (External/Prelude.Map.Entry Role Role)
+                ( \(role : Role) ->
                     let dependencies = (Role/toMetadata role).dependencies
 
                     in  External/Prelude.List.map
-                          Role/Enum
-                          (External/Prelude.Map.Entry Role/Enum Role/Enum)
-                          ( \(dependency : Role/Enum) ->
+                          Role
+                          (External/Prelude.Map.Entry Role Role)
+                          ( \(dependency : Role) ->
                               { mapKey = dependency, mapValue = role }
                           )
                           dependencies
@@ -34,15 +34,13 @@ let sort
 
         let start =
               External/Prelude.List.filter
-                Role/Enum
-                ( \(role : Role/Enum) ->
+                Role
+                ( \(role : Role) ->
                     External/Prelude.List.fold
-                      (External/Prelude.Map.Entry Role/Enum Role/Enum)
+                      (External/Prelude.Map.Entry Role Role)
                       edges
                       Bool
-                      ( \ ( edge
-                          : External/Prelude.Map.Entry Role/Enum Role/Enum
-                          ) ->
+                      ( \(edge : External/Prelude.Map.Entry Role Role) ->
                         \(acc : Bool) ->
                               External/Prelude.Bool.not
                                 (Role/equal edge.mapValue role)
@@ -54,9 +52,9 @@ let sort
 
         let indices =
               External/Prelude.List.generate
-                (   External/Prelude.List.length Role/Enum xs
+                (   External/Prelude.List.length Role xs
                   + External/Prelude.List.length
-                      (External/Prelude.Map.Entry Role/Enum Role/Enum)
+                      (External/Prelude.Map.Entry Role Role)
                       edges
                 )
                 Natural
@@ -68,20 +66,16 @@ let sort
                 Accumulator
                 ( \(index : Natural) ->
                   \(acc : Accumulator) ->
-                    let maybeNode =
-                          External/Prelude.List.head Role/Enum acc.start
+                    let maybeNode = External/Prelude.List.head Role acc.start
 
                     in  if    External/Prelude.Bool.not
-                                ( External/Prelude.Optional.null
-                                    Role/Enum
-                                    maybeNode
-                                )
+                                (External/Prelude.Optional.null Role maybeNode)
                         then  let acc =
                                         acc
                                     //  { start =
                                             External/Prelude.List.drop
                                               1
-                                              Role/Enum
+                                              Role
                                               acc.start
                                         }
 
@@ -90,25 +84,20 @@ let sort
                                     //  { sorted =
                                               acc.sorted
                                             # External/Prelude.Optional.toList
-                                                Role/Enum
+                                                Role
                                                 maybeNode
                                         }
 
                               let dependentEdges =
                                     External/Prelude.List.filter
-                                      ( External/Prelude.Map.Entry
-                                          Role/Enum
-                                          Role/Enum
-                                      )
+                                      (External/Prelude.Map.Entry Role Role)
                                       ( \ ( edge
-                                          : External/Prelude.Map.Entry
-                                              Role/Enum
-                                              Role/Enum
+                                          : External/Prelude.Map.Entry Role Role
                                           ) ->
                                           merge
                                             { None = False
                                             , Some =
-                                                \(role : Role/Enum) ->
+                                                \(role : Role) ->
                                                   Role/equal edge.mapKey role
                                             }
                                             maybeNode
@@ -116,16 +105,11 @@ let sort
                                       acc.edges
 
                               in  External/Prelude.List.fold
-                                    ( External/Prelude.Map.Entry
-                                        Role/Enum
-                                        Role/Enum
-                                    )
+                                    (External/Prelude.Map.Entry Role Role)
                                     dependentEdges
                                     Accumulator
                                     ( \ ( dependentEdge
-                                        : External/Prelude.Map.Entry
-                                            Role/Enum
-                                            Role/Enum
+                                        : External/Prelude.Map.Entry Role Role
                                         ) ->
                                       \(acc : Accumulator) ->
                                         let acc =
@@ -134,13 +118,13 @@ let sort
                                                       let p =
                                                             External/Prelude.List.partition
                                                               ( External/Prelude.Map.Entry
-                                                                  Role/Enum
-                                                                  Role/Enum
+                                                                  Role
+                                                                  Role
                                                               )
                                                               ( \ ( edge
                                                                   : External/Prelude.Map.Entry
-                                                                      Role/Enum
-                                                                      Role/Enum
+                                                                      Role
+                                                                      Role
                                                                   ) ->
                                                                       Role/equal
                                                                         dependentEdge.mapKey
@@ -155,8 +139,8 @@ let sort
                                                           # External/Prelude.List.drop
                                                               1
                                                               ( External/Prelude.Map.Entry
-                                                                  Role/Enum
-                                                                  Role/Enum
+                                                                  Role
+                                                                  Role
                                                               )
                                                               p.true
                                                   }
@@ -165,18 +149,18 @@ let sort
                                               External/Prelude.Bool.not
                                                 ( External/Prelude.List.null
                                                     ( External/Prelude.Map.Entry
-                                                        Role/Enum
-                                                        Role/Enum
+                                                        Role
+                                                        Role
                                                     )
                                                     ( External/Prelude.List.partition
                                                         ( External/Prelude.Map.Entry
-                                                            Role/Enum
-                                                            Role/Enum
+                                                            Role
+                                                            Role
                                                         )
                                                         ( \ ( edge
                                                             : External/Prelude.Map.Entry
-                                                                Role/Enum
-                                                                Role/Enum
+                                                                Role
+                                                                Role
                                                             ) ->
                                                             Role/equal
                                                               dependentEdge.mapValue
@@ -199,8 +183,7 @@ let sort
                                     acc
                         else  acc
                 )
-                { edges, start, sorted = External/Prelude.List.empty Role/Enum }
+                { edges, start, sorted = External/Prelude.List.empty Role }
             ).sorted
-
 
 in  sort

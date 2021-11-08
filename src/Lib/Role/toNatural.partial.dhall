@@ -1,8 +1,8 @@
-let Role/Enum = ./Enum.partial.dhall
+let Role = ./Enum.partial.dhall
 
 let toNatural
-    : Role/Enum -> Natural
-    = \(role : Role/Enum) ->
+    : Role -> Natural
+    = \(role : Role) ->
         merge
           { Alacritty = 0
           , Backgrounds = 1

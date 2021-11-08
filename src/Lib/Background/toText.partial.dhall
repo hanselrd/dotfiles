@@ -1,8 +1,8 @@
-let Background/Enum = ./Enum.partial.dhall
+let Background = ./Enum.partial.dhall
 
 let toText
-    : Background/Enum -> Text
-    = \(background : Background/Enum) ->
+    : Background -> Text
+    = \(background : Background) ->
         merge
           { One = "0001.jpg"
           , Two = "0002.jpg"

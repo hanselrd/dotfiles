@@ -6,11 +6,11 @@ let Prelude =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/v21.0.0/Prelude/package.dhall
         sha256:46c48bba5eee7807a872bbf6c3cb6ee6c2ec9498de3543c5dcc7dd950e43999d
 
-let Role/Enum = ../Lib/Role/Enum.partial.dhall
+let Role = ../Lib/Role/Enum.partial.dhall
 
 let Role/toText = ../Lib/Role/toText.partial.dhall
 
-in  \(role : Role/Enum) ->
+in  \(role : Role) ->
     \(outputs : Prelude.Map.Type Text (List Text)) ->
       let roleText = Role/toText role
 

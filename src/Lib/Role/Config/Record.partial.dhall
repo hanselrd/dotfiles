@@ -1,3 +1,3 @@
-let Role/Enum = ../Enum.partial.dhall
+let Role = ../Enum.partial.dhall
 
-in  { Type = { role : Role/Enum, enabled : Bool }, default = {=} }
+in  { Type = { role : Role, enabled : Bool }, default = {=} }
