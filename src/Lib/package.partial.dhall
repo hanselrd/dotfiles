@@ -1,4 +1,5 @@
 { Background = ./Background/package.partial.dhall
+, Configuration = ./Configuration/package.partial.dhall
 , Directory = ./Directory/package.partial.dhall
 , External = ./External/package.partial.dhall
 , PackageManager = ./PackageManager/package.partial.dhall
