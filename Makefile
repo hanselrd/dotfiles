@@ -56,10 +56,10 @@ format:
 freeze:
 	@$(DHALLC) freeze $(SRCS) $(TEMPLATE_SRCS) $(PARTIAL_SRCS)
 
-install: all
+install:
 	@env --chdir=$(OBJDIR) ansible-playbook --diff -i inventory playbook.yml
 
-test: all
+test:
 	@env --chdir=$(OBJDIR) ansible-playbook --check --diff -i inventory playbook.yml
 
 clean:

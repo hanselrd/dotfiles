@@ -1,12 +1,15 @@
 let Role = ./Enum.partial.dhall
 
-let Role/Metadata = ./Metadata.partial.dhall
+let Role/Metadata = ./Metadata/Record.partial.dhall
 
 let toMetadata
     : Role -> Role/Metadata.Type
     = \(role : Role) ->
         merge
-          { Alacritty = Role/Metadata::{ conflicts = [ Role.Urxvt ] }
+          { Alacritty = Role/Metadata::{
+            , dependencies = [ Role.Packages ]
+            , conflicts = [ Role.Urxvt ]
+            }
           , Backgrounds = Role/Metadata::{=}
           , Bin = Role/Metadata::{=}
           , Bspwm = Role/Metadata::{ conflicts = [ Role.Dwm, Role.I3 ] }
