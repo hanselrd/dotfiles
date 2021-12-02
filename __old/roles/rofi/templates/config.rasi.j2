@@ -42,11 +42,6 @@ configuration {
 /*	scroll-method: 0;*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
-{% if theme_name == "wal" %}
-	theme: "~/.cache/wal/colors-rofi-dark.rasi";
-{% else %}
-	theme: "~/.config/rofi/theme.rasi";
-{% endif %}
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
@@ -149,3 +144,8 @@ configuration {
       sorting-method:    "name";
   }
 }
+{% if theme_name == "wal" %}
+@theme "~/.cache/wal/colors-rofi-dark.rasi"
+{% else %}
+@theme "~/.config/rofi/theme.rasi"
+{% endif %}
