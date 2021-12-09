@@ -4,9 +4,11 @@ let Role/Config = ./Record.partial.dhall
 
 let Role = ../Enum.partial.dhall
 
-let Role/sort = ../sort.partial.dhall
+let RoleMeta = ../EnumMeta.partial.dhall
 
-let Role/equal = ../equal.partial.dhall
+let Enum/equal = ../../Enum/equal.partial.dhall
+
+let Role/sort = ../sort.partial.dhall
 
 let sort
     : List Role/Config.Type -> List Role/Config.Type
@@ -27,7 +29,7 @@ let sort
                   External/Prelude.List.filter
                     Role/Config.Type
                     ( \(roleConfig : Role/Config.Type) ->
-                        Role/equal role roleConfig.role
+                        Enum/equal Role RoleMeta role roleConfig.role
                     )
                     xs
               )

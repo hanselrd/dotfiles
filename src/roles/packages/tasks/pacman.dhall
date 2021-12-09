@@ -2,8 +2,6 @@ let External/Ansible = ../../../Lib/External/Ansible.partial.dhall
 
 let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
 
-let Role = ../../../Lib/Role/Enum.partial.dhall
-
 let TaskPool/executeCommands =
       ../../../Lib/TaskPool/executeCommands.partial.dhall
 
@@ -151,18 +149,12 @@ in  External/Prelude.List.concat
           ( \(task : External/Ansible.Task.Type) ->
               task // { when = Some "st_yay.stat.exists" }
           )
-          ( TaskPool/executeCommands
-              Role.Packages
-              [ "yay -S ??? --needed --noconfirm" ]
-          )
+          (TaskPool/executeCommands [ "yay -S ??? --needed --noconfirm" ])
       , External/Prelude.List.map
           External/Ansible.Task.Type
           External/Ansible.Task.Type
           ( \(task : External/Ansible.Task.Type) ->
               task // { when = Some "st_yay.stat.exists" }
           )
-          ( TaskPool/executeCommands
-              Role.Packages
-              [ "yay -Rns ??? --unneeded --noconfirm" ]
-          )
+          (TaskPool/executeCommands [ "yay -Rns ??? --unneeded --noconfirm" ])
       ]

@@ -2,20 +2,12 @@ let External/Ansible = ../External/Ansible.partial.dhall
 
 let External/Prelude = ../External/Prelude.partial.dhall
 
-let Role = ../Role/Enum.partial.dhall
-
-let Role/toText = ../Role/toText.partial.dhall
-
 let Text/pathify = ../Text/pathify.partial.dhall
 
 let copyFiles
-    : Role ->
-      External/Prelude.Map.Type Text (List Text) ->
+    : External/Prelude.Map.Type Text (List Text) ->
         List External/Ansible.Task.Type
-    = \(role : Role) ->
-      \(map : External/Prelude.Map.Type Text (List Text)) ->
-        let roleText = Role/toText role
-
+    = \(map : External/Prelude.Map.Type Text (List Text)) ->
         let directories = External/Prelude.Map.keys Text (List Text) map
 
         in  External/Prelude.List.concat
@@ -26,8 +18,7 @@ let copyFiles
                             (External/Prelude.List.null Text directories)
                     then  Some
                             External/Ansible.Task::{
-                            , name = Some
-                                "Create ${roleText} directory (or directories)"
+                            , name = Some "Create directory (or directories)"
                             , file = Some External/Ansible.File::{
                               , path = "{{ item }}"
                               , state = Some
@@ -72,7 +63,7 @@ let copyFiles
                                   )
                           then  Some
                                   External/Ansible.Task::{
-                                  , name = Some "Copy ${roleText} file(s)"
+                                  , name = Some "Copy file(s)"
                                   , copy = Some External/Ansible.Copy::{
                                     , src = Some "{{ item }}"
                                     , dest =

@@ -2,7 +2,9 @@ let External/Prelude = ../External/Prelude.partial.dhall
 
 let Role = ./Enum.partial.dhall
 
-let Role/equal = ./equal.partial.dhall
+let RoleMeta = ./EnumMeta.partial.dhall
+
+let Enum/equal = ../Enum/equal.partial.dhall
 
 let Role/toMetadata = ./toMetadata.partial.dhall
 
@@ -43,7 +45,7 @@ let sort
                       ( \(edge : External/Prelude.Map.Entry Role Role) ->
                         \(acc : Bool) ->
                               External/Prelude.Bool.not
-                                (Role/equal edge.mapValue role)
+                                (Enum/equal Role RoleMeta edge.mapValue role)
                           &&  acc
                       )
                       True
@@ -98,7 +100,11 @@ let sort
                                             { None = False
                                             , Some =
                                                 \(role : Role) ->
-                                                  Role/equal edge.mapKey role
+                                                  Enum/equal
+                                                    Role
+                                                    RoleMeta
+                                                    edge.mapKey
+                                                    role
                                             }
                                             maybeNode
                                       )
@@ -126,10 +132,14 @@ let sort
                                                                       Role
                                                                       Role
                                                                   ) ->
-                                                                      Role/equal
+                                                                      Enum/equal
+                                                                        Role
+                                                                        RoleMeta
                                                                         dependentEdge.mapKey
                                                                         edge.mapKey
-                                                                  &&  Role/equal
+                                                                  &&  Enum/equal
+                                                                        Role
+                                                                        RoleMeta
                                                                         dependentEdge.mapValue
                                                                         edge.mapValue
                                                               )
@@ -162,7 +172,9 @@ let sort
                                                                 Role
                                                                 Role
                                                             ) ->
-                                                            Role/equal
+                                                            Enum/equal
+                                                              Role
+                                                              RoleMeta
                                                               dependentEdge.mapValue
                                                               edge.mapValue
                                                         )

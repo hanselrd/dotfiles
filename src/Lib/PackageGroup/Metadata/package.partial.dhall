@@ -1,1 +1,0 @@
-{ Record = ./Record.partial.dhall }

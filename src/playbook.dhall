@@ -4,13 +4,15 @@ let External/Prelude = ./Lib/External/Prelude.partial.dhall
 
 let Role = ./Lib/Role/Enum.partial.dhall
 
+let RoleMeta = ./Lib/Role/EnumMeta.partial.dhall
+
 let Role/Config = ./Lib/Role/Config/Record.partial.dhall
 
-let Role/toText = ./Lib/Role/toText.partial.dhall
+let Enum/toText = ./Lib/Enum/toText.partial.dhall
+
+let Enum/equal = ./Lib/Enum/equal.partial.dhall
 
 let Role/toMetadata = ./Lib/Role/toMetadata.partial.dhall
-
-let Role/equal = ./Lib/Role/equal.partial.dhall
 
 let Role/Config/sort = ./Lib/Role/Config/sort.partial.dhall
 
@@ -41,7 +43,11 @@ let assertRolesDependencies =
                                     Role
                                     Bool
                                     ( \(depRole : Role) ->
-                                        if    Role/equal role depRole
+                                        if    Enum/equal
+                                                Role
+                                                RoleMeta
+                                                role
+                                                depRole
                                         then  roleConfig.enabled
                                         else  True
                                     )
@@ -78,7 +84,11 @@ let assertRolesConflicts =
                                           Role
                                           Bool
                                           ( \(conflictRole : Role) ->
-                                              Role/equal role conflictRole
+                                              Enum/equal
+                                                Role
+                                                RoleMeta
+                                                role
+                                                conflictRole
                                           )
                                           conflicts
                                       )
@@ -90,7 +100,7 @@ let assertRolesConflicts =
 
 let addIncludeRoleTask =
       \(roleConfig : Role/Config.Type) ->
-        let roleText = Role/toText roleConfig.role
+        let roleText = Enum/toText Role RoleMeta roleConfig.role
 
         in  if    roleConfig.enabled
             then  Some
