@@ -9,11 +9,14 @@ let sort
       \(xs : List a) ->
         let maxSort =
               External/Prelude.Natural.listMax
-                ( External/Prelude.List.map
-                    (EnumMeta a).Type
+                ( External/Prelude.List.unpackOptionals
                     Natural
-                    (\(enumMeta : (EnumMeta a).Type) -> enumMeta.sort)
-                    enumMetas
+                    ( External/Prelude.List.map
+                        (EnumMeta a).Type
+                        (Optional Natural)
+                        (\(enumMeta : (EnumMeta a).Type) -> enumMeta.sort)
+                        enumMetas
+                    )
                 )
 
         let indices =
@@ -33,12 +36,29 @@ let sort
                       ( External/Prelude.List.filter
                           (EnumMeta a).Type
                           ( \(enumMeta : (EnumMeta a).Type) ->
-                              External/Prelude.Natural.equal enumMeta.sort index
+                              merge
+                                { Some =
+                                    \(n : Natural) ->
+                                      External/Prelude.Natural.equal n index
+                                , None = False
+                                }
+                                enumMeta.sort
                           )
                           enumMetas
                       )
                   # acc
               )
-              ([] : List a)
+              ( External/Prelude.List.map
+                  (EnumMeta a).Type
+                  a
+                  (\(enumMeta : (EnumMeta a).Type) -> enumMeta.value)
+                  ( External/Prelude.List.filter
+                      (EnumMeta a).Type
+                      ( \(enumMeta : (EnumMeta a).Type) ->
+                          External/Prelude.Optional.null Natural enumMeta.sort
+                      )
+                      enumMetas
+                  )
+              )
 
 in  sort

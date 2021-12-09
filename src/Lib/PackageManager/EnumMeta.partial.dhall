@@ -9,21 +9,21 @@ let default = { Pacman = False, Dnf = False, Apt = False }
 let meta =
       { Pacman = (EnumMeta PackageManager)::{
         , value = PackageManager.Pacman
-        , text = "pacman"
+        , text = Some "pacman"
         , equal =
             \(packageManager : PackageManager) ->
               merge (default // { Pacman = True }) packageManager
         }
       , Dnf = (EnumMeta PackageManager)::{
         , value = PackageManager.Dnf
-        , text = "dnf"
+        , text = Some "dnf"
         , equal =
             \(packageManager : PackageManager) ->
               merge (default // { Dnf = True }) packageManager
         }
       , Apt = (EnumMeta PackageManager)::{
         , value = PackageManager.Apt
-        , text = "apt"
+        , text = Some "apt"
         , equal =
             \(packageManager : PackageManager) ->
               merge (default // { Apt = True }) packageManager

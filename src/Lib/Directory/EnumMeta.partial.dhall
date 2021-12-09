@@ -13,7 +13,8 @@ let default = { Background = False }
 let meta =
       { Background = (EnumMeta Directory)::{
         , value = Directory.Background
-        , text = Text/pathify "${env.user_root_dir}/usr/local/share/backgrounds"
+        , text = Some
+            (Text/pathify "${env.user_root_dir}/usr/local/share/backgrounds")
         , equal =
             \(directory : Directory) ->
               merge (default // { Background = True }) directory

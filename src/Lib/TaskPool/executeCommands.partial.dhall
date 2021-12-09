@@ -6,7 +6,7 @@ let executeCommands
     : List Text -> List External/Ansible.Task.Type
     = \(commands : List Text) ->
         [ External/Ansible.Task::{
-          , name = Some "Execute  command(s)"
+          , name = Some "Execute command(s)"
           , shell = Some External/Ansible.Shell::{
             , cmd = Some (External/Prelude.Text.concatSep "\n" commands)
             }

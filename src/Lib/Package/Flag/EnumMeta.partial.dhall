@@ -9,14 +9,14 @@ let default = { Aur = False, Repo = False }
 let meta =
       { Aur = (EnumMeta Package/Flag)::{
         , value = Package/Flag.Aur
-        , text = "aur"
+        , text = Some "aur"
         , equal =
             \(packageFlag : Package/Flag) ->
               merge (default // { Aur = True }) packageFlag
         }
       , Repo = (EnumMeta Package/Flag)::{
         , value = Package/Flag.Repo
-        , text = "repo"
+        , text = Some "repo"
         , equal =
             \(packageFlag : Package/Flag) ->
               merge (default // { Repo = True }) packageFlag

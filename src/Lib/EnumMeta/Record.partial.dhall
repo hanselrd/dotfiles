@@ -1,4 +1,9 @@
 \(a : Type) ->
-  { Type = { value : a, sort : Natural, text : Text, equal : a -> Bool }
-  , default = { sort = 999, text = "" }
+  { Type =
+      { value : a
+      , sort : Optional Natural
+      , text : Optional Text
+      , equal : a -> Bool
+      }
+  , default = { sort = None Natural, text = None Text }
   }

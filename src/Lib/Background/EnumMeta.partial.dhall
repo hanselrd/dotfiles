@@ -19,72 +19,72 @@ let default =
 let meta =
       { One = (EnumMeta Background)::{
         , value = Background.One
-        , sort = 1
-        , text = "0001.jpg"
+        , sort = Some 1
+        , text = Some "0001.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { One = True }) background
         }
       , Two = (EnumMeta Background)::{
         , value = Background.Two
-        , sort = 2
-        , text = "0002.jpg"
+        , sort = Some 2
+        , text = Some "0002.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Two = True }) background
         }
       , Three = (EnumMeta Background)::{
         , value = Background.Three
-        , sort = 3
-        , text = "0003.jpg"
+        , sort = Some 3
+        , text = Some "0003.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Three = True }) background
         }
       , Four = (EnumMeta Background)::{
         , value = Background.Four
-        , sort = 4
-        , text = "0004.jpg"
+        , sort = Some 4
+        , text = Some "0004.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Four = True }) background
         }
       , Five = (EnumMeta Background)::{
         , value = Background.Five
-        , sort = 5
-        , text = "0005.jpg"
+        , sort = Some 5
+        , text = Some "0005.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Five = True }) background
         }
       , Six = (EnumMeta Background)::{
         , value = Background.Six
-        , sort = 6
-        , text = "0006.jpg"
+        , sort = Some 6
+        , text = Some "0006.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Six = True }) background
         }
       , Seven = (EnumMeta Background)::{
         , value = Background.Seven
-        , sort = 7
-        , text = "0007.jpg"
+        , sort = Some 7
+        , text = Some "0007.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Seven = True }) background
         }
       , Eight = (EnumMeta Background)::{
         , value = Background.Eight
-        , sort = 8
-        , text = "0008.jpg"
+        , sort = Some 8
+        , text = Some "0008.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Eight = True }) background
         }
       , Nine = (EnumMeta Background)::{
         , value = Background.Nine
-        , sort = 9
-        , text = "0009.jpg"
+        , sort = Some 9
+        , text = Some "0009.jpg"
         , equal =
             \(background : Background) ->
               merge (default // { Nine = True }) background

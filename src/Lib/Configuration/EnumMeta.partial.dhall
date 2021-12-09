@@ -9,21 +9,21 @@ let default = { Desktop = False, Laptop = False, Remote = False }
 let meta =
       { Desktop = (EnumMeta Configuration)::{
         , value = Configuration.Desktop
-        , text = "desktop"
+        , text = Some "desktop"
         , equal =
             \(configuration : Configuration) ->
               merge (default // { Desktop = True }) configuration
         }
       , Laptop = (EnumMeta Configuration)::{
         , value = Configuration.Laptop
-        , text = "laptop"
+        , text = Some "laptop"
         , equal =
             \(configuration : Configuration) ->
               merge (default // { Laptop = True }) configuration
         }
       , Remote = (EnumMeta Configuration)::{
         , value = Configuration.Remote
-        , text = "remote"
+        , text = Some "remote"
         , equal =
             \(configuration : Configuration) ->
               merge (default // { Remote = True }) configuration

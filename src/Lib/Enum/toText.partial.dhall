@@ -8,8 +8,10 @@ let toText
       \(enumMetas : List (EnumMeta a).Type) ->
       \(value : a) ->
         merge
-          { Some = \(enumMeta : (EnumMeta a).Type) -> enumMeta.text
-          , None = "<unknown>"
+          { Some =
+              \(enumMeta : (EnumMeta a).Type) ->
+                merge { Some = \(text : Text) -> text, None = "" } enumMeta.text
+          , None = ""
           }
           ( External/Prelude.List.head
               (EnumMeta a).Type
