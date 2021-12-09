@@ -1,6 +1,8 @@
 ''
 let Configuration = ../src/Lib/Configuration/Enum.partial.dhall
 
+let PackageManager = ../src/Lib/PackageManager/Enum.partial.dhall
+
 let Role = ../src/Lib/Role/Enum.partial.dhall
 
 let Role/Config = ../src/Lib/Role/Config/Record.partial.dhall
@@ -15,6 +17,7 @@ in  { Type =
         , user_root_dir : Text
         , user_temp_dir : Text
         , configuration : Configuration
+        , package_manager : PackageManager
         , roles : List Role/Config.Type
         }
     , default =
@@ -27,6 +30,7 @@ in  { Type =
       , user_root_dir = ${Text/show env:DOTFILES_USER_ROOT_DIR as Text}
       , user_temp_dir = ${Text/show env:DOTFILES_USER_TEMP_DIR as Text}
       , configuration = Configuration.${env:DOTFILES_CONFIGURATION as Text}
+      , package_manager = PackageManager.${env:DOTFILES_PACKAGE_MANAGER as Text}
       , roles =
         [ Role/Config::{ role = Role.Alacritty, enabled = ${env:DOTFILES_ROLE_ALACRITTY as Text} }
         , Role/Config::{ role = Role.Backgrounds, enabled = ${env:DOTFILES_ROLE_BACKGROUNDS as Text} }

@@ -41,8 +41,8 @@
       - cups-pdf
       - dbeaver
       - dhall
-      - dhall-lsp-server
       - dhall-json
+      - dhall-lsp-server
       - dhall-yaml
       - feh
       - ffmpeg
@@ -56,6 +56,7 @@
       - i3status-rust
       - libreoffice-fresh
       - lldb
+      - llvm
       - lxappearance
       - mesa-demos
       - nasm
