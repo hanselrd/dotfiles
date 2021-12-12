@@ -5,6 +5,20 @@ let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
 let TaskPool/executeCommands =
       ../../../Lib/TaskPool/executeCommands.partial.dhall
 
+let PackageGroup = ../../../Lib/PackageGroup/Enum.partial.dhall
+
+let PackageGroupMeta = ../../../Lib/PackageGroup/EnumMeta.partial.dhall
+
+let PackageGroup/groupBy = ../../../Lib/PackageGroup/groupBy.partial.dhall
+
+let Package = ../../../Lib/Package/Record.partial.dhall
+
+let Package/Flag = ../../../Lib/Package/Flag/Enum.partial.dhall
+
+let Enum/values = ../../../Lib/Enum/values.partial.dhall
+
+let env = ../../../../build/environment.dhall
+
 in  External/Prelude.List.concat
       External/Ansible.Task.Type
       [ [ External/Ansible.Task::{
@@ -23,98 +37,24 @@ in  External/Prelude.List.concat
                                 Text
                                 External/Ansible.Vars.Type
                                 External/Ansible.Vars.string
-                                [ "alacritty"
-                                , "alsa-utils"
-                                , "android-tools"
-                                , "arandr"
-                                , "archinstall"
-                                , "archiso"
-                                , "ccache"
-                                , "clang"
-                                , "cmake"
-                                , "ctags"
-                                , "cups"
-                                , "cups-pdf"
-                                , "dbeaver"
-                                , "dhall"
-                                , "dhall-lsp-server"
-                                , "dhall-json"
-                                , "dhall-yaml"
-                                , "feh"
-                                , "ffmpeg"
-                                , "flameshot"
-                                , "gdb"
-                                , "glfw-x11"
-                                , "graphviz"
-                                , "gutenprint"
-                                , "htop"
-                                , "i3-gaps"
-                                , "i3status-rust"
-                                , "libreoffice-fresh"
-                                , "lldb"
-                                , "lxappearance"
-                                , "mesa-demos"
-                                , "nasm"
-                                , "neofetch"
-                                , "ninja"
-                                , "nmap"
-                                , "noto-fonts"
-                                , "noto-fonts-cjk"
-                                , "noto-fonts-emoji"
-                                , "noto-fonts-extra"
-                                , "openresolv"
-                                , "openssh"
-                                , "openvpn"
-                                , "pacman-contrib"
-                                , "pandoc"
-                                , "picom"
-                                , "postgresql"
-                                , "pulseaudio"
-                                , "python-pip"
-                                , "python-pywal"
-                                , "python2"
-                                , "ranger"
-                                , "redshift"
-                                , "reflector"
-                                , "rofi"
-                                , "rpm-tools"
-                                , "rsync"
-                                , "rxvt-unicode"
-                                , "sdl2"
-                                , "sdl2_image"
-                                , "sdl2_mixer"
-                                , "sdl2_net"
-                                , "sdl2_ttf"
-                                , "shellcheck"
-                                , "sshfs"
-                                , "strace"
-                                , "sxhkd"
-                                , "tmux"
-                                , "tree"
-                                , "ttf-liberation"
-                                , "udisks2"
-                                , "unzip"
-                                , "upower"
-                                , "vulkan-intel"
-                                , "vulkan-tools"
-                                , "w3m"
-                                , "xdg-user-dirs"
-                                , "xorg"
-                                , "xorg-apps"
-                                , "xorg-drivers"
-                                , "xorg-fonts"
-                                , "xorg-xinit"
-                                , "xsel"
-                                , "youtube-dl"
-                                , "zsh"
-                                ]
+                                ( External/Prelude.List.map
+                                    Package.Type
+                                    Text
+                                    (\(package : Package.Type) -> package.name)
+                                    ( PackageGroup/groupBy
+                                        (None Package/Flag)
+                                        ( Enum/values
+                                            PackageGroup
+                                            PackageGroupMeta
+                                        )
+                                    ).present
+                                )
                             )
                       }
                   )
               )
           }
-        ]
-      , [ External/Ansible.Task::{
+        , External/Ansible.Task::{
           , name = Some "Remove packages"
           , package = Some External/Ansible.Package::{
             , name = "{{ item }}"
@@ -130,14 +70,24 @@ in  External/Prelude.List.concat
                                 Text
                                 External/Ansible.Vars.Type
                                 External/Ansible.Vars.string
-                                [ "xf86-input-synaptics" ]
+                                ( External/Prelude.List.map
+                                    Package.Type
+                                    Text
+                                    (\(package : Package.Type) -> package.name)
+                                    ( PackageGroup/groupBy
+                                        (None Package/Flag)
+                                        ( Enum/values
+                                            PackageGroup
+                                            PackageGroupMeta
+                                        )
+                                    ).absent
+                                )
                             )
                       }
                   )
               )
           }
-        ]
-      , [ External/Ansible.Task::{
+        , External/Ansible.Task::{
           , name = Some "Check if yay is installed"
           , stat = Some External/Ansible.Stat::{ path = "/usr/bin/yay" }
           , register = Some "st_yay"
@@ -147,14 +97,54 @@ in  External/Prelude.List.concat
           External/Ansible.Task.Type
           External/Ansible.Task.Type
           ( \(task : External/Ansible.Task.Type) ->
-              task // { when = Some "st_yay.stat.exists" }
+                  task
+              //  { become = Some True
+                  , become_user = Some env.user
+                  , when = Some "st_yay.stat.exists"
+                  }
           )
-          (TaskPool/executeCommands [ "yay -S ??? --needed --noconfirm" ])
+          ( let presentPackages =
+                  External/Prelude.List.map
+                    Package.Type
+                    Text
+                    (\(package : Package.Type) -> package.name)
+                    ( PackageGroup/groupBy
+                        (Some Package/Flag.Aur)
+                        (Enum/values PackageGroup PackageGroupMeta)
+                    ).present
+
+            in  TaskPool/executeCommands
+                  [ "yay -S ${External/Prelude.Text.concatSep
+                                " "
+                                presentPackages} --needed --noconfirm"
+                  ]
+                  True
+          )
       , External/Prelude.List.map
           External/Ansible.Task.Type
           External/Ansible.Task.Type
           ( \(task : External/Ansible.Task.Type) ->
-              task // { when = Some "st_yay.stat.exists" }
+                  task
+              //  { become = Some True
+                  , become_user = Some env.user
+                  , when = Some "st_yay.stat.exists"
+                  }
           )
-          (TaskPool/executeCommands [ "yay -Rns ??? --unneeded --noconfirm" ])
+          ( let absentPackages =
+                  External/Prelude.List.map
+                    Package.Type
+                    Text
+                    (\(package : Package.Type) -> package.name)
+                    ( PackageGroup/groupBy
+                        (Some Package/Flag.Aur)
+                        (Enum/values PackageGroup PackageGroupMeta)
+                    ).absent
+
+            in  TaskPool/executeCommands
+                  [ "yay -Rns ${External/Prelude.Text.concatSep
+                                  " "
+                                  absentPackages} --unneeded --noconfirm"
+                  ]
+                  True
+          )
       ]

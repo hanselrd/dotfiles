@@ -6,12 +6,11 @@ let Package = ../Package/Record.partial.dhall
 
 let Package/Flag = ../Package/Flag/Enum.partial.dhall
 
-let PackageManager = ../PackageManager/Enum.partial.dhall
+let env = ../../../build/environment.dhall
 
 let toMetadata
-    : PackageGroup -> PackageManager -> PackageGroup/Metadata.Type
+    : PackageGroup -> PackageGroup/Metadata.Type
     = \(packageGroup : PackageGroup) ->
-      \(packageManager : PackageManager) ->
         merge
           { Alacritty =
               merge
@@ -21,7 +20,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Alsa =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -30,7 +29,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Android =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -39,7 +38,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Arandr =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -50,7 +49,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Ccache =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -61,7 +60,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Clang =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -76,7 +75,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Cmake =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -87,7 +86,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Ctags =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -98,7 +97,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Cups =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -111,7 +110,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Dbeaver =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -120,7 +119,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Dhall =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -134,7 +133,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Feh =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -145,7 +144,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Ffmpeg =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -154,7 +153,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Flameshot =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -165,7 +164,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Fonts =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -180,7 +179,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Gdb =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -189,7 +188,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Glfw =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -200,7 +199,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Graphviz =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -209,7 +208,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Htop =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -220,7 +219,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , I3 =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -241,7 +240,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Libreoffice =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -250,7 +249,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Lldb =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -259,7 +258,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Lxappearance =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -268,7 +267,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Mesa =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -277,7 +276,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Nasm =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -286,7 +285,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Neofetch =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -297,7 +296,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Ninja =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -308,7 +307,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Nmap =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -317,7 +316,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Openresolv =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -326,7 +325,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Openssh =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -335,7 +334,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Openvpn =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -346,7 +345,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Other =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -412,7 +411,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Pandoc =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -421,7 +420,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Picom =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -432,7 +431,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Postgresql =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -441,7 +440,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Pulseaudio =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -450,7 +449,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Python =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -464,7 +463,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Ranger =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -475,7 +474,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Redshift =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -486,7 +485,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Rofi =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -497,7 +496,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Rsync =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -506,7 +505,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , RxvtUnicode =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -517,7 +516,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Sdl2 =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -540,7 +539,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Shellcheck =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -551,7 +550,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Sshfs =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -560,7 +559,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Strace =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -571,7 +570,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Sxhkd =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -582,7 +581,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Tmux =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -593,7 +592,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Tree =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -602,7 +601,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Udisks2 =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -611,7 +610,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Unzip =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -620,7 +619,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Upower =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -629,7 +628,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Vulkan =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -641,7 +640,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , W3m =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -650,7 +649,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Wal =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -659,7 +658,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Xdg =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -668,7 +667,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Xorg =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -684,7 +683,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Xsel =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -693,7 +692,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , YoutubeDl =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -702,7 +701,7 @@ let toMetadata
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           , Zsh =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -713,7 +712,7 @@ let toMetadata
                   }
                 , Apt = PackageGroup/Metadata::{=}
                 }
-                packageManager
+                env.package_manager
           }
           packageGroup
 

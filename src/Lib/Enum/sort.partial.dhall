@@ -2,11 +2,31 @@ let External/Prelude = ../External/Prelude.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
+let Enum/equal = ../Enum/equal.partial.dhall
+
 let sort
     : forall (a : Type) -> List (EnumMeta a).Type -> List a -> List a
     = \(a : Type) ->
       \(enumMetas : List (EnumMeta a).Type) ->
       \(xs : List a) ->
+        let enumMetas =
+              External/Prelude.List.filter
+                (EnumMeta a).Type
+                ( \(enumMeta : (EnumMeta a).Type) ->
+                    External/Prelude.Bool.not
+                      ( External/Prelude.List.null
+                          a
+                          ( External/Prelude.List.filter
+                              a
+                              ( \(x : a) ->
+                                  Enum/equal a enumMetas x enumMeta.value
+                              )
+                              xs
+                          )
+                      )
+                )
+                enumMetas
+
         let maxSort =
               External/Prelude.Natural.listMax
                 ( External/Prelude.List.unpackOptionals

@@ -10,7 +10,9 @@ let toText
         merge
           { Some =
               \(enumMeta : (EnumMeta a).Type) ->
-                merge { Some = \(text : Text) -> text, None = "" } enumMeta.text
+                merge
+                  { Some = External/Prelude.Function.identity Text, None = "" }
+                  enumMeta.text
           , None = ""
           }
           ( External/Prelude.List.head
