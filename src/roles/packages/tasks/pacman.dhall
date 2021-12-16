@@ -5,6 +5,8 @@ let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
 let TaskPool/executeCommands =
       ../../../Lib/TaskPool/executeCommands.partial.dhall
 
+let TaskPool/update = ../../../Lib/TaskPool/update.partial.dhall
+
 let PackageGroup = ../../../Lib/PackageGroup/Enum.partial.dhall
 
 let PackageGroupMeta = ../../../Lib/PackageGroup/EnumMeta.partial.dhall
@@ -93,58 +95,48 @@ in  External/Prelude.List.concat
           , register = Some "st_yay"
           }
         ]
-      , External/Prelude.List.map
-          External/Ansible.Task.Type
-          External/Ansible.Task.Type
-          ( \(task : External/Ansible.Task.Type) ->
-                  task
-              //  { become = Some True
-                  , become_user = Some env.user
-                  , when = Some "st_yay.stat.exists"
-                  }
-          )
-          ( let presentPackages =
-                  External/Prelude.List.map
-                    Package.Type
-                    Text
-                    (\(package : Package.Type) -> package.name)
-                    ( PackageGroup/groupBy
-                        (Some Package/Flag.Aur)
-                        (Enum/values PackageGroup PackageGroupMeta)
-                    ).present
+      , let presentPackages =
+              External/Prelude.List.map
+                Package.Type
+                Text
+                (\(package : Package.Type) -> package.name)
+                ( PackageGroup/groupBy
+                    (Some Package/Flag.Aur)
+                    (Enum/values PackageGroup PackageGroupMeta)
+                ).present
 
-            in  TaskPool/executeCommands
+        in  TaskPool/update
+              { become = Some True
+              , become_user = Some env.user
+              , when = Some "st_yay.stat.exists"
+              }
+              ( TaskPool/executeCommands
                   [ "yay -S ${External/Prelude.Text.concatSep
                                 " "
                                 presentPackages} --needed --noconfirm"
                   ]
                   True
-          )
-      , External/Prelude.List.map
-          External/Ansible.Task.Type
-          External/Ansible.Task.Type
-          ( \(task : External/Ansible.Task.Type) ->
-                  task
-              //  { become = Some True
-                  , become_user = Some env.user
-                  , when = Some "st_yay.stat.exists"
-                  }
-          )
-          ( let absentPackages =
-                  External/Prelude.List.map
-                    Package.Type
-                    Text
-                    (\(package : Package.Type) -> package.name)
-                    ( PackageGroup/groupBy
-                        (Some Package/Flag.Aur)
-                        (Enum/values PackageGroup PackageGroupMeta)
-                    ).absent
+              )
+      , let absentPackages =
+              External/Prelude.List.map
+                Package.Type
+                Text
+                (\(package : Package.Type) -> package.name)
+                ( PackageGroup/groupBy
+                    (Some Package/Flag.Aur)
+                    (Enum/values PackageGroup PackageGroupMeta)
+                ).absent
 
-            in  TaskPool/executeCommands
+        in  TaskPool/update
+              { become = Some True
+              , become_user = Some env.user
+              , when = Some "st_yay.stat.exists"
+              }
+              ( TaskPool/executeCommands
                   [ "yay -Rns ${External/Prelude.Text.concatSep
                                   " "
                                   absentPackages} --unneeded --noconfirm"
                   ]
                   True
-          )
+              )
       ]

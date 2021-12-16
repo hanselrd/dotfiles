@@ -42,7 +42,10 @@ let toMetadata
           , Systemd = Role/Metadata::{ conflicts = [ Role.Runit ] }
           , Theme = Role/Metadata::{=}
           , Tmux = Role/Metadata::{=}
-          , Urxvt = Role/Metadata::{ conflicts = [ Role.Alacritty ] }
+          , Urxvt = Role/Metadata::{
+            , dependencies = [ Role.Packages ]
+            , conflicts = [ Role.Alacritty ]
+            }
           , Vim = Role/Metadata::{=}
           , Vscode = Role/Metadata::{=}
           , Xinit = Role/Metadata::{=}
