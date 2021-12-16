@@ -7,14 +7,11 @@ let toText
     = \(a : Type) ->
       \(enumMetas : List (EnumMeta a).Type) ->
       \(value : a) ->
-        merge
-          { Some =
-              \(enumMeta : (EnumMeta a).Type) ->
-                merge
-                  { Some = External/Prelude.Function.identity Text, None = "" }
-                  enumMeta.text
-          , None = ""
-          }
+        External/Prelude.Text.defaultMap
+          (EnumMeta a).Type
+          ( \(enumMeta : (EnumMeta a).Type) ->
+              External/Prelude.Text.default enumMeta.text
+          )
           ( External/Prelude.List.head
               (EnumMeta a).Type
               ( External/Prelude.List.filter

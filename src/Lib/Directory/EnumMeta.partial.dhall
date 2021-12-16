@@ -1,12 +1,12 @@
 let External/Prelude = ../External/Prelude.partial.dhall
 
+let Prelude/Text/pathify = ../Prelude/Text/pathify.partial.dhall
+
 let Directory = ./Enum.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
 let env = ../../../build/environment.dhall
-
-let Text/pathify = ../Text/pathify.partial.dhall
 
 let default = { Background = False }
 
@@ -14,7 +14,9 @@ let meta =
       { Background = (EnumMeta Directory)::{
         , value = Directory.Background
         , text = Some
-            (Text/pathify "${env.user_root_dir}/usr/local/share/backgrounds")
+            ( Prelude/Text/pathify
+                "${env.user_root_dir}/usr/local/share/backgrounds"
+            )
         , equal =
             \(directory : Directory) ->
               merge (default // { Background = True }) directory

@@ -1,4 +1,4 @@
-let External/Prelude = ../External/Prelude.partial.dhall
+let External/Prelude = ../../External/Prelude.partial.dhall
 
 let pathify
     : Text -> Text

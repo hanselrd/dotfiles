@@ -2,7 +2,7 @@ let External/Ansible = ../External/Ansible.partial.dhall
 
 let External/Prelude = ../External/Prelude.partial.dhall
 
-let Text/pathify = ../Text/pathify.partial.dhall
+let Prelude/Text/pathify = ../Prelude/Text/pathify.partial.dhall
 
 let copyFiles
     : External/Prelude.Map.Type Text (List Text) ->
@@ -37,7 +37,7 @@ let copyFiles
                                                       Text
                                                       Text
                                                       External/Ansible.Vars.Type
-                                                      Text/pathify
+                                                      Prelude/Text/pathify
                                                       External/Ansible.Vars.string
                                                   )
                                                   directories
@@ -67,7 +67,7 @@ let copyFiles
                                   , copy = Some External/Ansible.Copy::{
                                     , src = Some "{{ item }}"
                                     , dest =
-                                        Text/pathify
+                                        Prelude/Text/pathify
                                           "${entry.mapKey}/{{ item }}"
                                     , force = Some True
                                     }

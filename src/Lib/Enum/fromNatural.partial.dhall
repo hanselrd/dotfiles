@@ -1,5 +1,7 @@
 let External/Prelude = ../External/Prelude.partial.dhall
 
+let Prelude/List/Indexed = ../Prelude/List/Indexed/Record.partial.dhall
+
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
 let fromNatural
@@ -7,20 +9,20 @@ let fromNatural
     = \(a : Type) ->
       \(enumMetas : List (EnumMeta a).Type) ->
       \(n : Natural) ->
-        merge
-          { Some =
-              \ ( indexedEnumMeta
-                : { index : Natural, value : (EnumMeta a).Type }
-                ) ->
-                Some indexedEnumMeta.value.value
-          , None = None a
-          }
+        External/Prelude.Optional.map
+          (Prelude/List/Indexed (EnumMeta a).Type).Type
+          a
+          ( \ ( indexedEnumMeta
+              : (Prelude/List/Indexed (EnumMeta a).Type).Type
+              ) ->
+              indexedEnumMeta.value.value
+          )
           ( External/Prelude.List.head
-              { index : Natural, value : (EnumMeta a).Type }
+              (Prelude/List/Indexed (EnumMeta a).Type).Type
               ( External/Prelude.List.filter
-                  { index : Natural, value : (EnumMeta a).Type }
+                  (Prelude/List/Indexed (EnumMeta a).Type).Type
                   ( \ ( indexedEnumMeta
-                      : { index : Natural, value : (EnumMeta a).Type }
+                      : (Prelude/List/Indexed (EnumMeta a).Type).Type
                       ) ->
                       External/Prelude.Natural.equal indexedEnumMeta.index n
                   )
