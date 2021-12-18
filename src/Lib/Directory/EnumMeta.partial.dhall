@@ -6,7 +6,8 @@ let Directory = ./Enum.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
-let env = ../../../build/environment.dhall
+-- let env = ../../codegen/environment.partial.dhall
+let env = ../../codegen/environment.partial.dhall
 
 let default = { Background = False }
 

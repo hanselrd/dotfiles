@@ -2,7 +2,7 @@ let External/Ansible = ../External/Ansible.partial.dhall
 
 let External/Prelude = ../External/Prelude.partial.dhall
 
-let env = ../../../build/environment.dhall
+let env = ../../codegen/environment.partial.dhall
 
 let executeCommands
     : List Text -> Bool -> List External/Ansible.Task.Type

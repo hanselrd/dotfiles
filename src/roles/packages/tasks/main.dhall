@@ -1,6 +1,6 @@
 let External/Ansible = ../../../Lib/External/Ansible.partial.dhall
 
-let env = ../../../../build/environment.dhall
+let env = ../../../codegen/environment.partial.dhall
 
 let PackageManager/toText =
       ../../../codegen/Lib/PackageManager/toText.partial.dhall

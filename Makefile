@@ -12,7 +12,6 @@ OBJDIR := build
 
 SRCS := $(shell find $(SRCDIR) -type f \
 			-name "*.dhall" \
-			-not -name "environment.dhall" \
 			-not -name "*.ctree.dhall" \
 			-not -name "*.ctemplate.dhall" \
 			-not -name "*.tree.dhall" \
@@ -48,31 +47,27 @@ all: $(OBJS) \
 	$(TEMPLATE_OBJS) \
 	$(RAW_OBJS)
 
-$(OBJDIR)/environment.dhall: $(SRCDIR)/environment.dhall .env | $(OBJDIR)
-	@echo "$(CHALK_WHITE)[Building environment]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
-	@$(DHALLC) text --file $< --output $@
-
-$(OBJDIR)/%.yml: $(SRCDIR)/%.dhall $(OBJDIR)/environment.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+$(OBJDIR)/%.yml: $(SRCDIR)/%.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building source]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALL2YAMLC) --generated-comment --file $< --output $@
 
-$(SRCDIR)/codegen/%: $(SRCDIR)/%.ctree.dhall $(OBJDIR)/environment.dhall | $(OBJDIR)
+$(SRCDIR)/codegen/%: $(SRCDIR)/%.ctree.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building codegen directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(@D)$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) to-directory-tree --file $< --output $(@D)
 
-$(SRCDIR)/codegen/%: $(SRCDIR)/%.ctemplate.dhall $(OBJDIR)/environment.dhall | $(OBJDIR)
+$(SRCDIR)/codegen/%: $(SRCDIR)/%.ctemplate.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building codegen template]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) text --file $< --output $@
 
-$(OBJDIR)/%: $(SRCDIR)/%.tree.dhall $(OBJDIR)/environment.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+$(OBJDIR)/%: $(SRCDIR)/%.tree.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(@D)$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) to-directory-tree --file $< --output $(@D)
 
-$(OBJDIR)/%: $(SRCDIR)/%.template.dhall $(OBJDIR)/environment.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+$(OBJDIR)/%: $(SRCDIR)/%.template.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building template]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) text --file $< --output $@

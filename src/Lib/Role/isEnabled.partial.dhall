@@ -6,7 +6,7 @@ let Role/Config = ./Config/Record.partial.dhall
 
 let Role/equal = ../../codegen/Lib/Role/equal.partial.dhall
 
-let env = ../../../build/environment.dhall
+let env = ../../codegen/environment.partial.dhall
 
 let isEnabled
     : Role -> Bool

@@ -4,7 +4,7 @@ let Prelude/Text/pathify = ../../../Lib/Prelude/Text/pathify.partial.dhall
 
 let TaskPool/copyFiles = ../../../Lib/TaskPool/copyFiles.partial.dhall
 
-let env = ../../../../build/environment.dhall
+let env = ../../../codegen/environment.partial.dhall
 
 in  TaskPool/copyFiles
       [ External/Prelude.Map.keyValue

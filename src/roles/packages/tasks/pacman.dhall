@@ -15,7 +15,7 @@ let PackageFlag = ../../../Lib/PackageFlag/Enum.partial.dhall
 
 let PackageGroup/values = ../../../codegen/Lib/PackageGroup/values.partial.dhall
 
-let env = ../../../../build/environment.dhall
+let env = ../../../codegen/environment.partial.dhall
 
 in  External/Prelude.List.concat
       External/Ansible.Task.Type

@@ -1,6 +1,6 @@
 let Configuration/toText = ./codegen/Lib/Configuration/toText.partial.dhall
 
-let env = ../build/environment.dhall
+let env = ./codegen/environment.partial.dhall
 
 let configurationText = Configuration/toText env.configuration
 

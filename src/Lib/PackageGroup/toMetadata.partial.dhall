@@ -6,7 +6,7 @@ let Package = ../Package/Record.partial.dhall
 
 let PackageFlag = ../PackageFlag/Enum.partial.dhall
 
-let env = ../../../build/environment.dhall
+let env = ../../codegen/environment.partial.dhall
 
 let toMetadata
     : PackageGroup -> PackageGroup/Metadata.Type
