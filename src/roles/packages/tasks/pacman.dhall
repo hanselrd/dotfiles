@@ -7,17 +7,13 @@ let TaskPool/executeCommands =
 
 let TaskPool/update = ../../../Lib/TaskPool/update.partial.dhall
 
-let PackageGroup = ../../../Lib/PackageGroup/Enum.partial.dhall
-
-let PackageGroupMeta = ../../../Lib/PackageGroup/EnumMeta.partial.dhall
-
 let PackageGroup/groupBy = ../../../Lib/PackageGroup/groupBy.partial.dhall
 
 let Package = ../../../Lib/Package/Record.partial.dhall
 
-let Package/Flag = ../../../Lib/Package/Flag/Enum.partial.dhall
+let PackageFlag = ../../../Lib/PackageFlag/Enum.partial.dhall
 
-let Enum/values = ../../../Lib/Enum/values.partial.dhall
+let PackageGroup/values = ../../../codegen/Lib/PackageGroup/values.partial.dhall
 
 let env = ../../../../build/environment.dhall
 
@@ -44,11 +40,8 @@ in  External/Prelude.List.concat
                                     Text
                                     (\(package : Package.Type) -> package.name)
                                     ( PackageGroup/groupBy
-                                        (None Package/Flag)
-                                        ( Enum/values
-                                            PackageGroup
-                                            PackageGroupMeta
-                                        )
+                                        (None PackageFlag)
+                                        PackageGroup/values
                                     ).present
                                 )
                             )
@@ -77,11 +70,8 @@ in  External/Prelude.List.concat
                                     Text
                                     (\(package : Package.Type) -> package.name)
                                     ( PackageGroup/groupBy
-                                        (None Package/Flag)
-                                        ( Enum/values
-                                            PackageGroup
-                                            PackageGroupMeta
-                                        )
+                                        (None PackageFlag)
+                                        PackageGroup/values
                                     ).absent
                                 )
                             )
@@ -101,8 +91,8 @@ in  External/Prelude.List.concat
                 Text
                 (\(package : Package.Type) -> package.name)
                 ( PackageGroup/groupBy
-                    (Some Package/Flag.Aur)
-                    (Enum/values PackageGroup PackageGroupMeta)
+                    (Some PackageFlag.Aur)
+                    PackageGroup/values
                 ).present
 
         in  TaskPool/update
@@ -123,8 +113,8 @@ in  External/Prelude.List.concat
                 Text
                 (\(package : Package.Type) -> package.name)
                 ( PackageGroup/groupBy
-                    (Some Package/Flag.Aur)
-                    (Enum/values PackageGroup PackageGroupMeta)
+                    (Some PackageFlag.Aur)
+                    PackageGroup/values
                 ).absent
 
         in  TaskPool/update

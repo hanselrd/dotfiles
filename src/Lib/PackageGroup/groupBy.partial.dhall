@@ -8,15 +8,13 @@ let PackageGroup/toMetadata = ./toMetadata.partial.dhall
 
 let Package = ../Package/Record.partial.dhall
 
-let Package/Flag = ../Package/Flag/Enum.partial.dhall
+let PackageFlag = ../PackageFlag/Enum.partial.dhall
 
-let Package/FlagMeta = ../Package/Flag/EnumMeta.partial.dhall
-
-let Enum/equal = ../Enum/equal.partial.dhall
+let PackageFlag/equal = ../../codegen/Lib/PackageFlag/equal.partial.dhall
 
 let groupBy
-    : Optional Package/Flag -> List PackageGroup -> PackageGroup/Metadata.Type
-    = \(packageFlag : Optional Package/Flag) ->
+    : Optional PackageFlag -> List PackageGroup -> PackageGroup/Metadata.Type
+    = \(packageFlag : Optional PackageFlag) ->
       \(xs : List PackageGroup) ->
         let xs =
               External/Prelude.List.map
@@ -39,18 +37,14 @@ let groupBy
                               ( \(package : Package.Type) ->
                                   merge
                                     { Some =
-                                        \(packageFlag : Package/Flag) ->
+                                        \(packageFlag : PackageFlag) ->
                                           External/Prelude.Optional.any
-                                            Package/Flag
-                                            ( Enum/equal
-                                                Package/Flag
-                                                Package/FlagMeta
-                                                packageFlag
-                                            )
+                                            PackageFlag
+                                            (PackageFlag/equal packageFlag)
                                             package.flag
                                     , None =
                                         External/Prelude.Optional.null
-                                          Package/Flag
+                                          PackageFlag
                                           package.flag
                                     }
                                     packageFlag
@@ -63,18 +57,14 @@ let groupBy
                               ( \(package : Package.Type) ->
                                   merge
                                     { Some =
-                                        \(packageFlag : Package/Flag) ->
+                                        \(packageFlag : PackageFlag) ->
                                           External/Prelude.Optional.any
-                                            Package/Flag
-                                            ( Enum/equal
-                                                Package/Flag
-                                                Package/FlagMeta
-                                                packageFlag
-                                            )
+                                            PackageFlag
+                                            (PackageFlag/equal packageFlag)
                                             package.flag
                                     , None =
                                         External/Prelude.Optional.null
-                                          Package/Flag
+                                          PackageFlag
                                           package.flag
                                     }
                                     packageFlag

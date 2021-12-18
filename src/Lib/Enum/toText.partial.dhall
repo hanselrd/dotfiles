@@ -7,16 +7,15 @@ let toText
     = \(a : Type) ->
       \(enumMetas : List (EnumMeta a).Type) ->
       \(value : a) ->
-        External/Prelude.Text.defaultMap
-          (EnumMeta a).Type
-          ( \(enumMeta : (EnumMeta a).Type) ->
-              External/Prelude.Text.default enumMeta.text
-          )
+        External/Prelude.Text.default
           ( External/Prelude.List.head
-              (EnumMeta a).Type
-              ( External/Prelude.List.filter
+              Text
+              ( External/Prelude.List.filterMap
                   (EnumMeta a).Type
-                  (\(enumMeta : (EnumMeta a).Type) -> enumMeta.equal value)
+                  Text
+                  ( \(enumMeta : (EnumMeta a).Type) ->
+                      if enumMeta.equal value then enumMeta.text else None Text
+                  )
                   enumMetas
               )
           )

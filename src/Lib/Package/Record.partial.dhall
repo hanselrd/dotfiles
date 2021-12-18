@@ -1,5 +1,5 @@
-let Package/Flag = ./Flag/Enum.partial.dhall
+let PackageFlag = ../PackageFlag/Enum.partial.dhall
 
-in  { Type = { name : Text, flag : Optional Package/Flag }
-    , default.flag = None Package/Flag
+in  { Type = { name : Text, flag : Optional PackageFlag }
+    , default.flag = None PackageFlag
     }

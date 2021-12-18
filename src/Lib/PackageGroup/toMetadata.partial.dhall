@@ -4,7 +4,7 @@ let PackageGroup/Metadata = ./Metadata/Record.partial.dhall
 
 let Package = ../Package/Record.partial.dhall
 
-let Package/Flag = ../Package/Flag/Enum.partial.dhall
+let PackageFlag = ../PackageFlag/Enum.partial.dhall
 
 let env = ../../../build/environment.dhall
 
@@ -227,7 +227,7 @@ let toMetadata
                     [ Package::{ name = "i3-gaps" }
                     , Package::{
                       , name = "i3lock-color"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     , Package::{ name = "i3status-rust" }
                     ]
@@ -354,42 +354,36 @@ let toMetadata
                     , Package::{ name = "archiso" }
                     , Package::{
                       , name = "brave-bin"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     , Package::{
                       , name = "downgrade"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     , Package::{
                       , name = "numix-gtk-theme"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     , Package::{
                       , name = "numix-icon-theme-pack-git"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
-                    , Package::{
-                      , name = "objconv"
-                      , flag = Some Package/Flag.Aur
-                      }
+                    , Package::{ name = "objconv", flag = Some PackageFlag.Aur }
                     , Package::{ name = "pacman-contrib" }
-                    , Package::{
-                      , name = "polybar"
-                      , flag = Some Package/Flag.Aur
-                      }
+                    , Package::{ name = "polybar", flag = Some PackageFlag.Aur }
                     , Package::{ name = "reflector" }
                     , Package::{ name = "rpm-tools" }
                     , Package::{
                       , name = "snap-pac-grub"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     , Package::{
                       , name = "ventoy-bin"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     , Package::{
                       , name = "visual-studio-code-bin"
-                      , flag = Some Package/Flag.Aur
+                      , flag = Some PackageFlag.Aur
                       }
                     ]
                   }

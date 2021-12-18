@@ -100,7 +100,9 @@ let toMetadata
               , brightWhite = "#A6B3CC"
               }
             }
-          , Wal = Theme/Metadata::{=}
+          , Wal = Theme/Metadata::{
+            , palette = ~/.cache/wal/colors.dhall ? Theme/Palette::{=}
+            }
           }
           theme
 

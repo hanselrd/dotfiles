@@ -4,27 +4,31 @@ let Prelude/List/Indexed = ../Prelude/List/Indexed/Record.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
+let Enum/equal = ../Enum/equal.partial.dhall
+
 let toNatural
     : forall (a : Type) -> List (EnumMeta a).Type -> a -> Natural
     = \(a : Type) ->
       \(enumMetas : List (EnumMeta a).Type) ->
       \(value : a) ->
-        merge
-          { Some =
-              \ ( indexedEnumMeta
-                : (Prelude/List/Indexed (EnumMeta a).Type).Type
-                ) ->
-                indexedEnumMeta.index
-          , None = External/Prelude.List.length (EnumMeta a).Type enumMetas
-          }
+        External/Prelude.Optional.default
+          Natural
+          (External/Prelude.List.length (EnumMeta a).Type enumMetas)
           ( External/Prelude.List.head
-              (Prelude/List/Indexed (EnumMeta a).Type).Type
-              ( External/Prelude.List.filter
+              Natural
+              ( External/Prelude.List.filterMap
                   (Prelude/List/Indexed (EnumMeta a).Type).Type
+                  Natural
                   ( \ ( indexedEnumMeta
                       : (Prelude/List/Indexed (EnumMeta a).Type).Type
                       ) ->
-                      indexedEnumMeta.value.equal value
+                      if    Enum/equal
+                              a
+                              enumMetas
+                              indexedEnumMeta.value.value
+                              value
+                      then  Some indexedEnumMeta.index
+                      else  None Natural
                   )
                   (External/Prelude.List.indexed (EnumMeta a).Type enumMetas)
               )
