@@ -6,6 +6,8 @@ let EnumMeta = ../EnumMeta/Record.partial.dhall
 
 let Enum/equal = ../Enum/equal.partial.dhall
 
+let SORT_MULTIPLIER = 10000
+
 let toNatural
     : forall (a : Type) -> List (EnumMeta a).Type -> a -> Natural
     = \(a : Type) ->
@@ -13,7 +15,7 @@ let toNatural
       \(value : a) ->
         External/Prelude.Optional.default
           Natural
-          (External/Prelude.List.length (EnumMeta a).Type enumMetas)
+          0
           ( External/Prelude.List.head
               Natural
               ( External/Prelude.List.filterMap
@@ -27,7 +29,17 @@ let toNatural
                               enumMetas
                               indexedEnumMeta.value.value
                               value
-                      then  Some indexedEnumMeta.index
+                      then  Some
+                              (     External/Prelude.Optional.default
+                                      Natural
+                                      ( External/Prelude.List.length
+                                          (EnumMeta a).Type
+                                          enumMetas
+                                      )
+                                      indexedEnumMeta.value.sort
+                                  * SORT_MULTIPLIER
+                                + indexedEnumMeta.index
+                              )
                       else  None Natural
                   )
                   (External/Prelude.List.indexed (EnumMeta a).Type enumMetas)

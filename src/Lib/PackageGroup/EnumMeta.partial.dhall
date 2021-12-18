@@ -256,6 +256,7 @@ let meta =
         }
       , Other = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Other
+        , sort = Some 99999
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Other = True }) packageGroup

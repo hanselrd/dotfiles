@@ -4,6 +4,8 @@ let Prelude/List/Indexed = ../Prelude/List/Indexed/Record.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
+let SORT_MULTIPLIER = 10000
+
 let fromNatural
     : forall (a : Type) -> List (EnumMeta a).Type -> Natural -> Optional a
     = \(a : Type) ->
@@ -17,7 +19,18 @@ let fromNatural
               ( \ ( indexedEnumMeta
                   : (Prelude/List/Indexed (EnumMeta a).Type).Type
                   ) ->
-                  if    External/Prelude.Natural.equal indexedEnumMeta.index n
+                  if    External/Prelude.Natural.equal
+                          (     External/Prelude.Optional.default
+                                  Natural
+                                  ( External/Prelude.List.length
+                                      (EnumMeta a).Type
+                                      enumMetas
+                                  )
+                                  indexedEnumMeta.value.sort
+                              * SORT_MULTIPLIER
+                            + indexedEnumMeta.index
+                          )
+                          n
                   then  Some indexedEnumMeta.value.value
                   else  None a
               )
