@@ -9,6 +9,7 @@ DHALL2YAMLC = dhall-to-yaml
 
 SRCDIR := src
 OBJDIR := build
+REPORTDIR := reports
 
 SRCS := $(shell find $(SRCDIR) -type f \
 			-name "*.dhall" \
@@ -77,7 +78,7 @@ $(OBJDIR)/%: $(SRCDIR)/% | $(OBJDIR)
 	@mkdir -p $(@D)
 	@cp $< $@
 
-$(OBJDIR):
+$(OBJDIR) $(REPORTDIR):
 	@mkdir -p $@
 
 lint:
@@ -131,13 +132,17 @@ freeze:
 install:
 	@env --chdir=$(OBJDIR) ansible-playbook --diff -i inventory playbook.yml
 
-report: $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS)
-	@truncate -s 0 report.txt
-	@$(foreach src,$(shell find $(SRCDIR) -type f -name "*.dhall"),printf "%s " $(src) >> report.txt;$(DHALLC) --file $(src) | $(DHALLC) encode | wc -c >> report.txt;)
-	@cat report.txt | sort -t" " -nk2 -o report.txt
+report: $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(REPORTDIR)
+	@set -e ;\
+	REPORT=$(REPORTDIR)/$$(date --utc +%Y%m%dT%H%M%SZ).txt ;\
+	echo "$(CHALK_WHITE)[Generating report]$(CHALK_RESET) $(CHALK_YELLOW)REPORT$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$REPORT$(CHALK_RESET)" ;\
+    truncate -s 0 $$REPORT ;\
+    find $(SRCDIR) -type f -name "*.dhall" -exec sh -c "printf \"%s \" {} >> $$REPORT" \; -exec sh -c "$(DHALLC) --file {} | $(DHALLC) encode | wc -c >> $$REPORT" \; ;\
+	echo "$(CHALK_WHITE)[Sorting report]$(CHALK_RESET) $(CHALK_YELLOW)$$REPORT$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$REPORT.sorted$(CHALK_RESET)" ;\
+	cat $$REPORT | sort -t" " -rnk2 > $$REPORT.sorted
 
 test:
 	@env --chdir=$(OBJDIR) ansible-playbook --check --diff -i inventory playbook.yml
 
 clean:
-	@rm -rf $(SRCDIR)/codegen $(OBJDIR) report.txt
+	@rm -rf $(SRCDIR)/codegen $(OBJDIR) $(REPORTDIR)

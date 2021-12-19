@@ -1,13 +1,19 @@
 let External/Prelude = ./Lib/External/Prelude.partial.dhall
 
 in  ''
+    let Background = ../Lib/Background/Enum.partial.dhall
+
     let Configuration = ../Lib/Configuration/Enum.partial.dhall
+
+    let Font = ../Lib/Font/Enum.partial.dhall
 
     let PackageManager = ../Lib/PackageManager/Enum.partial.dhall
 
     let Role = ../Lib/Role/Enum.partial.dhall
 
     let Role/Config = ../Lib/Role/Config/Record.partial.dhall
+
+    let Theme = ../Lib/Theme/Enum.partial.dhall
 
     in  { Type =
             { user : Text
@@ -19,6 +25,9 @@ in  ''
             , user_root_dir : Text
             , user_temp_dir : Text
             , configuration : Configuration
+            , background : Background
+            , theme : Theme
+            , font : Font
             , package_manager : PackageManager
             , roles : List Role/Config.Type
             }
@@ -39,6 +48,9 @@ in  ''
           , user_temp_dir = ${External/Prelude.Text.show
                                 env:DOTFILES_USER_TEMP_DIR as Text}
           , configuration = Configuration.${env:DOTFILES_CONFIGURATION as Text}
+          , background = Background.${env:DOTFILES_BACKGROUND as Text}
+          , theme = Theme.${env:DOTFILES_THEME as Text}
+          , font = Font.${env:DOTFILES_FONT as Text}
           , package_manager = PackageManager.${env:DOTFILES_PACKAGE_MANAGER as Text}
           , roles =
             [ Role/Config::{ role = Role.Alacritty, enabled = ${env:DOTFILES_ROLE_ALACRITTY as Text} }

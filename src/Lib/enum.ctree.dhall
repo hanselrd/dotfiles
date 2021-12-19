@@ -87,6 +87,7 @@ in  External/Prelude.List.map
       [ "Background"
       , "Configuration"
       , "Directory"
+      , "Font"
       , "PackageFlag"
       , "PackageGroup"
       , "PackageManager"

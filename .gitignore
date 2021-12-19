@@ -1,5 +1,5 @@
 .env
 build
-report.txt
+reports
 src/codegen
 tags
