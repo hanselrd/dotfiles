@@ -8,7 +8,9 @@ DHALLC = dhall
 DHALL2YAMLC = dhall-to-yaml
 
 SRCDIR := src
+CODEGENDIR := $(SRCDIR)/codegen
 OBJDIR := build
+INTERMEDIATEDIR := $(OBJDIR)/.intermediate
 PACKAGEDIR := packages
 REPORTDIR := reports
 
@@ -26,9 +28,9 @@ TEMPLATE_SRCS := $(shell find $(SRCDIR) -type f -name "*.template.dhall")
 PARTIAL_SRCS := $(shell find $(SRCDIR) -type f -name "*.partial.dhall")
 RAW_SRCS := $(shell find $(SRCDIR) -type f -not -name "*.dhall")
 OBJS := $(SRCS:$(SRCDIR)/%.dhall=$(OBJDIR)/%.yml)
-CODEGEN_TREE_OBJS := $(CODEGEN_TREE_SRCS:$(SRCDIR)/%.ctree.dhall=$(SRCDIR)/codegen/%)
-CODEGEN_TEMPLATE_OBJS := $(CODEGEN_TEMPLATE_SRCS:$(SRCDIR)/%.ctemplate.dhall=$(SRCDIR)/codegen/%)
-TREE_OBJS := $(TREE_SRCS:$(SRCDIR)/%.tree.dhall=$(OBJDIR)/%)
+CODEGEN_TREE_OBJS := $(CODEGEN_TREE_SRCS:$(SRCDIR)/%.ctree.dhall=$(INTERMEDIATEDIR)/ctree/%)
+CODEGEN_TEMPLATE_OBJS := $(CODEGEN_TEMPLATE_SRCS:$(SRCDIR)/%.ctemplate.dhall=$(CODEGENDIR)/%)
+TREE_OBJS := $(TREE_SRCS:$(SRCDIR)/%.tree.dhall=$(INTERMEDIATEDIR)/tree/%)
 TEMPLATE_OBJS := $(TEMPLATE_SRCS:$(SRCDIR)/%.template.dhall=$(OBJDIR)/%)
 RAW_OBJS := $(RAW_SRCS:$(SRCDIR)/%=$(OBJDIR)/%)
 
@@ -49,25 +51,31 @@ all: $(OBJS) \
 	$(TEMPLATE_OBJS) \
 	$(RAW_OBJS)
 
+$(OBJS) $(TREE_OBJS) $(TEMPLATE_OBJS): $(PARTIAL_SRCS)
+
+$(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS): $(SRCDIR)/Lib/External/Prelude.partial.dhall
+
 $(OBJDIR)/%.yml: $(SRCDIR)/%.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building source]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALL2YAMLC) --generated-comment --file $< --output $@
 
-$(SRCDIR)/codegen/%: $(SRCDIR)/%.ctree.dhall | $(OBJDIR)
-	@echo "$(CHALK_WHITE)[Building codegen directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(@D)$(CHALK_RESET)"
-	@mkdir -p $(@D)
-	@$(DHALLC) to-directory-tree --file $< --output $(@D)
+$(INTERMEDIATEDIR)/ctree/%: $(SRCDIR)/%.ctree.dhall | $(OBJDIR)
+	@echo "$(CHALK_WHITE)[Building codegen directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(CODEGENDIR)/$(*D)$(CHALK_RESET)"
+	@mkdir -p $(@D) $(CODEGENDIR)/$(*D)
+	@$(DHALLC) to-directory-tree --file $< --output $(CODEGENDIR)/$(*D)
+	@touch $@
 
-$(SRCDIR)/codegen/%: $(SRCDIR)/%.ctemplate.dhall | $(OBJDIR)
+$(CODEGENDIR)/%: $(SRCDIR)/%.ctemplate.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building codegen template]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) text --file $< --output $@
 
-$(OBJDIR)/%: $(SRCDIR)/%.tree.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
-	@echo "$(CHALK_WHITE)[Building directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(@D)$(CHALK_RESET)"
-	@mkdir -p $(@D)
-	@$(DHALLC) to-directory-tree --file $< --output $(@D)
+$(INTERMEDIATEDIR)/tree/%: $(SRCDIR)/%.tree.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+	@echo "$(CHALK_WHITE)[Building directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(OBJDIR)/$(*D)$(CHALK_RESET)"
+	@mkdir -p $(@D) $(OBJDIR)/$(*D)
+	@$(DHALLC) to-directory-tree --file $< --output $(OBJDIR)/$(*D)
+	@touch $@
 
 $(OBJDIR)/%: $(SRCDIR)/%.template.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building template]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
@@ -137,7 +145,7 @@ package: | $(PACKAGEDIR)
 	@set -e ;\
 	PACKAGE=$(PACKAGEDIR)/package-$(DOTFILES_CONFIGURATION)-$(DOTFILES_PACKAGE_MANAGER)-$$(date --utc +%Y%m%dT%H%M%SZ).tar.gz ;\
 	echo "$(CHALK_WHITE)[Building package]$(CHALK_RESET) $(CHALK_YELLOW)$(OBJDIR)$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$PACKAGE$(CHALK_RESET)" ;\
-	tar --transform='s/$(OBJDIR)/package/g' -czvf $$PACKAGE $(OBJDIR)
+	tar --exclude="$(INTERMEDIATEDIR)" --transform='s/$(OBJDIR)/package/g' -czvf $$PACKAGE $(OBJDIR)
 
 report: $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(REPORTDIR)
 	@set -e ;\
@@ -152,4 +160,4 @@ test:
 	@env --chdir=$(OBJDIR) ansible-playbook --check --diff -i inventory playbook.yml
 
 clean:
-	@rm -rf $(SRCDIR)/codegen $(OBJDIR) $(PACKAGEDIR) $(REPORTDIR)
+	@rm -rf $(CODEGENDIR) $(OBJDIR) $(PACKAGEDIR) $(REPORTDIR)

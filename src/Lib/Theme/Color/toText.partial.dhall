@@ -5,9 +5,9 @@ let Theme/Color = ./Union.partial.dhall
 let Theme/Palette = ../Palette/Record.partial.dhall
 
 let toText
-    : Theme/Color -> Theme/Palette.Type -> Text
-    = \(color : Theme/Color) ->
-      \(palette : Theme/Palette.Type) ->
+    : Theme/Palette.Type -> Theme/Color -> Text
+    = \(palette : Theme/Palette.Type) ->
+      \(color : Theme/Color) ->
         merge
           { Background = palette.background
           , Foreground = palette.foreground
