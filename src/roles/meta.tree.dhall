@@ -2,7 +2,7 @@ let External/Prelude = ../Lib/External/Prelude.partial.dhall
 
 let Role = ../Lib/Role/Enum.partial.dhall
 
-let Role/isEnabled = ../Lib/Role/isEnabled.partial.dhall
+let Role/enabled = ../Lib/Role/enabled.partial.dhall
 
 let Role/toMetadata = ../Lib/Role/toMetadata.partial.dhall
 
@@ -14,7 +14,7 @@ in  External/Prelude.List.filterMap
       Role
       (External/Prelude.Map.Entry Text { meta : { `main.yml` : Text } })
       ( \(role : Role) ->
-          if    Role/isEnabled role
+          if    Role/enabled role
           then  Some
                   ( External/Prelude.Map.keyValue
                       { meta : { `main.yml` : Text } }

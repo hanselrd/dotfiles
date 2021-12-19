@@ -4,7 +4,7 @@ let External/Prelude = ./Lib/External/Prelude.partial.dhall
 
 let Role = ./Lib/Role/Enum.partial.dhall
 
-let Role/isEnabled = ./Lib/Role/isEnabled.partial.dhall
+let Role/enabled = ./Lib/Role/enabled.partial.dhall
 
 let Role/toMetadata = ./Lib/Role/toMetadata.partial.dhall
 
@@ -20,7 +20,7 @@ let assertRolesDependencies =
                   Role
                   (List Role)
                   ( \(role : Role) ->
-                      if    Role/isEnabled role
+                      if    Role/enabled role
                       then  Some (Role/toMetadata role).dependencies
                       else  None (List Role)
                   )
@@ -28,7 +28,7 @@ let assertRolesDependencies =
               )
 
       in    assert
-          : External/Prelude.List.all Role Role/isEnabled dependencies === True
+          : External/Prelude.List.all Role Role/enabled dependencies === True
 
 let assertRolesConflicts =
       let conflicts =
@@ -38,7 +38,7 @@ let assertRolesConflicts =
                   Role
                   (List Role)
                   ( \(role : Role) ->
-                      if    Role/isEnabled role
+                      if    Role/enabled role
                       then  Some (Role/toMetadata role).conflicts
                       else  None (List Role)
                   )
@@ -46,7 +46,7 @@ let assertRolesConflicts =
               )
 
       in    assert
-          : External/Prelude.List.any Role Role/isEnabled conflicts === False
+          : External/Prelude.List.any Role Role/enabled conflicts === False
 
 in  [ External/Ansible.Play::{
       , hosts = "all"
@@ -57,7 +57,7 @@ in  [ External/Ansible.Play::{
               Role
               Text
               ( \(role : Role) ->
-                  if    Role/isEnabled role
+                  if    Role/enabled role
                   then  Some (Role/toText role)
                   else  None Text
               )
