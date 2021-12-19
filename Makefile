@@ -133,7 +133,7 @@ freeze:
 install:
 	@env --chdir=$(OBJDIR) ansible-playbook --diff -i inventory playbook.yml
 
-package: all | $(PACKAGEDIR)
+package: | $(PACKAGEDIR)
 	@set -e ;\
 	PACKAGE=$(PACKAGEDIR)/package-$(DOTFILES_CONFIGURATION)-$(DOTFILES_PACKAGE_MANAGER)-$$(date --utc +%Y%m%dT%H%M%SZ).tar.gz ;\
 	echo "$(CHALK_WHITE)[Building package]$(CHALK_RESET) $(CHALK_YELLOW)$(OBJDIR)$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$PACKAGE$(CHALK_RESET)" ;\
