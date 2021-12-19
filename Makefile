@@ -51,11 +51,11 @@ all: $(OBJS) \
 	$(TEMPLATE_OBJS) \
 	$(RAW_OBJS)
 
-$(OBJS) $(TREE_OBJS) $(TEMPLATE_OBJS): $(PARTIAL_SRCS)
+$(OBJS) $(TREE_OBJS) $(TEMPLATE_OBJS): $(PARTIAL_SRCS) $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS)
 
 $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS): $(SRCDIR)/Lib/External/Prelude.partial.dhall
 
-$(OBJDIR)/%.yml: $(SRCDIR)/%.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+$(OBJDIR)/%.yml: $(SRCDIR)/%.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building source]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALL2YAMLC) --generated-comment --file $< --output $@
@@ -71,13 +71,13 @@ $(CODEGENDIR)/%: $(SRCDIR)/%.ctemplate.dhall | $(OBJDIR)
 	@mkdir -p $(@D)
 	@$(DHALLC) text --file $< --output $@
 
-$(INTERMEDIATEDIR)/tree/%: $(SRCDIR)/%.tree.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+$(INTERMEDIATEDIR)/tree/%: $(SRCDIR)/%.tree.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(OBJDIR)/$(*D)$(CHALK_RESET)"
 	@mkdir -p $(@D) $(OBJDIR)/$(*D)
 	@$(DHALLC) to-directory-tree --file $< --output $(OBJDIR)/$(*D)
 	@touch $@
 
-$(OBJDIR)/%: $(SRCDIR)/%.template.dhall $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(OBJDIR)
+$(OBJDIR)/%: $(SRCDIR)/%.template.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building template]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) text --file $< --output $@
