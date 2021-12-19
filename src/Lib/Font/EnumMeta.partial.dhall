@@ -17,36 +17,31 @@ let meta =
         , value = Font.CascadiaCode
         , text = Some "CascadiaCode.zip"
         , equal =
-            \(background : Font) ->
-              merge (default // { CascadiaCode = True }) background
+            \(font : Font) -> merge (default // { CascadiaCode = True }) font
         }
       , FantasqueSansMono = (EnumMeta Font)::{
         , value = Font.FantasqueSansMono
         , text = Some "FantasqueSansMono.zip"
         , equal =
-            \(background : Font) ->
-              merge (default // { FantasqueSansMono = True }) background
+            \(font : Font) ->
+              merge (default // { FantasqueSansMono = True }) font
         }
       , Inconsolata = (EnumMeta Font)::{
         , value = Font.Inconsolata
         , text = Some "Inconsolata.zip"
         , equal =
-            \(background : Font) ->
-              merge (default // { Inconsolata = True }) background
+            \(font : Font) -> merge (default // { Inconsolata = True }) font
         }
       , Iosevka = (EnumMeta Font)::{
         , value = Font.Iosevka
         , text = Some "Iosevka.zip"
-        , equal =
-            \(background : Font) ->
-              merge (default // { Iosevka = True }) background
+        , equal = \(font : Font) -> merge (default // { Iosevka = True }) font
         }
       , JetBrainsMono = (EnumMeta Font)::{
         , value = Font.JetBrainsMono
         , text = Some "JetBrainsMono.zip"
         , equal =
-            \(background : Font) ->
-              merge (default // { JetBrainsMono = True }) background
+            \(font : Font) -> merge (default // { JetBrainsMono = True }) font
         }
       }
 

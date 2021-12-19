@@ -9,6 +9,7 @@ DHALL2YAMLC = dhall-to-yaml
 
 SRCDIR := src
 OBJDIR := build
+PACKAGEDIR := packages
 REPORTDIR := reports
 
 SRCS := $(shell find $(SRCDIR) -type f \
@@ -41,7 +42,7 @@ CHALK_MAGENTA := $(shell tput setaf 5)
 CHALK_CYAN := $(shell tput setaf 6)
 CHALK_WHITE := $(shell tput setaf 7)
 
-.PHONY: all lint format freeze install report test clean
+.PHONY: all lint format freeze install package report test clean
 
 all: $(OBJS) \
 	$(TREE_OBJS) \
@@ -78,7 +79,7 @@ $(OBJDIR)/%: $(SRCDIR)/% | $(OBJDIR)
 	@mkdir -p $(@D)
 	@cp $< $@
 
-$(OBJDIR) $(REPORTDIR):
+$(OBJDIR) $(PACKAGEDIR) $(REPORTDIR):
 	@mkdir -p $@
 
 lint:
@@ -132,9 +133,15 @@ freeze:
 install:
 	@env --chdir=$(OBJDIR) ansible-playbook --diff -i inventory playbook.yml
 
+package: all | $(PACKAGEDIR)
+	@set -e ;\
+	PACKAGE=$(PACKAGEDIR)/package-$(DOTFILES_CONFIGURATION)-$(DOTFILES_PACKAGE_MANAGER)-$$(date --utc +%Y%m%dT%H%M%SZ).tar.gz ;\
+	echo "$(CHALK_WHITE)[Building package]$(CHALK_RESET) $(CHALK_YELLOW)$(OBJDIR)$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$PACKAGE$(CHALK_RESET)" ;\
+	tar --transform='s/$(OBJDIR)/package/g' -czvf $$PACKAGE $(OBJDIR)
+
 report: $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(REPORTDIR)
 	@set -e ;\
-	REPORT=$(REPORTDIR)/$$(date --utc +%Y%m%dT%H%M%SZ).txt ;\
+	REPORT=$(REPORTDIR)/report-$$(date --utc +%Y%m%dT%H%M%SZ).txt ;\
 	echo "$(CHALK_WHITE)[Generating report]$(CHALK_RESET) $(CHALK_YELLOW)REPORT$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$REPORT$(CHALK_RESET)" ;\
     truncate -s 0 $$REPORT ;\
     find $(SRCDIR) -type f -name "*.dhall" -exec sh -c "printf \"%s \" {} >> $$REPORT" \; -exec sh -c "$(DHALLC) --file {} | $(DHALLC) encode | wc -c >> $$REPORT" \; ;\
@@ -145,4 +152,4 @@ test:
 	@env --chdir=$(OBJDIR) ansible-playbook --check --diff -i inventory playbook.yml
 
 clean:
-	@rm -rf $(SRCDIR)/codegen $(OBJDIR) $(REPORTDIR)
+	@rm -rf $(SRCDIR)/codegen $(OBJDIR) $(PACKAGEDIR) $(REPORTDIR)

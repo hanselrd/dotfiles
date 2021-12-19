@@ -1,5 +1,6 @@
 .env
 build
+packages
 reports
 src/codegen
 tags

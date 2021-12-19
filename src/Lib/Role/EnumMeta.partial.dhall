@@ -11,6 +11,7 @@ let default =
       , Bspwm = False
       , Ccache = False
       , Chsh = False
+      , Common = False
       , Dwm = False
       , Elm = False
       , Fonts = False
@@ -73,6 +74,11 @@ let meta =
         , value = Role.Chsh
         , text = Some "chsh"
         , equal = \(role : Role) -> merge (default // { Chsh = True }) role
+        }
+      , Common = (EnumMeta Role)::{
+        , value = Role.Common
+        , text = Some "common"
+        , equal = \(role : Role) -> merge (default // { Common = True }) role
         }
       , Dwm = (EnumMeta Role)::{
         , value = Role.Dwm

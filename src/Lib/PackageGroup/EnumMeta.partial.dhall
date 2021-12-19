@@ -29,7 +29,6 @@ let default =
       , Lldb = False
       , Lxappearance = False
       , Mesa = False
-      , Nasm = False
       , Neofetch = False
       , Ninja = False
       , Nmap = False
@@ -211,12 +210,6 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Mesa = True }) packageGroup
-        }
-      , Nasm = (EnumMeta PackageGroup)::{
-        , value = PackageGroup.Nasm
-        , equal =
-            \(packageGroup : PackageGroup) ->
-              merge (default // { Nasm = True }) packageGroup
         }
       , Neofetch = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Neofetch

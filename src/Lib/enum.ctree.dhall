@@ -91,6 +91,7 @@ in  External/Prelude.List.map
       , "PackageFlag"
       , "PackageGroup"
       , "PackageManager"
+      , "Privilege"
       , "Role"
       , "Theme"
       ]

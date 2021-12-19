@@ -22,7 +22,6 @@
 | Lldb
 | Lxappearance
 | Mesa
-| Nasm
 | Neofetch
 | Ninja
 | Nmap

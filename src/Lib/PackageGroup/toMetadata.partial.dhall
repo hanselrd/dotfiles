@@ -277,15 +277,6 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
-          , Nasm =
-              merge
-                { Pacman = PackageGroup/Metadata::{
-                  , present = [ Package::{ name = "nasm" } ]
-                  }
-                , Dnf = PackageGroup/Metadata::{=}
-                , Apt = PackageGroup/Metadata::{=}
-                }
-                env.package_manager
           , Neofetch =
               merge
                 { Pacman = PackageGroup/Metadata::{

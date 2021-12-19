@@ -4,6 +4,7 @@
 | Bspwm
 | Ccache
 | Chsh
+| Common
 | Dwm
 | Elm
 | Fonts

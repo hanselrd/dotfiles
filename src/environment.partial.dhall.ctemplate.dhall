@@ -59,6 +59,7 @@ in  ''
             , Role/Config::{ role = Role.Bspwm, enabled = ${env:DOTFILES_ROLE_BSPWM as Text} }
             , Role/Config::{ role = Role.Ccache, enabled = ${env:DOTFILES_ROLE_CCACHE as Text} }
             , Role/Config::{ role = Role.Chsh, enabled = ${env:DOTFILES_ROLE_CHSH as Text} }
+            , Role/Config::{ role = Role.Common, enabled = True }
             , Role/Config::{ role = Role.Dwm, enabled = ${env:DOTFILES_ROLE_DWM as Text} }
             , Role/Config::{ role = Role.Elm, enabled = ${env:DOTFILES_ROLE_ELM as Text} }
             , Role/Config::{ role = Role.Fonts, enabled = ${env:DOTFILES_ROLE_FONTS as Text} }
