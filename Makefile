@@ -156,6 +156,13 @@ report: $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(REPORTDIR)
 	echo "$(CHALK_WHITE)[Sorting report]$(CHALK_RESET) $(CHALK_YELLOW)$$REPORT$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$REPORT.sorted$(CHALK_RESET)" ;\
 	cat $$REPORT | sort -t" " -rnk2 > $$REPORT.sorted
 
+digest: all
+	@set -e ;\
+	DIGEST=digest.txt ;\
+	echo "$(CHALK_WHITE)[Generating digest]$(CHALK_RESET) $(CHALK_YELLOW)DIGEST$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$DIGEST$(CHALK_RESET)" ;\
+    truncate -s 0 $$DIGEST ;\
+    find $(OBJDIR) -type f -not -path "$(INTERMEDIATEDIR)/*" -print0 | sort -z | xargs -r0 sha256sum > $$DIGEST
+
 test:
 	@env --chdir=$(OBJDIR) ansible-playbook --check --diff -i inventory playbook.yml
 

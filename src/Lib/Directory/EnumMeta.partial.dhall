@@ -1,6 +1,6 @@
 let External/Prelude = ../External/Prelude.partial.dhall
 
-let Prelude/Text/pathify = ../Prelude/Text/pathify.partial.dhall
+let Prelude = ../Prelude.partial.dhall
 
 let Directory = ./Enum.partial.dhall
 
@@ -14,7 +14,7 @@ let meta =
       { Background = (EnumMeta Directory)::{
         , value = Directory.Background
         , text = Some
-            ( Prelude/Text/pathify
+            ( Prelude.Text.pathify
                 "${env.user_root_dir}/usr/local/share/backgrounds"
             )
         , equal =

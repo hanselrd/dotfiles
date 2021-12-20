@@ -93,5 +93,6 @@ in  External/Prelude.List.map
       , "PackageManager"
       , "Privilege"
       , "Role"
+      , "Shell"
       , "Theme"
       ]

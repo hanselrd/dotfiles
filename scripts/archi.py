@@ -432,6 +432,8 @@ if __name__ == "__main__":
         Prompt.Item(tag="base-devel", state=True),
         Prompt.Item(tag="btrfs-progs", state=True),
         Prompt.Item(tag="cronie", state=True),
+        Prompt.Item(tag="dhall", state=True),
+        Prompt.Item(tag="dhall-yaml", state=True),
         Prompt.Item(tag="efibootmgr", state=True),
         Prompt.Item(tag="git", state=True),
         Prompt.Item(tag="grub", state=True),

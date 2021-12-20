@@ -8,19 +8,24 @@ let Role/equal = ../../codegen/Lib/Role/equal.partial.dhall
 
 let env = ../../codegen/environment.partial.dhall
 
-let isEnabled
+let enabled
     : Role -> Bool
     = \(role : Role) ->
-        External/Prelude.Bool.or
-          ( External/Prelude.List.filterMap
-              Role/Config.Type
+        External/Prelude.Optional.default
+          Bool
+          False
+          ( External/Prelude.List.head
               Bool
-              ( \(roleConfig : Role/Config.Type) ->
-                  if    Role/equal roleConfig.role role
-                  then  Some roleConfig.enabled
-                  else  None Bool
+              ( External/Prelude.List.filterMap
+                  Role/Config.Type
+                  Bool
+                  ( \(roleConfig : Role/Config.Type) ->
+                      if    Role/equal roleConfig.role role
+                      then  Some roleConfig.enabled
+                      else  None Bool
+                  )
+                  env.roles
               )
-              env.roles
           )
 
-in  isEnabled
+in  enabled

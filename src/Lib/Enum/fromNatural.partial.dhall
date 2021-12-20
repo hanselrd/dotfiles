@@ -1,6 +1,6 @@
 let External/Prelude = ../External/Prelude.partial.dhall
 
-let Prelude/List/Indexed = ../Prelude/List/Indexed/Record.partial.dhall
+let Prelude = ../Prelude.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
@@ -14,10 +14,10 @@ let fromNatural
         External/Prelude.List.head
           a
           ( External/Prelude.List.filterMap
-              (Prelude/List/Indexed (EnumMeta a).Type).Type
+              (Prelude.List.Indexed (EnumMeta a).Type).Type
               a
               ( \ ( indexedEnumMeta
-                  : (Prelude/List/Indexed (EnumMeta a).Type).Type
+                  : (Prelude.List.Indexed (EnumMeta a).Type).Type
                   ) ->
                   if    External/Prelude.Natural.equal
                           (     External/Prelude.Optional.default

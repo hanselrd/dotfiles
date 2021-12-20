@@ -4,7 +4,7 @@ let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
 
 let Privilege = ../../../Lib/Privilege/Enum.partial.dhall
 
-let Prelude/Text/pathify = ../../../Lib/Prelude/Text/pathify.partial.dhall
+let Prelude = ../../../Lib/Prelude.partial.dhall
 
 let TaskPool/become = ../../../Lib/TaskPool/become.partial.dhall
 
@@ -31,7 +31,7 @@ in  TaskPool/become
                                   Text
                                   Text
                                   External/Ansible.Vars.Type
-                                  Prelude/Text/pathify
+                                  Prelude.Text.pathify
                                   External/Ansible.Vars.string
                               )
                               [ env.user_home_dir

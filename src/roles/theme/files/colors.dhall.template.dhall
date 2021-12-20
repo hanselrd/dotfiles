@@ -1,9 +1,9 @@
 let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
 
-let Prelude/Text/replaces = ../../../Lib/Prelude/Text/replaces.partial.dhall
+let Prelude = ../../../Lib/Prelude.partial.dhall
 
 in  ''
-    let Theme/Palette = ${Prelude/Text/replaces
+    let Theme/Palette = ${Prelude.Text.replaces
                             [ External/Prelude.Map.keyText "{" "{{"
                             , External/Prelude.Map.keyText "}" "}}"
                             ]
