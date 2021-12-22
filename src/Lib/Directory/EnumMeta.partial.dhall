@@ -8,10 +8,18 @@ let EnumMeta = ../EnumMeta/Record.partial.dhall
 
 let env = ../../codegen/environment.partial.dhall
 
-let default = { Background = False }
+let default =
+      { Alacritty = False, Background = False, Font = False, Theme = False }
 
 let meta =
-      { Background = (EnumMeta Directory)::{
+      { Alacritty = (EnumMeta Directory)::{
+        , value = Directory.Alacritty
+        , text = Some (Prelude.Text.pathify "${env.user_config_dir}/alacritty")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Alacritty = True }) directory
+        }
+      , Background = (EnumMeta Directory)::{
         , value = Directory.Background
         , text = Some
             ( Prelude.Text.pathify
@@ -21,8 +29,24 @@ let meta =
             \(directory : Directory) ->
               merge (default // { Background = True }) directory
         }
+      , Font = (EnumMeta Directory)::{
+        , value = Directory.Font
+        , text = Some
+            (Prelude.Text.pathify "${env.user_root_dir}/usr/local/share/fonts")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Font = True }) directory
+        }
+      , Theme = (EnumMeta Directory)::{
+        , value = Directory.Theme
+        , text = Some
+            (Prelude.Text.pathify "${env.user_config_dir}/wal/templates")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Theme = True }) directory
+        }
       }
 
-let validate = assert : merge meta Directory.Background === meta.Background
+let validate = assert : merge meta Directory.Alacritty === meta.Alacritty
 
 in  External/Prelude.Map.values Text (EnumMeta Directory).Type (toMap meta)

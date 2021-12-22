@@ -11,10 +11,14 @@ let values
         Enum/sort
           a
           enumMetas
-          ( External/Prelude.List.map
+          ( External/Prelude.List.filterMap
               (EnumMeta a).Type
               a
-              (\(enumMeta : (EnumMeta a).Type) -> enumMeta.value)
+              ( \(enumMeta : (EnumMeta a).Type) ->
+                  if    External/Prelude.Bool.not enumMeta.skip
+                  then  Some enumMeta.value
+                  else  None a
+              )
               enumMetas
           )
 

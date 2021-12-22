@@ -1,1 +1,1 @@
-< Background >
+< Alacritty | Background | Font | Theme >

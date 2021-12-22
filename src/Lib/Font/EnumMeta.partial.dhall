@@ -34,6 +34,7 @@ let meta =
         }
       , Iosevka = (EnumMeta Font)::{
         , value = Font.Iosevka
+        , skip = True
         , text = Some "Iosevka.zip"
         , equal = \(font : Font) -> merge (default // { Iosevka = True }) font
         }

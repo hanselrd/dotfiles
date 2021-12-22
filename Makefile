@@ -51,9 +51,9 @@ all: $(OBJS) \
 	$(TEMPLATE_OBJS) \
 	$(RAW_OBJS)
 
-$(OBJS) $(TREE_OBJS) $(TEMPLATE_OBJS): $(PARTIAL_SRCS) $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS)
+$(OBJS) $(TREE_OBJS) $(TEMPLATE_OBJS): $(ENV) $(PARTIAL_SRCS) $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS)
 
-$(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS): $(SRCDIR)/Lib/External/Prelude.partial.dhall
+$(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS): $(ENV) $(SRCDIR)/Lib/External/Prelude.partial.dhall
 
 $(OBJDIR)/%.yml: $(SRCDIR)/%.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building source]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
@@ -154,6 +154,7 @@ report: $(CODEGEN_TREE_OBJS) $(CODEGEN_TEMPLATE_OBJS) | $(REPORTDIR)
     truncate -s 0 $$REPORT ;\
     find $(SRCDIR) -type f -name "*.dhall" -exec sh -c "printf \"%s \" {} >> $$REPORT" \; -exec sh -c "$(DHALLC) --file {} | $(DHALLC) encode | wc -c >> $$REPORT" \; ;\
 	echo "$(CHALK_WHITE)[Sorting report]$(CHALK_RESET) $(CHALK_YELLOW)$$REPORT$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$$REPORT.sorted$(CHALK_RESET)" ;\
+	cat $$REPORT | sort -o $$REPORT ;\
 	cat $$REPORT | sort -t" " -rnk2 > $$REPORT.sorted
 
 digest: all
