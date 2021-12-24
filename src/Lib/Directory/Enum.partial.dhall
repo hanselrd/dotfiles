@@ -1,1 +1,32 @@
-< Alacritty | Background | Font | Theme >
+< Alacritty
+| Background
+| Bin
+| Ccache
+| Font
+| Gdb1
+| Gdb2
+| Git
+| Gtk1
+| Gtk2
+| I3
+| I3status
+| Picom
+| Ranger
+| Rofi
+| Rust
+| Ssh
+| Sxhkd
+| Systemd1
+| Systemd2
+| Theme
+| Tmux1
+| Tmux2
+| Urxvt
+| Vim1
+| Vim2
+| Vscode
+| Xinit
+| Xrandr
+| Xrdb
+| Zsh
+>

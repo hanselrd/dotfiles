@@ -10,8 +10,6 @@ let TaskPool = ./Alias.partial.dhall
 
 let TaskPool/build = ./build.partial.dhall
 
-let env = ../../codegen/environment.partial.dhall
-
 let executeCommands
     : Shell -> List Text -> TaskPool.Type
     = \(shell : Shell) ->
@@ -38,16 +36,20 @@ let executeCommands
                                       ( External/Prelude.List.map
                                           Text
                                           External/Ansible.Vars.Type
-                                          External/Ansible.Vars.string
-                                          (   ( if    Shell/equal
-                                                        shell
-                                                        Shell.Zsh
-                                                then  [ ". ${env.user_home_dir}/.zshrc"
-                                                      ]
-                                                else  [] : List Text
+                                          ( External/Prelude.Function.compose
+                                              Text
+                                              Text
+                                              External/Ansible.Vars.Type
+                                              ( \(command : Text) ->
+                                                  if    Shell/equal
+                                                          shell
+                                                          Shell.Zsh
+                                                  then  "/usr/bin/zsh -ic \"${command}\""
+                                                  else  command
                                               )
-                                            # commands
+                                              External/Ansible.Vars.string
                                           )
+                                          commands
                                       )
                                 }
                             )

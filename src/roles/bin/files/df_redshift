@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+cd "$(dirname "$0")" || exit
+
+# $1 = {{ inventory_hostname }}
+case "$1" in
+    desktop|laptop)
+        case "$2" in
+            start|restart)
+                case "$1" in
+                    desktop)
+                        # ./df_launcher redshift -P -O 3500
+                        ./df_launcher redshift -P -t 3500:2500 -l 40.7128:-74.0060
+                        ;;
+                    laptop)
+                        ./df_launcher redshift -P -t 5500:2500 -l 40.7128:-74.0060
+                        ;;
+                esac
+                ;;
+            stop)
+                killall -q redshift
+                redshift -x
+                ;;
+            *)
+                echo "Usage: $0 {{ inventory_hostname }} {start|restart|stop}"
+                echo "$2 not supported"
+                exit 2
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {{ inventory_hostname }} {start|restart|stop}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac

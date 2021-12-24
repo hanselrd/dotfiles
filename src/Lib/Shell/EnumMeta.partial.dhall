@@ -14,6 +14,7 @@ let meta =
         }
       , Zsh = (EnumMeta Shell)::{
         , value = Shell.Zsh
+        , text = Some "/usr/bin/zsh"
         , equal = \(shell : Shell) -> merge (default // { Zsh = True }) shell
         }
       }

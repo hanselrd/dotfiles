@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+# cd "$(dirname "$0")" || exit
+
+archive_basename=$(date +"%Y%m%d_$(neofetch model | cut -d ' ' -f 2- | sed 's/ *$//g' | tr ' ' _ | tr '[:lower:]' '[:upper:]')")
+
+case "$1" in
+    home|root)
+        case "$1" in
+            home)
+                df_archive encrypt "$(printf "%s_HOME_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")" "$HOME/Desktop" "$HOME/Documents" "$HOME/Downloads" "$HOME/Music" "$HOME/Pictures" "$HOME/Public" "$HOME/Templates" "$HOME/Videos"
+                split -b 3G "$(printf "%s_HOME_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")" "$(printf "%s_HOME_%s_BACKUP.tar.gz.gpg." "$archive_basename" "$USER")"
+                rm -rf "$(printf "%s_HOME_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")"
+                ;;
+            root)
+                df_archive encrypt "$(printf "%s_ROOT_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")" /etc
+                split -b 3G "$(printf "%s_ROOT_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")" "$(printf "%s_ROOT_%s_BACKUP.tar.gz.gpg." "$archive_basename" "$USER")"
+                rm -rf "$(printf "%s_ROOT_%s_BACKUP.tar.gz.gpg" "$archive_basename" "$USER")"
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {home|root}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac

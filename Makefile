@@ -75,17 +75,20 @@ $(INTERMEDIATEDIR)/tree/%: $(SRCDIR)/%.tree.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building directory tree]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$(OBJDIR)/$(*D)$(CHALK_RESET)"
 	@mkdir -p $(@D) $(OBJDIR)/$(*D)
 	@$(DHALLC) to-directory-tree --file $< --output $(OBJDIR)/$(*D)
+	@find $(OBJDIR)/$(*D) -type f -exec chmod --reference=$< {} \;
 	@touch $@
 
 $(OBJDIR)/%: $(SRCDIR)/%.template.dhall | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Building template]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@$(DHALLC) text --file $< --output $@
+	@chmod --reference=$< $@
 
 $(OBJDIR)/%: $(SRCDIR)/% | $(OBJDIR)
 	@echo "$(CHALK_WHITE)[Copying file]$(CHALK_RESET) $(CHALK_YELLOW)$<$(CHALK_RESET) $(CHALK_WHITE)-->$(CHALK_RESET) $(CHALK_GREEN)$@$(CHALK_RESET)"
 	@mkdir -p $(@D)
 	@cp $< $@
+	@chmod --reference=$< $@
 
 $(OBJDIR) $(PACKAGEDIR) $(REPORTDIR):
 	@mkdir -p $@

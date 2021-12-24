@@ -10,6 +10,8 @@ let TaskPool/build = ./build.partial.dhall
 
 let TaskPool/concat = ./concat.partial.dhall
 
+let TaskPool/createDirectories = ./createDirectories.partial.dhall
+
 let copyFiles
     : External/Prelude.Map.Type Text (List Text) -> TaskPool.Type
     = \(map : External/Prelude.Map.Type Text (List Text)) ->
@@ -21,100 +23,57 @@ let copyFiles
                 (External/Prelude.Map.values Text (List Text) map)
 
         in  TaskPool/concat
-              [ Some
-                  ( TaskPool/build
-                      [ if    External/Prelude.Bool.not
-                                (External/Prelude.List.null Text directories)
-                        then  Some
-                                External/Ansible.Task::{
-                                , name = Some
-                                    "Create directory (or directories)"
-                                , file = Some External/Ansible.File::{
-                                  , path = "{{ item }}"
-                                  , state = Some
-                                      External/Ansible.File.state.directory
-                                  }
-                                , loop = Some "{{ directories }}"
-                                , vars = Some
-                                    ( External/Ansible.Vars.object
-                                        ( toMap
-                                            { directories =
-                                                External/Ansible.Vars.array
-                                                  ( External/Prelude.List.map
-                                                      Text
-                                                      External/Ansible.Vars.Type
-                                                      ( External/Prelude.Function.compose
-                                                          Text
-                                                          Text
-                                                          External/Ansible.Vars.Type
-                                                          Prelude.Text.pathify
-                                                          External/Ansible.Vars.string
-                                                      )
-                                                      directories
-                                                  )
-                                            }
-                                        )
-                                    )
-                                }
-                        else  None TaskPool.Entry
-                      ]
-                  )
-              , Some
-                  ( TaskPool/concat
-                      [ if    External/Prelude.Bool.not
-                                (External/Prelude.List.null Text files)
-                        then  Some
-                                ( TaskPool/build
-                                    ( External/Prelude.List.map
-                                        ( External/Prelude.Map.Entry
-                                            Text
-                                            (List Text)
-                                        )
-                                        (Optional TaskPool.Entry)
-                                        ( \ ( entry
-                                            : External/Prelude.Map.Entry
+              [ Some (TaskPool/createDirectories directories)
+              , if    External/Prelude.Bool.not
+                        (External/Prelude.List.null Text files)
+                then  Some
+                        ( TaskPool/build
+                            ( External/Prelude.List.map
+                                (External/Prelude.Map.Entry Text (List Text))
+                                (Optional TaskPool.Entry)
+                                ( \ ( entry
+                                    : External/Prelude.Map.Entry
+                                        Text
+                                        (List Text)
+                                    ) ->
+                                    if    External/Prelude.Bool.not
+                                            ( External/Prelude.List.null
                                                 Text
-                                                (List Text)
-                                            ) ->
-                                            if    External/Prelude.Bool.not
-                                                    ( External/Prelude.List.null
-                                                        Text
-                                                        entry.mapValue
+                                                entry.mapValue
+                                            )
+                                    then  Some
+                                            External/Ansible.Task::{
+                                            , name = Some "Copy file(s)"
+                                            , copy = Some External/Ansible.Copy::{
+                                              , src = Some "{{ item }}"
+                                              , dest =
+                                                  Prelude.Text.pathify
+                                                    "${entry.mapKey}/{{ item }}"
+                                              , mode = Some "preserve"
+                                              , force = Some True
+                                              }
+                                            , loop = Some "{{ files }}"
+                                            , vars = Some
+                                                ( External/Ansible.Vars.object
+                                                    ( toMap
+                                                        { files =
+                                                            External/Ansible.Vars.array
+                                                              ( External/Prelude.List.map
+                                                                  Text
+                                                                  External/Ansible.Vars.Type
+                                                                  External/Ansible.Vars.string
+                                                                  entry.mapValue
+                                                              )
+                                                        }
                                                     )
-                                            then  Some
-                                                    External/Ansible.Task::{
-                                                    , name = Some "Copy file(s)"
-                                                    , copy = Some External/Ansible.Copy::{
-                                                      , src = Some "{{ item }}"
-                                                      , dest =
-                                                          Prelude.Text.pathify
-                                                            "${entry.mapKey}/{{ item }}"
-                                                      , force = Some True
-                                                      }
-                                                    , loop = Some "{{ files }}"
-                                                    , vars = Some
-                                                        ( External/Ansible.Vars.object
-                                                            ( toMap
-                                                                { files =
-                                                                    External/Ansible.Vars.array
-                                                                      ( External/Prelude.List.map
-                                                                          Text
-                                                                          External/Ansible.Vars.Type
-                                                                          External/Ansible.Vars.string
-                                                                          entry.mapValue
-                                                                      )
-                                                                }
-                                                            )
-                                                        )
-                                                    }
-                                            else  None TaskPool.Entry
-                                        )
-                                        map
-                                    )
+                                                )
+                                            }
+                                    else  None TaskPool.Entry
                                 )
-                        else  None TaskPool.Type
-                      ]
-                  )
+                                map
+                            )
+                        )
+                else  None TaskPool.Type
               ]
 
 in  copyFiles

@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+cd "$(dirname "$0")" || exit
+
+# $1 = {{ inventory_hostname }}
+case "$1" in
+    desktop|laptop)
+        case "$2" in
+            start|restart)
+                ./df_launcher picom
+                ;;
+            stop)
+                killall -q picom
+                ;;
+            *)
+                echo "Usage: $0 {{ inventory_hostname }} {start|restart|stop}"
+                echo "$2 not supported"
+                exit 2
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {{ inventory_hostname }} {start|restart|stop}"
+        echo "$1 not supported"
+        exit 1
+        ;;
+esac

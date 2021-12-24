@@ -22,12 +22,14 @@ let toMetadata
                 , Chsh = Role/Metadata::{=}
                 , Common = Role/Metadata::{=}
                 , Dwm = Role/Metadata::{ conflicts = [ Role.Bspwm, Role.I3 ] }
-                , Elm = Role/Metadata::{=}
+                , Elm = Role/Metadata::{
+                  , dependencies = [ Role.Zsh, Role.Nodejs ]
+                  }
                 , Fonts = Role/Metadata::{=}
                 , Gdb = Role/Metadata::{=}
                 , Git = Role/Metadata::{=}
                 , Gtk = Role/Metadata::{=}
-                , Haskell = Role/Metadata::{=}
+                , Haskell = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , I3 = Role/Metadata::{
                   , dependencies = [ Role.Packages ]
                   , conflicts = [ Role.Bspwm, Role.Dwm ]
@@ -35,21 +37,21 @@ let toMetadata
                 , I3status = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.I3 ]
                   }
-                , Nodejs = Role/Metadata::{=}
+                , Nodejs = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Packages = Role/Metadata::{=}
                 , Picom = Role/Metadata::{=}
                 , Python = Role/Metadata::{=}
                 , Ranger = Role/Metadata::{=}
                 , Rofi = Role/Metadata::{=}
                 , Runit = Role/Metadata::{ conflicts = [ Role.Systemd ] }
-                , Rust = Role/Metadata::{=}
+                , Rust = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Ssh = Role/Metadata::{=}
                 , Sxhkd = Role/Metadata::{=}
                 , Systemd = Role/Metadata::{ conflicts = [ Role.Runit ] }
                 , Theme = Role/Metadata::{=}
                 , Tmux = Role/Metadata::{=}
                 , Urxvt = Role/Metadata::{
-                  , dependencies = [ Role.Packages ]
+                  , dependencies = [ Role.Packages, Role.Xrdb ]
                   , conflicts = [ Role.Alacritty ]
                   }
                 , Vim = Role/Metadata::{=}

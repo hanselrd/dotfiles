@@ -1,0 +1,20 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["rust"//, "haskell", "lhaskell", "javascript", "javascriptreact", "typescript", "typescriptreact"],
+    /* "clangd.arguments": ["-j", "1"], */
+    "git.addGBlameToBufferVar": true,
+    "languageserver": {
+        "elmLS": {
+            "command": "elm-language-server",
+            "filetypes": ["elm"],
+            "rootPatterns": ["elm.json"]
+        },
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "args": ["--lsp"],
+            "filetypes": ["haskell", "lhaskell"],
+            "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"]
+        }
+    },
+    "python.jediEnabled": false,
+    "tailwindCSS.headwind.runOnSave": false
+}

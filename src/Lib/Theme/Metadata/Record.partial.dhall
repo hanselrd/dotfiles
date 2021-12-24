@@ -125,7 +125,7 @@ in  { Type =
         , urgentWorkspace =
           { border = Theme/Color.Red, text = Theme/Color.BrightWhite }
         , bindingMode =
-          { border = Theme/Color.Red, text = Theme/Color.BrightWhite }
+          { border = Theme/Color.Magenta, text = Theme/Color.BrightWhite }
         , idle =
           { background = Theme/Color.Black
           , foreground = Theme/Color.BrightWhite
