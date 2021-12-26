@@ -12,11 +12,14 @@ let TaskPool/copyFiles = ../../../Lib/TaskPool/copyFiles.partial.dhall
 
 let Privilege = ../../../Lib/Privilege/Enum.partial.dhall
 
+let PermissionMode = ../../../Lib/PermissionMode/Record.partial.dhall
+
 in  TaskPool/become
       Privilege.User
       ( TaskPool/concat
           [ Some
               ( TaskPool/copyFiles
+                  (None PermissionMode.Type)
                   [ External/Prelude.Map.keyValue
                       (List Text)
                       (Directory/toText Directory.Gtk1)
@@ -25,6 +28,7 @@ in  TaskPool/become
               )
           , Some
               ( TaskPool/copyFiles
+                  (None PermissionMode.Type)
                   [ External/Prelude.Map.keyValue
                       (List Text)
                       (Directory/toText Directory.Gtk2)

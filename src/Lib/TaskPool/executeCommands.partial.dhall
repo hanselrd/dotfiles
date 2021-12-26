@@ -4,15 +4,15 @@ let External/Prelude = ../External/Prelude.partial.dhall
 
 let Shell = ../Shell/Enum.partial.dhall
 
-let Shell/equal = ../../codegen/Lib/Shell/equal.partial.dhall
+let Shell/toText = ../../codegen/Lib/Shell/toText.partial.dhall
 
 let TaskPool = ./Alias.partial.dhall
 
 let TaskPool/build = ./build.partial.dhall
 
 let executeCommands
-    : Shell -> List Text -> TaskPool.Type
-    = \(shell : Shell) ->
+    : Optional Shell -> List Text -> TaskPool.Type
+    = \(shell : Optional Shell) ->
       \(commands : List Text) ->
         TaskPool/build
           [ if    External/Prelude.Bool.not
@@ -23,9 +23,13 @@ let executeCommands
                     , shell = Some External/Ansible.Shell::{
                       , cmd = Some "{{ item }}"
                       , executable =
-                          if    Shell/equal shell Shell.Zsh
-                          then  Some "/usr/bin/zsh"
-                          else  None Text
+                          External/Prelude.Optional.map
+                            Shell
+                            Text
+                            ( \(shell : Shell) ->
+                                "/usr/bin/${Shell/toText shell}"
+                            )
+                            shell
                       }
                     , loop = Some "{{ commands }}"
                     , vars = Some
@@ -41,11 +45,18 @@ let executeCommands
                                               Text
                                               External/Ansible.Vars.Type
                                               ( \(command : Text) ->
-                                                  if    Shell/equal
-                                                          shell
-                                                          Shell.Zsh
-                                                  then  "/usr/bin/zsh -ic \"${command}\""
-                                                  else  command
+                                                  External/Prelude.Optional.default
+                                                    Text
+                                                    command
+                                                    ( External/Prelude.Optional.map
+                                                        Shell
+                                                        Text
+                                                        ( \(shell : Shell) ->
+                                                            "/usr/bin/${Shell/toText
+                                                                          shell} -ic \"${command}\""
+                                                        )
+                                                        shell
+                                                    )
                                               )
                                               External/Ansible.Vars.string
                                           )

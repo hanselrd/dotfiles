@@ -15,8 +15,7 @@ in  ''
         $TERMINAL
 
     super + shift + {Return,e}
-        $TERMINAL -e zsh -c ". ${Directory/toText
-                                   Directory.Zsh}/.zshrc && {ranger,$EDITOR}"
+        $TERMINAL -e zsh -c "{ranger,$EDITOR}"
 
     super + shift + z
         $BROWSER

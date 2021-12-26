@@ -12,9 +12,16 @@ let TaskPool/concat = ./concat.partial.dhall
 
 let TaskPool/createDirectories = ./createDirectories.partial.dhall
 
+let PermissionMode = ../PermissionMode/Record.partial.dhall
+
+let PermissionMode/toText = ../PermissionMode/toText.partial.dhall
+
 let unarchiveFiles
-    : External/Prelude.Map.Type Text (List Text) -> TaskPool.Type
-    = \(map : External/Prelude.Map.Type Text (List Text)) ->
+    : Optional PermissionMode.Type ->
+      External/Prelude.Map.Type Text (List Text) ->
+        TaskPool.Type
+    = \(permissionMode : Optional PermissionMode.Type) ->
+      \(map : External/Prelude.Map.Type Text (List Text)) ->
         let directories = External/Prelude.Map.keys Text (List Text) map
 
         let files =
@@ -49,6 +56,13 @@ let unarchiveFiles
                                               , dest =
                                                   Prelude.Text.pathify
                                                     "${entry.mapKey}"
+                                              , keep_newer = Some True
+                                              , mode =
+                                                  External/Prelude.Optional.map
+                                                    PermissionMode.Type
+                                                    Text
+                                                    PermissionMode/toText
+                                                    permissionMode
                                               }
                                             , loop = Some "{{ files }}"
                                             , vars = Some

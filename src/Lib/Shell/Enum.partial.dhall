@@ -1,1 +1,1 @@
-< Default | Zsh >
+< Bash | Zsh >

@@ -10,6 +10,6 @@ let Shell = ../../../Lib/Shell/Enum.partial.dhall
 in  TaskPool/become
       Privilege.User
       ( TaskPool/executeCommands
-          Shell.Zsh
+          (Some Shell.Zsh)
           [ "pip install --upgrade --user pipenv black cmakelang" ]
       )

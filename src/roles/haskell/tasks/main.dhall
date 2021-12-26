@@ -10,7 +10,7 @@ let Shell = ../../../Lib/Shell/Enum.partial.dhall
 in  TaskPool/become
       Privilege.User
       ( TaskPool/executeCommands
-          Shell.Zsh
+          (Some Shell.Zsh)
           [ "curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | TMPDIR=/var/tmp BOOTSTRAP_HASKELL_NONINTERACTIVE=true sh"
           , "curl -sSL https://get.haskellstack.org | sh || true"
           , "ghcup upgrade"

@@ -10,7 +10,7 @@ let Shell = ../../../Lib/Shell/Enum.partial.dhall
 in  TaskPool/become
       Privilege.User
       ( TaskPool/executeCommands
-          Shell.Zsh
+          (Some Shell.Zsh)
           [ "npm install -g elm elm-format elm-test @elm-tooling/elm-language-server"
           , "npm update -g"
           ]

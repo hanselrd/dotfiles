@@ -20,13 +20,15 @@ let Privilege = ../../../Lib/Privilege/Enum.partial.dhall
 
 let Shell = ../../../Lib/Shell/Enum.partial.dhall
 
+let PermissionMode = ../../../Lib/PermissionMode/Record.partial.dhall
+
 in  TaskPool/become
       Privilege.User
       ( TaskPool/concat
           [ Some (TaskPool/createDirectories [ Directory/toText Directory.Ssh ])
           , Some
               ( TaskPool/executeCommands
-                  Shell.Default
+                  (None Shell)
                   [ "test -f ${Directory/toText
                                  Directory.Ssh}/id_rsa || ssh-keygen -b 4096 -t rsa -f ${Directory/toText
                                                                                            Directory.Ssh}/id_rsa -N \"\""
@@ -34,6 +36,7 @@ in  TaskPool/become
               )
           , Some
               ( TaskPool/copyFiles
+                  (None PermissionMode.Type)
                   [ External/Prelude.Map.keyValue
                       (List Text)
                       (Directory/toText Directory.Ssh)

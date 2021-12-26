@@ -1,152 +1,9 @@
 1ccaf63546d6d19315f3430ad5435a0addd8baab7053c75fcb28c1e7dc895296  build/Makefile
-4ca4e863b822ee87b30bc806cbc32d73c3389de3a3461770539c50b690df0178  build/ansible-output/cache/dotfiles/systemd/bootstrapd.sh
-14577744f5d7e58bca8b7cd6afaad8a9850afa421c25b0a791938e8b7f425a86  build/ansible-output/cache/dotfiles/systemd/bootstrapd_pre.sh
-89cc72627899fd4c687a87da50e88dd76e371aaaa27cb9f4296277fde933133f  build/ansible-output/config/Code/User/keybindings.json
-6567772e55566fc3f03a1ecf88f0caf721c5e2ecad2edaf657b036063dadf1de  build/ansible-output/config/Code/User/settings.json
-18e94968978ae5f9de21ba8fd22c3ec74a7b3c408dff0c4cf82b68f965d195b4  build/ansible-output/config/alacritty/alacritty.yml
-7c00e0cba6760f6db49df7099f4d0627673669cf009fe8ca94289442af1c9edf  build/ansible-output/config/gtk-3.0/settings.ini
-e11b1cca66dfd669654065b865ff1a02aba677a1d84c00572b1301799de17c90  build/ansible-output/config/i3/config
-b59804f3e00c65cf07ae189a2fff596ec12b17850bd62cb8ace7080324cda648  build/ansible-output/config/i3status/config
-772cec8e4c3815bbad7522f414c519af1a21377b4366a6091d3af0164565bf1b  build/ansible-output/config/i3status/config-sm
-f267581665c5abb9367a16fccd447d0dbc5aa7a9adb5640c7e76009a27da4e03  build/ansible-output/config/i3status/config-sm.toml
-abd42fcd32d4990529d601dfb7192f80a256b9947e3354e199d849822722a025  build/ansible-output/config/i3status/config.toml
-18b08181c6453c70da30da8fbb79fbb6c712edc8d3b4c6a920ee7a6649adcf10  build/ansible-output/config/picom/picom.conf
-cdbf67935895f9f093b7231bcd00681d300ce2295aeb470febd5c7ea36658f3d  build/ansible-output/config/ranger/rc.conf
-b697c2104e99f61e8705e34eb01377d7a41ec48f245b4b71ea9485d7b6b7d5b3  build/ansible-output/config/rofi/config.rasi
-fde9a9282a6ef2a38d16c729d0c6faa968d5cedce87f33842219d6d1665e9847  build/ansible-output/config/rofi/theme.rasi
-9e10d90a60f8579b6dcb15a96de65d634ece8b2f0de15763f0b44fa94a807458  build/ansible-output/config/rustfmt/rustfmt.toml
-7146b6b08f903681cf7e8d46aa1effd3beb245979e5f6c7c8cad7a8c3e3ff9ee  build/ansible-output/config/sxhkd/sxhkdrc
-2fcf4e85df3d16f77f87c09b31585e9a5586644632116b56b40575cc7e2dd544  build/ansible-output/config/systemd/user/bootstrapd.service
-09fbd2f041c4c974e03e71d966436edee4d429b996610974a7c12f41af1772ce  build/ansible-output/config/wal/templates/colors.dhall
-01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b  build/ansible-output/home/.Xresources
-f398cd45c7f91abc9a83f79edd7d3adfa4d77ab2d0b03a97dc9c4b8303c029bf  build/ansible-output/home/.ccache/ccache.conf
-82a727d948fb4c985e50a0c0dc03fd291010f6b3889aa0cf0e3d469295fa1ab5  build/ansible-output/home/.gdb/offsetsof.py
-9df7d6df0f901838a6b6d151fe5bf2654ff4295dc334eb747fa2915a809655c1  build/ansible-output/home/.gdb/offsetsof_python2.py
-d593e6ae6fb2637916221aa529bd6254c4b37405d613a0467f11b94ed1ac327c  build/ansible-output/home/.gdbinit
-52e569811260febf9a912c556537210a747fa6fe3e04cf42168b845d70dd28a9  build/ansible-output/home/.gitconfig
-0359e7d11a5dd4e8f8c9e9c2bbb4aaec17023c2e35612398679ccf4d16d37dbd  build/ansible-output/home/.gtkrc-2.0
-2ed85a38c61a1c93d0a7793de2346e153bafc1b81cc021e52315b585a1a579fb  build/ansible-output/home/.screenlayout/default-desktop.sh
-01609194b719d3e7811eb9573d2225ed0ad4f2062973040a1cba38887b10df8d  build/ansible-output/home/.ssh/config
-8a9e655d9eff27f2b421c6f7dcc11e793645c0f37c5881f70cf262e61af42492  build/ansible-output/home/.ssh/id_rsa
-1c04de3f83445c89c14e18c7f931e4bc2ff750462ff9c513329a04c1cb45283c  build/ansible-output/home/.ssh/id_rsa.pub
-ca596f9c8402f794465a0476d9c2f45fa621d950d40e2eb8278ef24433bf6aae  build/ansible-output/home/.tmux.conf
-77d7a797e17d28a5a57c2d33abcc1fb9abaa95300afbf559c77184b76037e227  build/ansible-output/home/.vim/coc-settings.json
-22ef480d999ec541554d0ba289f72a4f67b3cff96f7741374836a37dd648018b  build/ansible-output/home/.vimrc
-157a3118b76f67e4f0835182aa452998674781af45c0dfff24ac53fe65703258  build/ansible-output/home/.xinitrc
-7204a5b88262c0843676e810d2f702a8c0f893d7adc8424912fb21038fee49e5  build/ansible-output/home/.zprofile
-9e3dea1645e1a4deca5a282b61ae7a4172959a88402d3e0e7acc1355fa687186  build/ansible-output/home/.zshenv
-747d49d0217b489e8b628c0c35bf4a742a5cca726cc04d90030ac13be6d17c27  build/ansible-output/home/.zshrc
-bb42ff1d695bbea2c5843c54a1853160dbd8e8b2909f2e8498d53abb297fb5a4  build/ansible-output/root/usr/local/bin/df_archive
-7f5e337f439c158feaf6cee7273cf12c3f6f1645569ca81e769310830c1e00c4  build/ansible-output/root/usr/local/bin/df_backup
-a8e26bb6273acce68d2ed10eb6defc4a8633d496f8ac72a7049a85f4ded84e9e  build/ansible-output/root/usr/local/bin/df_exit
-ef9f7c570f779e2bf8d2cae06ba2c3fc1a920bcde0f179281e061793e04b2275  build/ansible-output/root/usr/local/bin/df_launcher
-bfc0d7eea0d81841a05f132efb02a989653b098efa93caf8bd2f22d7d4888d39  build/ansible-output/root/usr/local/bin/df_passphrase
-a77c9b7492885a8054f6827c9eb1c15ed25028f2c02b3d7aa149de9b6e59292b  build/ansible-output/root/usr/local/bin/df_picom
-fdc5d308dfe641a0491353b8fde540f88255dc11289a55853e4c9582ae3c68c2  build/ansible-output/root/usr/local/bin/df_power_now
-597a19d75a1f67eeeb223b5fe661c81c4ba16158a738d247e1c80b18c656303b  build/ansible-output/root/usr/local/bin/df_redshift
-d81b07ef7953c5d78f27c2d2c69158467ddc27783a6d3cf19c349cd2e990ffda  build/ansible-output/root/usr/local/bin/df_xrandr
-189df2237124a432f98d25dae7478c6c59b33fc3ca023e10181ba229cf233985  build/ansible-output/root/usr/local/share/backgrounds/0001.jpg
-23242aff3472c5f4c540750fa6e1f37438c53ca1ea194ebe139d652c779eb1fe  build/ansible-output/root/usr/local/share/backgrounds/0002.jpg
-cc6ffe7676601323151c6982b9aec5bfa9f644e53a8d3c409ee100fbd5f63d2b  build/ansible-output/root/usr/local/share/backgrounds/0003.jpg
-c4a60d172b96fde60ba7ba418e8d441a873937321b74133ebca1b7812bdcabc0  build/ansible-output/root/usr/local/share/backgrounds/0004.jpg
-9a5f561429b9ff7b97b3ddb67bdc5649a889df9147df0f7e7d1ce8e32695ebce  build/ansible-output/root/usr/local/share/backgrounds/0005.jpg
-c101fef853ca9107ed87bb4119f5a7bfb2358e0a42538bbd70f25a7b2678c2b8  build/ansible-output/root/usr/local/share/backgrounds/0006.jpg
-d5ce180269651f703b6ee56254872ef7cae1aa9a60ec8eac50802dbb7ca88ba5  build/ansible-output/root/usr/local/share/backgrounds/0007.jpg
-ef4eeeb0928741d508bbab9ff4d3b462cb604719915aa1955bf7a2d3783b56ee  build/ansible-output/root/usr/local/share/backgrounds/0008.jpg
-6021d4fe348a1949db36aedf682371d00186b4db3bd2e0bc2316b64cb473f623  build/ansible-output/root/usr/local/share/backgrounds/0009.jpg
-c666ebadeaf57e9b92f2da3c7e67086329d0871800ab7be16d3c6a6ca6b427cc  build/ansible-output/root/usr/local/share/fonts/Caskaydia Cove Nerd Font Complete Mono Windows Compatible.ttf
-f851bb2977ac951536c49855e1ff73f3dc2426c310a744e4518262a641b8627e  build/ansible-output/root/usr/local/share/fonts/Caskaydia Cove Nerd Font Complete Mono.ttf
-f036680014d2e94a0e37361e220eb24169b0ccb5589e6c981f13a94d8c558163  build/ansible-output/root/usr/local/share/fonts/Caskaydia Cove Nerd Font Complete Windows Compatible.ttf
-5b5c79a4c1327d1f0c7952a985f7055fff02e5aca5e209ffabdad47cf7c6143f  build/ansible-output/root/usr/local/share/fonts/Caskaydia Cove Nerd Font Complete.ttf
-ecad076785ef2c4015c13b9692b9a0cfa6a30ae44e0ae8c38e7b0b377cd01911  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Italic Nerd Font Complete Mono Windows Compatible.ttf
-89ce3aec53c083333a5e39768815091ea6021afdbfb8c5224319c51cd039069a  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Italic Nerd Font Complete Mono.ttf
-116e97db17d5eb46dfc7119e752990f13090d64bdff38b7584769505499fff6e  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Italic Nerd Font Complete Windows Compatible.ttf
-9e87f3e993a5948c3aa5489305310c4829e5423315368e85aff48810fce50d7d  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Italic Nerd Font Complete.ttf
-167aac1de82217c97df0aa35080227782ab30e1e758fce9514acfbeb130ea2c2  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Nerd Font Complete Mono Windows Compatible.ttf
-e3fb5407498849ad528421f3032e44699f5cba091ea3e2a8d6dbda232477a8c6  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Nerd Font Complete Mono.ttf
-6904e94581c1a9d0b308f25c82b4aa20e1b1871f615a6b034c60f114da5c180f  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Nerd Font Complete Windows Compatible.ttf
-dfe262ad57dd691c896625aea345d90a2a172fed648a1c433ab31a8edde8c35c  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Bold Nerd Font Complete.ttf
-367fb2d493fcff9d90729dbe4f329da732919c20e3153c4c76d77e65e9f2dd37  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Italic Nerd Font Complete Mono Windows Compatible.ttf
-789a98d3dcf63ee1549b0e4a7fae43c601071917d29c7c2c244d86b48d3cb543  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Italic Nerd Font Complete Mono.ttf
-f42cd8705f251785da782b583d1d246a9bdd0b1afdf80d70d732f88a17be50e4  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Italic Nerd Font Complete Windows Compatible.ttf
-2ca7544bb993e4a275fe5fd953cf5c45eed7f987e01bd60754a2523a7e963828  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Italic Nerd Font Complete.ttf
-2cf41f68da9a1e58ee39430a7c2634da06205e6a1a4c94976becba8749699873  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Regular Nerd Font Complete Mono Windows Compatible.ttf
-9bf3d298bcfe3b3001e2a50967fd5e081abdc8de1877f016d0ea9d45f5221a84  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Regular Nerd Font Complete Mono.ttf
-65451a20f4961eb3e11a6abc2ab0f9b6f34a0919a8d21c08ef95a9b773a31d90  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Regular Nerd Font Complete Windows Compatible.ttf
-92f68f352b0d95ff7192ac6b6a5f4789609b7e3eaea5bbf624df9d81861c2115  build/ansible-output/root/usr/local/share/fonts/Fantasque Sans Mono Regular Nerd Font Complete.ttf
-c77648dbd0764fba904bd20944db87354c798654b8612a5ca05b70afdc9280ef  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete Mono Windows Compatible.otf
-db3b15193ada0576e6127a06d5b45e31fe1b3beb977975da5f4b7e22ce8870d5  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete Mono Windows Compatible.ttf
-34ec3a67149b360926ee0a4e17abfd036931d265a9359e3fe8d99c7cc5898759  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete Mono.otf
-b9a7b6339a381f27199a1f70ce0bed20662be147ccf2e1dbdd3318a7bed025ab  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete Mono.ttf
-b8630b26cd2e0d1e1195671c8517ccabc40be285589eab2d8a321f89de065677  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete Windows Compatible.otf
-0a32855e267b40a290988981e7b0982de54b53c0d7be2e5f2d8076105d60188f  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete Windows Compatible.ttf
-d5cfdf7aad648c532263763957f1f37753a7b25d4f330e58f443344c5b885cc1  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete.otf
-89b8c0a55ca3e012b30c664c132390a0fa2f86312b34c2054880a6fd0cebd965  build/ansible-output/root/usr/local/share/fonts/Inconsolata Bold Nerd Font Complete.ttf
-09beaec3f5f7ad2c2193199761b5c703455e2c23c6c3f18a9a092eaefdca7fb4  build/ansible-output/root/usr/local/share/fonts/Inconsolata Nerd Font Complete Mono Windows Compatible.otf
-e8f42b3da4a6811e47c53deec6d0f10aac8c83065c6d5e4900e7060422880e9e  build/ansible-output/root/usr/local/share/fonts/Inconsolata Nerd Font Complete Mono.otf
-3dc2e3ca6cc337be538eecfc76000d693e25bbf3524af31f6f2c20f4bd1a7afc  build/ansible-output/root/usr/local/share/fonts/Inconsolata Nerd Font Complete Windows Compatible.otf
-37f6cbdc9799963590cb7df54549d5812ed8591dc639518dc74de580654d450d  build/ansible-output/root/usr/local/share/fonts/Inconsolata Nerd Font Complete.otf
-5b6bd407e8b0972f945b2a1336f43baf2055842e7cf9f8f12586b73932ea1c3f  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete Mono Windows Compatible.otf
-6bf1678951b5ec5ba702a2a32f480f08774fdee1f8460c1cf60630447fb246f3  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete Mono Windows Compatible.ttf
-8b799ffb4de8a7d0bd2737c05c16a2d49cbbecd0ea7a15763ceac3b16a92be4c  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete Mono.otf
-9fb45baa6996be77e1af67c03767de28c4c11a3cb6bfcc8bc5722fef1faa2343  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete Mono.ttf
-a9b840cda6312d615ec33d37d8fc75d0763c0de4a91aabf8c314b4918748c399  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete Windows Compatible.otf
-802fcf787e1d345295ce5b8cce27f1b4bcbdc6427b17b26ce98409d6fd42ed23  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete Windows Compatible.ttf
-5090843a210cc07a053e8c06932fd02d867879ef31e0c5e6c3df098e0d1385e4  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete.otf
-723baf26fd089189644c8da8bf2c2aae919dad12e84f7f32429221daa498d568  build/ansible-output/root/usr/local/share/fonts/Inconsolata Regular Nerd Font Complete.ttf
-3154e833093dfc0415c5a5d37096185929cd00e6925bc39091455f91dbda8f1f  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Italic Nerd Font Complete Mono Windows Compatible.ttf
-fe4250ee78e818a6e9975faa57cddd872c219a282eabe636d9abc26f5db49b9e  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Italic Nerd Font Complete Mono.ttf
-9f7972eb634a6516fae13f19c31ff5cdd4785ba66801690acfcbd61c1d625b67  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Italic Nerd Font Complete Windows Compatible.ttf
-7a8c0ed6d39d3dcc72995333afc2a962b84d643874442073ac99d4ea0e8a8dc5  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Italic Nerd Font Complete.ttf
-8fbfd13920057666d00d84874b6fce0fbff0297672c7d52382ae853baacd55ef  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Nerd Font Complete Mono Windows Compatible.ttf
-e44e1fe869513b3ca85bf7111bb285e87c81f71d390f5bf2d9c7ec4aefbeb13e  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Nerd Font Complete Mono.ttf
-e912c768f0d8304e9f18038602dfc6a89345f84a715de6c793d7a0adb0e0a5ff  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Nerd Font Complete Windows Compatible.ttf
-78dc1708b4cf9e5acc0b57c89851bb581d9d9abec03f2bdfaa38f972ae44a35a  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Bold Nerd Font Complete.ttf
-fd64c34254b1ea627386aa9ff1aa77dbed43b2fe979bd511011b1eab6e00a4b8  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtBd Ita Nerd Font Complete Mono Windows Compatible.ttf
-b2ad3d8dbbea5e99f50b502bb6f607ba8187a72fb812f611ae18dba26868449b  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtBd Ita Nerd Font Complete Mono.ttf
-66d2f192de2c91471e9913fe25a560560b05da73464962543637620fe253dd93  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtBd Ita Nerd Font Complete Windows Compatible.ttf
-95129a5bde1edcefd8dc863b7c59a9241b9c614ee680bcc8d93249260bc71597  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtBd Ita Nerd Font Complete.ttf
-5b21f68739abb7ecff9fc82a92d5c8fea764622af7ebf730095a8a4823c516f4  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Extra Bold Nerd Font Complete Mono Windows Compatible.ttf
-3676bfdd419d827040b2fe832a0a386babebb706f26a3c16b2be3f6d294f4df3  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Extra Bold Nerd Font Complete Mono.ttf
-1f84fc92db2eed5ce65e608fb00e894c8dc5020a200bdf8a606d4bb3c175465e  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Extra Bold Nerd Font Complete Windows Compatible.ttf
-27bc5175f70f3bd84869fa89b4aaee2d45357117a635a0d5d8787c93c3965d9e  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Extra Bold Nerd Font Complete.ttf
-807507a332e3983601907c7117ae13a9600a8a10b8c7ba5f6ec5e8837ad46b33  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExBd I Nerd Font Complete Mono Windows Compatible.ttf
-30a7f2a70d0d95609f4b58f6fa97ae1622d79a8bd03a789f56aa379d2fcd2d90  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExBd I Nerd Font Complete Mono.ttf
-979930400130cf3a7c68415286840fb7300f7679efe3cc214de376e0891ed355  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExBd I Nerd Font Complete Windows Compatible.ttf
-1d84098b097d77010efdef6edc65b4ac56611fcc28cca99d42dd2088cd187002  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExBd I Nerd Font Complete.ttf
-03ae07c7b01ffd38d12e6d86674f25e2519cd44c6ecf444f1209dec3c98dba2e  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExtBd Nerd Font Complete Mono Windows Compatible.ttf
-716b717600db2351fea5784cc476b6f8b6851556bd1f105a4feaf746f5c869dd  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExtBd Nerd Font Complete Mono.ttf
-8b60a0671acff599f55e864af5a85b3de045631d722b30124ff2b9b081e123fa  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExtBd Nerd Font Complete Windows Compatible.ttf
-7f6c3ae817edd495f26fc481578e2b6b5fe6493e24dcca9800bb3d90eace8dd3  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono ExtraBold ExtBd Nerd Font Complete.ttf
-182e873c29bc21cc5a954f72ec6c93d790711378a9f13504e75dbab352664db3  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Italic Nerd Font Complete Mono Windows Compatible.ttf
-c88c1d7224f558c59d7b02ef0637435a7d3963b2108713e66d4509befb3d5a57  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Italic Nerd Font Complete Mono.ttf
-712ea1a828841b168a20d3f7b035913c2e88ed6f2e0289b236c3a34cfbf1ec14  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Italic Nerd Font Complete Windows Compatible.ttf
-2917c9fdd4bb79b13dc4c517705397405504394887ded612f29081ad0548f18f  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Italic Nerd Font Complete.ttf
-5d238ff1508268f2975bf119c465eac54a3f9638fecb7f508c732318e622436b  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Italic Nerd Font Complete Mono Windows Compatible.ttf
-834e7c0b578df1a49441b7c6e52bd1d39e50d40453773062a8cf14fa649505f7  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Italic Nerd Font Complete Mono.ttf
-925452cc40f919983dad38242d5672e61b4b91a66c188aec5e9fbe7145b67d46  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Italic Nerd Font Complete Windows Compatible.ttf
-224494a54dfc2baab3bcee507c05ff8986d605b04d9deb692105e20fada7080f  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Italic Nerd Font Complete.ttf
-9a0f0be600b388b4c64246b7ef6bee42139a1500f50e8ff0273369c90ae5f5cb  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Med Ita Nerd Font Complete Mono Windows Compatible.ttf
-262f04379c4690a2bf7b86b41667938e2a79aac1cd1b0f299e7090785051f374  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Med Ita Nerd Font Complete Mono.ttf
-38a734bafd689c3e7420fc683a234448a4cb6fcf38dc30b4702b6150ab052c3e  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Med Ita Nerd Font Complete Windows Compatible.ttf
-51ee136a8e344b12bcac188cb63cb6971bd1c8734c4a2f424a8fa2b087fa5443  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Med Ita Nerd Font Complete.ttf
-842501b2fcf03e5d7f3e044c7e7ce74fce45b8a357220eddecb8c979633a8165  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Medium Nerd Font Complete Mono Windows Compatible.ttf
-8e34a4fc2254cdb8fe2bdc03a62efde03eba6f8f365bae4edef7424df9b2975c  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Medium Nerd Font Complete Mono.ttf
-c672e7ac9e6011a012b45ca5a3e83a8958bdc84dcb6eb47666a3419c5cc0b669  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Medium Nerd Font Complete Windows Compatible.ttf
-a983c5f07463659aaa7ae2af037f8eed7becc38b2b5150efa3252aa7effc9564  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Medium Nerd Font Complete.ttf
-70da50cfffd1208a19c5bb4a358cd5671dc69c6bf03814a62226e18660b3c469  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Nerd Font Complete Mono Windows Compatible.ttf
-64f2422aa91f787f5e50eefdfe3e754cbe8ecc0a259c498e0a65728acdc9a30b  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Nerd Font Complete Mono.ttf
-72c3868661000c191045053ad6f0820cdc7cf9b017278bba13d7a9ce40522dbf  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Nerd Font Complete Windows Compatible.ttf
-3f9a1f1a5ca5d8d3f208845cc8e88717b6e40f871108146903b3c5ec0cc9c96a  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Medium Nerd Font Complete.ttf
-4f711df32a97e69bda20027f181e79969f06d691991715f7f11c52832178ad65  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Regular Nerd Font Complete Mono Windows Compatible.ttf
-7391b088424c134ddffc39c97471d0fa99ba663f8a80b0cc23a2d40dc5b97127  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf
-128450c891984dfc2ac51a47dc8d0ca027099a7a4f35e6a4933228fb0ef32f4c  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Regular Nerd Font Complete Windows Compatible.ttf
-dc6dfd768bd1649a7cadb05d5935e7a1a2e444b6df9e300db7f4e2935ff5e1de  build/ansible-output/root/usr/local/share/fonts/JetBrains Mono Regular Nerd Font Complete.ttf
 8c7e2a880f6fa63e5d5ab0ffc2280996c45122ec36eadc6968771a9102843be8  build/inventory
 6ef0a0194ca007467fdae238ce991f50bb41e3b99fce1f59d5194dfb0ab1a47a  build/playbook.yml
 18e94968978ae5f9de21ba8fd22c3ec74a7b3c408dff0c4cf82b68f965d195b4  build/roles/alacritty/files/alacritty.yml
 14b4f889722065d24ee9b8686ba62d8391d62df748d3011817d2d21f139c7e7c  build/roles/alacritty/meta/main.yml
-6dd74fbe871aec564636c694167fdf6e01cd80be40828d08da02643a83161aea  build/roles/alacritty/tasks/main.yml
+cb9e0035e6796762048375e9e72afc3d0c5f67b1bf95d51ee6747a3c6f04af87  build/roles/alacritty/tasks/main.yml
 189df2237124a432f98d25dae7478c6c59b33fc3ca023e10181ba229cf233985  build/roles/backgrounds/files/0001.jpg
 23242aff3472c5f4c540750fa6e1f37438c53ca1ea194ebe139d652c779eb1fe  build/roles/backgrounds/files/0002.jpg
 cc6ffe7676601323151c6982b9aec5bfa9f644e53a8d3c409ee100fbd5f63d2b  build/roles/backgrounds/files/0003.jpg
@@ -157,7 +14,7 @@ d5ce180269651f703b6ee56254872ef7cae1aa9a60ec8eac50802dbb7ca88ba5  build/roles/ba
 ef4eeeb0928741d508bbab9ff4d3b462cb604719915aa1955bf7a2d3783b56ee  build/roles/backgrounds/files/0008.jpg
 6021d4fe348a1949db36aedf682371d00186b4db3bd2e0bc2316b64cb473f623  build/roles/backgrounds/files/0009.jpg
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/backgrounds/meta/main.yml
-7a518d022e5f636ec7d5d2043f817c38447d985a4898e9957880fc64dd778667  build/roles/backgrounds/tasks/main.yml
+43bc853cb2f2c44321301d70f00c782bb96833f8923ffc4d62cc768350d2c572  build/roles/backgrounds/tasks/main.yml
 bb42ff1d695bbea2c5843c54a1853160dbd8e8b2909f2e8498d53abb297fb5a4  build/roles/bin/files/df_archive
 19c1db1cb852bcc540ce65d2f7686123d5d23612b046b3819b50a250018cee6f  build/roles/bin/files/df_arex
 7f5e337f439c158feaf6cee7273cf12c3f6f1645569ca81e769310830c1e00c4  build/roles/bin/files/df_backup
@@ -169,102 +26,102 @@ fdc5d308dfe641a0491353b8fde540f88255dc11289a55853e4c9582ae3c68c2  build/roles/bi
 597a19d75a1f67eeeb223b5fe661c81c4ba16158a738d247e1c80b18c656303b  build/roles/bin/files/df_redshift
 d81b07ef7953c5d78f27c2d2c69158467ddc27783a6d3cf19c349cd2e990ffda  build/roles/bin/files/df_xrandr
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/bin/meta/main.yml
-377710ddae91fce4d55c2a2c7affc881c41e18019c32f8c5f3d480d40efa106c  build/roles/bin/tasks/main.yml
+280c79e6d65b953d1d2da642b1b492494a2c00482812761c833581fb1db0fc3f  build/roles/bin/tasks/main.yml
 f398cd45c7f91abc9a83f79edd7d3adfa4d77ab2d0b03a97dc9c4b8303c029bf  build/roles/ccache/files/ccache.conf
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/ccache/meta/main.yml
-706e2477bdfd4f42ea2207449cc3d552138fd56ad9de932f95a8b75e2fc3a015  build/roles/ccache/tasks/main.yml
+c956e982f548386c21a3b794a0ee55f08d7e904d223db03b9f2530cc44d7b2a4  build/roles/ccache/tasks/main.yml
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/chsh/meta/main.yml
-d24ca07890135b0b851b841ec68d49a3bc124ce8637e66cd83271c74edc8b973  build/roles/chsh/tasks/main.yml
+fcc3e3b2853430ed8571d718731c86cb13f729ef8b5553edc6dcc339b8714bd1  build/roles/chsh/tasks/main.yml
 26b8c95997ca79d01201078cb26789ae042495e75dee23aa6525fa85b971dd0b  build/roles/common/meta/main.yml
-4faebb2286857b0ccb7e19eb559c3f0b8c527c0ddc533233b886d0bb36768e8a  build/roles/common/tasks/main.yml
+75e81ee36737f45fa2dd66ce300229be644385781f16b0a7c98ec9e738ef2fab  build/roles/common/tasks/main.yml
 024f7f5636845ecf50d07ac0bec66c458af2a2af09f9bf0fcced4202fa589fce  build/roles/elm/meta/main.yml
-439b8b8e15222bcf162c026c82f6cbbb679cd22c988243ef2c7b079b54f00999  build/roles/elm/tasks/main.yml
+237fd8175607b955163a713c001a824cd745a4673266e2cc4b517fd6b116dbd2  build/roles/elm/tasks/main.yml
 92b50960305c580fc90bb3bd5456e26edc9b321907dfa2578066a9b38e2a94e0  build/roles/fonts/files/CascadiaCode.zip
 66bf67eb5031c1614e5f76b4e011860dd249a61350e5d921331c443b6609f090  build/roles/fonts/files/FantasqueSansMono.zip
 21b2e09afb0fd7f0c06aba6605dae79abe1b7c9e695fc34d2232b43101e3eb91  build/roles/fonts/files/Inconsolata.zip
 842013fa44b6896d4eb91635a81ef75244d78d7f61ff866c9dfd3315a67788cd  build/roles/fonts/files/JetBrainsMono.zip
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/fonts/meta/main.yml
-6f7202997edb44ef6c015dd0c8d7b30b0ffc07fa6230804fcc16fec0de0350a6  build/roles/fonts/tasks/main.yml
-d593e6ae6fb2637916221aa529bd6254c4b37405d613a0467f11b94ed1ac327c  build/roles/gdb/files/.gdbinit
+fd56da27d208dce1ac791b5b2cf94ab4cf89c386b4676882a6f526d8272f548a  build/roles/fonts/tasks/main.yml
+ce6b51d5e78a839654562146fb26e506a3982237bf4bcedae18f4b8f27dcbfbf  build/roles/gdb/files/.gdbinit
 82a727d948fb4c985e50a0c0dc03fd291010f6b3889aa0cf0e3d469295fa1ab5  build/roles/gdb/files/offsetsof.py
 9df7d6df0f901838a6b6d151fe5bf2654ff4295dc334eb747fa2915a809655c1  build/roles/gdb/files/offsetsof_python2.py
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/gdb/meta/main.yml
-c103d2ba3d7ec7dd9a0c025a84d2594ad6ca7e19d5bdcfd3b6b9b6f0a24ec31c  build/roles/gdb/tasks/main.yml
-52e569811260febf9a912c556537210a747fa6fe3e04cf42168b845d70dd28a9  build/roles/git/files/.gitconfig
+136726020356f0772025c8fede0f8fc934976c302c09b8d58958738b0d67e814  build/roles/gdb/tasks/main.yml
+8407e4442466ceaf42c667aca279d5751f6033d245052a031d0997a96d2ffb8f  build/roles/git/files/.gitconfig
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/git/meta/main.yml
-46522906d5946f73312a1b5b65d8e001ad40437695d6047f7b5363f4273f7a44  build/roles/git/tasks/main.yml
-0359e7d11a5dd4e8f8c9e9c2bbb4aaec17023c2e35612398679ccf4d16d37dbd  build/roles/gtk/files/.gtkrc-2.0
+93ede4d1c38dab6ae5db41e1516c2b54d752e7e017d76e3b5620525490aca976  build/roles/git/tasks/main.yml
+eb92e11a827258376a140e0596343f3384a73d1ea8ab5195af2f070bec4591d0  build/roles/gtk/files/.gtkrc-2.0
 7c00e0cba6760f6db49df7099f4d0627673669cf009fe8ca94289442af1c9edf  build/roles/gtk/files/settings.ini
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/gtk/meta/main.yml
-ec1af928d7b8db9186be7cda85120213f9781ae0ea951c3791d53ab10a6449c9  build/roles/gtk/tasks/main.yml
+e01a90212ad9123fc21459376541e6e5b563c6bd8385a040c538e0dcebe036c3  build/roles/gtk/tasks/main.yml
 cd863e20bec27ddc9454a1fd99f60289ea0de061877e478073a07cf4dab96d99  build/roles/haskell/meta/main.yml
-640d8db0c3167a65a74b1400a8e6e1ef8e70e7a57356b2f991ce78e61f1084a2  build/roles/haskell/tasks/main.yml
-e11b1cca66dfd669654065b865ff1a02aba677a1d84c00572b1301799de17c90  build/roles/i3/files/config
+da4a885a3c3c85e18394e077283819d24ab37d974e17cffa8985be7d8f7bed6d  build/roles/haskell/tasks/main.yml
+504be48b6471def6738848f6ab9702a0ccc2648e222ffe0010f8a79b4445f261  build/roles/i3/files/config
 14b4f889722065d24ee9b8686ba62d8391d62df748d3011817d2d21f139c7e7c  build/roles/i3/meta/main.yml
-35896484b6cb3eee77cd97595ab0d14e1e46ec68cd113ca2282a5a69bbc1e5a3  build/roles/i3/tasks/main.yml
+fbcd97f60f7e4122dfa5da374c7bb1c3636b51ab1b54f73dcac76a2223b1fda9  build/roles/i3/tasks/main.yml
 b59804f3e00c65cf07ae189a2fff596ec12b17850bd62cb8ace7080324cda648  build/roles/i3status/files/config
 772cec8e4c3815bbad7522f414c519af1a21377b4366a6091d3af0164565bf1b  build/roles/i3status/files/config-sm
 f267581665c5abb9367a16fccd447d0dbc5aa7a9adb5640c7e76009a27da4e03  build/roles/i3status/files/config-sm.toml
 abd42fcd32d4990529d601dfb7192f80a256b9947e3354e199d849822722a025  build/roles/i3status/files/config.toml
 22f6cf19622e77176866428425ee7c62f6f7eaad2105daa06827c5056464edde  build/roles/i3status/meta/main.yml
-f3611675808bf694d061b5b93d80e99932a0fda4a990fdf507454c726f42547e  build/roles/i3status/tasks/main.yml
+f79efb460d7192a367b8099de2f7d0e47eb82e85bb7e7ee768ed8584ad93bb28  build/roles/i3status/tasks/main.yml
 cd863e20bec27ddc9454a1fd99f60289ea0de061877e478073a07cf4dab96d99  build/roles/nodejs/meta/main.yml
-ef31523aba2eda4d8e5417ae075ea4434a8d7de382942aa82ee2ed62d9af80da  build/roles/nodejs/tasks/main.yml
+c428b36b2c0bba6b4091b993d7b70131a986f0c0e1f55a46cb9824e6e0201bf4  build/roles/nodejs/tasks/main.yml
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/packages/meta/main.yml
 9b6a70681e3eee2dcfd8bc572e3f9cdbdb9b1ee9ee57394084e30fd54cde1366  build/roles/packages/tasks/main.yml
-0c6d911073a693819635f00afc29d222a1d6dab169c8b164a8491fabddbeb5b6  build/roles/packages/tasks/pacman.yml
+74d2c5e3f1fa1e7b64f21a39e7ae88b2f107bc333e3e93da9819e1184717197f  build/roles/packages/tasks/pacman.yml
 18b08181c6453c70da30da8fbb79fbb6c712edc8d3b4c6a920ee7a6649adcf10  build/roles/picom/files/picom.conf
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/picom/meta/main.yml
-6284670bf7d2b10998135327a790b85cfe6a2ff4a17998b5efa8cea029168ae3  build/roles/picom/tasks/main.yml
+db8933daf2e3d8540b01ce919fdc0ccded2bf89e2f36f413efe9e8eb2fa2ff68  build/roles/picom/tasks/main.yml
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/python/meta/main.yml
-9fce0cb58fabb5d1fbe17a6f3dac8c71644cc1680ec86a3a0cafca229a18e4b1  build/roles/python/tasks/main.yml
+011b3ada10e1c924e1bb5114d7cab4868cc23e5152273050507f306e0537c245  build/roles/python/tasks/main.yml
 cdbf67935895f9f093b7231bcd00681d300ce2295aeb470febd5c7ea36658f3d  build/roles/ranger/files/rc.conf
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/ranger/meta/main.yml
-a9bdf235718c70c155645e2b2a3ab662058c773b4f3cbd4e2ecc858bf5c0f9e7  build/roles/ranger/tasks/main.yml
-b697c2104e99f61e8705e34eb01377d7a41ec48f245b4b71ea9485d7b6b7d5b3  build/roles/rofi/files/config.rasi
+459d236ba144f8ea03437d953210ee361df12ec5d2ccca41707e0d747a89c2d8  build/roles/ranger/tasks/main.yml
+31cbdc0aab49043a58a98c1e64e5b45124cf65add83e08d93fc65998826648b2  build/roles/rofi/files/config.rasi
 fde9a9282a6ef2a38d16c729d0c6faa968d5cedce87f33842219d6d1665e9847  build/roles/rofi/files/theme.rasi
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/rofi/meta/main.yml
-177071473ec92cb5845aa4775336adc903a54b30580a487ee999b2a094ccc753  build/roles/rofi/tasks/main.yml
+354665850e5eb84f0f8f4e9003451cc887ba44867ab5cb1fcc1e5eea7dcbaa29  build/roles/rofi/tasks/main.yml
 cd863e20bec27ddc9454a1fd99f60289ea0de061877e478073a07cf4dab96d99  build/roles/rust/meta/main.yml
-ddf76a80901c2c961527bc4c5ff54b19850ca5aa3e42443daa4f4d59710ad05e  build/roles/rust/tasks/main.yml
+f68ca68c00ff42c6d451a929311071448d8a8c15c8deb23b36fbd26a67c5b6cb  build/roles/rust/tasks/main.yml
 01609194b719d3e7811eb9573d2225ed0ad4f2062973040a1cba38887b10df8d  build/roles/ssh/files/config
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/ssh/meta/main.yml
-6cc4d1c06cae9e73f740b7eea937cc256e7e5f2983b3db94abe36db8435c281f  build/roles/ssh/tasks/main.yml
-7146b6b08f903681cf7e8d46aa1effd3beb245979e5f6c7c8cad7a8c3e3ff9ee  build/roles/sxhkd/files/sxhkdrc
+09c18c7037ec19da2d581f3b26921af78aadb10bfc97700aff6526f1f6c5f324  build/roles/ssh/tasks/main.yml
+93e14c349dbdf61afdebcce28530a7735283f56601d40d8827a08f75bfae5234  build/roles/sxhkd/files/sxhkdrc
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/sxhkd/meta/main.yml
-7d948269651892423263329501699653b1b202ff445f7130e89e8e22c4346b9c  build/roles/sxhkd/tasks/main.yml
-2fcf4e85df3d16f77f87c09b31585e9a5586644632116b56b40575cc7e2dd544  build/roles/systemd/files/bootstrapd.service
-4ca4e863b822ee87b30bc806cbc32d73c3389de3a3461770539c50b690df0178  build/roles/systemd/files/bootstrapd.sh
+164e9ab37af5aa5275f8af0aed8823bbd9e306abe8f3d6b40f0f4497ee202534  build/roles/sxhkd/tasks/main.yml
+b8cbecf908ef263bc4a23e2ec90026b230c5cbc5ffb28462a34494ed3e17c20a  build/roles/systemd/files/bootstrapd.service
+a952734fe724f52c844418a74991b2277c355a0904e3c1683fef56bf2a1857d2  build/roles/systemd/files/bootstrapd.sh
 14577744f5d7e58bca8b7cd6afaad8a9850afa421c25b0a791938e8b7f425a86  build/roles/systemd/files/bootstrapd_pre.sh
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/systemd/meta/main.yml
-70c456093c30687308e6b10df713cad147ffe97eb9c13f4c30b36e666076bb12  build/roles/systemd/tasks/main.yml
+5c49f34be2fb145cc6ff94315c9e4538a58faeed6c8fedd2e14572877781ac20  build/roles/systemd/tasks/main.yml
 09fbd2f041c4c974e03e71d966436edee4d429b996610974a7c12f41af1772ce  build/roles/theme/files/colors.dhall
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/theme/meta/main.yml
-2ec7ec584cfc0a96a422aa990ba7a56949bd722cb419dfcd048a08ccc44f3e3f  build/roles/theme/tasks/main.yml
-ca596f9c8402f794465a0476d9c2f45fa621d950d40e2eb8278ef24433bf6aae  build/roles/tmux/files/.tmux.conf
+45804ae1247b6c2ca0b7d3481ea1b10e74febf0e1542c4268df2fdc4cb4cf922  build/roles/theme/tasks/main.yml
+b9e605674a8bf6b2bc55a1fd34ebc4bda869d5153be16a0ac2e98bda0f13388b  build/roles/tmux/files/.tmux.conf
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/tmux/meta/main.yml
-104e8e96d873342a0296751e76a654a3e3dc58da4e9de14f1722e0d9351c66a8  build/roles/tmux/tasks/main.yml
+52493b5f60ae745bb05a2ab5083e56530f71c0a24b4546d1018cfbabe393fdf8  build/roles/tmux/tasks/main.yml
 01f5f6a48af97458c10bacb339ac1b0b8d87d2528b551653dc66b342f8979d42  build/roles/urxvt/files/rxvt-unicode
-8cac025050f058f6801f91355449497a2e74aa21469ac4ae1282c6cf5bb3cffb  build/roles/urxvt/tasks/main.yml
-22ef480d999ec541554d0ba289f72a4f67b3cff96f7741374836a37dd648018b  build/roles/vim/files/.vimrc
+310686ca069433c12ff8bea4d24469e9df37a66693d88c15abbbb9df93f96fef  build/roles/urxvt/tasks/main.yml
+178e918b4f188674ee9b82dbc32fd3f2910114bf4835d9707f52beba36d4b26a  build/roles/vim/files/.vimrc
 77d7a797e17d28a5a57c2d33abcc1fb9abaa95300afbf559c77184b76037e227  build/roles/vim/files/coc-settings.json
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/vim/meta/main.yml
-ad3eb81c714dd41b1d3df7d5c5e861ee6a1945f01bd88db50399ce1d4bfd1faa  build/roles/vim/tasks/main.yml
+3df36cfc57630332d36a9522091b96f4c75c6ccd8df28b3f88ab946fb93840c2  build/roles/vim/tasks/main.yml
 89cc72627899fd4c687a87da50e88dd76e371aaaa27cb9f4296277fde933133f  build/roles/vscode/files/keybindings.json
 6567772e55566fc3f03a1ecf88f0caf721c5e2ecad2edaf657b036063dadf1de  build/roles/vscode/files/settings.json
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/vscode/meta/main.yml
-02387f3a0ee993767c57881f7a567ee039172b718c2ca6fbdac7bbb06055d224  build/roles/vscode/tasks/main.yml
-157a3118b76f67e4f0835182aa452998674781af45c0dfff24ac53fe65703258  build/roles/xinit/files/.xinitrc
+b0d0c11b006fb83108c7e34267ef7f172cfd959ded724e4294799ed51300186c  build/roles/vscode/tasks/main.yml
+f144ab23f4b42d653cfcc5ae524c674b943eb029458900a71900491569b84883  build/roles/xinit/files/.xinitrc
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/xinit/meta/main.yml
-66632c00ef2e1de2a76c8901ab80645a1553678532d0bde9eb5463e3924baa03  build/roles/xinit/tasks/main.yml
+66be6bcaa7aa82eb6bd96a9d2b5c9b1af1bcfd4508a50a54c3736847a467d7be  build/roles/xinit/tasks/main.yml
 2ed85a38c61a1c93d0a7793de2346e153bafc1b81cc021e52315b585a1a579fb  build/roles/xrandr/files/default-desktop.sh
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/xrandr/meta/main.yml
-bf62fa70fbd27dff649f2ab09d3035d822f5b97f7b7e8086605cf818cdb0702f  build/roles/xrandr/tasks/main.yml
+b62b8b7156fd6978ec4ccb067a4ac838c83ae36038dce40cb4fddf557a676c14  build/roles/xrandr/tasks/main.yml
 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b  build/roles/xrdb/files/.Xresources
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/xrdb/meta/main.yml
-6fdb15cc753da5969306f291dd64553b6c9284a4f97c7ad5910e8e829afb868c  build/roles/xrdb/tasks/main.yml
+e4e66d6966e5d95164817cab8908d8cbcbb33ac916266f9c27413222a3fbeca2  build/roles/xrdb/tasks/main.yml
 7204a5b88262c0843676e810d2f702a8c0f893d7adc8424912fb21038fee49e5  build/roles/zsh/files/.zprofile
 9e3dea1645e1a4deca5a282b61ae7a4172959a88402d3e0e7acc1355fa687186  build/roles/zsh/files/.zshenv
-747d49d0217b489e8b628c0c35bf4a742a5cca726cc04d90030ac13be6d17c27  build/roles/zsh/files/.zshrc
+fcc4694c16f5274129025815d39bae56d487dd89572c5f097e1c1a6cbcfea147  build/roles/zsh/files/.zshrc
 b2ba48d1a357c78069b8c6009138cd8c89f2c60a476447d2691ccb774a64a791  build/roles/zsh/meta/main.yml
-80f5e67939e6347612fddd9cd62935b7362c98032f3176233fc4c1c6db9bace6  build/roles/zsh/tasks/main.yml
+528d506fcb00168ac147e54e89fac9a75c61a5d72ccbd84a347fbb06891fb14f  build/roles/zsh/tasks/main.yml

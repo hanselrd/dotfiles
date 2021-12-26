@@ -10,9 +10,20 @@ let TaskPool/become = ../../../Lib/TaskPool/become.partial.dhall
 
 let Privilege = ../../../Lib/Privilege/Enum.partial.dhall
 
+let PermissionMode = ../../../Lib/PermissionMode/Record.partial.dhall
+
+let Permission = ../../../Lib/Permission/Enum.partial.dhall
+
 in  TaskPool/become
       Privilege.User
       ( TaskPool/copyFiles
+          ( Some
+              PermissionMode::{
+              , user = [ Permission.Read, Permission.Write, Permission.Execute ]
+              , group = [ Permission.Read, Permission.Execute ]
+              , other = [ Permission.Read, Permission.Execute ]
+              }
+          )
           [ External/Prelude.Map.keyValue
               (List Text)
               (Directory/toText Directory.Xrandr)

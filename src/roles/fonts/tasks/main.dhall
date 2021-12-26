@@ -12,7 +12,10 @@ let Directory/toText = ../../../codegen/Lib/Directory/toText.partial.dhall
 
 let TaskPool/unarchiveFiles = ../../../Lib/TaskPool/unarchiveFiles.partial.dhall
 
+let PermissionMode = ../../../Lib/PermissionMode/Record.partial.dhall
+
 in  TaskPool/unarchiveFiles
+      (Some PermissionMode::{=})
       [ External/Prelude.Map.keyValue
           (List Text)
           (Directory/toText Directory.Font)

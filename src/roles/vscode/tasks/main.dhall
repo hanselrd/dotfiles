@@ -17,11 +17,14 @@ let Privilege = ../../../Lib/Privilege/Enum.partial.dhall
 
 let Shell = ../../../Lib/Shell/Enum.partial.dhall
 
+let PermissionMode = ../../../Lib/PermissionMode/Record.partial.dhall
+
 in  TaskPool/become
       Privilege.User
       ( TaskPool/concat
           [ Some
               ( TaskPool/copyFiles
+                  (None PermissionMode.Type)
                   [ External/Prelude.Map.keyValue
                       (List Text)
                       (Directory/toText Directory.Vscode)
@@ -30,7 +33,7 @@ in  TaskPool/become
               )
           , Some
               ( TaskPool/executeCommands
-                  Shell.Default
+                  (Some Shell.Zsh)
                   ( External/Prelude.List.map
                       Text
                       Text

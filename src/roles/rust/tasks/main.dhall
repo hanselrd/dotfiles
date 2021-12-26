@@ -23,7 +23,7 @@ in  TaskPool/become
               (TaskPool/createDirectories [ Directory/toText Directory.Rust ])
           , Some
               ( TaskPool/executeCommands
-                  Shell.Zsh
+                  (Some Shell.Zsh)
                   [ "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y"
                   , "rustup component add rls rust-analysis rust-src"
                   , "rustup default nightly"

@@ -11,19 +11,16 @@ let sort
     = \(a : Type) ->
       \(enumMetas : List (EnumMeta a).Type) ->
       \(xs : List a) ->
-        External/Prelude.List.unpackOptionals
+        External/Prelude.List.filterMap
+          Natural
           a
-          ( External/Prelude.List.map
-              Natural
-              (Optional a)
-              (Enum/fromNatural a enumMetas)
-              ( External/Prelude.Natural.sort
-                  ( External/Prelude.List.map
-                      a
-                      Natural
-                      (Enum/toNatural a enumMetas)
-                      xs
-                  )
+          (Enum/fromNatural a enumMetas)
+          ( External/Prelude.Natural.sort
+              ( External/Prelude.List.map
+                  a
+                  Natural
+                  (Enum/toNatural a enumMetas)
+                  xs
               )
           )
 

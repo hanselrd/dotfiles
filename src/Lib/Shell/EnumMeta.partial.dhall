@@ -4,21 +4,21 @@ let Shell = ./Enum.partial.dhall
 
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
-let default = { Default = False, Zsh = False }
+let default = { Bash = False, Zsh = False }
 
 let meta =
-      { Default = (EnumMeta Shell)::{
-        , value = Shell.Default
-        , equal =
-            \(shell : Shell) -> merge (default // { Default = True }) shell
+      { Bash = (EnumMeta Shell)::{
+        , value = Shell.Bash
+        , text = Some "bash"
+        , equal = \(shell : Shell) -> merge (default // { Bash = True }) shell
         }
       , Zsh = (EnumMeta Shell)::{
         , value = Shell.Zsh
-        , text = Some "/usr/bin/zsh"
+        , text = Some "zsh"
         , equal = \(shell : Shell) -> merge (default // { Zsh = True }) shell
         }
       }
 
-let validate = assert : merge meta Shell.Default === meta.Default
+let validate = assert : merge meta Shell.Bash === meta.Bash
 
 in  External/Prelude.Map.values Text (EnumMeta Shell).Type (toMap meta)

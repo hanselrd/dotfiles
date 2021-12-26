@@ -12,9 +12,16 @@ let TaskPool/concat = ./concat.partial.dhall
 
 let TaskPool/createDirectories = ./createDirectories.partial.dhall
 
+let PermissionMode = ../PermissionMode/Record.partial.dhall
+
+let PermissionMode/toText = ../PermissionMode/toText.partial.dhall
+
 let copyFiles
-    : External/Prelude.Map.Type Text (List Text) -> TaskPool.Type
-    = \(map : External/Prelude.Map.Type Text (List Text)) ->
+    : Optional PermissionMode.Type ->
+      External/Prelude.Map.Type Text (List Text) ->
+        TaskPool.Type
+    = \(permissionMode : Optional PermissionMode.Type) ->
+      \(map : External/Prelude.Map.Type Text (List Text)) ->
         let directories = External/Prelude.Map.keys Text (List Text) map
 
         let files =
@@ -49,7 +56,12 @@ let copyFiles
                                               , dest =
                                                   Prelude.Text.pathify
                                                     "${entry.mapKey}/{{ item }}"
-                                              , mode = Some "preserve"
+                                              , mode =
+                                                  External/Prelude.Optional.map
+                                                    PermissionMode.Type
+                                                    Text
+                                                    PermissionMode/toText
+                                                    permissionMode
                                               , force = Some True
                                               }
                                             , loop = Some "{{ files }}"

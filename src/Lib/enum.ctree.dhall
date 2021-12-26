@@ -4,7 +4,8 @@ in  External/Prelude.List.map
       Text
       ( External/Prelude.Map.Entry
           Text
-          { `equal.partial.dhall` : Text
+          { `dedupe.partial.dhall` : Text
+          , `equal.partial.dhall` : Text
           , `fromNatural.partial.dhall` : Text
           , `sort.partial.dhall` : Text
           , `toNatural.partial.dhall` : Text
@@ -14,7 +15,8 @@ in  External/Prelude.List.map
       )
       ( \(enum : Text) ->
           External/Prelude.Map.keyValue
-            { `equal.partial.dhall` : Text
+            { `dedupe.partial.dhall` : Text
+            , `equal.partial.dhall` : Text
             , `fromNatural.partial.dhall` : Text
             , `sort.partial.dhall` : Text
             , `toNatural.partial.dhall` : Text
@@ -22,7 +24,17 @@ in  External/Prelude.List.map
             , `values.partial.dhall` : Text
             }
             enum
-            { `equal.partial.dhall` =
+            { `dedupe.partial.dhall` =
+                ''
+                let ${enum} = ../../../Lib/${enum}/Enum.partial.dhall
+
+                let ${enum}Meta = ../../../Lib/${enum}/EnumMeta.partial.dhall
+
+                let Enum/dedupe = ../../../Lib/Enum/dedupe.partial.dhall
+
+                in  Enum/dedupe ${enum} ${enum}Meta
+                ''
+            , `equal.partial.dhall` =
                 ''
                 let ${enum} = ../../../Lib/${enum}/Enum.partial.dhall
 
@@ -91,6 +103,7 @@ in  External/Prelude.List.map
       , "PackageFlag"
       , "PackageGroup"
       , "PackageManager"
+      , "Permission"
       , "Privilege"
       , "Role"
       , "Shell"

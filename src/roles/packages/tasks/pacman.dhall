@@ -127,7 +127,7 @@ in  TaskPool/concat
                                 )
                         then  Some
                                 ( TaskPool/executeCommands
-                                    Shell.Default
+                                    (None Shell)
                                     [ "yay -S ${External/Prelude.Text.concatSep
                                                   " "
                                                   ( External/Prelude.List.map
@@ -150,7 +150,7 @@ in  TaskPool/concat
                                 )
                         then  Some
                                 ( TaskPool/executeCommands
-                                    Shell.Default
+                                    (None Shell)
                                     [ "yay -Rns ${External/Prelude.Text.concatSep
                                                     " "
                                                     ( External/Prelude.List.map

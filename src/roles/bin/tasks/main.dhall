@@ -6,7 +6,18 @@ let Directory/toText = ../../../codegen/Lib/Directory/toText.partial.dhall
 
 let TaskPool/copyFiles = ../../../Lib/TaskPool/copyFiles.partial.dhall
 
+let PermissionMode = ../../../Lib/PermissionMode/Record.partial.dhall
+
+let Permission = ../../../Lib/Permission/Enum.partial.dhall
+
 in  TaskPool/copyFiles
+      ( Some
+          PermissionMode::{
+          , user = [ Permission.Read, Permission.Write, Permission.Execute ]
+          , group = [ Permission.Read, Permission.Execute ]
+          , other = [ Permission.Read, Permission.Execute ]
+          }
+      )
       [ External/Prelude.Map.keyValue
           (List Text)
           (Directory/toText Directory.Bin)
