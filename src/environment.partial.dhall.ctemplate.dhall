@@ -29,6 +29,7 @@ in  ''
             , theme : Theme
             , font : Font
             , package_manager : PackageManager
+            , unsafe_ignore_dependencies : List Role
             , roles : List Role/Config.Type
             }
         , default =
@@ -52,6 +53,7 @@ in  ''
           , theme = Theme.${env:DOTFILES_THEME as Text}
           , font = Font.${env:DOTFILES_FONT as Text}
           , package_manager = PackageManager.${env:DOTFILES_PACKAGE_MANAGER as Text}
+          , unsafe_ignore_dependencies = ${env:DOTFILES_ROLES_UNSAFE_IGNORE_DEPENDENCIES as Text} : List Role
           , roles =
             [ Role/Config::{ role = Role.Alacritty, enabled = ${env:DOTFILES_ROLE_ALACRITTY as Text} }
             , Role/Config::{ role = Role.Backgrounds, enabled = ${env:DOTFILES_ROLE_BACKGROUNDS as Text} }

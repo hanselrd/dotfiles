@@ -61,7 +61,7 @@ in  ''
                                                   env.background}" &
 
     # wal
-    # TODO: write script to generate wal colorscheme (df_wal?)
+    # TODO: write script to generate wal colorscheme (df_wal?) [wal -b 000000 -i BG -nste]
     #wal -b 000000 -n -i "${Directory/toText
                               Directory.Background}/${Background/toText
                                                         env.background}" &

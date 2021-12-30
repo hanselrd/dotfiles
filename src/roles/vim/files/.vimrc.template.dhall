@@ -150,13 +150,9 @@ in  ''
 
     " Plug 'itchyny/lightline.vim'
     let g:lightline={
-    ${if    Theme/equal env.theme Theme.Wal
-      then  ''
-                \ 'colorscheme': 'wal',
-            ''
-      else  ''
-                \ 'colorscheme': '16color',
-            ''}
+        \ 'colorscheme': '${if    Theme/equal env.theme Theme.Wal
+                            then  "wal"
+                            else  "16color"}',
         \ 'mode_map': {
         \   'n' : 'N',
         \   'i' : 'I',

@@ -2,6 +2,8 @@ let Theme = ./Enum.partial.dhall
 
 let Theme/Palette = ./Palette/Record.partial.dhall
 
+let Theme/Color = ./Color/Union.partial.dhall
+
 let Theme/Metadata = ./Metadata/Record.partial.dhall
 
 let toMetadata
@@ -79,10 +81,10 @@ let toMetadata
             }
           , ChallengerDeep = Theme/Metadata::{
             , palette = Theme/Palette::{
-              , background = "#1B182C"
+              , background = "#1E1C31"
               , foreground = "#CBE3E7"
               , cursor = "#FBFCFC"
-              , black = "#100E23"
+              , black = "#565575"
               , red = "#FF8080"
               , green = "#95FFA4"
               , yellow = "#FFE9AA"
@@ -90,7 +92,7 @@ let toMetadata
               , magenta = "#C991E1"
               , cyan = "#AAFFE4"
               , white = "#CBE3E7"
-              , brightBlack = "#565575"
+              , brightBlack = "#100E23"
               , brightRed = "#FF5458"
               , brightGreen = "#62D196"
               , brightYellow = "#FFB378"
@@ -98,6 +100,47 @@ let toMetadata
               , brightMagenta = "#906CFF"
               , brightCyan = "#63F2F1"
               , brightWhite = "#A6B3CC"
+              }
+            , statusBar =
+              { background = Theme/Color.Background
+              , foreground = Theme/Color.Foreground
+              , separator = Theme/Color.Raw "#666666"
+              , focusedWorkspace =
+                { border = Theme/Color.Blue, text = Theme/Color.Background }
+              , activeWorkspace =
+                { border = Theme/Color.Background
+                , text = Theme/Color.Foreground
+                }
+              , inactiveWorkspace =
+                { border = Theme/Color.Background, text = Theme/Color.White }
+              , urgentWorkspace =
+                { border = Theme/Color.Red, text = Theme/Color.Foreground }
+              , bindingMode =
+                { border = Theme/Color.Magenta, text = Theme/Color.Foreground }
+              , idle =
+                { background = Theme/Color.Background
+                , foreground = Theme/Color.Foreground
+                }
+              , info =
+                { background = Theme/Color.Blue
+                , foreground = Theme/Color.Background
+                }
+              , good =
+                { background = Theme/Color.Green
+                , foreground = Theme/Color.Background
+                }
+              , warning =
+                { background = Theme/Color.Yellow
+                , foreground = Theme/Color.Background
+                }
+              , critical =
+                { background = Theme/Color.Red
+                , foreground = Theme/Color.Background
+                }
+              , alternatingTint =
+                { background = Theme/Color.Raw "#111111"
+                , foreground = Theme/Color.Raw "#000000"
+                }
               }
             }
           , Wal = Theme/Metadata::{

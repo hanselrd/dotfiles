@@ -4,7 +4,14 @@ let Configuration = ../../../Lib/Configuration/Enum.partial.dhall
 
 let Configuration/equal = ../../../codegen/Lib/Configuration/equal.partial.dhall
 
+let Theme/toMetadata = ../../../Lib/Theme/toMetadata.partial.dhall
+
 let env = ../../../codegen/environment.partial.dhall
+
+let themeMetadata = Theme/toMetadata env.theme
+
+let Theme/Color/toText =
+      ../../../Lib/Theme/Color/toText.partial.dhall themeMetadata.palette
 
 in  ''
     # Setup Antigen
@@ -24,8 +31,13 @@ in  ''
     export NVM_LAZY_LOAD_EXTRA_COMMANDS=("vim")
     antigen bundle lukechilds/zsh-nvm
 
-    antigen bundle zdharma/fast-syntax-highlighting
+    antigen bundle zdharma-continuum/fast-syntax-highlighting
+
     antigen bundle zsh-users/zsh-autosuggestions
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${Theme/Color/toText
+                                            themeMetadata.terminal.background},bg=${Theme/Color/toText
+                                                                                      themeMetadata.terminal.foreground},underline"
+
     antigen bundle zsh-users/zsh-completions
 
     antigen theme denysdovhan/spaceship-prompt
@@ -128,7 +140,6 @@ in  ''
     alias vi="vim -u NONE -U NONE -N -i NONE"
     alias dryclean="find . \( -name 'node_modules' -o -name 'elm-stuff' -o -name 'target' -o -name 'build' -o -name 'dist' -o -name 'venv' \) -type d -print -prune"
     alias clean="find . \( -name 'node_modules' -o -name 'elm-stuff' -o -name 'target' -o -name 'build' -o -name 'dist' -o -name 'venv' \) -type d -print -prune -exec rm -rfI {} \;"
-    alias trailingnewlines="find . -type f -exec sed -n ''${/^$/F}' {} \;"
     alias ydlaudio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320k --embed-thumbnail --add-metadata --no-post-overwrites --geo-bypass --ignore-errors --restrict-filenames --output-na-placeholder=''' -o '%(title)s-%(id)s.%(ext)s'"
     alias ?="lynx https://google.com"
 

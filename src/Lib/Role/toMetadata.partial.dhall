@@ -1,10 +1,14 @@
 let External/Prelude = ../External/Prelude.partial.dhall
 
+let Prelude = ../Prelude.partial.dhall
+
 let Role = ./Enum.partial.dhall
 
 let Role/Metadata = ./Metadata/Record.partial.dhall
 
 let Role/equal = ../../codegen/Lib/Role/equal.partial.dhall
+
+let env = ../../codegen/environment.partial.dhall
 
 let toMetadata
     : Role -> Role/Metadata.Type
@@ -12,23 +16,33 @@ let toMetadata
         let metadata =
               merge
                 { Alacritty = Role/Metadata::{
-                  , dependencies = [ Role.Packages ]
+                  , dependencies = [ Role.Packages, Role.Fonts, Role.Theme ]
                   , conflicts = [ Role.Urxvt ]
                   }
                 , Backgrounds = Role/Metadata::{=}
-                , Bin = Role/Metadata::{=}
-                , Bspwm = Role/Metadata::{ conflicts = [ Role.Dwm, Role.I3 ] }
-                , Ccache = Role/Metadata::{=}
-                , Chsh = Role/Metadata::{=}
+                , Bin = Role/Metadata::{
+                  , dependencies = [ Role.Packages, Role.Xrandr ]
+                  }
+                , Bspwm = Role/Metadata::{
+                  , dependencies = [ Role.Packages ]
+                  , conflicts = [ Role.Dwm, Role.I3 ]
+                  }
+                , Ccache = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Chsh = Role/Metadata::{
+                  , dependencies = [ Role.Packages, Role.Zsh ]
+                  }
                 , Common = Role/Metadata::{=}
-                , Dwm = Role/Metadata::{ conflicts = [ Role.Bspwm, Role.I3 ] }
+                , Dwm = Role/Metadata::{
+                  , dependencies = [ Role.Packages ]
+                  , conflicts = [ Role.Bspwm, Role.I3 ]
+                  }
                 , Elm = Role/Metadata::{
                   , dependencies = [ Role.Zsh, Role.Nodejs ]
                   }
                 , Fonts = Role/Metadata::{=}
-                , Gdb = Role/Metadata::{=}
-                , Git = Role/Metadata::{=}
-                , Gtk = Role/Metadata::{=}
+                , Gdb = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Git = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Gtk = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Haskell = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , I3 = Role/Metadata::{
                   , dependencies = [ Role.Packages ]
@@ -39,37 +53,57 @@ let toMetadata
                   }
                 , Nodejs = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Packages = Role/Metadata::{=}
-                , Picom = Role/Metadata::{=}
-                , Python = Role/Metadata::{=}
-                , Ranger = Role/Metadata::{=}
-                , Rofi = Role/Metadata::{=}
-                , Runit = Role/Metadata::{ conflicts = [ Role.Systemd ] }
+                , Picom = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Python = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Ranger = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Rofi = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Runit = Role/Metadata::{
+                  , dependencies = [ Role.Packages ]
+                  , conflicts = [ Role.Systemd ]
+                  }
                 , Rust = Role/Metadata::{ dependencies = [ Role.Zsh ] }
-                , Ssh = Role/Metadata::{=}
-                , Sxhkd = Role/Metadata::{=}
-                , Systemd = Role/Metadata::{ conflicts = [ Role.Runit ] }
+                , Ssh = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Sxhkd = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Systemd = Role/Metadata::{
+                  , dependencies = [ Role.Packages ]
+                  , conflicts = [ Role.Runit ]
+                  }
                 , Theme = Role/Metadata::{=}
-                , Tmux = Role/Metadata::{=}
+                , Tmux = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Urxvt = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.Xrdb ]
                   , conflicts = [ Role.Alacritty ]
                   }
-                , Vim = Role/Metadata::{=}
-                , Vscode = Role/Metadata::{=}
-                , Xinit = Role/Metadata::{=}
-                , Xrandr = Role/Metadata::{=}
-                , Xrdb = Role/Metadata::{=}
-                , Zsh = Role/Metadata::{=}
+                , Vim = Role/Metadata::{
+                  , dependencies = [ Role.Packages, Role.Tmux ]
+                  }
+                , Vscode = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Xinit = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Xrandr = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Xrdb = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Zsh = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 }
                 role
 
         in      metadata
             //  { dependencies =
-                      metadata.dependencies
-                    # ( if    External/Prelude.Bool.not
-                                (Role/equal role Role.Common)
-                        then  [ Role.Common ]
-                        else  [] : List Role
+                    External/Prelude.List.filter
+                      Role
+                      ( \(role : Role) ->
+                          External/Prelude.Bool.not
+                            ( Prelude.List.contains
+                                Role
+                                role
+                                Role/equal
+                                env.unsafe_ignore_dependencies
+                            )
+                      )
+                      (   metadata.dependencies
+                        # ( if    External/Prelude.Bool.not
+                                    (Role/equal role Role.Common)
+                            then  [ Role.Common ]
+                            else  [] : List Role
+                          )
                       )
                 }
 

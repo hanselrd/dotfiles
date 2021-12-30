@@ -87,80 +87,78 @@ in  { Type =
       , windowManager =
         { clientFocused =
           { border = Theme/Color.Blue
-          , text = Theme/Color.BrightWhite
+          , text = Theme/Color.Foreground
           , indicator = Theme/Color.BrightBlue
           }
         , clientFocusedInactive =
-          { border = Theme/Color.Black
-          , text = Theme/Color.BrightWhite
+          { border = Theme/Color.Background
+          , text = Theme/Color.Foreground
           , indicator = Theme/Color.BrightBlack
           }
         , clientUnfocused =
-          { border = Theme/Color.Black
+          { border = Theme/Color.Background
           , text = Theme/Color.White
           , indicator = Theme/Color.BrightBlack
           }
         , clientUrgent =
           { border = Theme/Color.Red
-          , text = Theme/Color.BrightWhite
+          , text = Theme/Color.Foreground
           , indicator = Theme/Color.BrightRed
           }
         , clientPlaceholder =
           { border = Theme/Color.Raw "#0C0C0C"
-          , text = Theme/Color.BrightWhite
+          , text = Theme/Color.Foreground
           , indicator = Theme/Color.Raw "#0C0C0C"
           }
-        , clientBackground = Theme/Color.Black
+        , clientBackground = Theme/Color.Background
         }
       , statusBar =
-        { background = Theme/Color.Black
-        , foreground = Theme/Color.BrightWhite
+        { background = Theme/Color.Background
+        , foreground = Theme/Color.Foreground
         , separator = Theme/Color.Raw "#666666"
         , focusedWorkspace =
-          { border = Theme/Color.Blue, text = Theme/Color.BrightWhite }
+          { border = Theme/Color.Blue, text = Theme/Color.Foreground }
         , activeWorkspace =
-          { border = Theme/Color.Black, text = Theme/Color.BrightWhite }
+          { border = Theme/Color.Background, text = Theme/Color.Foreground }
         , inactiveWorkspace =
-          { border = Theme/Color.Black, text = Theme/Color.White }
+          { border = Theme/Color.Background, text = Theme/Color.White }
         , urgentWorkspace =
-          { border = Theme/Color.Red, text = Theme/Color.BrightWhite }
+          { border = Theme/Color.Red, text = Theme/Color.Foreground }
         , bindingMode =
-          { border = Theme/Color.Magenta, text = Theme/Color.BrightWhite }
+          { border = Theme/Color.Magenta, text = Theme/Color.Foreground }
         , idle =
-          { background = Theme/Color.Black
-          , foreground = Theme/Color.BrightWhite
+          { background = Theme/Color.Background
+          , foreground = Theme/Color.Foreground
           }
         , info =
-          { background = Theme/Color.Blue
-          , foreground = Theme/Color.BrightWhite
-          }
+          { background = Theme/Color.Blue, foreground = Theme/Color.Background }
         , good =
           { background = Theme/Color.Green
-          , foreground = Theme/Color.BrightWhite
+          , foreground = Theme/Color.Background
           }
         , warning =
           { background = Theme/Color.Yellow
-          , foreground = Theme/Color.BrightWhite
+          , foreground = Theme/Color.Background
           }
         , critical =
-          { background = Theme/Color.Red, foreground = Theme/Color.BrightWhite }
+          { background = Theme/Color.Red, foreground = Theme/Color.Background }
         , alternatingTint =
           { background = Theme/Color.Raw "#111111"
           , foreground = Theme/Color.Raw "#000000"
           }
         }
       , launcher =
-        { background = Theme/Color.Black
-        , foreground = Theme/Color.BrightWhite
+        { background = Theme/Color.Background
+        , foreground = Theme/Color.Foreground
         , activeBackground = Theme/Color.Blue
         , urgentBackground = Theme/Color.Red
         , selectedActiveBackground = Theme/Color.BrightBlue
-        , selectedNormalBackground = Theme/Color.BrightBlack
+        , selectedNormalBackground = Theme/Color.Blue
         , selectedUrgentBackground = Theme/Color.BrightRed
         }
       , terminal =
-        { background = Theme/Color.Black
-        , foreground = Theme/Color.BrightWhite
+        { background = Theme/Color.Background
+        , foreground = Theme/Color.Foreground
         , cursor = Theme/Color.Cursor
         , palette =
           { color0 = Theme/Color.Color0
