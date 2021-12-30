@@ -145,9 +145,9 @@ let toMetadata
             }
           , OneDark = Theme/Metadata::{
             , palette = Theme/Palette::{
-              , background = "#282C34"
-              , foreground = "#ABB2BF"
-              , cursor = "#ABB2BF"
+              , background = "#131519"
+              , foreground = "#CED6E5"
+              , cursor = "#CED6E5"
               , black = "#282C34"
               , red = "#E06C75"
               , green = "#98C379"
