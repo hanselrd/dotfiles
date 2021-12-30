@@ -1,4 +1,0 @@
-PubkeyAcceptedKeyTypes +ssh-rsa
-Host 10.*.*.* 192.168.*.*
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null

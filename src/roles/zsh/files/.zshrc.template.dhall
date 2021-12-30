@@ -4,14 +4,7 @@ let Configuration = ../../../Lib/Configuration/Enum.partial.dhall
 
 let Configuration/equal = ../../../codegen/Lib/Configuration/equal.partial.dhall
 
-let Theme/toMetadata = ../../../Lib/Theme/toMetadata.partial.dhall
-
 let env = ../../../codegen/environment.partial.dhall
-
-let themeMetadata = Theme/toMetadata env.theme
-
-let Theme/Color/toText =
-      ../../../Lib/Theme/Color/toText.partial.dhall themeMetadata.palette
 
 in  ''
     # Setup Antigen
@@ -34,9 +27,7 @@ in  ''
     antigen bundle zdharma-continuum/fast-syntax-highlighting
 
     antigen bundle zsh-users/zsh-autosuggestions
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${Theme/Color/toText
-                                            themeMetadata.terminal.background},bg=${Theme/Color/toText
-                                                                                      themeMetadata.terminal.foreground},underline"
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=0,bg=15,underline,standout"
 
     antigen bundle zsh-users/zsh-completions
 

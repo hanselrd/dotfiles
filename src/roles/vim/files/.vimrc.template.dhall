@@ -1,5 +1,3 @@
-let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
-
 let Directory = ../../../Lib/Directory/Enum.partial.dhall
 
 let Directory/toText = ../../../codegen/Lib/Directory/toText.partial.dhall
@@ -280,6 +278,7 @@ in  ''
     highlight SignColumn ctermbg=NONE
     highlight CursorLine ctermbg=4 ctermfg=0
     highlight CursorLineNr ctermbg=0 ctermfg=4
+    highlight Comment ctermbg=NONE ctermfg=7
     highlight Folded ctermbg=0
     highlight VertSplit ctermbg=0
     highlight Pmenu ctermbg=0 ctermfg=7
