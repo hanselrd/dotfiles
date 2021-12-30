@@ -103,7 +103,7 @@ b9e605674a8bf6b2bc55a1fd34ebc4bda869d5153be16a0ac2e98bda0f13388b  build/roles/tm
 7c92b0e66f971f07d8bf8f6362107a4891d58d63f6ef271ad720daf8ed97a58e  build/roles/tmux/tasks/main.yml
 a0215e09cc646836a4fb7181d34c4898a3f721fc2f6a4022f369dd5662142f9e  build/roles/urxvt/files/rxvt-unicode
 50556fc1bf3e980adac8402066a7dd6a236bc37cd54e8872ecb17f70926be75a  build/roles/urxvt/tasks/main.yml
-3b9eb7dfafb37b9a2aa6e069cefe1a6ae361c6aefaf6e6899645d028876eac4b  build/roles/vim/files/.vimrc
+8f172c68fbb04aa05493b8c2ec68f50d67e7ff17a110ff747cfdd1798863deaa  build/roles/vim/files/.vimrc
 de6ec33c84a2c974ef3971f7154ad5b2c5f1aa42d64623c8045e3a9986ece6b2  build/roles/vim/files/coc-settings.json
 ebe9027a69917a20fed0c33c46dce58c6ea50ca9a8deb8b5cd335c0f5f8a215f  build/roles/vim/meta/main.yml
 ce3e3a5be602f3faa5cf9313c962eb8ef216b27c21c3c7bf4e58380e71ccdd95  build/roles/vim/tasks/main.yml

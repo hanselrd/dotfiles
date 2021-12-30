@@ -2,10 +2,6 @@ let Directory = ../../../Lib/Directory/Enum.partial.dhall
 
 let Directory/toText = ../../../codegen/Lib/Directory/toText.partial.dhall
 
-let Theme = ../../../Lib/Theme/Enum.partial.dhall
-
-let Theme/equal = ../../../codegen/Lib/Theme/equal.partial.dhall
-
 let env = ../../../codegen/environment.partial.dhall
 
 in  ''
@@ -148,9 +144,7 @@ in  ''
 
     " Plug 'itchyny/lightline.vim'
     let g:lightline={
-        \ 'colorscheme': '${if    Theme/equal env.theme Theme.Wal
-                            then  "wal"
-                            else  "16color"}',
+        \ 'colorscheme': 'gruvbox',
         \ 'mode_map': {
         \   'n' : 'N',
         \   'i' : 'I',
@@ -276,8 +270,8 @@ in  ''
     colorscheme gruvbox
     highlight Normal ctermbg=NONE
     highlight SignColumn ctermbg=NONE
-    highlight CursorLine ctermbg=4 ctermfg=0
-    highlight CursorLineNr ctermbg=0 ctermfg=4
+    highlight CursorLine ctermbg=7 ctermfg=0
+    highlight CursorLineNr ctermbg=0 ctermfg=7
     highlight Comment ctermbg=NONE ctermfg=7
     highlight Folded ctermbg=0
     highlight VertSplit ctermbg=0
