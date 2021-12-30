@@ -269,14 +269,7 @@ in  ''
     let g:gruvbox_transparent_bg=1
     let g:gruvbox_contrast_dark='hard'
     let g:gruvbox_hls_cursor='blue'
-    ${External/Prelude.Text.default
-        ( if    Theme/equal env.theme Theme.Wal
-          then  Some
-                  ''
-                  let g:gruvbox_termcolors=16
-                  ''
-          else  None Text
-        )}
+    let g:gruvbox_termcolors=16
     if !empty(glob('${Directory/toText
                         Directory.Vim2}/plugged/gruvbox/colors/gruvbox.vim'))
         silent !sed -zi "s/\(  let s:aqua\[1\]   = 14\)\n\(  let s:fg1\[1\]    = 15\)/\1\n  let s:orange[1] = 3\n\2/g" ${Directory/toText

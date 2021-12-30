@@ -5,18 +5,30 @@ let Theme = ./Enum.partial.dhall
 let EnumMeta = ../EnumMeta/Record.partial.dhall
 
 let default =
-      { Gruvbox = False
+      { ChallengerDeep = False
+      , Gruvbox = False
+      , Matrix = False
       , Nord = False
       , OneDark = False
-      , ChallengerDeep = False
+      , PaperColor = False
       , Wal = False
       }
 
 let meta =
-      { Gruvbox = (EnumMeta Theme)::{
+      { ChallengerDeep = (EnumMeta Theme)::{
+        , value = Theme.ChallengerDeep
+        , equal =
+            \(theme : Theme) ->
+              merge (default // { ChallengerDeep = True }) theme
+        }
+      , Gruvbox = (EnumMeta Theme)::{
         , value = Theme.Gruvbox
         , equal =
             \(theme : Theme) -> merge (default // { Gruvbox = True }) theme
+        }
+      , Matrix = (EnumMeta Theme)::{
+        , value = Theme.Matrix
+        , equal = \(theme : Theme) -> merge (default // { Matrix = True }) theme
         }
       , Nord = (EnumMeta Theme)::{
         , value = Theme.Nord
@@ -27,11 +39,10 @@ let meta =
         , equal =
             \(theme : Theme) -> merge (default // { OneDark = True }) theme
         }
-      , ChallengerDeep = (EnumMeta Theme)::{
-        , value = Theme.ChallengerDeep
+      , PaperColor = (EnumMeta Theme)::{
+        , value = Theme.PaperColor
         , equal =
-            \(theme : Theme) ->
-              merge (default // { ChallengerDeep = True }) theme
+            \(theme : Theme) -> merge (default // { PaperColor = True }) theme
         }
       , Wal = (EnumMeta Theme)::{
         , value = Theme.Wal
@@ -39,6 +50,6 @@ let meta =
         }
       }
 
-let validate = assert : merge meta Theme.Gruvbox === meta.Gruvbox
+let validate = assert : merge meta Theme.ChallengerDeep === meta.ChallengerDeep
 
 in  External/Prelude.Map.values Text (EnumMeta Theme).Type (toMap meta)

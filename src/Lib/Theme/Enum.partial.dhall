@@ -1,1 +1,1 @@
-< Gruvbox | Nord | OneDark | ChallengerDeep | Wal >
+< ChallengerDeep | Gruvbox | Matrix | Nord | OneDark | PaperColor | Wal >
