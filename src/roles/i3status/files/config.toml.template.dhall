@@ -80,13 +80,13 @@ in  ''
                   ''
                   [[block]]
                   block = "battery"
-                  format = "{percentage}% {time}"
+                  format = "{percentage} {time}"
                   interval = 10
 
                   [[block]]
                   block = "custom"
-                  command = ''' printf " " && ${Directory/toText
-                                                   Directory.Bin}/df_power_now '''
+                  command = '''' printf " " && ${Directory/toText
+                                                    Directory.Bin}/df_power_now ''''
                   interval = 1
                   ''
           else  None Text
