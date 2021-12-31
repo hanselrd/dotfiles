@@ -1,3 +1,9 @@
+let External/Prelude = ../../../Lib/External/Prelude.partial.dhall
+
+let Configuration = ../../../Lib/Configuration/Enum.partial.dhall
+
+let Configuration/equal = ../../../codegen/Lib/Configuration/equal.partial.dhall
+
 let Configuration/toText =
       ../../../codegen/Lib/Configuration/toText.partial.dhall
 
@@ -28,11 +34,23 @@ in  ''
             Directory.Bin}/df_exit "${Configuration/toText
                                         env.configuration}" $(echo -e 'lock\nexit\nsuspend\nhibernate\nreboot\nshutdown' | rofi -dmenu -p "power")
 
+    ${External/Prelude.Text.default
+        ( if    Configuration/equal env.configuration Configuration.Laptop
+          then  Some
+                  ''
+                  super + alt + {1,2,3}
+                      ${Directory/toText
+                          Directory.Bin}/df_xrandr "${Configuration/toText
+                                                        env.configuration}" {default,dock-only,laptop-dock}
+                  ''
+          else  None Text
+        )}
+
     @Print
         flameshot gui
 
-    XF86MonBrightness{Up,Down}
-        xbacklight -{inc,dec} 5
+    XF86MonBrightness{Down,Up}
+        xbacklight -{dec,inc} 5
 
     XF86Audio{Lower,Raise}Volume
         pactl set-sink-volume @DEFAULT_SINK@ {-,+}5%
@@ -44,7 +62,7 @@ in  ''
         pactl set-{sink,source}-mute @DEFAULT_{SINK,SOURCE}@ toggle
 
     F{2,3}
-        xbacklight -{inc,dec} 5
+        xbacklight -{dec,inc} 5
 
     F{7,8}
         pactl set-sink-volume @DEFAULT_SINK@ {-,+}5%

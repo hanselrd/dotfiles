@@ -20,13 +20,17 @@ in  TaskPool/become
           ( Some
               PermissionMode::{
               , user = [ Permission.Read, Permission.Write, Permission.Execute ]
-              , group = [ Permission.Read, Permission.Execute ]
-              , other = [ Permission.Read, Permission.Execute ]
+              , group = [] : List Permission
+              , other = [] : List Permission
               }
           )
           [ External/Prelude.Map.keyValue
               (List Text)
               (Directory/toText Directory.Xrandr)
-              [ "default-desktop.sh" ]
+              [ "default-desktop.sh"
+              , "default-laptop.sh"
+              , "dock-only.sh"
+              , "laptop-dock.sh"
+              ]
           ]
       )
