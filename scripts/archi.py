@@ -257,7 +257,7 @@ if __name__ == "__main__":
     )
     if rc == 0:
         LUKS_CREATE = True if stderr == "create a new one" else False
-        _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK} | tail -n +2")
+        _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK}")
         items = [
             Prompt.Item(tag=s[0], description=" ".join(s[1:]))
             for s in [s.split() for s in stdout.split("\n")]
@@ -307,7 +307,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # Select EFI partition
-    _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK} | tail -n +2")
+    _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK}")
     items = [
         Prompt.Item(tag=s[0], description=" ".join(s[1:]))
         for s in [s.split() for s in stdout.split("\n")]
@@ -324,7 +324,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # Select BTRFS partition
-    _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK} | tail -n +2")
+    _, stdout, _ = shell(f"lsblk -p -n -l -o NAME,SIZE {DISK}")
     items = [
         Prompt.Item(tag=s[0], description=" ".join(s[1:]))
         for s in [s.split() for s in stdout.split("\n")]
@@ -401,7 +401,7 @@ if __name__ == "__main__":
             sys.exit(1)
 
     # Update pacman mirrors
-    shell("pacman -S reflector --noconfirm", dryrun=args.dryrun)
+    # shell("pacman -S reflector --noconfirm", dryrun=args.dryrun)
     _, stdout, _ = shell(
         'reflector --list-countries | tail -n +3 | rev | awk \'{out=""; for(i=3;i<=NF;++i){out=out" "$i}; print $1,$2,out}\' | rev'
     )
@@ -619,7 +619,7 @@ if __name__ == "__main__":
         f'arch-chroot /mnt sed -i \'/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g\' /etc/default/grub',
         dryrun=args.dryrun,
     )
-    _, stdout, _ = shell(f"lsblk -no UUID {LUKS_PARTITION} | head -n 1")
+    _, stdout, _ = shell(f"lsblk -no UUID,TYPE {LUKS_PARTITION} | grep 'part' | cut -d' ' -f 1")
     shell(
         f'arch-chroot /mnt sed -i \'/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name={stdout}={LUKS_NAME} rd.luks.key={stdout}=\/.keys\/{LUKS_NAME}.keyfile"/g\' /etc/default/grub',
         dryrun=args.dryrun,
