@@ -2,6 +2,7 @@
 | Alsa
 | Android
 | Arandr
+| Bolt
 | Ccache
 | Clang
 | Cmake

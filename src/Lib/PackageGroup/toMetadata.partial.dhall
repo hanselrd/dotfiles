@@ -50,6 +50,15 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Bolt =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "bolt" } ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Ccache =
               merge
                 { Pacman = PackageGroup/Metadata::{

@@ -9,6 +9,7 @@ let default =
       , Alsa = False
       , Android = False
       , Arandr = False
+      , Bolt = False
       , Ccache = False
       , Clang = False
       , Cmake = False
@@ -90,6 +91,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Arandr = True }) packageGroup
+        }
+      , Bolt = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Bolt
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Bolt = True }) packageGroup
         }
       , Ccache = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Ccache
