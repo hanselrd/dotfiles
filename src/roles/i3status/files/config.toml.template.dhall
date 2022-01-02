@@ -53,7 +53,7 @@ in  ''
     [[block]]
     block = "disk_space"
     alias = "/"
-    format = "{icon} {used}/{total}{percentage}"
+    format = "{icon} {used}/{total} {percentage}"
     info_type = "used"
     interval = 20
     path = "/"
