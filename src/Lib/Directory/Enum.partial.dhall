@@ -1,4 +1,5 @@
 < Alacritty
+| Alsa
 | Background
 | Bin
 | Ccache

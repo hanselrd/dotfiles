@@ -10,6 +10,7 @@ let env = ../../codegen/environment.partial.dhall
 
 let default =
       { Alacritty = False
+      , Alsa = False
       , Background = False
       , Bin = False
       , Ccache = False
@@ -49,6 +50,14 @@ let meta =
         , equal =
             \(directory : Directory) ->
               merge (default // { Alacritty = True }) directory
+        }
+      , Alsa = (EnumMeta Directory)::{
+        , value = Directory.Alsa
+        , text = Some
+            (Prelude.Text.pathify "${env.user_root_dir}/etc/modprobe.d")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Alsa = True }) directory
         }
       , Background = (EnumMeta Directory)::{
         , value = Directory.Background

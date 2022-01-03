@@ -19,6 +19,7 @@ let toMetadata
                   , dependencies = [ Role.Packages, Role.Fonts, Role.Theme ]
                   , conflicts = [ Role.Urxvt ]
                   }
+                , Alsa = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Backgrounds = Role/Metadata::{=}
                 , Bin = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.Xrandr ]

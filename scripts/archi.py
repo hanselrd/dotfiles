@@ -352,24 +352,27 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # Mount partitions and BTRFS subvolumes
-    shell(f"mount -o compress=lzo,subvol=@ {BTRFS_PARTITION} /mnt", dryrun=args.dryrun)
+    shell(
+        f"mount -o compress-force=zstd,subvol=@ {BTRFS_PARTITION} /mnt",
+        dryrun=args.dryrun,
+    )
     shell("mkdir -p /mnt/{efi,home,.shared,.swap,.keys}", dryrun=args.dryrun)
     shell(f"mount {EFI_PARTITION} /mnt/efi", dryrun=args.dryrun)
     shell(
-        f"mount -o compress=lzo,subvol=@home {BTRFS_PARTITION} /mnt/home",
+        f"mount -o compress-force=zstd,subvol=@home {BTRFS_PARTITION} /mnt/home",
         dryrun=args.dryrun,
     )
     shell(
-        f"mount -o compress=lzo,subvol=@shared {BTRFS_PARTITION} /mnt/.shared",
+        f"mount -o compress-force=zstd,subvol=@shared {BTRFS_PARTITION} /mnt/.shared",
         dryrun=args.dryrun,
     )
     shell("chmod 777 /mnt/.shared", dryrun=args.dryrun)
     shell(
-        f"mount -o compress=lzo,subvol=@swap {BTRFS_PARTITION} /mnt/.swap",
+        f"mount -o compress-force=zstd,subvol=@swap {BTRFS_PARTITION} /mnt/.swap",
         dryrun=args.dryrun,
     )
     shell(
-        f"mount -o compress=lzo,subvol=@keys {BTRFS_PARTITION} /mnt/.keys",
+        f"mount -o compress-force=zstd,subvol=@keys {BTRFS_PARTITION} /mnt/.keys",
         dryrun=args.dryrun,
     )
 
@@ -619,7 +622,9 @@ if __name__ == "__main__":
         f'arch-chroot /mnt sed -i \'/GRUB_CMDLINE_LINUX_DEFAULT=/s/".*"/"loglevel=3"/g\' /etc/default/grub',
         dryrun=args.dryrun,
     )
-    _, stdout, _ = shell(f"lsblk -no UUID,TYPE {LUKS_PARTITION} | grep 'part' | cut -d' ' -f 1")
+    _, stdout, _ = shell(
+        f"lsblk -no UUID,TYPE {LUKS_PARTITION} | grep 'part' | cut -d' ' -f 1"
+    )
     shell(
         f'arch-chroot /mnt sed -i \'/GRUB_CMDLINE_LINUX=/s/".*"/"rd.luks.name={stdout}={LUKS_NAME} rd.luks.key={stdout}=\/.keys\/{LUKS_NAME}.keyfile"/g\' /etc/default/grub',
         dryrun=args.dryrun,

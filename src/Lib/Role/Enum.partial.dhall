@@ -1,4 +1,5 @@
 < Alacritty
+| Alsa
 | Backgrounds
 | Bin
 | Bspwm

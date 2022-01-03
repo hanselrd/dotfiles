@@ -56,6 +56,7 @@ in  ''
           , unsafe_ignore_dependencies = ${env:DOTFILES_ROLES_UNSAFE_IGNORE_DEPENDENCIES as Text} : List Role
           , roles =
             [ Role/Config::{ role = Role.Alacritty, enabled = ${env:DOTFILES_ROLE_ALACRITTY as Text} }
+            , Role/Config::{ role = Role.Alsa, enabled = ${env:DOTFILES_ROLE_ALSA as Text} }
             , Role/Config::{ role = Role.Backgrounds, enabled = ${env:DOTFILES_ROLE_BACKGROUNDS as Text} }
             , Role/Config::{ role = Role.Bin, enabled = ${env:DOTFILES_ROLE_BIN as Text} }
             , Role/Config::{ role = Role.Bspwm, enabled = ${env:DOTFILES_ROLE_BSPWM as Text} }

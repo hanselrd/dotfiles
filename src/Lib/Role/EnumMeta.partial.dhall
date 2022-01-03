@@ -6,6 +6,7 @@ let EnumMeta = ../EnumMeta/Record.partial.dhall
 
 let default =
       { Alacritty = False
+      , Alsa = False
       , Backgrounds = False
       , Bin = False
       , Bspwm = False
@@ -48,6 +49,11 @@ let meta =
         , value = Role.Alacritty
         , text = Some "alacritty"
         , equal = \(role : Role) -> merge (default // { Alacritty = True }) role
+        }
+      , Alsa = (EnumMeta Role)::{
+        , value = Role.Alsa
+        , text = Some "alsa"
+        , equal = \(role : Role) -> merge (default // { Alsa = True }) role
         }
       , Backgrounds = (EnumMeta Role)::{
         , value = Role.Backgrounds
