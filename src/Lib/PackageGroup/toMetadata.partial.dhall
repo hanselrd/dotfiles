@@ -25,7 +25,8 @@ let toMetadata
               merge
                 { Pacman = PackageGroup/Metadata::{
                   , present =
-                    [ Package::{ name = "alsa-utils" }
+                    [ Package::{ name = "alsa-firmware" }
+                    , Package::{ name = "alsa-utils" }
                     , Package::{ name = "sof-firmware" }
                     ]
                   }
