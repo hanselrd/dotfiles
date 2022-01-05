@@ -11,6 +11,10 @@ let PackageManager = ../../../Lib/PackageManager/Enum.partial.dhall
 let PackageManager/equal =
       ../../../codegen/Lib/PackageManager/equal.partial.dhall
 
+let Role = ../../../Lib/Role/Enum.partial.dhall
+
+let Role/enabled = ../../../Lib/Role/enabled.partial.dhall
+
 let TaskPool = ../../../Lib/TaskPool/Alias.partial.dhall
 
 let TaskPool/build = ../../../Lib/TaskPool/build.partial.dhall
@@ -33,7 +37,8 @@ in  TaskPool/concat
                   [ "tlp.conf" ]
               ]
           )
-      , if    PackageManager/equal env.package_manager PackageManager.Pacman
+      , if        Role/enabled Role.Systemd
+              &&  PackageManager/equal env.package_manager PackageManager.Pacman
         then  Some
                 ( TaskPool/build
                     [ Some
@@ -50,7 +55,8 @@ in  TaskPool/concat
                     ]
                 )
         else  None TaskPool.Type
-      , if    PackageManager/equal env.package_manager PackageManager.Pacman
+      , if        Role/enabled Role.Systemd
+              &&  PackageManager/equal env.package_manager PackageManager.Pacman
         then  Some
                 ( TaskPool/build
                     [ Some
