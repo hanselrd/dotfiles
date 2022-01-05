@@ -19,15 +19,6 @@ if __name__ == "__main__":
     )
     CONNECTED_MONITORS = stdout.split("\n")
 
-    if rc == 0:
-        DP__1_5 = [c for c in CONNECTED_MONITORS if "DP" in c and "-1-5" in c][0]
-        DP_ = [c for c in CONNECTED_MONITORS if "DP" in c and "-1-5" not in c][0]
-        print(PRIMARY)
-        print(DP__1_5)
-        print(DP_)
-    else:
-        sys.exit(1)
-
     rc, stdout, _ = shell(
         "xrandr --query | grep '\\bdisconnected\\b' | grep -v '\\bprimary\\b' | cut -d\" \" -f1"
     )

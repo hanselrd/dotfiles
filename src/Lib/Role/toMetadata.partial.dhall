@@ -64,7 +64,9 @@ let toMetadata
                   }
                 , Rust = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Ssh = Role/Metadata::{ dependencies = [ Role.Packages ] }
-                , Sxhkd = Role/Metadata::{ dependencies = [ Role.Packages, Role.Xrandr ] }
+                , Sxhkd = Role/Metadata::{
+                  , dependencies = [ Role.Packages, Role.Xrandr ]
+                  }
                 , Systemd = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.Python ]
                   , conflicts = [ Role.Runit ]
