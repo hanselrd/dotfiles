@@ -27,6 +27,7 @@
 | Sxhkd
 | Systemd
 | Theme
+| Tlp
 | Tmux
 | Urxvt
 | Vim

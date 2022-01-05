@@ -20,6 +20,7 @@
 | Systemd1
 | Systemd2
 | Theme
+| Tlp
 | Tmux1
 | Tmux2
 | Urxvt

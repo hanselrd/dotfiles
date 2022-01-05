@@ -34,6 +34,7 @@ let default =
       , Sxhkd = False
       , Systemd = False
       , Theme = False
+      , Tlp = False
       , Tmux = False
       , Urxvt = False
       , Vim = False
@@ -190,6 +191,11 @@ let meta =
         , value = Role.Theme
         , text = Some "theme"
         , equal = \(role : Role) -> merge (default // { Theme = True }) role
+        }
+      , Tlp = (EnumMeta Role)::{
+        , value = Role.Tlp
+        , text = Some "tlp"
+        , equal = \(role : Role) -> merge (default // { Tlp = True }) role
         }
       , Tmux = (EnumMeta Role)::{
         , value = Role.Tmux

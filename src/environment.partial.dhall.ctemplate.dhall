@@ -84,6 +84,7 @@ in  ''
             , Role/Config::{ role = Role.Sxhkd, enabled = ${env:DOTFILES_ROLE_SXHKD as Text} }
             , Role/Config::{ role = Role.Systemd, enabled = ${env:DOTFILES_ROLE_SYSTEMD as Text} }
             , Role/Config::{ role = Role.Theme, enabled = ${env:DOTFILES_ROLE_THEME as Text} }
+            , Role/Config::{ role = Role.Tlp, enabled = ${env:DOTFILES_ROLE_TLP as Text} }
             , Role/Config::{ role = Role.Tmux, enabled = ${env:DOTFILES_ROLE_TMUX as Text} }
             , Role/Config::{ role = Role.Urxvt, enabled = ${env:DOTFILES_ROLE_URXVT as Text} }
             , Role/Config::{ role = Role.Vim, enabled = ${env:DOTFILES_ROLE_VIM as Text} }

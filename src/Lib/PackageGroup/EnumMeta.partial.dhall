@@ -52,6 +52,7 @@ let default =
       , Sshfs = False
       , Strace = False
       , Sxhkd = False
+      , Tlp = False
       , Tmux = False
       , Tree = False
       , Udisks2 = False
@@ -350,6 +351,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Sxhkd = True }) packageGroup
+        }
+      , Tlp = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Tlp
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Tlp = True }) packageGroup
         }
       , Tmux = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Tmux

@@ -45,6 +45,7 @@
 | Sshfs
 | Strace
 | Sxhkd
+| Tlp
 | Tmux
 | Tree
 | Udisks2

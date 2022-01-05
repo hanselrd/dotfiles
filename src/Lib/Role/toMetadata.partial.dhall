@@ -72,6 +72,7 @@ let toMetadata
                   , conflicts = [ Role.Runit ]
                   }
                 , Theme = Role/Metadata::{=}
+                , Tlp = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Tmux = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Urxvt = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.Xrdb ]

@@ -579,6 +579,24 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Tlp =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present =
+                    [ Package::{ name = "tlp" }
+                    , Package::{ name = "tlp-rdw" }
+                    , Package::{
+                      , name = "tlpui-git"
+                      , flag = Some PackageFlag.Aur
+                      }
+                    , Package::{ name = "acpi_call" }
+                    , Package::{ name = "acpi_call-lts" }
+                    ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Tmux =
               merge
                 { Pacman = PackageGroup/Metadata::{

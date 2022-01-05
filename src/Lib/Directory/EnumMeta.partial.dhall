@@ -31,6 +31,7 @@ let default =
       , Systemd1 = False
       , Systemd2 = False
       , Theme = False
+      , Tlp = False
       , Tmux1 = False
       , Tmux2 = False
       , Urxvt = False
@@ -206,6 +207,13 @@ let meta =
         , equal =
             \(directory : Directory) ->
               merge (default // { Theme = True }) directory
+        }
+      , Tlp = (EnumMeta Directory)::{
+        , value = Directory.Tlp
+        , text = Some (Prelude.Text.pathify "${env.user_root_dir}/etc")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Tlp = True }) directory
         }
       , Tmux1 = (EnumMeta Directory)::{
         , value = Directory.Tmux1
