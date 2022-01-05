@@ -28,8 +28,11 @@ in  TaskPool/become
               (List Text)
               (Directory/toText Directory.Xrandr)
               [ "default-desktop.sh"
+              , "default-laptop.py"
               , "default-laptop.sh"
+              , "dock-only.py"
               , "dock-only.sh"
+              , "laptop-dock.py"
               , "laptop-dock.sh"
               ]
           ]

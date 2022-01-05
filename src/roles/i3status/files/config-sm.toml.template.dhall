@@ -123,7 +123,7 @@ in  ''
                   ''
                   [[block]]
                   block = "backlight"
-                  # invert_icons = true
+                  invert_icons = true
                   step_width = 5
                   ''
           else  None Text

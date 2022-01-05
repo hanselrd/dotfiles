@@ -11,5 +11,7 @@ in  TaskPool/become
       Privilege.User
       ( TaskPool/executeCommands
           (Some Shell.Zsh)
-          [ "pip install --upgrade --user pipenv black cmakelang" ]
+          [ "pip install --upgrade --user pipenv black cmakelang"
+          , "pip install --user {{ role_path }}/files"
+          ]
       )

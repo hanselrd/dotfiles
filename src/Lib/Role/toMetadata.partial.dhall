@@ -22,7 +22,7 @@ let toMetadata
                 , Alsa = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Backgrounds = Role/Metadata::{=}
                 , Bin = Role/Metadata::{
-                  , dependencies = [ Role.Packages, Role.Xrandr ]
+                  , dependencies = [ Role.Packages, Role.Python ]
                   }
                 , Bspwm = Role/Metadata::{
                   , dependencies = [ Role.Packages ]
@@ -64,9 +64,9 @@ let toMetadata
                   }
                 , Rust = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Ssh = Role/Metadata::{ dependencies = [ Role.Packages ] }
-                , Sxhkd = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Sxhkd = Role/Metadata::{ dependencies = [ Role.Packages, Role.Xrandr ] }
                 , Systemd = Role/Metadata::{
-                  , dependencies = [ Role.Packages ]
+                  , dependencies = [ Role.Packages, Role.Python ]
                   , conflicts = [ Role.Runit ]
                   }
                 , Theme = Role/Metadata::{=}
@@ -80,7 +80,9 @@ let toMetadata
                   }
                 , Vscode = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Xinit = Role/Metadata::{ dependencies = [ Role.Packages ] }
-                , Xrandr = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Xrandr = Role/Metadata::{
+                  , dependencies = [ Role.Packages, Role.Python ]
+                  }
                 , Xrdb = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Zsh = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 }

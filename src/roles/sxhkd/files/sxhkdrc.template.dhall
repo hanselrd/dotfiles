@@ -40,8 +40,7 @@ in  ''
                   ''
                   super + alt + {1,2,3}
                       ${Directory/toText
-                          Directory.Bin}/df_xrandr "${Configuration/toText
-                                                        env.configuration}" {default,dock-only,laptop-dock}
+                          Directory.Xrandr}/{default-laptop,dock-only,laptop-dock}.py
                   ''
           else  None Text
         )}
