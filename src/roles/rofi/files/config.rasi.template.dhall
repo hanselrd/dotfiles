@@ -52,7 +52,7 @@ in  ''
     /*	tokenize: true;*/
     /*	m: "-5";*/
     /*	filter: ;*/
-    	dpi: 1;
+    /*	dpi: 1;*/
     /*	threads: 0;*/
     /*	scroll-method: 0;*/
     /*	window-format: "{w}    {c}   {t}";*/

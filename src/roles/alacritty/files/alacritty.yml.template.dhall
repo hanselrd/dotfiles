@@ -27,7 +27,7 @@ in  ''
     # Any items in the `env` entry below will be added as
     # environment variables. Some entries may override variables
     # set by alacritty itself.
-    #env:
+    env:
       # TERM variable
       #
       # This value is used to set the `$TERM` environment variable for
@@ -35,6 +35,7 @@ in  ''
       # check the local terminfo database and use `alacritty` if it is
       # available, otherwise `xterm-256color` is used.
       #TERM: alacritty
+      WINIT_X11_SCALE_FACTOR: '1'
 
     window:
       # Window dimensions (changes require restart)
