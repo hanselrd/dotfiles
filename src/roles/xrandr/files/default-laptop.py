@@ -1,17 +1,8 @@
 #!/usr/bin/env python
 
 from dotfiles import shell
-import logging
-import sys
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        format="[%(asctime)s] %(levelname)-8s | %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S %z",
-        level=logging.DEBUG,
-        handlers=[logging.StreamHandler(sys.stdout)],
-    )
-
     rc, PRIMARY, _ = shell("xrandr --query | grep '\\bprimary\\b' | cut -d\" \" -f1")
 
     rc, stdout, _ = shell(

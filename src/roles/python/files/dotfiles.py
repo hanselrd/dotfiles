@@ -1,8 +1,25 @@
 import logging
 import shutil
 import subprocess
+import sys
 import time
 import typing
+
+
+_LOGGER_IS_CONFIGURED: bool = False
+
+
+def _configure_logger() -> None:
+    global _LOGGER_IS_CONFIGURED
+    if not _LOGGER_IS_CONFIGURED:
+        if not logging.getLogger().hasHandlers():
+            logging.basicConfig(
+                format="[%(asctime)s] %(levelname)-8s | %(message)s",
+                datefmt="%Y-%m-%d %H:%M:%S %z",
+                level=logging.DEBUG,
+                handlers=[logging.StreamHandler(sys.stdout)],
+            )
+        _LOGGER_IS_CONFIGURED = True
 
 
 def shell(
@@ -11,6 +28,13 @@ def shell(
     progress: bool = True,
     dryrun: bool = False,
 ) -> typing.Tuple[int, str, str]:
+    """
+    Execute a command in the user's default shell.
+    The return code, stdout and stderr are returned as a tuple
+    """
+
+    _configure_logger()
+
     if dryrun:
         logging.debug(f"(DRYRUN) cmd={cmd}")
         return 0, "", ""

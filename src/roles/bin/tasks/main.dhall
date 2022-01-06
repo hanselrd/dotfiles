@@ -24,10 +24,12 @@ in  TaskPool/copyFiles
           [ "df_archive"
           , "df_backup"
           , "df_exit"
+          , "df_launcher.py"
           , "df_launcher"
           , "df_passphrase"
           , "df_picom"
           , "df_power_now"
+          , "df_redshift.py"
           , "df_redshift"
           , "df_xrandr"
           ]
