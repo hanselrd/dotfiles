@@ -1,9 +1,11 @@
 import logging
+import re
 import shutil
 import subprocess
 import sys
 import time
 import typing
+import unicodedata
 
 
 _LOGGER_IS_CONFIGURED: bool = False
@@ -20,6 +22,23 @@ def _configure_logger() -> None:
                 handlers=[logging.StreamHandler(sys.stdout)],
             )
         _LOGGER_IS_CONFIGURED = True
+
+
+def slugify(value: str, allow_unicode: bool = False) -> str:
+    """
+    Generate a slug that is url-safe
+    """
+
+    if allow_unicode:
+        value = unicodedata.normalize("NFKC", value)
+    else:
+        value = (
+            unicodedata.normalize("NFKD", value)
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-_")
 
 
 def shell(
