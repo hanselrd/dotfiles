@@ -25,6 +25,7 @@ let default =
       , Nodejs = False
       , Packages = False
       , Picom = False
+      , Polybar = False
       , Python = False
       , Ranger = False
       , Rofi = False
@@ -146,6 +147,11 @@ let meta =
         , value = Role.Picom
         , text = Some "picom"
         , equal = \(role : Role) -> merge (default // { Picom = True }) role
+        }
+      , Polybar = (EnumMeta Role)::{
+        , value = Role.Polybar
+        , text = Some "polybar"
+        , equal = \(role : Role) -> merge (default // { Polybar = True }) role
         }
       , Python = (EnumMeta Role)::{
         , value = Role.Python

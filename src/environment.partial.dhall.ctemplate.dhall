@@ -75,6 +75,7 @@ in  ''
             , Role/Config::{ role = Role.Nodejs, enabled = ${env:DOTFILES_ROLE_NODEJS as Text} }
             , Role/Config::{ role = Role.Packages, enabled = ${env:DOTFILES_ROLE_PACKAGES as Text} }
             , Role/Config::{ role = Role.Picom, enabled = ${env:DOTFILES_ROLE_PICOM as Text} }
+            , Role/Config::{ role = Role.Polybar, enabled = ${env:DOTFILES_ROLE_POLYBAR as Text} }
             , Role/Config::{ role = Role.Python, enabled = ${env:DOTFILES_ROLE_PYTHON as Text} }
             , Role/Config::{ role = Role.Ranger, enabled = ${env:DOTFILES_ROLE_RANGER as Text} }
             , Role/Config::{ role = Role.Rofi, enabled = ${env:DOTFILES_ROLE_ROFI as Text} }

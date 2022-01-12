@@ -18,6 +18,7 @@
 | Nodejs
 | Packages
 | Picom
+| Polybar
 | Python
 | Ranger
 | Rofi

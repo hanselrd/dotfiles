@@ -1,0 +1,151 @@
+[colors]
+; background = ${xrdb:background:#F0F0F0}
+; foreground = ${xrdb:foreground:#F0F0F0}
+; color0 = ${xrdb:color0:#F0F0F0}
+; color1 = ${xrdb:color1:#F0F0F0}
+; color2 = ${xrdb:color2:#F0F0F0}
+; color3 = ${xrdb:color3:#F0F0F0}
+; color4 = ${xrdb:color4:#F0F0F0}
+; color5 = ${xrdb:color5:#F0F0F0}
+; color6 = ${xrdb:color6:#F0F0F0}
+; color7 = ${xrdb:color7:#F0F0F0}
+; color8 = ${xrdb:color8:#F0F0F0}
+; color9 = ${xrdb:color9:#F0F0F0}
+; color10 = ${xrdb:color10:#F0F0F0}
+; color11 = ${xrdb:color11:#F0F0F0}
+; color12 = ${xrdb:color12:#F0F0F0}
+; color13 = ${xrdb:color13:#F0F0F0}
+; color14 = ${xrdb:color14:#F0F0F0}
+; color15 = ${xrdb:color15:#F0F0F0}
+background = #F0F0F0
+foreground = #F0F0F0
+black = #F0F0F0
+red = #F0F0F0
+green = #F0F0F0
+yellow = #F0F0F0
+blue = #F0F0F0
+magenta = #F0F0F0
+cyan = #F0F0F0
+white = #F0F0F0
+bright-black = #F0F0F0
+bright-red = #F0F0F0
+bright-green = #F0F0F0
+bright-yellow = #F0F0F0
+bright-blue = #F0F0F0
+bright-magenta = #F0F0F0
+bright-cyan = #F0F0F0
+bright-white = #F0F0F0
+
+[bar/primary]
+fixed-center = false
+
+width = 100%
+height = 27
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 6
+
+module-margin = 1
+
+font-0 = JetBrainsMono Nerd Font:weight=Bold:size=10;1
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+modules-left = i3 xwindow
+modules-center =
+modules-right = memory xbacklight pulseaudio uptime packages date
+
+[module/i3]
+type = internal/i3
+index-sort = true
+wrapping-scroll = false
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-background = ${colors.color2}
+label-mode-foreground = ${colors.foreground}
+label-mode-padding = 1
+
+label-focused = %index%
+label-focused-background = ${colors.color4}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = ${self.label-focused-padding}
+
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-foreground = ${self.label-focused-foreground}
+label-visible-padding = ${self.label-focused-padding}
+
+label-urgent = %index%
+label-urgent-background = ${self.label-mode-background}
+label-urgent-foreground = ${self.label-mode-foreground}
+label-urgent-padding = ${self.label-focused-padding}
+
+[module/xwindow]
+type = internal/xwindow
+label =  %title:0:30:...%
+
+[module/memory]
+type = internal/memory
+
+format =  <label>
+
+label = %gb_used%/%gb_total% %percentage_used%%
+
+interval = 3
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format =  <label>
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+label-muted =  %percentage%%
+
+[module/uptime]
+type = custom/script
+
+format =  <label>
+
+exec = uptime --pretty | sed 's/up //' | sed 's/\ years\?,/y/' | sed 's/\ weeks\?,/w/' | sed 's/\ days\?,/d/' | sed 's/\ hours\?,\?/h/' | sed 's/\ minutes\?/m/'
+
+interval = 60
+
+[module/packages]
+type = custom/script
+
+format =  <label>
+
+exec = yay -Qu | wc -l
+
+interval = 90
+
+[module/date]
+type = internal/date
+
+date = %a %m/%d/%Y
+time = %r
+
+date-alt = %Y-%m-%d
+time-alt = %T%z %Z
+
+label =  %date%  %time%
+
+[settings]
+screenchange-reload = true

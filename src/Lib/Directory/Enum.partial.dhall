@@ -12,6 +12,7 @@
 | I3
 | I3status
 | Picom
+| Polybar
 | Ranger
 | Rofi
 | Rust

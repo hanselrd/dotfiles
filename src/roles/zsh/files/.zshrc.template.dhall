@@ -46,6 +46,7 @@ in  ''
         dir
         host
         git
+        venv
         exec_time
         line_sep
         vi_mode

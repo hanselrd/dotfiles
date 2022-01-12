@@ -41,6 +41,9 @@ in  ''
                   (Configuration/equal env.configuration Configuration.Remote)
           then  Some
                   ''
+                  export CMAKE_GENERATOR=Ninja
+                  export CMAKE_BUILD_TYPE=Release
+                  export CPM_SOURCE_CACHE=${env.user_cache_dir}/CPM
                   export SXHKD_SHELL=/bin/sh
                   ''
           else  None Text

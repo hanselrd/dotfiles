@@ -51,10 +51,15 @@ let toMetadata
                   }
                 , I3status = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.I3 ]
+                  , conflicts = [ Role.Polybar ]
                   }
                 , Nodejs = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Packages = Role/Metadata::{=}
                 , Picom = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Polybar = Role/Metadata::{
+                  , dependencies = [ Role.Packages ]
+                  , conflicts = [ Role.I3status ]
+                  }
                 , Python = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Ranger = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Rofi = Role/Metadata::{ dependencies = [ Role.Packages ] }

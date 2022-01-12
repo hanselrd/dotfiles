@@ -23,6 +23,7 @@ let default =
       , I3 = False
       , I3status = False
       , Picom = False
+      , Polybar = False
       , Ranger = False
       , Rofi = False
       , Rust = False
@@ -148,6 +149,13 @@ let meta =
         , equal =
             \(directory : Directory) ->
               merge (default // { Picom = True }) directory
+        }
+      , Polybar = (EnumMeta Directory)::{
+        , value = Directory.Polybar
+        , text = Some (Prelude.Text.pathify "${env.user_config_dir}/polybar")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Polybar = True }) directory
         }
       , Ranger = (EnumMeta Directory)::{
         , value = Directory.Ranger
