@@ -151,7 +151,7 @@ in  ''
                   [[block]]
                   block = "pacman"
                   aur_command = "yay -Qua"
-                  critical_updates_regex = "(linux|linux-lts|linux-zen|linux-hardened)"
+                  critical_updates_regex = "(linux |linux-lts |linux-zen |linux-hardened )"
                   format = "{both}"
                   format_singular = "{both}"
                   format_up_to_date = "{both}"
