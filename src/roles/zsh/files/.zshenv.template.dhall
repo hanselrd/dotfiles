@@ -35,6 +35,7 @@ in  ''
     export GIT_ASKPASS=
     export KEYTIMEOUT=1
     export SSH_ASKPASS=
+    export FZF_DEFAULT_COMMAND="find * -type f -not -path '*.git*' -a -not -path '*node_modules*'"
 
     ${External/Prelude.Text.default
         ( if    External/Prelude.Bool.not

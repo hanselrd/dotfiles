@@ -2,6 +2,7 @@
 | Alsa
 | Android
 | Arandr
+| Bat
 | Bolt
 | Ccache
 | Clang
@@ -10,6 +11,7 @@
 | Cups
 | Dbeaver
 | Dhall
+| Exa
 | Feh
 | Ffmpeg
 | Flameshot

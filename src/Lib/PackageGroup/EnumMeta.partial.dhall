@@ -9,6 +9,7 @@ let default =
       , Alsa = False
       , Android = False
       , Arandr = False
+      , Bat = False
       , Bolt = False
       , Ccache = False
       , Clang = False
@@ -17,6 +18,7 @@ let default =
       , Cups = False
       , Dbeaver = False
       , Dhall = False
+      , Exa = False
       , Feh = False
       , Ffmpeg = False
       , Flameshot = False
@@ -93,6 +95,12 @@ let meta =
             \(packageGroup : PackageGroup) ->
               merge (default // { Arandr = True }) packageGroup
         }
+      , Bat = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Bat
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Bat = True }) packageGroup
+        }
       , Bolt = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Bolt
         , equal =
@@ -140,6 +148,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Dhall = True }) packageGroup
+        }
+      , Exa = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Exa
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Exa = True }) packageGroup
         }
       , Feh = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Feh

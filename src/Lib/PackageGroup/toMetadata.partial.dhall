@@ -53,6 +53,19 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Bat =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "bat" } ]
+                  }
+                , Dnf = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "rust-bat" } ]
+                  }
+                , Apt = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "rust-bat" } ]
+                  }
+                }
+                env.package_manager
           , Bolt =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -143,6 +156,17 @@ let toMetadata
                     ]
                   }
                 , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
+          , Exa =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "exa" } ]
+                  }
+                , Dnf = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "exa" } ]
+                  }
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
