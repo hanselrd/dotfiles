@@ -162,7 +162,10 @@ let toMetadata
           , Docker =
               merge
                 { Pacman = PackageGroup/Metadata::{
-                  , present = [ Package::{ name = "docker" } ]
+                  , present =
+                    [ Package::{ name = "docker" }
+                    , Package::{ name = "docker-compose" }
+                    ]
                   }
                 , Dnf = PackageGroup/Metadata::{=}
                 , Apt = PackageGroup/Metadata::{=}

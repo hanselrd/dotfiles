@@ -79,6 +79,7 @@ in  TaskPool/become
                       , "wmaurer.change-case"
                       , "wwm.better-align"
                       , "zhuangtongfa.material-theme"
+                      ]
                   )
               )
           ]
