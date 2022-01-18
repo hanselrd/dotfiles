@@ -33,6 +33,7 @@ let toMetadata
                   , dependencies = [ Role.Packages, Role.Zsh ]
                   }
                 , Common = Role/Metadata::{=}
+                , Docker = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Dwm = Role/Metadata::{
                   , dependencies = [ Role.Packages ]
                   , conflicts = [ Role.Bspwm, Role.I3 ]

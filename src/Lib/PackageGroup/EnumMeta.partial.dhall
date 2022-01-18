@@ -18,6 +18,7 @@ let default =
       , Cups = False
       , Dbeaver = False
       , Dhall = False
+      , Docker = False
       , Exa = False
       , Feh = False
       , Ffmpeg = False
@@ -148,6 +149,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Dhall = True }) packageGroup
+        }
+      , Docker = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Docker
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Docker = True }) packageGroup
         }
       , Exa = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Exa

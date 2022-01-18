@@ -159,6 +159,15 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Docker =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "docker" } ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Exa =
               merge
                 { Pacman = PackageGroup/Metadata::{

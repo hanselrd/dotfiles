@@ -13,6 +13,7 @@ let default =
       , Ccache = False
       , Chsh = False
       , Common = False
+      , Docker = False
       , Dwm = False
       , Elm = False
       , Fonts = False
@@ -87,6 +88,11 @@ let meta =
         , value = Role.Common
         , text = Some "common"
         , equal = \(role : Role) -> merge (default // { Common = True }) role
+        }
+      , Docker = (EnumMeta Role)::{
+        , value = Role.Docker
+        , text = Some "docker"
+        , equal = \(role : Role) -> merge (default // { Docker = True }) role
         }
       , Dwm = (EnumMeta Role)::{
         , value = Role.Dwm

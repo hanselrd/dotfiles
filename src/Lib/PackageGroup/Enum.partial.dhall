@@ -11,6 +11,7 @@
 | Cups
 | Dbeaver
 | Dhall
+| Docker
 | Exa
 | Feh
 | Ffmpeg

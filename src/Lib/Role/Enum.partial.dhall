@@ -6,6 +6,7 @@
 | Ccache
 | Chsh
 | Common
+| Docker
 | Dwm
 | Elm
 | Fonts

@@ -26,6 +26,8 @@ in  ''
 
     antigen bundle zdharma-continuum/fast-syntax-highlighting
 
+    antigen bundle zpm-zsh/ls
+
     antigen bundle zsh-users/zsh-autosuggestions
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=0,bg=15,underline,standout"
 
@@ -87,6 +89,7 @@ in  ''
     SPACESHIP_EXIT_CODE_SHOW=true
 
     antigen apply
+    unalias l la ll ls lsa
 
     eval spaceship_vi_mode_enable
 
