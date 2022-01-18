@@ -56,6 +56,7 @@ in  TaskPool/become
                       , "justusadam.language-haskell"
                       , "matklad.rust-analyzer"
                       , "mnxn.lalrpop-highlight"
+                      , "ms-azuretools.vscode-docker"
                       , "ms-python.python"
                       , "ms-python.vscode-pylance"
                       , "ms-toolsai.jupyter-keymap"
@@ -78,7 +79,6 @@ in  TaskPool/become
                       , "wmaurer.change-case"
                       , "wwm.better-align"
                       , "zhuangtongfa.material-theme"
-                      ]
                   )
               )
           ]
