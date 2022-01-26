@@ -171,6 +171,15 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Emscripten =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present = [ Package::{ name = "emscripten" } ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Exa =
               merge
                 { Pacman = PackageGroup/Metadata::{

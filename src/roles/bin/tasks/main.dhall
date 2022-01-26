@@ -23,6 +23,7 @@ in  TaskPool/copyFiles
           (Directory/toText Directory.Bin)
           [ "df_archive"
           , "df_backup"
+          , "df_charge_now.py"
           , "df_exit"
           , "df_launcher.py"
           , "df_launcher"

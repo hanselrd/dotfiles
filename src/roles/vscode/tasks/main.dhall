@@ -78,6 +78,7 @@ in  TaskPool/become
                       , "vscodevim.vim"
                       , "wmaurer.change-case"
                       , "wwm.better-align"
+                      , "xmonader.vscode-capnp"
                       , "zhuangtongfa.material-theme"
                       ]
                   )

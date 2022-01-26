@@ -12,6 +12,7 @@
 | Dbeaver
 | Dhall
 | Docker
+| Emscripten
 | Exa
 | Feh
 | Ffmpeg

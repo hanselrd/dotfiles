@@ -19,6 +19,7 @@ let default =
       , Dbeaver = False
       , Dhall = False
       , Docker = False
+      , Emscripten = False
       , Exa = False
       , Feh = False
       , Ffmpeg = False
@@ -155,6 +156,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Docker = True }) packageGroup
+        }
+      , Emscripten = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Emscripten
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Emscripten = True }) packageGroup
         }
       , Exa = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Exa
