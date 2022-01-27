@@ -246,6 +246,18 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Git =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present =
+                    [ Package::{ name = "git" }
+                    , Package::{ name = "git-filter-repo" }
+                    ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Glfw =
               merge
                 { Pacman = PackageGroup/Metadata::{

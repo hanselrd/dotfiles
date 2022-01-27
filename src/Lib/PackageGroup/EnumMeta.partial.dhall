@@ -26,6 +26,7 @@ let default =
       , Flameshot = False
       , Fonts = False
       , Gdb = False
+      , Git = False
       , Glfw = False
       , Graphviz = False
       , Htop = False
@@ -198,6 +199,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Gdb = True }) packageGroup
+        }
+      , Git = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Git
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Git = True }) packageGroup
         }
       , Glfw = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Glfw

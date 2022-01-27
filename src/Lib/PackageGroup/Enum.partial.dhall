@@ -19,6 +19,7 @@
 | Flameshot
 | Fonts
 | Gdb
+| Git
 | Glfw
 | Graphviz
 | Htop
