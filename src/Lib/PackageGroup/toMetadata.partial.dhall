@@ -774,6 +774,16 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Zoom =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present =
+                    [ Package::{ name = "zoom", flag = Some PackageFlag.Aur } ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Zsh =
               merge
                 { Pacman = PackageGroup/Metadata::{

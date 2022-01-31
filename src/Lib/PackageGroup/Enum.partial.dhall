@@ -63,5 +63,6 @@
 | Xorg
 | Xsel
 | YoutubeDl
+| Zoom
 | Zsh
 >

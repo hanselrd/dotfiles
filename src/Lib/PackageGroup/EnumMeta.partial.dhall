@@ -70,6 +70,7 @@ let default =
       , Xorg = False
       , Xsel = False
       , YoutubeDl = False
+      , Zoom = False
       , Zsh = False
       }
 
@@ -464,6 +465,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { YoutubeDl = True }) packageGroup
+        }
+      , Zoom = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Zoom
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Zoom = True }) packageGroup
         }
       , Zsh = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Zsh
