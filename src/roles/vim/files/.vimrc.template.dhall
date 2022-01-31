@@ -272,7 +272,7 @@ in  ''
     highlight SignColumn ctermbg=NONE
     highlight CursorLine ctermbg=7 ctermfg=0
     highlight CursorLineNr ctermbg=0 ctermfg=7
-    highlight Comment ctermbg=NONE ctermfg=7
+    highlight Comment ctermbg=NONE ctermfg=8
     highlight Folded ctermbg=0
     highlight VertSplit ctermbg=0
     highlight Pmenu ctermbg=0 ctermfg=7
