@@ -11,6 +11,7 @@
 | Gtk2
 | I3
 | I3status
+| Lua
 | Picom
 | Polybar
 | Ranger

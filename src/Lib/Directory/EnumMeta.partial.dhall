@@ -22,6 +22,7 @@ let default =
       , Gtk2 = False
       , I3 = False
       , I3status = False
+      , Lua = False
       , Picom = False
       , Polybar = False
       , Ranger = False
@@ -142,6 +143,14 @@ let meta =
         , equal =
             \(directory : Directory) ->
               merge (default // { I3status = True }) directory
+        }
+      , Lua = (EnumMeta Directory)::{
+        , value = Directory.Lua
+        , text = Some
+            (Prelude.Text.pathify "${env.user_config_dir}/luaformatter")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Lua = True }) directory
         }
       , Picom = (EnumMeta Directory)::{
         , value = Directory.Picom

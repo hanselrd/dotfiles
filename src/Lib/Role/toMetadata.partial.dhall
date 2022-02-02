@@ -54,7 +54,9 @@ let toMetadata
                   , dependencies = [ Role.Packages, Role.I3 ]
                   , conflicts = [ Role.Polybar ]
                   }
-                , Lua = Role/Metadata::{ dependencies = [ Role.Packages ] }
+                , Lua = Role/Metadata::{
+                  , dependencies = [ Role.Packages, Role.Zsh ]
+                  }
                 , Nodejs = Role/Metadata::{ dependencies = [ Role.Zsh ] }
                 , Packages = Role/Metadata::{=}
                 , Picom = Role/Metadata::{ dependencies = [ Role.Packages ] }
