@@ -142,6 +142,6 @@ f144ab23f4b42d653cfcc5ae524c674b943eb029458900a71900491569b84883  build/roles/xi
 aefd4f7957c6c9187c402a38ee3187503dec8b09cedc449ee6e5be4b8f65c86d  build/roles/xrdb/tasks/main.yml
 7204a5b88262c0843676e810d2f702a8c0f893d7adc8424912fb21038fee49e5  build/roles/zsh/files/.zprofile
 74cef4a5507cf05005c5a84c43fc1b317ca4a07ca86d314dabbd172737f72446  build/roles/zsh/files/.zshenv
-c868aa68b8fa547140cc2066a50308665efacb54aa0c4a5c7a4674b2e999f5e7  build/roles/zsh/files/.zshrc
+c9aea5018affe9f2f0031f841d17c44931050efacdb2f513149464ad5cbdbd1f  build/roles/zsh/files/.zshrc
 14b4f889722065d24ee9b8686ba62d8391d62df748d3011817d2d21f139c7e7c  build/roles/zsh/meta/main.yml
 4ac8c7bdb55b06d3902c558c98e425c83afaa4dfd5ed42b90e44a0fa550b3050  build/roles/zsh/tasks/main.yml

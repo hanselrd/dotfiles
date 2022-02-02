@@ -96,10 +96,10 @@ in  ''
     # Set PATH
     ${if    Configuration/equal env.configuration Configuration.Remote
       then  ''
-            export PATH="${env.user_home_dir}/.cargo/bin:${env.user_home_dir}/.local/bin:${env.user_home_dir}/sources/opt/llvm7/bin:$PATH"
+            export PATH="${env.user_home_dir}/.cargo/bin:${env.user_home_dir}/.local/bin:${env.user_home_dir}/.luarocks/bin:${env.user_home_dir}/sources/opt/llvm7/bin:$PATH"
             ''
       else  ''
-            export PATH="/usr/lib/ccache/bin:/opt/llvm/bin:${env.user_home_dir}/.cargo/bin:${env.user_home_dir}/.local/bin:$PATH"
+            export PATH="/usr/lib/ccache/bin:/opt/llvm/bin:${env.user_home_dir}/.cargo/bin:${env.user_home_dir}/.local/bin:${env.user_home_dir}/.luarocks/bin:$PATH"
             ''}
 
     # Load ghcup
