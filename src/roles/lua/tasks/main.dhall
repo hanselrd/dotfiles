@@ -11,5 +11,7 @@ in  TaskPool/become
       Privilege.User
       ( TaskPool/executeCommands
           (None Shell)
-          [ "luarocks install --server=https://luarocks.org/dev luaformatter" ]
+          [ "luarocks install --server=https://luarocks.org/dev luaformatter"
+          , "luarocks install fennel"
+          ]
       )
