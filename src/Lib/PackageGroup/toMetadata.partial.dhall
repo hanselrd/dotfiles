@@ -328,6 +328,18 @@ let toMetadata
                 , Apt = PackageGroup/Metadata::{=}
                 }
                 env.package_manager
+          , Lua =
+              merge
+                { Pacman = PackageGroup/Metadata::{
+                  , present =
+                    [ Package::{ name = "lua" }
+                    , Package::{ name = "luarocks" }
+                    ]
+                  }
+                , Dnf = PackageGroup/Metadata::{=}
+                , Apt = PackageGroup/Metadata::{=}
+                }
+                env.package_manager
           , Lxappearance =
               merge
                 { Pacman = PackageGroup/Metadata::{
@@ -508,7 +520,8 @@ let toMetadata
               merge
                 { Pacman = PackageGroup/Metadata::{
                   , present =
-                    [ Package::{ name = "python-pip" }
+                    [ Package::{ name = "python" }
+                    , Package::{ name = "python-pip" }
                     , Package::{ name = "python2" }
                     ]
                   }

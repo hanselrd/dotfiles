@@ -26,6 +26,7 @@
 | I3
 | Libreoffice
 | Lldb
+| Lua
 | Lxappearance
 | Mesa
 | Neofetch

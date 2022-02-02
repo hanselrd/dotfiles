@@ -33,6 +33,7 @@ let default =
       , I3 = False
       , Libreoffice = False
       , Lldb = False
+      , Lua = False
       , Lxappearance = False
       , Mesa = False
       , Neofetch = False
@@ -242,6 +243,12 @@ let meta =
         , equal =
             \(packageGroup : PackageGroup) ->
               merge (default // { Lldb = True }) packageGroup
+        }
+      , Lua = (EnumMeta PackageGroup)::{
+        , value = PackageGroup.Lua
+        , equal =
+            \(packageGroup : PackageGroup) ->
+              merge (default // { Lua = True }) packageGroup
         }
       , Lxappearance = (EnumMeta PackageGroup)::{
         , value = PackageGroup.Lxappearance
