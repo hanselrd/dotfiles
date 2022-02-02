@@ -73,6 +73,7 @@ in  ''
             , Role/Config::{ role = Role.Haskell, enabled = ${env:DOTFILES_ROLE_HASKELL as Text} }
             , Role/Config::{ role = Role.I3, enabled = ${env:DOTFILES_ROLE_I3 as Text} }
             , Role/Config::{ role = Role.I3status, enabled = ${env:DOTFILES_ROLE_I3STATUS as Text} }
+            , Role/Config::{ role = Role.Lua, enabled = ${env:DOTFILES_ROLE_LUA as Text} }
             , Role/Config::{ role = Role.Nodejs, enabled = ${env:DOTFILES_ROLE_NODEJS as Text} }
             , Role/Config::{ role = Role.Packages, enabled = ${env:DOTFILES_ROLE_PACKAGES as Text} }
             , Role/Config::{ role = Role.Picom, enabled = ${env:DOTFILES_ROLE_PICOM as Text} }

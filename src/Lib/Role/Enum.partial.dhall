@@ -16,6 +16,7 @@
 | Haskell
 | I3
 | I3status
+| Lua
 | Nodejs
 | Packages
 | Picom
