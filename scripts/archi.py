@@ -353,26 +353,26 @@ if __name__ == "__main__":
 
     # Mount partitions and BTRFS subvolumes
     shell(
-        f"mount -o compress-force=zstd,subvol=@ {BTRFS_PARTITION} /mnt",
+        f"mount -o compress-force=zstd:1,subvol=@ {BTRFS_PARTITION} /mnt",
         dryrun=args.dryrun,
     )
     shell("mkdir -p /mnt/{efi,home,.shared,.swap,.keys}", dryrun=args.dryrun)
     shell(f"mount {EFI_PARTITION} /mnt/efi", dryrun=args.dryrun)
     shell(
-        f"mount -o compress-force=zstd,subvol=@home {BTRFS_PARTITION} /mnt/home",
+        f"mount -o compress-force=zstd:1,subvol=@home {BTRFS_PARTITION} /mnt/home",
         dryrun=args.dryrun,
     )
     shell(
-        f"mount -o compress-force=zstd,subvol=@shared {BTRFS_PARTITION} /mnt/.shared",
+        f"mount -o compress-force=zstd:1,subvol=@shared {BTRFS_PARTITION} /mnt/.shared",
         dryrun=args.dryrun,
     )
     shell("chmod 777 /mnt/.shared", dryrun=args.dryrun)
     shell(
-        f"mount -o compress-force=zstd,subvol=@swap {BTRFS_PARTITION} /mnt/.swap",
+        f"mount -o compress-force=zstd:1,subvol=@swap {BTRFS_PARTITION} /mnt/.swap",
         dryrun=args.dryrun,
     )
     shell(
-        f"mount -o compress-force=zstd,subvol=@keys {BTRFS_PARTITION} /mnt/.keys",
+        f"mount -o compress-force=zstd:1,subvol=@keys {BTRFS_PARTITION} /mnt/.keys",
         dryrun=args.dryrun,
     )
 
