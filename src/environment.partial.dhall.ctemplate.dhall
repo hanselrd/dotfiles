@@ -13,6 +13,8 @@ in  ''
 
     let Role/Config = ../Lib/Role/Config/Record.partial.dhall
 
+    let System = ../Lib/System/Enum.partial.dhall
+
     let Theme = ../Lib/Theme/Enum.partial.dhall
 
     in  { Type =
@@ -24,11 +26,12 @@ in  ''
             , user_config_dir : Text
             , user_root_dir : Text
             , user_temp_dir : Text
+            , system : System
             , configuration : Configuration
+            , package_manager : PackageManager
             , background : Background
             , theme : Theme
             , font : Font
-            , package_manager : PackageManager
             , unsafe_ignore_dependencies : List Role
             , roles : List Role/Config.Type
             }
@@ -48,11 +51,12 @@ in  ''
                                 env:DOTFILES_USER_ROOT_DIR as Text}
           , user_temp_dir = ${External/Prelude.Text.show
                                 env:DOTFILES_USER_TEMP_DIR as Text}
+          , system = System.${env:DOTFILES_SYSTEM as Text}
           , configuration = Configuration.${env:DOTFILES_CONFIGURATION as Text}
+          , package_manager = PackageManager.${env:DOTFILES_PACKAGE_MANAGER as Text}
           , background = Background.${env:DOTFILES_BACKGROUND as Text}
           , theme = Theme.${env:DOTFILES_THEME as Text}
           , font = Font.${env:DOTFILES_FONT as Text}
-          , package_manager = PackageManager.${env:DOTFILES_PACKAGE_MANAGER as Text}
           , unsafe_ignore_dependencies = ${env:DOTFILES_ROLES_UNSAFE_IGNORE_DEPENDENCIES as Text} : List Role
           , roles =
             [ Role/Config::{ role = Role.Alacritty, enabled = ${env:DOTFILES_ROLE_ALACRITTY as Text} }
@@ -73,6 +77,7 @@ in  ''
             , Role/Config::{ role = Role.Haskell, enabled = ${env:DOTFILES_ROLE_HASKELL as Text} }
             , Role/Config::{ role = Role.I3, enabled = ${env:DOTFILES_ROLE_I3 as Text} }
             , Role/Config::{ role = Role.I3status, enabled = ${env:DOTFILES_ROLE_I3STATUS as Text} }
+            , Role/Config::{ role = Role.Kernel, enabled = ${env:DOTFILES_ROLE_KERNEL as Text} }
             , Role/Config::{ role = Role.Lua, enabled = ${env:DOTFILES_ROLE_LUA as Text} }
             , Role/Config::{ role = Role.Nodejs, enabled = ${env:DOTFILES_ROLE_NODEJS as Text} }
             , Role/Config::{ role = Role.Packages, enabled = ${env:DOTFILES_ROLE_PACKAGES as Text} }

@@ -22,6 +22,7 @@ let default =
       , Gtk2 = False
       , I3 = False
       , I3status = False
+      , Kernel = False
       , Lua = False
       , Picom = False
       , Polybar = False
@@ -143,6 +144,13 @@ let meta =
         , equal =
             \(directory : Directory) ->
               merge (default // { I3status = True }) directory
+        }
+      , Kernel = (EnumMeta Directory)::{
+        , value = Directory.Kernel
+        , text = Some (Prelude.Text.pathify "${env.user_root_dir}/etc")
+        , equal =
+            \(directory : Directory) ->
+              merge (default // { Kernel = True }) directory
         }
       , Lua = (EnumMeta Directory)::{
         , value = Directory.Lua

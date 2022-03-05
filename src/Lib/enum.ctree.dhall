@@ -107,5 +107,6 @@ in  External/Prelude.List.map
       , "Privilege"
       , "Role"
       , "Shell"
+      , "System"
       , "Theme"
       ]

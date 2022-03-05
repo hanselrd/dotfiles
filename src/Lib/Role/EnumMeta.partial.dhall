@@ -23,6 +23,7 @@ let default =
       , Haskell = False
       , I3 = False
       , I3status = False
+      , Kernel = False
       , Lua = False
       , Nodejs = False
       , Packages = False
@@ -139,6 +140,11 @@ let meta =
         , value = Role.I3status
         , text = Some "i3status"
         , equal = \(role : Role) -> merge (default // { I3status = True }) role
+        }
+      , Kernel = (EnumMeta Role)::{
+        , value = Role.Kernel
+        , text = Some "kernel"
+        , equal = \(role : Role) -> merge (default // { Kernel = True }) role
         }
       , Lua = (EnumMeta Role)::{
         , value = Role.Lua

@@ -54,6 +54,7 @@ let toMetadata
                   , dependencies = [ Role.Packages, Role.I3 ]
                   , conflicts = [ Role.Polybar ]
                   }
+                , Kernel = Role/Metadata::{=}
                 , Lua = Role/Metadata::{
                   , dependencies = [ Role.Packages, Role.Zsh ]
                   }
