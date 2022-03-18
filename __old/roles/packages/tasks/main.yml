@@ -1,8 +1,0 @@
----
-# tasks file for roles/packages
-
-- include_tasks: pacman.yml
-  when: ansible_pkg_mgr == "pacman"
-
-- include_tasks: dnf.yml
-  when: ansible_pkg_mgr == "dnf"
