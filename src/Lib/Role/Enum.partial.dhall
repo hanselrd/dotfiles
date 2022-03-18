@@ -22,6 +22,7 @@
 | Packages
 | Picom
 | Polybar
+| Purescript
 | Python
 | Ranger
 | Rofi

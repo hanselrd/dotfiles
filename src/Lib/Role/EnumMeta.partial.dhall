@@ -29,6 +29,7 @@ let default =
       , Packages = False
       , Picom = False
       , Polybar = False
+      , Purescript = False
       , Python = False
       , Ranger = False
       , Rofi = False
@@ -170,6 +171,12 @@ let meta =
         , value = Role.Polybar
         , text = Some "polybar"
         , equal = \(role : Role) -> merge (default // { Polybar = True }) role
+        }
+      , Purescript = (EnumMeta Role)::{
+        , value = Role.Purescript
+        , text = Some "purescript"
+        , equal =
+            \(role : Role) -> merge (default // { Purescript = True }) role
         }
       , Python = (EnumMeta Role)::{
         , value = Role.Python

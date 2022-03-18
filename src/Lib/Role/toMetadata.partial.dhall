@@ -65,6 +65,9 @@ let toMetadata
                   , dependencies = [ Role.Packages ]
                   , conflicts = [ Role.I3status ]
                   }
+                , Purescript = Role/Metadata::{
+                  , dependencies = [ Role.Zsh, Role.Nodejs ]
+                  }
                 , Python = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Ranger = Role/Metadata::{ dependencies = [ Role.Packages ] }
                 , Rofi = Role/Metadata::{ dependencies = [ Role.Packages ] }
