@@ -33,7 +33,7 @@ in  TaskPool/concat
               Privilege.User
               ( TaskPool/executeCommands
                   (None Shell)
-                  [ "pip install --upgrade --user pipenv black cmakelang updog"
+                  [ "pip install --upgrade --user pipenv black cmakelang csvkit updog"
                   , "pip install --user {{ role_path }}/files"
                   ]
               )
