@@ -4,7 +4,7 @@ use serde::Serialize;
 use serde_yaml;
 use std::collections::HashMap;
 
-#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Default, Clone, PartialEq, Serialize)]
 pub struct Task {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
@@ -19,70 +19,69 @@ pub struct Task {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub copy: Option<copy::Copy>,
 
-    #[rustfmt::skip]
-    // #[serde(rename = "ansible.windows.win_copy")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_copy: Option<win_copy::WinCopy>,
+    #[serde(rename = "ansible.windows.win_copy")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_copy: Option<win_copy::WinCopy>,
 
-    // #[serde(rename = "ansible.builtin.file")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub file: Option<file::File>,
+    #[serde(rename = "ansible.builtin.file")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub file: Option<file::File>,
 
-    // #[serde(rename = "ansible.windows.win_file")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_file: Option<win_file::WinFile>,
+    #[serde(rename = "ansible.windows.win_file")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_file: Option<win_file::WinFile>,
 
-    // #[serde(rename = "ansible.builtin.shell")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub shell: Option<shell::Shell>,
+    #[serde(rename = "ansible.builtin.shell")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shell: Option<shell::Shell>,
 
-    // #[serde(rename = "ansible.windows.win_shell")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_shell: Option<win_shell::WinShell>,
+    #[serde(rename = "ansible.windows.win_shell")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_shell: Option<win_shell::WinShell>,
 
-    // #[serde(rename = "ansible.builtin.unarchive")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub unarchive: Option<unarchive::Unarchive>,
+    #[serde(rename = "ansible.builtin.unarchive")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub unarchive: Option<unarchive::Unarchive>,
 
-    // #[serde(rename = "community.windows.win_unzip")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_unzip: Option<win_unzip::WinUnzip>,
+    #[serde(rename = "community.windows.win_unzip")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_unzip: Option<win_unzip::WinUnzip>,
 
-    // #[serde(rename = "ansible.builtin.debug")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub debug: Option<debug::Debug>,
+    #[serde(rename = "ansible.builtin.debug")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub debug: Option<debug::Debug>,
 
-    // #[serde(rename = "ansible.builtin.user")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub user: Option<user::User>,
+    #[serde(rename = "ansible.builtin.user")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub user: Option<user::User>,
 
-    // #[serde(rename = "ansible.windows.win_user")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_user: Option<win_user::WinUser>,
+    #[serde(rename = "ansible.windows.win_user")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_user: Option<win_user::WinUser>,
 
-    // #[serde(rename = "ansible.builtin.systemd")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub systemd: Option<systemd::Systemd>,
+    #[serde(rename = "ansible.builtin.systemd")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub systemd: Option<systemd::Systemd>,
 
-    // #[serde(rename = "ansible.builtin.include_tasks")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub include_tasks: Option<include_tasks::IncludeTasks>,
+    #[serde(rename = "ansible.builtin.include_tasks")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub include_tasks: Option<include_tasks::IncludeTasks>,
 
-    // #[serde(rename = "ansible.builtin.package")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub package: Option<package::Package>,
+    #[serde(rename = "ansible.builtin.package")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub package: Option<package::Package>,
 
-    // #[serde(rename = "ansible.windows.win_package")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_package: Option<win_package::WinPackage>,
+    #[serde(rename = "ansible.windows.win_package")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_package: Option<win_package::WinPackage>,
 
-    // #[serde(rename = "ansible.builtin.stat")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub stat: Option<stat::Stat>,
+    #[serde(rename = "ansible.builtin.stat")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stat: Option<stat::Stat>,
 
-    // #[serde(rename = "ansible.windows.win_stat")]
-    // #[serde(skip_serializing_if = "Option::is_none")]
-    // pub win_stat: Option<win_stat::WinStat>,
+    #[serde(rename = "ansible.windows.win_stat")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_stat: Option<win_stat::WinStat>,
 
     #[serde(rename = "ansible.builtin.meta")]
     #[serde(skip_serializing_if = "Option::is_none")]
