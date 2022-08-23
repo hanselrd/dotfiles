@@ -4,6 +4,7 @@ __pycache__
 !.env.test
 build
 packages
+!src/roles/packages
 reports
 src/codegen
 tags
