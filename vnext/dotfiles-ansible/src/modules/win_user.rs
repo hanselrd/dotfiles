@@ -3,10 +3,20 @@ use serde::Serialize;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
+pub enum GroupsAction {
+    Add,
+    #[default]
+    Replace,
+    Remove,
+}
+
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum State {
     Absent,
     #[default]
     Present,
+    Query,
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
@@ -20,111 +30,49 @@ pub enum UpdatePassword {
 #[derive(Debug, Default, Clone, PartialEq, PartialOrd, Serialize)]
 pub struct WinUser {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub append: Option<bool>,
+    pub account_disabled: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub authorization: Option<String>,
+    pub account_locked: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub comment: Option<String>,
-
-    #[serde(alias = "createhome")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub create_home: Option<bool>,
+    pub description: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub expires: Option<f64>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub force: Option<bool>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub generate_ssh_key: Option<bool>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub group: Option<String>,
+    pub fullname: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub groups: Option<Vec<String>>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub hidden: Option<bool>,
+    pub groups_action: Option<GroupsAction>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub home: Option<String>,
+    pub home_directory: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub local: Option<bool>,
+    pub login_script: Option<String>,
 
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub login_class: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub move_home: Option<bool>,
-
-    #[serde(alias = "user")]
     pub name: String,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub non_unique: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub password: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub password_expire_max: Option<u64>,
+    pub password_expired: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub password_expire_min: Option<u64>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub password_lock: Option<bool>,
+    pub password_never_expires: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub profile: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub remove: Option<bool>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub role: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub seuser: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub shell: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub skeleton: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub ssh_key_bits: Option<u64>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub ssh_key_comment: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub ssh_key_file: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub ssh_key_passphrase: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub ssh_key_type: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub system: Option<bool>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub uid: Option<u64>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub umask: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub update_password: Option<UpdatePassword>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub user_cannot_change_password: Option<bool>,
 }

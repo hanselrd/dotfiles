@@ -4,11 +4,10 @@ use serde::{Deserialize, Serialize};
     Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize,
 )]
 #[serde(rename_all = "lowercase")]
-pub enum Configuration {
-    #[cfg_attr(target_os = "windows", default)]
-    Desktop,
-    #[cfg_attr(target_os = "macos", default)]
-    Laptop,
+pub enum Preset {
+    #[cfg_attr(any(target_os = "windows", target_os = "macos"), default)]
+    Full,
     #[cfg_attr(target_os = "linux", default)]
+    Minimal,
     Server,
 }

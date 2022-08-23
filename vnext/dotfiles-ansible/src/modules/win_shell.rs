@@ -7,23 +7,25 @@ pub struct WinShell {
     pub chdir: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub cmd: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub creates: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub executable: Option<String>,
+
+    #[rustfmt::skip]
+    // This task is somewhat broken because it doesn't accept a cmd like
+    // the normal shell module
+    // pub free_form: String,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub no_profile: Option<bool>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub output_encoding_override: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub removes: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stdin: Option<String>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub stdin_add_newline: Option<bool>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub warn: Option<bool>,
 }

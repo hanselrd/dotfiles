@@ -87,6 +87,14 @@ pub struct Task {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub meta: Option<meta::Meta>,
 
+    #[serde(rename = "ansible.builtin.ping")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ping: Option<ping::Ping>,
+
+    #[serde(rename = "ansible.windows.win_ping")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_ping: Option<win_ping::WinPing>,
+
     #[serde(skip_serializing_if = "Option::is_none")]
     pub r#loop: Option<String>,
 
