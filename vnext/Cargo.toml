@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "dotfiles-ansible",
+    "dotfiles-core",
+    "dotfiles-types",
+]

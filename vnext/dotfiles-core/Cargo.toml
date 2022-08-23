@@ -1,0 +1,10 @@
+[package]
+name = "dotfiles-core"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dfa = { version = "0.1.0", path = "../dotfiles-ansible", package = "dotfiles-ansible" }
+dft = { version = "0.1.0", path = "../dotfiles-types", package = "dotfiles-types" }
