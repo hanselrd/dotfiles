@@ -5,8 +5,10 @@ use serde::{Deserialize, Serialize};
 )]
 #[serde(rename_all = "lowercase")]
 pub enum Configuration {
+    #[cfg_attr(target_os = "windows", default)]
     Desktop,
+    #[cfg_attr(target_os = "macos", default)]
     Laptop,
-    #[default]
+    #[cfg_attr(target_os = "linux", default)]
     Server,
 }

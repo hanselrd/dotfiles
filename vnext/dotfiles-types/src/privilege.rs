@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 )]
 #[serde(rename_all = "lowercase")]
 pub enum Privilege {
+    #[cfg_attr(target_os = "linux", serde(rename = "root"))]
     Administrator,
     #[default]
     User,
