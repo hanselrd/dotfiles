@@ -84,6 +84,10 @@ pub struct Task {
     // #[serde(skip_serializing_if = "Option::is_none")]
     // pub win_stat: Option<win_stat::WinStat>,
 
+    #[serde(rename = "ansible.builtin.meta")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub meta: Option<meta::Meta>,
+
     #[serde(skip_serializing_if = "Option::is_none")]
     pub r#loop: Option<String>,
 
@@ -125,6 +129,14 @@ mod tests {
             })
             .unwrap(),
             "name: Copy file(s)\nansible.builtin.copy:\n  dest: /path/to/dest/{{ item }}\n  force: true\n  mode: u=rwx,g=,o=\n  src: '{{ item }}'\nloop: '{{ files }}'\nvars:\n  files: file.txt\n",
+        );
+        assert_eq!(
+            serde_yaml::to_string(&Task {
+                meta: Some(meta::Meta(meta::FreeForm::EndPlay)),
+                ..Default::default()
+            })
+            .unwrap(),
+            "ansible.builtin.meta: end_play\n"
         );
     }
 }
