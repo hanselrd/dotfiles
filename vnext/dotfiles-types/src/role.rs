@@ -20,7 +20,7 @@ pub enum Role {
     Gtk,
     Haskell,
     I3,
-    I3status,
+    I3Status,
     Kernel,
     Lua,
     Nodejs,
