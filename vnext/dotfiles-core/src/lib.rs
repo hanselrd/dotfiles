@@ -1,5 +1,3 @@
-use dfa::*;
-
 // #[cfg_attr(target_os = "windows", path = "windows/mod.rs")]
 // #[cfg_atr(any(
 //     target_os = "linux",

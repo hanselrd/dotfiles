@@ -1,5 +1,4 @@
-use crate::modules::*;
-use crate::types::*;
+use crate::*;
 use serde::Serialize;
 use serde_yaml;
 use std::collections::HashMap;
@@ -17,83 +16,87 @@ pub struct Task {
 
     #[serde(rename = "ansible.builtin.copy")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub copy: Option<copy::Copy>,
+    pub copy: Option<modules::Copy>,
 
     #[serde(rename = "ansible.windows.win_copy")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_copy: Option<win_copy::WinCopy>,
+    pub win_copy: Option<modules::WinCopy>,
 
     #[serde(rename = "ansible.builtin.file")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub file: Option<file::File>,
+    pub file: Option<modules::File>,
 
     #[serde(rename = "ansible.windows.win_file")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_file: Option<win_file::WinFile>,
+    pub win_file: Option<modules::WinFile>,
 
     #[serde(rename = "ansible.builtin.shell")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub shell: Option<shell::Shell>,
+    pub shell: Option<modules::Shell>,
 
     #[serde(rename = "ansible.windows.win_shell")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_shell: Option<win_shell::WinShell>,
+    pub win_shell: Option<modules::WinShell>,
 
     #[serde(rename = "ansible.builtin.unarchive")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub unarchive: Option<unarchive::Unarchive>,
+    pub unarchive: Option<modules::Unarchive>,
 
     #[serde(rename = "community.windows.win_unzip")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_unzip: Option<win_unzip::WinUnzip>,
+    pub win_unzip: Option<modules::WinUnzip>,
 
     #[serde(rename = "ansible.builtin.debug")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub debug: Option<debug::Debug>,
+    pub debug: Option<modules::Debug>,
 
     #[serde(rename = "ansible.builtin.user")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub user: Option<user::User>,
+    pub user: Option<modules::User>,
 
     #[serde(rename = "ansible.windows.win_user")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_user: Option<win_user::WinUser>,
+    pub win_user: Option<modules::WinUser>,
 
     #[serde(rename = "ansible.builtin.systemd")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub systemd: Option<systemd::Systemd>,
+    pub systemd: Option<modules::Systemd>,
 
     #[serde(rename = "ansible.builtin.include_tasks")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub include_tasks: Option<include_tasks::IncludeTasks>,
+    pub include_tasks: Option<modules::IncludeTasks>,
 
     #[serde(rename = "ansible.builtin.package")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub package: Option<package::Package>,
+    pub package: Option<modules::Package>,
 
     #[serde(rename = "ansible.windows.win_package")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_package: Option<win_package::WinPackage>,
+    pub win_package: Option<modules::WinPackage>,
+
+    #[serde(rename = "chocolatey.chocolatey.win_chocolatey")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_chocolatey: Option<modules::WinChocolatey>,
 
     #[serde(rename = "ansible.builtin.stat")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub stat: Option<stat::Stat>,
+    pub stat: Option<modules::Stat>,
 
     #[serde(rename = "ansible.windows.win_stat")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_stat: Option<win_stat::WinStat>,
+    pub win_stat: Option<modules::WinStat>,
 
     #[serde(rename = "ansible.builtin.meta")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub meta: Option<meta::Meta>,
+    pub meta: Option<modules::Meta>,
 
     #[serde(rename = "ansible.builtin.ping")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ping: Option<ping::Ping>,
+    pub ping: Option<modules::Ping>,
 
     #[serde(rename = "ansible.windows.win_ping")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub win_ping: Option<win_ping::WinPing>,
+    pub win_ping: Option<modules::WinPing>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub r#loop: Option<String>,
@@ -117,11 +120,11 @@ mod tests {
         assert_eq!(
             serde_yaml::to_string(&Task {
                 name: Some("Copy file(s)".to_string()),
-                copy: Some(copy::Copy {
+                copy: Some(modules::Copy {
                     src: Some("{{ item }}".to_string()),
                     dest: "/path/to/dest/{{ item }}".to_string(),
-                    mode: Some(file_mode::FileMode {
-                        user: file_mode::FileModeBits::all(),
+                    mode: Some(types::FileMode {
+                        user: types::FileModeBits::all(),
                         ..Default::default()
                     }),
                     force: Some(true),
@@ -139,7 +142,7 @@ mod tests {
         );
         assert_eq!(
             serde_yaml::to_string(&Task {
-                meta: Some(meta::Meta(meta::FreeForm::EndPlay)),
+                meta: Some(modules::Meta(modules::meta::FreeForm::EndPlay)),
                 ..Default::default()
             })
             .unwrap(),

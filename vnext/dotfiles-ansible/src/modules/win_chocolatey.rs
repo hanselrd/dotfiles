@@ -1,4 +1,3 @@
-use crate::types::*;
 use serde::Serialize;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
@@ -12,13 +11,13 @@ pub enum Architecture {
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum State {
-Absent,
-Downgrade,
-Upgrade,
-Latest,
+    Absent,
+    Downgrade,
+    Upgrade,
+    Latest,
     #[default]
-Present,
-Reinstalled,
+    Present,
+    Reinstalled,
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
@@ -35,11 +34,11 @@ pub struct WinChocolatey {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub architecture: Option<Architecture>,
 
-    #[serde(alias="install_ps1", alias="bootstrap_ps1")]
+    #[serde(alias = "install_ps1", alias = "bootstrap_ps1")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bootstrap_script: Option<String>,
 
-    #[serde(alias="licensed_args")]
+    #[serde(alias = "licensed_args")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub choco_args: Option<Vec<String>>,
 
@@ -60,7 +59,7 @@ pub struct WinChocolatey {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub override_args: Option<bool>,
 
-    #[serde(alias="params")]
+    #[serde(alias = "params")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub package_params: Option<String>,
 
@@ -94,7 +93,7 @@ pub struct WinChocolatey {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
 
-    #[serde(alias="execution_timeout")]
+    #[serde(alias = "execution_timeout")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timeout: Option<u64>,
 

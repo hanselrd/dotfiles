@@ -1,4 +1,4 @@
-use crate::types::*;
+use crate::*;
 use serde::Serialize;
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
@@ -22,7 +22,7 @@ pub struct Copy {
     pub dest: String,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub directory_mode: Option<file_mode::FileMode>,
+    pub directory_mode: Option<types::FileMode>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub follow: Option<bool>,
@@ -37,7 +37,7 @@ pub struct Copy {
     pub local_follow: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub mode: Option<file_mode::FileMode>,
+    pub mode: Option<types::FileMode>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub owner: Option<String>,

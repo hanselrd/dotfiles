@@ -1,4 +1,4 @@
-use crate::types::*;
+use crate::*;
 use serde::Serialize;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
@@ -35,7 +35,7 @@ pub struct File {
     pub group: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub mode: Option<file_mode::FileMode>,
+    pub mode: Option<types::FileMode>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub modification_time: Option<String>,
