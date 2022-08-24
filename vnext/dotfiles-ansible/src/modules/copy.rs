@@ -1,5 +1,6 @@
 use crate::*;
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 pub struct Copy {
@@ -19,7 +20,7 @@ pub struct Copy {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub decrypt: Option<bool>,
 
-    pub dest: String,
+    pub dest: PathBuf,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub directory_mode: Option<types::FileMode>,
@@ -58,7 +59,7 @@ pub struct Copy {
     pub seuser: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub src: Option<String>,
+    pub src: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub unsafe_writes: Option<bool>,

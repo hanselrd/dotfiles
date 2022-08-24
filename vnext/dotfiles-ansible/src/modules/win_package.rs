@@ -1,5 +1,6 @@
 use serde::Serialize;
 use std::collections::HashMap;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -35,7 +36,7 @@ pub struct WinPackage {
     pub arguments: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub chdir: Option<String>,
+    pub chdir: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub client_cert: Option<String>,
@@ -44,7 +45,7 @@ pub struct WinPackage {
     pub client_cert_password: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub creates_path: Option<String>,
+    pub creates_path: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub creates_service: Option<String>,
@@ -68,7 +69,7 @@ pub struct WinPackage {
     pub http_agent: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub log_path: Option<String>,
+    pub log_path: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub maximum_redirection: Option<u64>,

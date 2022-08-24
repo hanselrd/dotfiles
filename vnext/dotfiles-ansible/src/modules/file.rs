@@ -1,5 +1,6 @@
 use crate::*;
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -47,7 +48,7 @@ pub struct File {
     pub owner: Option<String>,
 
     #[serde(alias = "dest", alias = "name")]
-    pub path: String,
+    pub path: PathBuf,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub recurse: Option<bool>,
@@ -65,7 +66,7 @@ pub struct File {
     pub seuser: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub src: Option<String>,
+    pub src: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,

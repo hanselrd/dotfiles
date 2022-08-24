@@ -1,4 +1,5 @@
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 pub struct WinCopy {
@@ -11,7 +12,7 @@ pub struct WinCopy {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub decrypt: Option<bool>,
 
-    pub dest: String,
+    pub dest: PathBuf,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub force: Option<bool>,
@@ -23,5 +24,5 @@ pub struct WinCopy {
     pub remote_src: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub src: Option<String>,
+    pub src: Option<PathBuf>,
 }

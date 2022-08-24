@@ -1,7 +1,19 @@
+use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 
 #[derive(
-    Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize,
+    Debug,
+    Default,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    Serialize,
+    Deserialize,
+    ValueEnum,
 )]
 #[serde(rename_all = "lowercase")]
 pub enum System {

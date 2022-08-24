@@ -1,5 +1,6 @@
 use crate::*;
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 pub struct Unarchive {
@@ -11,12 +12,12 @@ pub struct Unarchive {
     pub copy: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub creates: Option<String>,
+    pub creates: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub decrypt: Option<bool>,
 
-    pub dest: String,
+    pub dest: PathBuf,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub exclude: Option<Vec<String>>,
@@ -60,7 +61,7 @@ pub struct Unarchive {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub seuser: Option<String>,
 
-    pub src: String,
+    pub src: PathBuf,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub unsafe_writes: Option<bool>,

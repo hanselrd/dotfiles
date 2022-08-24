@@ -1,4 +1,5 @@
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -33,5 +34,5 @@ pub struct Stat {
     pub get_mime: Option<bool>,
 
     #[serde(alias = "dest", alias = "name")]
-    pub path: String,
+    pub path: PathBuf,
 }

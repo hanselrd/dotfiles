@@ -1,4 +1,5 @@
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -23,5 +24,5 @@ pub struct WinStat {
     pub get_checksum: Option<bool>,
 
     #[serde(alias = "dest", alias = "name")]
-    pub path: String,
+    pub path: PathBuf,
 }

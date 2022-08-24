@@ -12,6 +12,14 @@
 // #[cfg_attr(target_arch = "wasm32", path = "web/mod.rs")]
 // mod platform;
 
+// .arg(
+//     clap::Arg::with_name("log-file")
+//         .short("L")
+//         .long("log-file")
+//         .value_name("LOG_FILE")
+//         .default_value("file.log"),
+// )
+
 use dfa::*;
 use dft::*;
 use toml;

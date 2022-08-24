@@ -2,6 +2,7 @@ use crate::*;
 use serde::Serialize;
 use serde_yaml;
 use std::collections::HashMap;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, PartialEq, Serialize)]
 pub struct Task {
@@ -34,9 +35,14 @@ pub struct Task {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub shell: Option<modules::Shell>,
 
+    #[deprecated]
     #[serde(rename = "ansible.windows.win_shell")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub win_shell: Option<modules::WinShell>,
+
+    #[serde(rename = "ansible.windows.win_powershell")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub win_powershell: Option<modules::WinPowershell>,
 
     #[serde(rename = "ansible.builtin.unarchive")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -121,8 +127,8 @@ mod tests {
             serde_yaml::to_string(&Task {
                 name: Some("Copy file(s)".to_string()),
                 copy: Some(modules::Copy {
-                    src: Some("{{ item }}".to_string()),
-                    dest: "/path/to/dest/{{ item }}".to_string(),
+                    src: Some(PathBuf::from("{{ item }}")),
+                    dest: PathBuf::from("/path/to/dest/{{ item }}"),
                     mode: Some(types::FileMode {
                         user: types::FileModeBits::all(),
                         ..Default::default()

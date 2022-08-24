@@ -1,4 +1,5 @@
 use serde::Serialize;
+use std::path::PathBuf;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -50,7 +51,7 @@ pub struct User {
     pub hidden: Option<bool>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub home: Option<String>,
+    pub home: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub local: Option<bool>,
@@ -104,7 +105,7 @@ pub struct User {
     pub ssh_key_comment: Option<String>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ssh_key_file: Option<String>,
+    pub ssh_key_file: Option<PathBuf>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ssh_key_passphrase: Option<String>,
