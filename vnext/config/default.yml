@@ -1,0 +1,55 @@
+user: placeholder
+user_name: Place Holder
+user_email: placeholder@gmail.com
+user_home_dir: .intermediate/__ansible/home/placeholder
+user_cache_dir: .intermediate/__ansible/home/placeholder/.cache
+user_config_dir: .intermediate/__ansible/home/placeholder/.config
+user_root_dir: .intermediate/__ansible
+user_temp_dir: .intermediate/__ansible/tmp
+system: windows
+preset: full
+unsafe_ignore_dependencies: []
+roles:
+  - alacritty
+  - alsa
+  - backgrounds
+  - bin
+  - ccache
+  - chsh
+  - common
+  - docker
+  - elm
+  - fonts
+  - gdb
+  - git
+  - gtk
+  - haskell
+  - i3
+  - i3status
+  - kernel
+  - lua
+  - nodejs
+  - packages
+  - picom
+  - purescript
+  - python
+  - ranger
+  - rofi
+  - rust
+  - ssh
+  - sxhkd
+  - systemd
+  - theme
+  - tlp
+  - tmux
+  - vim
+  - vscode
+  - xinit
+  - xrandr
+  - xrdb
+  - zsh
+  # - bspwm
+  # - dwm
+  # - polybar
+  # - runit
+  # - urxvt

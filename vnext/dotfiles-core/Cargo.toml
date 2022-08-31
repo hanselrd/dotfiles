@@ -8,4 +8,3 @@ edition = "2021"
 [dependencies]
 dfa = { version = "0.1.0", path = "../dotfiles-ansible", package = "dotfiles-ansible" }
 dft = { version = "0.1.0", path = "../dotfiles-types", package = "dotfiles-types" }
-toml = "0.5.9"
