@@ -6,7 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-config = "0.13.2"
 dfa = { version = "0.1.0", path = "../dotfiles-ansible", package = "dotfiles-ansible" }
 dfc = { version = "0.1.0", path = "../dotfiles-core", package = "dotfiles-core" }
 dft = { version = "0.1.0", path = "../dotfiles-types", package = "dotfiles-types" }

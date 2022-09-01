@@ -125,9 +125,9 @@ mod tests {
     fn task() {
         assert_eq!(
             serde_yaml::to_string(&Task {
-                name: Some("Copy file(s)".to_string()),
+                name: Some(String::from("Copy file(s)")),
                 copy: Some(modules::Copy {
-                    src: Some(PathBuf::from("{{ item }}")),
+                   src: Some(PathBuf::from("{{ item }}")),
                     dest: PathBuf::from("/path/to/dest/{{ item }}"),
                     mode: Some(types::FileMode {
                         user: types::FileModeBits::all(),
@@ -136,10 +136,10 @@ mod tests {
                     force: Some(true),
                     ..Default::default()
                 }),
-                r#loop: Some("{{ files }}".to_string()),
+                r#loop: Some(String::from("{{ files }}")),
                 vars: Some(HashMap::from([(
-                    "files".to_string(),
-                    serde_yaml::Value::String("file.txt".to_string()),
+                    String::from("files"),
+                    serde_yaml::Value::String(String::from("file.txt")),
                 )])),
                 ..Default::default()
             })

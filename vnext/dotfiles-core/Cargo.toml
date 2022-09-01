@@ -8,3 +8,7 @@ edition = "2021"
 [dependencies]
 dfa = { version = "0.1.0", path = "../dotfiles-ansible", package = "dotfiles-ansible" }
 dft = { version = "0.1.0", path = "../dotfiles-types", package = "dotfiles-types" }
+handlebars = "4.3.3"
+lazy_static = "1.4.0"
+path-slash = "0.2.1"
+serde_yaml = "0.9.10"

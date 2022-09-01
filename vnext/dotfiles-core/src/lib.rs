@@ -12,4 +12,9 @@
 // #[cfg_attr(target_arch = "wasm32", path = "web/mod.rs")]
 // mod platform;
 
-// pub mod generator;
+pub mod command;
+pub mod generator;
+pub mod globals;
+
+pub use command::*;
+pub use generator::*;

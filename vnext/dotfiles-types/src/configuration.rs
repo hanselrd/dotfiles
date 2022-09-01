@@ -27,7 +27,7 @@ pub struct Configuration {
 
 impl Configuration {
     pub fn new() -> Result<Self, ConfigError> {
-        let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
+        let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| String::from("development"));
 
         let config = Config::builder()
             .add_source(File::with_name("config/default"))

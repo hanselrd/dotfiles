@@ -1,0 +1,55 @@
+user: placeholder
+user_name: Place Holder
+user_email: placeholder@gmail.com
+user_home_dir: C:\Users\Place Holder
+user_cache_dir: C:\Users\Place Holder\.cache
+user_config_dir: C:\Users\Place Holder\.config
+user_root_dir: C:\
+user_temp_dir: C:\Temp
+system: windows
+preset: full
+unsafe_ignore_dependencies: []
+roles:
+  - alacritty
+  - alsa
+  - backgrounds
+  - bin
+  - ccache
+  - chsh
+  - common
+  - docker
+  - elm
+  - fonts
+  - gdb
+  - git
+  - gtk
+  - haskell
+  - i3
+  - i3status
+  - kernel
+  - lua
+  - nodejs
+  - packages
+  - picom
+  - purescript
+  - python
+  - ranger
+  - rofi
+  - rust
+  - ssh
+  - sxhkd
+  - systemd
+  - theme
+  - tlp
+  - tmux
+  - vim
+  - vscode
+  - xinit
+  - xrandr
+  - xrdb
+  - zsh
+  # - bspwm
+  # - dwm
+  # - polybar
+  # - runit
+  # - urxvt
