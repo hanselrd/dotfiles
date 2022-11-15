@@ -33,6 +33,7 @@
     directory = {
       format = "[$read_only]($read_only_style)[$path]($style) ";
       read_only = "<ro>";
+      read_only_style = "bold red";
     };
     git_branch = {
       format = "[$branch(:$remote_branch)]($style)";
