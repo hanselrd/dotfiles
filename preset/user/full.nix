@@ -129,6 +129,9 @@
     ../../core/user/role/base/index.nix
     ../../core/user/role/nix/index.nix
     ../../core/user/role/shell/index.nix
+    ../../core/user/role/editor/index.nix
+    ../../core/user/role/pager/index.nix
+    # ../../core/user/role/browser/index.nix
   ];
 
   programs.bat = lib.ext.mkProgram "bat" {};
@@ -139,13 +142,9 @@
 
   programs.gpg = lib.ext.mkProgram "gpg" {};
 
-  programs.neovim = lib.ext.mkProgram "neovim" {};
-
   programs.ssh = lib.ext.mkProgram "ssh" {};
 
   programs.tmux = lib.ext.mkProgram "tmux" {};
-
-  # programs.vscode = lib.ext.mkProgram "vscode" { };
 
   programs.zoxide = lib.ext.mkProgram "zoxide" {};
 

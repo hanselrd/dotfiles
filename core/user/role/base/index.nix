@@ -21,4 +21,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager = lib.ext.mkProgram "home-manager" {};
+
+  services.home-manager.autoUpgrade = lib.ext.mkService "home-manager.autoUpgrade" {};
 }
