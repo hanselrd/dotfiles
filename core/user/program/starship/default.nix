@@ -32,18 +32,20 @@
     };
     directory = {
       format = "[$read_only]($read_only_style)[$path]($style) ";
-      read_only = "ro:";
+      read_only = "<ro>";
     };
-    git_branch = {format = "[$branch(:$remote_branch)]($style)";};
+    git_branch = {
+      format = "[$branch(:$remote_branch)]($style)";
+    };
     git_commit = {
       format = "[|](bold black)[$hash]($style) ";
       commit_hash_length = 6;
       only_detached = false;
     };
     hostname = {
-      format = "[@](bold black)[$ssh_symbol$hostname]($style) ";
+      format = "[@](bold black)[$ssh_symbol](bold green)[$hostname]($style) ";
       ssh_only = false;
-      ssh_symbol = "ssh:";
+      ssh_symbol = "<ssh>";
       style = "bold black";
     };
     shell = {
@@ -56,8 +58,8 @@
       disabled = false;
     };
     sudo = {
-      format = "[$symbol]($style)[|](bold black)";
-      symbol = "sudo";
+      format = "[$symbol]($style)";
+      symbol = "<sudo>";
       disabled = false;
     };
     time = {
