@@ -1,4 +1,5 @@
-* text=auto
+* text=auto eol=lf
+
 *.7z binary
 *.bz2 binary
 *.eot binary

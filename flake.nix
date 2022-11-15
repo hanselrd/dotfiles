@@ -21,19 +21,31 @@
     home-manager,
     homeage,
   }: let
+    isImpure = builtins ? currentSystem;
+
+    system =
+      if isImpure
+      then builtins.currentSystem
+      else "x86_64-linux";
+
     pkgs = import nixpkgs {
       inherit system;
 
       config = {
         allowUnfree = true;
         home = rec {
-          username = "delacruz";
-          homeDirectory = "/home/${username}";
+          username =
+            if isImpure
+            then builtins.getEnv "USER"
+            else "delacruz";
+
+          homeDirectory =
+            if isImpure
+            then builtins.getEnv "HOME"
+            else "/home/${username}";
         };
       };
     };
-
-    system = "x86_64-linux";
   in {
     nixosConfigurations = builtins.listToAttrs (
       map
@@ -46,13 +58,13 @@
                 system = systemPreset;
               };
             in {
-              inherit system;
+              # inherit system;
 
               modules = [./preset/system/${systemPreset}.nix];
 
-              extraSpecialArgs = {
-                inherit preset;
-              };
+              # extraSpecialArgs = {
+              #   inherit preset;
+              # };
             }
           );
         }

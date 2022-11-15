@@ -131,6 +131,7 @@
     ../../core/user/role/shell/index.nix
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix
+    ../../core/user/role/terminal/index.nix
     # ../../core/user/role/browser/index.nix
   ];
 

@@ -6,7 +6,8 @@
 }: {
   programs.neovim = lib.ext.mkProgram "neovim" {};
 
-  # programs.vscode = lib.ext.mkProgram "vscode" { };
+  # TODO: add way to specify "supportedPresets"
+  # programs.vscode = lib.ext.mkProgram "vscode" {};
 
   home.sessionVariables = rec {
     EDITOR = "nvim";
