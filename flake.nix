@@ -96,7 +96,7 @@
                 }
               );
             }
-          ) ["full" "minimal" "server"]
+          ) ["desktop" "minimal" "server"]
       ) ["linux-systemd" "linux" "nixos"]
     );
   };
