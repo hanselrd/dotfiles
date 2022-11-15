@@ -1,14 +1,14 @@
 {
   lib,
   pkgs,
-  presets,
+  preset,
   ...
 }: {
   mkProgram = name: attrs:
     lib.attrsets.recursiveUpdate
     (
       (import ../program/${name}/default.nix) {
-        inherit pkgs lib;
+        inherit pkgs lib preset;
         inherit (pkgs) config;
       }
     )
@@ -18,13 +18,13 @@
     lib.attrsets.recursiveUpdate
     (
       (import ../service/${name}/default.nix) {
-        inherit pkgs lib;
+        inherit pkgs lib preset;
         inherit (pkgs) config;
       }
     )
     ({
         enable =
-          if presets.system == "linux-systemd"
+          if preset.system == "linux-systemd"
           then true
           else false;
       }

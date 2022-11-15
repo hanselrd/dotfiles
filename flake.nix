@@ -42,7 +42,7 @@
           name = systemPreset;
           value = nixpkgs.lib.nixosSystem (
             let
-              presets = {
+              preset = {
                 system = systemPreset;
               };
             in {
@@ -51,7 +51,7 @@
               modules = [./preset/system/${systemPreset}.nix];
 
               extraSpecialArgs = {
-                inherit presets;
+                inherit preset;
               };
             }
           );
@@ -70,7 +70,7 @@
               name = "${systemPreset}-${userPreset}";
               value = home-manager.lib.homeManagerConfiguration (
                 let
-                  presets = {
+                  preset = {
                     system = systemPreset;
                     user = userPreset;
                   };
@@ -79,7 +79,7 @@
 
                   lib = pkgs.lib.extend (self: super: {
                     ext = (import ./core/user/lib/index.nix) {
-                      inherit pkgs presets;
+                      inherit pkgs preset;
 
                       lib = self;
                     };
@@ -91,7 +91,7 @@
                   ];
 
                   extraSpecialArgs = {
-                    inherit presets;
+                    inherit preset;
                   };
                 }
               );

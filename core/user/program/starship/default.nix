@@ -28,7 +28,7 @@
     };
     cmd_duration = {
       format = "[<$duration>]($style) ";
-      style = "bold black";
+      style = "bold bright-black";
     };
     directory = {
       format = "[$read_only]($read_only_style)[$path]($style) ";
@@ -38,19 +38,19 @@
       format = "[$branch(:$remote_branch)]($style)";
     };
     git_commit = {
-      format = "[|](bold black)[$hash]($style) ";
+      format = "[|](bold bright-black)[$hash]($style) ";
       commit_hash_length = 6;
       only_detached = false;
     };
     hostname = {
-      format = "[@](bold black)[$ssh_symbol](bold green)[$hostname]($style) ";
+      format = "[@](bold bright-black)[$ssh_symbol](bold green)[$hostname]($style) ";
       ssh_only = false;
       ssh_symbol = "<ssh>";
-      style = "bold black";
+      style = "bold bright-black";
     };
     shell = {
       format = "[\\[$indicator\\]]($style) ";
-      style = "bold black";
+      style = "bold bright-black";
       disabled = false;
     };
     status = {
@@ -60,6 +60,7 @@
     sudo = {
       format = "[$symbol]($style)";
       symbol = "<sudo>";
+      style = "bold red";
       disabled = false;
     };
     time = {
