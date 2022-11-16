@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: {
+  defaultKeymap = "emacs";
   enableAutosuggestions = true;
   enableCompletion = false;
   enableSyntaxHighlighting = true;
