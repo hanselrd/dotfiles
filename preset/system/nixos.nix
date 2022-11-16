@@ -44,6 +44,7 @@
     description = "Hansel De La Cruz";
     extraGroups = ["networkmanager" "wheel"];
     initialPassword = "password";
+    shell = pkgs.zsh;
     packages = with pkgs; [];
   };
 
@@ -56,6 +57,8 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];
+
+  environment.shells = with pkgs; [zsh];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

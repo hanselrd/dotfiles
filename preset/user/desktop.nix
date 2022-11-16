@@ -44,85 +44,86 @@
     # xdg-user-dirs
     # xsel
     # zoom-us
-    age
+
+    # age
+    # android-tools
+    # ansible
+    # atool
+    # ccache
+    # clang-tools
+    # cmake
+    # ctags
+    # dhall
+    # dhall-bash
+    # dhall-json
+    # dhall-lsp-server
+    # dhall-nix
+    # docker
+    # docker-compose
+    # elixir
+    # emscripten
+    # fd
+    # figlet
+    # fortune
+    # gcc
+    # gdb
+    # git-crypt
+    # glfw
+    # gnumake
+    # gnutar
+    # go
+    # graphviz
+    # htop
+    # httpie
+    # imagemagick
+    # jq
+    # lazygit
+    # lldb
+    # llvm
+    # lolcat
+    # lua
+    # mesa
+    # mesa-demos
+    # meson
+    # neofetch
+    # ninja
+    # nmap
+    # nodejs
+    # objconv
+    # openssh
+    # pandoc
+    # perl
+    # postgresql
+    # pre-commit
+    # python3
+    # pywal
+    # ranger
+    # restic
+    # ripgrep
+    # rsync
+    # ruby
+    # rustup
+    # SDL2
+    # SDL2_image
+    # SDL2_mixer
+    # SDL2_net
+    # SDL2_ttf
+    # sshfs
+    # stow
+    # strace
+    # tokei
+    # tree
+    # unzip
+    # vulkan-tools
+    # wtf
+    # xsv
+    # youtube-dl
+    # zlib
+    # zstd
     alejandra
-    android-tools
-    ansible
-    atool
-    ccache
-    clang-tools
-    cmake
-    ctags
-    dhall
-    dhall-bash
-    dhall-json
-    dhall-lsp-server
-    dhall-nix
-    docker
-    docker-compose
-    elixir
-    emscripten
-    fd
-    figlet
-    fortune
-    gcc
-    gdb
-    git-crypt
-    glfw
-    gnumake
-    gnutar
-    go
-    graphviz
-    htop
-    httpie
-    imagemagick
-    jq
-    lazygit
-    lldb
-    llvm
-    lolcat
-    lua
-    mesa
-    mesa-demos
-    meson
-    neofetch
-    ninja
     nixpkgs-fmt
-    nmap
-    nodejs
-    objconv
-    openssh
-    pandoc
-    perl
-    postgresql
-    pre-commit
-    python3
-    pywal
-    ranger
-    restic
-    ripgrep
-    rsync
-    ruby
-    rustup
-    SDL2
-    SDL2_image
-    SDL2_mixer
-    SDL2_net
-    SDL2_ttf
     shellcheck
     shfmt
-    sshfs
-    stow
-    strace
-    tokei
-    tree
-    unzip
-    vulkan-tools
-    wtf
-    xsv
-    youtube-dl
-    zlib
-    zstd
   ];
 
   imports = [
