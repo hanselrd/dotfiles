@@ -7,8 +7,3 @@ NIX_INSTALL_DIR=$(mktemp -d "${TMPDIR:-/tmp}/nix.XXXXXX")
 curl -Lo "$NIX_INSTALL_DIR/install.sh" https://nixos.org/nix/install
 chmod +x "$NIX_INSTALL_DIR/install.sh"
 "$NIX_INSTALL_DIR/install.sh" --no-daemon
-
-. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-
-# Bootstrap home-manager
-. "$(dirname "$0")/home-manager-bootstrap.sh"

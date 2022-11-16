@@ -58,13 +58,13 @@
                 system = systemPreset;
               };
             in {
-              # inherit system;
+              inherit system;
 
               modules = [./preset/system/${systemPreset}.nix];
 
-              # extraSpecialArgs = {
-              #   inherit preset;
-              # };
+              specialArgs = {
+                inherit preset;
+              };
             }
           );
         }
@@ -109,7 +109,7 @@
               );
             }
           ) ["desktop" "minimal" "server"]
-      ) ["linux-systemd" "linux" "nixos"]
+      ) ["linux-systemd" "linux" "macos" "nixos"]
     );
   };
 }
