@@ -17,5 +17,4 @@ nix-shell '<home-manager>' -A install
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 # Build and activate home-manager configuration
-# TODO: use .#linux-server
-home-manager switch --flake ".#linux-desktop" -b bak."$(date +"%Y%m%d")" --extra-experimental-features "nix-command flakes"
+home-manager switch --flake ".#linux-server" -b bak."$(date +"%Y%m%d")" --extra-experimental-features "nix-command flakes"

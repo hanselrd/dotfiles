@@ -3,7 +3,7 @@
   pkgs,
   preset,
   ...
-}: {
+}: rec {
   mkProgram = name: attrs:
     lib.attrsets.recursiveUpdate
     (
@@ -13,6 +13,11 @@
       }
     )
     ({enable = true;} // attrs);
+
+  mkProgramIf = name: cond: attrs:
+    if cond
+    then mkProgram name attrs
+    else {};
 
   mkService = name: attrs:
     lib.attrsets.recursiveUpdate
