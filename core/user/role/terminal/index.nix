@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  programs.alacritty = lib.ext.mkProgram "alacritty" {};
+  programs.alacritty = lib.core.user.mkProgram "alacritty" {};
 
   home.sessionVariables = {
     TERMINAL = "alacritty";

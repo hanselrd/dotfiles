@@ -133,19 +133,19 @@
     zstd
   ];
 
-  programs.bat = lib.ext.mkProgram "bat" {};
+  programs.bat = lib.core.user.mkProgram "bat" {};
 
-  programs.exa = lib.ext.mkProgram "exa" {};
+  programs.exa = lib.core.user.mkProgram "exa" {};
 
-  programs.git = lib.ext.mkProgram "git" {};
+  programs.git = lib.core.user.mkProgram "git" {};
 
-  programs.gpg = lib.ext.mkProgram "gpg" {};
+  programs.gpg = lib.core.user.mkProgram "gpg" {};
 
-  programs.ssh = lib.ext.mkProgram "ssh" {};
+  programs.ssh = lib.core.user.mkProgram "ssh" {};
 
-  programs.tmux = lib.ext.mkProgram "tmux" {};
+  programs.tmux = lib.core.user.mkProgram "tmux" {};
 
-  programs.zoxide = lib.ext.mkProgram "zoxide" {};
+  programs.zoxide = lib.core.user.mkProgram "zoxide" {};
 
-  services.gpg-agent = lib.ext.mkService "gpg-agent" {};
+  # services.gpg-agent = lib.core.user.mkService "gpg-agent" {};
 }

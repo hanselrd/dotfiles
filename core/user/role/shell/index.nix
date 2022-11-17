@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  programs.bash = lib.ext.mkProgram "bash" {};
+  programs.bash = lib.core.user.mkProgram "bash" {};
 
-  programs.zsh = lib.ext.mkProgram "zsh" {};
+  programs.zsh = lib.core.user.mkProgram "zsh" {};
 
-  programs.starship = lib.ext.mkProgram "starship" {};
+  programs.starship = lib.core.user.mkProgram "starship" {};
 
-  programs.fzf = lib.ext.mkProgram "fzf" {};
+  programs.fzf = lib.core.user.mkProgram "fzf" {};
 }

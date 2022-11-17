@@ -21,32 +21,46 @@
     home-manager,
     homeage,
   }: let
-    isImpure = builtins ? currentSystem;
-
     system =
-      if isImpure
+      if !lib.inPureEvalMode
       then builtins.currentSystem
       else "x86_64-linux";
 
     pkgs = import nixpkgs {
       inherit system;
 
+      overlays = [self.overlay];
+
       config = {
         allowUnfree = true;
         home = rec {
           username =
-            if isImpure
+            if !lib.inPureEvalMode
             then builtins.getEnv "USER"
             else "delacruz";
 
           homeDirectory =
-            if isImpure
+            if !lib.inPureEvalMode
             then builtins.getEnv "HOME"
             else "/home/${username}";
         };
       };
     };
+
+    lib = nixpkgs.lib.extend (self: super: {
+      core = {
+        user = (import ./core/user/lib/index.nix) {
+          inherit pkgs;
+
+          lib = self;
+        };
+      };
+    });
   in {
+    overlay = final: prev: {
+      inherit lib;
+    };
+
     nixosConfigurations = builtins.listToAttrs (
       builtins.concatMap
       (
@@ -54,7 +68,7 @@
           map
           (
             userPreset: {
-              name = systemPreset;
+              name = "${systemPreset}-${userPreset}";
               value = nixpkgs.lib.nixosSystem (
                 let
                   preset = {
@@ -105,14 +119,6 @@
                   };
                 in {
                   inherit pkgs;
-
-                  lib = pkgs.lib.extend (self: super: {
-                    ext = (import ./core/user/lib/index.nix) {
-                      inherit pkgs preset;
-
-                      lib = self;
-                    };
-                  });
 
                   modules = [
                     homeage.homeManagerModules.homeage

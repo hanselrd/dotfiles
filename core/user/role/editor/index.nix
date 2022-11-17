@@ -5,9 +5,9 @@
   preset,
   ...
 }: {
-  programs.neovim = lib.ext.mkProgram "neovim" {};
+  programs.neovim = lib.core.user.mkProgram "neovim" {};
 
-  programs.vscode = lib.ext.mkProgramIf "vscode" (preset.user == "desktop") {};
+  programs.vscode = lib.core.user.mkProgramIf "vscode" (preset.user == "desktop") {};
 
   home.sessionVariables = rec {
     EDITOR = "nvim";
