@@ -86,6 +86,7 @@
     git-crypt
     glfw
     gnumake
+    gnupatch
     graphviz
     httpie
     imagemagick

@@ -48,28 +48,45 @@
     };
   in {
     nixosConfigurations = builtins.listToAttrs (
-      map
+      builtins.concatMap
       (
-        systemPreset: {
-          name = systemPreset;
-          value = nixpkgs.lib.nixosSystem (
-            let
-              preset = {
-                system = systemPreset;
-              };
-            in {
-              inherit system;
+        systemPreset:
+          map
+          (
+            userPreset: {
+              name = systemPreset;
+              value = nixpkgs.lib.nixosSystem (
+                let
+                  preset = {
+                    system = systemPreset;
+                  };
+                in {
+                  inherit system;
 
-              modules = [./preset/system/${systemPreset}.nix];
+                  modules = [
+                    ./preset/system/${systemPreset}.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.users.${pkgs.config.home.username} = import ./preset/user/${userPreset}.nix;
 
-              specialArgs = {
-                inherit preset;
-              };
+                      # TODO: add homeage module and make sure it works
+                      # sharedModules = [homeage.homeManagerModules.homeage];
+
+                      # Optionally, use home-manager.extraSpecialArgs to pass
+                      # arguments to home.nix
+                    }
+                  ];
+
+                  specialArgs = {
+                    inherit preset;
+                  };
+                }
+              );
             }
-          );
-        }
-      )
-      ["nixos"]
+          ) ["desktop" "minimal" "server"]
+      ) ["nixos"]
     );
 
     homeConfigurations = builtins.listToAttrs (
@@ -109,7 +126,7 @@
               );
             }
           ) ["desktop" "minimal" "server"]
-      ) ["linux-systemd" "linux" "macos" "nixos"]
+      ) ["linux-systemd" "linux"]
     );
   };
 }

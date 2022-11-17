@@ -4,6 +4,12 @@
   pkgs,
   ...
 }: {
+  userName = "Hansel De La Cruz";
+  userEmail = "18725263+hanselrd@users.noreply.github.com";
+  difftastic = {
+    enable = true;
+    background = "dark";
+  };
   extraConfig = {
     safe = {directory = "*";};
     color = {ui = "auto";};
@@ -23,11 +29,5 @@
       changed = "green";
       untracked = "cyan";
     };
-  };
-  userName = "Hansel De La Cruz";
-  userEmail = "18725263+hanselrd@users.noreply.github.com";
-  difftastic = {
-    enable = true;
-    background = "dark";
   };
 }

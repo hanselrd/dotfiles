@@ -5,16 +5,8 @@ if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
-# Install home-manager
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-# nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz home-manager
-nix-channel --update
+NIX_HOME_CONFIGURATION="linux-server"
 
-export NIX_PATH="$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}"
-
-nix-shell '<home-manager>' -A install
-
-. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-
-# Build and activate home-manager configuration
-home-manager switch --flake ".#linux-server" -b bak."$(date +"%Y%m%d")" --extra-experimental-features "nix-command flakes"
+nix build --no-link ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --extra-experimental-features "nix-command flakes"
+NIX_HOME_MANAGER="$(nix path-info ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --extra-experimental-features "nix-command flakes")"/home-path/bin/home-manager
+$NIX_HOME_MANAGER switch --flake ".#$NIX_HOME_CONFIGURATION" -b bak."$(date +"%Y%m%d")" --extra-experimental-features "nix-command flakes"
