@@ -73,11 +73,17 @@
                 let
                   preset = {
                     system = systemPreset;
+                    user = userPreset;
                   };
                 in {
                   inherit system;
 
                   modules = [
+                    {
+                      nixpkgs = {
+                        inherit (pkgs) overlays config;
+                      };
+                    }
                     ./preset/system/${systemPreset}.nix
                     home-manager.nixosModules.home-manager
                     {
@@ -85,11 +91,11 @@
                       home-manager.useUserPackages = true;
                       home-manager.users.${pkgs.config.home.username} = import ./preset/user/${userPreset}.nix;
 
-                      # TODO: add homeage module and make sure it works
-                      # sharedModules = [homeage.homeManagerModules.homeage];
+                      home-manager.sharedModules = [homeage.homeManagerModules.homeage];
 
-                      # Optionally, use home-manager.extraSpecialArgs to pass
-                      # arguments to home.nix
+                      home-manager.extraSpecialArgs = {
+                        inherit preset;
+                      };
                     }
                   ];
 
