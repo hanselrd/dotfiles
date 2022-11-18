@@ -29,22 +29,38 @@
     pkgs = import nixpkgs {
       inherit system;
 
-      overlays = [self.overlay];
-
       config = {
         allowUnfree = true;
-        home = rec {
+        home = let
+          SUDO_USER = builtins.getEnv "SUDO_USER";
+          USER = builtins.getEnv "USER";
+          HOME = builtins.getEnv "HOME";
+        in rec {
           username =
             if !lib.inPureEvalMode
-            then builtins.getEnv "USER"
+            then
+              (
+                if SUDO_USER != ""
+                then SUDO_USER
+                else if USER != ""
+                then USER
+                else "delacruz"
+              )
             else "delacruz";
 
           homeDirectory =
             if !lib.inPureEvalMode
-            then builtins.getEnv "HOME"
+            then
+              (
+                if SUDO_USER == "" && HOME != ""
+                then HOME
+                else "/home/${username}"
+              )
             else "/home/${username}";
         };
       };
+
+      overlays = [self.overlay];
     };
 
     lib = nixpkgs.lib.extend (self: super: {
@@ -81,7 +97,7 @@
                   modules = [
                     {
                       nixpkgs = {
-                        inherit (pkgs) overlays config;
+                        inherit (pkgs) config overlays;
                       };
                     }
                     ./preset/system/${systemPreset}.nix
