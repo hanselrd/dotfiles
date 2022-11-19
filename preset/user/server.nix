@@ -10,56 +10,10 @@
     ../../core/user/role/shell/index.nix
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix
-    ../../core/user/role/terminal/index.nix
+    ../../core/user/role/scripts/index.nix
   ];
 
   home.packages = with pkgs; [
-    # arandr
-    # bolt
-    # brave
-    # clang
-    # cups
-    # dbeaver
-    # feh
-    # ffmpeg
-    # flameshot
-    # jetbrains-mono
-    # liberation_ttf
-    # libreoffice-fresh
-    # lxappearance
-    # nerd-fonts
-    # noto-fonts
-    # noto-fonts-cjk-sans
-    # noto-fonts-cjk-serif
-    # noto-fonts-emoji
-    # noto-fonts-emoji-blob-bin
-    # noto-fonts-extra
-    # numix-gtk-theme
-    # numix-icon-theme
-    # numix-icon-theme-circle
-    # numix-icon-theme-square
-    # openresolv
-    # openvpn
-    # picom
-    # redshift
-    # renderdoc
-    # rofi
-    # snapper
-    # tlp
-    # udisks
-    # upower
-    # ventoy-bin
-    # w3m
-    # xdg-user-dirs
-    # xsel
-    # zoom-us
-
-    # go
-    # htop
-    # jq
-    # lazygit
-    # pandoc
-    # pywal
     age
     alejandra
     android-tools
@@ -80,6 +34,7 @@
     emscripten
     fd
     figlet
+    flock
     fortune
     gcc
     gdb
@@ -87,9 +42,12 @@
     glfw
     gnumake
     gnupatch
+    go
     graphviz
+    htop
     httpie
     imagemagick
+    jq
     lldb
     llvm
     lolcat
@@ -103,6 +61,7 @@
     nmap
     nodejs
     objconv
+    openvpn
     perl
     postgresql
     pre-commit
