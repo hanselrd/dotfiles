@@ -4,13 +4,46 @@
   pkgs,
   ...
 }: let
-  df-gen-master-key =
-    pkgs.writeShellScriptBin "df-gen-master-key"
-    ''
-      MASTER_KEY_NAME=master
-      ${pkgs.age}/bin/age-keygen -o $1/$MASTER_KEY_NAME.age
-      ${pkgs.age}/bin/age-keygen -y -o $1/$MASTER_KEY_NAME.age.pub $1/$MASTER_KEY_NAME.age
+  writeShellApp = name: runtimeInputs: attrs:
+    pkgs.writeShellApplication {
+      inherit name runtimeInputs;
+
+      text = let
+        loop = depth: arg0:
+          if builtins.isAttrs arg0
+          then
+            lib.strings.concatStringsSep "\n" (
+              [
+                ''
+                  if [ "$#" -lt ${builtins.toString depth} ]; then
+                    echo "Usage ${lib.strings.concatMapStringsSep " " (x: "\$${builtins.toString x}") (builtins.genList (lib.trivial.id) depth)} <${lib.strings.concatStringsSep "|" (lib.attrsets.attrNames arg0)}>"
+                    exit 1
+                  fi
+
+                  case "''$${builtins.toString depth}" in
+                ''
+              ]
+              ++ (lib.attrsets.mapAttrsToList (
+                  name: value: ''
+                    ${name})
+                    ${loop (depth + 1) value}
+                    ;;
+                  ''
+                )
+                arg0)
+              ++ ["esac"]
+            )
+          else arg0;
+      in
+        loop 1 attrs;
+    };
+
+  df-master-key = writeShellApp "df-master-key" (with pkgs; [age]) {
+    generate = ''
+      age-keygen -o "$2/master.age"
+      age-keygen -y -o "$2/master.age.pub" "$2/master.age"
     '';
+  };
 
   df-encrypt =
     pkgs.writeShellScriptBin "df-encrypt"
@@ -50,7 +83,7 @@
     '';
 in {
   home.packages = with pkgs; [
-    df-gen-master-key
+    df-master-key
     df-encrypt
     df-decrypt
   ];

@@ -6,6 +6,8 @@
 }: {
   settings = {
     format = lib.concatStrings [
+      "\${custom.lock}"
+      "\${custom.idle}"
       "$time"
       "$sudo"
       "$username"
@@ -74,6 +76,21 @@
       show_always = true;
       style_user = "bold cyan";
       disabled = false;
+    };
+    custom.lock = {
+      format = "[$symbol]($style) ";
+      when = "[ -f /var/lock/prevent_idle_terminate ]";
+      symbol = "<lock>";
+      style = "bold red";
+      os = "linux";
+    };
+    custom.idle = {
+      format = "[<$symbol]($style)[@$output](bold bright-black)[>]($style) ";
+      command = "cat /etc/idle_terminate_threshold";
+      when = "[ -f /etc/idle_terminate_threshold ]";
+      symbol = "idle";
+      style = "bold red";
+      os = "linux";
     };
   };
 }
