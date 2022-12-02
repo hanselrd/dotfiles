@@ -4,8 +4,11 @@
   pkgs,
   ...
 }: {
-  # coc.enable = true;
   plugins = with pkgs.vimPlugins; [
+    cmp-nvim-lsp
+    nvim-cmp
+    nvim-lspconfig
+    nvim-ts-rainbow
     nvim-web-devicons
     onedarkpro-nvim
     pears-nvim
@@ -26,6 +29,13 @@
     #       ]
     #   )
     # )
+  ];
+  extraPackages = with pkgs; [
+    gopls
+    nodePackages.pyright
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    rust-analyzer
   ];
   viAlias = true;
   vimAlias = true;
@@ -87,11 +97,32 @@
 
     " START PLUGIN CONFIGURATION
 
+    " nvim-lspconfig
+    lua << EOF
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local lspconfig = require("lspconfig")
+      local servers = {
+        "clangd",
+        "gopls",
+        "pyright",
+        "rust_analyzer",
+        "tsserver",
+      }
+      for _, lsp in ipairs(servers) do
+        lspconfig[lsp].setup {
+          capabilities = capabilities,
+        }
+      end
+    EOF
+
     " nvim-treesitter
     lua << EOF
       require("nvim-treesitter.configs").setup {
         highlight = {
-          enable = true
+          enable = true,
+        },
+        rainbow = {
+          enable = true,
         }
       }
     EOF
