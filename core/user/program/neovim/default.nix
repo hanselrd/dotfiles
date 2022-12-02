@@ -5,6 +5,7 @@
   ...
 }: {
   plugins = with pkgs.vimPlugins; [
+    awesome-vim-colorschemes
     cmp-buffer
     cmp-cmdline
     cmp-nvim-lsp
@@ -14,12 +15,12 @@
     nvim-lspconfig
     nvim-ts-rainbow
     nvim-web-devicons
-    onedarkpro-nvim
     pears-nvim
     plenary-nvim
     telescope-fzf-native-nvim
     telescope-nvim
     vim-better-whitespace
+    vim-colorschemes
     vim-commentary
     vim-eunuch
     vim-fugitive
@@ -75,7 +76,7 @@
       opt.mouse = "a"
 
       -- Nicer UI settings
-      opt.termguicolors = true
+      --opt.termguicolors = true
       opt.cursorline = true
       opt.number = true
       opt.relativenumber = true
@@ -94,6 +95,8 @@
       opt.shortmess = "at"
     EOF
 
+    set listchars=tab:>\\,trail:~,extends:>,precedes:<,space:.
+    set list
     set nowrap
     set nobackup
     set nowritebackup
@@ -102,7 +105,7 @@
     "set noshowmode
 
     set background=dark
-    colorscheme onedarkpro
+    colorscheme wombat256
     highlight Normal ctermbg=NONE guibg=NONE
 
     " START PLUGIN CONFIGURATION
