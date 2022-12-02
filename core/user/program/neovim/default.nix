@@ -56,15 +56,17 @@
       g.mapleader = "\\"
 
       -- Undo files
+      opt.undodir = vim.fn.expand("~/.cache/nvim/undo")
       opt.undofile = true
-      opt.undodir = "~/.cache"
 
       -- Indentation
       opt.smartindent = true
       opt.autoindent = true
-      opt.tabstop = 4
-      opt.shiftwidth = 4
+      opt.tabstop = 8
+      opt.softtabstop = 0
       opt.expandtab = true
+      opt.shiftwidth = 4
+      opt.smarttab = true
 
       -- Set clipboard to use system clipboard
       opt.clipboard = "unnamedplus"
@@ -89,7 +91,7 @@
       opt.autoread = true
       opt.incsearch = true
       opt.hidden = true
-      opt.shortmess = "atl"
+      opt.shortmess = "at"
     EOF
 
     set nowrap
@@ -97,6 +99,7 @@
     set nowritebackup
     set noerrorbells
     set noswapfile
+    "set noshowmode
 
     set background=dark
     colorscheme onedarkpro
