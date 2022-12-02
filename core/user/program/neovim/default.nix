@@ -169,6 +169,11 @@
       }
     EOF
 
+    " pears-nvim
+    lua << EOF
+      require("pears").setup()
+    EOF
+
     " telescope-nvim
     nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
     nnoremap <leader>aa <cmd>lua require('telescope.builtin').builtin()<cr>
