@@ -8,7 +8,6 @@
   plugins = with pkgs.vimPlugins; [
     nvim-web-devicons
     onedarkpro-nvim
-    onedarkpro-nvim
     pears-nvim
     plenary-nvim
     telescope-fzf-native-nvim
