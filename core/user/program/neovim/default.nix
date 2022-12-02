@@ -5,7 +5,11 @@
   ...
 }: {
   plugins = with pkgs.vimPlugins; [
+    cmp-buffer
+    cmp-cmdline
     cmp-nvim-lsp
+    cmp-path
+    cmp-vsnip
     nvim-cmp
     nvim-lspconfig
     nvim-ts-rainbow
@@ -15,11 +19,14 @@
     plenary-nvim
     telescope-fzf-native-nvim
     telescope-nvim
+    vim-better-whitespace
     vim-commentary
     vim-eunuch
     vim-fugitive
+    vim-gitgutter
     vim-sort-motion
     vim-startify
+    vim-vsnip
     (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     # (
     #   nvim-treesitter.withPlugins (
@@ -96,6 +103,35 @@
     highlight Normal ctermbg=NONE guibg=NONE
 
     " START PLUGIN CONFIGURATION
+
+    " nvim-cmp
+    lua << EOF
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end,
+        },
+        window = {
+          -- completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "vsnip" },
+        }, {
+          { name = "buffer" },
+        })
+      })
+    EOF
 
     " nvim-lspconfig
     lua << EOF

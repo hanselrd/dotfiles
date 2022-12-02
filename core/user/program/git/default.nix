@@ -6,9 +6,11 @@
 }: {
   userName = "Hansel De La Cruz";
   userEmail = "18725263+hanselrd@users.noreply.github.com";
-  difftastic = {
+  delta = {
     enable = true;
-    background = "dark";
+    options = {
+      line-numbers = true;
+    };
   };
   extraConfig = {
     safe = {directory = "*";};
