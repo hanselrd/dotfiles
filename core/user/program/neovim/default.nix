@@ -5,12 +5,14 @@
   ...
 }: {
   plugins = with pkgs.vimPlugins; [
-    awesome-vim-colorschemes
     cmp-buffer
     cmp-cmdline
     cmp-nvim-lsp
     cmp-path
     cmp-vsnip
+    lualine-lsp-progress
+    lualine-nvim
+    nvim-base16
     nvim-cmp
     nvim-lspconfig
     nvim-ts-rainbow
@@ -20,13 +22,13 @@
     telescope-fzf-native-nvim
     telescope-nvim
     vim-better-whitespace
-    vim-colorschemes
     vim-commentary
     vim-eunuch
     vim-fugitive
     vim-gitgutter
     vim-sort-motion
     vim-startify
+    vim-vinegar
     vim-vsnip
     (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     # (
@@ -102,13 +104,79 @@
     set nowritebackup
     set noerrorbells
     set noswapfile
-    "set noshowmode
+    set noshowmode
+    set laststatus=2
 
     set background=dark
-    colorscheme wombat256
-    highlight Normal ctermbg=NONE guibg=NONE
+    colorscheme base16-chalk
+    "highlight Normal ctermbg=NONE guibg=NONE
 
     " START PLUGIN CONFIGURATION
+
+    " lualine-nvim
+    lua << EOF
+      require("lualine").setup {
+        options = {
+          icons_enabled = true,
+          theme = "auto",
+          component_separators = { left = "", right = ""},
+          section_separators = { left = "", right = ""},
+          disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+          },
+          ignore_focus = {},
+          always_divide_middle = true,
+          globalstatus = false,
+          refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+          }
+        },
+        sections = {
+          lualine_a = {"mode"},
+          lualine_b = {"branch", "diff", "diagnostics"},
+          lualine_c = {"filename", "lsp_progress"},
+          lualine_x = {"encoding", "fileformat", "filetype"},
+          lualine_y = {"progress"},
+          lualine_z = {"location"}
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {"filename"},
+          lualine_x = {"location"},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        tabline = {
+          lualine_a = {"buffers"},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {"tabs"}
+        },
+        winbar = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {"filename"},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        inactive_winbar = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {"filename"},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        extensions = {}
+      }
+    EOF
 
     " nvim-cmp
     lua << EOF
