@@ -17,6 +17,8 @@
     {
       plugin = prefix-highlight;
       extraConfig = ''
+        set -g @prefix_highlight_fg 'white'
+        set -g @prefix_highlight_bg 'blue,bold'
         set -g @prefix_highlight_copy_prompt 'COPY'
         set -g @prefix_highlight_sync_prompt 'SYNC'
         set -g @prefix_highlight_show_copy_mode 'on'
