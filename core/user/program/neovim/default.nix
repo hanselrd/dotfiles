@@ -42,6 +42,7 @@
   ];
   extraPackages = with pkgs; [
     gopls
+    jdt-language-server
     nodePackages.pyright
     nodePackages.typescript
     nodePackages.typescript-language-server
@@ -212,15 +213,17 @@
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
       local servers = {
-        "clangd",
-        "gopls",
-        "pyright",
-        "rust_analyzer",
-        "tsserver",
+        jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data", vim.fn.expand("~/.cache/jdtls/workspace") } },
+        clangd = {},
+        gopls = {},
+        pyright = {},
+        rust_analyzer = {},
+        tsserver = {},
       }
-      for _, lsp in ipairs(servers) do
+      for lsp, setup in pairs(servers) do
         lspconfig[lsp].setup {
           capabilities = capabilities,
+          cmd = setup["cmd"],
         }
       end
     EOF
