@@ -4,7 +4,5 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [
-    go
-  ];
+  programs.go = lib.core.user.mkProgram "go" {};
 }
