@@ -5,6 +5,12 @@
   ...
 }: {
   home.packages = with pkgs; [
-    python3
+    (python3.withPackages
+      (packages:
+        with packages; [
+          black
+          flake8
+          pylint
+        ]))
   ];
 }
