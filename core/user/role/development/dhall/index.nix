@@ -5,7 +5,9 @@
   ...
 }: {
   home.packages = with pkgs; [
-    maven
-    openjdk
+    dhall
+    dhall-bash
+    dhall-json
+    dhall-nix
   ];
 }

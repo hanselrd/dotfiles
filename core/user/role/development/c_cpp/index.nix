@@ -13,6 +13,7 @@
     gdb
     lldb
     llvm
+    meson
     ninja
   ];
 }

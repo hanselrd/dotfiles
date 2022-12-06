@@ -5,7 +5,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    maven
-    openjdk
+    lua
+    luarocks
   ];
 }

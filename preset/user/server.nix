@@ -5,14 +5,22 @@
   ...
 }: {
   imports = [
-    ../../core/user/role/base/index.nix
+    ../../core/user/role/common/index.nix
     ../../core/user/role/nix/index.nix
     ../../core/user/role/shell/index.nix
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix
-    ../../core/user/role/development/base/index.nix
+    ../../core/user/role/development/common/index.nix
     ../../core/user/role/development/c_cpp/index.nix
+    ../../core/user/role/development/dhall/index.nix
+    ../../core/user/role/development/elixir/index.nix
+    ../../core/user/role/development/go/index.nix
     ../../core/user/role/development/java/index.nix
+    ../../core/user/role/development/lua/index.nix
+    ../../core/user/role/development/nix/index.nix
+    ../../core/user/role/development/python/index.nix
+    ../../core/user/role/development/rust/index.nix
+    ../../core/user/role/development/shell/index.nix
     # ../../core/user/role/scripts/index.nix
   ];
 
@@ -20,53 +28,36 @@
     # android-tools
     # ansible
     # atool
-    # dhall
-    # dhall-bash
-    # dhall-json
-    # dhall-lsp-server
-    # dhall-nix
-    # docker
-    # docker-compose
-    # elixir
     # fd
     # figlet
     # flock
     # fortune
     # git-crypt
     # glfw
-    # go
     # graphviz
     # httpie
     # imagemagick
     # jq
     # lolcat
-    # lua
     # mesa
     # mesa-demos
-    # meson
     # neofetch
-    # nixpkgs-fmt
     # nmap
-    # nodejs
     # objconv
     # openvpn
     # perl
     # postgresql
     # pre-commit
-    # python3
     # ranger
     # restic
     # ripgrep
     # rsync
     # ruby
-    # rustup
     # SDL2
     # SDL2_image
     # SDL2_mixer
     # SDL2_net
     # SDL2_ttf
-    # shellcheck
-    # shfmt
     # sshfs
     # stow
     # strace
@@ -78,7 +69,6 @@
     # zlib
     # zstd
     age
-    alejandra
     htop
     tree
   ];

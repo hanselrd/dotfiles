@@ -47,6 +47,7 @@
     nodePackages.typescript
     nodePackages.typescript-language-server
     rust-analyzer
+    sumneko-lua-language-server
   ];
   viAlias = true;
   vimAlias = true;
@@ -213,11 +214,12 @@
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
       local servers = {
-        jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data", vim.fn.expand("~/.cache/jdtls/workspace") } },
         clangd = {},
         gopls = {},
+        jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data", vim.fn.expand("~/.cache/jdtls/workspace") } },
         pyright = {},
         rust_analyzer = {},
+        sumneko_lua = {},
         tsserver = {},
       }
       for lsp, setup in pairs(servers) do

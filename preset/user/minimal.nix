@@ -4,7 +4,10 @@
   pkgs,
   ...
 }: {
-  imports = [./server.nix];
+  imports = [
+    ./server.nix
+    ../../core/user/role/docker/index.nix
+  ];
 
   home.packages = with pkgs; [
     ffmpeg
