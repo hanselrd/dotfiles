@@ -41,6 +41,7 @@
     # )
   ];
   extraPackages = with pkgs; [
+    # rnix-lsp
     gopls
     jdt-language-server
     nodePackages.pyright
@@ -214,6 +215,7 @@
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
       local servers = {
+        -- rnix = {},
         clangd = {},
         gopls = {},
         jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data", vim.fn.expand("~/.cache/jdtls/workspace") } },
