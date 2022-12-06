@@ -86,7 +86,5 @@
 
   programs.tmux = lib.core.user.mkProgram "tmux" {};
 
-  # programs.zoxide = lib.core.user.mkProgram "zoxide" {};
-
   # services.gpg-agent = lib.core.user.mkService "gpg-agent" {};
 }
