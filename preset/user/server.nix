@@ -71,6 +71,7 @@
     # zstd
     age
     htop
+    lm_sensors
     tree
   ];
 
