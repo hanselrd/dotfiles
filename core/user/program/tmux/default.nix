@@ -26,7 +26,7 @@
         set -g @prefix_highlight_show_sync_mode 'on'
         set -g @prefix_highlight_sync_mode_attr 'fg=white,bg=blue,bold'
 
-        set -g status-right '#{prefix_highlight} %y-%m-%d %R'
+        set -g status-right '#{prefix_highlight} #[fg=black,bold]#H #[fg=default]%y-%m-%d %R'
       '';
     }
     {
