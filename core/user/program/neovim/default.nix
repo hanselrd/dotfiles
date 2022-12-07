@@ -250,7 +250,7 @@
     EOF
 
     " telescope-nvim
-    nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+    nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
     nnoremap <leader>aa <cmd>lua require('telescope.builtin').builtin()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
     nnoremap <leader>fgr <cmd>lua require('telescope.builtin').live_grep()<cr>
