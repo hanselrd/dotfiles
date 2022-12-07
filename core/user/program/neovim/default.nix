@@ -78,7 +78,7 @@
       opt.clipboard = "unnamedplus"
 
       -- Use mouse
-      opt.mouse = "a"
+      --opt.mouse = "a"
 
       -- Nicer UI settings
       --opt.termguicolors = true

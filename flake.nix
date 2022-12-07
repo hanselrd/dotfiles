@@ -72,6 +72,20 @@
         };
       };
     });
+
+    nixosSystemPresets = ["nixos"];
+    darwinSystemPresets = ["macos"];
+    otherSystemPresets = [
+      "linux-systemd"
+      "linux"
+    ];
+    userPresets = [
+      "desktop"
+      "minimal"
+      "server"
+      "work0"
+      "work1"
+    ];
   in {
     overlay = final: prev: {
       inherit lib;
@@ -121,8 +135,10 @@
                 }
               );
             }
-          ) ["desktop" "minimal" "server"]
-      ) ["nixos"]
+          )
+          userPresets
+      )
+      nixosSystemPresets
     );
 
     homeConfigurations = builtins.listToAttrs (
@@ -153,8 +169,10 @@
                 }
               );
             }
-          ) ["desktop" "minimal" "server"]
-      ) ["linux-systemd" "linux"]
+          )
+          userPresets
+      )
+      otherSystemPresets
     );
   };
 }

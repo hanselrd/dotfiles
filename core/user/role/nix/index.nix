@@ -13,7 +13,5 @@
     '';
   };
 
-  home.packages = with pkgs; [
-    nix-index
-  ];
+  programs.nix-index = lib.core.user.mkProgram "nix-index" {};
 }

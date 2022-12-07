@@ -12,6 +12,7 @@
           black
           flake8
           pylint
+          python-magic
         ]))
     poetry
   ];

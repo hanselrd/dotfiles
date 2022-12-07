@@ -15,6 +15,14 @@
       '';
     }
     {
+      plugin = cpu;
+      extraConfig = ''
+        set -g status-justify 'centre'
+        set -g status-left-length '100'
+        set -g status-left '[#S] #[fg=black,bold]#W#F#[default] #{cpu_fg_color}#{cpu_percentage}#[default] #{ram_fg_color}#{ram_percentage}#[default] #{cpu_temp_fg_color}#{cpu_temp}#[default]'
+      '';
+    }
+    {
       plugin = prefix-highlight;
       extraConfig = ''
         set -g @prefix_highlight_fg 'white'
@@ -26,7 +34,8 @@
         set -g @prefix_highlight_show_sync_mode 'on'
         set -g @prefix_highlight_sync_mode_attr 'fg=white,bg=blue,bold'
 
-        set -g status-right '#{prefix_highlight} #[fg=black,bold]#{=22:pane_title} #[fg=default]%y-%m-%d %R'
+        set -g status-right-length '100'
+        set -g status-right '#{prefix_highlight} #[fg=cyan,bold]#U#[default]#[fg=black,bold]@#H#[default] %y-%m-%d %R'
       '';
     }
     {
@@ -48,6 +57,21 @@
           };
         };
       extraConfig = "set -g @colors-base16 'chalk'";
+    }
+    {
+      plugin =
+        mkTmuxPlugin
+        {
+          pluginName = "tmux-current-pane-hostname";
+          rtpFilePath = "current_pane_hostname.tmux";
+          version = "unstable";
+          src = pkgs.fetchFromGitHub {
+            owner = "soyuka";
+            repo = "tmux-current-pane-hostname";
+            rev = "6bb3c95250f8120d8b072f46a807d2678ecbc97c";
+            sha256 = "vmGdHAWpYwo95tJNZlu9M5ZaC0qazTP4vT7tUAZHPfA=";
+          };
+        };
     }
   ];
   prefix = "C-a";
