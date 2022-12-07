@@ -5,6 +5,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    python2
     (python3.withPackages
       (packages:
         with packages; [
