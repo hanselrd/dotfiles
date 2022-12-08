@@ -26,6 +26,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Enable virtualisation
+  virtualisation.docker.enable = true;
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -42,7 +45,7 @@
   users.users.delacruz = {
     isNormalUser = true;
     description = "Hansel De La Cruz";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     initialPassword = "password";
     shell = pkgs.zsh;
     packages = with pkgs; [];

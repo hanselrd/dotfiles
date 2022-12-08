@@ -8,12 +8,14 @@
     format = lib.concatStrings [
       "\${custom.lock}"
       "\${custom.idle}"
+      "$nix_shell"
       "$time"
       "$sudo"
       "$username"
       "$hostname"
       "$directory"
       "$git_branch"
+      "$git_status"
       "$git_commit"
       "$cmd_duration"
       "$line_break"
@@ -38,18 +40,39 @@
       read_only_style = "bold red";
     };
     git_branch = {
-      format = "[$branch(:$remote_branch)]($style)";
+      format = "[$branch]($style)[(:$remote_branch)](bold bright-black)";
     };
     git_commit = {
       format = "[|](bold bright-black)[$hash]($style) ";
       commit_hash_length = 6;
       only_detached = false;
     };
+    git_status = {
+      format = "([\\[$all_status$ahead_behind\\]]($style))";
+      conflicted = "=[$count](bold bright-black)";
+      ahead = "^[$count](bold bright-black)";
+      behind = "v[$count](bold bright-black)";
+      diverged = "@[(+$ahead_count)(-$behind_count)](bold bright-black)";
+      up_to_date = "";
+      untracked = "?[$count](bold bright-black)";
+      stashed = "\\$[$count](bold bright-black)";
+      modified = "![$count](bold bright-black)";
+      staged = "+[$count](bold bright-black)";
+      renamed = ">>[$count](bold bright-black)";
+      deleted = "x[$count](bold bright-black)";
+    };
     hostname = {
-      format = "[@](bold bright-black)[$ssh_symbol](bold green)[$hostname]($style) ";
+      format = "[@](bold bright-black)$ssh_symbol[$hostname]($style) ";
       ssh_only = false;
-      ssh_symbol = "<ssh>";
+      ssh_symbol = "[<ssh>](bold green)";
       style = "bold bright-black";
+    };
+    nix_shell = {
+      format = "[<$symbol]($style)[@](bold bright-black)$state[(:$name)](bold bright-black)[>]($style) ";
+      symbol = "nix";
+      impure_msg = "[impure](bold red)";
+      pure_msg = "[pure](bold green)";
+      style = "bold purple";
     };
     shell = {
       format = "[\\[$indicator\\]]($style) ";

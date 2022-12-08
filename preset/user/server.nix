@@ -10,6 +10,7 @@
     ../../core/user/role/shell/index.nix
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix
+    ../../core/user/role/docker/index.nix
     ../../core/user/role/development/common/index.nix
     ../../core/user/role/development/c_cpp/index.nix
     ../../core/user/role/development/dhall/index.nix
