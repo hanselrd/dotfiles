@@ -14,6 +14,8 @@
   };
   extraConfig = {
     safe = {directory = "*";};
+    grep = {lineNumber = true;};
+    advice = {detachedHead = false;};
     color = {ui = "auto";};
     color."branch" = {
       current = "yellow reverse";

@@ -14,6 +14,7 @@
           pylint
           python-magic
         ]))
+    pipenv
     poetry
   ];
 }

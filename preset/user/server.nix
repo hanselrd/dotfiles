@@ -70,9 +70,11 @@
     # zlib
     # zstd
     age
+    btop
     htop
     lm_sensors
     tree
+    wget
   ];
 
   programs.bat = lib.core.user.mkProgram "bat" {};
