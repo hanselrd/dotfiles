@@ -48,7 +48,7 @@
       only_detached = false;
     };
     git_status = {
-      format = "([\\[$all_status$ahead_behind\\]]($style))";
+      format = "([\\($all_status$ahead_behind\\)]($style))";
       conflicted = "=[$count](bold bright-black)";
       ahead = "^[$count](bold bright-black)";
       behind = "v[$count](bold bright-black)";
@@ -60,6 +60,7 @@
       staged = "+[$count](bold bright-black)";
       renamed = ">>[$count](bold bright-black)";
       deleted = "x[$count](bold bright-black)";
+      style = "bold purple";
     };
     hostname = {
       format = "[@](bold bright-black)$ssh_symbol[$hostname]($style) ";
