@@ -28,6 +28,8 @@
     vim-gitgutter
     vim-sort-motion
     vim-startify
+    vim-textobj-entire
+    vim-textobj-function
     vim-vinegar
     vim-vsnip
     (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
@@ -39,6 +41,17 @@
     #       ]
     #   )
     # )
+    (pkgs.vimUtils.buildVimPluginFrom2Nix
+      {
+        name = "vim-textobj-indent";
+        version = "unstable";
+        src = pkgs.fetchFromGitHub {
+          owner = "kana";
+          repo = "vim-textobj-indent";
+          rev = "deb76867c302f933c8f21753806cbf2d8461b548";
+          sha256 = "oFzUPG+IOkbKZ2gU/kduQ3G/LsLDlEjFhRP0BHBE+1Q=";
+        };
+      })
   ];
   extraPackages = with pkgs; [
     gopls

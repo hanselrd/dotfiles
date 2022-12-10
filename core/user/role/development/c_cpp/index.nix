@@ -8,6 +8,7 @@
     ccache
     clang-tools
     cmake
+    cmake-format
     emscripten
     gcc
     gdb
