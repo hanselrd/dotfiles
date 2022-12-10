@@ -10,6 +10,7 @@
     cmp-nvim-lsp
     cmp-path
     cmp-vsnip
+    git-blame-nvim
     lualine-lsp-progress
     lualine-nvim
     nvim-base16
@@ -129,8 +130,17 @@
 
     " START PLUGIN CONFIGURATION
 
+    " git-blame-nvim
+    lua << EOF
+        vim.g.gitblame_display_virtual_text = 0
+        vim.g.gitblame_message_template = "<sha> <author> <date>"
+        vim.g.gitblame_date_format = "%Y-%m-%dT%T%z"
+        vim.g.gitblame_message_when_not_committed = "Not committed yet"
+    EOF
+
     " lualine-nvim
     lua << EOF
+      local gitblame = require("gitblame")
       require("lualine").setup {
         options = {
           icons_enabled = true,
@@ -153,7 +163,7 @@
         sections = {
           lualine_a = {"mode"},
           lualine_b = {"branch", "diff", "diagnostics"},
-          lualine_c = {"filename", "lsp_progress"},
+          lualine_c = {"filename", "lsp_progress", { gitblame.get_current_blame_text, cond = gitblame.is_blame_text_available } },
           lualine_x = {"encoding", "fileformat", "filetype"},
           lualine_y = {"progress"},
           lualine_z = {"location"}
