@@ -15,6 +15,7 @@
   extraConfig = {
     safe = {directory = "*";};
     grep = {lineNumber = true;};
+    merge = {conflictStyle = "diff3";};
     advice = {detachedHead = false;};
     color = {ui = "auto";};
     color."branch" = {
