@@ -1,0 +1,90 @@
+version: '3'
+
+services:
+  # linux-systemd
+  dotfiles_linux_systemd_desktop: &default
+    build: &default_build
+      context: .
+      args: &default_args
+        PRESET: linux-systemd-desktop
+    image: dotfiles/linux-systemd-desktop
+
+  dotfiles_linux_systemd_minimal:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-systemd-minimal
+    image: dotfiles/linux-systemd-minimal
+
+  dotfiles_linux_systemd_server:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-systemd-server
+    image: dotfiles/linux-systemd-server
+
+  dotfiles_linux_systemd_work0:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-systemd-work0
+    image: dotfiles/linux-systemd-work0
+
+  dotfiles_linux_systemd_work1:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-systemd-work1
+    image: dotfiles/linux-systemd-work1
+
+  # linux
+  dotfiles_linux_desktop: &default
+    build: &default_build
+      context: .
+      args: &default_args
+        PRESET: linux-desktop
+    image: dotfiles/linux-desktop
+
+  dotfiles_linux_minimal:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-minimal
+    image: dotfiles/linux-minimal
+
+  dotfiles_linux_server:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-server
+    image: dotfiles/linux-server
+
+  dotfiles_linux_work0:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-work0
+    image: dotfiles/linux-work0
+
+  dotfiles_linux_work1:
+    <<: *default
+    build:
+      <<: *default_build
+      args:
+        <<: *default_args
+        PRESET: linux-work1
+    image: dotfiles/linux-work1

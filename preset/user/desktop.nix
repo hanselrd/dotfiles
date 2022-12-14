@@ -17,7 +17,7 @@
     jetbrains-mono
     liberation_ttf
     libreoffice-fresh
-    nerd-fonts
+    nerdfonts
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
