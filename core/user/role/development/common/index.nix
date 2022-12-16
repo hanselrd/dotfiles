@@ -11,6 +11,8 @@
 
     libGL
     libGL.dev
+    musl
+    musl.dev
     postgresql
     postgresql.lib
     xorg.libX11
