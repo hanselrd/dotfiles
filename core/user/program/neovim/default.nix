@@ -91,8 +91,8 @@
       -- Set clipboard to use system clipboard
       opt.clipboard = "unnamedplus"
 
-      -- Use mouse
-      --opt.mouse = "a"
+      -- Disable mouse
+      opt.mouse = ""
 
       -- Nicer UI settings
       --opt.termguicolors = true
