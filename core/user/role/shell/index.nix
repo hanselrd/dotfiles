@@ -20,5 +20,6 @@
     lla = "exa -la --octal-permissions";
     ls = "exa";
     lt = "exa --tree";
+    lta = "exa --tree -a";
   };
 }
