@@ -20,8 +20,6 @@
 
   programs.bat = lib.core.user.mkProgram "bat" {};
 
-  programs.exa = lib.core.user.mkProgram "exa" {};
-
   programs.git = lib.core.user.mkProgram "git" {};
 
   programs.ssh = lib.core.user.mkProgram "ssh" {};

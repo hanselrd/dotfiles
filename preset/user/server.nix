@@ -80,8 +80,6 @@
 
   programs.bat = lib.core.user.mkProgram "bat" {};
 
-  programs.exa = lib.core.user.mkProgram "exa" {};
-
   programs.git = lib.core.user.mkProgram "git" {};
 
   # programs.gpg = lib.core.user.mkProgram "gpg" {};
