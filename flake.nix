@@ -22,7 +22,7 @@
     homeage,
   }: let
     system =
-      if !lib.inPureEvalMode
+      if !lib.trivial.inPureEvalMode
       then builtins.currentSystem
       else "x86_64-linux";
 
@@ -37,7 +37,7 @@
           HOME = builtins.getEnv "HOME";
         in rec {
           username =
-            if !lib.inPureEvalMode
+            if !lib.trivial.inPureEvalMode
             then
               (
                 if SUDO_USER != ""
@@ -49,12 +49,12 @@
             else "delacruz";
 
           name =
-            if username == "delacruz"
+            if lib.strings.hasInfix "delacruz" username
             then "Hansel De La Cruz"
             else "";
 
           homeDirectory =
-            if !lib.inPureEvalMode
+            if !lib.trivial.inPureEvalMode
             then
               (
                 if SUDO_USER == "" && HOME != ""

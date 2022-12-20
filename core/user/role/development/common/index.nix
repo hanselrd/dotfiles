@@ -23,6 +23,6 @@
     xorg.libXrandr.dev
     xorg.libXrender.dev
     xorg.libxcb.dev
-    (lib.lowPrio xorg.xorgproto)
+    (lib.meta.lowPrio xorg.xorgproto)
   ];
 }

@@ -5,7 +5,7 @@
   ...
 }: {
   settings = {
-    format = lib.concatStrings [
+    format = lib.strings.concatStrings [
       "\${custom.lock}"
       "\${custom.idle}"
       "$nix_shell"
