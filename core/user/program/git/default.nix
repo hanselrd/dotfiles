@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  userName = "Hansel De La Cruz";
+  userName = config.home.name;
   userEmail = "18725263+hanselrd@users.noreply.github.com";
   delta = {
     enable = true;

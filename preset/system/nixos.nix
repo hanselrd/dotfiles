@@ -42,13 +42,12 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.delacruz = {
+  users.users.${pkgs.config.home.username} = {
     isNormalUser = true;
-    description = "Hansel De La Cruz";
+    description = pkgs.config.home.name;
     extraGroups = ["networkmanager" "wheel" "docker"];
     initialPassword = "password";
     shell = pkgs.zsh;
-    packages = with pkgs; [];
   };
 
   # Allow unfree packages

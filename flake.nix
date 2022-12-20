@@ -48,6 +48,11 @@
               )
             else "delacruz";
 
+          name =
+            if username == "delacruz"
+            then "Hansel De La Cruz"
+            else "";
+
           homeDirectory =
             if !lib.inPureEvalMode
             then
