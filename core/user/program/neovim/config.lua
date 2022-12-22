@@ -14,7 +14,7 @@ vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
 
 -- Use system clipboard
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
 
 -- Disable mouse
 vim.opt.mouse = ""
@@ -222,7 +222,9 @@ require("nvim-treesitter.configs").setup {
 }
 
 -- pears-nvim
-require("pears").setup()
+require("pears").setup(function(config)
+  config.remove_pair_on_outer_backspace(false)
+end)
 
 -- telescope-nvim
 local telescope_builtin = require("telescope.builtin")
