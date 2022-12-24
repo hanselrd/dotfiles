@@ -11,20 +11,9 @@
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix
     ../../core/user/role/docker/index.nix
-    ../../core/user/role/development/common/index.nix
-    ../../core/user/role/development/c_cpp/index.nix
-    ../../core/user/role/development/dhall/index.nix
-    ../../core/user/role/development/elixir/index.nix
-    ../../core/user/role/development/go/index.nix
-    ../../core/user/role/development/java/index.nix
-    ../../core/user/role/development/lua/index.nix
-    ../../core/user/role/development/nix/index.nix
-    ../../core/user/role/development/nodejs/index.nix
-    ../../core/user/role/development/purescript/index.nix
-    ../../core/user/role/development/python/index.nix
-    ../../core/user/role/development/rust/index.nix
-    ../../core/user/role/development/shell/index.nix
+    ../../core/user/role/development/index.nix
     # ../../core/user/role/scripts/index.nix
+    ../../core/user/role/other/index.nix
   ];
 
   home.packages = with pkgs; [
@@ -78,16 +67,4 @@
     tree
     wget
   ];
-
-  programs.bat = lib.core.user.mkProgram "bat" {};
-
-  programs.git = lib.core.user.mkProgram "git" {};
-
-  # programs.gpg = lib.core.user.mkProgram "gpg" {};
-
-  programs.ssh = lib.core.user.mkProgram "ssh" {};
-
-  programs.tmux = lib.core.user.mkProgram "tmux" {};
-
-  # services.gpg-agent = lib.core.user.mkService "gpg-agent" {};
 }

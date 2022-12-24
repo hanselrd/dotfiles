@@ -10,19 +10,11 @@
     ../../core/user/role/shell/index.nix
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix
-    ../../core/user/role/development/common/index.nix
+    ../../core/user/role/other/index.nix
   ];
 
   home.packages = with pkgs; [
     age
     ansible
   ];
-
-  programs.bat = lib.core.user.mkProgram "bat" {};
-
-  programs.git = lib.core.user.mkProgram "git" {};
-
-  programs.ssh = lib.core.user.mkProgram "ssh" {};
-
-  programs.tmux = lib.core.user.mkProgram "tmux" {};
 }

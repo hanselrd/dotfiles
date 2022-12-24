@@ -88,8 +88,7 @@
       "desktop"
       "minimal"
       "server"
-      "work0"
-      "work1"
+      "work"
     ];
   in {
     overlay = final: prev: {

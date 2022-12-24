@@ -27,23 +27,14 @@ services:
         PRESET: linux-systemd-server
     image: dotfiles/linux-systemd-server
 
-  dotfiles_linux_systemd_work0:
+  dotfiles_linux_systemd_work:
     <<: *default
     build:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-systemd-work0
-    image: dotfiles/linux-systemd-work0
-
-  dotfiles_linux_systemd_work1:
-    <<: *default
-    build:
-      <<: *default_build
-      args:
-        <<: *default_args
-        PRESET: linux-systemd-work1
-    image: dotfiles/linux-systemd-work1
+        PRESET: linux-systemd-work
+    image: dotfiles/linux-systemd-work
 
   # linux
   dotfiles_linux_desktop: &default
@@ -71,20 +62,11 @@ services:
         PRESET: linux-server
     image: dotfiles/linux-server
 
-  dotfiles_linux_work0:
+  dotfiles_linux_work:
     <<: *default
     build:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-work0
-    image: dotfiles/linux-work0
-
-  dotfiles_linux_work1:
-    <<: *default
-    build:
-      <<: *default_build
-      args:
-        <<: *default_args
-        PRESET: linux-work1
-    image: dotfiles/linux-work1
+        PRESET: linux-work
+    image: dotfiles/linux-work

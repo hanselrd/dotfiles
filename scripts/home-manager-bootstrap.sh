@@ -7,6 +7,6 @@ fi
 
 NIX_HOME_CONFIGURATION="${1:-linux-server}"
 
-nix build --no-link ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --extra-experimental-features "nix-command flakes"
-NIX_HOME_MANAGER="$(nix path-info ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --extra-experimental-features "nix-command flakes")"/home-path/bin/home-manager
-$NIX_HOME_MANAGER switch --flake ".#$NIX_HOME_CONFIGURATION" -b bak."$(date +"%Y%m%d")" --extra-experimental-features "nix-command flakes"
+nix build --no-link ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --impure --extra-experimental-features "nix-command flakes"
+NIX_HOME_MANAGER="$(nix path-info ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --impure --extra-experimental-features "nix-command flakes")"/home-path/bin/home-manager
+$NIX_HOME_MANAGER switch --flake ".#$NIX_HOME_CONFIGURATION" -b bak."$(date +"%Y%m%d")" --impure --extra-experimental-features "nix-command flakes"
