@@ -27,6 +27,6 @@
     CMAKE_COLOR_DIAGNOSTICS = "ON";
     CMAKE_GENERATOR = "Ninja";
     CMAKE_PREFIX_PATH = "/nix/var/nix/profiles/per-user/${config.home.username}/home-manager/home-path";
-    CPM_SOURCE_CACHE = "${config.home.homeDirectory}/.cache/CPM";
+    CPM_SOURCE_CACHE = "${config.home.homeDirectory}/.cache/cpm";
   };
 }

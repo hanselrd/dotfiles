@@ -20,6 +20,7 @@
     ../../core/user/role/development/lua/index.nix
     ../../core/user/role/development/nix/index.nix
     ../../core/user/role/development/nodejs/index.nix
+    ../../core/user/role/development/purescript/index.nix
     ../../core/user/role/development/python/index.nix
     ../../core/user/role/development/rust/index.nix
     ../../core/user/role/development/shell/index.nix

@@ -188,6 +188,7 @@ local servers = {
   gopls = {},
   jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data",
     vim.fn.expand("~/.cache/jdtls/workspace") } },
+  purescriptls = {},
   pyright = {},
   rnix = {},
   rust_analyzer = {},

@@ -57,6 +57,7 @@
   extraPackages = with pkgs; [
     gopls
     jdt-language-server
+    nodePackages.purescript-language-server
     nodePackages.pyright
     nodePackages.typescript
     nodePackages.typescript-language-server
