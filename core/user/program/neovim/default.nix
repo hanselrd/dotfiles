@@ -27,6 +27,7 @@
     vim-eunuch
     vim-fugitive
     vim-gitgutter
+    vim-polyglot
     vim-sort-motion
     vim-startify
     vim-textobj-entire
