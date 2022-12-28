@@ -185,6 +185,7 @@ end
 local lspconfig = require("lspconfig")
 local servers = {
   clangd = {},
+  emmet_ls = {},
   gopls = {},
   jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data",
     vim.fn.expand("~/.cache/jdtls/workspace") } },

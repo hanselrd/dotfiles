@@ -44,24 +44,27 @@
     #   )
     # )
     (pkgs.vimUtils.buildVimPluginFrom2Nix
-      {
+      rec {
         name = "vim-textobj-indent";
         version = "unstable";
         src = pkgs.fetchFromGitHub {
           owner = "kana";
-          repo = "vim-textobj-indent";
+          repo = name;
           rev = "deb76867c302f933c8f21753806cbf2d8461b548";
-          sha256 = "oFzUPG+IOkbKZ2gU/kduQ3G/LsLDlEjFhRP0BHBE+1Q=";
+          hash = "sha256-oFzUPG+IOkbKZ2gU/kduQ3G/LsLDlEjFhRP0BHBE+1Q=";
         };
       })
   ];
-  extraPackages = with pkgs; [
+  extraPackages = with pkgs; let
+    otherNodePackages = callPackage ./nodePackages {};
+  in [
     gopls
     jdt-language-server
     nodePackages.purescript-language-server
     nodePackages.pyright
     nodePackages.typescript
     nodePackages.typescript-language-server
+    otherNodePackages.emmet-ls
     rnix-lsp
     rust-analyzer
     sumneko-lua-language-server

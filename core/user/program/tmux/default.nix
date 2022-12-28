@@ -45,15 +45,15 @@
     {
       plugin =
         mkTmuxPlugin
-        {
+        rec {
           pluginName = "base16-tmux";
           rtpFilePath = "tmuxcolors.tmux";
           version = "unstable";
           src = pkgs.fetchFromGitHub {
             owner = "tinted-theming";
-            repo = "base16-tmux";
+            repo = pluginName;
             rev = "c3366618c6d746647051b3cd0ded23f3f7c332e1";
-            sha256 = "lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=";
+            hash = "sha256-lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=";
           };
         };
       extraConfig = "set -g @colors-base16 'chalk'";
@@ -61,15 +61,15 @@
     {
       plugin =
         mkTmuxPlugin
-        {
+        rec {
           pluginName = "tmux-current-pane-hostname";
           rtpFilePath = "current_pane_hostname.tmux";
           version = "unstable";
           src = pkgs.fetchFromGitHub {
             owner = "soyuka";
-            repo = "tmux-current-pane-hostname";
+            repo = pluginName;
             rev = "6bb3c95250f8120d8b072f46a807d2678ecbc97c";
-            sha256 = "vmGdHAWpYwo95tJNZlu9M5ZaC0qazTP4vT7tUAZHPfA=";
+            hash = "sha256-vmGdHAWpYwo95tJNZlu9M5ZaC0qazTP4vT7tUAZHPfA=";
           };
         };
     }
