@@ -8,4 +8,8 @@
     nodejs
     nodePackages.ts-node
   ];
+
+  home.sessionVariables = {
+    NEXT_TELEMETRY_DISABLED = 1;
+  };
 }
