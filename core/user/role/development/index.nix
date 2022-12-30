@@ -10,6 +10,7 @@
     ./dhall/index.nix
     ./elixir/index.nix
     ./go/index.nix
+    ./haskell/index.nix
     ./java/index.nix
     ./lua/index.nix
     ./nix/index.nix
