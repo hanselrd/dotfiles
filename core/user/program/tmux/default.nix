@@ -52,8 +52,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "tinted-theming";
             repo = pluginName;
-            rev = "c3366618c6d746647051b3cd0ded23f3f7c332e1";
-            hash = "sha256-lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=";
+            rev = "3312bb2cbb26db7eeb2d2235ae17d4ffaef5e59b";
+            hash = "sha256-HcJwx1tucRP0XKkEIaP831xJCW8wwKvbiksDl9r9zNw=";
           };
         };
       extraConfig = "set -g @colors-base16 'chalk'";
