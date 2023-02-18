@@ -140,7 +140,7 @@ cmp.setup({
     -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-b>"] = cmp.mapping.scroll_docs( -4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.abort(),
@@ -189,19 +189,24 @@ local servers = {
   gopls = {},
   jdtls = { cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data",
     vim.fn.expand("~/.cache/jdtls/workspace") } },
+  lua_ls = {
+    settings = {
+      Lua = {
+        runtime = { version = "LuaJIT" },
+        diagnostics = {
+          globals = { "vim" }
+        },
+        workspace = {
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        telemetry = { enable = false },
+      }
+    }
+  },
   purescriptls = {},
   pyright = {},
   rnix = {},
   rust_analyzer = {},
-  sumneko_lua = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" }
-        }
-      }
-    }
-  },
   tsserver = {},
 }
 for lsp, setup in pairs(servers) do

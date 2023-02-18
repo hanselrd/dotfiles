@@ -60,6 +60,7 @@
   in [
     gopls
     jdt-language-server
+    lua-language-server
     nodePackages.purescript-language-server
     nodePackages.pyright
     nodePackages.typescript
@@ -67,7 +68,6 @@
     otherNodePackages.emmet-ls
     rnix-lsp
     rust-analyzer
-    sumneko-lua-language-server
   ];
   viAlias = true;
   vimAlias = true;
