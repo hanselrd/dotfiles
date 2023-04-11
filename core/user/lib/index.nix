@@ -24,10 +24,7 @@
         inherit (pkgs) config;
       }
     )
-    ({
-        enable = true;
-      }
-      // attrs);
+    ({enable = true;} // attrs);
 
   mkServiceIf = name: cond: attrs:
     lib.modules.mkIf cond (mkService name attrs);

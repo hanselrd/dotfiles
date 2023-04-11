@@ -44,13 +44,20 @@
     xkbVariant = "";
   };
 
+  # Enable shell system-wide
+  programs.zsh.enable = true;
+  environment.shells = with pkgs; [zsh];
+
+  # Change shell system-wide
+  users.defaultUserShell = pkgs.zsh;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${pkgs.config.home.username} = {
     isNormalUser = true;
     description = pkgs.config.home.name;
     extraGroups = ["networkmanager" "wheel" "docker"];
     initialPassword = "password";
-    shell = pkgs.zsh;
+    # shell = pkgs.zsh;
   };
 
   # Allow unfree packages
@@ -62,8 +69,6 @@
     git
     vim
   ];
-
-  environment.shells = with pkgs; [zsh];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
