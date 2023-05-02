@@ -154,15 +154,7 @@
                     user = userPreset;
                   };
                 in {
-                  pkgs =
-                    pkgs
-                    // {
-                      overlays = [
-                        (final: prev: {
-                          inherit lib;
-                        })
-                      ];
-                    };
+                  inherit pkgs lib;
 
                   modules = [
                     homeage.homeManagerModules.homeage
