@@ -15,6 +15,7 @@
     ];
 
   home.sessionVariables = rec {
+    CS_DISABLE_FILE_DOWNLOADS = 1;
     EDITOR = "nvim";
     SUDO_EDITOR = EDITOR;
     VISUAL = EDITOR;

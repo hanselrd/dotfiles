@@ -64,8 +64,6 @@
             else "/home/${username}";
         };
       };
-
-      overlays = [self.overlay];
     };
 
     lib = nixpkgs.lib.extend (self: super: {
@@ -91,10 +89,6 @@
       "work"
     ];
   in {
-    overlay = final: prev: {
-      inherit lib;
-    };
-
     nixosConfigurations = builtins.listToAttrs (
       builtins.concatMap
       (
@@ -115,7 +109,7 @@
                   modules = [
                     {
                       nixpkgs = {
-                        inherit (pkgs) config overlays;
+                        inherit (pkgs) config;
                       };
                     }
                     ./preset/system/${systemPreset}.nix
@@ -134,7 +128,7 @@
                   ];
 
                   specialArgs = {
-                    inherit preset;
+                    inherit lib;
                   };
                 }
               );
