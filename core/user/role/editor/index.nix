@@ -9,6 +9,11 @@
 
   programs.vscode = lib.core.user.mkProgramIf "vscode" (preset.user == "desktop") {};
 
+  home.packages = with pkgs;
+    lib.modules.mkIf (preset.user == "desktop") [
+      code-server
+    ];
+
   home.sessionVariables = rec {
     EDITOR = "nvim";
     SUDO_EDITOR = EDITOR;
