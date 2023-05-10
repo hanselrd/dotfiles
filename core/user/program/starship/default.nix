@@ -87,7 +87,7 @@
     };
     sudo = {
       format = "[$symbol]($style)";
-      symbol = "<sudo>";
+      symbol = "<su>";
       style = "bold red";
       disabled = false;
     };
