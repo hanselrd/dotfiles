@@ -37,7 +37,7 @@
 
       config = {
         allowUnfree = true;
-        colorScheme = nix-colors.colorSchemes.chalk;
+        colorScheme = nix-colors.colorSchemes.gruvbox-dark-hard;
         home = let
           SUDO_USER = builtins.getEnv "SUDO_USER";
           USER = builtins.getEnv "USER";
