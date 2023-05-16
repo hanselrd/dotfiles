@@ -51,8 +51,8 @@ vim.opt.showmode = false
 vim.opt.laststatus = 2
 
 vim.opt.background = "dark"
-vim.cmd [[ colorscheme base16-chalk ]]
-vim.cmd [[ highlight Normal ctermbg=NONE guibg=NONE ]]
+-- vim.cmd [[ colorscheme base16-chalk ]]
+-- vim.cmd [[ highlight Normal ctermbg=NONE guibg=NONE ]]
 
 -- PLUGIN CONFIGURATION
 

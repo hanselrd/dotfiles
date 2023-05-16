@@ -13,7 +13,6 @@
     git-blame-nvim
     lualine-lsp-progress
     lualine-nvim
-    nvim-base16
     nvim-cmp
     nvim-lspconfig
     nvim-ts-rainbow
@@ -34,6 +33,8 @@
     vim-textobj-function
     vim-vinegar
     vim-vsnip
+    # nvim-base16
+    (lib.vendor.nix-colors-contrib.vimThemeFromScheme {scheme = config.colorScheme;})
     (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     # (
     #   nvim-treesitter.withPlugins (
@@ -76,6 +77,7 @@
   extraConfig = ''
     lua << EOF
       ${builtins.readFile ./config.lua}
+      vim.cmd [[ colorscheme nix-${config.colorScheme.slug} ]]
     EOF
   '';
 }

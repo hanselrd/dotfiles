@@ -37,6 +37,7 @@
 
       config = {
         allowUnfree = true;
+        colorScheme = nix-colors.colorSchemes.chalk;
         home = let
           SUDO_USER = builtins.getEnv "SUDO_USER";
           USER = builtins.getEnv "USER";
@@ -73,6 +74,10 @@
     };
 
     lib = nixpkgs.lib.extend (self: super: {
+      vendor = {
+        nix-colors = nix-colors.lib;
+        nix-colors-contrib = nix-colors.lib.contrib {inherit pkgs;};
+      };
       core = {
         user = (import ./core/user/lib/index.nix) {
           inherit pkgs;
@@ -125,7 +130,10 @@
                       home-manager.useUserPackages = true;
                       home-manager.users.${pkgs.config.home.username} = import ./preset/user/${userPreset}.nix;
 
-                      home-manager.sharedModules = [homeage.homeManagerModules.homeage];
+                      home-manager.sharedModules = [
+                        homeage.homeManagerModules.homeage
+                        nix-colors.homeManagerModules.default
+                      ];
 
                       home-manager.extraSpecialArgs = {
                         inherit nix-colors preset;
@@ -164,6 +172,7 @@
 
                   modules = [
                     homeage.homeManagerModules.homeage
+                    nix-colors.homeManagerModules.default
                     ./preset/user/${userPreset}.nix
                   ];
 
