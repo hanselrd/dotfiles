@@ -7,6 +7,7 @@
   imports = [
     ../../core/user/role/common/index.nix
     ../../core/user/role/nix/index.nix
+    ../../core/user/role/theme/index.nix
     ../../core/user/role/shell/index.nix
     ../../core/user/role/editor/index.nix
     ../../core/user/role/pager/index.nix

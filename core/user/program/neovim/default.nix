@@ -33,8 +33,14 @@
     vim-textobj-function
     vim-vinegar
     vim-vsnip
-    # nvim-base16
-    (lib.vendor.nix-colors-contrib.vimThemeFromScheme {scheme = config.colorScheme;})
+    {
+      plugin = lib.vendor.nix-colors-contrib.vimThemeFromScheme {scheme = config.colorScheme;};
+      config = ''
+        lua << EOF
+          vim.cmd [[ colorscheme nix-${config.colorScheme.slug} ]]
+        EOF
+      '';
+    }
     (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     # (
     #   nvim-treesitter.withPlugins (
@@ -77,7 +83,6 @@
   extraConfig = ''
     lua << EOF
       ${builtins.readFile ./config.lua}
-      vim.cmd [[ colorscheme nix-${config.colorScheme.slug} ]]
     EOF
   '';
 }

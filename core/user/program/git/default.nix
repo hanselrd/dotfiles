@@ -9,7 +9,10 @@
   delta = {
     enable = true;
     options = {
+      syntax-theme = "nix-${config.colorScheme.slug}";
       line-numbers = true;
+      plus-style = "green bold ul";
+      minus-style = "red bold ul";
     };
   };
   extraConfig = {

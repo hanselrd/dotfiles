@@ -37,8 +37,8 @@
 
       config = {
         allowUnfree = true;
-        colorScheme = nix-colors.colorSchemes.chalk;
-        # colorScheme = (import ./core/user/theme/matrix.nix).colorScheme;
+        # colorScheme = nix-colors.colorSchemes.chalk;
+        colorScheme = (import ./core/user/theme/grayscale.nix).colorScheme;
         home = let
           SUDO_USER = builtins.getEnv "SUDO_USER";
           USER = builtins.getEnv "USER";
@@ -78,6 +78,11 @@
       vendor = {
         nix-colors = nix-colors.lib;
         nix-colors-contrib = nix-colors.lib.contrib {inherit pkgs;};
+        nix-colors-custom = (import ./core/vendor/lib/nix-colors-custom.nix) {
+          inherit pkgs;
+
+          lib = self;
+        };
       };
       core = {
         user = (import ./core/user/lib/index.nix) {

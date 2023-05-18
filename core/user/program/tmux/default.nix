@@ -61,52 +61,9 @@
           };
         };
     }
-    # {
-    #   plugin =
-    #     mkTmuxPlugin
-    #     rec {
-    #       pluginName = "base16-tmux";
-    #       rtpFilePath = "tmuxcolors.tmux";
-    #       version = "unstable";
-    #       src = pkgs.fetchFromGitHub {
-    #         owner = "tinted-theming";
-    #         repo = pluginName;
-    #         rev = "3312bb2cbb26db7eeb2d2235ae17d4ffaef5e59b";
-    #         hash = "sha256-HcJwx1tucRP0XKkEIaP831xJCW8wwKvbiksDl9r9zNw=";
-    #       };
-    #     };
-    #   extraConfig = "set -g @colors-base16 'chalk'";
-    # }
   ];
-  extraConfig = with config.colorScheme.colors; ''
-    # default statusbar colors
-    set-option -g status-style "fg=#${base04},bg=#${base01}"
-
-    # default window title colors
-    set-window-option -g window-status-style "fg=#${base04},bg=default"
-
-    # active window title colors
-    set-window-option -g window-status-current-style "fg=#${base0A},bg=default"
-
-    # pane border
-    set-option -g pane-border-style "fg=#${base01}"
-    set-option -g pane-active-border-style "fg=#${base02}"
-
-    # message text
-    set-option -g message-style "fg=#${base05},bg=#${base01}"
-
-    # pane number display
-    set-option -g display-panes-active-colour "#${base0B}"
-    set-option -g display-panes-colour "#${base0A}"
-
-    # clock
-    set-window-option -g clock-mode-colour "#${base0B}"
-
-    # copy mode highligh
-    set-window-option -g mode-style "fg=#${base04},bg=#${base02}"
-
-    # bell
-    set-window-option -g window-status-bell-style "fg=#${base01},bg=#${base08}"
+  extraConfig = ''
+    ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = config.colorScheme;})}
   '';
   prefix = "C-a";
   tmuxp.enable = true;
