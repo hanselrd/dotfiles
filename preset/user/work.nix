@@ -15,7 +15,8 @@
   ];
 
   home.packages = with pkgs; [
+    # ansible
     age
-    ansible
+    cpio
   ];
 }

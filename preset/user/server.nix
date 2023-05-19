@@ -63,6 +63,7 @@
     # zstd
     age
     btop
+    cpio
     htop
     lm_sensors
     tree
