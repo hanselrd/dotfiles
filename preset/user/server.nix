@@ -18,6 +18,11 @@
   ];
 
   home.packages = with pkgs; [
+    # SDL2
+    # SDL2_image
+    # SDL2_mixer
+    # SDL2_net
+    # SDL2_ttf
     # android-tools
     # ansible
     # atool
@@ -46,11 +51,6 @@
     # ripgrep
     # rsync
     # ruby
-    # SDL2
-    # SDL2_image
-    # SDL2_mixer
-    # SDL2_net
-    # SDL2_ttf
     # sshfs
     # stow
     # strace
@@ -65,6 +65,7 @@
     btop
     cpio
     htop
+    hyperfine
     lm_sensors
     tree
     wget

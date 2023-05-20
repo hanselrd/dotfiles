@@ -93,7 +93,7 @@
     };
     time = {
       format = "[{$time}]($style) ";
-      time_format = "%y-%m-%d %R";
+      time_format = "%y-%-m-%-d %-H:%M";
       disabled = false;
     };
     username = {

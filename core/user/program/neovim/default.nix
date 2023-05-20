@@ -31,7 +31,6 @@
     vim-startify
     vim-textobj-entire
     vim-textobj-function
-    vim-vinegar
     vim-vsnip
     {
       plugin = lib.vendor.nix-colors-contrib.vimThemeFromScheme {scheme = config.colorScheme;};
@@ -50,6 +49,17 @@
     #       ]
     #   )
     # )
+    (pkgs.vimUtils.buildVimPluginFrom2Nix
+      rec {
+        name = "oil.nvim";
+        version = "unstable";
+        src = pkgs.fetchFromGitHub {
+          owner = "stevearc";
+          repo = name;
+          rev = "19563c365800ab519e46a08a0aa59d5677b329b6";
+          hash = "sha256-FMrnmo8gIgh3J1iRc2KrQnoAvT72B7sII2gvAlrz6Qs=";
+        };
+      })
     (pkgs.vimUtils.buildVimPluginFrom2Nix
       rec {
         name = "vim-textobj-indent";
