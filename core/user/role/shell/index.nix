@@ -17,4 +17,8 @@
     cd4 = "cd ../../../..";
     cd5 = "cd ../../../../..";
   };
+
+  # home.sessionVariables = {
+  #   LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
+  # };
 }
