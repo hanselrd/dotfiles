@@ -7,10 +7,10 @@
 }: {
   programs.neovim = lib.core.user.mkProgram "neovim" {};
 
-  programs.vscode = lib.core.user.mkProgramIf "vscode" (preset.user == "desktop") {};
+  programs.vscode = lib.core.user.mkProgramIf "vscode" (preset.user == "full") {};
 
   home.packages = with pkgs;
-    lib.modules.mkIf (preset.user == "desktop") [
+    lib.modules.mkIf (preset.user == "full") [
       code-server
     ];
 

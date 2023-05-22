@@ -100,10 +100,10 @@
       "linux"
     ];
     userPresets = [
-      "desktop"
+      "full"
       "minimal"
-      "server"
-      "work"
+      "standard"
+      "base"
     ];
   in {
     nixosConfigurations = builtins.listToAttrs (

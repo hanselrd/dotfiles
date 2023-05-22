@@ -3,7 +3,7 @@ FROM redhat/ubi8
 ARG USER=docker
 ARG UID=1000
 ARG GID=1000
-ARG PRESET=linux-server
+ARG PRESET=linux-standard
 
 ENV USER=${USER}
 

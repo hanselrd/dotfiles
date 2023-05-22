@@ -5,16 +5,10 @@
   ...
 }: {
   imports = [
-    ../../core/user/role/common/index.nix
-    ../../core/user/role/nix/index.nix
-    ../../core/user/role/theme/index.nix
-    ../../core/user/role/shell/index.nix
-    ../../core/user/role/editor/index.nix
-    ../../core/user/role/pager/index.nix
+    ./base.nix
     ../../core/user/role/docker/index.nix
     ../../core/user/role/development/index.nix
     # ../../core/user/role/scripts/index.nix
-    ../../core/user/role/other/index.nix
   ];
 
   home.packages = with pkgs; [
@@ -61,13 +55,7 @@
     # youtube-dl
     # zlib
     # zstd
-    age
     btop
-    cpio
-    htop
-    hyperfine
     lm_sensors
-    tree
-    wget
   ];
 }

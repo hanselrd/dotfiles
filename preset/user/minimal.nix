@@ -4,7 +4,9 @@
   pkgs,
   ...
 }: {
-  imports = [./server.nix];
+  imports = [
+    ./standard.nix
+  ];
 
   home.packages = with pkgs; [
     ffmpeg

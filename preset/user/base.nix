@@ -15,8 +15,11 @@
   ];
 
   home.packages = with pkgs; [
-    # ansible
     age
     cpio
+    htop
+    hyperfine
+    tree
+    wget
   ];
 }

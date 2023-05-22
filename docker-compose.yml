@@ -2,12 +2,12 @@ version: '3'
 
 services:
   # linux-systemd
-  dotfiles_linux_systemd_desktop: &default
+  dotfiles_linux_systemd_full: &default
     build: &default_build
       context: .
       args: &default_args
-        PRESET: linux-systemd-desktop
-    image: dotfiles/linux-systemd-desktop
+        PRESET: linux-systemd-full
+    image: dotfiles/linux-systemd-full
 
   dotfiles_linux_systemd_minimal:
     <<: *default
@@ -18,31 +18,31 @@ services:
         PRESET: linux-systemd-minimal
     image: dotfiles/linux-systemd-minimal
 
-  dotfiles_linux_systemd_server:
+  dotfiles_linux_systemd_standard:
     <<: *default
     build:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-systemd-server
-    image: dotfiles/linux-systemd-server
+        PRESET: linux-systemd-standard
+    image: dotfiles/linux-systemd-standard
 
-  dotfiles_linux_systemd_work:
+  dotfiles_linux_systemd_base:
     <<: *default
     build:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-systemd-work
-    image: dotfiles/linux-systemd-work
+        PRESET: linux-systemd-base
+    image: dotfiles/linux-systemd-base
 
   # linux
-  dotfiles_linux_desktop: &default
+  dotfiles_linux_full: &default
     build: &default_build
       context: .
       args: &default_args
-        PRESET: linux-desktop
-    image: dotfiles/linux-desktop
+        PRESET: linux-full
+    image: dotfiles/linux-full
 
   dotfiles_linux_minimal:
     <<: *default
@@ -53,20 +53,20 @@ services:
         PRESET: linux-minimal
     image: dotfiles/linux-minimal
 
-  dotfiles_linux_server:
+  dotfiles_linux_standard:
     <<: *default
     build:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-server
-    image: dotfiles/linux-server
+        PRESET: linux-standard
+    image: dotfiles/linux-standard
 
-  dotfiles_linux_work:
+  dotfiles_linux_base:
     <<: *default
     build:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-work
-    image: dotfiles/linux-work
+        PRESET: linux-base
+    image: dotfiles/linux-base
