@@ -19,4 +19,6 @@
   programs.tmux = lib.core.user.mkProgram "tmux" {};
 
   # services.gpg-agent = lib.core.user.mkService "gpg-agent" {};
+
+  # home.packages = with pkgs; [];
 }

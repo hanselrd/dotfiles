@@ -16,6 +16,9 @@
     cd3 = "cd ../../..";
     cd4 = "cd ../../../..";
     cd5 = "cd ../../../../..";
+    rcd = "rsync -avzP";
+    rmv = "rsync -avzP --remove-source-files";
+    vi = "vim -u NONE -U NONE -N -i NONE";
   };
 
   # home.sessionVariables = {

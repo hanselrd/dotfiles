@@ -1,3 +1,2 @@
-keys/*
-!keys/*.pub
-*.age
+**/secrets/*
+!**/secrets/*.age
