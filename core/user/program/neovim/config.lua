@@ -63,7 +63,7 @@ vim.g.gitblame_message_when_not_committed = "Not committed yet"
 
 -- lualine-nvim
 local gitblame = require("gitblame")
-require("lualine").setup {
+require("lualine").setup({
   options = {
     icons_enabled = true,
     theme = "auto",
@@ -124,7 +124,7 @@ require("lualine").setup {
     lualine_z = {}
   },
   extensions = {}
-}
+})
 
 -- nvim-cmp
 local cmp = require("cmp")
@@ -211,23 +211,26 @@ local servers = {
   tsserver = {},
 }
 for lsp, setup in pairs(servers) do
-  lspconfig[lsp].setup {
+  lspconfig[lsp].setup({
     capabilities = capabilities,
     on_attach = on_attach,
     cmd = setup["cmd"],
     settings = setup["settings"],
-  }
+  })
 end
 
+-- nvim-surround
+require("nvim-surround").setup()
+
 -- nvim-treesitter
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
   -- highlight = {
   --   enable = true,
   -- },
   rainbow = {
     enable = true,
   }
-}
+})
 
 -- oil.nvim
 local oil = require("oil")
@@ -253,11 +256,14 @@ vim.keymap.set("n", "<leader>fhs", telescope_builtin.search_history, {})
 vim.keymap.set("n", "<leader>fC", telescope_builtin.git_commits, {})
 vim.keymap.set("n", "<leader>fc", telescope_builtin.git_bcommits, {})
 vim.keymap.set("n", "<leader>ftt", telescope_builtin.filetypes, {})
-require("telescope").setup {
+require("telescope").setup({
   pickers = {
     find_files = { hidden = true }
   }
-}
+})
+
+-- treesj
+require("treesj").setup()
 
 -- vim-commentary
 vim.cmd [[ autocmd FileType nix setlocal commentstring=#\ %s ]]

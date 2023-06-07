@@ -15,12 +15,15 @@
     lualine-nvim
     nvim-cmp
     nvim-lspconfig
+    nvim-surround
+    nvim-treesitter-textobjects
     nvim-ts-rainbow
     nvim-web-devicons
     pears-nvim
     plenary-nvim
     telescope-fzf-native-nvim
     telescope-nvim
+    treesj
     vim-better-whitespace
     vim-commentary
     vim-eunuch

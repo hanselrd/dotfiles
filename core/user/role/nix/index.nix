@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = pkgs.config.allowUnfree;
 
   xdg.configFile = {
     "nix/nix.conf".text = ''
