@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: {
   programs.bash = lib.core.user.mkProgram "bash" {};
@@ -21,7 +22,7 @@
     vi = "vim -u NONE -U NONE -N -i NONE";
   };
 
-  # home.sessionVariables = {
-  #   LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
-  # };
+  home.sessionVariables = lib.modules.mkIf env.shellLdPreload {
+    LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
+  };
 }

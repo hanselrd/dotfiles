@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  env,
   ...
 }: rec {
   mkProgram = name: attrs:
@@ -9,6 +10,7 @@
       (import ../program/${name}/default.nix) {
         inherit pkgs lib;
         inherit (pkgs) config;
+        inherit env;
       }
     )
     ({enable = true;} // attrs);
@@ -22,6 +24,7 @@
       (import ../service/${name}/default.nix) {
         inherit pkgs lib;
         inherit (pkgs) config;
+        inherit env;
       }
     )
     ({enable = true;} // attrs);

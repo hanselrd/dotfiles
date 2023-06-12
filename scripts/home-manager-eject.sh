@@ -20,7 +20,7 @@ HME_PACKAGE=$(nix path-info ".#homeConfigurations.$HME_HOME_CONFIGURATION.activa
 nix-store -qR "$HME_PACKAGE" | xargs -L1 basename > "$HME_DEP_FILE.1"
 HME_PACKAGE_2=$(readlink -f "$HOME/.nix-profile")
 nix-store -qR "$HME_PACKAGE_2" | xargs -L1 basename > "$HME_DEP_FILE.2"
-cat $HME_DEP_FILE.* | sort | uniq > "$HME_DEP_FILE"
+cat "$HME_DEP_FILE".* | sort | uniq > "$HME_DEP_FILE"
 find /nix/store -depth -print | grep -Ff "$HME_DEP_FILE" | cpio -ov > "$HME_CPIO_FILE"
 sed -i "s@/nix/store@$HME_STORE_DIR@g" "$HME_CPIO_FILE"
 mkdir -p "$HME_STORE_DIR"

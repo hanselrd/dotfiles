@@ -27,6 +27,8 @@
     homeage,
     nix-colors,
   }: let
+    env = import ./environment.nix;
+
     system =
       if !lib.trivial.inPureEvalMode
       then builtins.currentSystem
@@ -86,7 +88,7 @@
       };
       core = {
         user = (import ./core/user/lib/index.nix) {
-          inherit pkgs;
+          inherit pkgs env;
 
           lib = self;
         };
@@ -142,7 +144,7 @@
                       ];
 
                       home-manager.extraSpecialArgs = {
-                        inherit nix-colors preset;
+                        inherit nix-colors env preset;
                       };
                     }
                   ];
@@ -183,7 +185,7 @@
                   ];
 
                   extraSpecialArgs = {
-                    inherit nix-colors preset;
+                    inherit nix-colors env preset;
                   };
                 }
               );

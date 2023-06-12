@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: {
   defaultKeymap = "emacs";
@@ -12,11 +13,23 @@
     expireDuplicatesFirst = true;
   };
   initExtra = ''
-    # sh ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
+    ${
+      if env.shellTheme
+      then ''
+        sh ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
+      ''
+      else ""
+    }
 
-    if [ -e ${config.home.homeDirectory}/.secrets/rts.sh ]; then
-      . ${config.home.homeDirectory}/.secrets/rts.sh
-    fi
+    ${
+      if env.homeageSecrets
+      then ''
+        if [ -e ${config.home.homeDirectory}/.secrets/rts.sh ]; then
+          . ${config.home.homeDirectory}/.secrets/rts.sh
+        fi
+      ''
+      else ""
+    }
   '';
   profileExtra = ''
     if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
