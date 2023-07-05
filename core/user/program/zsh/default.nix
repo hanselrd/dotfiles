@@ -8,7 +8,18 @@
   defaultKeymap = "emacs";
   enableAutosuggestions = true;
   enableCompletion = false;
-  enableSyntaxHighlighting = true;
+  syntaxHighlighting = {
+    enable = true;
+    # styles = {
+    #   "main" = "";
+    #   "brackets" = "";
+    #   "pattern" = "";
+    #   "regexp" = "";
+    #   "cursor" = "";
+    #   "root" = "";
+    #   "line" = "";
+    # };
+  };
   history = {
     expireDuplicatesFirst = true;
   };
