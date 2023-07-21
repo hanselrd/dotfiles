@@ -107,7 +107,7 @@
     result in civil and/or criminal penalties. All activities performed on this
     device are logged and monitored.
 
-    ${preset.system}-${preset.user}: rev: ${self.shortRev or "dirty"} @ ${lib.core.currentTimeUtcPretty} by ${pkgs.config.home.username}
+    ${preset.system}-${preset.user}: rev: ${self.shortRev or "dirty"} branch: ${self.ref or "HEAD"} @ ${lib.core.currentTimeUtcPretty} by ${pkgs.config.home.username}
 
     Host:    ${networking.hostName}
     OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})
