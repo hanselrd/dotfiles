@@ -17,8 +17,8 @@
     cd3 = "cd ../../..";
     cd4 = "cd ../../../..";
     cd5 = "cd ../../../../..";
-    rcd = "rsync -avzP";
-    rmv = "rsync -avzP --remove-source-files";
+    rcd = "rsync -CcavzP";
+    rmv = "rsync -CcavzP --remove-source-files";
     vi = "vim -u NONE -U NONE -N -i NONE";
   };
 

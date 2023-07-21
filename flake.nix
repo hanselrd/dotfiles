@@ -26,7 +26,7 @@
     home-manager,
     homeage,
     nix-colors,
-  }: let
+  } @ inputs: let
     env = import ./environment.nix;
 
     system =
@@ -39,8 +39,8 @@
 
       config = {
         allowUnfree = true;
-        # colorScheme = nix-colors.colorSchemes.chalk;
-        colorScheme = (import ./core/user/theme/grayscale.nix).colorScheme;
+        colorScheme = nix-colors.colorSchemes.chalk;
+        # colorScheme = (import ./core/user/theme/grayscale.nix).colorScheme;
         home = let
           SUDO_USER = builtins.getEnv "SUDO_USER";
           USER = builtins.getEnv "USER";
@@ -92,6 +92,20 @@
 
           lib = self;
         };
+        currentTimeUtcPretty = builtins.replaceStrings ["\n"] [""] (
+          builtins.readFile (
+            pkgs.runCommand "current-time-utc-pretty" {
+              currentTime = builtins.currentTime;
+            } "date --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out"
+          )
+        );
+        currentTimePretty = builtins.replaceStrings ["\n"] [""] (
+          builtins.readFile (
+            pkgs.runCommand "current-time-pretty" {
+              currentTime = builtins.currentTime;
+            } "date \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
+          )
+        );
       };
     });
 
@@ -143,15 +157,19 @@
                         nix-colors.homeManagerModules.default
                       ];
 
-                      home-manager.extraSpecialArgs = {
-                        inherit nix-colors env preset;
-                      };
+                      home-manager.extraSpecialArgs =
+                        inputs
+                        // {
+                          inherit env preset;
+                        };
                     }
                   ];
 
-                  specialArgs = {
-                    inherit nix-colors lib;
-                  };
+                  specialArgs =
+                    inputs
+                    // {
+                      inherit lib preset;
+                    };
                 }
               );
             }
@@ -184,9 +202,11 @@
                     ./preset/user/${userPreset}.nix
                   ];
 
-                  extraSpecialArgs = {
-                    inherit nix-colors env preset;
-                  };
+                  extraSpecialArgs =
+                    inputs
+                    // {
+                      inherit env preset;
+                    };
                 }
               );
             }

@@ -11,13 +11,14 @@
   ];
 
   home.packages = with pkgs; [
+    # jetbrains-mono
+    # nerdfonts
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
     arandr
     dbeaver
     flameshot
-    jetbrains-mono
     liberation_ttf
     libreoffice-fresh
-    nerdfonts
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif

@@ -5,9 +5,9 @@
   ...
 }: {
   settings = {
-    env = {
-      WINIT_X11_SCALE_FACTOR = 1;
-    };
+    # env = {
+    #   WINIT_X11_SCALE_FACTOR = 1;
+    # };
     window = {
       padding = {
         x = 15;

@@ -2,14 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  self,
   config,
+  lib,
   pkgs,
+  preset,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
   ];
+
+  # Set configuration revision
+  system.configurationRevision = self.rev or "dirty";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -38,6 +44,30 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  # # Enable the X11 windowing system.
+  # services.xserver.enable = true;
+
+  # # Enable the KDE Plasma Desktop Environment.
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+
+  # # Enable RDP
+  # services.xrdp.enable = true;
+  # services.xrdp.defaultWindowManager = "startplasma-x11";
+  # services.xrdp.openFirewall = true;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -59,6 +89,32 @@
     initialPassword = "password";
     # shell = pkgs.zsh;
   };
+
+  # Change MOTD
+  users.motd = with config; ''
+
+    888                                          888              888
+    888-~88e   /~~~8e  888-~88e  d88~\  e88~~8e  888 888-~\  e88~\888
+    888  888       88b 888  888 C888   d888  88b 888 888    d888  888
+    888  888  e88~-888 888  888  Y88b  8888__888 888 888    8888  888
+    888  888 C888  888 888  888   888D Y888    , 888 888    Y888  888
+    888  888  "88_-888 888  888 \_88P   "88___/  888 888     "88_/888
+
+             UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+
+    You must have explicit, authorized permission to access or configure this
+    device. Unauthorized attempts and actions to access or use this system may
+    result in civil and/or criminal penalties. All activities performed on this
+    device are logged and monitored.
+
+    ${preset.system}-${preset.user}: rev: ${self.shortRev or "dirty"} branch: ${self.ref or "???"} @ ${lib.core.currentTimeUtcPretty} by ${pkgs.config.home.username}
+
+    Host:    ${networking.hostName}
+    OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})
+    Version: ${system.nixos.version}
+    Kernel:  ${boot.kernelPackages.kernel.version}
+
+  '';
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
