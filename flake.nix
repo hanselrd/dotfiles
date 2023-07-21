@@ -20,13 +20,13 @@
     };
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
     home-manager,
     homeage,
     nix-colors,
-  } @ inputs: let
+  }: let
     env = import ./environment.nix;
 
     system =
