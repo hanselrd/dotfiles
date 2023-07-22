@@ -20,6 +20,7 @@
       "$cmd_duration"
       "$line_break"
       "$shell"
+      "$shlvl"
       "$status"
       "$character"
     ];
@@ -77,8 +78,14 @@
       style = "bold purple";
     };
     shell = {
-      format = "[\\[$indicator\\]]($style) ";
+      format = "[$indicator]($style)";
       style = "bold bright-black";
+      disabled = false;
+    };
+    shlvl = {
+      format = "[|](bold bright-black)[$shlvl]($style) ";
+      threshold = 1;
+      style = "bold yellow";
       disabled = false;
     };
     status = {
