@@ -1,17 +1,19 @@
 {
+  nixpkgs,
   config,
   lib,
   pkgs,
   env,
   ...
 }: {
+  nix.registry.nixpkgs.flake = nixpkgs;
+
   nixpkgs.config.allowUnfree = pkgs.config.allowUnfree;
 
-  xdg.configFile = {
-    "nix/nix.conf".text = ''
-      experimental-features = nix-command flakes
-      sandbox = ${lib.trivial.boolToString env.nixSandbox}
-    '';
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    sandbox = env.nixSandbox;
+    show-trace = true;
   };
 
   programs.nix-index = lib.core.user.mkProgram "nix-index" {};
