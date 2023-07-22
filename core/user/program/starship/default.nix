@@ -67,7 +67,7 @@
     hostname = {
       format = "[@](bold bright-black)$ssh_symbol[$hostname]($style) ";
       ssh_only = false;
-      ssh_symbol = "[<ssh>](bold red)";
+      ssh_symbol = "[<ssh>](bold green)";
       style = "bold bright-black";
     };
     nix_shell = {
@@ -96,7 +96,7 @@
       format = "[$symbol]($style)";
       symbol = "<su>";
       style = "bold red";
-      disabled = false;
+      # disabled = false;
     };
     time = {
       format = "[{$time}]($style) ";
