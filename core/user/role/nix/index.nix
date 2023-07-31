@@ -10,6 +10,8 @@
 
   nixpkgs.config.allowUnfree = pkgs.config.allowUnfree;
 
+  nix.package = lib.modules.mkDefault pkgs.nix;
+
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
     sandbox = env.nixSandbox;
