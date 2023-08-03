@@ -144,8 +144,14 @@
     };
   };
 
+  # Enable Cockpit
+  services.cockpit = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [5000];
+  networking.firewall.allowedTCPPorts = [5000 9443];
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 3000;
