@@ -152,7 +152,7 @@
       to = 3100;
     }
   ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [51820];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
