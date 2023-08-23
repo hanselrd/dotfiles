@@ -6,6 +6,6 @@
 }: {
   home.packages = with pkgs; [
     purescript
-    spago
+    # spago
   ];
 }
