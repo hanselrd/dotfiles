@@ -204,6 +204,7 @@ local servers = {
       }
     }
   },
+  nickel_ls = {},
   purescriptls = {},
   pyright = {},
   rnix = {},

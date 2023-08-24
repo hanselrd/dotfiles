@@ -13,6 +13,7 @@
     ./haskell/index.nix
     ./java/index.nix
     ./lua/index.nix
+    ./nickel/index.nix
     ./nix/index.nix
     ./nodejs/index.nix
     ./purescript/index.nix

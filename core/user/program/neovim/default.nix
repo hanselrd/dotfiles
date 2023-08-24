@@ -29,6 +29,7 @@
     vim-eunuch
     vim-fugitive
     vim-gitgutter
+    vim-nickel
     vim-polyglot
     vim-sort-motion
     vim-startify
@@ -81,6 +82,7 @@
     gopls
     jdt-language-server
     lua-language-server
+    nls
     nodePackages.purescript-language-server
     nodePackages.pyright
     nodePackages.typescript
