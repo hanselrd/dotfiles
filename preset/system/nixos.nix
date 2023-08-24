@@ -90,6 +90,9 @@
     # shell = pkgs.zsh;
   };
 
+  # Set trusted users
+  nix.settings.trusted-users = ["root" "@wheel"];
+
   # Change MOTD
   users.motd = with config; ''
 
