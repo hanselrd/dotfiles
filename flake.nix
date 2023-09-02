@@ -14,10 +14,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nickel-nix = {
+      url = "github:nickel-lang/nickel-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-colors = {
       url = "github:misterio77/nix-colors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+  };
+
+  nixConfig = {
+    extra-substituters = ["https://nickel-nix.cachix.org"];
+    extra-trusted-public-keys = ["nickel-nix.cachix.org-1:/Ziozgt3g0CfGwGS795wyjRa9ArE89s3tbz31S6xxFM="];
   };
 
   outputs = inputs @ {
@@ -25,6 +35,7 @@
     nixpkgs,
     home-manager,
     homeage,
+    nickel-nix,
     nix-colors,
   }: let
     env = import ./environment.nix;
@@ -78,6 +89,7 @@
 
     lib = nixpkgs.lib.extend (self: super: {
       vendor = {
+        nickel-nix = nickel-nix.lib.${system};
         nix-colors = nix-colors.lib;
         nix-colors-contrib = nix-colors.lib.contrib {inherit pkgs;};
         nix-colors-custom = (import ./core/vendor/lib/nix-colors-custom.nix) {
