@@ -39,7 +39,7 @@
         set -g @prefix_highlight_sync_mode_attr 'fg=white,bg=blue,bold'
 
         set -g status-right-length '100'
-        set -g status-right '#{prefix_highlight} #[fg=cyan,bold]#U#[default]#[fg=black,bold]@#[default]#[fg=green,bold]#{?#{pane_ssh_connected},<ssh>,}#[default]#[fg=black,bold]#H#[default] %y-%m-%d %R'
+        set -g status-right '#{prefix_highlight} #[fg=cyan,bold]#U#[default]#[fg=black,bold]@#[default]#[fg=green,bold]#{?#{pane_ssh_connected},<ssh>,}#[default]#[fg=black,bold]#H#[default] %y-%-m-%-d %-H:%M'
       '';
     }
     {
