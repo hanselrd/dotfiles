@@ -2,10 +2,11 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: {
-  userName = config.home.name;
-  userEmail = "18725263+hanselrd@users.noreply.github.com";
+  userName = env.user.name;
+  userEmail = env.user.email;
   delta = {
     enable = true;
     options = {

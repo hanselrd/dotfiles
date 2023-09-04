@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  env,
   preset,
   ...
 }: {
@@ -84,7 +85,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${pkgs.config.home.username} = {
     isNormalUser = true;
-    description = pkgs.config.home.name;
+    description = env.user.name;
     extraGroups = ["networkmanager" "wheel" "docker"];
     initialPassword = "password";
     # shell = pkgs.zsh;
@@ -110,12 +111,14 @@
     result in civil and/or criminal penalties. All activities performed on this
     device are logged and monitored.
 
-    ${preset.system}-${preset.user}: rev: ${self.shortRev or "dirty"} @ ${lib.core.currentTimeUtcPretty} by ${pkgs.config.home.username}
+    ${preset.system}-${preset.user}: rev: ${self.shortRev or "dirty"} @ ${lib.core.common.currentTimeUtcPretty} by ${pkgs.config.home.username}
 
     Host:    ${networking.hostName}
     OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})
     Version: ${system.nixos.version}
     Kernel:  ${boot.kernelPackages.kernel.version}
+
+    Environment: ${builtins.toJSON env}
 
   '';
 

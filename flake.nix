@@ -38,7 +38,7 @@
     nickel-nix,
     nix-colors,
   }: let
-    env = import ./environment.nix;
+    env = lib.vendor.nickel-nix.importNcl ./. "environment.ncl" {};
 
     system =
       if !lib.trivial.inPureEvalMode
@@ -52,72 +52,30 @@
         allowUnfree = true;
         colorScheme = nix-colors.colorSchemes.chalk;
         # colorScheme = (import ./core/user/theme/grayscale.nix).colorScheme;
-        home = let
-          SUDO_USER = builtins.getEnv "SUDO_USER";
-          USER = builtins.getEnv "USER";
-          HOME = builtins.getEnv "HOME";
-        in rec {
-          username =
-            if !lib.trivial.inPureEvalMode
-            then
-              (
-                if SUDO_USER != ""
-                then SUDO_USER
-                else if USER != ""
-                then USER
-                else "delacruz"
-              )
-            else "delacruz";
-
-          name =
-            if lib.strings.hasInfix "delacruz" username
-            then "Hansel De La Cruz"
-            else "";
-
-          homeDirectory =
-            if !lib.trivial.inPureEvalMode
-            then
-              (
-                if SUDO_USER == "" && HOME != ""
-                then HOME
-                else "/home/${username}"
-              )
-            else "/home/${username}";
+        home = {
+          username = env.user.username;
+          homeDirectory = env.user.homeDirectory;
         };
       };
     };
 
     lib = nixpkgs.lib.extend (self: super: {
-      vendor = {
-        nickel-nix = nickel-nix.lib.${system};
-        nix-colors = nix-colors.lib;
-        nix-colors-contrib = nix-colors.lib.contrib {inherit pkgs;};
-        nix-colors-custom = (import ./core/vendor/lib/nix-colors-custom.nix) {
-          inherit pkgs;
-
-          lib = self;
-        };
-      };
+      vendor =
+        (import ./lib/vendor.nix)
+        (inputs
+          // {
+            inherit pkgs system env;
+            lib = self;
+          });
       core = {
-        user = (import ./core/user/lib/index.nix) {
+        user = (import ./lib/user.nix) {
           inherit pkgs env;
-
           lib = self;
         };
-        currentTimeUtcPretty = builtins.replaceStrings ["\n"] [""] (
-          builtins.readFile (
-            pkgs.runCommand "current-time-utc-pretty" {
-              currentTime = builtins.currentTime;
-            } "date --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out"
-          )
-        );
-        currentTimePretty = builtins.replaceStrings ["\n"] [""] (
-          builtins.readFile (
-            pkgs.runCommand "current-time-pretty" {
-              currentTime = builtins.currentTime;
-            } "date \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
-          )
-        );
+        common = (import ./lib/common.nix) {
+          inherit pkgs env;
+          lib = self;
+        };
       };
     });
 
@@ -180,7 +138,7 @@
                   specialArgs =
                     inputs
                     // {
-                      inherit lib preset;
+                      inherit lib env preset;
                     };
                 }
               );

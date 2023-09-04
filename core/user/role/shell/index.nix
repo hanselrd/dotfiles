@@ -22,7 +22,7 @@
     vi = "vim -u NONE -U NONE -N -i NONE";
   };
 
-  home.sessionVariables = lib.modules.mkIf env.shellLdPreload {
+  home.sessionVariables = lib.modules.mkIf env.roles.shell.ldPreload {
     LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
   };
 }

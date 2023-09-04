@@ -5,7 +5,7 @@
   env,
   ...
 }: {
-  homeage = lib.modules.mkIf env.homeageSecrets {
+  homeage = lib.modules.mkIf env.roles.homeage.secrets {
     identityPaths = [
       # "${config.home.homeDirectory}/.ssh/id_ed25519"
       # "${config.home.homeDirectory}/.ssh/id_rsa"
