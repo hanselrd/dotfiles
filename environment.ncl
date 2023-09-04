@@ -1,5 +1,5 @@
-let { EnvironmentSchema, .. } = import "lib/environment-schema.ncl" in
-let enum_record = import "lib/enum-record.ncl" in
+let { EnvironmentSchema, .. } = import "lib/schemas/environment.ncl" in
+let enum_record = import "lib/contracts/enum-record.ncl" in
 {
   user = {
     username = "delacruz",

@@ -12,6 +12,6 @@
     'scripts,
     'shell,
     'terminal,
-    'theme,
+    'theme
   |]
 }

@@ -23,6 +23,11 @@
       url = "github:misterio77/nix-colors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -37,13 +42,14 @@
     homeage,
     nickel-nix,
     nix-colors,
+    nix-darwin,
   }: let
     env = lib.vendor.nickel-nix.importNcl ./. "environment.ncl" {};
 
     system =
       if !lib.trivial.inPureEvalMode
       then builtins.currentSystem
-      else "x86_64-linux";
+      else env._system;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -147,6 +153,63 @@
           userPresets
       )
       nixosSystemPresets
+    );
+
+    darwinConfigurations = builtins.listToAttrs (
+      builtins.concatMap
+      (
+        systemPreset:
+          map
+          (
+            userPreset: {
+              name = "${systemPreset}-${userPreset}";
+              value = nix-darwin.lib.darwinSystem (
+                let
+                  preset = {
+                    system = systemPreset;
+                    user = userPreset;
+                  };
+                in {
+                  inherit system;
+
+                  modules = [
+                    {
+                      nixpkgs = {
+                        inherit (pkgs) config;
+                      };
+                    }
+                    ./preset/system/${systemPreset}.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.users.${pkgs.config.home.username} = import ./preset/user/${userPreset}.nix;
+
+                      home-manager.sharedModules = [
+                        homeage.homeManagerModules.homeage
+                        nix-colors.homeManagerModules.default
+                      ];
+
+                      home-manager.extraSpecialArgs =
+                        inputs
+                        // {
+                          inherit env preset;
+                        };
+                    }
+                  ];
+
+                  specialArgs =
+                    inputs
+                    // {
+                      inherit lib env preset;
+                    };
+                }
+              );
+            }
+          )
+          userPresets
+      )
+      darwinSystemPresets
     );
 
     homeConfigurations = builtins.listToAttrs (
