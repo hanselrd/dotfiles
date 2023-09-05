@@ -155,63 +155,6 @@
       nixosSystemPresets
     );
 
-    darwinConfigurations = builtins.listToAttrs (
-      builtins.concatMap
-      (
-        systemPreset:
-          map
-          (
-            userPreset: {
-              name = "${systemPreset}-${userPreset}";
-              value = nix-darwin.lib.darwinSystem (
-                let
-                  preset = {
-                    system = systemPreset;
-                    user = userPreset;
-                  };
-                in {
-                  inherit system;
-
-                  modules = [
-                    {
-                      nixpkgs = {
-                        inherit (pkgs) config;
-                      };
-                    }
-                    ./preset/system/${systemPreset}.nix
-                    home-manager.nixosModules.home-manager
-                    {
-                      home-manager.useGlobalPkgs = true;
-                      home-manager.useUserPackages = true;
-                      home-manager.users.${pkgs.config.home.username} = import ./preset/user/${userPreset}.nix;
-
-                      home-manager.sharedModules = [
-                        homeage.homeManagerModules.homeage
-                        nix-colors.homeManagerModules.default
-                      ];
-
-                      home-manager.extraSpecialArgs =
-                        inputs
-                        // {
-                          inherit env preset;
-                        };
-                    }
-                  ];
-
-                  specialArgs =
-                    inputs
-                    // {
-                      inherit lib env preset;
-                    };
-                }
-              );
-            }
-          )
-          userPresets
-      )
-      darwinSystemPresets
-    );
-
     homeConfigurations = builtins.listToAttrs (
       builtins.concatMap
       (
