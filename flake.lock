@@ -466,11 +466,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694179458,
-        "narHash": "sha256-1g3X5Bg4AWHTN5CShv9eqFNWVBrY1RsM31Crm9llvYU=",
+        "lastModified": 1694192158,
+        "narHash": "sha256-Men9NPd0g8QukNC09YKsfzIW69+DdlXUh++zLb9xPxA=",
         "owner": "nickel-lang",
         "repo": "organist",
-        "rev": "be772eea99d32ac37cb33b45dcf1d58543ad8870",
+        "rev": "314e211cfaaf01aacbbd77e5632d934f0043216f",
         "type": "github"
       },
       "original": {
