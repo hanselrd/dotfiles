@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nickel-nix = {
-      url = "github:nickel-lang/nickel-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-colors = {
       url = "github:misterio77/nix-colors";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,11 +23,16 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    organist = {
+      url = "github:nickel-lang/organist";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
-    extra-substituters = ["https://nickel-nix.cachix.org"];
-    extra-trusted-public-keys = ["nickel-nix.cachix.org-1:/Ziozgt3g0CfGwGS795wyjRa9ArE89s3tbz31S6xxFM="];
+    extra-substituters = ["https://organist.cachix.org"];
+    extra-trusted-public-keys = ["organist.cachix.org-1:GB9gOx3rbGl7YEh6DwOscD1+E/Gc5ZCnzqwObNH2Faw="];
   };
 
   outputs = inputs @ {
@@ -40,11 +40,11 @@
     nixpkgs,
     home-manager,
     homeage,
-    nickel-nix,
     nix-colors,
     nix-darwin,
+    organist,
   }: let
-    env = lib.vendor.nickel-nix.importNcl ./. "environment.ncl" {};
+    env = lib.vendor.organist.importNcl ./. "environment.ncl" {} {};
 
     system =
       if !lib.trivial.inPureEvalMode
@@ -57,7 +57,10 @@
       config = {
         allowUnfree = true;
         colorScheme = nix-colors.colorSchemes.chalk;
-        # colorScheme = (import ./core/user/theme/grayscale.nix).colorScheme;
+        # colorScheme =
+        #   (lib.vendor.organist.importNcl
+        #     ./. "lib/themes/${env.theme}.ncl" {} {})
+        #   .colorScheme;
         home = {
           username = env.user.username;
           homeDirectory = env.user.homeDirectory;

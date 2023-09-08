@@ -37,18 +37,18 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1692750383,
-        "narHash": "sha256-n5P5HOXuu23UB1h9PuayldnRRVQuXJLpoO+xqtMO3ws=",
+        "lastModified": 1693608196,
+        "narHash": "sha256-qs1rDvXXjrKdobPvTdn9qKjV0/RE2uqCCTHD/c6AAo8=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "ef5d11e3c2e5b3924eb0309dba2e1fea2d9062ae",
+        "rev": "80432e15452e55a72403da3bc91837508a4ccae3",
         "type": "github"
       },
       "original": {
@@ -62,7 +62,7 @@
         "flake-compat": "flake-compat_3",
         "flake-utils": "flake-utils_4",
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "topiary",
           "nixpkgs"
@@ -242,7 +242,7 @@
     "gitignore": {
       "inputs": {
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "pre-commit-hooks",
           "nixpkgs"
@@ -269,11 +269,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1693895999,
-        "narHash": "sha256-yN1XVFltQxiwle833KCqWkZNfBuRLWkXyEnOD+ljoYY=",
+        "lastModified": 1694134858,
+        "narHash": "sha256-fG/ESauOGmiojKlpJG8gB62dJa5Wd+ZIuiDMKK/HD3g=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3c0e381fef63e4fbc6c3292c9e9cbcf479c01794",
+        "rev": "19c6a4081b14443420358262f8416149bd79561a",
         "type": "github"
       },
       "original": {
@@ -306,44 +306,22 @@
       "inputs": {
         "crane": "crane",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "pre-commit-hooks": "pre-commit-hooks",
         "rust-overlay": "rust-overlay_2",
         "topiary": "topiary"
       },
       "locked": {
-        "lastModified": 1693562250,
-        "narHash": "sha256-6lrTQWLZFBfIBBUPg+yfhyexk3ZjqZEp9ZtJmKUe6w0=",
+        "lastModified": 1693991699,
+        "narHash": "sha256-TPS9sLQFogqVbWREN3ppb9sijHJepD54YcxmktqC33Q=",
         "owner": "tweag",
         "repo": "nickel",
-        "rev": "b8e292d44bf005296dc9fb8b4c793458c65bdf28",
+        "rev": "be9269a44320a7d33d76415761d67ce386b0c58c",
         "type": "github"
       },
       "original": {
         "owner": "tweag",
         "repo": "nickel",
-        "type": "github"
-      }
-    },
-    "nickel-nix": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nickel": "nickel",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1693927128,
-        "narHash": "sha256-PZwxUCIVnoOBs0DPZiJ+D3CNxuYMjf4gq6ENm8f7wEo=",
-        "owner": "nickel-lang",
-        "repo": "nickel-nix",
-        "rev": "6bc20b4d5b74c4548b923bb6cd01911dd71cf8d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nickel-lang",
-        "repo": "nickel-nix",
         "type": "github"
       }
     },
@@ -403,17 +381,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1693003285,
-        "narHash": "sha256-5nm4yrEHKupjn62MibENtfqlP6pWcRTuSKrMiH9bLkc=",
-        "owner": "NixOS",
+        "lastModified": 1693985761,
+        "narHash": "sha256-K5b+7j7Tt3+AqbWkcw+wMeqOAWyCD1MH26FPZyWXpdo=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5690c4271f2998c304a45c91a0aeb8fb69feaea7",
+        "rev": "0bffda19b8af722f8069d09d8b6a24594c80b352",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
+        "owner": "nixos",
         "ref": "nixos-unstable",
-        "type": "indirect"
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-lib": {
@@ -449,6 +428,21 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1693565476,
+        "narHash": "sha256-ya00zHt7YbPo3ve/wNZ/6nts61xt7wK/APa6aZAfey0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "aa8aa7e2ea35ce655297e8322dc82bf77a31d04b",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1681358109,
         "narHash": "sha256-eKyxW4OohHQx9Urxi7TQlFBTDWII+F+x2hklDOQPB50=",
         "owner": "NixOS",
@@ -463,19 +457,25 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "organist": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nickel": "nickel",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1693663421,
-        "narHash": "sha256-ImMIlWE/idjcZAfxKK8sQA7A1Gi/O58u5/CJA+mxvl8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e56990880811a451abd32515698c712788be5720",
+        "lastModified": 1694179458,
+        "narHash": "sha256-1g3X5Bg4AWHTN5CShv9eqFNWVBrY1RsM31Crm9llvYU=",
+        "owner": "nickel-lang",
+        "repo": "organist",
+        "rev": "be772eea99d32ac37cb33b45dcf1d58543ad8870",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
+        "owner": "nickel-lang",
+        "repo": "organist",
         "type": "github"
       }
     },
@@ -483,13 +483,13 @@
       "inputs": {
         "flake-compat": "flake-compat_2",
         "flake-utils": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "flake-utils"
         ],
         "gitignore": "gitignore",
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "nixpkgs"
         ],
@@ -513,22 +513,22 @@
       "inputs": {
         "home-manager": "home-manager",
         "homeage": "homeage",
-        "nickel-nix": "nickel-nix",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs",
+        "organist": "organist"
       }
     },
     "rust-overlay": {
       "inputs": {
         "flake-utils": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "crane",
           "flake-utils"
         ],
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "crane",
           "nixpkgs"
@@ -551,22 +551,22 @@
     "rust-overlay_2": {
       "inputs": {
         "flake-utils": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "flake-utils"
         ],
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1693015707,
-        "narHash": "sha256-SFr93DYn502sVT9nB5U8/cKg1INyEk/jCeq8tHioz7Y=",
+        "lastModified": 1693620498,
+        "narHash": "sha256-GPhAI2YayaSs3WYeVVbGN3K4mvRTbui/ii7YGoABZBs=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "e90223633068a44f0fb62374e0fa360ccc987292",
+        "rev": "cdf3b15af70f2db17d5f47822f12016f1a89bd73",
         "type": "github"
       },
       "original": {
@@ -578,14 +578,14 @@
     "rust-overlay_3": {
       "inputs": {
         "flake-utils": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "topiary",
           "crane",
           "flake-utils"
         ],
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "topiary",
           "crane",
@@ -609,7 +609,7 @@
     "rust-overlay_4": {
       "inputs": {
         "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1689042658,
@@ -722,7 +722,7 @@
         "flake-utils": "flake-utils_5",
         "nix-filter": "nix-filter",
         "nixpkgs": [
-          "nickel-nix",
+          "organist",
           "nickel",
           "nixpkgs"
         ],
