@@ -6,7 +6,7 @@
 }: {
   programs.bat = lib.core.user.mkProgram "bat" {};
 
-  programs.exa = lib.core.user.mkProgram "exa" {};
+  programs.eza = lib.core.user.mkProgram "eza" {};
 
   programs.fzf = lib.core.user.mkProgram "fzf" {};
 

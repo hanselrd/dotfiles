@@ -5,8 +5,9 @@
   ...
 }: {
   home.packages = with pkgs; [
-    nodejs
+    bun
     nodePackages.ts-node
+    nodejs
   ];
 
   home.sessionVariables = {
