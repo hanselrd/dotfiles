@@ -62,7 +62,8 @@
       renamed = ">>[$count](bold bright-black)";
       deleted = "x[$count](bold bright-black)";
       style = "bold purple";
-      windows_starship = "/mnt/c/ProgramData/chocolatey/bin/starship.exe";
+      # windows_starship = "/mnt/c/ProgramData/chocolatey/bin/starship.exe";
+      windows_starship = "/mnt/c/Program Files/starship/bin/starship.exe";
     };
     hostname = {
       format = "[@](bold bright-black)$ssh_symbol[$hostname]($style) ";
