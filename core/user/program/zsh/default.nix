@@ -33,7 +33,7 @@
     }
 
     ${
-      if env.roles.homeage.secrets
+      if env.roles.shell.rts
       then ''
         if [ -e ${config.home.homeDirectory}/.secrets/rts.sh ]; then
           . ${config.home.homeDirectory}/.secrets/rts.sh

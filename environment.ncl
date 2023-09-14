@@ -10,7 +10,7 @@ let enum_record = import "lib/contracts/enum-record.ncl" in
     {}
     |> enum_record.insert
       'homeage
-      { secrets = false }
+      { decrypt = true }
     |> enum_record.insert
       'nix
       { sandbox = true }
@@ -19,6 +19,7 @@ let enum_record = import "lib/contracts/enum-record.ncl" in
       {
         bashToZsh = false,
         ldPreload = false,
+        rts = false,
         theme = false
       }
 } | EnvironmentSchema

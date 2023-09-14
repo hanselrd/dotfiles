@@ -22,7 +22,12 @@
     vi = "vim -u NONE -U NONE -N -i NONE";
   };
 
-  home.sessionVariables = lib.modules.mkIf env.roles.shell.ldPreload {
-    LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
-  };
+  home.sessionVariables = lib.modules.mkMerge [
+    {
+      HISTTIMEFORMAT = "%y-%-m-%-d %-H:%M:%S  ";
+    }
+    (lib.modules.mkIf env.roles.shell.ldPreload {
+      LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
+    })
+  ];
 }
