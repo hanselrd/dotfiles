@@ -5,7 +5,7 @@ if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
-HME_HOME_CONFIGURATION="${1:-linux-standard}"
+HME_HOME_CONFIGURATION="${1:-linux-base}"
 
 HME_TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/hme.XXXXXX")
 HME_HOME_DIR="${2:-"$HME_TEMP_DIR/home"}"

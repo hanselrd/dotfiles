@@ -5,7 +5,7 @@ if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
-NIX_HOME_CONFIGURATION="${1:-linux-standard}"
+NIX_HOME_CONFIGURATION="${1:-linux-base}"
 
 nix build --no-link ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --impure --extra-experimental-features "nix-command flakes"
 NIX_HOME_MANAGER="$(nix path-info ".#homeConfigurations.$NIX_HOME_CONFIGURATION.activationPackage" --impure --extra-experimental-features "nix-command flakes")"/home-path/bin/home-manager

@@ -20,7 +20,9 @@ RUN dnf install \
 RUN mkdir -p /nix
 RUN chown -R ${USER}:${GID} /nix
 
-COPY . /dotfiles
+COPY --chown=${USER}:${GID} . /dotfiles
+
+RUN git config --global --add safe.directory /dotfiles
 
 WORKDIR /dotfiles
 

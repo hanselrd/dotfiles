@@ -10,7 +10,7 @@ let enum_record = import "lib/contracts/enum-record.ncl" in
     {}
     |> enum_record.insert
       'homeage
-      { decrypt = true }
+      { decrypt = false }
     |> enum_record.insert
       'nix
       { sandbox = true }
