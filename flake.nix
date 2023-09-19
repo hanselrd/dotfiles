@@ -49,7 +49,7 @@
     system =
       if !lib.trivial.inPureEvalMode
       then builtins.currentSystem
-      else env._system;
+      else "x86_64-linux";
 
     pkgs = import nixpkgs {
       inherit system;
@@ -100,7 +100,7 @@
       "standard"
       "base"
     ];
-  in {
+  in rec {
     nixosConfigurations = builtins.listToAttrs (
       builtins.concatMap
       (
@@ -194,5 +194,55 @@
       )
       otherSystemPresets
     );
+
+    packages = {
+      ${system} = {
+        dotfiles-scripts = pkgs.buildGoModule rec {
+          name = "dotfiles-scripts";
+          src = ./.;
+          vendorHash = "sha256-uVwT/XgwgDWiQQgY3Df+EgVreyaTweAHPlXcFyJQb7A=";
+          subPackages = [
+            "scripts/home-manager"
+          ];
+        };
+
+        dotfiles-update =
+          pkgs.writeShellScriptBin "dotfiles-update"
+          ''
+            nix flake update
+
+            ${lib.getExe' pkgs.go "go"} get -u ./...
+
+            pushd core/user/program/neovim/nodePackages
+            ${lib.getExe' pkgs.node2nix "node2nix"} -i <(echo "[\"emmet-ls\"]")
+            popd
+          '';
+
+        dotfiles-format =
+          pkgs.writeShellScriptBin "dotfiles-format"
+          ''
+            echo "Formatting *.nix file(s)"
+            find $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
+
+            echo "Formatting *.ncl file(s)"
+            find $PWD -type f ! -path "*/ancestry/*" -name "*.ncl" -print -exec ${lib.getExe' pkgs.topiary "topiary"} -l nickel -f {} --in-place \;
+
+            echo "Formatting *.go file(s)"
+            find $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
+
+            echo "Formatting *.sh file(s)"
+            find $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
+          '';
+      };
+    };
+
+    apps = {
+      ${system} = {
+        dotfiles-home-manager = {
+          type = "app";
+          program = lib.getExe' packages.${system}.dotfiles-scripts "home-manager";
+        };
+      };
+    };
   };
 }

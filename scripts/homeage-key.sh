@@ -2,7 +2,7 @@
 set -xe
 
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
 mkdir -p "$HOME/.keys"

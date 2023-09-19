@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 set -xe
 
-if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-fi
+. lib/common.sh
+
+source_nix
 
 HME_HOME_CONFIGURATION="${1:-linux-base}"
 
