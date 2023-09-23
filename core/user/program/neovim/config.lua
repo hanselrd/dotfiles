@@ -153,6 +153,14 @@ cmp.setup({
   })
 })
 
+-- nvim-colorizer-lua
+require("colorizer").setup({
+  user_default_options = {
+    -- mode = "virtualtext",
+    tailwind = true,
+  }
+})
+
 -- nvim-lspconfig
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local opts = { noremap = true, silent = true }

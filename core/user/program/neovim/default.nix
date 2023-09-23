@@ -14,6 +14,7 @@
     lualine-lsp-progress
     lualine-nvim
     nvim-cmp
+    nvim-colorizer-lua
     nvim-lspconfig
     nvim-surround
     nvim-treesitter-textobjects
