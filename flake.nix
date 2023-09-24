@@ -23,16 +23,6 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    organist = {
-      url = "github:nickel-lang/organist";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  nixConfig = {
-    extra-substituters = ["https://organist.cachix.org"];
-    extra-trusted-public-keys = ["organist.cachix.org-1:GB9gOx3rbGl7YEh6DwOscD1+E/Gc5ZCnzqwObNH2Faw="];
   };
 
   outputs = inputs @ {
@@ -42,10 +32,7 @@
     homeage,
     nix-colors,
     nix-darwin,
-    organist,
   }: let
-    env = lib.vendor.organist.importNcl ./. "environment.ncl" {} {};
-
     system =
       if !lib.trivial.inPureEvalMode
       then builtins.currentSystem
@@ -56,17 +43,31 @@
 
       config = {
         allowUnfree = true;
-        colorScheme = nix-colors.colorSchemes.chalk;
-        # colorScheme =
-        #   (lib.vendor.organist.importNcl
-        #     ./. "lib/themes/${env.theme}.ncl" {} {})
-        #   .colorScheme;
+        # colorScheme = nix-colors.colorSchemes.chalk;
+        colorScheme = env.theme;
         home = {
           username = env.user.username;
           homeDirectory = env.user.homeDirectory;
         };
       };
     };
+
+    scripts = pkgs.buildGoModule {
+      name = "dotfiles-scripts";
+      src = ./.;
+      vendorHash = "sha256-uVwT/XgwgDWiQQgY3Df+EgVreyaTweAHPlXcFyJQb7A=";
+      subPackages = [
+        "scripts/environment"
+        "scripts/home-manager"
+      ];
+    };
+
+    env = builtins.fromJSON (
+      builtins.readFile (
+        pkgs.runCommand "dotfiles-scripts-environment-json" {}
+        "${lib.getExe' scripts "environment"} > $out"
+      )
+    );
 
     lib = nixpkgs.lib.extend (self: super: {
       vendor =
@@ -196,15 +197,14 @@
     );
 
     packages = {
-      ${system} = {
-        dotfiles-scripts = pkgs.buildGoModule rec {
-          name = "dotfiles-scripts";
-          src = ./.;
-          vendorHash = "sha256-uVwT/XgwgDWiQQgY3Df+EgVreyaTweAHPlXcFyJQb7A=";
-          subPackages = [
-            "scripts/home-manager"
-          ];
-        };
+      ${system} = rec {
+        dotfiles-codegen =
+          pkgs.writeShellScriptBin "dotfiles-codegen"
+          ''
+            ${lib.getExe' pkgs.go "go"} generate github.com/hanselrd/dotfiles/lib/enums
+          '';
+
+        dotfiles-scripts = scripts;
 
         dotfiles-update =
           pkgs.writeShellScriptBin "dotfiles-update"
@@ -212,11 +212,13 @@
             nix flake update
 
             ${lib.getExe' pkgs.go "go"} get -u ./...
+            ${lib.getExe' pkgs.go "go"} mod tidy
 
             pushd core/user/program/neovim/nodePackages
             ${lib.getExe' pkgs.node2nix "node2nix"} -i <(echo "[\"emmet-ls\"]")
             popd
           '';
+        dotfiles-upgrade = dotfiles-update;
 
         dotfiles-format =
           pkgs.writeShellScriptBin "dotfiles-format"
@@ -232,12 +234,20 @@
 
             echo "Formatting *.sh file(s)"
             find $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
+
+            echo "Formatting *.lua file(s)"
+            find $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
           '';
       };
     };
 
     apps = {
       ${system} = {
+        dotfiles-environment = {
+          type = "app";
+          program = lib.getExe' packages.${system}.dotfiles-scripts "environment";
+        };
+
         dotfiles-home-manager = {
           type = "app";
           program = lib.getExe' packages.${system}.dotfiles-scripts "home-manager";

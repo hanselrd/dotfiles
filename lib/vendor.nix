@@ -1,6 +1,5 @@
 {
   nix-colors,
-  organist,
   lib,
   pkgs,
   system,
@@ -12,5 +11,4 @@
   nix-colors-custom = (import ./vendor/nix-colors-custom.nix) {
     inherit pkgs lib;
   };
-  organist = organist.lib.${system};
 }

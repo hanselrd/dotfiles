@@ -31,7 +31,8 @@ RUN git grep -l "delacruz" | xargs sed -i "s/delacruz/${USER}/g"
 USER ${USER}
 
 RUN ./scripts/nix-bootstrap.sh
-RUN ./scripts/home-manager-bootstrap.sh "${PRESET}"
+RUN . /home/${USER}/.nix-profile/etc/profile.d/nix.sh && \
+    nix run ".#dotfiles-home-manager" --accept-flake-config -- --preset ${PRESET}
 
 WORKDIR /home/${USER}
 

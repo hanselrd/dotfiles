@@ -1,53 +1,50 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"log"
+	"os"
+	"time"
 
-	"github.com/bitfield/script"
 	"github.com/fatih/color"
+	"github.com/itchyny/timefmt-go"
+
+	"github.com/hanselrd/dotfiles/lib"
 )
 
-func shell(command string, dryrun bool) (rc int, stdout string, stderr string) {
-	log.Printf("command=%v", command)
-
-	if dryrun {
-		return
-	}
-
-	stdoutBuf := new(bytes.Buffer)
-	stderrBuf := new(bytes.Buffer)
-	p := script.NewPipe().WithStdout(stdoutBuf).WithStderr(stderrBuf).Exec(command)
-
-	if err := p.Error(); err != nil {
-		p.SetError(nil)
-	}
-
-	p.Wait()
-
-	rc = p.ExitStatus()
-	log.Printf("rc=%v", rc)
-
-	stdout = stdoutBuf.String()
-	log.Printf("stdout=%v", stdout)
-
-	stderr = stderrBuf.String()
-	log.Printf("stderr=%v", stderr)
-
-	return
-}
-
 func main() {
-	var configuration string
-	flag.StringVar(&configuration, "configuration", "linux-base", "home-manager configuration")
+	now := time.Now()
+	nowYmd := timefmt.Format(now, "%Y%m%d")
+	nowYmdTHMS := timefmt.Format(now, "%Y%m%dT%H%M%S")
+
+	var preset string
+	flag.StringVar(&preset, "preset", "linux-base", "home-manager preset")
 
 	var eject bool
 	flag.BoolVar(&eject, "eject", false, "ejects home-manager configuration to work without nix")
 
 	var dryrun bool
 	flag.BoolVar(&dryrun, "dryrun", false, "runs without affecting the system")
+
+	defaultTempDir, err := os.MkdirTemp("", "home-manager")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer os.RemoveAll(defaultTempDir)
+	var tempDir string
+	flag.StringVar(&tempDir, "temp-dir", defaultTempDir, "Temporary directory")
+
+	var homeDir string
+	flag.StringVar(&homeDir, "home-dir", os.Getenv("HOME"), "Home directory")
+
+	var hash = lib.RandSeq(5)
+
+	var histDir string
+	flag.StringVar(&histDir, "hist-dir", fmt.Sprintf("%v/.nix/hm-store/%v-%v", homeDir, nowYmdTHMS, hash), "Home directory")
+
+	var storeDir string
+	flag.StringVar(&storeDir, "store-dir", fmt.Sprintf("/tmp/%v", hash), "Store directory")
 
 	flag.Parse()
 
@@ -56,24 +53,21 @@ func main() {
 		log.SetPrefix(c.Sprint("[DRYRUN] "))
 	}
 
-	log.Printf("configuration: %v\n", configuration)
-	log.Printf("eject: %v\n", eject)
+	// if !dryrun {
+	// 	if err := os.Link(histDir, storeDir); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// }
 
-	shell(fmt.Sprintf("nix build --no-link .#homeConfigurations.%v.activationPackage --impure --extra-experimental-features \"nix-command flakes\" --accept-flake-config", configuration),
-		false)
+	lib.Shell(
+		fmt.Sprintf("nix build --no-link .#homeConfigurations.%v.activationPackage", preset),
+		dryrun, nil)
+	_, stdout, _ := lib.Shell(
+		fmt.Sprintf("nix path-info .#homeConfigurations.%v.activationPackage", preset),
+		dryrun, nil)
 
-	// cmd := exec.Command(
-	// 	"nix",
-	// 	"build",
-	// 	"--no-link",
-	// 	fmt.Sprintf(".#homeConfigurations.%v.activationPackage", configuration),
-	// 	"--impure",
-	// 	"--extra-experimental-features",
-	// 	"nix-command flakes",
-	// 	// "flakes",
-	// 	// `"nix-command flakes"`,
-	// 	"--accept-flake-config",
-	// )
-	// HMB_HOME_MANAGER="$(nix path-info ".#homeConfigurations.$HMB_CONFIGURATION.activationPackage" --impure --extra-experimental-features "nix-command flakes" --accept-flake-config)"/home-path/bin/home-manager
-	// $HMB_HOME_MANAGER switch --flake ".#$HMB_CONFIGURATION" -b bak."$(date +"%Y%m%d")" --impure --extra-experimental-features "nix-command flakes" --option accept-flake-config true
+	homeManagerExe := fmt.Sprintf("%v/home-path/bin/home-manager", stdout)
+	lib.Shell(
+		fmt.Sprintf("%v switch --flake .#%v -b bak.%v", homeManagerExe, preset, nowYmd),
+		dryrun, nil)
 }

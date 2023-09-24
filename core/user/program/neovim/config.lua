@@ -80,16 +80,19 @@ require("lualine").setup({
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
-    }
+    },
   },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { "filename", "lsp_progress",
-      { gitblame.get_current_blame_text, cond = gitblame.is_blame_text_available } },
+    lualine_c = {
+      "filename",
+      "lsp_progress",
+      { gitblame.get_current_blame_text, cond = gitblame.is_blame_text_available },
+    },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },
-    lualine_z = { "location" }
+    lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
@@ -97,7 +100,7 @@ require("lualine").setup({
     lualine_c = { "filename" },
     lualine_x = { "location" },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
   tabline = {
     lualine_a = { "buffers" },
@@ -105,7 +108,7 @@ require("lualine").setup({
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = { "tabs" }
+    lualine_z = { "tabs" },
   },
   winbar = {
     lualine_a = {},
@@ -113,7 +116,7 @@ require("lualine").setup({
     lualine_c = { "filename" },
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
   inactive_winbar = {
     lualine_a = {},
@@ -121,9 +124,9 @@ require("lualine").setup({
     lualine_c = { "filename" },
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
-  extensions = {}
+  extensions = {},
 })
 
 -- nvim-cmp
@@ -150,7 +153,7 @@ cmp.setup({
     { name = "vsnip" },
   }, {
     { name = "buffer" },
-  })
+  }),
 })
 
 -- nvim-colorizer-lua
@@ -158,7 +161,7 @@ require("colorizer").setup({
   user_default_options = {
     -- mode = "virtualtext",
     tailwind = true,
-  }
+  },
 })
 
 -- nvim-lspconfig
@@ -186,8 +189,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format { async = true } end, bufopts)
-  vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set("n", "<leader>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, bufopts)
+  vim.keymap.set("v", "<leader>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, bufopts)
 end
 local lspconfig = require("lspconfig")
 local servers = {
@@ -195,22 +202,27 @@ local servers = {
   emmet_ls = {},
   gopls = {},
   jdtls = {
-    cmd = { "jdt-language-server", "-configuration", vim.fn.expand("~/.cache/jdtls/config"), "-data",
-      vim.fn.expand("~/.cache/jdtls/workspace") }
+    cmd = {
+      "jdt-language-server",
+      "-configuration",
+      vim.fn.expand("~/.cache/jdtls/config"),
+      "-data",
+      vim.fn.expand("~/.cache/jdtls/workspace"),
+    },
   },
   lua_ls = {
     settings = {
       Lua = {
         runtime = { version = "LuaJIT" },
         diagnostics = {
-          globals = { "vim" }
+          globals = { "vim" },
         },
         workspace = {
           library = vim.api.nvim_get_runtime_file("", true),
         },
         telemetry = { enable = false },
-      }
-    }
+      },
+    },
   },
   nickel_ls = {},
   purescriptls = {},
@@ -238,7 +250,7 @@ require("nvim-treesitter.configs").setup({
   -- },
   rainbow = {
     enable = true,
-  }
+  },
 })
 
 -- oil.nvim
@@ -267,15 +279,15 @@ vim.keymap.set("n", "<leader>fc", telescope_builtin.git_bcommits, {})
 vim.keymap.set("n", "<leader>ftt", telescope_builtin.filetypes, {})
 require("telescope").setup({
   pickers = {
-    find_files = { hidden = true }
-  }
+    find_files = { hidden = true },
+  },
 })
 
 -- treesj
 require("treesj").setup()
 
 -- vim-commentary
-vim.cmd [[ autocmd FileType nix setlocal commentstring=#\ %s ]]
+vim.cmd([[ autocmd FileType nix setlocal commentstring=#\ %s ]])
 
 -- vim-startify
 vim.g.startify_change_to_vcs_root = 0
