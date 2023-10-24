@@ -20,11 +20,13 @@
     nvim-treesitter-textobjects
     nvim-ts-rainbow
     nvim-web-devicons
+    oil-nvim
     pears-nvim
     plenary-nvim
     telescope-fzf-native-nvim
     telescope-nvim
     treesj
+    vim-abolish
     vim-better-whitespace
     vim-commentary
     vim-eunuch
@@ -54,18 +56,7 @@
     #       ]
     #   )
     # )
-    (pkgs.vimUtils.buildVimPluginFrom2Nix
-      rec {
-        name = "oil.nvim";
-        version = "unstable";
-        src = pkgs.fetchFromGitHub {
-          owner = "stevearc";
-          repo = name;
-          rev = "19563c365800ab519e46a08a0aa59d5677b329b6";
-          hash = "sha256-FMrnmo8gIgh3J1iRc2KrQnoAvT72B7sII2gvAlrz6Qs=";
-        };
-      })
-    (pkgs.vimUtils.buildVimPluginFrom2Nix
+    (pkgs.vimUtils.buildVimPlugin
       rec {
         name = "vim-textobj-indent";
         version = "unstable";

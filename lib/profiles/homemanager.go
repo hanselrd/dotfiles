@@ -56,7 +56,7 @@ var (
 	)
 )
 
-var HomeManagerProfiles = [...]structs.Profile{
+var HomeManagerProfiles = []structs.Profile{
 	LinuxSystemdBase,
 	LinuxSystemdStandard,
 	LinuxSystemdMinimal,

@@ -1,10 +1,9 @@
 package enums
 
-import "encoding/json"
-
 type Role uint
 
 //go:generate stringer -type Role -linecomment
+//go:generate go run codegen.go Role
 
 const (
 	RoleBrowser     Role = iota // browser
@@ -21,11 +20,3 @@ const (
 	RoleTerminal                // terminal
 	RoleTheme                   // theme
 )
-
-func (r Role) MarshalText() ([]byte, error) {
-	return []byte(r.String()), nil
-}
-
-func (r Role) MarshalJSON() ([]byte, error) {
-	return json.Marshal(r.String())
-}

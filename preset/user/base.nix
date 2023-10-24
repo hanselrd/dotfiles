@@ -22,6 +22,7 @@
     hyperfine
     rsync
     tree
+    tshark
     wget
   ];
 }

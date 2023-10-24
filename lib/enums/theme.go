@@ -1,10 +1,9 @@
 package enums
 
-import "encoding/json"
-
 type Theme uint
 
 //go:generate stringer -type Theme -linecomment
+//go:generate go run codegen.go Theme
 
 const (
 	ThemeChalk     Theme = iota // chalk
@@ -16,11 +15,3 @@ const (
 	ThemeTomorrow               // tomorrow
 	ThemeTwilight               // twilight
 )
-
-func (t Theme) MarshalText() ([]byte, error) {
-	return []byte(t.String()), nil
-}
-
-func (t Theme) MarshalJSON() ([]byte, error) {
-	return json.Marshal(t.String())
-}

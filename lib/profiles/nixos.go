@@ -24,7 +24,7 @@ var (
 	)
 )
 
-var NixOSProfiles = [...]structs.Profile{
+var NixOSProfiles = []structs.Profile{
 	NixOSBase,
 	NixOSStandard,
 	NixOSMinimal,

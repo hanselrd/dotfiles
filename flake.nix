@@ -55,17 +55,16 @@
     scripts = pkgs.buildGoModule {
       name = "dotfiles-scripts";
       src = ./.;
-      vendorHash = "sha256-uVwT/XgwgDWiQQgY3Df+EgVreyaTweAHPlXcFyJQb7A=";
+      vendorHash = "sha256-tV7pRuJNyrxEw2IKXGOX/5FHK3K+RFmqz7PUve067cc=";
       subPackages = [
-        "scripts/environment"
-        "scripts/home-manager"
+        "scripts/dotfiles-cli"
       ];
     };
 
     env = builtins.fromJSON (
       builtins.readFile (
-        pkgs.runCommand "dotfiles-scripts-environment-json" {}
-        "${lib.getExe' scripts "environment"} > $out"
+        pkgs.runCommand "dotfiles-cli-environment-json" {}
+        "${lib.getExe' scripts "dotfiles-cli"} environment > $out"
       )
     );
 
@@ -185,7 +184,7 @@
                   extraSpecialArgs =
                     inputs
                     // {
-                      inherit env preset;
+                      inherit pkgs env preset;
                     };
                 }
               );
@@ -201,7 +200,7 @@
         dotfiles-codegen =
           pkgs.writeShellScriptBin "dotfiles-codegen"
           ''
-            ${lib.getExe' pkgs.go "go"} generate github.com/hanselrd/dotfiles/lib/enums
+            ${lib.getExe' pkgs.go "go"} generate ./...
           '';
 
         dotfiles-scripts = scripts;
@@ -213,6 +212,7 @@
 
             ${lib.getExe' pkgs.go "go"} get -u ./...
             ${lib.getExe' pkgs.go "go"} mod tidy
+            ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
 
             pushd core/user/program/neovim/nodePackages
             ${lib.getExe' pkgs.node2nix "node2nix"} -i <(echo "[\"emmet-ls\"]")
@@ -243,14 +243,9 @@
 
     apps = {
       ${system} = {
-        dotfiles-environment = {
+        dotfiles-cli = {
           type = "app";
-          program = lib.getExe' packages.${system}.dotfiles-scripts "environment";
-        };
-
-        dotfiles-home-manager = {
-          type = "app";
-          program = lib.getExe' packages.${system}.dotfiles-scripts "home-manager";
+          program = lib.getExe' packages.${system}.dotfiles-scripts "dotfiles-cli";
         };
       };
     };

@@ -3,7 +3,7 @@ FROM redhat/ubi8
 ARG USER=docker
 ARG UID=1000
 ARG GID=1000
-ARG PRESET=linux-standard
+ARG PROFILE=linux-base
 
 ENV USER=${USER}
 
@@ -32,7 +32,7 @@ USER ${USER}
 
 RUN ./scripts/nix-bootstrap.sh
 RUN . /home/${USER}/.nix-profile/etc/profile.d/nix.sh && \
-    nix run ".#dotfiles-home-manager" --accept-flake-config -- --preset ${PRESET}
+    nix run ".#dotfiles-cli" -- homeManager bootstrap --profile ${PROFILE}
 
 WORKDIR /home/${USER}
 

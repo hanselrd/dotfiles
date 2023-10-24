@@ -6,7 +6,7 @@ services:
     build: &default_build
       context: .
       args: &default_args
-        PRESET: linux-systemd-full
+        PROFILE: linux-systemd-full
     image: dotfiles/linux-systemd-full
 
   dotfiles_linux_systemd_minimal:
@@ -15,7 +15,7 @@ services:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-systemd-minimal
+        PROFILE: linux-systemd-minimal
     image: dotfiles/linux-systemd-minimal
 
   dotfiles_linux_systemd_standard:
@@ -24,7 +24,7 @@ services:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-systemd-standard
+        PROFILE: linux-systemd-standard
     image: dotfiles/linux-systemd-standard
 
   dotfiles_linux_systemd_base:
@@ -33,7 +33,7 @@ services:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-systemd-base
+        PROFILE: linux-systemd-base
     image: dotfiles/linux-systemd-base
 
   # linux
@@ -41,7 +41,7 @@ services:
     build: &default_build
       context: .
       args: &default_args
-        PRESET: linux-full
+        PROFILE: linux-full
     image: dotfiles/linux-full
 
   dotfiles_linux_minimal:
@@ -50,7 +50,7 @@ services:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-minimal
+        PROFILE: linux-minimal
     image: dotfiles/linux-minimal
 
   dotfiles_linux_standard:
@@ -59,7 +59,7 @@ services:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-standard
+        PROFILE: linux-standard
     image: dotfiles/linux-standard
 
   dotfiles_linux_base:
@@ -68,5 +68,5 @@ services:
       <<: *default_build
       args:
         <<: *default_args
-        PRESET: linux-base
+        PROFILE: linux-base
     image: dotfiles/linux-base

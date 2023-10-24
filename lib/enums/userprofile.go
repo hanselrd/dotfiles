@@ -1,10 +1,9 @@
 package enums
 
-import "encoding/json"
-
 type UserProfile uint
 
 //go:generate stringer -type UserProfile -linecomment
+//go:generate go run codegen.go UserProfile
 
 const (
 	UserProfileBase     UserProfile = iota // base
@@ -12,11 +11,3 @@ const (
 	UserProfileMinimal                     // minimal
 	UserProfileFull                        // full
 )
-
-func (u UserProfile) MarshalText() ([]byte, error) {
-	return []byte(u.String()), nil
-}
-
-func (u UserProfile) MarshalJSON() ([]byte, error) {
-	return json.Marshal(u.String())
-}

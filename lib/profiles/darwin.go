@@ -24,7 +24,7 @@ var (
 	)
 )
 
-var DarwinProfiles = [...]structs.Profile{
+var DarwinProfiles = []structs.Profile{
 	MacOSBase,
 	MacOSStandard,
 	MacOSMinimal,
