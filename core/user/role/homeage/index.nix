@@ -11,7 +11,7 @@
     (lib.modules.mkMerge [
       (lib.modules.mkIf
         (preset.system != "nixos" && preset.system != "linux-systemd") {
-          mount = "${env.user.stateDirectory}/homeage/secrets";
+          mount = "${env.user.cacheDirectory}/nix/homeage/secrets";
         })
       {
         identityPaths = [
