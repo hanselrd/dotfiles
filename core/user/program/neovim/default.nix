@@ -5,6 +5,7 @@
   ...
 }: {
   plugins = with pkgs.vimPlugins; [
+    close-buffers-vim
     cmp-buffer
     cmp-cmdline
     cmp-nvim-lsp

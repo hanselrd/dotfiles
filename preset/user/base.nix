@@ -20,6 +20,7 @@
     cpio
     htop
     hyperfine
+    parallel
     rsync
     tree
     tshark

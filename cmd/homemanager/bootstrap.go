@@ -7,7 +7,6 @@ import (
 	"github.com/itchyny/timefmt-go"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/lib/flags"
 	"github.com/hanselrd/dotfiles/lib/utils"
 )
 
@@ -19,17 +18,11 @@ var bootstrapCmd = &cobra.Command{
 		now := time.Now()
 		nowYmd := timefmt.Format(now, "%Y%m%d")
 
-		utils.Shell(
-			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile),
-			flags.Dryrun, nil)
-		_, stdout, _ := utils.Shell(
-			fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile),
-			flags.Dryrun, nil)
+		utils.Shell(fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile))
+		_, stdout, _ := utils.Shell(fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile))
 
 		homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", stdout)
-		utils.Shell(
-			fmt.Sprintf("%s switch --flake .#%s -b bak.%s", homeManagerExe, profile, nowYmd),
-			flags.Dryrun, nil)
+		utils.Shell(fmt.Sprintf("%s switch --flake .#%s -b bak.%s", homeManagerExe, profile, nowYmd))
 	},
 }
 
