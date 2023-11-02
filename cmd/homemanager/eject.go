@@ -48,11 +48,11 @@ var ejectCmd = &cobra.Command{
 
 		utils.Shell("cpio -idmv < eject.cpio")
 
-		_, pkg1New, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}@%s@g\"", histDir), utils.WithStdin(pkg1))
+		_, pkg1New, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg1))
 		utils.Shell(fmt.Sprintf("find %s/home-files/ -type d -exec chmod u+w {} \\;", pkg1New))
 		utils.Shell(fmt.Sprintf("cp -av %s/home-files/. %s/", pkg1New, dotfiles.Environment.User.HomeDirectory))
 
-		_, pkg2New, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}@%s@g\"", histDir), utils.WithStdin(pkg2))
+		_, pkg2New, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg2))
 		utils.Shell(fmt.Sprintf("ln -snfF %s %s/.nix-profile", pkg2New, dotfiles.Environment.User.HomeDirectory))
 	},
 }
