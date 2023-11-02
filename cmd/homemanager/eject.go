@@ -38,7 +38,7 @@ var ejectCmd = &cobra.Command{
 		utils.Shell("sort | uniq > eject.dep", utils.WithStdin(fmt.Sprintf("%s\n%s", deps1, deps2)))
 		utils.Shell("find /nix/store -depth -print | grep -Ff eject.dep | cpio -ov > eject.cpio")
 
-		normalizedHistDir := strings.Repeat("/", len("/nix/store/")+32-len(histDir)) + histDir
+		normalizedHistDir := histDir + strings.Repeat("/", len("/nix/store/")+32-len(histDir))
 
 		utils.Shell(fmt.Sprintf("parallel -a eject.cpio -k --block -1 --pipe-part -q sed \"s@/nix/store/.\\{32\\}-@%s/@g\" > eject.cpio~", normalizedHistDir))
 		utils.Shell("mv eject.cpio~ eject.cpio")
