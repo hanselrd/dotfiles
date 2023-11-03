@@ -26,33 +26,30 @@ var ejectCmd = &cobra.Command{
 	Long:  "Eject command",
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.Shell(fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile))
-		_, pkg1, _ := utils.Shell(fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile))
-		_, deps1, _ := utils.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg1))
+		pkg1, _, _ := utils.Shell(fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile))
+		deps1, _, _ := utils.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg1))
 
-		_, pkg2, _ := utils.Shell(fmt.Sprintf("readlink -f %s/.local/state/nix/profiles/profile", dotfiles.Environment.User.HomeDirectory))
-		rc, deps2, _ := utils.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg2))
-		if rc != 0 {
-			cobra.CheckErr(fmt.Errorf("rc=%d", rc))
-		}
+		pkg2, _, _ := utils.Shell(fmt.Sprintf("readlink -f %s/.nix-profile", dotfiles.Environment.User.HomeDirectory))
+		deps2, _, err := utils.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg2))
+		cobra.CheckErr(err)
 
-		utils.Shell("sort | uniq > eject.dep", utils.WithStdin(fmt.Sprintf("%s\n%s", deps1, deps2)))
+		utils.Shell("sort | uniq > eject.dep", utils.WithStdin(strings.Join([]string{deps1, deps2}, "\n")))
 		utils.Shell("find /nix/store -depth -print | grep -Ff eject.dep | cpio -ov > eject.cpio")
 
 		normalizedHistDir := histDir + strings.Repeat("/", len("/nix/store/")+32-len(histDir))
 
-		utils.Shell(fmt.Sprintf("parallel -a eject.cpio -k --block -1 --pipe-part -q sed \"s@/nix/store/.\\{32\\}-@%s/@g\" > eject.cpio~", normalizedHistDir))
-		utils.Shell("mv eject.cpio~ eject.cpio")
+		utils.Shell(fmt.Sprintf("sed -i \"s@/nix/store/.\\{32\\}-@%s/@g\" eject.cpio", normalizedHistDir))
 
-		err := os.MkdirAll(histDir, 0700)
+		err = os.MkdirAll(histDir, 0700)
 		cobra.CheckErr(err)
 
 		utils.Shell("cpio -idmv < eject.cpio")
+		utils.Shell(fmt.Sprintf("chmod -R u+w %s", histDir))
 
-		_, pkg1New, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg1))
-		utils.Shell(fmt.Sprintf("find %s/home-files/ -type d -exec chmod u+w {} \\;", pkg1New))
+		pkg1New, _, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg1))
 		utils.Shell(fmt.Sprintf("cp -av %s/home-files/. %s/", pkg1New, dotfiles.Environment.User.HomeDirectory))
 
-		_, pkg2New, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg2))
+		pkg2New, _, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg2))
 		utils.Shell(fmt.Sprintf("ln -snfF %s %s/.nix-profile", pkg2New, dotfiles.Environment.User.HomeDirectory))
 	},
 }

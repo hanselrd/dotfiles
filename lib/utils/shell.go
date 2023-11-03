@@ -34,11 +34,11 @@ func WithExpectFn(fn ExpectFn) ShellOpt {
 	}
 }
 
-func Shell(command string, opts ...ShellOpt) (rc int, stdout string, stderr string) {
+func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err error) {
 	options := ShellOpts{}
 
 	for _, opt := range opts {
-		if err := opt(&options); err != nil {
+		if err = opt(&options); err != nil {
 			return
 		}
 	}
@@ -54,7 +54,8 @@ func Shell(command string, opts ...ShellOpt) (rc int, stdout string, stderr stri
 
 	// c, err := expect.NewConsole(expect.WithStdout(os.Stdout), expect.WithStdout(stdoutBuf))
 	// if err != nil {
-	// 	log.Fatal("could not create console")
+	// 	log.Print("could not create console")
+	// 	return
 	// }
 	// defer c.Close()
 
@@ -70,9 +71,10 @@ func Shell(command string, opts ...ShellOpt) (rc int, stdout string, stderr stri
 	cmd.Stdout = stdoutBuf
 	cmd.Stderr = stderrBuf
 
-	err := cmd.Start()
+	err = cmd.Start()
 	if err != nil {
-		log.Fatalf("could not start command: \"%s\"", command)
+		log.Printf("could not start command: \"%s\"", command)
+		return
 	}
 
 	// if options.ExpectFn != nil {
@@ -80,15 +82,6 @@ func Shell(command string, opts ...ShellOpt) (rc int, stdout string, stderr stri
 	// }
 
 	err = cmd.Wait()
-	if err != nil {
-		if exitError, ok := err.(*exec.ExitError); ok {
-			rc = exitError.ExitCode()
-		} else {
-			log.Fatalf("could not wait on command")
-		}
-	}
-
-	log.Printf("rc=%v", rc)
 
 	stdout = strings.TrimSpace(stdoutBuf.String())
 	log.Printf("stdout=%s", stdout)

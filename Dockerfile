@@ -6,6 +6,7 @@ ARG GID=1000
 ARG PROFILE=linux-base
 
 ENV USER=${USER}
+ENV HOME=/home/${USER}
 
 RUN groupadd --gid ${GID} --force ${USER}
 RUN useradd --uid ${UID} --gid ${GID} --groups wheel --create-home ${USER}
@@ -20,20 +21,21 @@ RUN dnf install \
 RUN mkdir -p /nix
 RUN chown -R ${USER}:${GID} /nix
 
-COPY --chown=${USER}:${GID} . /dotfiles
+COPY --chown=${USER}:${GID} . ${HOME}/.dotfiles
 
-RUN git config --global --add safe.directory /dotfiles
+RUN git config --global --add safe.directory ${HOME}/.dotfiles
 
-WORKDIR /dotfiles
+WORKDIR ${HOME}/.dotfiles
 
-RUN git grep -l "delacruz" | xargs sed -i "s/delacruz/${USER}/g"
+RUN sed -i "s/delacruz/${USER}/g" environment.go
+RUN sed -i "/bashToZsh/s/false/true/g" environment.go
 
 USER ${USER}
 
 RUN ./scripts/nix-bootstrap.sh
-RUN . /home/${USER}/.nix-profile/etc/profile.d/nix.sh && \
+RUN . ${HOME}/.nix-profile/etc/profile.d/nix.sh && \
     nix run ".#dotfiles-cli" -- homeManager bootstrap --profile ${PROFILE}
 
-WORKDIR /home/${USER}
+WORKDIR ${HOME}
 
 ENTRYPOINT ["/bin/bash", "--login"]
