@@ -1,0 +1,365 @@
+{
+  "version": "3",
+  "services": {
+    "dotfiles-eject-linux-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-base"
+        }
+      },
+      "image": "dotfiles-eject/linux-base"
+    },
+    "dotfiles-eject-linux-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-full"
+        }
+      },
+      "image": "dotfiles-eject/linux-full"
+    },
+    "dotfiles-eject-linux-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-minimal"
+        }
+      },
+      "image": "dotfiles-eject/linux-minimal"
+    },
+    "dotfiles-eject-linux-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-standard"
+        }
+      },
+      "image": "dotfiles-eject/linux-standard"
+    },
+    "dotfiles-eject-linux-systemd-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-base"
+        }
+      },
+      "image": "dotfiles-eject/linux-systemd-base"
+    },
+    "dotfiles-eject-linux-systemd-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-full"
+        }
+      },
+      "image": "dotfiles-eject/linux-systemd-full"
+    },
+    "dotfiles-eject-linux-systemd-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-minimal"
+        }
+      },
+      "image": "dotfiles-eject/linux-systemd-minimal"
+    },
+    "dotfiles-eject-linux-systemd-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-standard"
+        }
+      },
+      "image": "dotfiles-eject/linux-systemd-standard"
+    },
+    "dotfiles-eject-wsl-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-base"
+        }
+      },
+      "image": "dotfiles-eject/wsl-base"
+    },
+    "dotfiles-eject-wsl-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-full"
+        }
+      },
+      "image": "dotfiles-eject/wsl-full"
+    },
+    "dotfiles-eject-wsl-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-minimal"
+        }
+      },
+      "image": "dotfiles-eject/wsl-minimal"
+    },
+    "dotfiles-eject-wsl-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-standard"
+        }
+      },
+      "image": "dotfiles-eject/wsl-standard"
+    },
+    "dotfiles-linux-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-base"
+        }
+      },
+      "image": "dotfiles/linux-base"
+    },
+    "dotfiles-linux-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-full"
+        }
+      },
+      "image": "dotfiles/linux-full"
+    },
+    "dotfiles-linux-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-minimal"
+        }
+      },
+      "image": "dotfiles/linux-minimal"
+    },
+    "dotfiles-linux-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-standard"
+        }
+      },
+      "image": "dotfiles/linux-standard"
+    },
+    "dotfiles-linux-systemd-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-base"
+        }
+      },
+      "image": "dotfiles/linux-systemd-base"
+    },
+    "dotfiles-linux-systemd-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-full"
+        }
+      },
+      "image": "dotfiles/linux-systemd-full"
+    },
+    "dotfiles-linux-systemd-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-minimal"
+        }
+      },
+      "image": "dotfiles/linux-systemd-minimal"
+    },
+    "dotfiles-linux-systemd-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-standard"
+        }
+      },
+      "image": "dotfiles/linux-systemd-standard"
+    },
+    "dotfiles-proot-linux-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-base"
+        }
+      },
+      "image": "dotfiles-proot/linux-base"
+    },
+    "dotfiles-proot-linux-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-full"
+        }
+      },
+      "image": "dotfiles-proot/linux-full"
+    },
+    "dotfiles-proot-linux-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-minimal"
+        }
+      },
+      "image": "dotfiles-proot/linux-minimal"
+    },
+    "dotfiles-proot-linux-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-standard"
+        }
+      },
+      "image": "dotfiles-proot/linux-standard"
+    },
+    "dotfiles-proot-linux-systemd-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-base"
+        }
+      },
+      "image": "dotfiles-proot/linux-systemd-base"
+    },
+    "dotfiles-proot-linux-systemd-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-full"
+        }
+      },
+      "image": "dotfiles-proot/linux-systemd-full"
+    },
+    "dotfiles-proot-linux-systemd-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-minimal"
+        }
+      },
+      "image": "dotfiles-proot/linux-systemd-minimal"
+    },
+    "dotfiles-proot-linux-systemd-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "linux-systemd-standard"
+        }
+      },
+      "image": "dotfiles-proot/linux-systemd-standard"
+    },
+    "dotfiles-proot-wsl-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-base"
+        }
+      },
+      "image": "dotfiles-proot/wsl-base"
+    },
+    "dotfiles-proot-wsl-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-full"
+        }
+      },
+      "image": "dotfiles-proot/wsl-full"
+    },
+    "dotfiles-proot-wsl-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-minimal"
+        }
+      },
+      "image": "dotfiles-proot/wsl-minimal"
+    },
+    "dotfiles-proot-wsl-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "wsl-standard"
+        }
+      },
+      "image": "dotfiles-proot/wsl-standard"
+    },
+    "dotfiles-wsl-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "wsl-base"
+        }
+      },
+      "image": "dotfiles/wsl-base"
+    },
+    "dotfiles-wsl-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "wsl-full"
+        }
+      },
+      "image": "dotfiles/wsl-full"
+    },
+    "dotfiles-wsl-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "wsl-minimal"
+        }
+      },
+      "image": "dotfiles/wsl-minimal"
+    },
+    "dotfiles-wsl-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "wsl-standard"
+        }
+      },
+      "image": "dotfiles/wsl-standard"
+    }
+  }
+}

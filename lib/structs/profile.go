@@ -20,7 +20,7 @@ func NewProfile(system enums.SystemProfile, user enums.UserProfile) *Profile {
 }
 
 func (p Profile) String() string {
-	return fmt.Sprintf("%s-%s", p.System.String(), p.User.String())
+	return fmt.Sprintf("%s-%s", p.System, p.User)
 }
 
 func (p Profile) MarshalText() ([]byte, error) {

@@ -55,10 +55,11 @@
     scripts = pkgs.buildGoModule {
       name = "dotfiles-scripts";
       src = ./.;
-      vendorHash = "sha256-QskDfpIr7RqmUh7/vWId12ui23JGhavOzA39kCXFj64=";
+      vendorHash = "sha256-bCYe7p5b7FwaCfMhwoYp8igs8V19b7mwqeSiA18hQYY=";
       subPackages = [
         "scripts/dotfiles-cli"
       ];
+      CGO_ENABLED = 0;
     };
 
     env = builtins.fromJSON (
@@ -201,6 +202,8 @@
           pkgs.writeShellScriptBin "dotfiles-codegen"
           ''
             ${lib.getExe' pkgs.go "go"} generate ./...
+            ${lib.getExe' scripts "dotfiles-cli"} environment > environment.json
+            ${lib.getExe' scripts "dotfiles-cli"} dockerCompose > docker-compose.json
           '';
 
         dotfiles-scripts = scripts;

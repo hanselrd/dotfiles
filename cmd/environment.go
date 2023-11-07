@@ -14,7 +14,7 @@ var environmentCmd = &cobra.Command{
 	Short: "Environment command",
 	Long:  "Environment command",
 	Run: func(cmd *cobra.Command, args []string) {
-		data, _ := json.Marshal(dotfiles.Environment)
+		data, _ := json.MarshalIndent(dotfiles.Environment, "", "  ")
 		fmt.Println(string(data))
 	},
 }

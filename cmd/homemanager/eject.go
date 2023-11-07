@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/itchyny/timefmt-go"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles"
@@ -24,6 +25,13 @@ var ejectCmd = &cobra.Command{
 	Use:   "eject",
 	Short: "Eject command",
 	Long:  "Eject command",
+	PreRunE: func(cmd *cobra.Command, args []string) (err error) {
+		if len(histDir) > len("/nix/store/")+32 {
+			err = fmt.Errorf("%s is too long", histDir)
+			log.Error().Err(err).Send()
+		}
+		return
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.Shell(fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile))
 		pkg1, _, _ := utils.Shell(fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile))

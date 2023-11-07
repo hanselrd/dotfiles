@@ -3,6 +3,8 @@ package cmd
 import (
 	"os"
 
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/cmd/homeage"
@@ -14,6 +16,11 @@ var rootCmd = &cobra.Command{
 	Use:   "dotfiles-cli",
 	Short: "Dotfiles CLI",
 	Long:  "Dotfiles CLI",
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		zerolog.SetGlobalLevel(zerolog.TraceLevel)
+		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+		return nil
+	},
 }
 
 func Execute() {

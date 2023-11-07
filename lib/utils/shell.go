@@ -2,11 +2,11 @@ package utils
 
 import (
 	"bytes"
-	"log"
 	"os/exec"
 	"strings"
 
 	expect "github.com/Netflix/go-expect"
+	"github.com/rs/zerolog/log"
 
 	"github.com/hanselrd/dotfiles/lib/flags"
 )
@@ -43,7 +43,7 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 		}
 	}
 
-	log.Printf("command=%s dryrun=%v", command, flags.Dryrun)
+	log.Debug().Str("command", command).Bool("dryrun", flags.Dryrun).Send()
 
 	if flags.Dryrun {
 		return
@@ -54,7 +54,7 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 
 	// c, err := expect.NewConsole(expect.WithStdout(os.Stdout), expect.WithStdout(stdoutBuf))
 	// if err != nil {
-	// 	log.Print("could not create console")
+	// 	log.Debug().Msg("could not create console")
 	// 	return
 	// }
 	// defer c.Close()
@@ -73,7 +73,7 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 
 	err = cmd.Start()
 	if err != nil {
-		log.Printf("could not start command: \"%s\"", command)
+		log.Debug().Msgf("could not start command: \"%s\"", command)
 		return
 	}
 
@@ -84,10 +84,10 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 	err = cmd.Wait()
 
 	stdout = strings.TrimSpace(stdoutBuf.String())
-	log.Printf("stdout=%s", stdout)
+	log.Trace().Str("stdout", stdout).Send()
 
 	stderr = strings.TrimSpace(stderrBuf.String())
-	log.Printf("stderr=%s", stderr)
+	log.Trace().Str("stderr", stderr).Send()
 
 	return
 }

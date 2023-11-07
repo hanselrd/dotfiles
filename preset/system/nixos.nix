@@ -118,8 +118,6 @@
     Version: ${system.nixos.version}
     Kernel:  ${boot.kernelPackages.kernel.version}
 
-    Environment: ${builtins.toJSON env}
-
   '';
 
   # Allow unfree packages
