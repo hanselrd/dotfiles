@@ -88,112 +88,75 @@
         };
       };
     });
-
-    nixosSystemPresets = ["nixos"];
-    darwinSystemPresets = ["macos"];
-    otherSystemPresets = [
-      "linux-systemd"
-      "linux"
-    ];
-    userPresets = [
-      "full"
-      "minimal"
-      "standard"
-      "base"
-    ];
   in rec {
     nixosConfigurations = builtins.listToAttrs (
-      builtins.concatMap
+      builtins.map
       (
-        systemPreset:
-          map
-          (
-            userPreset: {
-              name = "${systemPreset}-${userPreset}";
-              value = nixpkgs.lib.nixosSystem (
-                let
-                  preset = {
-                    system = systemPreset;
-                    user = userPreset;
+        profile: {
+          name = "${profile.system}-${profile.user}";
+          value = nixpkgs.lib.nixosSystem {
+            inherit system;
+
+            modules = [
+              {
+                nixpkgs = {
+                  inherit (pkgs) config;
+                };
+              }
+              ./profile/system/${profile.system}.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.${pkgs.config.home.username} = import ./profile/user/${profile.user}.nix;
+
+                home-manager.sharedModules = [
+                  homeage.homeManagerModules.homeage
+                  nix-colors.homeManagerModules.default
+                ];
+
+                home-manager.extraSpecialArgs =
+                  inputs
+                  // {
+                    inherit env profile;
                   };
-                in {
-                  inherit system;
+              }
+            ];
 
-                  modules = [
-                    {
-                      nixpkgs = {
-                        inherit (pkgs) config;
-                      };
-                    }
-                    ./preset/system/${systemPreset}.nix
-                    home-manager.nixosModules.home-manager
-                    {
-                      home-manager.useGlobalPkgs = true;
-                      home-manager.useUserPackages = true;
-                      home-manager.users.${pkgs.config.home.username} = import ./preset/user/${userPreset}.nix;
-
-                      home-manager.sharedModules = [
-                        homeage.homeManagerModules.homeage
-                        nix-colors.homeManagerModules.default
-                      ];
-
-                      home-manager.extraSpecialArgs =
-                        inputs
-                        // {
-                          inherit env preset;
-                        };
-                    }
-                  ];
-
-                  specialArgs =
-                    inputs
-                    // {
-                      inherit lib env preset;
-                    };
-                }
-              );
-            }
-          )
-          userPresets
+            specialArgs =
+              inputs
+              // {
+                inherit lib env profile;
+              };
+          };
+        }
       )
-      nixosSystemPresets
+      env.profiles.nixos
     );
 
     homeConfigurations = builtins.listToAttrs (
-      builtins.concatMap
+      builtins.map
       (
-        systemPreset:
-          map
-          (
-            userPreset: {
-              name = "${systemPreset}-${userPreset}";
-              value = home-manager.lib.homeManagerConfiguration (
-                let
-                  preset = {
-                    system = systemPreset;
-                    user = userPreset;
-                  };
-                in {
-                  inherit pkgs lib;
+        profile: {
+          name = "${profile.system}-${profile.user}";
+          value = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs lib;
 
-                  modules = [
-                    homeage.homeManagerModules.homeage
-                    nix-colors.homeManagerModules.default
-                    ./preset/user/${userPreset}.nix
-                  ];
+            modules = [
+              homeage.homeManagerModules.homeage
+              nix-colors.homeManagerModules.default
+              ./profile/user/${profile.user}.nix
+            ];
 
-                  extraSpecialArgs =
-                    inputs
-                    // {
-                      inherit pkgs env preset;
-                    };
-                }
-              );
-            }
-          )
-          userPresets
+            extraSpecialArgs =
+              inputs
+              // {
+                inherit pkgs env profile;
+              };
+          };
+        }
       )
-      otherSystemPresets
+      env.profiles.homeManager
     );
 
     packages = {

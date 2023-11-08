@@ -2,15 +2,15 @@
   config,
   lib,
   pkgs,
-  preset,
+  profile,
   ...
 }: {
   programs.neovim = lib.core.user.mkProgram "neovim" {};
 
-  programs.vscode = lib.core.user.mkProgramIf "vscode" (preset.user == "full") {};
+  programs.vscode = lib.core.user.mkProgramIf "vscode" (profile.user == "full") {};
 
   # home.packages = with pkgs;
-  #   lib.modules.mkIf (preset.user == "full") [
+  #   lib.modules.mkIf (profile.user == "full") [
   #     code-server
   #   ];
 

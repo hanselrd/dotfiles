@@ -7,7 +7,7 @@
   lib,
   pkgs,
   env,
-  preset,
+  profile,
   ...
 }: {
   imports = [
@@ -111,7 +111,7 @@
     result in civil and/or criminal penalties. All activities performed on this
     device are logged and monitored.
 
-    ${preset.system}-${preset.user}: rev: ${self.shortRev or "dirty"} @ ${lib.core.common.currentTimePretty time.timeZone} by ${pkgs.config.home.username}
+    ${profile.system}-${profile.user}: rev: ${self.shortRev or "dirty"} @ ${lib.core.common.currentTimePretty time.timeZone} by ${pkgs.config.home.username}
 
     Host:    ${networking.hostName}
     OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})

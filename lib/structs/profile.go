@@ -1,15 +1,14 @@
 package structs
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
 )
 
 type Profile struct {
-	System enums.SystemProfile
-	User   enums.UserProfile
+	System enums.SystemProfile `json:"system"`
+	User   enums.UserProfile   `json:"user"`
 }
 
 func NewProfile(system enums.SystemProfile, user enums.UserProfile) *Profile {
@@ -21,12 +20,4 @@ func NewProfile(system enums.SystemProfile, user enums.UserProfile) *Profile {
 
 func (p Profile) String() string {
 	return fmt.Sprintf("%s-%s", p.System, p.User)
-}
-
-func (p Profile) MarshalText() ([]byte, error) {
-	return []byte(p.String()), nil
-}
-
-func (p Profile) MarshalJSON() ([]byte, error) {
-	return json.Marshal(p.String())
 }

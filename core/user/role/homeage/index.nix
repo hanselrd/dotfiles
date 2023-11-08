@@ -3,14 +3,14 @@
   lib,
   pkgs,
   env,
-  preset,
+  profile,
   ...
 }: {
   homeage =
     lib.modules.mkIf env.roles.homeage.decrypt
     (lib.modules.mkMerge [
       (lib.modules.mkIf
-        (preset.system != "nixos" && preset.system != "linux-systemd") {
+        (profile.system != "nixos" && profile.system != "linux-systemd") {
           mount = "${env.user.cacheDirectory}/nix/homeage/secrets";
         })
       {
