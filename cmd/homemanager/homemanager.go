@@ -17,7 +17,7 @@ var HomeManagerCmd = &cobra.Command{
 	Use:   "homeManager",
 	Short: "Home Manager command",
 	Long:  "Home Manager command",
-	PreRunE: func(cmd *cobra.Command, args []string) (err error) {
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
 		if len(sf.Filter(profiles.HomeManagerProfiles, func(p structs.Profile) bool {
 			return p.String() == profile
 		})) != 1 {

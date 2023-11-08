@@ -25,7 +25,7 @@ var ejectCmd = &cobra.Command{
 	Use:   "eject",
 	Short: "Eject command",
 	Long:  "Eject command",
-	PreRunE: func(cmd *cobra.Command, args []string) (err error) {
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
 		if len(histDir) > len("/nix/store/")+32 {
 			err = fmt.Errorf("%s is too long", histDir)
 			log.Error().Err(err).Send()

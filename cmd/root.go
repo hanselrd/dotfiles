@@ -31,6 +31,8 @@ func Execute() {
 }
 
 func init() {
+	cobra.EnableTraverseRunHooks = true
+
 	rootCmd.PersistentFlags().BoolVar(&flags.Dryrun, "dryrun", false, "run without affecting the system")
 
 	rootCmd.AddCommand(homeage.HomeageCmd)
