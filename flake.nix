@@ -93,7 +93,7 @@
       builtins.map
       (
         profile: {
-          name = "${profile.system}-${profile.user}";
+          name = profile.name;
           value = nixpkgs.lib.nixosSystem {
             inherit system;
 
@@ -138,7 +138,7 @@
       builtins.map
       (
         profile: {
-          name = "${profile.system}-${profile.user}";
+          name = profile.name;
           value = home-manager.lib.homeManagerConfiguration {
             inherit pkgs lib;
 
@@ -203,6 +203,14 @@
 
             echo "Formatting *.lua file(s)"
             find $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
+          '';
+
+        dotfiles-all =
+          pkgs.writeShellScriptBin "dotfiles-all"
+          ''
+            ${lib.getExe dotfiles-upgrade}
+            ${lib.getExe dotfiles-codegen}
+            ${lib.getExe dotfiles-format}
           '';
       };
     };
