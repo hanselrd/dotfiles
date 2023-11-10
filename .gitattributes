@@ -1,5 +1,4 @@
 * text=auto eol=lf
-
 *.7z binary
 *.bz2 binary
 *.eot binary
@@ -22,3 +21,4 @@
 *.ttf binary
 *.woff binary
 *.zip binary
+ancestry/** linguist-documentation
