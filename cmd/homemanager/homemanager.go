@@ -2,6 +2,8 @@ package homemanager
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 	sf "github.com/sa-/slicefunk"
@@ -9,6 +11,7 @@ import (
 
 	"github.com/hanselrd/dotfiles/lib/profiles"
 	"github.com/hanselrd/dotfiles/lib/structs"
+	"github.com/hanselrd/dotfiles/lib/utils"
 )
 
 var profile string
@@ -32,5 +35,17 @@ var HomeManagerCmd = &cobra.Command{
 }
 
 func init() {
-	HomeManagerCmd.PersistentFlags().StringVar(&profile, "profile", profiles.LinuxBase.String(), "home manager profile")
+	defaultProfile := func() structs.Profile {
+		stdout, _, _ := utils.Shell("uname -a")
+		if strings.Contains(strings.ToLower(stdout), "microsoft") {
+			return profiles.WSLBase
+		}
+		if strings.Contains(stdout, "Linux") {
+			if _, err := os.Stat("/run/systemd/system"); !os.IsNotExist(err) {
+				return profiles.LinuxSystemdBase
+			}
+		}
+		return profiles.LinuxBase
+	}()
+	HomeManagerCmd.PersistentFlags().StringVar(&profile, "profile", defaultProfile.String(), "home manager profile")
 }
