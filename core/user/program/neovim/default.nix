@@ -39,6 +39,7 @@
     vim-startify
     vim-textobj-entire
     vim-textobj-function
+    vim-unimpaired
     vim-vsnip
     {
       plugin = lib.vendor.nix-colors-contrib.vimThemeFromScheme {scheme = config.colorScheme;};

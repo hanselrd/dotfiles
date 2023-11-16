@@ -27,7 +27,7 @@ var HomeManagerCmd = &cobra.Command{
 		return
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("homeManager called")
+		log.Info().Msg("homeManager called")
 	},
 }
 
