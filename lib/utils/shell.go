@@ -1,11 +1,13 @@
 package utils
 
 import (
+	"bufio"
 	"bytes"
+	"fmt"
+	"io"
 	"os/exec"
 	"strings"
 
-	expect "github.com/Netflix/go-expect"
 	"github.com/rs/zerolog/log"
 
 	"github.com/hanselrd/dotfiles/lib/flags"
@@ -13,23 +15,13 @@ import (
 
 type ShellOpt func(*ShellOpts) error
 
-type ExpectFn func(*expect.Console) error
-
 type ShellOpts struct {
-	Stdin    string
-	ExpectFn ExpectFn
+	Stdin string
 }
 
 func WithStdin(stdin string) ShellOpt {
 	return func(opts *ShellOpts) error {
 		opts.Stdin = stdin
-		return nil
-	}
-}
-
-func WithExpectFn(fn ExpectFn) ShellOpt {
-	return func(opts *ShellOpts) error {
-		opts.ExpectFn = fn
 		return nil
 	}
 }
@@ -43,7 +35,7 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 		}
 	}
 
-	log.Debug().Str("command", command).Bool("dryrun", flags.Dryrun).Send()
+	log.Info().Str("cmdline", command).Bool("dryrun", flags.Dryrun).Send()
 
 	if flags.Dryrun {
 		return
@@ -52,24 +44,14 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 	stdoutBuf := new(bytes.Buffer)
 	stderrBuf := new(bytes.Buffer)
 
-	// c, err := expect.NewConsole(expect.WithStdout(os.Stdout), expect.WithStdout(stdoutBuf))
-	// if err != nil {
-	// 	log.Debug().Msg("could not create console")
-	// 	return
-	// }
-	// defer c.Close()
-
 	cmd := exec.Command("bash", "--norc", "--noprofile", "-c", command)
-	// cmd.Stdin = c.Tty()
-	// cmd.Stdout = c.Tty()
-	// cmd.Stderr = c.Tty()
 
 	if len(options.Stdin) > 0 {
 		cmd.Stdin = strings.NewReader(options.Stdin)
 	}
 
-	cmd.Stdout = stdoutBuf
-	cmd.Stderr = stderrBuf
+	stdoutPipe, _ := cmd.StdoutPipe()
+	stderrPipe, _ := cmd.StderrPipe()
 
 	err = cmd.Start()
 	if err != nil {
@@ -77,17 +59,23 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 		return
 	}
 
-	// if options.ExpectFn != nil {
-	// 	options.ExpectFn(c)
-	// }
+	go scan("cmdout", stdoutPipe, stdoutBuf)
+	go scan("cmderr", stderrPipe, stderrBuf)
 
 	err = cmd.Wait()
 
 	stdout = strings.TrimSpace(stdoutBuf.String())
-	log.Trace().Str("stdout", stdout).Send()
-
 	stderr = strings.TrimSpace(stderrBuf.String())
-	log.Trace().Str("stderr", stderr).Send()
 
 	return
+}
+
+func scan(name string, pipe io.ReadCloser, buffer *bytes.Buffer) {
+	scanner := bufio.NewScanner(pipe)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		text := scanner.Text()
+		log.Debug().Str(name, text).Send()
+		buffer.WriteString(fmt.Sprintln(text))
+	}
 }
