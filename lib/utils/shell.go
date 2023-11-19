@@ -35,6 +35,10 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 		}
 	}
 
+	if len(options.Stdin) > 0 {
+		log.Info().Str("cmdin", options.Stdin).Send()
+	}
+
 	log.Info().Str("cmdline", command).Send()
 
 	if flags.Dryrun {
