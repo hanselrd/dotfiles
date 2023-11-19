@@ -3,6 +3,7 @@ package cmd
 import (
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
@@ -18,7 +19,35 @@ var rootCmd = &cobra.Command{
 	Long:  "Dotfiles CLI",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		zerolog.SetGlobalLevel(zerolog.TraceLevel)
-		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+		log.Logger = log.Output(zerolog.ConsoleWriter{
+			Out: os.Stderr,
+			FormatLevel: func(i interface{}) string {
+				var attrs []color.Attribute
+				switch i.(string) {
+				case zerolog.LevelTraceValue:
+					attrs = []color.Attribute{color.FgHiBlack}
+				case zerolog.LevelDebugValue:
+					attrs = []color.Attribute{color.FgCyan}
+				case zerolog.LevelInfoValue:
+					attrs = []color.Attribute{color.FgGreen}
+				case zerolog.LevelWarnValue:
+					attrs = []color.Attribute{color.FgYellow}
+				case zerolog.LevelErrorValue:
+					attrs = []color.Attribute{color.FgRed}
+				case zerolog.LevelFatalValue:
+					attrs = []color.Attribute{color.FgHiRed, color.BlinkSlow}
+				case zerolog.LevelPanicValue:
+					attrs = []color.Attribute{color.BgHiRed, color.BlinkRapid}
+				default:
+					attrs = []color.Attribute{color.Reset}
+				}
+				return color.New(attrs...).Sprintf("%-5s", i) + "|"
+			},
+			FormatFieldName: func(i interface{}) string {
+				return color.HiBlackString("%s= ", i)
+			},
+		})
+		log.Info().Bool("dryrun", flags.Dryrun).Send()
 		return nil
 	},
 }

@@ -55,7 +55,7 @@
     scripts = pkgs.buildGoModule {
       name = "dotfiles-scripts";
       src = ./.;
-      vendorHash = "sha256-7iqHIkb0SRJxDnODsAkThxLx+7amLwQ3R6WifSNw/qg=";
+      vendorHash = "sha256-WttOOKf1ZepZbAu8E+HHv0OEyLDz7k+BRdtuaficrvA=";
       subPackages = [
         "scripts/dotfiles-cli"
       ];

@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	sf "github.com/sa-/slicefunk"
 	"github.com/spf13/cobra"
@@ -35,6 +36,8 @@ var HomeManagerCmd = &cobra.Command{
 }
 
 func init() {
+	zerolog.SetGlobalLevel(zerolog.Disabled)
+
 	defaultProfile := func() structs.Profile {
 		stdout, _, _ := utils.Shell("uname -a")
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {

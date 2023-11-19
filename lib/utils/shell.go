@@ -35,7 +35,7 @@ func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err 
 		}
 	}
 
-	log.Info().Str("cmdline", command).Bool("dryrun", flags.Dryrun).Send()
+	log.Info().Str("cmdline", command).Send()
 
 	if flags.Dryrun {
 		return
