@@ -73,6 +73,7 @@
   extraPackages = with pkgs; let
     otherNodePackages = callPackage ./nodePackages {};
   in [
+    clang-tools
     gopls
     jdt-language-server
     lua-language-server

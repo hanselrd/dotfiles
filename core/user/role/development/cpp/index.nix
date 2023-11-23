@@ -2,9 +2,11 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: {
   home.packages = with pkgs; [
+    bear
     ccache
     clang-tools
     cmake
@@ -26,7 +28,7 @@
     CMAKE_BUILD_TYPE = "Release";
     CMAKE_COLOR_DIAGNOSTICS = "ON";
     CMAKE_GENERATOR = "Ninja";
-    CMAKE_PREFIX_PATH = "/nix/var/nix/profiles/per-user/${config.home.username}/home-manager/home-path";
-    CPM_SOURCE_CACHE = "${config.home.homeDirectory}/.cache/cpm";
+    # CMAKE_PREFIX_PATH = "/nix/var/nix/profiles/per-user/${config.home.username}/home-manager/home-path";
+    CPM_SOURCE_CACHE = "${env.user.cacheDirectory}/cpm";
   };
 }

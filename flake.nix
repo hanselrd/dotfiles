@@ -166,6 +166,7 @@
           ''
             ${lib.getExe' pkgs.go "go"} generate ./...
             ${lib.getExe' scripts "dotfiles-cli"} environment > environment.json
+            ${lib.getExe' scripts "dotfiles-cli"} roleImport > core/user/roles.nix
             ${lib.getExe' scripts "dotfiles-cli"} dockerCompose > docker-compose.json
           '';
 

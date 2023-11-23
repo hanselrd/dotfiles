@@ -1,9 +1,13 @@
 package cmd
 
 import (
+	"os"
+	"text/template"
+
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
+	"github.com/hanselrd/dotfiles/lib/enums"
 	"github.com/hanselrd/dotfiles/lib/utils"
 )
 
@@ -22,8 +26,13 @@ var roleImportCmd = &cobra.Command{
 		log.Info().Msg("roleImport called")
 		log.Warn().Msg("roleImport called")
 		log.Error().Msg("roleImport called")
-		log.Fatal().Msg("roleImport called")
-		log.Panic().Msg("roleImport called")
+		// log.Fatal().Msg("roleImport called")
+		// log.Panic().Msg("roleImport called")
+
+		tmpl, err := template.ParseGlob("templates/*.gotmpl")
+		cobra.CheckErr(err)
+		err = tmpl.ExecuteTemplate(os.Stdout, "roles.nix.gotmpl", enums.Roles())
+		cobra.CheckErr(err)
 	},
 }
 
