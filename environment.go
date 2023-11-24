@@ -26,18 +26,20 @@ var Environment = structs.Environment{
 		CacheDirectory:  cacheDir,
 	},
 	Theme: themes.ThemeMapStruct[enums.ThemeChalk],
-	Roles: map[enums.Role]map[string]bool{
-		enums.RoleHomeage: {
-			"decrypt": false,
-		},
-		enums.RoleNix: {
-			"sandbox": true,
-		},
-		enums.RoleShell: {
-			"bashToZsh": false,
-			"ldPreload": false,
-			"rts":       false,
-			"theme":     false,
+	Roles: structs.EnvironmentRoles{
+		User: map[enums.UserRole]map[string]bool{
+			enums.UserRoleHomeage: {
+				"decrypt": false,
+			},
+			enums.UserRoleNix: {
+				"sandbox": true,
+			},
+			enums.UserRoleShell: {
+				"bashToZsh": false,
+				"ldPreload": false,
+				"rts":       false,
+				"theme":     false,
+			},
 		},
 	},
 	Profiles: structs.EnvironmentProfiles{

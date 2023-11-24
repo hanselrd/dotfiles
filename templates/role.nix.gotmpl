@@ -1,0 +1,18 @@
+{{define "role.nix" -}}
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.roles.{{.type}}.{{.role}};
+in {
+  options = {
+    roles.{{.type}}.{{.role}} = {
+      enable = lib.mkEnableOption "roles.{{.type}}.{{.role}}";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {};
+}
+{{end}}

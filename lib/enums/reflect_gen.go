@@ -2,8 +2,9 @@
 package enums
 
 var Reflect = map[string]interface{}{
-	"Roles":          Roles,
 	"SystemProfiles": SystemProfiles,
+	"SystemRoles":    SystemRoles,
 	"Themes":         Themes,
 	"UserProfiles":   UserProfiles,
+	"UserRoles":      UserRoles,
 }

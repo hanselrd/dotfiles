@@ -22,5 +22,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager = lib.core.user.mkProgram "home-manager" {};
 
+  home.enableNixpkgsReleaseCheck = false;
+
   # services.home-manager.autoUpgrade = lib.core.user.mkService "home-manager.autoUpgrade" {};
 }

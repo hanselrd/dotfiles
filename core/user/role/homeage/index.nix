@@ -7,7 +7,7 @@
   ...
 }: {
   homeage =
-    lib.modules.mkIf env.roles.homeage.decrypt
+    lib.modules.mkIf env.roles.user.homeage.decrypt
     (lib.modules.mkMerge [
       (lib.modules.mkIf
         (profile.system != "nixos" && profile.system != "linux-systemd") {

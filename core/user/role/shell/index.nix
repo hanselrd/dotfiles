@@ -26,7 +26,7 @@
     {
       HISTTIMEFORMAT = "%y-%-m-%-d %-H:%M:%S  ";
     }
-    (lib.modules.mkIf env.roles.shell.ldPreload {
+    (lib.modules.mkIf env.roles.user.shell.ldPreload {
       LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
     })
   ];

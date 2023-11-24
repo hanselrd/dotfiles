@@ -103,7 +103,8 @@
                   inherit (pkgs) config;
                 };
               }
-              ./profile/system/${profile.system}.nix
+              ./system/roles.nix
+              ./system/profiles/${profile.system}.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
@@ -113,6 +114,7 @@
                 home-manager.sharedModules = [
                   homeage.homeManagerModules.homeage
                   nix-colors.homeManagerModules.default
+                  ./user/roles.nix
                 ];
 
                 home-manager.extraSpecialArgs =
@@ -145,6 +147,7 @@
             modules = [
               homeage.homeManagerModules.homeage
               nix-colors.homeManagerModules.default
+              ./user/roles.nix
               ./profile/user/${profile.user}.nix
             ];
 
@@ -161,13 +164,19 @@
 
     packages = {
       ${system} = rec {
-        dotfiles-codegen =
-          pkgs.writeShellScriptBin "dotfiles-codegen"
+        dotfiles-codegen0 =
+          pkgs.writeShellScriptBin "dotfiles-codegen0"
           ''
             ${lib.getExe' pkgs.go "go"} generate ./...
+          '';
+
+        dotfiles-codegen1 =
+          pkgs.writeShellScriptBin "dotfiles-codegen1"
+          ''
+            ${lib.getExe dotfiles-codegen0}
             ${lib.getExe' scripts "dotfiles-cli"} environment > environment.json
-            ${lib.getExe' scripts "dotfiles-cli"} roleImport > core/user/roles.nix
             ${lib.getExe' scripts "dotfiles-cli"} dockerCompose > docker-compose.json
+            ${lib.getExe' scripts "dotfiles-cli"} template
           '';
 
         dotfiles-scripts = scripts;
@@ -210,7 +219,7 @@
           pkgs.writeShellScriptBin "dotfiles-all"
           ''
             ${lib.getExe dotfiles-upgrade}
-            ${lib.getExe dotfiles-codegen}
+            ${lib.getExe dotfiles-codegen1}
             ${lib.getExe dotfiles-format}
           '';
       };

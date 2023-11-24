@@ -7,7 +7,7 @@
 }: {
   initExtra = ''
     ${
-      if env.roles.shell.theme
+      if env.roles.user.shell.theme
       then ''
         sh ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
       ''
@@ -15,7 +15,7 @@
     }
 
     ${
-      if env.roles.shell.rts
+      if env.roles.user.shell.rts
       then ''
         if [ -e ${config.home.homeDirectory}/.secrets/rts.sh ]; then
           . ${config.home.homeDirectory}/.secrets/rts.sh
@@ -30,7 +30,7 @@
     fi
 
     ${
-      if env.roles.shell.bashToZsh
+      if env.roles.user.shell.bashToZsh
       then ''
         if command -v zsh &> /dev/null; then
           export SHELL=$(command -v zsh)

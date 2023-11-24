@@ -1,3 +1,3 @@
 package enums
 
-//go:generate go run reflect_codegen.go Role SystemProfile Theme UserProfile
+//go:generate go run reflect_codegen.go SystemProfile SystemRole Theme UserProfile UserRole

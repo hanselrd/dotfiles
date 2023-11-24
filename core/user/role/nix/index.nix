@@ -14,7 +14,7 @@
 
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
-    sandbox = env.roles.nix.sandbox;
+    sandbox = env.roles.user.nix.sandbox;
     show-trace = true;
   };
 
