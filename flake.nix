@@ -78,10 +78,6 @@
             lib = self;
           });
       core = {
-        user = (import ./lib/user.nix) {
-          inherit pkgs env;
-          lib = self;
-        };
         common = (import ./lib/common.nix) {
           inherit pkgs env;
           lib = self;
