@@ -53,7 +53,7 @@ in {
           screen_tabs = 0;
           shadow_distribution_path_prefix = 1;
           shadow_other_users = 0;
-          show_cpu_frequency = 0;
+          show_cpu_frequency = 1;
           show_cpu_temperature = 1;
           show_cpu_usage = 1;
           show_merged_command = 1;
