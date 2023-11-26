@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./roles/boot.nix
+    ./roles/bootstrap.nix
     ./roles/i18n.nix
     ./roles/monitoring.nix
     ./roles/motd.nix

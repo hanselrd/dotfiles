@@ -12,5 +12,10 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {};
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      docker
+      docker-compose
+    ];
+  };
 }

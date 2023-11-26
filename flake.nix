@@ -109,7 +109,7 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.${pkgs.config.home.username} = import ./profile/user/${profile.user}.nix;
+                home-manager.users.${pkgs.config.home.username} = import ./user/profiles/${profile.user}.nix;
 
                 home-manager.sharedModules = [
                   homeage.homeManagerModules.homeage
@@ -148,7 +148,7 @@
               homeage.homeManagerModules.homeage
               nix-colors.homeManagerModules.default
               ./user/roles.nix
-              ./profile/user/${profile.user}.nix
+              ./user/profiles/${profile.user}.nix
             ];
 
             extraSpecialArgs =
@@ -190,7 +190,7 @@
             ${lib.getExe' pkgs.go "go"} mod tidy
             ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
 
-            pushd core/user/program/neovim/nodePackages
+            pushd user/roles/neovim/nodePackages
             ${lib.getExe' pkgs.node2nix "node2nix"} -i <(echo "[\"emmet-ls\"]")
             popd
           '';

@@ -7,6 +7,7 @@ type SystemRole uint
 
 const (
 	SystemRoleBoot           SystemRole = iota // boot
+	SystemRoleBootstrap                        // bootstrap
 	SystemRoleI18n                             // i18n
 	SystemRoleMonitoring                       // monitoring
 	SystemRoleMotd                             // motd

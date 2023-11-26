@@ -8,21 +8,51 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[UserRoleBrowser-0]
-	_ = x[UserRoleDevelopment-1]
-	_ = x[UserRoleDocker-2]
-	_ = x[UserRoleEditor-3]
-	_ = x[UserRoleHomeage-4]
-	_ = x[UserRoleNix-5]
-	_ = x[UserRolePager-6]
-	_ = x[UserRoleShell-7]
-	_ = x[UserRoleTerminal-8]
-	_ = x[UserRoleTheme-9]
+	_ = x[UserRoleAlacritty-0]
+	_ = x[UserRoleBash-1]
+	_ = x[UserRoleBat-2]
+	_ = x[UserRoleBootstrap-3]
+	_ = x[UserRoleBrowser-4]
+	_ = x[UserRoleDevelopment-5]
+	_ = x[UserRoleDevelopmentCpp-6]
+	_ = x[UserRoleDevelopmentDhall-7]
+	_ = x[UserRoleDevelopmentElixir-8]
+	_ = x[UserRoleDevelopmentGo-9]
+	_ = x[UserRoleDevelopmentHaskell-10]
+	_ = x[UserRoleDevelopmentJava-11]
+	_ = x[UserRoleDevelopmentLua-12]
+	_ = x[UserRoleDevelopmentNickel-13]
+	_ = x[UserRoleDevelopmentNix-14]
+	_ = x[UserRoleDevelopmentNodejs-15]
+	_ = x[UserRoleDevelopmentPurescript-16]
+	_ = x[UserRoleDevelopmentPython-17]
+	_ = x[UserRoleDevelopmentRust-18]
+	_ = x[UserRoleDevelopmentShell-19]
+	_ = x[UserRoleDocker-20]
+	_ = x[UserRoleEditor-21]
+	_ = x[UserRoleEza-22]
+	_ = x[UserRoleFzf-23]
+	_ = x[UserRoleGit-24]
+	_ = x[UserRoleHomeage-25]
+	_ = x[UserRoleHtop-26]
+	_ = x[UserRoleNeovim-27]
+	_ = x[UserRoleNix-28]
+	_ = x[UserRolePager-29]
+	_ = x[UserRoleScripts-30]
+	_ = x[UserRoleShell-31]
+	_ = x[UserRoleSsh-32]
+	_ = x[UserRoleStarship-33]
+	_ = x[UserRoleTerminal-34]
+	_ = x[UserRoleTheme-35]
+	_ = x[UserRoleTmux-36]
+	_ = x[UserRoleVscode-37]
+	_ = x[UserRoleZsh-38]
+	_ = x[UserRoleZzz-39]
 }
 
-const _UserRole_name = "browserdevelopmentdockereditorhomeagenixpagershellterminaltheme"
+const _UserRole_name = "alacrittybashbatbootstrapbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldockereditorezafzfgithomeagehtopneovimnixpagerscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
 
-var _UserRole_index = [...]uint8{0, 7, 18, 24, 30, 37, 40, 45, 50, 58, 63}
+var _UserRole_index = [...]uint16{0, 9, 13, 16, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 287, 293, 296, 299, 302, 309, 313, 319, 322, 327, 334, 339, 342, 350, 358, 363, 367, 373, 376, 379}
 
 func (i UserRole) String() string {
 	if i >= UserRole(len(_UserRole_index)-1) {

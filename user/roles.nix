@@ -5,15 +5,45 @@
   ...
 }: {
   imports = [
+    ./roles/alacritty.nix
+    ./roles/bash.nix
+    ./roles/bat.nix
+    ./roles/bootstrap.nix
     ./roles/browser.nix
     ./roles/development.nix
+    ./roles/development.cpp.nix
+    ./roles/development.dhall.nix
+    ./roles/development.elixir.nix
+    ./roles/development.go.nix
+    ./roles/development.haskell.nix
+    ./roles/development.java.nix
+    ./roles/development.lua.nix
+    ./roles/development.nickel.nix
+    ./roles/development.nix.nix
+    ./roles/development.nodejs.nix
+    ./roles/development.purescript.nix
+    ./roles/development.python.nix
+    ./roles/development.rust.nix
+    ./roles/development.shell.nix
     ./roles/docker.nix
     ./roles/editor.nix
+    ./roles/eza.nix
+    ./roles/fzf.nix
+    ./roles/git.nix
     ./roles/homeage.nix
+    ./roles/htop.nix
+    ./roles/neovim.nix
     ./roles/nix.nix
     ./roles/pager.nix
+    ./roles/scripts.nix
     ./roles/shell.nix
+    ./roles/ssh.nix
+    ./roles/starship.nix
     ./roles/terminal.nix
     ./roles/theme.nix
+    ./roles/tmux.nix
+    ./roles/vscode.nix
+    ./roles/zsh.nix
+    ./roles/zzz.nix
   ];
 }

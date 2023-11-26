@@ -12,5 +12,11 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {};
+  config = lib.mkIf cfg.enable {
+    roles.user.alacritty.enable = true;
+
+    home.sessionVariables = {
+      TERMINAL = "alacritty";
+    };
+  };
 }

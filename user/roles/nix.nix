@@ -1,7 +1,9 @@
 {
+  nixpkgs,
   config,
   lib,
   pkgs,
+  env,
   ...
 }: let
   cfg = config.roles.user.nix;
@@ -12,5 +14,19 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {};
+  config = lib.mkIf cfg.enable {
+    nix.registry.nixpkgs.flake = nixpkgs;
+
+    nixpkgs.config.allowUnfree = pkgs.config.allowUnfree;
+
+    nix.package = lib.mkDefault pkgs.nix;
+
+    nix.settings = {
+      experimental-features = ["nix-command" "flakes"];
+      sandbox = env.roles.user.nix.sandbox;
+      show-trace = true;
+    };
+
+    programs.nix-index.enable = true;
+  };
 }

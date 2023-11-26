@@ -9,21 +9,22 @@ func _() {
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
 	_ = x[SystemRoleBoot-0]
-	_ = x[SystemRoleI18n-1]
-	_ = x[SystemRoleMonitoring-2]
-	_ = x[SystemRoleMotd-3]
-	_ = x[SystemRoleNetworking-4]
-	_ = x[SystemRoleNix-5]
-	_ = x[SystemRoleShell-6]
-	_ = x[SystemRoleTime-7]
-	_ = x[SystemRoleUser-8]
-	_ = x[SystemRoleVirtualization-9]
-	_ = x[SystemRoleX11-10]
+	_ = x[SystemRoleBootstrap-1]
+	_ = x[SystemRoleI18n-2]
+	_ = x[SystemRoleMonitoring-3]
+	_ = x[SystemRoleMotd-4]
+	_ = x[SystemRoleNetworking-5]
+	_ = x[SystemRoleNix-6]
+	_ = x[SystemRoleShell-7]
+	_ = x[SystemRoleTime-8]
+	_ = x[SystemRoleUser-9]
+	_ = x[SystemRoleVirtualization-10]
+	_ = x[SystemRoleX11-11]
 }
 
-const _SystemRole_name = "booti18nmonitoringmotdnetworkingnixshelltimeuservirtualizationx11"
+const _SystemRole_name = "bootbootstrapi18nmonitoringmotdnetworkingnixshelltimeuservirtualizationx11"
 
-var _SystemRole_index = [...]uint8{0, 4, 8, 18, 22, 32, 35, 40, 44, 48, 62, 65}
+var _SystemRole_index = [...]uint8{0, 4, 13, 17, 27, 31, 41, 44, 49, 53, 57, 71, 74}
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRole_index)-1) {
