@@ -71,17 +71,18 @@ in {
         // (with config.lib.htop;
           leftMeters [
             (bar "LeftCPUs2")
+            (bar "CPU")
             (bar "Memory")
             (bar "Swap")
-            # (text "Zram")
+            (bar "HugePages")
           ])
         // (with config.lib.htop;
           rightMeters [
             (bar "RightCPUs2")
+            (text "System")
             (text "Tasks")
             (text "LoadAverage")
             (text "Uptime")
-            # (text "Systemd")
           ]);
     };
   };
