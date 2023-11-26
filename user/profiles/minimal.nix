@@ -20,6 +20,7 @@
     # android-tools
     # ansible
     # atool
+    # btop
     # fd
     # figlet
     # flock
@@ -55,7 +56,6 @@
     # youtube-dl
     # zlib
     # zstd
-    btop
     lm_sensors
   ];
 }

@@ -14,9 +14,9 @@
   roles.user.zzz.enable = true;
 
   home.packages = with pkgs; [
+    # hyperfine
     age
     cpio
-    hyperfine
     rsync
     tree
     tshark

@@ -9,9 +9,9 @@
   ];
 
   home.packages = with pkgs; [
+    # pywal
     ffmpeg
     pandoc
-    pywal
     tlp
     udisks
     ventoy-bin
