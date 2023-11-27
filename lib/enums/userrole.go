@@ -36,6 +36,7 @@ const (
 	UserRoleNeovim                                // neovim
 	UserRoleNix                                   // nix
 	UserRolePager                                 // pager
+	UserRoleRipgrep                               // ripgrep
 	UserRoleScripts                               // scripts
 	UserRoleShell                                 // shell
 	UserRoleSsh                                   // ssh

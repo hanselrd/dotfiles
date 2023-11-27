@@ -35,6 +35,7 @@
     ./roles/neovim.nix
     ./roles/nix.nix
     ./roles/pager.nix
+    ./roles/ripgrep.nix
     ./roles/scripts.nix
     ./roles/shell.nix
     ./roles/ssh.nix

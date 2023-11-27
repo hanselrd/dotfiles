@@ -38,21 +38,22 @@ func _() {
 	_ = x[UserRoleNeovim-27]
 	_ = x[UserRoleNix-28]
 	_ = x[UserRolePager-29]
-	_ = x[UserRoleScripts-30]
-	_ = x[UserRoleShell-31]
-	_ = x[UserRoleSsh-32]
-	_ = x[UserRoleStarship-33]
-	_ = x[UserRoleTerminal-34]
-	_ = x[UserRoleTheme-35]
-	_ = x[UserRoleTmux-36]
-	_ = x[UserRoleVscode-37]
-	_ = x[UserRoleZsh-38]
-	_ = x[UserRoleZzz-39]
+	_ = x[UserRoleRipgrep-30]
+	_ = x[UserRoleScripts-31]
+	_ = x[UserRoleShell-32]
+	_ = x[UserRoleSsh-33]
+	_ = x[UserRoleStarship-34]
+	_ = x[UserRoleTerminal-35]
+	_ = x[UserRoleTheme-36]
+	_ = x[UserRoleTmux-37]
+	_ = x[UserRoleVscode-38]
+	_ = x[UserRoleZsh-39]
+	_ = x[UserRoleZzz-40]
 }
 
-const _UserRole_name = "alacrittybashbatbootstrapbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldockereditorezafzfgithomeagehtopneovimnixpagerscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
+const _UserRole_name = "alacrittybashbatbootstrapbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldockereditorezafzfgithomeagehtopneovimnixpagerripgrepscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
 
-var _UserRole_index = [...]uint16{0, 9, 13, 16, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 287, 293, 296, 299, 302, 309, 313, 319, 322, 327, 334, 339, 342, 350, 358, 363, 367, 373, 376, 379}
+var _UserRole_index = [...]uint16{0, 9, 13, 16, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 287, 293, 296, 299, 302, 309, 313, 319, 322, 327, 334, 341, 346, 349, 357, 365, 370, 374, 380, 383, 386}
 
 func (i UserRole) String() string {
 	if i >= UserRole(len(_UserRole_index)-1) {

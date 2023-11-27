@@ -32,6 +32,7 @@ in {
       ctags
       gnumake
       gnupatch
+      objconv
 
       # libGL
       # libGL.dev
