@@ -46,7 +46,7 @@ in {
           hide_running_in_container = 0;
           hide_userland_threads = 0;
           highlight_base_name = 1;
-          highlight_changes = 1;
+          highlight_changes = 0;
           highlight_changes_delay_secs = 5;
           highlight_deleted_exe = 1;
           highlight_megabytes = 1;
