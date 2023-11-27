@@ -20,7 +20,7 @@ in {
           account_guest_in_cpu_meter = 0;
           all_branches_collapsed = 0;
           color_scheme = 0;
-          cpu_count_from_one = 1;
+          cpu_count_from_one = 0;
           degree_fahrenheit = 0;
           delay = 15;
           detailed_cpu_time = 0;
