@@ -12,7 +12,9 @@
   roles.user.docker.enable = true;
 
   home.packages = with pkgs; [
+    (lib.hiPrio stress)
     hyperfine
-    lm_sensors
+    speedtest-cli
+    tshark
   ];
 }

@@ -18,13 +18,10 @@
     age
     cpio
     curl
-    git-crypt
     pfetch
     rsync
-    speedtest-cli
     strace
     tree
-    tshark
     wget
   ];
 }
