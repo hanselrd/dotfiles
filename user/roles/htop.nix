@@ -26,11 +26,12 @@ in {
           detailed_cpu_time = 0;
           enable_mouse = 1;
           fields = with config.lib.htop.fields; [
+            PPID
             PID
             USER
-            # PRIORITY
-            # NICE
             PROCESSOR
+            PRIORITY
+            NICE
             STATE
             NLWP
             PERCENT_CPU

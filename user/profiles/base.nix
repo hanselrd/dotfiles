@@ -21,6 +21,7 @@
     git-crypt
     pfetch
     rsync
+    speedtest-cli
     strace
     tree
     tshark
