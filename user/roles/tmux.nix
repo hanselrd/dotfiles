@@ -16,6 +16,7 @@ in {
     programs.tmux = {
       enable = true;
       clock24 = true;
+      historyLimit = 50000;
       keyMode = "vi";
       plugins = with pkgs.tmuxPlugins; [
         better-mouse-mode

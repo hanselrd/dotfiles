@@ -77,11 +77,9 @@
             inherit pkgs system env;
             lib = self;
           });
-      core = {
-        common = (import ./lib/common.nix) {
-          inherit pkgs env;
-          lib = self;
-        };
+      common = (import ./lib/common.nix) {
+        inherit pkgs env;
+        lib = self;
       };
     });
   in rec {
