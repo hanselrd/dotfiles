@@ -8,10 +8,13 @@ import (
 	"strings"
 	"text/template"
 
+	"github.com/iancoleman/strcase"
 	"github.com/rs/zerolog/log"
+	sf "github.com/sa-/slicefunk"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/lib/interfaces"
 )
 
 var templateCmd = &cobra.Command{
@@ -19,7 +22,10 @@ var templateCmd = &cobra.Command{
 	Short: "Template command",
 	Long:  "Template command",
 	Run: func(cmd *cobra.Command, args []string) {
-		tmpl := template.New("")
+		tmpl := template.New("").Funcs(template.FuncMap{
+			"camel":      strcase.ToCamel,
+			"lowerCamel": strcase.ToLowerCamel,
+		})
 
 		err := filepath.Walk("templates", func(path string, info fs.FileInfo, err error) error {
 			if strings.HasSuffix(path, ".gotmpl") {
@@ -33,20 +39,24 @@ var templateCmd = &cobra.Command{
 		})
 		cobra.CheckErr(err)
 
+		f, err := os.Create("lib/profiles.nix")
+		cobra.CheckErr(err)
+		err = tmpl.ExecuteTemplate(f, "profiles.nix",
+			sf.Flatten([][]interfaces.Profile{
+				sf.Map(enums.SystemProfiles(), func(p enums.SystemProfile) interfaces.Profile { return p }),
+				sf.Map(enums.UserProfiles(), func(p enums.UserProfile) interfaces.Profile { return p }),
+			}))
+		cobra.CheckErr(err)
+
 		for _, role := range enums.SystemRoles() {
 			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", role)); !os.IsNotExist(err) {
 				log.Debug().Str("file", fmt.Sprintf("system/roles/%s.nix", role)).Msg("skipping, already exists")
 				continue
 			}
 
-			data := map[string]any{
-				"type": "system",
-				"role": role,
-			}
-
 			f, err := os.Create(fmt.Sprintf("system/roles/%s.nix", role))
 			cobra.CheckErr(err)
-			err = tmpl.ExecuteTemplate(f, "role.nix", data)
+			err = tmpl.ExecuteTemplate(f, "role.nix", role)
 			cobra.CheckErr(err)
 		}
 
@@ -56,18 +66,13 @@ var templateCmd = &cobra.Command{
 				continue
 			}
 
-			data := map[string]any{
-				"type": "user",
-				"role": role,
-			}
-
 			f, err := os.Create(fmt.Sprintf("user/roles/%s.nix", role))
 			cobra.CheckErr(err)
-			err = tmpl.ExecuteTemplate(f, "role.nix", data)
+			err = tmpl.ExecuteTemplate(f, "role.nix", role)
 			cobra.CheckErr(err)
 		}
 
-		f, err := os.Create("system/roles.nix")
+		f, err = os.Create("system/roles.nix")
 		cobra.CheckErr(err)
 		err = tmpl.ExecuteTemplate(f, "roles.nix", enums.SystemRoles())
 		cobra.CheckErr(err)

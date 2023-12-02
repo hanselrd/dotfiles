@@ -8,10 +8,10 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[UserRoleAlacritty-0]
-	_ = x[UserRoleBash-1]
-	_ = x[UserRoleBat-2]
-	_ = x[UserRoleBootstrap-3]
+	_ = x[UserRoleBootstrap-0]
+	_ = x[UserRoleAlacritty-1]
+	_ = x[UserRoleBash-2]
+	_ = x[UserRoleBat-3]
 	_ = x[UserRoleBrowser-4]
 	_ = x[UserRoleDevelopment-5]
 	_ = x[UserRoleDevelopmentCpp-6]
@@ -51,9 +51,9 @@ func _() {
 	_ = x[UserRoleZzz-40]
 }
 
-const _UserRole_name = "alacrittybashbatbootstrapbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldockereditorezafzfgithomeagehtopneovimnixpagerripgrepscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
+const _UserRole_name = "bootstrapalacrittybashbatbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldockereditorezafzfgithomeagehtopneovimnixpagerripgrepscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
 
-var _UserRole_index = [...]uint16{0, 9, 13, 16, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 287, 293, 296, 299, 302, 309, 313, 319, 322, 327, 334, 341, 346, 349, 357, 365, 370, 374, 380, 383, 386}
+var _UserRole_index = [...]uint16{0, 9, 18, 22, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 287, 293, 296, 299, 302, 309, 313, 319, 322, 327, 334, 341, 346, 349, 357, 365, 370, 374, 380, 383, 386}
 
 func (i UserRole) String() string {
 	if i >= UserRole(len(_UserRole_index)-1) {

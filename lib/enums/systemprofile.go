@@ -12,3 +12,11 @@ const (
 	SystemProfileLinux                             // linux
 	SystemProfileWSL                               // wsl
 )
+
+func (p SystemProfile) Type() string {
+	return "system"
+}
+
+func (p SystemProfile) Profile() string {
+	return p.String()
+}

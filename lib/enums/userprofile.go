@@ -11,3 +11,11 @@ const (
 	UserProfileMinimal                     // minimal
 	UserProfileFull                        // full
 )
+
+func (p UserProfile) Type() string {
+	return "user"
+}
+
+func (p UserProfile) Profile() string {
+	return p.String()
+}

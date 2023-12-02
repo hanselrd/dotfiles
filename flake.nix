@@ -34,7 +34,7 @@
     nix-darwin,
   }: let
     system =
-      if !lib.trivial.inPureEvalMode
+      if !lib.inPureEvalMode
       then builtins.currentSystem
       else "x86_64-linux";
 
@@ -55,7 +55,7 @@
     scripts = pkgs.buildGoModule {
       name = "dotfiles-scripts";
       src = ./.;
-      vendorHash = "sha256-J9fjuvCVHBpQXfedynNKaXVlxYxVf1lVBOZ9kwXKv7w=";
+      vendorHash = "sha256-T+43M76yQZwZFNblU4lUBaO3uIMYgqTdyfFvfPNE59M=";
       subPackages = [
         "scripts/dotfiles-cli"
       ];
@@ -69,24 +69,33 @@
       )
     );
 
-    lib = nixpkgs.lib.extend (self: super: {
-      vendor =
-        (import ./lib/vendor.nix)
-        (inputs
-          // {
-            inherit pkgs system env;
-            lib = self;
-          });
-      common = (import ./lib/common.nix) {
-        inherit pkgs env;
-        lib = self;
-      };
-    });
+    lib = nixpkgs.lib;
+
+    mkLib = {profile, ...}:
+      nixpkgs.lib.extend (self: super: {
+        vendor =
+          (import ./lib/vendor.nix)
+          (inputs
+            // {
+              inherit pkgs system env;
+              lib = self;
+            });
+        common = (import ./lib/common.nix) {
+          inherit pkgs env;
+          lib = self;
+        };
+        profiles = (import ./lib/profiles.nix) {
+          inherit pkgs env profile;
+          lib = self;
+        };
+      });
   in rec {
     nixosConfigurations = builtins.listToAttrs (
       builtins.map
       (
-        profile: {
+        profile: let
+          lib = mkLib {inherit profile;};
+        in {
           name = profile.name;
           value = nixpkgs.lib.nixosSystem {
             inherit system;
@@ -133,7 +142,9 @@
     homeConfigurations = builtins.listToAttrs (
       builtins.map
       (
-        profile: {
+        profile: let
+          lib = mkLib {inherit profile;};
+        in {
           name = profile.name;
           value = home-manager.lib.homeManagerConfiguration {
             inherit pkgs lib;

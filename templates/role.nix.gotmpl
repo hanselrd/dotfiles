@@ -5,11 +5,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.roles.{{.type}}.{{.role}};
+  cfg = config.roles.{{.Type}}.{{.Role}};
 in {
   options = {
-    roles.{{.type}}.{{.role}} = {
-      enable = lib.mkEnableOption "roles.{{.type}}.{{.role}}";
+    roles.{{.Type}}.{{.Role}} = {
+      enable = lib.mkEnableOption "roles.{{.Type}}.{{.Role}}";
     };
   };
 

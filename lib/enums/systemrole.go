@@ -6,8 +6,8 @@ type SystemRole uint
 //go:generate go run codegen.go SystemRole
 
 const (
-	SystemRoleBoot           SystemRole = iota // boot
-	SystemRoleBootstrap                        // bootstrap
+	SystemRoleBootstrap      SystemRole = iota // bootstrap
+	SystemRoleBoot                             // boot
 	SystemRoleI18n                             // i18n
 	SystemRoleMonitoring                       // monitoring
 	SystemRoleMotd                             // motd
@@ -19,3 +19,11 @@ const (
 	SystemRoleVirtualization                   // virtualization
 	SystemRoleX11                              // x11
 )
+
+func (r SystemRole) Type() string {
+	return "system"
+}
+
+func (r SystemRole) Role() string {
+	return r.String()
+}

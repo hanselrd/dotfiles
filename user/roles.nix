@@ -5,10 +5,10 @@
   ...
 }: {
   imports = [
+    ./roles/bootstrap.nix
     ./roles/alacritty.nix
     ./roles/bash.nix
     ./roles/bat.nix
-    ./roles/bootstrap.nix
     ./roles/browser.nix
     ./roles/development.nix
     ./roles/development.cpp.nix

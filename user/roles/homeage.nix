@@ -3,7 +3,6 @@
   lib,
   pkgs,
   env,
-  profile,
   ...
 }: let
   cfg = config.roles.user.homeage;
@@ -19,7 +18,7 @@ in {
       lib.mkIf env.roles.user.homeage.decrypt
       (lib.mkMerge [
         (lib.mkIf
-          (profile.system != "nixos" && profile.system != "linux-systemd") {
+          (!lib.profiles.isSystemNixos && !lib.profiles.isSystemLinuxSystemd) {
             mount = "${env.user.cacheDirectory}/nix/homeage/secrets";
           })
         {

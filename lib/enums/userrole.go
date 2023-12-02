@@ -6,10 +6,10 @@ type UserRole uint
 //go:generate go run codegen.go UserRole
 
 const (
-	UserRoleAlacritty             UserRole = iota // alacritty
+	UserRoleBootstrap             UserRole = iota // bootstrap
+	UserRoleAlacritty                             // alacritty
 	UserRoleBash                                  // bash
 	UserRoleBat                                   // bat
-	UserRoleBootstrap                             // bootstrap
 	UserRoleBrowser                               // browser
 	UserRoleDevelopment                           // development
 	UserRoleDevelopmentCpp                        // development.cpp
@@ -48,3 +48,11 @@ const (
 	UserRoleZsh                                   // zsh
 	UserRoleZzz                                   // zzz
 )
+
+func (r UserRole) Type() string {
+	return "user"
+}
+
+func (r UserRole) Role() string {
+	return r.String()
+}

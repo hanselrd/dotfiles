@@ -8,8 +8,8 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[SystemRoleBoot-0]
-	_ = x[SystemRoleBootstrap-1]
+	_ = x[SystemRoleBootstrap-0]
+	_ = x[SystemRoleBoot-1]
 	_ = x[SystemRoleI18n-2]
 	_ = x[SystemRoleMonitoring-3]
 	_ = x[SystemRoleMotd-4]
@@ -22,9 +22,9 @@ func _() {
 	_ = x[SystemRoleX11-11]
 }
 
-const _SystemRole_name = "bootbootstrapi18nmonitoringmotdnetworkingnixshelltimeuservirtualizationx11"
+const _SystemRole_name = "bootstrapbooti18nmonitoringmotdnetworkingnixshelltimeuservirtualizationx11"
 
-var _SystemRole_index = [...]uint8{0, 4, 13, 17, 27, 31, 41, 44, 49, 53, 57, 71, 74}
+var _SystemRole_index = [...]uint8{0, 9, 13, 17, 27, 31, 41, 44, 49, 53, 57, 71, 74}
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRole_index)-1) {

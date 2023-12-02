@@ -1,0 +1,12 @@
+{{define "profiles.nix" -}}
+{
+  lib,
+  pkgs,
+  profile,
+  ...
+}: {
+  {{- range .}}
+  is{{camel .Type}}{{camel .Profile}} = profile.{{.Type}} == "{{.Profile}}";
+  {{- end}}
+}
+{{end}}
