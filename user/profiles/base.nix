@@ -5,6 +5,7 @@
   ...
 }: {
   roles.user.bootstrap.enable = true;
+  roles.user.scripts.enable = true;
   roles.user.editor.enable = true;
   roles.user.homeage.enable = true;
   roles.user.nix.enable = true;

@@ -50,43 +50,47 @@
           homeDirectory = env.user.homeDirectory;
         };
       };
-    };
 
-    scripts = pkgs.buildGoModule {
-      name = "dotfiles-scripts";
-      src = ./.;
-      vendorHash = "sha256-T+43M76yQZwZFNblU4lUBaO3uIMYgqTdyfFvfPNE59M=";
-      subPackages = [
-        "scripts/dotfiles-cli"
+      overlays = [
+        (final: prev: {
+          dotfiles-scripts = prev.buildGoModule {
+            name = "dotfiles-scripts";
+            src = ./.;
+            vendorHash = "sha256-T+43M76yQZwZFNblU4lUBaO3uIMYgqTdyfFvfPNE59M=";
+            subPackages = [
+              "scripts/dotfiles-cli"
+            ];
+            CGO_ENABLED = 0;
+          };
+        })
       ];
-      CGO_ENABLED = 0;
     };
 
     env = builtins.fromJSON (
       builtins.readFile (
         pkgs.runCommand "dotfiles-cli-environment-json" {}
-        "${lib.getExe' scripts "dotfiles-cli"} environment > $out"
+        "${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > $out"
       )
     );
 
     lib = nixpkgs.lib;
 
     mkLib = {profile, ...}:
-      nixpkgs.lib.extend (self: super: {
+      nixpkgs.lib.extend (final: prev: {
         vendor =
           (import ./lib/vendor.nix)
           (inputs
             // {
               inherit pkgs system env;
-              lib = self;
+              lib = final;
             });
         common = (import ./lib/common.nix) {
           inherit pkgs env;
-          lib = self;
+          lib = final;
         };
         profiles = (import ./lib/profiles.nix) {
           inherit pkgs env profile;
-          lib = self;
+          lib = final;
         };
       });
   in rec {
@@ -103,7 +107,7 @@
             modules = [
               {
                 nixpkgs = {
-                  inherit (pkgs) config;
+                  inherit (pkgs) config overlays;
                 };
               }
               ./system/roles.nix
@@ -179,12 +183,10 @@
           pkgs.writeShellScriptBin "dotfiles-codegen1"
           ''
             ${lib.getExe dotfiles-codegen0}
-            ${lib.getExe' scripts "dotfiles-cli"} environment > environment.json
-            ${lib.getExe' scripts "dotfiles-cli"} dockerCompose > docker-compose.json
-            ${lib.getExe' scripts "dotfiles-cli"} template
+            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
+            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} dockerCompose > docker-compose.json
+            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} template
           '';
-
-        dotfiles-scripts = scripts;
 
         dotfiles-update =
           pkgs.writeShellScriptBin "dotfiles-update"
@@ -234,7 +236,7 @@
       ${system} = {
         dotfiles-cli = {
           type = "app";
-          program = lib.getExe' packages.${system}.dotfiles-scripts "dotfiles-cli";
+          program = lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli";
         };
       };
     };
