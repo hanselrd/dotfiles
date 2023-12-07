@@ -10,7 +10,7 @@
     };
 
     homeage = {
-      url = "github:jordanisaacs/homeage";
+      url = "github:jordanisaacs/homeage/pull/43/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
