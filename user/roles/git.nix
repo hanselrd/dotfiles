@@ -59,11 +59,11 @@ in {
               basename=''${repository##*/}
               directory=''${2:-''${basename%.*}}
 
-              mkdir -p $directory
-              git clone --bare --filter=blob:none $repository $directory/.bare
-              echo "gitdir: ./.bare" > $directory/.git
-              git -C $directory config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-              # git -C $directory fetch origin
+              ${lib.getExe' pkgs.coreutils "mkdir"} -p $directory
+              ${lib.getExe' pkgs.git "git"} clone --bare --filter=blob:none $repository $directory/.bare
+              ${lib.getExe' pkgs.coreutils "echo"} "gitdir: ./.bare" > $directory/.git
+              ${lib.getExe' pkgs.git "git"} -C $directory config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+              # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
             ''
           }";
         };

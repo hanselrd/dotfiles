@@ -17,10 +17,12 @@
 
   home.packages = with pkgs; [
     age
+    coreutils
     cpio
     curl
     pfetch
     rsync
+    ssh-to-age
     strace
     tree
     wget

@@ -8,7 +8,7 @@
     builtins.readFile (
       pkgs.runCommand "current-time-utc-pretty" {
         currentTime = builtins.currentTime;
-      } "date --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out"
+      } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out"
     )
   );
 
@@ -18,7 +18,7 @@
         pkgs.runCommand "current-time-pretty" {
           buildInputs = [pkgs.tzdata];
           currentTime = builtins.currentTime;
-        } "TZ=${tz} date \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
+        } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
       )
     );
 }

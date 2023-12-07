@@ -198,7 +198,7 @@
             ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
 
             pushd user/roles/neovim/nodePackages
-            ${lib.getExe' pkgs.node2nix "node2nix"} -i <(echo "[\"emmet-ls\"]")
+            ${lib.getExe' pkgs.node2nix "node2nix"} -i <(${lib.getExe' pkgs.coreutils "echo"} "[\"emmet-ls\"]")
             popd
           '';
         dotfiles-upgrade = dotfiles-update;
@@ -206,20 +206,20 @@
         dotfiles-format =
           pkgs.writeShellScriptBin "dotfiles-format"
           ''
-            echo "Formatting *.nix file(s)"
-            find $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.nix file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
 
-            echo "Formatting *.ncl file(s)"
-            find $PWD -type f ! -path "*/ancestry/*" -name "*.ncl" -print -exec ${lib.getExe' pkgs.topiary "topiary"} -l nickel -f {} --in-place \;
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.ncl file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.ncl" -print -exec ${lib.getExe' pkgs.topiary "topiary"} -l nickel -f {} --in-place \;
 
-            echo "Formatting *.go file(s)"
-            find $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
 
-            echo "Formatting *.sh file(s)"
-            find $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
+            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.sh file(s)"
+            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
 
-            echo "Formatting *.lua file(s)"
-            find $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.lua file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
           '';
 
         dotfiles-all =
