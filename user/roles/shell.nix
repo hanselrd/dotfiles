@@ -26,6 +26,7 @@ in {
       cd5 = "cd ../../../../..";
       rcp = "rsync -CcavzP";
       rmv = "rsync -CcavzP --remove-source-files";
+      sudo = "sudo ";
       vi = "vim -u NONE -U NONE -N -i NONE";
     };
 
