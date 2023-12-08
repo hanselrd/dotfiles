@@ -26,7 +26,7 @@ in {
         }
 
         ${
-          if env.roles.user.shell.rts
+          if !env.roles.user.shell.bashToZsh && env.roles.user.shell.rts
           then ''
             if [ -e ${config.home.homeDirectory}/.secrets/rts.sh ]; then
               . ${config.home.homeDirectory}/.secrets/rts.sh
