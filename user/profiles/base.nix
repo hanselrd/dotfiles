@@ -20,10 +20,13 @@
     coreutils
     cpio
     curl
+    lm_sensors
     pfetch
+    procps
     rsync
     ssh-to-age
     strace
+    sysstat
     tree
     wget
   ];
