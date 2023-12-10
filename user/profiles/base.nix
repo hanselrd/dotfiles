@@ -20,6 +20,9 @@
     coreutils
     cpio
     curl
+    findutils
+    gnugrep
+    gnused
     lm_sensors
     pfetch
     procps

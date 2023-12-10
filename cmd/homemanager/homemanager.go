@@ -39,7 +39,7 @@ func init() {
 	zerolog.SetGlobalLevel(zerolog.Disabled)
 
 	defaultProfile := func() structs.Profile {
-		stdout, _, _ := utils.Shell("uname -a")
+		stdout := utils.First(utils.Must2(utils.Shell("uname -a")))
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {
 			return profiles.WSLBase
 		}
