@@ -44,9 +44,13 @@ var ejectCmd = &cobra.Command{
 		utils.Shell("sort | uniq > eject.dep", utils.WithStdin(strings.Join([]string{deps1, deps2}, "\n")))
 		utils.Shell("find /nix/store -depth -print | grep -Ff eject.dep | cpio -ov > eject.cpio")
 
-		normalizedHistDir := histDir + strings.Repeat("/", len("/nix/store/")+32-len(histDir))
+		if !strings.HasSuffix(histDir, "/") {
+			histDir += "/"
+		}
 
-		utils.Shell(fmt.Sprintf("sed -i \"s@/nix/store/.\\{32\\}-@%s/@g\" eject.cpio", normalizedHistDir))
+		sedSearch := fmt.Sprintf("/nix/store/%s-", strings.Repeat(".", 32))[:len(histDir)]
+
+		utils.Shell(fmt.Sprintf("sed -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" eject.cpio", sedSearch, histDir))
 
 		err = os.MkdirAll(histDir, 0700)
 		cobra.CheckErr(err)
@@ -54,10 +58,10 @@ var ejectCmd = &cobra.Command{
 		utils.Shell("cpio -idmv < eject.cpio")
 		utils.Shell(fmt.Sprintf("chmod -R u+w %s", histDir))
 
-		pkg1New, _, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg1))
+		pkg1New, _, _ := utils.Shell(fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, histDir), utils.WithStdin(pkg1))
 		utils.Shell(fmt.Sprintf("cp -av %s/home-files/. %s/", pkg1New, dotfiles.Environment.User.HomeDirectory))
 
-		pkg2New, _, _ := utils.Shell(fmt.Sprintf("sed \"s@/nix/store/.\\{32\\}-@%s/@g\"", histDir), utils.WithStdin(pkg2))
+		pkg2New, _, _ := utils.Shell(fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, histDir), utils.WithStdin(pkg2))
 		utils.Shell(fmt.Sprintf("ln -snfF %s %s/.nix-profile", pkg2New, dotfiles.Environment.User.HomeDirectory))
 	},
 }
