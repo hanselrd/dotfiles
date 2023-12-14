@@ -10,6 +10,7 @@
 
   roles.system.bootstrap.enable = true;
   roles.system.boot.enable = true;
+  roles.system.kernel.enable = true;
   roles.system.motd.enable = true;
   roles.system.nix.enable = true;
   roles.system.shell.enable = true;

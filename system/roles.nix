@@ -8,6 +8,7 @@
     ./roles/bootstrap.nix
     ./roles/boot.nix
     ./roles/i18n.nix
+    ./roles/kernel.nix
     ./roles/monitoring.nix
     ./roles/motd.nix
     ./roles/networking.nix

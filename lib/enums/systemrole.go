@@ -9,6 +9,7 @@ const (
 	SystemRoleBootstrap      SystemRole = iota // bootstrap
 	SystemRoleBoot                             // boot
 	SystemRoleI18n                             // i18n
+	SystemRoleKernel                           // kernel
 	SystemRoleMonitoring                       // monitoring
 	SystemRoleMotd                             // motd
 	SystemRoleNetworking                       // networking
