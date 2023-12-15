@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: let
   cfg = config.roles.user.bootstrap;
@@ -13,8 +14,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.username = pkgs.config.home.username;
-    home.homeDirectory = pkgs.config.home.homeDirectory;
+    home.username = env.user.username;
+    home.homeDirectory = env.user.homeDirectory;
 
     programs.home-manager.enable = true;
 

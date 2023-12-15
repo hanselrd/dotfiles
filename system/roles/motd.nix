@@ -32,7 +32,7 @@ in {
       result in civil and/or criminal penalties. All activities performed on this
       device are logged and monitored.
 
-      ${profile.name}: rev: ${self.shortRev or "dirty"} @ ${lib.common.currentTimePretty time.timeZone} by ${pkgs.config.home.username}
+      ${profile.name}: rev: ${self.shortRev or "dirty"} @ ${lib.common.currentTimePretty time.timeZone} by ${env.user.username}
 
       Host:    ${networking.hostName}
       OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})

@@ -14,7 +14,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    users.users.${pkgs.config.home.username} = {
+    users.users.${env.user.username} = {
       isNormalUser = true;
       description = env.user.name;
       extraGroups = ["networkmanager" "wheel" "docker"];

@@ -21,7 +21,7 @@ in {
       delta = {
         enable = true;
         options = {
-          syntax-theme = "nix-${pkgs.config.colorScheme.slug}";
+          syntax-theme = "nix-${config.colorScheme.slug}";
           line-numbers = true;
           plus-style = "green bold ul";
           minus-style = "red bold ul";
@@ -32,22 +32,24 @@ in {
         grep = {lineNumber = true;};
         merge = {conflictStyle = "diff3";};
         advice = {detachedHead = false;};
-        color = {ui = "auto";};
-        color."branch" = {
-          current = "yellow reverse";
-          local = "yellow";
-          remote = "green";
-        };
-        color."diff" = {
-          meta = "yellow bold";
-          frag = "magenta bold";
-          old = "red bold";
-          new = "green bold";
-        };
-        color."status" = {
-          added = "yellow";
-          changed = "green";
-          untracked = "cyan";
+        color = {
+          ui = "auto";
+          branch = {
+            current = "yellow reverse";
+            local = "yellow";
+            remote = "green";
+          };
+          diff = {
+            meta = "yellow bold";
+            frag = "magenta bold";
+            old = "red bold";
+            new = "green bold";
+          };
+          status = {
+            added = "yellow";
+            changed = "green";
+            untracked = "cyan";
+          };
         };
         alias = {
           smart-clone = "!sh ${

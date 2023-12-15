@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     nix.registry.nixpkgs.flake = nixpkgs;
 
-    nixpkgs.config.allowUnfree = pkgs.config.allowUnfree;
+    nixpkgs.config.allowUnfree = true;
 
     nix.package = lib.mkDefault pkgs.nix;
 

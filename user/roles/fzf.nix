@@ -16,7 +16,7 @@ in {
     programs.fzf = {
       enable = true;
       tmux.enableShellIntegration = true;
-      colors = lib.vendor.nix-colors-custom.fzfThemeFromScheme {scheme = pkgs.config.colorScheme;};
+      colors = lib.vendor.nix-colors-custom.fzfThemeFromScheme {scheme = config.colorScheme;};
     };
   };
 }

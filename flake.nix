@@ -41,16 +41,6 @@
     pkgs = import nixpkgs {
       inherit system;
 
-      config = {
-        allowUnfree = true;
-        # colorScheme = nix-colors.colorSchemes.chalk;
-        colorScheme = env.theme;
-        home = {
-          username = env.user.username;
-          homeDirectory = env.user.homeDirectory;
-        };
-      };
-
       overlays = [
         (final: prev: {
           dotfiles-scripts = prev.buildGoModule {
@@ -107,7 +97,7 @@
             modules = [
               {
                 nixpkgs = {
-                  inherit (pkgs) config overlays;
+                  inherit (pkgs) overlays;
                 };
               }
               ./system/roles.nix
@@ -116,7 +106,7 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.${pkgs.config.home.username} = import ./user/profiles/${profile.user}.nix;
+                home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
 
                 home-manager.sharedModules = [
                   homeage.homeManagerModules.homeage

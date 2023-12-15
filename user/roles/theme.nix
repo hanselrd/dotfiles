@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: let
   cfg = config.roles.user.theme;
@@ -13,6 +14,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    colorScheme = pkgs.config.colorScheme;
+    colorScheme = env.theme;
   };
 }

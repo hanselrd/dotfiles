@@ -16,11 +16,11 @@ in {
     programs.bat = {
       enable = true;
       config = {
-        theme = "nix-${pkgs.config.colorScheme.slug}";
+        theme = "nix-${config.colorScheme.slug}";
       };
       themes = {
-        "nix-${pkgs.config.colorScheme.slug}" =
-          builtins.readFile (lib.vendor.nix-colors-custom.batThemeFromScheme {scheme = pkgs.config.colorScheme;});
+        "nix-${config.colorScheme.slug}" =
+          builtins.readFile (lib.vendor.nix-colors-custom.batThemeFromScheme {scheme = config.colorScheme;});
       };
     };
   };

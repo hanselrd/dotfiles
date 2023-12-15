@@ -75,7 +75,7 @@ in {
         }
       ];
       extraConfig = ''
-        ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = pkgs.config.colorScheme;})}
+        ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = config.colorScheme;})}
       '';
       prefix = "C-a";
       tmuxp.enable = true;
