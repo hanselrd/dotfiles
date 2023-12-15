@@ -199,6 +199,7 @@ end
 local lspconfig = require("lspconfig")
 local servers = {
   clangd = {},
+  elixirls = { cmd = { "elixir-ls" } },
   emmet_ls = {},
   gopls = {},
   jdtls = {
@@ -225,9 +226,9 @@ local servers = {
     },
   },
   nickel_ls = {},
+  nixd = {},
   purescriptls = {},
   pyright = {},
-  rnix = {},
   rust_analyzer = {},
   tsserver = {},
 }

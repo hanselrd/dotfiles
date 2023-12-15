@@ -85,16 +85,17 @@ in {
         otherNodePackages = callPackage ./neovim/nodePackages {};
       in [
         clang-tools
+        elixir-ls
         gopls
         jdt-language-server
         lua-language-server
+        nixd
         nls
         nodePackages.purescript-language-server
         nodePackages.pyright
         nodePackages.typescript
         nodePackages.typescript-language-server
         otherNodePackages.emmet-ls
-        rnix-lsp
         rust-analyzer
       ];
       viAlias = true;
