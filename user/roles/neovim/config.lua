@@ -198,8 +198,8 @@ local on_attach = function(client, bufnr)
 end
 local lspconfig = require("lspconfig")
 local servers = {
+  -- elixirls = { cmd = { "elixir-ls" } },
   clangd = {},
-  elixirls = { cmd = { "elixir-ls" } },
   emmet_ls = {},
   gopls = {},
   jdtls = {
@@ -231,6 +231,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
+  zls = {},
 }
 for lsp, setup in pairs(servers) do
   lspconfig[lsp].setup({

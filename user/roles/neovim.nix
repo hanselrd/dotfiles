@@ -84,8 +84,8 @@ in {
       extraPackages = with pkgs; let
         otherNodePackages = callPackage ./neovim/nodePackages {};
       in [
+        # elixir-ls
         clang-tools
-        elixir-ls
         gopls
         jdt-language-server
         lua-language-server
@@ -97,6 +97,7 @@ in {
         nodePackages.typescript-language-server
         otherNodePackages.emmet-ls
         rust-analyzer
+        zls
       ];
       viAlias = true;
       vimAlias = true;

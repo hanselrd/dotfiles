@@ -28,32 +28,33 @@ func _() {
 	_ = x[UserRoleDevelopmentPython-17]
 	_ = x[UserRoleDevelopmentRust-18]
 	_ = x[UserRoleDevelopmentShell-19]
-	_ = x[UserRoleDocker-20]
-	_ = x[UserRoleEditor-21]
-	_ = x[UserRoleEza-22]
-	_ = x[UserRoleFzf-23]
-	_ = x[UserRoleGit-24]
-	_ = x[UserRoleHomeage-25]
-	_ = x[UserRoleHtop-26]
-	_ = x[UserRoleNeovim-27]
-	_ = x[UserRoleNix-28]
-	_ = x[UserRolePager-29]
-	_ = x[UserRoleRipgrep-30]
-	_ = x[UserRoleScripts-31]
-	_ = x[UserRoleShell-32]
-	_ = x[UserRoleSsh-33]
-	_ = x[UserRoleStarship-34]
-	_ = x[UserRoleTerminal-35]
-	_ = x[UserRoleTheme-36]
-	_ = x[UserRoleTmux-37]
-	_ = x[UserRoleVscode-38]
-	_ = x[UserRoleZsh-39]
-	_ = x[UserRoleZzz-40]
+	_ = x[UserRoleDevelopmentZig-20]
+	_ = x[UserRoleDocker-21]
+	_ = x[UserRoleEditor-22]
+	_ = x[UserRoleEza-23]
+	_ = x[UserRoleFzf-24]
+	_ = x[UserRoleGit-25]
+	_ = x[UserRoleHomeage-26]
+	_ = x[UserRoleHtop-27]
+	_ = x[UserRoleNeovim-28]
+	_ = x[UserRoleNix-29]
+	_ = x[UserRolePager-30]
+	_ = x[UserRoleRipgrep-31]
+	_ = x[UserRoleScripts-32]
+	_ = x[UserRoleShell-33]
+	_ = x[UserRoleSsh-34]
+	_ = x[UserRoleStarship-35]
+	_ = x[UserRoleTerminal-36]
+	_ = x[UserRoleTheme-37]
+	_ = x[UserRoleTmux-38]
+	_ = x[UserRoleVscode-39]
+	_ = x[UserRoleZsh-40]
+	_ = x[UserRoleZzz-41]
 }
 
-const _UserRole_name = "bootstrapalacrittybashbatbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldockereditorezafzfgithomeagehtopneovimnixpagerripgrepscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
+const _UserRole_name = "bootstrapalacrittybashbatbrowserdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.godevelopment.haskelldevelopment.javadevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldevelopment.zigdockereditorezafzfgithomeagehtopneovimnixpagerripgrepscriptsshellsshstarshipterminalthemetmuxvscodezshzzz"
 
-var _UserRole_index = [...]uint16{0, 9, 18, 22, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 287, 293, 296, 299, 302, 309, 313, 319, 322, 327, 334, 341, 346, 349, 357, 365, 370, 374, 380, 383, 386}
+var _UserRole_index = [...]uint16{0, 9, 18, 22, 25, 32, 43, 58, 75, 93, 107, 126, 142, 157, 175, 190, 208, 230, 248, 264, 281, 296, 302, 308, 311, 314, 317, 324, 328, 334, 337, 342, 349, 356, 361, 364, 372, 380, 385, 389, 395, 398, 401}
 
 func (i UserRole) String() string {
 	if i >= UserRole(len(_UserRole_index)-1) {

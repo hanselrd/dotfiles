@@ -14,8 +14,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      cargo
       rust-cbindgen
-      rustup
+      rustc
+      rustfmt
       wasm-bindgen-cli
     ];
   };

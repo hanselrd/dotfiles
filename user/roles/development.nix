@@ -27,6 +27,7 @@ in {
     roles.user.development.python.enable = true;
     roles.user.development.rust.enable = true;
     roles.user.development.shell.enable = true;
+    roles.user.development.zig.enable = true;
 
     home.packages = with pkgs; [
       ctags

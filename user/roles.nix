@@ -25,6 +25,7 @@
     ./roles/development.python.nix
     ./roles/development.rust.nix
     ./roles/development.shell.nix
+    ./roles/development.zig.nix
     ./roles/docker.nix
     ./roles/editor.nix
     ./roles/eza.nix

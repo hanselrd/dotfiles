@@ -26,6 +26,7 @@ const (
 	UserRoleDevelopmentPython                     // development.python
 	UserRoleDevelopmentRust                       // development.rust
 	UserRoleDevelopmentShell                      // development.shell
+	UserRoleDevelopmentZig                        // development.zig
 	UserRoleDocker                                // docker
 	UserRoleEditor                                // editor
 	UserRoleEza                                   // eza
