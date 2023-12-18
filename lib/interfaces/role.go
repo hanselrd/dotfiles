@@ -1,6 +1,6 @@
 package interfaces
 
 type Role interface {
-	Type() string
+	Type
 	Role() string
 }

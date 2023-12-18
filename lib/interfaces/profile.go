@@ -1,6 +1,6 @@
 package interfaces
 
 type Profile interface {
-	Type() string
+	Type
 	Profile() string
 }
