@@ -30,11 +30,11 @@ in {
         nvim-lspconfig
         nvim-surround
         nvim-treesitter-textobjects
-        nvim-ts-rainbow
         nvim-web-devicons
         oil-nvim
         pears-nvim
         plenary-nvim
+        rainbow-delimiters-nvim
         telescope-fzf-native-nvim
         telescope-nvim
         treesj
