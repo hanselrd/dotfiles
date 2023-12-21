@@ -13,6 +13,7 @@
     ./roles/motd.nix
     ./roles/networking.nix
     ./roles/nix.nix
+    ./roles/openssh.nix
     ./roles/shell.nix
     ./roles/time.nix
     ./roles/user.nix

@@ -16,16 +16,17 @@ func _() {
 	_ = x[SystemRoleMotd-5]
 	_ = x[SystemRoleNetworking-6]
 	_ = x[SystemRoleNix-7]
-	_ = x[SystemRoleShell-8]
-	_ = x[SystemRoleTime-9]
-	_ = x[SystemRoleUser-10]
-	_ = x[SystemRoleVirtualization-11]
-	_ = x[SystemRoleX11-12]
+	_ = x[SystemRoleOpenSsh-8]
+	_ = x[SystemRoleShell-9]
+	_ = x[SystemRoleTime-10]
+	_ = x[SystemRoleUser-11]
+	_ = x[SystemRoleVirtualization-12]
+	_ = x[SystemRoleX11-13]
 }
 
-const _SystemRole_name = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixshelltimeuservirtualizationx11"
+const _SystemRole_name = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationx11"
 
-var _SystemRole_index = [...]uint8{0, 9, 13, 17, 23, 33, 37, 47, 50, 55, 59, 63, 77, 80}
+var _SystemRole_index = [...]uint8{0, 9, 13, 17, 23, 33, 37, 47, 50, 57, 62, 66, 70, 84, 87}
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRole_index)-1) {

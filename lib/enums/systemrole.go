@@ -14,6 +14,7 @@ const (
 	SystemRoleMotd                             // motd
 	SystemRoleNetworking                       // networking
 	SystemRoleNix                              // nix
+	SystemRoleOpenSsh                          // openssh
 	SystemRoleShell                            // shell
 	SystemRoleTime                             // time
 	SystemRoleUser                             // user

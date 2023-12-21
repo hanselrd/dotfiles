@@ -17,7 +17,5 @@ in {
       layout = "us";
       xkbVariant = "";
     };
-
-    services.openssh.settings.X11Forwarding = true;
   };
 }

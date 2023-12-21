@@ -13,7 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.openssh.enable = true;
+    roles.system.openssh.enable = true;
 
     services.cockpit = {
       enable = true;
