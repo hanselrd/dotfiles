@@ -17,8 +17,6 @@ in {
   config = lib.mkIf cfg.enable {
     nix.registry.nixpkgs.flake = nixpkgs;
 
-    nixpkgs.config.allowUnfree = true;
-
     nix.package = lib.mkDefault pkgs.nix;
 
     nix.settings = {
@@ -26,6 +24,8 @@ in {
       sandbox = env.roles.user.nix.sandbox;
       show-trace = true;
     };
+
+    nixpkgs.config.allowUnfree = true;
 
     programs.nix-index.enable = true;
   };

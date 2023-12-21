@@ -13,7 +13,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nix.settings.trusted-users = ["root" "@wheel"];
+    nix.settings = {
+      auto-optimise-store = true;
+      experimental-features = ["nix-command" "flakes"];
+      show-trace = true;
+      trusted-users = ["root" "@wheel"];
+    };
 
     nixpkgs.config.allowUnfree = true;
   };
