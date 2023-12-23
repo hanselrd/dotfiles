@@ -23,6 +23,16 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zig-overlay = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -32,6 +42,8 @@
     homeage,
     nix-colors,
     nix-darwin,
+    rust-overlay,
+    zig-overlay,
   }: let
     system =
       if !lib.inPureEvalMode
@@ -42,6 +54,8 @@
       inherit system;
 
       overlays = [
+        rust-overlay.overlays.default
+        zig-overlay.overlays.default
         (final: prev: {
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
@@ -199,17 +213,20 @@
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.nix file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
 
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.ncl file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.ncl" -print -exec ${lib.getExe' pkgs.topiary "topiary"} -l nickel -f {} --in-place \;
-
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
-
             # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.sh file(s)"
             # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
 
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.lua file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
+
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
+
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
+
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe pkgs.zigpkgs.master} fmt {} \;
           '';
 
         dotfiles-all =
