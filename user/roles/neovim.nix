@@ -72,7 +72,7 @@ in {
         (pkgs.vimUtils.buildVimPlugin
           rec {
             name = "vim-textobj-indent";
-            version = "unstable";
+            version = "master";
             src = pkgs.fetchFromGitHub {
               owner = "kana";
               repo = name;

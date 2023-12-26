@@ -64,7 +64,7 @@ in {
             rec {
               pluginName = "tmux-current-pane-hostname";
               rtpFilePath = "current_pane_hostname.tmux";
-              version = "unstable";
+              version = "master";
               src = pkgs.fetchFromGitHub {
                 owner = "soyuka";
                 repo = pluginName;

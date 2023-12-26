@@ -33,6 +33,12 @@
       url = "github:mitchellh/zig-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zls = {
+      url = "github:zigtools/zls";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.zig-overlay.follows = "zig-overlay";
+    };
   };
 
   outputs = inputs @ {
@@ -44,6 +50,7 @@
     nix-darwin,
     rust-overlay,
     zig-overlay,
+    zls,
   }: let
     system =
       if !lib.inPureEvalMode
@@ -56,6 +63,9 @@
       overlays = [
         rust-overlay.overlays.default
         zig-overlay.overlays.default
+        (final: prev: {
+          zls = zls.packages.${system}.default;
+        })
         (final: prev: {
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
@@ -85,7 +95,7 @@
           (import ./lib/vendor.nix)
           (inputs
             // {
-              inherit pkgs system env;
+              inherit pkgs env;
               lib = final;
             });
         common = (import ./lib/common.nix) {
@@ -225,8 +235,8 @@
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
 
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
+            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
+            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
           '';
 
         dotfiles-all =
