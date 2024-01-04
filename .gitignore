@@ -1,4 +1,5 @@
 **/secrets/*
 !**/secrets/*.age
 environment.json
-/target
+/zig-cache
+/zig-out

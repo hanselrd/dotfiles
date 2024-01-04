@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,6 +49,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    gitignore,
     home-manager,
     homeage,
     nix-colors,
@@ -65,12 +71,21 @@
         zig-overlay.overlays.default
         (final: prev: {
           zls = zls.packages.${system}.default;
+          zon2nix = prev.zon2nix.overrideAttrs (old: {
+            version = "master";
+            src = prev.fetchFromGitHub {
+              owner = "nix-community";
+              repo = "zon2nix";
+              rev = "pull/8/head";
+              hash = "sha256-0pkNLXJF83Ezk5eSgnMR7kU5XXFpkIqTM7KKZpe0VTc=";
+            };
+          });
         })
         (final: prev: {
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
-            src = ./.;
-            vendorHash = "sha256-T+43M76yQZwZFNblU4lUBaO3uIMYgqTdyfFvfPNE59M=";
+            src = gitignore.lib.gitignoreSource ./.;
+            vendorHash = "sha256-/nVhDeQ/vx4D8bjMGV4bD6sJGHRX9y157iuK4/AjvGQ=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -235,8 +250,8 @@
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
 
-            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
-            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
+            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
           '';
 
         dotfiles-all =
