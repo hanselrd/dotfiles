@@ -4,7 +4,7 @@
   ...
 }: {
   alacrittyThemeFromScheme = {scheme}:
-    with scheme.colors; {
+    with scheme.palette; {
       primary = {
         background = "#${base00}";
         foreground = "#${base05}";
@@ -36,7 +36,7 @@
     };
 
   batThemeFromScheme = {scheme}:
-    with scheme.colors;
+    with scheme.palette;
       pkgs.writeText "bat-theme-${scheme.slug}.tmTheme"
       ''
         <?xml version="1.0" encoding="UTF-8"?>
@@ -578,7 +578,7 @@
       '';
 
   fzfThemeFromScheme = {scheme}:
-    with scheme.colors; {
+    with scheme.palette; {
       bg = "#${base00}";
       "bg+" = "#${base01}";
       fg = "#${base04}";
@@ -594,7 +594,7 @@
     };
 
   tmuxThemeFromScheme = {scheme}:
-    with scheme.colors;
+    with scheme.palette;
       pkgs.writeText "tmux-theme-${scheme.slug}.tmux" ''
         # default statusbar colors
         set-option -g status-style "fg=#${base04},bg=#${base01}"

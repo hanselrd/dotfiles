@@ -7,7 +7,7 @@ import (
 
 var Mocha = structs.Theme{
 	Slug: enums.ThemeMocha,
-	Colors: structs.ThemeColors{
+	Palette: structs.ThemePalette{
 		Base0:  "3B3228",
 		Base1:  "CB6077",
 		Base2:  "BEB55B",

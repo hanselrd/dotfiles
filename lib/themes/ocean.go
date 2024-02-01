@@ -7,7 +7,7 @@ import (
 
 var Ocean = structs.Theme{
 	Slug: enums.ThemeOcean,
-	Colors: structs.ThemeColors{
+	Palette: structs.ThemePalette{
 		Base0:  "2B303B",
 		Base1:  "BF616A",
 		Base2:  "A3BE8C",

@@ -7,7 +7,7 @@ import (
 
 var OneDark = structs.Theme{
 	Slug: enums.ThemeOneDark,
-	Colors: structs.ThemeColors{
+	Palette: structs.ThemePalette{
 		Base0:  "282C34",
 		Base1:  "E06C75",
 		Base2:  "98C379",

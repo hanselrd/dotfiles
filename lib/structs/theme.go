@@ -5,13 +5,13 @@ import (
 )
 
 type Theme struct {
-	Slug   enums.Theme `json:"slug"`
-	Name   string      `json:"name,omitempty"`
-	Email  string      `json:"author,omitempty"`
-	Colors ThemeColors `json:"colors"`
+	Slug    enums.Theme  `json:"slug"`
+	Name    string       `json:"name,omitempty"`
+	Email   string       `json:"author,omitempty"`
+	Palette ThemePalette `json:"palette"`
 }
 
-type ThemeColors struct {
+type ThemePalette struct {
 	Base0  string `json:"base00"`
 	Base1  string `json:"base01"`
 	Base2  string `json:"base02"`

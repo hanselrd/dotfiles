@@ -7,7 +7,7 @@ import (
 
 var Grayscale = structs.Theme{
 	Slug: enums.ThemeGrayscale,
-	Colors: structs.ThemeColors{
+	Palette: structs.ThemePalette{
 		Base0:  "111111",
 		Base1:  "333333",
 		Base2:  "555555",

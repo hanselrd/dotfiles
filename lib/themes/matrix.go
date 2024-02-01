@@ -7,7 +7,7 @@ import (
 
 var Matrix = structs.Theme{
 	Slug: enums.ThemeMatrix,
-	Colors: structs.ThemeColors{
+	Palette: structs.ThemePalette{
 		Base0:  "001100",
 		Base1:  "003300",
 		Base2:  "005500",

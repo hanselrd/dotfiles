@@ -7,7 +7,7 @@ import (
 
 var Chalk = structs.Theme{
 	Slug: enums.ThemeChalk,
-	Colors: structs.ThemeColors{
+	Palette: structs.ThemePalette{
 		Base0:  "151515",
 		Base1:  "202020",
 		Base2:  "303030",
