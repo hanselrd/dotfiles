@@ -14,8 +14,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.xserver = {
-      layout = "us";
-      xkbVariant = "";
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
     };
   };
 }
