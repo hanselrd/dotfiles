@@ -91,6 +91,25 @@
             ];
             CGO_ENABLED = 0;
           };
+          # dotfiles-scripts2 = prev.stdenvNoCC.mkDerivation {
+          #   name = "dotfiles-scripts2";
+          #   version = "master";
+          #   src = gitignore.lib.gitignoreSource ./.;
+          #   nativeBuildInputs = with prev; [
+          #     zigpkgs.master
+          #   ];
+          #   dontConfigure = true;
+          #   dontInstall = true;
+          #   doCheck = true;
+          #   buildPhase = ''
+          #     mkdir -p .cache
+          #     ln -s ${prev.callPackage ./deps.nix {}} .cache/p
+          #     zig build install --cache-dir $(pwd)/zig-cache --global-cache-dir $(pwd)/.cache -Dcpu=baseline -Doptimize=ReleaseFast --prefix $out
+          #   '';
+          #   checkPhase = ''
+          #     zig build test --cache-dir $(pwd)/zig-cache --global-cache-dir $(pwd)/.cache -Dcpu=baseline
+          #   '';
+          # };
         })
       ];
     };
@@ -221,6 +240,8 @@
           pkgs.writeShellScriptBin "dotfiles-update"
           ''
             nix flake update
+
+            ${lib.getExe' pkgs.zon2nix "zon2nix"} > deps.nix
 
             ${lib.getExe' pkgs.go "go"} get -u ./...
             ${lib.getExe' pkgs.go "go"} mod tidy
