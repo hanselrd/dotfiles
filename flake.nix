@@ -247,8 +247,8 @@
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
 
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
+            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
+            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
 
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
