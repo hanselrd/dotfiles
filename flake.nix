@@ -91,6 +91,16 @@
             ];
             CGO_ENABLED = 0;
           };
+          # dotfiles-scripts2 =
+          #   (prev.makeRustPlatform {
+          #     cargo = prev.rust-bin.nightly.latest.minimal;
+          #     rustc = prev.rust-bin.nightly.latest.minimal;
+          #   })
+          #   .buildRustPackage {
+          #     name = "dotfiles-scripts2";
+          #     src = gitignore.lib.gitignoreSource ./.;
+          #     cargoLock.lockFile = ./Cargo.lock;
+          #   };
         })
       ];
     };
@@ -250,8 +260,8 @@
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
 
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
+            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
+            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
           '';
 
         dotfiles-all =

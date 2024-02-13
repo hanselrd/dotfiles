@@ -1,5 +1,7 @@
 **/secrets/*
 !**/secrets/*.age
 environment.json
-/zig-cache
-/zig-out
+debug/
+target/
+**/*.rs.bak
+*.pdb
