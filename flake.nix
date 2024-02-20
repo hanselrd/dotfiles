@@ -102,8 +102,8 @@
           #   dontInstall = true;
           #   doCheck = true;
           #   buildPhase = ''
-          #     mkdir -p .cache
-          #     ln -s ${prev.callPackage ./deps.nix {}} .cache/p
+          #     mkdir -p $(pwd)/.cache
+          #     ln -s ${prev.callPackage ./deps.nix {}} $(pwd)/.cache/p
           #     zig build install --cache-dir $(pwd)/zig-cache --global-cache-dir $(pwd)/.cache -Dcpu=baseline -Doptimize=ReleaseFast --prefix $out
           #   '';
           #   checkPhase = ''

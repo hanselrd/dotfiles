@@ -17,6 +17,7 @@
     ./roles/development.go.nix
     ./roles/development.haskell.nix
     ./roles/development.java.nix
+    ./roles/development.kotlin.nix
     ./roles/development.lua.nix
     ./roles/development.nickel.nix
     ./roles/development.nix.nix
@@ -45,6 +46,7 @@
     ./roles/theme.nix
     ./roles/tmux.nix
     ./roles/vscode.nix
+    ./roles/zoxide.nix
     ./roles/zsh.nix
     ./roles/zzz.nix
   ];

@@ -19,6 +19,7 @@ in {
     roles.user.development.go.enable = true;
     roles.user.development.haskell.enable = true;
     roles.user.development.java.enable = true;
+    roles.user.development.kotlin.enable = true;
     roles.user.development.lua.enable = true;
     roles.user.development.nickel.enable = true;
     roles.user.development.nix.enable = true;

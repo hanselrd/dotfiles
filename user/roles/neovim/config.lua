@@ -203,6 +203,7 @@ local servers = {
   emmet_ls = {},
   gopls = {},
   jdtls = {},
+  kotlin_language_server = {},
   lua_ls = {
     settings = {
       Lua = {

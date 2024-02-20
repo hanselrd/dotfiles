@@ -5,6 +5,7 @@ const std = @import("std");
 const Cli = @import("cli.zig").Cli;
 const profile = @import("profile.zig");
 const role = @import("role.zig");
+const shell = @import("utils/shell.zig").shell;
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
@@ -43,6 +44,15 @@ pub fn main() !void {
     // }
 
     std.log.info("[END] Processing", .{});
+
+    _ = try shell("echo hello", alloc);
+    _ = try shell("echo hello", alloc);
+
+    // const term = proc.term;
+    // _ = term;
+
+    // std.debug.print("stdout= {s}\n", .{proc.stdout});
+    // std.debug.print("stderr= {s}\n", .{proc.stderr});
 }
 
 test {

@@ -88,6 +88,7 @@ in {
         clang-tools
         gopls
         jdt-language-server
+        kotlin-language-server
         lua-language-server
         nixd
         nls

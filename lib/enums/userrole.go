@@ -18,6 +18,7 @@ const (
 	UserRoleDevelopmentGo                         // development.go
 	UserRoleDevelopmentHaskell                    // development.haskell
 	UserRoleDevelopmentJava                       // development.java
+	UserRoleDevelopmentKotlin                     // development.kotlin
 	UserRoleDevelopmentLua                        // development.lua
 	UserRoleDevelopmentNickel                     // development.nickel
 	UserRoleDevelopmentNix                        // development.nix
@@ -46,6 +47,7 @@ const (
 	UserRoleTheme                                 // theme
 	UserRoleTmux                                  // tmux
 	UserRoleVscode                                // vscode
+	UserRoleZoxide                                // zoxide
 	UserRoleZsh                                   // zsh
 	UserRoleZzz                                   // zzz
 )

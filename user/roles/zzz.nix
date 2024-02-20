@@ -20,5 +20,6 @@ in {
     roles.user.htop.enable = true;
     roles.user.ssh.enable = true;
     roles.user.tmux.enable = true;
+    roles.user.zoxide.enable = true;
   };
 }
