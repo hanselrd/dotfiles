@@ -223,6 +223,7 @@ local servers = {
   purescriptls = {},
   pyright = {},
   rust_analyzer = {},
+  templ = {},
   tsserver = {},
   zls = {},
 }

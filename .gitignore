@@ -1,5 +1,3 @@
 **/secrets/*
 !**/secrets/*.age
 environment.json
-/zig-cache
-/zig-out

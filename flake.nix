@@ -70,18 +70,6 @@
         rust-overlay.overlays.default
         zig-overlay.overlays.default
         (final: prev: {
-          zls = zls.packages.${system}.default;
-          zon2nix = prev.zon2nix.overrideAttrs (old: {
-            version = "master";
-            src = prev.fetchFromGitHub {
-              owner = "nix-community";
-              repo = "zon2nix";
-              rev = "pull/8/head";
-              hash = "sha256-0pkNLXJF83Ezk5eSgnMR7kU5XXFpkIqTM7KKZpe0VTc=";
-            };
-          });
-        })
-        (final: prev: {
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
@@ -91,25 +79,6 @@
             ];
             CGO_ENABLED = 0;
           };
-          # dotfiles-scripts2 = prev.stdenvNoCC.mkDerivation {
-          #   name = "dotfiles-scripts2";
-          #   version = "master";
-          #   src = gitignore.lib.gitignoreSource ./.;
-          #   nativeBuildInputs = with prev; [
-          #     zigpkgs.master
-          #   ];
-          #   dontConfigure = true;
-          #   dontInstall = true;
-          #   doCheck = true;
-          #   buildPhase = ''
-          #     mkdir -p $(pwd)/.cache
-          #     ln -s ${prev.callPackage ./deps.nix {}} $(pwd)/.cache/p
-          #     zig build install --cache-dir $(pwd)/zig-cache --global-cache-dir $(pwd)/.cache -Dcpu=baseline -Doptimize=ReleaseFast --prefix $out
-          #   '';
-          #   checkPhase = ''
-          #     zig build test --cache-dir $(pwd)/zig-cache --global-cache-dir $(pwd)/.cache -Dcpu=baseline
-          #   '';
-          # };
         })
       ];
     };
@@ -241,8 +210,6 @@
           ''
             nix flake update
 
-            ${lib.getExe' pkgs.zon2nix "zon2nix"} > deps.nix
-
             ${lib.getExe' pkgs.go "go"} get -u ./...
             ${lib.getExe' pkgs.go "go"} mod tidy
             ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
@@ -267,12 +234,6 @@
 
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.go "gofmt"} -w {} \;
-
-            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.rs file(s)"
-            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.rs" -print -exec ${lib.getExe' pkgs.rust-bin.nightly.latest.default "rustfmt"} {} \;
-
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.zig file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.zig" -print -exec ${lib.getExe' pkgs.zigpkgs.master "zig"} fmt {} \;
           '';
 
         dotfiles-all =

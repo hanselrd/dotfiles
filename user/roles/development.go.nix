@@ -23,6 +23,7 @@ in {
       cobra-cli
       golines
       gotools
+      templ
     ];
   };
 }

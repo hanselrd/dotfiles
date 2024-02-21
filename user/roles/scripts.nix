@@ -90,7 +90,6 @@ in {
       # df-encrypt
       # df-decrypt
       dotfiles-scripts
-      # dotfiles-scripts2
     ];
   };
 }
