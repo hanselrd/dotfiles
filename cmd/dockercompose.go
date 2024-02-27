@@ -8,6 +8,7 @@ import (
 
 	"github.com/hanselrd/dotfiles/lib/profiles"
 	"github.com/hanselrd/dotfiles/lib/structs"
+	"github.com/hanselrd/dotfiles/lib/utils"
 )
 
 var dockerComposeCmd = &cobra.Command{
@@ -55,7 +56,7 @@ var dockerComposeCmd = &cobra.Command{
 			}(),
 		}
 
-		data, _ := json.MarshalIndent(dc, "", "  ")
+		data := utils.Must(json.MarshalIndent(dc, "", "  "))
 		fmt.Println(string(data))
 	},
 }
