@@ -41,6 +41,7 @@ in {
         vim-abolish
         vim-better-whitespace
         vim-commentary
+        vim-easymotion
         vim-eunuch
         vim-fugitive
         vim-gitgutter
