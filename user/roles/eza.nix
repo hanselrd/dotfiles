@@ -15,7 +15,8 @@ in {
   config = lib.mkIf cfg.enable {
     programs.eza = {
       enable = true;
-      enableAliases = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
       extraOptions = [
         "--group"
         "--group-directories-first"

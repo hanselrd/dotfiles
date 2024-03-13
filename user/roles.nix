@@ -14,6 +14,7 @@
     ./roles/development.cpp.nix
     ./roles/development.dhall.nix
     ./roles/development.elixir.nix
+    ./roles/development.gleam.nix
     ./roles/development.go.nix
     ./roles/development.haskell.nix
     ./roles/development.java.nix

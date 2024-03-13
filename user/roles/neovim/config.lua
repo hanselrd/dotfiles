@@ -199,8 +199,10 @@ end
 local lspconfig = require("lspconfig")
 local servers = {
   -- elixirls = { cmd = { "elixir-ls" } },
+  -- nixd = {},
   clangd = {},
   emmet_ls = {},
+  gleam = {},
   gopls = {},
   jdtls = {},
   kotlin_language_server = {},
@@ -219,7 +221,6 @@ local servers = {
     },
   },
   nickel_ls = {},
-  nixd = {},
   purescriptls = {},
   pyright = {},
   rust_analyzer = {},

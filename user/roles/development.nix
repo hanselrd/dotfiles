@@ -16,6 +16,7 @@ in {
     roles.user.development.cpp.enable = true;
     roles.user.development.dhall.enable = true;
     roles.user.development.elixir.enable = true;
+    roles.user.development.gleam.enable = true;
     roles.user.development.go.enable = true;
     roles.user.development.haskell.enable = true;
     roles.user.development.java.enable = true;

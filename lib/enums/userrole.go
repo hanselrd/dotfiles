@@ -15,6 +15,7 @@ const (
 	UserRoleDevelopmentCpp                        // development.cpp
 	UserRoleDevelopmentDhall                      // development.dhall
 	UserRoleDevelopmentElixir                     // development.elixir
+	UserRoleDevelopmentGleam                      // development.gleam
 	UserRoleDevelopmentGo                         // development.go
 	UserRoleDevelopmentHaskell                    // development.haskell
 	UserRoleDevelopmentJava                       // development.java
