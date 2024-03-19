@@ -17,7 +17,9 @@ in {
     programs.zsh = {
       enable = true;
       defaultKeymap = "emacs";
-      enableAutosuggestions = true;
+      autosuggestion = {
+        enable = true;
+      };
       enableCompletion = false;
       syntaxHighlighting = {
         enable = true;
