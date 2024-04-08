@@ -73,7 +73,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-U5KK3FREGGY3mtF16qdbZx9TAdID4lAFLcF5rzfEdEE=";
+            vendorHash = "sha256-JFUTD5Ww3A/97yfmAIvNxEI1QNRdh3wd+thFV6tOVoU=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
