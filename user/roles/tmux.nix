@@ -16,10 +16,13 @@ in {
     programs.tmux = {
       enable = true;
       clock24 = true;
+      customPaneNavigationAndResize = true;
       historyLimit = 50000;
       keyMode = "vi";
+      # mouse = true;
+      newSession = true;
       plugins = with pkgs.tmuxPlugins; [
-        better-mouse-mode
+        # better-mouse-mode
         extrakto
         pain-control
         yank
