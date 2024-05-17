@@ -3,7 +3,7 @@ module github.com/hanselrd/dotfiles
 go 1.20
 
 require (
-	github.com/fatih/color v1.16.0
+	github.com/fatih/color v1.17.0
 	github.com/iancoleman/strcase v0.3.0
 	github.com/itchyny/timefmt-go v0.1.5
 	github.com/rs/zerolog v1.32.0
