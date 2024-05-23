@@ -6,7 +6,7 @@ require (
 	github.com/fatih/color v1.17.0
 	github.com/iancoleman/strcase v0.3.0
 	github.com/itchyny/timefmt-go v0.1.5
-	github.com/rs/zerolog v1.32.0
+	github.com/rs/zerolog v1.33.0
 	github.com/sa-/slicefunk v0.1.4
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
