@@ -18,7 +18,7 @@
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
     arandr
-    dbeaver
+    dbeaver-bin
     liberation_ttf
     libreoffice-fresh
     mesa
