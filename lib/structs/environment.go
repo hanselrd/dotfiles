@@ -9,6 +9,7 @@ type Environment struct {
 	Theme    Theme               `json:"theme"`
 	Roles    EnvironmentRoles    `json:"roles"`
 	Profiles EnvironmentProfiles `json:"profiles"`
+	Extra    EnvironmentExtra    `json:"extra"`
 }
 
 type EnvironmentRoles struct {
@@ -20,4 +21,8 @@ type EnvironmentProfiles struct {
 	NixOS       []Profile `json:"nixos"`
 	Darwin      []Profile `json:"darwin"`
 	HomeManager []Profile `json:"homeManager"`
+}
+
+type EnvironmentExtra struct {
+	BackupFileExtension string `json:"backupFileExtension"`
 }

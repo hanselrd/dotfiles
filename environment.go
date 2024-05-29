@@ -2,6 +2,9 @@ package dotfiles
 
 import (
 	"fmt"
+	"time"
+
+	"github.com/itchyny/timefmt-go"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
 	"github.com/hanselrd/dotfiles/lib/profiles"
@@ -10,10 +13,13 @@ import (
 )
 
 var (
-	username  = "delacruz"
-	homeDir   = fmt.Sprintf("/home/%s", username)
-	configDir = fmt.Sprintf("%s/.config", homeDir)
-	cacheDir  = fmt.Sprintf("%s/.cache", homeDir)
+	now           = time.Now()
+	nowYmd        = timefmt.Format(now, "%Y%m%d")
+	backupFileExt = fmt.Sprintf("bkp.%s", nowYmd)
+	username      = "delacruz"
+	homeDir       = fmt.Sprintf("/home/%s", username)
+	configDir     = fmt.Sprintf("%s/.config", homeDir)
+	cacheDir      = fmt.Sprintf("%s/.cache", homeDir)
 )
 
 var Environment = structs.Environment{
@@ -46,5 +52,8 @@ var Environment = structs.Environment{
 		NixOS:       profiles.NixOSProfiles,
 		Darwin:      profiles.DarwinProfiles,
 		HomeManager: profiles.HomeManagerProfiles,
+	},
+	Extra: structs.EnvironmentExtra{
+		BackupFileExtension: backupFileExt,
 	},
 }

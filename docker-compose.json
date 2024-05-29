@@ -1,5 +1,4 @@
 {
-  "version": "3",
   "services": {
     "dotfiles-eject-linux-base": {
       "build": {

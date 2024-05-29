@@ -17,7 +17,6 @@ var dockerComposeCmd = &cobra.Command{
 	Long:  "Docker Compose command",
 	Run: func(cmd *cobra.Command, args []string) {
 		dc := structs.DockerCompose{
-			Version: "3",
 			Services: func() map[string]structs.DockerComposeService {
 				services := make(map[string]structs.DockerComposeService)
 				for _, profile := range profiles.HomeManagerProfiles {

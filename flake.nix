@@ -131,6 +131,7 @@
               ./system/profiles/${profile.system}.nix
               home-manager.nixosModules.home-manager
               {
+                home-manager.backupFileExtension = env.extra.backupFileExtension;
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
