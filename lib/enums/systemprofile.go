@@ -6,11 +6,10 @@ type SystemProfile uint
 //go:generate go run codegen.go SystemProfile
 
 const (
-	SystemProfileNixOS        SystemProfile = iota // nixos
-	SystemProfileMacOS                             // macos
-	SystemProfileLinuxSystemd                      // linux-systemd
-	SystemProfileLinux                             // linux
-	SystemProfileWSL                               // wsl
+	SystemProfileNixOS SystemProfile = iota // nixos
+	SystemProfileMacOS                      // macos
+	SystemProfileLinux                      // linux
+	SystemProfileWSL                        // wsl
 )
 
 func (p SystemProfile) Type() string {

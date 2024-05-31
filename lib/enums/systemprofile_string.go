@@ -10,14 +10,13 @@ func _() {
 	var x [1]struct{}
 	_ = x[SystemProfileNixOS-0]
 	_ = x[SystemProfileMacOS-1]
-	_ = x[SystemProfileLinuxSystemd-2]
-	_ = x[SystemProfileLinux-3]
-	_ = x[SystemProfileWSL-4]
+	_ = x[SystemProfileLinux-2]
+	_ = x[SystemProfileWSL-3]
 }
 
-const _SystemProfile_name = "nixosmacoslinux-systemdlinuxwsl"
+const _SystemProfile_name = "nixosmacoslinuxwsl"
 
-var _SystemProfile_index = [...]uint8{0, 5, 10, 23, 28, 31}
+var _SystemProfile_index = [...]uint8{0, 5, 10, 15, 18}
 
 func (i SystemProfile) String() string {
 	if i >= SystemProfile(len(_SystemProfile_index)-1) {

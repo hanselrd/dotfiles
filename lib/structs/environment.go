@@ -24,5 +24,6 @@ type EnvironmentProfiles struct {
 }
 
 type EnvironmentExtra struct {
+	IsSystemd           bool   `json:"isSystemd"`
 	BackupFileExtension string `json:"backupFileExtension"`
 }

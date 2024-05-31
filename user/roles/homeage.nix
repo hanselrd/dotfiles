@@ -17,10 +17,9 @@ in {
     homeage =
       lib.mkIf env.roles.user.homeage.decrypt
       (lib.mkMerge [
-        (lib.mkIf
-          (!lib.profiles.isSystemNixos && !lib.profiles.isSystemLinuxSystemd) {
-            mount = "${env.user.cacheDirectory}/nix/homeage/secrets";
-          })
+        (lib.mkIf (!env.extra.isSystemd) {
+          mount = "${env.user.cacheDirectory}/nix/homeage/secrets";
+        })
         {
           identityPaths = [
             # "${config.home.homeDirectory}/.ssh/id_ed25519"

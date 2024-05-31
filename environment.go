@@ -2,6 +2,7 @@ package dotfiles
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/itchyny/timefmt-go"
@@ -54,6 +55,12 @@ var Environment = structs.Environment{
 		HomeManager: profiles.HomeManagerProfiles,
 	},
 	Extra: structs.EnvironmentExtra{
+		IsSystemd: func() bool {
+			if _, err := os.Stat("/run/systemd/system"); !os.IsNotExist(err) {
+				return true
+			}
+			return false
+		}(),
 		BackupFileExtension: backupFileExt,
 	},
 }

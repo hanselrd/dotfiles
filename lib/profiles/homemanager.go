@@ -6,22 +6,6 @@ import (
 )
 
 var (
-	LinuxSystemdBase = *structs.NewProfile(
-		enums.SystemProfileLinuxSystemd,
-		enums.UserProfileBase,
-	)
-	LinuxSystemdStandard = *structs.NewProfile(
-		enums.SystemProfileLinuxSystemd,
-		enums.UserProfileStandard,
-	)
-	LinuxSystemdMinimal = *structs.NewProfile(
-		enums.SystemProfileLinuxSystemd,
-		enums.UserProfileMinimal,
-	)
-	LinuxSystemdFull = *structs.NewProfile(
-		enums.SystemProfileLinuxSystemd,
-		enums.UserProfileFull,
-	)
 	LinuxBase = *structs.NewProfile(
 		enums.SystemProfileLinux,
 		enums.UserProfileBase,
@@ -57,10 +41,6 @@ var (
 )
 
 var HomeManagerProfiles = []structs.Profile{
-	LinuxSystemdBase,
-	LinuxSystemdStandard,
-	LinuxSystemdMinimal,
-	LinuxSystemdFull,
 	LinuxBase,
 	LinuxStandard,
 	LinuxMinimal,
