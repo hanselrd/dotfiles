@@ -20,6 +20,8 @@ type EnvironmentRoles struct {
 type EnvironmentProfiles struct {
 	NixOS       []Profile `json:"nixos"`
 	Darwin      []Profile `json:"darwin"`
+	Linux       []Profile `json:"linux"`
+	WSL         []Profile `json:"wsl"`
 	HomeManager []Profile `json:"homeManager"`
 }
 

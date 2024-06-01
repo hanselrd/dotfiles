@@ -40,6 +40,46 @@
       },
       "image": "dotfiles-eject/linux-standard"
     },
+    "dotfiles-eject-macos-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "macos-base"
+        }
+      },
+      "image": "dotfiles-eject/macos-base"
+    },
+    "dotfiles-eject-macos-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "macos-full"
+        }
+      },
+      "image": "dotfiles-eject/macos-full"
+    },
+    "dotfiles-eject-macos-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "macos-minimal"
+        }
+      },
+      "image": "dotfiles-eject/macos-minimal"
+    },
+    "dotfiles-eject-macos-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "macos-standard"
+        }
+      },
+      "image": "dotfiles-eject/macos-standard"
+    },
     "dotfiles-eject-wsl-base": {
       "build": {
         "context": ".",
@@ -120,6 +160,46 @@
       },
       "image": "dotfiles/linux-standard"
     },
+    "dotfiles-macos-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "macos-base"
+        }
+      },
+      "image": "dotfiles/macos-base"
+    },
+    "dotfiles-macos-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "macos-full"
+        }
+      },
+      "image": "dotfiles/macos-full"
+    },
+    "dotfiles-macos-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "macos-minimal"
+        }
+      },
+      "image": "dotfiles/macos-minimal"
+    },
+    "dotfiles-macos-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "macos-standard"
+        }
+      },
+      "image": "dotfiles/macos-standard"
+    },
     "dotfiles-proot-linux-base": {
       "build": {
         "context": ".",
@@ -159,6 +239,46 @@
         }
       },
       "image": "dotfiles-proot/linux-standard"
+    },
+    "dotfiles-proot-macos-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "macos-base"
+        }
+      },
+      "image": "dotfiles-proot/macos-base"
+    },
+    "dotfiles-proot-macos-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "macos-full"
+        }
+      },
+      "image": "dotfiles-proot/macos-full"
+    },
+    "dotfiles-proot-macos-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "macos-minimal"
+        }
+      },
+      "image": "dotfiles-proot/macos-minimal"
+    },
+    "dotfiles-proot-macos-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "macos-standard"
+        }
+      },
+      "image": "dotfiles-proot/macos-standard"
     },
     "dotfiles-proot-wsl-base": {
       "build": {

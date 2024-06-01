@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	sf "github.com/sa-/slicefunk"
+	"github.com/samber/lo"
 )
 
 type choice struct {
@@ -14,9 +14,9 @@ type choice struct {
 
 func NewChoice[T fmt.Stringer](allowed []T, value T) *choice {
 	return &choice{
-		Allowed: sf.Map(
+		Allowed: lo.Map(
 			allowed,
-			func(t T) string {
+			func(t T, _ int) string {
 				return t.String()
 			},
 		),

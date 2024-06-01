@@ -10,7 +10,7 @@ import (
 
 	"github.com/iancoleman/strcase"
 	"github.com/rs/zerolog/log"
-	sf "github.com/sa-/slicefunk"
+	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
@@ -42,9 +42,9 @@ var templateCmd = &cobra.Command{
 		f, err := os.Create("lib/profiles.nix")
 		cobra.CheckErr(err)
 		err = tmpl.ExecuteTemplate(f, "profiles.nix",
-			sf.Flatten([][]interfaces.Profile{
-				sf.Map(enums.SystemProfiles(), func(p enums.SystemProfile) interfaces.Profile { return p }),
-				sf.Map(enums.UserProfiles(), func(p enums.UserProfile) interfaces.Profile { return p }),
+			lo.Flatten([][]interfaces.Profile{
+				lo.Map(enums.SystemProfiles(), func(p enums.SystemProfile, _ int) interfaces.Profile { return p }),
+				lo.Map(enums.UserProfiles(), func(p enums.UserProfile, _ int) interfaces.Profile { return p }),
 			}))
 		cobra.CheckErr(err)
 

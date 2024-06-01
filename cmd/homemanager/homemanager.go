@@ -2,11 +2,11 @@ package homemanager
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	sf "github.com/sa-/slicefunk"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/lib/profiles"
@@ -21,9 +21,9 @@ var HomeManagerCmd = &cobra.Command{
 	Short: "Home Manager command",
 	Long:  "Home Manager command",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
-		if len(sf.Filter(profiles.HomeManagerProfiles, func(p structs.Profile) bool {
+		if !slices.ContainsFunc(profiles.HomeManagerProfiles, func(p structs.Profile) bool {
 			return p.String() == profile
-		})) != 1 {
+		}) {
 			err = fmt.Errorf("%s is not valid", profile)
 			log.Error().Err(err).Send()
 		}
@@ -41,6 +41,9 @@ func init() {
 		stdout := utils.First(utils.Must2(utils.Shell("uname -a")))
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {
 			return profiles.WSLBase
+		}
+		if strings.Contains(stdout, "Darwin") {
+			return profiles.MacOSBase
 		}
 		return profiles.LinuxBase
 	}()
