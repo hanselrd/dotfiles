@@ -6,8 +6,10 @@ import (
 	structs "github.com/hanselrd/dotfiles/lib/structs"
 )
 
-var MacOSBase = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileBase)
-var MacOSStandard = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileStandard)
-var MacOSMinimal = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileMinimal)
-var MacOSFull = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileFull)
+var (
+	MacOSBase     = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileBase)
+	MacOSStandard = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileStandard)
+	MacOSMinimal  = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileMinimal)
+	MacOSFull     = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileFull)
+)
 var DarwinProfiles = []structs.Profile{MacOSBase, MacOSStandard, MacOSMinimal, MacOSFull}

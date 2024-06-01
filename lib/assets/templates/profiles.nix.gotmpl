@@ -1,4 +1,3 @@
-{{define "profiles.nix" -}}
 {
   lib,
   pkgs,
@@ -9,4 +8,3 @@
   is{{camel .Type}}{{camel .Profile}} = profile.{{.Type}} == "{{.Profile}}";
   {{- end}}
 }
-{{end}}

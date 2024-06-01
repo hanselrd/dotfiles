@@ -6,8 +6,10 @@ import (
 	structs "github.com/hanselrd/dotfiles/lib/structs"
 )
 
-var NixOSBase = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileBase)
-var NixOSStandard = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileStandard)
-var NixOSMinimal = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileMinimal)
-var NixOSFull = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileFull)
+var (
+	NixOSBase     = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileBase)
+	NixOSStandard = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileStandard)
+	NixOSMinimal  = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileMinimal)
+	NixOSFull     = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileFull)
+)
 var NixOSProfiles = []structs.Profile{NixOSBase, NixOSStandard, NixOSMinimal, NixOSFull}

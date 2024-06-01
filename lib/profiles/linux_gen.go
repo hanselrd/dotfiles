@@ -6,8 +6,10 @@ import (
 	structs "github.com/hanselrd/dotfiles/lib/structs"
 )
 
-var LinuxBase = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileBase)
-var LinuxStandard = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileStandard)
-var LinuxMinimal = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileMinimal)
-var LinuxFull = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileFull)
+var (
+	LinuxBase     = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileBase)
+	LinuxStandard = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileStandard)
+	LinuxMinimal  = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileMinimal)
+	LinuxFull     = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileFull)
+)
 var LinuxProfiles = []structs.Profile{LinuxBase, LinuxStandard, LinuxMinimal, LinuxFull}

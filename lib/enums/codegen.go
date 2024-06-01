@@ -32,7 +32,7 @@ func main() {
 					Id(
 						fmt.Sprintf("_%s_index", os.Args[1]),
 					).
-					Index(Op(":").
+					Index(Empty(),
 						Len(
 							Id(
 								fmt.Sprintf("_%s_index", os.Args[1]),
@@ -43,23 +43,6 @@ func main() {
 			),
 			Return(Id("m")),
 		)
-
-	// f.Func().
-	// 	Id(fmt.Sprintf("%sMap", os.Args[1])).
-	// 	Types(Id("T").Any()).
-	// 	Params(Id("f").Func().Params(Id(os.Args[1])).Params(Id("T"))).
-	// 	Params(Id("m").Map(Id(os.Args[1])).Id("T")).
-	// 	Block(
-	// 		For(
-	// 			List(Id("_"), Id("v")).Op(":=").Range().
-	// 				Id(
-	// 					fmt.Sprintf("%ss", os.Args[1]),
-	// 				).Call(),
-	// 		).Block(
-	// 			Id("m").Index(Id("v")).Op("=").Id("f").Call(Id("v")),
-	// 		),
-	// 		Return(),
-	// 	)
 
 	f.Func().
 		Params(

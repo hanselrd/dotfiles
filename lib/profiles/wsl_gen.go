@@ -6,8 +6,10 @@ import (
 	structs "github.com/hanselrd/dotfiles/lib/structs"
 )
 
-var WSLBase = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileBase)
-var WSLStandard = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileStandard)
-var WSLMinimal = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileMinimal)
-var WSLFull = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileFull)
+var (
+	WSLBase     = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileBase)
+	WSLStandard = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileStandard)
+	WSLMinimal  = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileMinimal)
+	WSLFull     = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileFull)
+)
 var WSLProfiles = []structs.Profile{WSLBase, WSLStandard, WSLMinimal, WSLFull}
