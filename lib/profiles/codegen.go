@@ -25,15 +25,32 @@ func main() {
 			Id(fmt.Sprintf("%s%s", os.Args[2], strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""))).
 			Op("=").Op("*").Qual("github.com/hanselrd/dotfiles/lib/structs", "NewProfile").
 			Call(
-				Qual("github.com/hanselrd/dotfiles/lib/enums", fmt.Sprintf("SystemProfile%s", os.Args[2])),
-				Qual("github.com/hanselrd/dotfiles/lib/enums", fmt.Sprintf("UserProfile%s", strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""))),
+				Qual(
+					"github.com/hanselrd/dotfiles/lib/enums",
+					fmt.Sprintf("SystemProfile%s", os.Args[2]),
+				),
+				Qual(
+					"github.com/hanselrd/dotfiles/lib/enums",
+					fmt.Sprintf(
+						"UserProfile%s",
+						strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""),
+					),
+				),
 			)
 	}
 
 	f.Var().Id(fmt.Sprintf("%sProfiles", os.Args[1])).
-		Op("=").Index().Qual("github.com/hanselrd/dotfiles/lib/structs", "Profile").ValuesFunc(func(g *Group) {
+		Op("=").
+		Index().
+		Qual("github.com/hanselrd/dotfiles/lib/structs", "Profile").ValuesFunc(func(g *Group) {
 		for _, userProfile := range enums.UserProfiles() {
-			g.Id(fmt.Sprintf("%s%s", os.Args[2], strings.ReplaceAll(strings.Title(userProfile.String()), "-", "")))
+			g.Id(
+				fmt.Sprintf(
+					"%s%s",
+					os.Args[2],
+					strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""),
+				),
+			)
 		}
 	})
 

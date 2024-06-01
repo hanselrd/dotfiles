@@ -18,7 +18,12 @@ var keyCmd = &cobra.Command{
 		err := os.MkdirAll(fmt.Sprintf("%s/.keys", dotfiles.Environment.User.HomeDirectory), 0700)
 		cobra.CheckErr(err)
 
-		utils.Shell(fmt.Sprintf("age -d -i user/roles/homeage/keys/0.age user/roles/homeage/keys/1.age > %s/.keys/2.age", dotfiles.Environment.User.HomeDirectory))
+		utils.Shell(
+			fmt.Sprintf(
+				"age -d -i user/roles/homeage/keys/0.age user/roles/homeage/keys/1.age > %s/.keys/2.age",
+				dotfiles.Environment.User.HomeDirectory,
+			),
+		)
 	},
 }
 

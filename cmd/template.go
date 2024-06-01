@@ -43,14 +43,22 @@ var templateCmd = &cobra.Command{
 		cobra.CheckErr(err)
 		err = tmpl.ExecuteTemplate(f, "profiles.nix",
 			lo.Flatten([][]interfaces.Profile{
-				lo.Map(enums.SystemProfiles(), func(p enums.SystemProfile, _ int) interfaces.Profile { return p }),
-				lo.Map(enums.UserProfiles(), func(p enums.UserProfile, _ int) interfaces.Profile { return p }),
+				lo.Map(
+					enums.SystemProfiles(),
+					func(p enums.SystemProfile, _ int) interfaces.Profile { return p },
+				),
+				lo.Map(
+					enums.UserProfiles(),
+					func(p enums.UserProfile, _ int) interfaces.Profile { return p },
+				),
 			}))
 		cobra.CheckErr(err)
 
 		for _, role := range enums.SystemRoles() {
 			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", role)); !os.IsNotExist(err) {
-				log.Debug().Str("file", fmt.Sprintf("system/roles/%s.nix", role)).Msg("skipping, already exists")
+				log.Debug().
+					Str("file", fmt.Sprintf("system/roles/%s.nix", role)).
+					Msg("skipping, already exists")
 				continue
 			}
 
@@ -62,7 +70,9 @@ var templateCmd = &cobra.Command{
 
 		for _, role := range enums.UserRoles() {
 			if _, err := os.Stat(fmt.Sprintf("user/roles/%s.nix", role)); !os.IsNotExist(err) {
-				log.Debug().Str("file", fmt.Sprintf("user/roles/%s.nix", role)).Msg("skipping, already exists")
+				log.Debug().
+					Str("file", fmt.Sprintf("user/roles/%s.nix", role)).
+					Msg("skipping, already exists")
 				continue
 			}
 

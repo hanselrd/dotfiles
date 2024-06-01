@@ -47,5 +47,6 @@ func init() {
 		}
 		return profiles.LinuxBase
 	}()
-	HomeManagerCmd.PersistentFlags().StringVar(&profile, "profile", defaultProfile.String(), "home manager profile")
+	HomeManagerCmd.PersistentFlags().
+		StringVar(&profile, "profile", defaultProfile.String(), "home manager profile")
 }
