@@ -77,7 +77,7 @@ in {
             src = pkgs.fetchFromGitHub {
               owner = "kana";
               repo = name;
-              rev = "deb76867c302f933c8f21753806cbf2d8461b548";
+              rev = version;
               hash = "sha256-oFzUPG+IOkbKZ2gU/kduQ3G/LsLDlEjFhRP0BHBE+1Q=";
             };
           })

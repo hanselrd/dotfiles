@@ -20,7 +20,7 @@ in {
         src = pkgs.fetchFromGitHub {
           owner = "tmux";
           repo = finalAttrs.pname;
-          rev = "c07e856d244d07ab2b65e72328fb9fe20747794b";
+          rev = finalAttrs.version;
           hash = "sha256-99hdAskEByqD4fjl2wrth9QfSkPXkN7o2A9e+BOH6ug=";
         };
         patches = [];
@@ -81,7 +81,7 @@ in {
               src = pkgs.fetchFromGitHub {
                 owner = "soyuka";
                 repo = pluginName;
-                rev = "6bb3c95250f8120d8b072f46a807d2678ecbc97c";
+                rev = version;
                 hash = "sha256-vmGdHAWpYwo95tJNZlu9M5ZaC0qazTP4vT7tUAZHPfA=";
               };
             };
