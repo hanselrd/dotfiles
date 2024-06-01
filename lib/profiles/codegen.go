@@ -11,6 +11,7 @@ import (
 	. "github.com/dave/jennifer/jen"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/lib/utils"
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 
 	f.Var().DefsFunc(func(g *Group) {
 		for _, userProfile := range enums.UserProfiles() {
-			g.Id(fmt.Sprintf("%s%s", os.Args[2], strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""))).
+			g.Id(fmt.Sprintf("%s%s", os.Args[2], strings.ReplaceAll(utils.Caser.Title.String(userProfile.String()), "-", ""))).
 				Op("=").
 				Op("*").
 				Qual("github.com/hanselrd/dotfiles/lib/structs", "NewProfile").
@@ -35,7 +36,7 @@ func main() {
 						"github.com/hanselrd/dotfiles/lib/enums",
 						fmt.Sprintf(
 							"UserProfile%s",
-							strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""),
+							strings.ReplaceAll(utils.Caser.Title.String(userProfile.String()), "-", ""),
 						),
 					),
 				)
@@ -52,7 +53,7 @@ func main() {
 				fmt.Sprintf(
 					"%s%s",
 					os.Args[2],
-					strings.ReplaceAll(strings.Title(userProfile.String()), "-", ""),
+					strings.ReplaceAll(utils.Caser.Title.String(userProfile.String()), "-", ""),
 				),
 			)
 		}

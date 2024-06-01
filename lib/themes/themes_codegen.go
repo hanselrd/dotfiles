@@ -11,6 +11,7 @@ import (
 	. "github.com/dave/jennifer/jen"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/lib/utils"
 )
 
 func main() {
@@ -25,8 +26,8 @@ func main() {
 		Qual("github.com/hanselrd/dotfiles/lib/structs", "Theme").Values(
 		DictFunc(func(d Dict) {
 			for _, theme := range enums.Themes() {
-				d[Qual("github.com/hanselrd/dotfiles/lib/enums", fmt.Sprintf("Theme%s", strings.ReplaceAll(strings.Title(theme.String()), "-", "")))] = Id(
-					strings.ReplaceAll(strings.Title(theme.String()), "-", ""),
+				d[Qual("github.com/hanselrd/dotfiles/lib/enums", fmt.Sprintf("Theme%s", strings.ReplaceAll(utils.Caser.Title.String(theme.String()), "-", "")))] = Id(
+					strings.ReplaceAll(utils.Caser.Title.String(theme.String()), "-", ""),
 				)
 			}
 		}))
