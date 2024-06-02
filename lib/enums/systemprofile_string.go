@@ -8,10 +8,10 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[SystemProfileNixOS-0]
-	_ = x[SystemProfileMacOS-1]
+	_ = x[SystemProfileNixos-0]
+	_ = x[SystemProfileMacos-1]
 	_ = x[SystemProfileLinux-2]
-	_ = x[SystemProfileWSL-3]
+	_ = x[SystemProfileWsl-3]
 }
 
 const _SystemProfile_name = "nixosmacoslinuxwsl"

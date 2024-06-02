@@ -80,6 +80,46 @@
       },
       "image": "dotfiles-eject/macos-standard"
     },
+    "dotfiles-eject-nixos-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-base"
+        }
+      },
+      "image": "dotfiles-eject/nixos-base"
+    },
+    "dotfiles-eject-nixos-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-full"
+        }
+      },
+      "image": "dotfiles-eject/nixos-full"
+    },
+    "dotfiles-eject-nixos-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-minimal"
+        }
+      },
+      "image": "dotfiles-eject/nixos-minimal"
+    },
+    "dotfiles-eject-nixos-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-standard"
+        }
+      },
+      "image": "dotfiles-eject/nixos-standard"
+    },
     "dotfiles-eject-wsl-base": {
       "build": {
         "context": ".",
@@ -200,6 +240,46 @@
       },
       "image": "dotfiles/macos-standard"
     },
+    "dotfiles-nixos-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "nixos-base"
+        }
+      },
+      "image": "dotfiles/nixos-base"
+    },
+    "dotfiles-nixos-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "nixos-full"
+        }
+      },
+      "image": "dotfiles/nixos-full"
+    },
+    "dotfiles-nixos-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "nixos-minimal"
+        }
+      },
+      "image": "dotfiles/nixos-minimal"
+    },
+    "dotfiles-nixos-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "nixos-standard"
+        }
+      },
+      "image": "dotfiles/nixos-standard"
+    },
     "dotfiles-proot-linux-base": {
       "build": {
         "context": ".",
@@ -279,6 +359,46 @@
         }
       },
       "image": "dotfiles-proot/macos-standard"
+    },
+    "dotfiles-proot-nixos-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-base"
+        }
+      },
+      "image": "dotfiles-proot/nixos-base"
+    },
+    "dotfiles-proot-nixos-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-full"
+        }
+      },
+      "image": "dotfiles-proot/nixos-full"
+    },
+    "dotfiles-proot-nixos-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-minimal"
+        }
+      },
+      "image": "dotfiles-proot/nixos-minimal"
+    },
+    "dotfiles-proot-nixos-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "nixos-standard"
+        }
+      },
+      "image": "dotfiles-proot/nixos-standard"
     },
     "dotfiles-proot-wsl-base": {
       "build": {

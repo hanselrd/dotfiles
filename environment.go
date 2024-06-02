@@ -50,10 +50,10 @@ var Environment = structs.Environment{
 		},
 	},
 	Profiles: structs.EnvironmentProfiles{
-		NixOS:       profiles.NixOSProfiles,
-		Darwin:      profiles.DarwinProfiles,
+		Nixos:       profiles.NixosProfiles,
+		Macos:       profiles.MacosProfiles,
 		Linux:       profiles.LinuxProfiles,
-		WSL:         profiles.WSLProfiles,
+		Wsl:         profiles.WslProfiles,
 		HomeManager: profiles.HomeManagerProfiles,
 	},
 	Extra: structs.EnvironmentExtra{
