@@ -1,10 +1,8 @@
 package enums
 
-import "strings"
-
 type UserProfile uint
 
-//go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile -linecomment -json -text
+//go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile -linecomment -json -text -transform title-lower
 
 const (
 	UserProfileBase UserProfile = iota
@@ -18,5 +16,5 @@ func (p UserProfile) Type() string {
 }
 
 func (p UserProfile) Profile() string {
-	return strings.ToLower(p.String())
+	return p.String()
 }

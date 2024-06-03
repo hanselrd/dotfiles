@@ -9,6 +9,8 @@ import (
 
 	. "github.com/dave/jennifer/jen"
 
+	"github.com/iancoleman/strcase"
+
 	"github.com/hanselrd/dotfiles/lib/enums"
 )
 
@@ -22,20 +24,20 @@ func main() {
 	f.Var().DefsFunc(func(g *Group) {
 		for _, systemProfile := range enums.SystemProfileValues() {
 			for _, userProfile := range enums.UserProfileValues() {
-				g.Id(fmt.Sprintf("%s%s", systemProfile, userProfile)).
+				g.Id(fmt.Sprintf("%s%s", strcase.ToCamel(systemProfile.String()), strcase.ToCamel(userProfile.String()))).
 					Op("=").
 					Op("*").
 					Qual("github.com/hanselrd/dotfiles/lib/structs", "NewProfile").
 					Call(
 						Qual(
 							"github.com/hanselrd/dotfiles/lib/enums",
-							fmt.Sprintf("SystemProfile%s", systemProfile),
+							fmt.Sprintf("SystemProfile%s", strcase.ToCamel(systemProfile.String())),
 						),
 						Qual(
 							"github.com/hanselrd/dotfiles/lib/enums",
 							fmt.Sprintf(
 								"UserProfile%s",
-								userProfile,
+								strcase.ToCamel(userProfile.String()),
 							),
 						),
 					)
@@ -45,7 +47,7 @@ func main() {
 
 	f.Var().DefsFunc(func(g *Group) {
 		for _, systemProfile := range enums.SystemProfileValues() {
-			g.Id(fmt.Sprintf("%sProfiles", systemProfile)).
+			g.Id(fmt.Sprintf("%sProfiles", strcase.ToCamel(systemProfile.String()))).
 				Op("=").
 				Index().
 				Qual("github.com/hanselrd/dotfiles/lib/structs", "Profile").
@@ -54,8 +56,8 @@ func main() {
 						gg.Id(
 							fmt.Sprintf(
 								"%s%s",
-								systemProfile,
-								userProfile,
+								strcase.ToCamel(systemProfile.String()),
+								strcase.ToCamel(userProfile.String()),
 							),
 						)
 					}
@@ -63,7 +65,7 @@ func main() {
 		}
 		g.Id("HomeManagerProfiles").Op("=").Qual("slices", "Concat").CallFunc(func(gg *Group) {
 			for _, systemProfile := range enums.SystemProfileValues() {
-				gg.Id(fmt.Sprintf("%sProfiles", systemProfile))
+				gg.Id(fmt.Sprintf("%sProfiles", strcase.ToCamel(systemProfile.String())))
 			}
 		})
 	})

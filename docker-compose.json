@@ -1,5 +1,85 @@
 {
   "services": {
+    "dotfiles-darwin-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "darwin-base"
+        }
+      },
+      "image": "dotfiles/darwin-base"
+    },
+    "dotfiles-darwin-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "darwin-full"
+        }
+      },
+      "image": "dotfiles/darwin-full"
+    },
+    "dotfiles-darwin-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "darwin-minimal"
+        }
+      },
+      "image": "dotfiles/darwin-minimal"
+    },
+    "dotfiles-darwin-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "darwin-standard"
+        }
+      },
+      "image": "dotfiles/darwin-standard"
+    },
+    "dotfiles-eject-darwin-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-base"
+        }
+      },
+      "image": "dotfiles-eject/darwin-base"
+    },
+    "dotfiles-eject-darwin-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-full"
+        }
+      },
+      "image": "dotfiles-eject/darwin-full"
+    },
+    "dotfiles-eject-darwin-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-minimal"
+        }
+      },
+      "image": "dotfiles-eject/darwin-minimal"
+    },
+    "dotfiles-eject-darwin-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-standard"
+        }
+      },
+      "image": "dotfiles-eject/darwin-standard"
+    },
     "dotfiles-eject-linux-base": {
       "build": {
         "context": ".",
@@ -39,46 +119,6 @@
         }
       },
       "image": "dotfiles-eject/linux-standard"
-    },
-    "dotfiles-eject-macos-base": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/eject.Dockerfile",
-        "args": {
-          "PROFILE": "macos-base"
-        }
-      },
-      "image": "dotfiles-eject/macos-base"
-    },
-    "dotfiles-eject-macos-full": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/eject.Dockerfile",
-        "args": {
-          "PROFILE": "macos-full"
-        }
-      },
-      "image": "dotfiles-eject/macos-full"
-    },
-    "dotfiles-eject-macos-minimal": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/eject.Dockerfile",
-        "args": {
-          "PROFILE": "macos-minimal"
-        }
-      },
-      "image": "dotfiles-eject/macos-minimal"
-    },
-    "dotfiles-eject-macos-standard": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/eject.Dockerfile",
-        "args": {
-          "PROFILE": "macos-standard"
-        }
-      },
-      "image": "dotfiles-eject/macos-standard"
     },
     "dotfiles-eject-nixos-base": {
       "build": {
@@ -200,46 +240,6 @@
       },
       "image": "dotfiles/linux-standard"
     },
-    "dotfiles-macos-base": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/Dockerfile",
-        "args": {
-          "PROFILE": "macos-base"
-        }
-      },
-      "image": "dotfiles/macos-base"
-    },
-    "dotfiles-macos-full": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/Dockerfile",
-        "args": {
-          "PROFILE": "macos-full"
-        }
-      },
-      "image": "dotfiles/macos-full"
-    },
-    "dotfiles-macos-minimal": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/Dockerfile",
-        "args": {
-          "PROFILE": "macos-minimal"
-        }
-      },
-      "image": "dotfiles/macos-minimal"
-    },
-    "dotfiles-macos-standard": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/Dockerfile",
-        "args": {
-          "PROFILE": "macos-standard"
-        }
-      },
-      "image": "dotfiles/macos-standard"
-    },
     "dotfiles-nixos-base": {
       "build": {
         "context": ".",
@@ -280,6 +280,46 @@
       },
       "image": "dotfiles/nixos-standard"
     },
+    "dotfiles-proot-darwin-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-base"
+        }
+      },
+      "image": "dotfiles-proot/darwin-base"
+    },
+    "dotfiles-proot-darwin-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-full"
+        }
+      },
+      "image": "dotfiles-proot/darwin-full"
+    },
+    "dotfiles-proot-darwin-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-minimal"
+        }
+      },
+      "image": "dotfiles-proot/darwin-minimal"
+    },
+    "dotfiles-proot-darwin-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/proot.Dockerfile",
+        "args": {
+          "PROFILE": "darwin-standard"
+        }
+      },
+      "image": "dotfiles-proot/darwin-standard"
+    },
     "dotfiles-proot-linux-base": {
       "build": {
         "context": ".",
@@ -319,46 +359,6 @@
         }
       },
       "image": "dotfiles-proot/linux-standard"
-    },
-    "dotfiles-proot-macos-base": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/proot.Dockerfile",
-        "args": {
-          "PROFILE": "macos-base"
-        }
-      },
-      "image": "dotfiles-proot/macos-base"
-    },
-    "dotfiles-proot-macos-full": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/proot.Dockerfile",
-        "args": {
-          "PROFILE": "macos-full"
-        }
-      },
-      "image": "dotfiles-proot/macos-full"
-    },
-    "dotfiles-proot-macos-minimal": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/proot.Dockerfile",
-        "args": {
-          "PROFILE": "macos-minimal"
-        }
-      },
-      "image": "dotfiles-proot/macos-minimal"
-    },
-    "dotfiles-proot-macos-standard": {
-      "build": {
-        "context": ".",
-        "dockerfile": "docker/proot.Dockerfile",
-        "args": {
-          "PROFILE": "macos-standard"
-        }
-      },
-      "image": "dotfiles-proot/macos-standard"
     },
     "dotfiles-proot-nixos-base": {
       "build": {

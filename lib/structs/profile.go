@@ -2,7 +2,6 @@ package structs
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/hanselrd/dotfiles/lib/enums"
 )
@@ -15,7 +14,7 @@ type Profile struct {
 
 func NewProfile(system enums.SystemProfile, user enums.UserProfile) *Profile {
 	return &Profile{
-		Name:   strings.ToLower(fmt.Sprintf("%s-%s", system, user)),
+		Name:   fmt.Sprintf("%s-%s", system, user),
 		System: system,
 		User:   user,
 	}

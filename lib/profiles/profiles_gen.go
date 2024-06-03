@@ -9,28 +9,28 @@ import (
 )
 
 var (
-	NixOSBase     = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileBase)
-	NixOSStandard = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileStandard)
-	NixOSMinimal  = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileMinimal)
-	NixOSFull     = *structs.NewProfile(enums.SystemProfileNixOS, enums.UserProfileFull)
-	MacOSBase     = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileBase)
-	MacOSStandard = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileStandard)
-	MacOSMinimal  = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileMinimal)
-	MacOSFull     = *structs.NewProfile(enums.SystemProfileMacOS, enums.UserProfileFull)
-	LinuxBase     = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileBase)
-	LinuxStandard = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileStandard)
-	LinuxMinimal  = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileMinimal)
-	LinuxFull     = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileFull)
-	WSLBase       = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileBase)
-	WSLStandard   = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileStandard)
-	WSLMinimal    = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileMinimal)
-	WSLFull       = *structs.NewProfile(enums.SystemProfileWSL, enums.UserProfileFull)
+	NixosBase      = *structs.NewProfile(enums.SystemProfileNixos, enums.UserProfileBase)
+	NixosStandard  = *structs.NewProfile(enums.SystemProfileNixos, enums.UserProfileStandard)
+	NixosMinimal   = *structs.NewProfile(enums.SystemProfileNixos, enums.UserProfileMinimal)
+	NixosFull      = *structs.NewProfile(enums.SystemProfileNixos, enums.UserProfileFull)
+	DarwinBase     = *structs.NewProfile(enums.SystemProfileDarwin, enums.UserProfileBase)
+	DarwinStandard = *structs.NewProfile(enums.SystemProfileDarwin, enums.UserProfileStandard)
+	DarwinMinimal  = *structs.NewProfile(enums.SystemProfileDarwin, enums.UserProfileMinimal)
+	DarwinFull     = *structs.NewProfile(enums.SystemProfileDarwin, enums.UserProfileFull)
+	LinuxBase      = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileBase)
+	LinuxStandard  = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileStandard)
+	LinuxMinimal   = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileMinimal)
+	LinuxFull      = *structs.NewProfile(enums.SystemProfileLinux, enums.UserProfileFull)
+	WslBase        = *structs.NewProfile(enums.SystemProfileWsl, enums.UserProfileBase)
+	WslStandard    = *structs.NewProfile(enums.SystemProfileWsl, enums.UserProfileStandard)
+	WslMinimal     = *structs.NewProfile(enums.SystemProfileWsl, enums.UserProfileMinimal)
+	WslFull        = *structs.NewProfile(enums.SystemProfileWsl, enums.UserProfileFull)
 )
 
 var (
-	NixOSProfiles       = []structs.Profile{NixOSBase, NixOSStandard, NixOSMinimal, NixOSFull}
-	MacOSProfiles       = []structs.Profile{MacOSBase, MacOSStandard, MacOSMinimal, MacOSFull}
+	NixosProfiles       = []structs.Profile{NixosBase, NixosStandard, NixosMinimal, NixosFull}
+	DarwinProfiles      = []structs.Profile{DarwinBase, DarwinStandard, DarwinMinimal, DarwinFull}
 	LinuxProfiles       = []structs.Profile{LinuxBase, LinuxStandard, LinuxMinimal, LinuxFull}
-	WSLProfiles         = []structs.Profile{WSLBase, WSLStandard, WSLMinimal, WSLFull}
-	HomeManagerProfiles = slices.Concat(NixOSProfiles, MacOSProfiles, LinuxProfiles, WSLProfiles)
+	WslProfiles         = []structs.Profile{WslBase, WslStandard, WslMinimal, WslFull}
+	HomeManagerProfiles = slices.Concat(NixosProfiles, DarwinProfiles, LinuxProfiles, WslProfiles)
 )

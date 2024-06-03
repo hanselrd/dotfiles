@@ -1,16 +1,14 @@
 package enums
 
-import "strings"
-
 type SystemProfile uint
 
-//go:generate go run github.com/dmarkham/enumer -type SystemProfile -trimprefix SystemProfile -linecomment -json -text
+//go:generate go run github.com/dmarkham/enumer -type SystemProfile -trimprefix SystemProfile -linecomment -json -text -transform title-lower
 
 const (
-	SystemProfileNixOS SystemProfile = iota
-	SystemProfileMacOS
+	SystemProfileNixos SystemProfile = iota
+	SystemProfileDarwin
 	SystemProfileLinux
-	SystemProfileWSL
+	SystemProfileWsl
 )
 
 func (p SystemProfile) Type() string {
@@ -18,5 +16,5 @@ func (p SystemProfile) Type() string {
 }
 
 func (p SystemProfile) Profile() string {
-	return strings.ToLower(p.String())
+	return p.String()
 }

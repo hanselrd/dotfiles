@@ -40,10 +40,10 @@ func init() {
 	defaultProfile := func() structs.Profile {
 		stdout := utils.First(utils.Must2(utils.Shell("uname -a")))
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {
-			return profiles.WSLBase
+			return profiles.WslBase
 		}
 		if strings.Contains(stdout, "Darwin") {
-			return profiles.MacOSBase
+			return profiles.DarwinBase
 		}
 		return profiles.LinuxBase
 	}()

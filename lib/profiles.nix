@@ -5,7 +5,7 @@
   ...
 }: {
   isSystemNixos = profile.system == "nixos";
-  isSystemMacos = profile.system == "macos";
+  isSystemDarwin = profile.system == "darwin";
   isSystemLinux = profile.system == "linux";
   isSystemWsl = profile.system == "wsl";
   isUserBase = profile.user == "base";

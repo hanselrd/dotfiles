@@ -215,6 +215,7 @@
             ${lib.getExe' pkgs.go "go"} mod tidy
             ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
             ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
+            ${lib.getExe' pkgs.go "go"} get github.com/iancoleman/strcase
             ${lib.getExe' pkgs.go "go"} get golang.org/x/text
 
             pushd user/roles/neovim/nodePackages
