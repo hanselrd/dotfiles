@@ -81,7 +81,7 @@ var ejectCmd = &cobra.Command{
 			),
 		)
 
-		err := os.MkdirAll(outDir, 0700)
+		err := os.MkdirAll(outDir, 0o700)
 		cobra.CheckErr(err)
 
 		utils.Shell("cpio -idmv < eject.cpio")

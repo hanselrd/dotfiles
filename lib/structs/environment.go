@@ -18,10 +18,10 @@ type EnvironmentRoles struct {
 }
 
 type EnvironmentProfiles struct {
-	Nixos       []Profile `json:"nixos"`
-	Macos       []Profile `json:"macos"`
+	NixOS       []Profile `json:"nixos"`
+	MacOS       []Profile `json:"macos"`
 	Linux       []Profile `json:"linux"`
-	Wsl         []Profile `json:"wsl"`
+	WSL         []Profile `json:"wsl"`
 	HomeManager []Profile `json:"homeManager"`
 }
 

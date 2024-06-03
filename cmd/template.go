@@ -31,17 +31,17 @@ var templateCmd = &cobra.Command{
 		err = tmpl.ExecuteTemplate(f, "profiles.nix.gotmpl",
 			lo.Flatten([][]interfaces.Profile{
 				lo.Map(
-					enums.SystemProfiles(),
+					enums.SystemProfileValues(),
 					func(p enums.SystemProfile, _ int) interfaces.Profile { return p },
 				),
 				lo.Map(
-					enums.UserProfiles(),
+					enums.UserProfileValues(),
 					func(p enums.UserProfile, _ int) interfaces.Profile { return p },
 				),
 			}))
 		cobra.CheckErr(err)
 
-		for _, role := range enums.SystemRoles() {
+		for _, role := range enums.SystemRoleValues() {
 			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", role)); !os.IsNotExist(err) {
 				log.Debug().
 					Str("file", fmt.Sprintf("system/roles/%s.nix", role)).
@@ -55,7 +55,7 @@ var templateCmd = &cobra.Command{
 			cobra.CheckErr(err)
 		}
 
-		for _, role := range enums.UserRoles() {
+		for _, role := range enums.UserRoleValues() {
 			if _, err := os.Stat(fmt.Sprintf("user/roles/%s.nix", role)); !os.IsNotExist(err) {
 				log.Debug().
 					Str("file", fmt.Sprintf("user/roles/%s.nix", role)).
@@ -71,12 +71,12 @@ var templateCmd = &cobra.Command{
 
 		f, err = os.Create("system/roles.nix")
 		cobra.CheckErr(err)
-		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", enums.SystemRoles())
+		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", enums.SystemRoleValues())
 		cobra.CheckErr(err)
 
 		f, err = os.Create("user/roles.nix")
 		cobra.CheckErr(err)
-		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", enums.UserRoles())
+		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", enums.UserRoleValues())
 		cobra.CheckErr(err)
 	},
 }

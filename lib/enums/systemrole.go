@@ -2,24 +2,23 @@ package enums
 
 type SystemRole uint
 
-//go:generate stringer -type SystemRole -linecomment
-//go:generate go run codegen.go SystemRole
+//go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole -linecomment -json -text -transform lower
 
 const (
-	SystemRoleBootstrap      SystemRole = iota // bootstrap
-	SystemRoleBoot                             // boot
-	SystemRoleI18n                             // i18n
-	SystemRoleKernel                           // kernel
-	SystemRoleMonitoring                       // monitoring
-	SystemRoleMotd                             // motd
-	SystemRoleNetworking                       // networking
-	SystemRoleNix                              // nix
-	SystemRoleOpenSsh                          // openssh
-	SystemRoleShell                            // shell
-	SystemRoleTime                             // time
-	SystemRoleUser                             // user
-	SystemRoleVirtualization                   // virtualization
-	SystemRoleX11                              // x11
+	SystemRoleBootstrap SystemRole = iota
+	SystemRoleBoot
+	SystemRoleI18n
+	SystemRoleKernel
+	SystemRoleMonitoring
+	SystemRoleMotd
+	SystemRoleNetworking
+	SystemRoleNix
+	SystemRoleOpenSsh
+	SystemRoleShell
+	SystemRoleTime
+	SystemRoleUser
+	SystemRoleVirtualization
+	SystemRoleX11
 )
 
 func (r SystemRole) Type() string {

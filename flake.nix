@@ -73,7 +73,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-dFnZ8OgvUgQy9RWjhU+o3TrnMU1q0xZtxWE7gC5iEc4=";
+            vendorHash = "sha256-KmlnckeyBZETwJSPmVUJv2ZhsYpx1QF6r2XCbL0lwuc=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -214,6 +214,8 @@
             ${lib.getExe' pkgs.go "go"} get -u ./...
             ${lib.getExe' pkgs.go "go"} mod tidy
             ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
+            ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
+            ${lib.getExe' pkgs.go "go"} get golang.org/x/text
 
             pushd user/roles/neovim/nodePackages
             ${lib.getExe' pkgs.node2nix "node2nix"} -i <(${lib.getExe' pkgs.coreutils "echo"} "[\"emmet-ls\"]")
@@ -235,6 +237,7 @@
 
             ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.gotools "goimports"} -w -local github.com/hanselrd/dotfiles {} \;
+            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe pkgs.gofumpt} -w -extra {} \;
             ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.golines "golines"} -w -m 100 {} \;
           '';
 

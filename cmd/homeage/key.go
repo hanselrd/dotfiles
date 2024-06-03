@@ -15,7 +15,7 @@ var keyCmd = &cobra.Command{
 	Short: "Key command",
 	Long:  "Key command",
 	Run: func(cmd *cobra.Command, args []string) {
-		err := os.MkdirAll(fmt.Sprintf("%s/.keys", dotfiles.Environment.User.HomeDirectory), 0700)
+		err := os.MkdirAll(fmt.Sprintf("%s/.keys", dotfiles.Environment.User.HomeDirectory), 0o700)
 		cobra.CheckErr(err)
 
 		utils.Shell(

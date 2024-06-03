@@ -2,55 +2,54 @@ package enums
 
 type UserRole uint
 
-//go:generate stringer -type UserRole -linecomment
-//go:generate go run codegen.go UserRole
+//go:generate go run github.com/dmarkham/enumer -type UserRole -trimprefix UserRole -linecomment -json -text -transform lower
 
 const (
-	UserRoleBootstrap             UserRole = iota // bootstrap
-	UserRoleAlacritty                             // alacritty
-	UserRoleBash                                  // bash
-	UserRoleBat                                   // bat
-	UserRoleBrowser                               // browser
-	UserRoleDevelopment                           // development
-	UserRoleDevelopmentCpp                        // development.cpp
-	UserRoleDevelopmentDhall                      // development.dhall
-	UserRoleDevelopmentElixir                     // development.elixir
-	UserRoleDevelopmentGleam                      // development.gleam
-	UserRoleDevelopmentGo                         // development.go
-	UserRoleDevelopmentHaskell                    // development.haskell
-	UserRoleDevelopmentJava                       // development.java
-	UserRoleDevelopmentKotlin                     // development.kotlin
-	UserRoleDevelopmentLua                        // development.lua
-	UserRoleDevelopmentNickel                     // development.nickel
-	UserRoleDevelopmentNix                        // development.nix
-	UserRoleDevelopmentNodejs                     // development.nodejs
-	UserRoleDevelopmentPurescript                 // development.purescript
-	UserRoleDevelopmentPython                     // development.python
-	UserRoleDevelopmentRust                       // development.rust
-	UserRoleDevelopmentShell                      // development.shell
-	UserRoleDevelopmentZig                        // development.zig
-	UserRoleDocker                                // docker
-	UserRoleEditor                                // editor
-	UserRoleEza                                   // eza
-	UserRoleFzf                                   // fzf
-	UserRoleGit                                   // git
-	UserRoleHomeage                               // homeage
-	UserRoleHtop                                  // htop
-	UserRoleNeovim                                // neovim
-	UserRoleNix                                   // nix
-	UserRolePager                                 // pager
-	UserRoleRipgrep                               // ripgrep
-	UserRoleScripts                               // scripts
-	UserRoleShell                                 // shell
-	UserRoleSsh                                   // ssh
-	UserRoleStarship                              // starship
-	UserRoleTerminal                              // terminal
-	UserRoleTheme                                 // theme
-	UserRoleTmux                                  // tmux
-	UserRoleVscode                                // vscode
-	UserRoleZoxide                                // zoxide
-	UserRoleZsh                                   // zsh
-	UserRoleZzz                                   // zzz
+	UserRoleBootstrap UserRole = iota
+	UserRoleAlacritty
+	UserRoleBash
+	UserRoleBat
+	UserRoleBrowser
+	UserRoleDevelopment
+	UserRoleDevelopmentCpp        // development.cpp
+	UserRoleDevelopmentDhall      // development.dhall
+	UserRoleDevelopmentElixir     // development.elixir
+	UserRoleDevelopmentGleam      // development.gleam
+	UserRoleDevelopmentGo         // development.go
+	UserRoleDevelopmentHaskell    // development.haskell
+	UserRoleDevelopmentJava       // development.java
+	UserRoleDevelopmentKotlin     // development.kotlin
+	UserRoleDevelopmentLua        // development.lua
+	UserRoleDevelopmentNickel     // development.nickel
+	UserRoleDevelopmentNix        // development.nix
+	UserRoleDevelopmentNodejs     // development.nodejs
+	UserRoleDevelopmentPurescript // development.purescript
+	UserRoleDevelopmentPython     // development.python
+	UserRoleDevelopmentRust       // development.rust
+	UserRoleDevelopmentShell      // development.shell
+	UserRoleDevelopmentZig        // development.zig
+	UserRoleDocker
+	UserRoleEditor
+	UserRoleEza
+	UserRoleFzf
+	UserRoleGit
+	UserRoleHomeage
+	UserRoleHtop
+	UserRoleNeovim
+	UserRoleNix
+	UserRolePager
+	UserRoleRipgrep
+	UserRoleScripts
+	UserRoleShell
+	UserRoleSsh
+	UserRoleStarship
+	UserRoleTerminal
+	UserRoleTheme
+	UserRoleTmux
+	UserRoleVscode
+	UserRoleZoxide
+	UserRoleZsh
+	UserRoleZzz
 )
 
 func (r UserRole) Type() string {

@@ -1,15 +1,16 @@
 package enums
 
+import "strings"
+
 type SystemProfile uint
 
-//go:generate stringer -type SystemProfile -linecomment
-//go:generate go run codegen.go SystemProfile
+//go:generate go run github.com/dmarkham/enumer -type SystemProfile -trimprefix SystemProfile -linecomment -json -text
 
 const (
-	SystemProfileNixos SystemProfile = iota // nixos
-	SystemProfileMacos                      // macos
-	SystemProfileLinux                      // linux
-	SystemProfileWsl                        // wsl
+	SystemProfileNixOS SystemProfile = iota
+	SystemProfileMacOS
+	SystemProfileLinux
+	SystemProfileWSL
 )
 
 func (p SystemProfile) Type() string {
@@ -17,5 +18,5 @@ func (p SystemProfile) Type() string {
 }
 
 func (p SystemProfile) Profile() string {
-	return p.String()
+	return strings.ToLower(p.String())
 }

@@ -2,16 +2,15 @@ package enums
 
 type Theme uint
 
-//go:generate stringer -type Theme -linecomment
-//go:generate go run codegen.go Theme
+//go:generate go run github.com/dmarkham/enumer -type Theme -trimprefix Theme -linecomment -json -text -transform kebab
 
 const (
-	ThemeChalk     Theme = iota // chalk
-	ThemeGrayscale              // grayscale
-	ThemeMatrix                 // matrix
-	ThemeMocha                  // mocha
-	ThemeOcean                  // ocean
-	ThemeOneDark                // one-dark
-	ThemeTomorrow               // tomorrow
-	ThemeTwilight               // twilight
+	ThemeChalk Theme = iota
+	ThemeGrayscale
+	ThemeMatrix
+	ThemeMocha
+	ThemeOcean
+	ThemeOneDark
+	ThemeTomorrow
+	ThemeTwilight
 )

@@ -26,7 +26,7 @@ func WithStdin(stdin string) ShellOpt {
 	}
 }
 
-func Shell(command string, opts ...ShellOpt) (stdout string, stderr string, err error) {
+func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) {
 	options := ShellOpts{}
 
 	for _, opt := range opts {
