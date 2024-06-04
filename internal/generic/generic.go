@@ -1,4 +1,4 @@
-package utils
+package generic
 
 import "github.com/rs/zerolog/log"
 

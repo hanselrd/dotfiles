@@ -10,8 +10,8 @@ import (
 
 	"github.com/hanselrd/dotfiles/cmd/homeage"
 	"github.com/hanselrd/dotfiles/cmd/homemanager"
-	"github.com/hanselrd/dotfiles/lib/flags"
-	"github.com/hanselrd/dotfiles/lib/utils"
+	"github.com/hanselrd/dotfiles/internal/choice"
+	"github.com/hanselrd/dotfiles/pkg/flags"
 )
 
 var rootCmd = &cobra.Command{
@@ -84,7 +84,7 @@ func init() {
 
 	rootCmd.PersistentFlags().
 		BoolVar(&flags.Dryrun, "dryrun", false, "run without affecting the system")
-	flags.LogLevel = utils.NewChoice(
+	flags.LogLevel = choice.NewChoice(
 		[]zerolog.Level{
 			zerolog.TraceLevel,
 			zerolog.DebugLevel,

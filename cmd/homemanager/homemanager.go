@@ -9,9 +9,10 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/lib/profiles"
-	"github.com/hanselrd/dotfiles/lib/structs"
-	"github.com/hanselrd/dotfiles/lib/utils"
+	"github.com/hanselrd/dotfiles/internal/generic"
+	"github.com/hanselrd/dotfiles/internal/shell"
+	"github.com/hanselrd/dotfiles/pkg/profiles"
+	"github.com/hanselrd/dotfiles/pkg/structs"
 )
 
 var profile string
@@ -38,7 +39,7 @@ func init() {
 	zerolog.SetGlobalLevel(zerolog.Disabled)
 
 	defaultProfile := func() structs.Profile {
-		stdout := utils.First(utils.Must2(utils.Shell("uname -a")))
+		stdout := generic.First(generic.Must2(shell.Shell("uname -a")))
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {
 			return profiles.WslBase
 		}

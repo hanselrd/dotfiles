@@ -6,9 +6,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/lib/profiles"
-	"github.com/hanselrd/dotfiles/lib/structs"
-	"github.com/hanselrd/dotfiles/lib/utils"
+	"github.com/hanselrd/dotfiles/internal/generic"
+	"github.com/hanselrd/dotfiles/pkg/profiles"
+	"github.com/hanselrd/dotfiles/pkg/structs"
 )
 
 var dockerComposeCmd = &cobra.Command{
@@ -55,7 +55,7 @@ var dockerComposeCmd = &cobra.Command{
 			}(),
 		}
 
-		data := utils.Must(json.MarshalIndent(dc, "", "  "))
+		data := generic.Must(json.MarshalIndent(dc, "", "  "))
 		fmt.Println(string(data))
 	},
 }

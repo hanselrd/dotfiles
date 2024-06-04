@@ -82,12 +82,11 @@ in {
             };
           })
       ];
-      extraPackages = with pkgs; let
-        otherNodePackages = callPackage ./neovim/nodePackages {};
-      in [
+      extraPackages = with pkgs; [
         # elixir-ls
         # nixd
         clang-tools
+        emmet-ls
         gopls
         jdt-language-server
         kotlin-language-server
@@ -97,7 +96,6 @@ in {
         nodePackages.pyright
         nodePackages.typescript
         nodePackages.typescript-language-server
-        otherNodePackages.emmet-ls
         rust-analyzer
         zls
       ];

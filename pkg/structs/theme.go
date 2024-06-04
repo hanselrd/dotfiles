@@ -1,7 +1,7 @@
 package structs
 
 import (
-	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/pkg/enums"
 )
 
 type Theme struct {

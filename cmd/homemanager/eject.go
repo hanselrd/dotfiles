@@ -11,7 +11,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles"
-	"github.com/hanselrd/dotfiles/lib/utils"
+	"github.com/hanselrd/dotfiles/internal/generic"
+	"github.com/hanselrd/dotfiles/internal/shell"
 )
 
 var (
@@ -33,23 +34,23 @@ var ejectCmd = &cobra.Command{
 		return
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.Shell(
+		shell.Shell(
 			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile),
 		)
-		pkg1 := utils.First(
-			utils.Must2(
-				utils.Shell(
+		pkg1 := generic.First(
+			generic.Must2(
+				shell.Shell(
 					fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile),
 				),
 			),
 		)
-		deps1 := utils.First(
-			utils.Must2(utils.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg1))),
+		deps1 := generic.First(
+			generic.Must2(shell.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg1))),
 		)
 
-		pkg2 := utils.First(
-			utils.Must2(
-				utils.Shell(
+		pkg2 := generic.First(
+			generic.Must2(
+				shell.Shell(
 					fmt.Sprintf(
 						"readlink -f %s/.nix-profile",
 						dotfiles.Environment.User.HomeDirectory,
@@ -57,15 +58,15 @@ var ejectCmd = &cobra.Command{
 				),
 			),
 		)
-		deps2 := utils.First(
-			utils.Must2(utils.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg2))),
+		deps2 := generic.First(
+			generic.Must2(shell.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg2))),
 		)
 
-		utils.Shell(
+		shell.Shell(
 			"sort | uniq > eject.dep",
-			utils.WithStdin(strings.Join([]string{deps1, deps2}, "\n")),
+			shell.WithStdin(strings.Join([]string{deps1, deps2}, "\n")),
 		)
-		utils.Shell("find /nix/store -depth -print | grep -Ff eject.dep | cpio -ov > eject.cpio")
+		shell.Shell("find /nix/store -depth -print | grep -Ff eject.dep | cpio -ov > eject.cpio")
 
 		if !strings.HasSuffix(outDir, "/") {
 			outDir += "/"
@@ -73,7 +74,7 @@ var ejectCmd = &cobra.Command{
 
 		sedSearch := fmt.Sprintf("/nix/store/%s-", strings.Repeat(".", 32))[:len(outDir)]
 
-		utils.Shell(
+		shell.Shell(
 			fmt.Sprintf(
 				"sed -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" eject.cpio",
 				sedSearch,
@@ -84,18 +85,18 @@ var ejectCmd = &cobra.Command{
 		err := os.MkdirAll(outDir, 0o700)
 		cobra.CheckErr(err)
 
-		utils.Shell("cpio -idmv < eject.cpio")
-		utils.Shell(fmt.Sprintf("chmod -R u+w %s", outDir))
+		shell.Shell("cpio -idmv < eject.cpio")
+		shell.Shell(fmt.Sprintf("chmod -R u+w %s", outDir))
 
-		pkg1New := utils.First(
-			utils.Must2(
-				utils.Shell(
+		pkg1New := generic.First(
+			generic.Must2(
+				shell.Shell(
 					fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
-					utils.WithStdin(pkg1),
+					shell.WithStdin(pkg1),
 				),
 			),
 		)
-		utils.Shell(
+		shell.Shell(
 			fmt.Sprintf(
 				"cp -av %s/home-files/. %s/",
 				pkg1New,
@@ -103,15 +104,15 @@ var ejectCmd = &cobra.Command{
 			),
 		)
 
-		pkg2New := utils.First(
-			utils.Must2(
-				utils.Shell(
+		pkg2New := generic.First(
+			generic.Must2(
+				shell.Shell(
 					fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
-					utils.WithStdin(pkg2),
+					shell.WithStdin(pkg2),
 				),
 			),
 		)
-		utils.Shell(
+		shell.Shell(
 			fmt.Sprintf(
 				"ln -snfF %s %s/.nix-profile",
 				pkg2New,

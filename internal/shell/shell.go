@@ -1,4 +1,4 @@
-package utils
+package shell
 
 import (
 	"bufio"
@@ -10,7 +10,7 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/hanselrd/dotfiles/lib/flags"
+	"github.com/hanselrd/dotfiles/pkg/flags"
 )
 
 type ShellOpt func(*ShellOpts) error

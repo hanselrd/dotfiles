@@ -3,7 +3,7 @@ package structs
 import (
 	"fmt"
 
-	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/pkg/enums"
 )
 
 type Profile struct {

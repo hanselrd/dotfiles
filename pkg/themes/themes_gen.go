@@ -2,8 +2,8 @@
 package themes
 
 import (
-	enums "github.com/hanselrd/dotfiles/lib/enums"
-	structs "github.com/hanselrd/dotfiles/lib/structs"
+	enums "github.com/hanselrd/dotfiles/pkg/enums"
+	structs "github.com/hanselrd/dotfiles/pkg/structs"
 )
 
 var ThemeMapStruct = map[enums.Theme]structs.Theme{

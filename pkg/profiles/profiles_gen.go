@@ -4,8 +4,8 @@ package profiles
 import (
 	"slices"
 
-	enums "github.com/hanselrd/dotfiles/lib/enums"
-	structs "github.com/hanselrd/dotfiles/lib/structs"
+	enums "github.com/hanselrd/dotfiles/pkg/enums"
+	structs "github.com/hanselrd/dotfiles/pkg/structs"
 )
 
 var (

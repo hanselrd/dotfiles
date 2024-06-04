@@ -12,7 +12,7 @@ import (
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 
-	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/pkg/enums"
 )
 
 func main() {
@@ -25,11 +25,11 @@ func main() {
 	caser := cases.Title(language.English)
 
 	f.Var().Id("ThemeMapStruct").
-		Op("=").Map(Qual("github.com/hanselrd/dotfiles/lib/enums", "Theme")).
-		Qual("github.com/hanselrd/dotfiles/lib/structs", "Theme").Values(
+		Op("=").Map(Qual("github.com/hanselrd/dotfiles/pkg/enums", "Theme")).
+		Qual("github.com/hanselrd/dotfiles/pkg/structs", "Theme").Values(
 		DictFunc(func(d Dict) {
 			for _, theme := range enums.ThemeValues() {
-				d[Qual("github.com/hanselrd/dotfiles/lib/enums", fmt.Sprintf("Theme%s", strings.ReplaceAll(caser.String(theme.String()), "-", "")))] = Id(
+				d[Qual("github.com/hanselrd/dotfiles/pkg/enums", fmt.Sprintf("Theme%s", strings.ReplaceAll(caser.String(theme.String()), "-", "")))] = Id(
 					strings.ReplaceAll(caser.String(theme.String()), "-", ""),
 				)
 			}

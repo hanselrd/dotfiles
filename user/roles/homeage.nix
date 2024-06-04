@@ -17,7 +17,7 @@ in {
     homeage =
       lib.mkIf env.roles.user.homeage.decrypt
       (lib.mkMerge [
-        (lib.mkIf (!env.extra.isSystemd) {
+        (lib.mkIf (!env.extra.withSystemd) {
           mount = "${env.user.cacheDirectory}/nix/homeage/secrets";
         })
         {

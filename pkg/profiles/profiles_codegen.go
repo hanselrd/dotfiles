@@ -8,10 +8,9 @@ import (
 	"path/filepath"
 
 	. "github.com/dave/jennifer/jen"
-
 	"github.com/iancoleman/strcase"
 
-	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/pkg/enums"
 )
 
 func main() {
@@ -27,14 +26,14 @@ func main() {
 				g.Id(fmt.Sprintf("%s%s", strcase.ToCamel(systemProfile.String()), strcase.ToCamel(userProfile.String()))).
 					Op("=").
 					Op("*").
-					Qual("github.com/hanselrd/dotfiles/lib/structs", "NewProfile").
+					Qual("github.com/hanselrd/dotfiles/pkg/structs", "NewProfile").
 					Call(
 						Qual(
-							"github.com/hanselrd/dotfiles/lib/enums",
+							"github.com/hanselrd/dotfiles/pkg/enums",
 							fmt.Sprintf("SystemProfile%s", strcase.ToCamel(systemProfile.String())),
 						),
 						Qual(
-							"github.com/hanselrd/dotfiles/lib/enums",
+							"github.com/hanselrd/dotfiles/pkg/enums",
 							fmt.Sprintf(
 								"UserProfile%s",
 								strcase.ToCamel(userProfile.String()),
@@ -50,7 +49,7 @@ func main() {
 			g.Id(fmt.Sprintf("%sProfiles", strcase.ToCamel(systemProfile.String()))).
 				Op("=").
 				Index().
-				Qual("github.com/hanselrd/dotfiles/lib/structs", "Profile").
+				Qual("github.com/hanselrd/dotfiles/pkg/structs", "Profile").
 				ValuesFunc(func(gg *Group) {
 					for _, userProfile := range enums.UserProfileValues() {
 						gg.Id(

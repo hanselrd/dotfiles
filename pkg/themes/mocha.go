@@ -1,8 +1,8 @@
 package themes
 
 import (
-	"github.com/hanselrd/dotfiles/lib/enums"
-	"github.com/hanselrd/dotfiles/lib/structs"
+	"github.com/hanselrd/dotfiles/pkg/enums"
+	"github.com/hanselrd/dotfiles/pkg/structs"
 )
 
 var Mocha = structs.Theme{

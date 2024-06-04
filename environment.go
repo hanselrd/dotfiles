@@ -7,10 +7,10 @@ import (
 
 	"github.com/itchyny/timefmt-go"
 
-	"github.com/hanselrd/dotfiles/lib/enums"
-	"github.com/hanselrd/dotfiles/lib/profiles"
-	"github.com/hanselrd/dotfiles/lib/structs"
-	"github.com/hanselrd/dotfiles/lib/themes"
+	"github.com/hanselrd/dotfiles/pkg/enums"
+	"github.com/hanselrd/dotfiles/pkg/profiles"
+	"github.com/hanselrd/dotfiles/pkg/structs"
+	"github.com/hanselrd/dotfiles/pkg/themes"
 )
 
 var (
@@ -57,7 +57,7 @@ var Environment = structs.Environment{
 		HomeManager: profiles.HomeManagerProfiles,
 	},
 	Extra: structs.EnvironmentExtra{
-		IsSystemd: func() bool {
+		WithSystemd: func() bool {
 			if _, err := os.Stat("/run/systemd/system"); !os.IsNotExist(err) {
 				return true
 			}

@@ -10,9 +10,9 @@ import (
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/lib/assets"
-	"github.com/hanselrd/dotfiles/lib/enums"
-	"github.com/hanselrd/dotfiles/lib/interfaces"
+	"github.com/hanselrd/dotfiles/internal/assets"
+	"github.com/hanselrd/dotfiles/pkg/enums"
+	"github.com/hanselrd/dotfiles/pkg/interfaces"
 )
 
 var templateCmd = &cobra.Command{

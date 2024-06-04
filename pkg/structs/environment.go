@@ -1,7 +1,7 @@
 package structs
 
 import (
-	"github.com/hanselrd/dotfiles/lib/enums"
+	"github.com/hanselrd/dotfiles/pkg/enums"
 )
 
 type Environment struct {
@@ -26,6 +26,6 @@ type EnvironmentProfiles struct {
 }
 
 type EnvironmentExtra struct {
-	IsSystemd           bool   `json:"isSystemd"`
+	WithSystemd         bool   `json:"withSystemd"`
 	BackupFileExtension string `json:"backupFileExtension"`
 }

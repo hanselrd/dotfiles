@@ -8,7 +8,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles"
-	"github.com/hanselrd/dotfiles/lib/utils"
+	"github.com/hanselrd/dotfiles/internal/generic"
+	"github.com/hanselrd/dotfiles/internal/shell"
 )
 
 var bootstrapCmd = &cobra.Command{
@@ -16,19 +17,19 @@ var bootstrapCmd = &cobra.Command{
 	Short: "Bootstrap command",
 	Long:  "Bootstrap command",
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.Shell(
+		shell.Shell(
 			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile),
 		)
-		stdout := utils.First(
-			utils.Must2(
-				utils.Shell(
+		stdout := generic.First(
+			generic.Must2(
+				shell.Shell(
 					fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile),
 				),
 			),
 		)
 
 		homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", stdout)
-		stdout, _, err := utils.Shell(
+		stdout, _, err := shell.Shell(
 			fmt.Sprintf(
 				"%s switch --flake .#%s -b %s",
 				homeManagerExe,
@@ -37,11 +38,11 @@ var bootstrapCmd = &cobra.Command{
 			),
 		)
 		if err != nil {
-			stdout := utils.First(
-				utils.Must2(
-					utils.Shell(
+			stdout := generic.First(
+				generic.Must2(
+					shell.Shell(
 						"sed -rn \"s/^.*Existing file '(.*)' .*$/\\1/p\"",
-						utils.WithStdin(stdout),
+						shell.WithStdin(stdout),
 					),
 				),
 			)
@@ -50,7 +51,7 @@ var bootstrapCmd = &cobra.Command{
 				err = os.Remove(file)
 				cobra.CheckErr(err)
 			}
-			utils.Shell(
+			shell.Shell(
 				fmt.Sprintf(
 					"%s switch --flake .#%s -b %s",
 					homeManagerExe,

@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles"
-	"github.com/hanselrd/dotfiles/lib/utils"
+	"github.com/hanselrd/dotfiles/internal/shell"
 )
 
 var keyCmd = &cobra.Command{
@@ -18,7 +18,7 @@ var keyCmd = &cobra.Command{
 		err := os.MkdirAll(fmt.Sprintf("%s/.keys", dotfiles.Environment.User.HomeDirectory), 0o700)
 		cobra.CheckErr(err)
 
-		utils.Shell(
+		shell.Shell(
 			fmt.Sprintf(
 				"age -d -i user/roles/homeage/keys/0.age user/roles/homeage/keys/1.age > %s/.keys/2.age",
 				dotfiles.Environment.User.HomeDirectory,
