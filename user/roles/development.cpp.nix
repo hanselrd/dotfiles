@@ -16,7 +16,15 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       bear
-      ccache
+      (ccache.overrideAttrs
+        (finalAttrs: prevAttrs: {
+          src = pkgs.fetchFromGitHub {
+            owner = "ccache";
+            repo = finalAttrs.pname;
+            rev = "refs/tags/v${finalAttrs.version}";
+            hash = "sha256-YHSr2pnk17QEdrIHInXX2eBFN9OGjdleaB41VLaqlnA=";
+          };
+        }))
       clang-tools
       cmake
       cmake-format
