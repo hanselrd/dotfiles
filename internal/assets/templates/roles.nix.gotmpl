@@ -6,7 +6,8 @@
 }: {
   imports = [
     {{- range .}}
-    ./roles/{{.}}.nix
+    {{- $role := printf "%s" .}}
+    ./roles/{{$role}}.nix
     {{- end}}
   ];
 }

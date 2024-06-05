@@ -1,14 +1,15 @@
+{{$role := printf "%s" . -}}
 {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.roles.{{.Type}}.{{.Role}};
+  cfg = config.roles.{{.Type}}.{{$role}};
 in {
   options = {
-    roles.{{.Type}}.{{.Role}} = {
-      enable = lib.mkEnableOption "roles.{{.Type}}.{{.Role}}";
+    roles.{{.Type}}.{{$role}} = {
+      enable = lib.mkEnableOption "roles.{{.Type}}.{{$role}}";
     };
   };
 

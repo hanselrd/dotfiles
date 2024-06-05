@@ -11,21 +11,20 @@ import (
 
 	"github.com/hanselrd/dotfiles/internal/generic"
 	"github.com/hanselrd/dotfiles/internal/shell"
-	"github.com/hanselrd/dotfiles/pkg/profiles"
-	"github.com/hanselrd/dotfiles/pkg/structs"
+	"github.com/hanselrd/dotfiles/pkg/profile"
 )
 
-var profile string
+var _profile string
 
 var HomeManagerCmd = &cobra.Command{
 	Use:   "homeManager",
 	Short: "Home Manager command",
 	Long:  "Home Manager command",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
-		if !slices.ContainsFunc(profiles.HomeManagerProfiles, func(p structs.Profile) bool {
-			return p.String() == profile
+		if !slices.ContainsFunc(profile.HomeManagerProfiles, func(pg profile.ProfileGroup) bool {
+			return pg.String() == _profile
 		}) {
-			err = fmt.Errorf("%s is not valid", profile)
+			err = fmt.Errorf("%s is not valid", _profile)
 			log.Error().Err(err).Send()
 		}
 		return
@@ -38,16 +37,16 @@ var HomeManagerCmd = &cobra.Command{
 func init() {
 	zerolog.SetGlobalLevel(zerolog.Disabled)
 
-	defaultProfile := func() structs.Profile {
+	defaultProfile := func() profile.ProfileGroup {
 		stdout := generic.First(generic.Must2(shell.Shell("uname -a")))
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {
-			return profiles.WslBase
+			return profile.WslBase
 		}
 		if strings.Contains(stdout, "Darwin") {
-			return profiles.DarwinBase
+			return profile.DarwinBase
 		}
-		return profiles.LinuxBase
+		return profile.LinuxBase
 	}()
 	HomeManagerCmd.PersistentFlags().
-		StringVar(&profile, "profile", defaultProfile.String(), "home manager profile")
+		StringVar(&_profile, "profile", defaultProfile.String(), "home manager profile")
 }

@@ -84,7 +84,7 @@ func init() {
 
 	rootCmd.PersistentFlags().
 		BoolVar(&flags.Dryrun, "dryrun", false, "run without affecting the system")
-	flags.LogLevel = choice.NewChoice(
+	flags.LogLevel = choice.New(
 		[]zerolog.Level{
 			zerolog.TraceLevel,
 			zerolog.DebugLevel,

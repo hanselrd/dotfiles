@@ -5,6 +5,7 @@
   ...
 }: {
   {{- range .}}
-  is{{camel .Type}}{{camel .Profile}} = profile.{{.Type}} == "{{.Profile}}";
+  {{- $profile := printf "%s" .}}
+  is{{camel .Type}}{{camel $profile}} = profile.{{.Type}} == "{{$profile}}";
   {{- end}}
 }

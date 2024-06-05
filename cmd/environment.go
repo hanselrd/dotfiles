@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles"
 	"github.com/hanselrd/dotfiles/internal/generic"
+	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
 var environmentCmd = &cobra.Command{
@@ -15,7 +15,7 @@ var environmentCmd = &cobra.Command{
 	Short: "Environment command",
 	Long:  "Environment command",
 	Run: func(cmd *cobra.Command, args []string) {
-		data := generic.Must(json.MarshalIndent(dotfiles.Environment, "", "  "))
+		data := generic.Must(json.MarshalIndent(environment.Environment, "", "  "))
 		fmt.Println(string(data))
 	},
 }

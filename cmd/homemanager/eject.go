@@ -10,9 +10,9 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles"
 	"github.com/hanselrd/dotfiles/internal/generic"
 	"github.com/hanselrd/dotfiles/internal/shell"
+	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
 var (
@@ -35,12 +35,15 @@ var ejectCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		shell.Shell(
-			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile),
+			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", _profile),
 		)
 		pkg1 := generic.First(
 			generic.Must2(
 				shell.Shell(
-					fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile),
+					fmt.Sprintf(
+						"nix path-info .#homeConfigurations.%s.activationPackage",
+						_profile,
+					),
 				),
 			),
 		)
@@ -53,7 +56,7 @@ var ejectCmd = &cobra.Command{
 				shell.Shell(
 					fmt.Sprintf(
 						"readlink -f %s/.nix-profile",
-						dotfiles.Environment.User.HomeDirectory,
+						environment.Environment.User.HomeDirectory,
 					),
 				),
 			),
@@ -100,7 +103,7 @@ var ejectCmd = &cobra.Command{
 			fmt.Sprintf(
 				"cp -av %s/home-files/. %s/",
 				pkg1New,
-				dotfiles.Environment.User.HomeDirectory,
+				environment.Environment.User.HomeDirectory,
 			),
 		)
 
@@ -116,7 +119,7 @@ var ejectCmd = &cobra.Command{
 			fmt.Sprintf(
 				"ln -snfF %s %s/.nix-profile",
 				pkg2New,
-				dotfiles.Environment.User.HomeDirectory,
+				environment.Environment.User.HomeDirectory,
 			),
 		)
 	},
@@ -124,7 +127,7 @@ var ejectCmd = &cobra.Command{
 
 func init() {
 	ejectCmd.Flags().
-		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix-hme/%s", dotfiles.Environment.User.HomeDirectory, nowymd), "eject output directory")
+		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix-hme/%s", environment.Environment.User.HomeDirectory, nowymd), "eject output directory")
 
 	HomeManagerCmd.AddCommand(ejectCmd)
 }

@@ -73,7 +73,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-942rKj+27PwBHjqq1t6DeboGmVWJ50mIn2Nxq77q9ts=";
+            vendorHash = "sha256-wmXcHCYkE0w0DxBkeD+GNmxOQytiOwLuoRwgBb9oWLc=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -216,8 +216,6 @@
             ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
             ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
             ${lib.getExe' pkgs.go "go"} get github.com/iancoleman/strcase
-            ${lib.getExe' pkgs.go "go"} get golang.org/x/text
-            ${lib.getExe' pkgs.go "go"} get golang.org/x/tools
           '';
         dotfiles-upgrade = dotfiles-update;
 

@@ -7,9 +7,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles"
 	"github.com/hanselrd/dotfiles/internal/generic"
 	"github.com/hanselrd/dotfiles/internal/shell"
+	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
 var bootstrapCmd = &cobra.Command{
@@ -18,12 +18,15 @@ var bootstrapCmd = &cobra.Command{
 	Long:  "Bootstrap command",
 	Run: func(cmd *cobra.Command, args []string) {
 		shell.Shell(
-			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", profile),
+			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", _profile),
 		)
 		stdout := generic.First(
 			generic.Must2(
 				shell.Shell(
-					fmt.Sprintf("nix path-info .#homeConfigurations.%s.activationPackage", profile),
+					fmt.Sprintf(
+						"nix path-info .#homeConfigurations.%s.activationPackage",
+						_profile,
+					),
 				),
 			),
 		)
@@ -33,8 +36,8 @@ var bootstrapCmd = &cobra.Command{
 			fmt.Sprintf(
 				"%s switch --flake .#%s -b %s",
 				homeManagerExe,
-				profile,
-				dotfiles.Environment.Extra.BackupFileExtension,
+				_profile,
+				environment.Environment.Extra.BackupFileExtension,
 			),
 		)
 		if err != nil {
@@ -55,8 +58,8 @@ var bootstrapCmd = &cobra.Command{
 				fmt.Sprintf(
 					"%s switch --flake .#%s -b %s",
 					homeManagerExe,
-					profile,
-					dotfiles.Environment.Extra.BackupFileExtension,
+					_profile,
+					environment.Environment.Extra.BackupFileExtension,
 				),
 			)
 		}

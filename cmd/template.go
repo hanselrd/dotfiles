@@ -11,8 +11,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/assets"
-	"github.com/hanselrd/dotfiles/pkg/enums"
-	"github.com/hanselrd/dotfiles/pkg/interfaces"
+	"github.com/hanselrd/dotfiles/pkg/profile"
+	"github.com/hanselrd/dotfiles/pkg/role"
 )
 
 var templateCmd = &cobra.Command{
@@ -29,19 +29,19 @@ var templateCmd = &cobra.Command{
 		f, err := os.Create("lib/profiles.nix")
 		cobra.CheckErr(err)
 		err = tmpl.ExecuteTemplate(f, "profiles.nix.gotmpl",
-			lo.Flatten([][]interfaces.Profile{
+			lo.Flatten([][]profile.Profile{
 				lo.Map(
-					enums.SystemProfileValues(),
-					func(p enums.SystemProfile, _ int) interfaces.Profile { return p },
+					profile.SystemProfileValues(),
+					func(p profile.SystemProfile, _ int) profile.Profile { return p },
 				),
 				lo.Map(
-					enums.UserProfileValues(),
-					func(p enums.UserProfile, _ int) interfaces.Profile { return p },
+					profile.UserProfileValues(),
+					func(p profile.UserProfile, _ int) profile.Profile { return p },
 				),
 			}))
 		cobra.CheckErr(err)
 
-		for _, role := range enums.SystemRoleValues() {
+		for _, role := range role.SystemRoleValues() {
 			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", role)); !os.IsNotExist(err) {
 				log.Debug().
 					Str("file", fmt.Sprintf("system/roles/%s.nix", role)).
@@ -55,7 +55,7 @@ var templateCmd = &cobra.Command{
 			cobra.CheckErr(err)
 		}
 
-		for _, role := range enums.UserRoleValues() {
+		for _, role := range role.UserRoleValues() {
 			if _, err := os.Stat(fmt.Sprintf("user/roles/%s.nix", role)); !os.IsNotExist(err) {
 				log.Debug().
 					Str("file", fmt.Sprintf("user/roles/%s.nix", role)).
@@ -71,12 +71,12 @@ var templateCmd = &cobra.Command{
 
 		f, err = os.Create("system/roles.nix")
 		cobra.CheckErr(err)
-		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", enums.SystemRoleValues())
+		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", role.SystemRoleValues())
 		cobra.CheckErr(err)
 
 		f, err = os.Create("user/roles.nix")
 		cobra.CheckErr(err)
-		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", enums.UserRoleValues())
+		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", role.UserRoleValues())
 		cobra.CheckErr(err)
 	},
 }

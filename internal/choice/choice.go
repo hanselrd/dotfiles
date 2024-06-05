@@ -12,7 +12,7 @@ type choice struct {
 	Value   string
 }
 
-func NewChoice[T fmt.Stringer](allowed []T, value T) *choice {
+func New[T fmt.Stringer](allowed []T, value T) *choice {
 	return &choice{
 		Allowed: lo.Map(
 			allowed,
