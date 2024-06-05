@@ -46,16 +46,16 @@ var DockerCompose = dockerCompose{
 				},
 				Image: fmt.Sprintf("dotfiles-eject/%s", profile),
 			}
-			services[fmt.Sprintf("dotfiles-proot-%s", profile)] = dockerComposeService{
-				Build: dockerComposeBuild{
-					Context:    ".",
-					Dockerfile: "docker/proot.Dockerfile",
-					Args: map[string]any{
-						"PROFILE": profile.String(),
-					},
-				},
-				Image: fmt.Sprintf("dotfiles-proot/%s", profile),
-			}
+			// services[fmt.Sprintf("dotfiles-proot-%s", profile)] = dockerComposeService{
+			// 	Build: dockerComposeBuild{
+			// 		Context:    ".",
+			// 		Dockerfile: "docker/proot.Dockerfile",
+			// 		Args: map[string]any{
+			// 			"PROFILE": profile.String(),
+			// 		},
+			// 	},
+			// 	Image: fmt.Sprintf("dotfiles-proot/%s", profile),
+			// }
 		}
 		return services
 	}(),

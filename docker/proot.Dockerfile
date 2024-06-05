@@ -24,8 +24,8 @@ RUN git config --global --add safe.directory ${HOME}/.dotfiles
 
 WORKDIR ${HOME}/.dotfiles
 
-RUN sed -i "s/delacruz/${USER}/g" environment.go
-RUN sed -i "/bashToZsh/s/false/true/g" environment.go
+RUN sed -i "s/delacruz/${USER}/g" pkg/environment/environment.go
+RUN sed -i "/bashToZsh/s/false/true/g" pkg/environment/environment.go
 
 USER ${USER}
 
@@ -34,8 +34,9 @@ RUN mkdir -p ${HOME}/.nix
 RUN ./scripts/proot-bootstrap.sh
 RUN ${HOME}/.bootstrap/proot -b ${HOME}/.nix:/nix ./scripts/nix-bootstrap.sh
 # RUN ${HOME}/.bootstrap/proot -b ${HOME}/.nix:/nix /bin/bash -c ". ${HOME}/.nix-profile/etc/profile.d/nix.sh && \
-#     nix run \".#dotfiles-cli\" -- homeManager bootstrap --profile ${PROFILE}"
+#     nix run .#dotfiles-cli -- homeManager bootstrap --profile ${PROFILE}"
 
 WORKDIR ${HOME}
 
-ENTRYPOINT ${HOME}/.bootstrap/proot -b ${HOME}/.nix:/nix /bin/bash --login
+# ENTRYPOINT ${HOME}/.bootstrap/proot -b ${HOME}/.nix:/nix /bin/bash --login
+ENTRYPOINT ["/bin/bash", "--login"]
