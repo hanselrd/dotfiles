@@ -8,6 +8,8 @@ import (
 
 	"github.com/itchyny/timefmt-go"
 	"github.com/rs/zerolog/log"
+	"github.com/samber/lo"
+	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/generic"
@@ -37,39 +39,44 @@ var ejectCmd = &cobra.Command{
 		shell.Shell(
 			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", _profile),
 		)
-		pkg1 := generic.First(
-			generic.Must2(
-				shell.Shell(
-					fmt.Sprintf(
-						"nix path-info .#homeConfigurations.%s.activationPackage",
-						_profile,
+
+		pkgs := []string{
+			generic.First(
+				generic.Must2(
+					shell.Shell(
+						fmt.Sprintf(
+							"nix path-info .#homeConfigurations.%s.activationPackage",
+							_profile,
+						),
 					),
 				),
 			),
-		)
-		deps1 := generic.First(
-			generic.Must2(shell.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg1))),
-		)
-
-		pkg2 := generic.First(
-			generic.Must2(
-				shell.Shell(
-					fmt.Sprintf(
-						"readlink -f %s/.nix-profile",
-						environment.Environment.User.HomeDirectory,
+			generic.First(
+				generic.Must2(
+					shell.Shell(
+						fmt.Sprintf(
+							"readlink -f %s/.nix-profile",
+							environment.Environment.User.HomeDirectory,
+						),
 					),
 				),
 			),
-		)
-		deps2 := generic.First(
-			generic.Must2(shell.Shell(fmt.Sprintf("nix-store -qR %s | xargs -L1 basename", pkg2))),
-		)
+		}
 
-		shell.Shell(
-			"sort | uniq > eject.dep",
-			shell.WithStdin(strings.Join([]string{deps1, deps2}, "\n")),
-		)
-		shell.Shell("find /nix/store -depth -print | grep -Ff eject.dep | cpio -ov > eject.cpio")
+		deps := lo.Uniq(lo.FlatMap(pkgs,
+			func(p string, _ int) []string {
+				return strings.Split(
+					generic.First(
+						generic.Must2(
+							shell.Shell(
+								fmt.Sprintf(
+									"nix-store -qR %s",
+									p,
+								),
+							),
+						),
+					), "\n")
+			}))
 
 		if !strings.HasSuffix(outDir, "/") {
 			outDir += "/"
@@ -77,48 +84,50 @@ var ejectCmd = &cobra.Command{
 
 		sedSearch := fmt.Sprintf("/nix/store/%s-", strings.Repeat(".", 32))[:len(outDir)]
 
-		shell.Shell(
-			fmt.Sprintf(
-				"sed -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" eject.cpio",
-				sedSearch,
-				outDir,
-			),
-		)
-
 		err := os.MkdirAll(outDir, 0o700)
 		cobra.CheckErr(err)
 
-		shell.Shell("cpio -idmv < eject.cpio")
+		lop.ForEach(deps, func(d string, i int) {
+			log.Debug().Str("dep", d).Msg("archiving")
+			cpio := fmt.Sprintf("eject.cpio.%d", i)
+
+			shell.Shell(fmt.Sprintf("find %s | cpio -ov > %s", d, cpio))
+			shell.Shell(
+				fmt.Sprintf(
+					"sed -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" %s",
+					sedSearch,
+					outDir,
+					cpio,
+				),
+			)
+			shell.Shell(fmt.Sprintf("(while cpio -idmv; do :; done) < %s", cpio))
+		})
+
+		shell.Shell("rm -rf eject.cpio.*")
 		shell.Shell(fmt.Sprintf("chmod -R u+w %s", outDir))
 
-		pkg1New := generic.First(
-			generic.Must2(
-				shell.Shell(
-					fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
-					shell.WithStdin(pkg1),
+		pkgsNew := lo.Map(pkgs, func(p string, _ int) string {
+			return generic.First(
+				generic.Must2(
+					shell.Shell(
+						fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
+						shell.WithStdin(p),
+					),
 				),
-			),
-		)
+			)
+		})
+
 		shell.Shell(
 			fmt.Sprintf(
 				"cp -av %s/home-files/. %s/",
-				pkg1New,
+				pkgsNew[0],
 				environment.Environment.User.HomeDirectory,
-			),
-		)
-
-		pkg2New := generic.First(
-			generic.Must2(
-				shell.Shell(
-					fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
-					shell.WithStdin(pkg2),
-				),
 			),
 		)
 		shell.Shell(
 			fmt.Sprintf(
 				"ln -snfF %s %s/.nix-profile",
-				pkg2New,
+				pkgsNew[1],
 				environment.Environment.User.HomeDirectory,
 			),
 		)

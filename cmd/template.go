@@ -8,6 +8,7 @@ import (
 	"github.com/iancoleman/strcase"
 	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
+	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/assets"
@@ -41,33 +42,33 @@ var templateCmd = &cobra.Command{
 			}))
 		cobra.CheckErr(err)
 
-		for _, role := range role.SystemRoleValues() {
-			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", role)); !os.IsNotExist(err) {
+		lop.ForEach(role.SystemRoleValues(), func(r role.SystemRole, _ int) {
+			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", r)); !os.IsNotExist(err) {
 				log.Debug().
-					Str("file", fmt.Sprintf("system/roles/%s.nix", role)).
+					Str("file", fmt.Sprintf("system/roles/%s.nix", r)).
 					Msg("skipping, already exists")
-				continue
+				return
 			}
 
-			f, err := os.Create(fmt.Sprintf("system/roles/%s.nix", role))
+			f, err := os.Create(fmt.Sprintf("system/roles/%s.nix", r))
 			cobra.CheckErr(err)
-			err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", role)
+			err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", r)
 			cobra.CheckErr(err)
-		}
+		})
 
-		for _, role := range role.UserRoleValues() {
-			if _, err := os.Stat(fmt.Sprintf("user/roles/%s.nix", role)); !os.IsNotExist(err) {
+		lop.ForEach(role.UserRoleValues(), func(r role.UserRole, _ int) {
+			if _, err := os.Stat(fmt.Sprintf("user/roles/%s.nix", r)); !os.IsNotExist(err) {
 				log.Debug().
-					Str("file", fmt.Sprintf("user/roles/%s.nix", role)).
+					Str("file", fmt.Sprintf("user/roles/%s.nix", r)).
 					Msg("skipping, already exists")
-				continue
+				return
 			}
 
-			f, err := os.Create(fmt.Sprintf("user/roles/%s.nix", role))
+			f, err := os.Create(fmt.Sprintf("user/roles/%s.nix", r))
 			cobra.CheckErr(err)
-			err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", role)
+			err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", r)
 			cobra.CheckErr(err)
-		}
+		})
 
 		f, err = os.Create("system/roles.nix")
 		cobra.CheckErr(err)

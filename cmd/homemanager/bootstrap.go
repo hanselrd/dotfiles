@@ -3,8 +3,10 @@ package homemanager
 import (
 	"fmt"
 	"os"
-	"strings"
+	"regexp"
 
+	"github.com/rs/zerolog/log"
+	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/generic"
@@ -41,19 +43,13 @@ var bootstrapCmd = &cobra.Command{
 			),
 		)
 		if err != nil {
-			stdout := generic.First(
-				generic.Must2(
-					shell.Shell(
-						"sed -rn \"s/^.*Existing file '(.*)' .*$/\\1/p\"",
-						shell.WithStdin(stdout),
-					),
-				),
-			)
-			files := strings.Split(stdout, "\n")
-			for _, file := range files {
-				err = os.Remove(file)
-				cobra.CheckErr(err)
-			}
+			re := regexp.MustCompile(`Existing file '(.*)' is in the way of '.*'\n`)
+			matches := re.FindAllStringSubmatch(stdout, -1)
+			lop.ForEach(matches, func(m []string, _ int) {
+				log.Debug().Str("file", m[1]).Msg("removing")
+				os.RemoveAll(m[1])
+			})
+
 			shell.Shell(
 				fmt.Sprintf(
 					"%s switch --flake .#%s -b %s",

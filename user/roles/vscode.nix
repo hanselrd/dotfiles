@@ -46,7 +46,7 @@ in {
         eamodio.gitlens
         haskell.haskell
         justusadam.language-haskell
-        matklad.rust-analyzer
+        rust-lang.rust-analyzer
         ms-azuretools.vscode-docker
         ms-python.python
         ms-python.vscode-pylance

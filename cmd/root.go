@@ -67,7 +67,7 @@ var rootCmd = &cobra.Command{
 				return color.HiBlackString("%s= ", i)
 			},
 		})
-		log.Info().Bool("dryrun", flags.Dryrun).Send()
+		log.Info().Bool("dryrun", flags.Dryrun).Str("loglevel", flags.LogLevel.String()).Send()
 		return nil
 	},
 }

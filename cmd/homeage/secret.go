@@ -1,6 +1,12 @@
 package homeage
 
 import (
+	"fmt"
+	"io/fs"
+	"path/filepath"
+
+	"github.com/rs/zerolog/log"
+	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/shell"
@@ -11,9 +17,23 @@ var secretCmd = &cobra.Command{
 	Short: "Secret command",
 	Long:  "Secret command",
 	Run: func(cmd *cobra.Command, args []string) {
-		shell.Shell(
-			"find user/roles/homeage/secrets -type f -not -name \"*.age\" -print -exec sh -c \"age -a -R user/roles/homeage/keys/1.age.pub {} > {}.age\" \\;",
-		)
+		files := []string{}
+		err := filepath.Walk("user/roles/homeage/secrets",
+			func(path string, info fs.FileInfo, err error) error {
+				if info.IsDir() || filepath.Ext(path) == ".age" {
+					return nil
+				}
+				log.Debug().Str("path", path).Send()
+				files = append(files, path)
+				return nil
+			})
+		cobra.CheckErr(err)
+
+		lop.ForEach(files, func(f string, _ int) {
+			shell.Shell(
+				fmt.Sprintf("age -a -R user/roles/homeage/keys/1.age.pub %[1]s > %[1]s.age", f),
+			)
+		})
 	},
 }
 

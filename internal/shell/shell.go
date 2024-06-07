@@ -7,8 +7,10 @@ import (
 	"io"
 	"os/exec"
 	"strings"
+	"sync"
 
 	"github.com/rs/zerolog/log"
+	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/pkg/flags"
 )
@@ -63,8 +65,18 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 		return
 	}
 
-	go scan("cmdout", stdoutPipe, stdoutBuf)
-	go scan("cmderr", stderrPipe, stderrBuf)
+	wg := sync.WaitGroup{}
+	for _, t3 := range []lo.Tuple3[string, io.ReadCloser, *bytes.Buffer]{
+		lo.T3("cmdout", stdoutPipe, stdoutBuf),
+		lo.T3("cmderr", stderrPipe, stderrBuf),
+	} {
+		wg.Add(1)
+		go func(t3 lo.Tuple3[string, io.ReadCloser, *bytes.Buffer]) {
+			defer wg.Done()
+			scan(lo.Unpack3(t3))
+		}(t3)
+	}
+	wg.Wait()
 
 	err = cmd.Wait()
 
