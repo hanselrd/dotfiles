@@ -42,43 +42,37 @@ var templateCmd = &cobra.Command{
 			}))
 		cobra.CheckErr(err)
 
-		lop.ForEach(role.SystemRoleValues(), func(r role.SystemRole, _ int) {
-			if _, err := os.Stat(fmt.Sprintf("system/roles/%s.nix", r)); !os.IsNotExist(err) {
-				log.Debug().
-					Str("file", fmt.Sprintf("system/roles/%s.nix", r)).
-					Msg("skipping, already exists")
-				return
-			}
+		for _, roles := range [][]role.Role{
+			lo.Map(
+				role.SystemRoleValues(),
+				func(r role.SystemRole, _ int) role.Role { return r },
+			),
+			lo.Map(
+				role.UserRoleValues(),
+				func(r role.UserRole, _ int) role.Role { return r },
+			),
+		} {
+			lop.ForEach(roles, func(r role.Role, _ int) {
+				if _, err := os.Stat(fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)); !os.IsNotExist(
+					err,
+				) {
+					log.Debug().
+						Str("file", fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)).
+						Msg("skipping, already exists")
+					return
+				}
 
-			f, err := os.Create(fmt.Sprintf("system/roles/%s.nix", r))
+				f, err := os.Create(fmt.Sprintf("%s/roles/%s.nix", r.Type(), r))
+				cobra.CheckErr(err)
+				err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", r)
+				cobra.CheckErr(err)
+			})
+
+			f, err = os.Create(fmt.Sprintf("%s/roles.nix", roles[0].Type()))
 			cobra.CheckErr(err)
-			err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", r)
+			err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", roles)
 			cobra.CheckErr(err)
-		})
-
-		lop.ForEach(role.UserRoleValues(), func(r role.UserRole, _ int) {
-			if _, err := os.Stat(fmt.Sprintf("user/roles/%s.nix", r)); !os.IsNotExist(err) {
-				log.Debug().
-					Str("file", fmt.Sprintf("user/roles/%s.nix", r)).
-					Msg("skipping, already exists")
-				return
-			}
-
-			f, err := os.Create(fmt.Sprintf("user/roles/%s.nix", r))
-			cobra.CheckErr(err)
-			err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", r)
-			cobra.CheckErr(err)
-		})
-
-		f, err = os.Create("system/roles.nix")
-		cobra.CheckErr(err)
-		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", role.SystemRoleValues())
-		cobra.CheckErr(err)
-
-		f, err = os.Create("user/roles.nix")
-		cobra.CheckErr(err)
-		err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", role.UserRoleValues())
-		cobra.CheckErr(err)
+		}
 	},
 }
 
