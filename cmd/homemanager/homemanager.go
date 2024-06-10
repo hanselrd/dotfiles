@@ -7,9 +7,9 @@ import (
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/internal/generic"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
@@ -38,7 +38,7 @@ func init() {
 	zerolog.SetGlobalLevel(zerolog.Disabled)
 
 	defaultProfile := func() profile.ProfileGroup {
-		stdout := generic.First(generic.Must2(shell.Shell("uname -a")))
+		stdout := lo.T2(lo.Must2(shell.Shell("uname -a"))).A
 		if strings.Contains(strings.ToLower(stdout), "microsoft") {
 			return profile.WslBase
 		}

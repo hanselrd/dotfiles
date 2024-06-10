@@ -93,9 +93,9 @@ in {
         lua-language-server
         nls
         nodePackages.purescript-language-server
-        nodePackages.pyright
         nodePackages.typescript
         nodePackages.typescript-language-server
+        pyright
         rust-analyzer
         zls
       ];

@@ -6,10 +6,10 @@ import (
 	"regexp"
 
 	"github.com/rs/zerolog/log"
+	"github.com/samber/lo"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/internal/generic"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 )
@@ -22,8 +22,8 @@ var bootstrapCmd = &cobra.Command{
 		shell.Shell(
 			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", _profile),
 		)
-		stdout := generic.First(
-			generic.Must2(
+		stdout := lo.T2(
+			lo.Must2(
 				shell.Shell(
 					fmt.Sprintf(
 						"nix path-info .#homeConfigurations.%s.activationPackage",
@@ -31,7 +31,7 @@ var bootstrapCmd = &cobra.Command{
 					),
 				),
 			),
-		)
+		).A
 
 		homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", stdout)
 		stdout, _, err := shell.Shell(

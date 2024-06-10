@@ -12,7 +12,6 @@ import (
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/internal/generic"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 )
@@ -41,8 +40,8 @@ var ejectCmd = &cobra.Command{
 		)
 
 		pkgs := []string{
-			generic.First(
-				generic.Must2(
+			lo.T2(
+				lo.Must2(
 					shell.Shell(
 						fmt.Sprintf(
 							"nix path-info .#homeConfigurations.%s.activationPackage",
@@ -50,9 +49,9 @@ var ejectCmd = &cobra.Command{
 						),
 					),
 				),
-			),
-			generic.First(
-				generic.Must2(
+			).A,
+			lo.T2(
+				lo.Must2(
 					shell.Shell(
 						fmt.Sprintf(
 							"readlink -f %s/.nix-profile",
@@ -60,14 +59,14 @@ var ejectCmd = &cobra.Command{
 						),
 					),
 				),
-			),
+			).A,
 		}
 
 		deps := lo.Uniq(lo.FlatMap(pkgs,
 			func(p string, _ int) []string {
 				return strings.Split(
-					generic.First(
-						generic.Must2(
+					lo.T2(
+						lo.Must2(
 							shell.Shell(
 								fmt.Sprintf(
 									"nix-store -qR %s",
@@ -75,7 +74,7 @@ var ejectCmd = &cobra.Command{
 								),
 							),
 						),
-					), "\n")
+					).A, "\n")
 			}))
 
 		if !strings.HasSuffix(outDir, "/") {
@@ -107,14 +106,14 @@ var ejectCmd = &cobra.Command{
 		shell.Shell(fmt.Sprintf("chmod -R u+w %s", outDir))
 
 		pkgsNew := lo.Map(pkgs, func(p string, _ int) string {
-			return generic.First(
-				generic.Must2(
+			return lo.T2(
+				lo.Must2(
 					shell.Shell(
 						fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
 						shell.WithStdin(p),
 					),
 				),
-			)
+			).A
 		})
 
 		shell.Shell(
