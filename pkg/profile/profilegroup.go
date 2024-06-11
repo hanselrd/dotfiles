@@ -3,7 +3,7 @@ package profile
 import "fmt"
 
 type ProfileGroup interface {
-	String() string
+	fmt.Stringer
 }
 
 type profileGroup struct {
