@@ -2,6 +2,7 @@ package homemanager
 
 import (
 	"fmt"
+	"math/big"
 	"os"
 	"strings"
 	"time"
@@ -17,8 +18,10 @@ import (
 )
 
 var (
-	now    = time.Now()
-	nowymd = timefmt.Format(now, "%y%m%d")
+	now        = time.Now()
+	nowymd     = timefmt.Format(now, "%y%m%d")
+	nowTodHash = big.NewInt(int64(now.Sub(time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())).Seconds())).
+			Text(36)
 )
 
 var outDir string
@@ -135,7 +138,7 @@ var ejectCmd = &cobra.Command{
 
 func init() {
 	ejectCmd.Flags().
-		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix-hme/%s", environment.Environment.User.HomeDirectory, nowymd), "eject output directory")
+		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix/e/%s/%s", environment.Environment.User.HomeDirectory, nowymd, nowTodHash), "eject output directory")
 
 	HomeManagerCmd.AddCommand(ejectCmd)
 }
