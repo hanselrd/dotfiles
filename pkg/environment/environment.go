@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 	"github.com/hanselrd/dotfiles/pkg/role"
 	"github.com/hanselrd/dotfiles/pkg/theme"
@@ -50,7 +51,7 @@ type environmentExtra struct {
 var (
 	now           = time.Now()
 	nowYmd        = timefmt.Format(now, "%Y%m%d")
-	backupFileExt = fmt.Sprintf("bkp.%s", nowYmd)
+	backupFileExt = fmt.Sprintf("bkp.%s-%s", nowYmd, hash.TodSeconds(now))
 	username      = "delacruz"
 	homeDir       = fmt.Sprintf("/home/%s", username)
 	configDir     = fmt.Sprintf("%s/.config", homeDir)

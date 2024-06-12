@@ -2,27 +2,21 @@ package homemanager
 
 import (
 	"fmt"
-	"math/big"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/itchyny/timefmt-go"
 	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
+	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
-var (
-	now        = time.Now()
-	nowymd     = timefmt.Format(now, "%y%m%d")
-	nowTodHash = big.NewInt(int64(now.Sub(time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())).Seconds())).
-			Text(36)
-)
+var now = time.Now()
 
 var outDir string
 
@@ -138,7 +132,7 @@ var ejectCmd = &cobra.Command{
 
 func init() {
 	ejectCmd.Flags().
-		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix/e/%s/%s", environment.Environment.User.HomeDirectory, nowymd, nowTodHash), "eject output directory")
+		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix/e/%s/%s", environment.Environment.User.HomeDirectory, hash.Date(now), hash.TodSeconds(now)), "eject output directory")
 
 	HomeManagerCmd.AddCommand(ejectCmd)
 }
