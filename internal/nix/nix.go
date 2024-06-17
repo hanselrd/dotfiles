@@ -28,7 +28,6 @@ func findStorePath(installables ...string) string {
 
 func BuildHomeManagerConfiguration(profile string) {
 	build(
-
 		fmt.Sprintf(".#homeConfigurations.%s.activationPackage", profile),
 	)
 }
@@ -40,8 +39,8 @@ func FindHomeManagerConfiguration(profile string) string {
 }
 
 func InstallHomeManagerConfiguration(profile string) (string, error) {
-	hmcsp := FindHomeManagerConfiguration(profile)
-	homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", hmcsp)
+	hmc := FindHomeManagerConfiguration(profile)
+	homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", hmc)
 	stdout, _, err := shell.Shell(
 		fmt.Sprintf(
 			"%s switch --flake .#%s -b %s",
