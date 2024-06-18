@@ -23,3 +23,11 @@ func NewProfileGroup(system SystemProfile, user UserProfile) *profileGroup {
 func (p profileGroup) String() string {
 	return p.Name
 }
+
+func (p profileGroup) SystemProfile() SystemProfile {
+	return p.System
+}
+
+func (p profileGroup) UserProfile() UserProfile {
+	return p.User
+}

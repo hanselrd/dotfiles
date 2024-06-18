@@ -16,7 +16,7 @@ require (
 
 require (
 	github.com/dave/jennifer v1.7.0 // indirect
-	github.com/dmarkham/enumer v1.5.9 // indirect
+	github.com/dmarkham/enumer v1.5.10 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
