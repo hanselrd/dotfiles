@@ -11,19 +11,19 @@ import (
 )
 
 func build(installables ...string) {
-	shell.Shell(
+	lo.Must2(shell.Shell(
 		fmt.Sprintf("nix build --no-link %s", strings.Join(installables, " ")),
-	)
+	))
 }
 
-func findStorePath(installables ...string) string {
-	return lo.T2(
+func pathInfo(installables ...string) []string {
+	return strings.Split(lo.T2(
 		lo.Must2(
 			shell.Shell(
 				fmt.Sprintf("nix path-info %s", strings.Join(installables, " ")),
 			),
 		),
-	).A
+	).A, "\n")
 }
 
 func BuildHomeManagerConfiguration(profile string) {
@@ -33,9 +33,8 @@ func BuildHomeManagerConfiguration(profile string) {
 }
 
 func FindHomeManagerConfiguration(profile string) string {
-	return findStorePath(
-		fmt.Sprintf(".#homeConfigurations.%s.activationPackage", profile),
-	)
+	return pathInfo(
+		fmt.Sprintf(".#homeConfigurations.%s.activationPackage", profile))[0]
 }
 
 func InstallHomeManagerConfiguration(profile string) (string, error) {
