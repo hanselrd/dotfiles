@@ -14,5 +14,4 @@ var HomeageCmd = &cobra.Command{
 	},
 }
 
-func init() {
-}
+func init() {}

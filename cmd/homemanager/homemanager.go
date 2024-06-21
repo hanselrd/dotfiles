@@ -14,19 +14,25 @@ import (
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
 
-var _profile string
+var (
+	_profile     string
+	profileGroup profile.ProfileGroup
+)
 
 var HomeManagerCmd = &cobra.Command{
 	Use:   "homeManager",
 	Short: "Home Manager command",
 	Long:  "Home Manager command",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
-		if !slices.ContainsFunc(profile.HomeManagerProfiles, func(pg profile.ProfileGroup) bool {
+		idx := slices.IndexFunc(profile.HomeManagerProfiles, func(pg profile.ProfileGroup) bool {
 			return pg.String() == _profile
-		}) {
+		})
+		if idx == -1 {
 			err = fmt.Errorf("%s is not valid", _profile)
 			log.Error().Err(err).Send()
+			return
 		}
+		profileGroup = profile.HomeManagerProfiles[idx]
 		return
 	},
 	Run: func(cmd *cobra.Command, args []string) {

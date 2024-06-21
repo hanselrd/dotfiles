@@ -12,13 +12,15 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
+	"github.com/hanselrd/dotfiles/internal/nix"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
-var now = time.Now()
-
-var outDir string
+var (
+	now    = time.Now()
+	outDir string
+)
 
 var ejectCmd = &cobra.Command{
 	Use:   "eject",
@@ -32,47 +34,10 @@ var ejectCmd = &cobra.Command{
 		return
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		shell.Shell(
-			fmt.Sprintf("nix build --no-link .#homeConfigurations.%s.activationPackage", _profile),
-		)
+		nix.BuildHomeManagerConfiguration(profileGroup)
 
-		pkgs := []string{
-			lo.T2(
-				lo.Must2(
-					shell.Shell(
-						fmt.Sprintf(
-							"nix path-info .#homeConfigurations.%s.activationPackage",
-							_profile,
-						),
-					),
-				),
-			).A,
-			lo.T2(
-				lo.Must2(
-					shell.Shell(
-						fmt.Sprintf(
-							"readlink -f %s/.nix-profile",
-							environment.Environment.User.HomeDirectory,
-						),
-					),
-				),
-			).A,
-		}
-
-		deps := lo.Uniq(lo.FlatMap(pkgs,
-			func(p string, _ int) []string {
-				return strings.Split(
-					lo.T2(
-						lo.Must2(
-							shell.Shell(
-								fmt.Sprintf(
-									"nix-store -qR %s",
-									p,
-								),
-							),
-						),
-					).A, "\n")
-			}))
+		paths := nix.FindHomeManagerEjectPaths(profileGroup)
+		deps := nix.FindHomeManagerEjectDependencies(profileGroup)
 
 		if !strings.HasSuffix(outDir, "/") {
 			outDir += "/"
@@ -102,7 +67,7 @@ var ejectCmd = &cobra.Command{
 		shell.Shell("rm -rf eject.cpio.*")
 		shell.Shell(fmt.Sprintf("chmod -R u+w %s", outDir))
 
-		pkgsNew := lo.Map(pkgs, func(p string, _ int) string {
+		pathsNew := lo.Map(paths, func(p string, _ int) string {
 			return lo.T2(
 				lo.Must2(
 					shell.Shell(
@@ -116,14 +81,14 @@ var ejectCmd = &cobra.Command{
 		shell.Shell(
 			fmt.Sprintf(
 				"cp -av %s/home-files/. %s/",
-				pkgsNew[0],
+				pathsNew[0],
 				environment.Environment.User.HomeDirectory,
 			),
 		)
 		shell.Shell(
 			fmt.Sprintf(
 				"ln -snfF %s %s/.nix-profile",
-				pkgsNew[1],
+				pathsNew[1],
 				environment.Environment.User.HomeDirectory,
 			),
 		)
