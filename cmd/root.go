@@ -10,7 +10,6 @@ import (
 
 	"github.com/hanselrd/dotfiles/cmd/homeage"
 	"github.com/hanselrd/dotfiles/cmd/homemanager"
-	"github.com/hanselrd/dotfiles/internal/choice"
 	"github.com/hanselrd/dotfiles/pkg/flags"
 )
 
@@ -19,24 +18,18 @@ var rootCmd = &cobra.Command{
 	Short: "Dotfiles CLI",
 	Long:  "Dotfiles CLI",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		var level zerolog.Level
-		switch flags.LogLevel.String() {
-		case zerolog.LevelTraceValue:
-			fallthrough
-		default:
-			level = zerolog.TraceLevel
-		case zerolog.LevelDebugValue:
-			level = zerolog.DebugLevel
-		case zerolog.LevelInfoValue:
-			level = zerolog.InfoLevel
-		case zerolog.LevelWarnValue:
-			level = zerolog.WarnLevel
-		case zerolog.LevelErrorValue:
+		level := zerolog.Disabled
+		if flags.Quiet {
 			level = zerolog.ErrorLevel
-		case zerolog.LevelFatalValue:
-			level = zerolog.FatalLevel
-		case zerolog.LevelPanicValue:
-			level = zerolog.PanicLevel
+		} else {
+			switch flags.Verbose {
+			case 0:
+				level = zerolog.InfoLevel
+			case 1:
+				level = zerolog.DebugLevel
+			default:
+				level = zerolog.TraceLevel
+			}
 		}
 		zerolog.SetGlobalLevel(level)
 		log.Logger = log.Output(zerolog.ConsoleWriter{
@@ -67,7 +60,9 @@ var rootCmd = &cobra.Command{
 				return color.HiBlackString("%s= ", i)
 			},
 		})
-		log.Info().Bool("dryrun", flags.Dryrun).Str("loglevel", flags.LogLevel.String()).Send()
+		log.Info().Bool("dryrun", flags.Dryrun).Int("verbose", flags.Verbose).
+			Bool("quiet", flags.Quiet).
+			Msg("flags")
 		return nil
 	},
 }
@@ -84,19 +79,11 @@ func init() {
 
 	rootCmd.PersistentFlags().
 		BoolVar(&flags.Dryrun, "dryrun", false, "run without affecting the system")
-	flags.LogLevel = choice.New(
-		[]zerolog.Level{
-			zerolog.TraceLevel,
-			zerolog.DebugLevel,
-			zerolog.InfoLevel,
-			zerolog.WarnLevel,
-			zerolog.ErrorLevel,
-			zerolog.FatalLevel,
-			zerolog.PanicLevel,
-		},
-		zerolog.TraceLevel,
-	)
-	rootCmd.PersistentFlags().Var(flags.LogLevel, "log-level", "log level")
+	rootCmd.PersistentFlags().
+		CountVarP(&flags.Verbose, "verbose", "v", "output verbosity")
+	rootCmd.PersistentFlags().
+		BoolVarP(&flags.Quiet, "quiet", "q", false, "quiet; do not generate unnecessary output")
+	rootCmd.MarkFlagsMutuallyExclusive("verbose", "quiet")
 
 	rootCmd.AddCommand(homeage.HomeageCmd)
 	rootCmd.AddCommand(homemanager.HomeManagerCmd)
