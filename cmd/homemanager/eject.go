@@ -14,6 +14,7 @@ import (
 	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/internal/nix"
 	"github.com/hanselrd/dotfiles/internal/shell"
+	"github.com/hanselrd/dotfiles/internal/shellx"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
@@ -52,26 +53,40 @@ var ejectCmd = &cobra.Command{
 			log.Debug().Str("dep", d).Msg("archiving")
 			cpio := fmt.Sprintf("eject.cpio.%d", i)
 
-			shell.Shell(fmt.Sprintf("find %s | cpio -ov > %s", d, cpio))
+			shell.Shell(
+				fmt.Sprintf("find %s | cpio %s -o > %s", d, shellx.VerbosityDefault(), cpio),
+			)
 			shell.Shell(
 				fmt.Sprintf(
-					"sed -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" %s",
+					"sed %s -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" %s",
+					shellx.VerbosityQuietOnlyDefault(),
 					sedSearch,
 					outDir,
 					cpio,
 				),
 			)
-			shell.Shell(fmt.Sprintf("(while cpio -idmv; do :; done) < %s", cpio))
+			shell.Shell(
+				fmt.Sprintf(
+					"(while cpio %s -idm; do :; done) < %s",
+					shellx.VerbosityDefault(),
+					cpio,
+				),
+			)
 		})
 
-		shell.Shell("rm -rf eject.cpio.*")
-		shell.Shell(fmt.Sprintf("chmod -R u+w %s", outDir))
+		shell.Shell(fmt.Sprintf("rm %s -rf eject.cpio.*", shellx.VerbosityVerboseOnlyDefault()))
+		shell.Shell(fmt.Sprintf("chmod %s -R u+w %s", shellx.VerbosityDefault(), outDir))
 
 		pathsNew := lo.Map(paths, func(p string, _ int) string {
 			return lo.T2(
 				lo.Must2(
 					shell.Shell(
-						fmt.Sprintf("sed \"s@%s@%s@g\"", sedSearch, outDir),
+						fmt.Sprintf(
+							"sed %s \"s@%s@%s@g\"",
+							shellx.VerbosityQuietOnlyDefault(),
+							sedSearch,
+							outDir,
+						),
 						shell.WithStdin(p),
 					),
 				),
@@ -80,14 +95,16 @@ var ejectCmd = &cobra.Command{
 
 		shell.Shell(
 			fmt.Sprintf(
-				"cp -av %s/home-files/. %s/",
+				"cp %s -a %s/home-files/. %s/",
+				shellx.VerbosityVerboseOnlyDefault(),
 				pathsNew[0],
 				environment.Environment.User.HomeDirectory,
 			),
 		)
 		shell.Shell(
 			fmt.Sprintf(
-				"ln -snfF %s %s/.nix-profile",
+				"ln %s -snfF %s %s/.nix-profile",
+				shellx.VerbosityVerboseOnlyDefault(),
 				pathsNew[1],
 				environment.Environment.User.HomeDirectory,
 			),
@@ -97,7 +114,7 @@ var ejectCmd = &cobra.Command{
 
 func init() {
 	ejectCmd.Flags().
-		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix/e/%s/%s", environment.Environment.User.HomeDirectory, hash.Date(now), hash.TodSeconds(now)), "eject output directory")
+		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix/e/%s-%s", environment.Environment.User.HomeDirectory, hash.Date(now), hash.TodSeconds(now)), "eject output directory")
 
 	HomeManagerCmd.AddCommand(ejectCmd)
 }
