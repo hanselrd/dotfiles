@@ -19,9 +19,8 @@ var rootCmd = &cobra.Command{
 	Long:  "Dotfiles CLI",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		level := zerolog.Disabled
-		if flags.Quiet {
-			level = zerolog.ErrorLevel
-		} else {
+		switch flags.Quiet {
+		case 0:
 			switch flags.Verbose {
 			case 0:
 				level = zerolog.InfoLevel
@@ -30,6 +29,16 @@ var rootCmd = &cobra.Command{
 			default:
 				level = zerolog.TraceLevel
 			}
+		case 1:
+			level = zerolog.WarnLevel
+		case 2:
+			level = zerolog.ErrorLevel
+		case 3:
+			level = zerolog.FatalLevel
+		case 4:
+			level = zerolog.PanicLevel
+		default:
+			level = zerolog.Disabled
 		}
 		zerolog.SetGlobalLevel(level)
 		log.Logger = log.Output(zerolog.ConsoleWriter{
@@ -60,8 +69,9 @@ var rootCmd = &cobra.Command{
 				return color.HiBlackString("%s= ", i)
 			},
 		})
-		log.Info().Bool("dryrun", flags.Dryrun).Int("verbose", flags.Verbose).
-			Bool("quiet", flags.Quiet).
+		log.Info().Bool("dryrun", flags.Dryrun).
+			Int("verbose", flags.Verbose).
+			Int("quiet", flags.Quiet).
 			Msg("flags")
 		return nil
 	},
@@ -82,7 +92,7 @@ func init() {
 	rootCmd.PersistentFlags().
 		CountVarP(&flags.Verbose, "verbose", "v", "output verbosity")
 	rootCmd.PersistentFlags().
-		BoolVarP(&flags.Quiet, "quiet", "q", false, "quiet; do not generate unnecessary output")
+		CountVarP(&flags.Quiet, "quiet", "q", "quiet; do not generate unnecessary output")
 	rootCmd.MarkFlagsMutuallyExclusive("verbose", "quiet")
 
 	rootCmd.AddCommand(homeage.HomeageCmd)

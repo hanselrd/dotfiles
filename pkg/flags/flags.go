@@ -2,6 +2,6 @@ package flags
 
 var (
 	Dryrun  bool
-	Quiet   bool
+	Quiet   int
 	Verbose int
 )

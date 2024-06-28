@@ -10,7 +10,7 @@ import (
 
 func verbosityQuietVerbose(quietFlag, verboseFlag string) string {
 	return lo.Ternary(
-		flags.Quiet,
+		flags.Quiet > 0,
 		quietFlag,
 		lo.Ternary(
 			flags.Verbose > 0,
@@ -22,7 +22,7 @@ func verbosityQuietVerbose(quietFlag, verboseFlag string) string {
 
 func verbosityQuietVerboseN(quietFlag, verboseFlag string) string {
 	return lo.Ternary(
-		flags.Quiet,
+		flags.Quiet > 0,
 		quietFlag,
 		lo.Ternary(
 			flags.Verbose > 0,
