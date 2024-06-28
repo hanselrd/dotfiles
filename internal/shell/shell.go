@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"strings"
 	"sync"
+	"text/template"
 
 	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
@@ -41,6 +42,44 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 		log.Info().Str("cmdin", options.Stdin).Send()
 	}
 
+	tmpl := lo.Must(template.New("").Parse(command))
+	data := struct {
+		VerbosityQuietLong               string
+		VerbosityQuietLongVerboseLong    string
+		VerbosityQuietLongVerboseLongN   string
+		VerbosityQuietLongVerboseShort   string
+		VerbosityQuietLongVerboseShortN  string
+		VerbosityQuietShort              string
+		VerbosityQuietShortVerboseLong   string
+		VerbosityQuietShortVerboseLongN  string
+		VerbosityQuietShortVerboseShort  string
+		VerbosityQuietShortVerboseShortN string
+		VerbosityVerboseLong             string
+		VerbosityVerboseLongN            string
+		VerbosityVerboseShort            string
+		VerbosityVerboseShortN           string
+	}{
+		verbosityQuietVerbose("--quiet", ""),
+		verbosityQuietVerbose("--quiet", "--verbose"),
+		verbosityQuietVerboseN("--quiet", "--verbose"),
+		verbosityQuietVerbose("--quiet", "-v"),
+		verbosityQuietVerboseN("--quiet", "-v"),
+		verbosityQuietVerbose("-q", ""),
+		verbosityQuietVerbose("-q", "--verbose"),
+		verbosityQuietVerboseN("-q", "--verbose"),
+		verbosityQuietVerbose("-q", "-v"),
+		verbosityQuietVerboseN("-q", "-v"),
+		verbosityQuietVerbose("", "--verbose"),
+		verbosityQuietVerboseN("", "--verbose"),
+		verbosityQuietVerbose("", "-v"),
+		verbosityQuietVerboseN("", "-v"),
+	}
+	commandBuf := new(bytes.Buffer)
+	if err = tmpl.Execute(commandBuf, data); err != nil {
+		return
+	}
+	command = commandBuf.String()
+
 	log.Info().Str("cmdline", command).Send()
 
 	if flags.Dryrun {
@@ -59,8 +98,7 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 	stdoutPipe, _ := cmd.StdoutPipe()
 	stderrPipe, _ := cmd.StderrPipe()
 
-	err = cmd.Start()
-	if err != nil {
+	if err = cmd.Start(); err != nil {
 		log.Debug().Msgf("could not start command: \"%s\"", command)
 		return
 	}

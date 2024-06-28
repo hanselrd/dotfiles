@@ -6,7 +6,6 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/shell"
-	"github.com/hanselrd/dotfiles/internal/shellx"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
@@ -27,9 +26,8 @@ func InstallHomeManagerConfiguration(pg profile.ProfileGroup) (string, error) {
 	homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", hmc)
 	stdout, _, err := shell.Shell(
 		fmt.Sprintf(
-			"%s switch %s --flake .#%s -b %s",
+			"%s switch {{.VerbosityVerboseShort}} --flake .#%s -b %s",
 			homeManagerExe,
-			shellx.VerbosityVerboseOnlyDefault(),
 			pg,
 			environment.Environment.Extra.BackupFileExtension,
 		),
@@ -44,8 +42,7 @@ func FindHomeManagerEjectPaths(pg profile.ProfileGroup) []string {
 			lo.Must2(
 				shell.Shell(
 					fmt.Sprintf(
-						"readlink %s -f %s/.nix-profile",
-						shellx.VerbosityDefault(),
+						"readlink {{.VerbosityQuietLongVerboseShortN}} -f %s/.nix-profile",
 						environment.Environment.User.HomeDirectory,
 					),
 				),

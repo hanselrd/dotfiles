@@ -9,7 +9,7 @@ require (
 	github.com/iancoleman/strcase v0.3.0
 	github.com/itchyny/timefmt-go v0.1.6
 	github.com/rs/zerolog v1.33.0
-	github.com/samber/lo v1.41.0
+	github.com/samber/lo v1.42.0
 	github.com/spf13/cobra v1.8.1
 )
 

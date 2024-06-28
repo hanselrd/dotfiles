@@ -14,7 +14,6 @@ import (
 	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/internal/nix"
 	"github.com/hanselrd/dotfiles/internal/shell"
-	"github.com/hanselrd/dotfiles/internal/shellx"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
@@ -54,12 +53,15 @@ var ejectCmd = &cobra.Command{
 			cpio := fmt.Sprintf("eject.cpio.%d", i)
 
 			shell.Shell(
-				fmt.Sprintf("find %s | cpio %s -o > %s", d, shellx.VerbosityDefault(), cpio),
+				fmt.Sprintf(
+					"find %s | cpio {{.VerbosityQuietLongVerboseShortN}} -o > %s",
+					d,
+					cpio,
+				),
 			)
 			shell.Shell(
 				fmt.Sprintf(
-					"sed %s -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" %s",
-					shellx.VerbosityQuietOnlyDefault(),
+					"sed {{.VerbosityQuietLong}} -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" %s",
 					sedSearch,
 					outDir,
 					cpio,
@@ -67,23 +69,21 @@ var ejectCmd = &cobra.Command{
 			)
 			shell.Shell(
 				fmt.Sprintf(
-					"(while cpio %s -idm; do :; done) < %s",
-					shellx.VerbosityDefault(),
+					"(while cpio {{.VerbosityQuietLongVerboseShortN}} -idm; do :; done) < %s",
 					cpio,
 				),
 			)
 		})
 
-		shell.Shell(fmt.Sprintf("rm %s -rf eject.cpio.*", shellx.VerbosityVerboseOnlyDefault()))
-		shell.Shell(fmt.Sprintf("chmod %s -R u+w %s", shellx.VerbosityDefault(), outDir))
+		shell.Shell(fmt.Sprintf("rm {{.VerbosityVerboseShortN}} -rf eject.cpio.*"))
+		shell.Shell(fmt.Sprintf("chmod {{.VerbosityQuietLongVerboseShortN}} -R u+w %s", outDir))
 
 		pathsNew := lo.Map(paths, func(p string, _ int) string {
 			return lo.T2(
 				lo.Must2(
 					shell.Shell(
 						fmt.Sprintf(
-							"sed %s \"s@%s@%s@g\"",
-							shellx.VerbosityQuietOnlyDefault(),
+							"sed {{.VerbosityQuietLong}} \"s@%s@%s@g\"",
 							sedSearch,
 							outDir,
 						),
@@ -95,16 +95,14 @@ var ejectCmd = &cobra.Command{
 
 		shell.Shell(
 			fmt.Sprintf(
-				"cp %s -a %s/home-files/. %s/",
-				shellx.VerbosityVerboseOnlyDefault(),
+				"cp {{.VerbosityVerboseShortN}} -a %s/home-files/. %s/",
 				pathsNew[0],
 				environment.Environment.User.HomeDirectory,
 			),
 		)
 		shell.Shell(
 			fmt.Sprintf(
-				"ln %s -snfF %s %s/.nix-profile",
-				shellx.VerbosityVerboseOnlyDefault(),
+				"ln {{.VerbosityVerboseShortN}} -snfF %s %s/.nix-profile",
 				pathsNew[1],
 				environment.Environment.User.HomeDirectory,
 			),
