@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: let
   cfg = config.roles.system.networking;
@@ -13,7 +14,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.hostName = "nohost";
+    networking.hostName = env.roles.system.networking.hostName;
 
     networking.networkmanager.enable = true;
 

@@ -7,7 +7,6 @@ import (
 
 	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/pkg/profile"
-	"github.com/hanselrd/dotfiles/pkg/role"
 	"github.com/hanselrd/dotfiles/pkg/theme"
 
 	"github.com/itchyny/timefmt-go"
@@ -28,11 +27,6 @@ type environmentUser struct {
 	HomeDirectory   string `json:"homeDirectory"`
 	ConfigDirectory string `json:"configDirectory"`
 	CacheDirectory  string `json:"cacheDirectory"`
-}
-
-type environmentRoles struct {
-	System map[role.SystemRole]map[string]bool `json:"system"`
-	User   map[role.UserRole]map[string]bool   `json:"user"`
 }
 
 type environmentProfiles struct {
@@ -69,18 +63,23 @@ var Environment = environment{
 	},
 	Theme: theme.Chalk,
 	Roles: environmentRoles{
-		User: map[role.UserRole]map[string]bool{
-			role.UserRoleHomeage: {
-				"decrypt": false,
+		System: &environmentRolesSystem{
+			Networking: &environmentRolesSystemNetworking{
+				HostName: "nohost0",
 			},
-			role.UserRoleNix: {
-				"sandbox": true,
+		},
+		User: &environmentRolesUser{
+			Homeage: &environmentRolesUserHomeage{
+				Decrypt: false,
 			},
-			role.UserRoleShell: {
-				"bashToZsh": false,
-				"ldPreload": false,
-				"rts":       false,
-				"theme":     false,
+			Nix: &environmentRolesUserNix{
+				Sandbox: true,
+			},
+			Shell: &environmentRolesUserShell{
+				BashToZsh: false,
+				LdPreload: false,
+				Rts:       false,
+				Theme:     false,
 			},
 		},
 	},

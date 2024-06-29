@@ -7,7 +7,7 @@ type SystemRole uint
 const (
 	SystemRoleBootstrap SystemRole = iota
 	SystemRoleBoot
-	SystemRoleI18n
+	SystemRoleI18N
 	SystemRoleKernel
 	SystemRoleMonitoring
 	SystemRoleMotd

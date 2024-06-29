@@ -27,7 +27,7 @@ func _SystemRoleNoOp() {
 	var x [1]struct{}
 	_ = x[SystemRoleBootstrap-(0)]
 	_ = x[SystemRoleBoot-(1)]
-	_ = x[SystemRoleI18n-(2)]
+	_ = x[SystemRoleI18N-(2)]
 	_ = x[SystemRoleKernel-(3)]
 	_ = x[SystemRoleMonitoring-(4)]
 	_ = x[SystemRoleMotd-(5)]
@@ -41,15 +41,15 @@ func _SystemRoleNoOp() {
 	_ = x[SystemRoleX11-(13)]
 }
 
-var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleI18n, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleTime, SystemRoleUser, SystemRoleVirtualization, SystemRoleX11}
+var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleI18N, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleTime, SystemRoleUser, SystemRoleVirtualization, SystemRoleX11}
 
 var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleName[0:9]:        SystemRoleBootstrap,
 	_SystemRoleLowerName[0:9]:   SystemRoleBootstrap,
 	_SystemRoleName[9:13]:       SystemRoleBoot,
 	_SystemRoleLowerName[9:13]:  SystemRoleBoot,
-	_SystemRoleName[13:17]:      SystemRoleI18n,
-	_SystemRoleLowerName[13:17]: SystemRoleI18n,
+	_SystemRoleName[13:17]:      SystemRoleI18N,
+	_SystemRoleLowerName[13:17]: SystemRoleI18N,
 	_SystemRoleName[17:23]:      SystemRoleKernel,
 	_SystemRoleLowerName[17:23]: SystemRoleKernel,
 	_SystemRoleName[23:33]:      SystemRoleMonitoring,
