@@ -13,7 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.hostName = "nixos"; # Define your hostname.
+    networking.hostName = "nohost";
 
     networking.networkmanager.enable = true;
 
