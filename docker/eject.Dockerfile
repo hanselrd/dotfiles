@@ -34,9 +34,9 @@ USER ${USER}
 
 RUN ./scripts/nix-bootstrap.sh
 RUN . ${HOME}/.nix-profile/etc/profile.d/nix.sh && \
-    nix run ".#dotfiles-cli" -- homeManager bootstrap --profile ${PROFILE}
+    nix run ".#dotfiles-cli" -- home-manager bootstrap --profile ${PROFILE}
 RUN . ${HOME}/.nix-profile/etc/profile.d/nix.sh && \
-    nix run ".#dotfiles-cli" -- homeManager eject --profile ${PROFILE}
+    nix run ".#dotfiles-cli" -- home-manager eject --profile ${PROFILE}
 
 WORKDIR ${HOME}
 

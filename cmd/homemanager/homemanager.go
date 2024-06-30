@@ -2,14 +2,15 @@ package homemanager
 
 import (
 	"fmt"
+	"log/slog"
+	"os"
 	"slices"
 	"strings"
 
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
+	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
@@ -20,7 +21,7 @@ var (
 )
 
 var HomeManagerCmd = &cobra.Command{
-	Use:   "homeManager",
+	Use:   "home-manager",
 	Short: "Home Manager command",
 	Long:  "Home Manager command",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -29,19 +30,23 @@ var HomeManagerCmd = &cobra.Command{
 		})
 		if idx == -1 {
 			err = fmt.Errorf("%s is not valid", _profile)
-			log.Error().Err(err).Send()
+			slog.Error("", "error", err)
 			return
 		}
 		profileGroup = profile.HomeManagerProfiles[idx]
 		return
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Info().Msg("homeManager called")
+		slog.Info("home-manager called")
 	},
 }
 
 func init() {
-	zerolog.SetGlobalLevel(zerolog.Disabled)
+	slog.SetDefault(slog.New(log.NewHandler(os.Stderr,
+		&slog.HandlerOptions{
+			Level: log.LevelDisabled,
+		},
+	)))
 
 	defaultProfile := func() profile.ProfileGroup {
 		stdout := lo.T2(lo.Must2(shell.Shell("uname -a"))).A

@@ -73,7 +73,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-W5/VEqvQ4rfcEh+JVfBFguqQToRlBAhIBB9BJfQCmvo=";
+            vendorHash = "sha256-GLQ7fJHxC/xbslnwi41xU3j+zgnPZehvLnWYj6GfRx4=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -202,7 +202,7 @@
           ''
             ${lib.getExe dotfiles-codegen0}
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
-            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} dockerCompose > docker-compose.json
+            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} docker-compose > docker-compose.json
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} template
           '';
 

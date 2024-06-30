@@ -11,7 +11,7 @@ import (
 )
 
 var dockerComposeCmd = &cobra.Command{
-	Use:   "dockerCompose",
+	Use:   "docker-compose",
 	Short: "Docker Compose command",
 	Long:  "Docker Compose command",
 	Run: func(cmd *cobra.Command, args []string) {

@@ -5,12 +5,12 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"log/slog"
 	"os/exec"
 	"strings"
 	"sync"
 	"text/template"
 
-	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/pkg/flags"
@@ -39,7 +39,7 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 	}
 
 	if len(options.Stdin) > 0 {
-		log.Info().Str("cmdin", options.Stdin).Send()
+		slog.Info("", "cmdin", options.Stdin)
 	}
 
 	tmpl := lo.Must(template.New("").Parse(command))
@@ -80,7 +80,7 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 	}
 	command = commandBuf.String()
 
-	log.Info().Str("cmdline", command).Send()
+	slog.Info("", "cmdline", command)
 
 	if flags.Dryrun {
 		return
@@ -99,7 +99,7 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 	stderrPipe, _ := cmd.StderrPipe()
 
 	if err = cmd.Start(); err != nil {
-		log.Debug().Msgf("could not start command: \"%s\"", command)
+		slog.Debug(fmt.Sprintf("could not start command: \"%s\"", command))
 		return
 	}
 
@@ -129,7 +129,7 @@ func scan(name string, pipe io.ReadCloser, buffer *bytes.Buffer) {
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		text := scanner.Text()
-		log.Debug().Str(name, text).Send()
+		slog.Debug("", name, text)
 		buffer.WriteString(fmt.Sprintln(text))
 	}
 }

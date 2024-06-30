@@ -1,7 +1,8 @@
 package homeage
 
 import (
-	"github.com/rs/zerolog/log"
+	"log/slog"
+
 	"github.com/spf13/cobra"
 )
 
@@ -10,7 +11,7 @@ var HomeageCmd = &cobra.Command{
 	Short: "Homeage command",
 	Long:  "Homeage command",
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Info().Msg("homeage called")
+		slog.Info("homeage called")
 	},
 }
 

@@ -2,11 +2,11 @@ package homemanager
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
@@ -29,7 +29,7 @@ var ejectCmd = &cobra.Command{
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) (err error) {
 		if len(outDir) > len("/nix/store/")+32 {
 			err = fmt.Errorf("%s is too long", outDir)
-			log.Error().Err(err).Send()
+			slog.Error("", "error", err)
 		}
 		return
 	},
@@ -49,7 +49,7 @@ var ejectCmd = &cobra.Command{
 		cobra.CheckErr(err)
 
 		lop.ForEach(deps, func(d string, i int) {
-			log.Debug().Str("dep", d).Msg("archiving")
+			slog.Debug("archiving", "dep", d)
 			cpio := fmt.Sprintf("eject.cpio.%d", i)
 
 			shell.Shell(

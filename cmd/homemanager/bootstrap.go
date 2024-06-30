@@ -1,10 +1,10 @@
 package homemanager
 
 import (
+	"log/slog"
 	"os"
 	"regexp"
 
-	"github.com/rs/zerolog/log"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
@@ -23,7 +23,7 @@ var bootstrapCmd = &cobra.Command{
 			re := regexp.MustCompile(`Existing file '(.*)' is in the way of '.*'\n`)
 			matches := re.FindAllStringSubmatch(stdout, -1)
 			lop.ForEach(matches, func(m []string, _ int) {
-				log.Debug().Str("file", m[1]).Msg("removing")
+				slog.Debug("removing", "file", m[1])
 				os.RemoveAll(m[1])
 			})
 

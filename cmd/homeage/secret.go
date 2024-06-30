@@ -3,9 +3,9 @@ package homeage
 import (
 	"fmt"
 	"io/fs"
+	"log/slog"
 	"path/filepath"
 
-	"github.com/rs/zerolog/log"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
@@ -23,7 +23,7 @@ var secretCmd = &cobra.Command{
 				if info.IsDir() || filepath.Ext(path) == ".age" {
 					return nil
 				}
-				log.Debug().Str("path", path).Send()
+				slog.Debug("", "path", path)
 				files = append(files, path)
 				return nil
 			})

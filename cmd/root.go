@@ -1,15 +1,15 @@
 package cmd
 
 import (
+	"log/slog"
 	"os"
+	"runtime"
 
-	"github.com/fatih/color"
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/cmd/homeage"
 	"github.com/hanselrd/dotfiles/cmd/homemanager"
+	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/pkg/flags"
 )
 
@@ -18,61 +18,48 @@ var rootCmd = &cobra.Command{
 	Short: "Dotfiles CLI",
 	Long:  "Dotfiles CLI",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		level := zerolog.Disabled
+		level := log.LevelDisabled
 		switch flags.Quiet {
 		case 0:
 			switch flags.Verbose {
 			case 0:
-				level = zerolog.InfoLevel
+				level = log.LevelInfo
 			case 1:
-				level = zerolog.DebugLevel
+				level = log.LevelDebug
+			case 2:
+				level = log.LevelTrace
 			default:
-				level = zerolog.TraceLevel
+				level = log.LevelTrace - slog.Level(flags.Verbose) + 2
 			}
 		case 1:
-			level = zerolog.WarnLevel
+			level = log.LevelWarn
 		case 2:
-			level = zerolog.ErrorLevel
+			level = log.LevelError
 		case 3:
-			level = zerolog.FatalLevel
+			level = log.LevelFatal
 		case 4:
-			level = zerolog.PanicLevel
+			level = log.LevelPanic
 		default:
-			level = zerolog.Disabled
+			level = log.LevelPanic + slog.Level(flags.Quiet) - 4
 		}
-		zerolog.SetGlobalLevel(level)
-		log.Logger = log.Output(zerolog.ConsoleWriter{
-			Out: os.Stderr,
-			FormatLevel: func(i interface{}) string {
-				var attrs []color.Attribute
-				switch i.(string) {
-				case zerolog.LevelTraceValue:
-					attrs = []color.Attribute{color.FgHiBlack}
-				case zerolog.LevelDebugValue:
-					attrs = []color.Attribute{color.FgCyan}
-				case zerolog.LevelInfoValue:
-					attrs = []color.Attribute{color.FgGreen}
-				case zerolog.LevelWarnValue:
-					attrs = []color.Attribute{color.FgYellow}
-				case zerolog.LevelErrorValue:
-					attrs = []color.Attribute{color.FgRed}
-				case zerolog.LevelFatalValue:
-					attrs = []color.Attribute{color.FgHiRed, color.BlinkSlow}
-				case zerolog.LevelPanicValue:
-					attrs = []color.Attribute{color.BgHiRed, color.BlinkRapid}
-				default:
-					attrs = []color.Attribute{color.Reset}
-				}
-				return color.New(attrs...).Sprintf("%-5s", i) + "|"
-			},
-			FormatFieldName: func(i interface{}) string {
-				return color.HiBlackString("%s= ", i)
-			},
-		})
-		log.Info().Bool("dryrun", flags.Dryrun).
-			Int("verbose", flags.Verbose).
-			Int("quiet", flags.Quiet).
-			Msg("flags")
+		logger := slog.New(log.NewHandler(os.Stderr,
+			&slog.HandlerOptions{
+				AddSource: false,
+				Level:     level,
+			}))
+		slog.SetDefault(logger)
+		log.Log(
+			level,
+			"",
+			"version",
+			runtime.Version(),
+			"cpu",
+			runtime.NumCPU(),
+		)
+		slog.Info("flags",
+			"dryrun", flags.Dryrun,
+			"verbose", flags.Verbose,
+			"quiet", flags.Quiet)
 		return nil
 	},
 }

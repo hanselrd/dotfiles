@@ -2,11 +2,11 @@ package cmd
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"text/template"
 
 	"github.com/iancoleman/strcase"
-	"github.com/rs/zerolog/log"
 	"github.com/samber/lo"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
@@ -56,9 +56,11 @@ var templateCmd = &cobra.Command{
 				if _, err := os.Stat(fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)); !os.IsNotExist(
 					err,
 				) {
-					log.Debug().
-						Str("file", fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)).
-						Msg("skipping, already exists")
+					slog.Debug(
+						"skipping, already exists",
+						"file",
+						fmt.Sprintf("%s/roles/%s.nix", r.Type(), r),
+					)
 					return
 				}
 
