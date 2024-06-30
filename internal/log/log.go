@@ -2,10 +2,10 @@ package log
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"log/slog"
 	"os"
+	"strings"
 
 	"github.com/fatih/color"
 	"github.com/rs/zerolog"
@@ -24,12 +24,7 @@ const (
 )
 
 func Log(level slog.Level, msg string, args ...any) {
-	slog.Log(context.Background(), level, msg,
-		append([]any{
-			fmt.Sprintf("@%s", slog.LevelKey),
-			level,
-		}, args...)...,
-	)
+	slog.Log(context.Background(), level, msg, args...)
 }
 
 func Trace(msg string, args ...any) {
@@ -97,8 +92,23 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 			}
 			return color.New(attrs...).Sprintf("%-5s", i) + "|"
 		},
+		FormatMessage: func(i interface{}) string {
+			if i != nil {
+				return color.HiWhiteString("%s", i)
+			}
+			return ""
+		},
 		FormatFieldName: func(i interface{}) string {
+			if s, ok := i.(string); ok {
+				if strings.HasPrefix(s, "@") {
+					return color.HiWhiteString("%s", s[:1]) +
+						color.HiBlackString("%s= ", s[1:])
+				}
+			}
 			return color.HiBlackString("%s= ", i)
+		},
+		FormatFieldValue: func(i interface{}) string {
+			return color.HiWhiteString("%s", i)
 		},
 	})
 	return slogzerolog.Option{
