@@ -12,6 +12,7 @@ import (
 	"github.com/hanselrd/dotfiles/cmd/windows"
 	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/pkg/flags"
+	"github.com/hanselrd/dotfiles/pkg/profile"
 )
 
 var rootCmd = &cobra.Command{
@@ -89,5 +90,7 @@ func init() {
 
 	rootCmd.AddCommand(homeage.HomeageCmd)
 	rootCmd.AddCommand(homemanager.HomeManagerCmd)
-	rootCmd.AddCommand(windows.WindowsCmd)
+	if profile.DefaultProfileGroup().SystemProfile() == profile.SystemProfileWsl {
+		rootCmd.AddCommand(windows.WindowsCmd)
+	}
 }
