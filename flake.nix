@@ -73,7 +73,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-GLQ7fJHxC/xbslnwi41xU3j+zgnPZehvLnWYj6GfRx4=";
+            vendorHash = "sha256-EVe4GMZlNrqI+MypSwPy6uhDlnmffLY35WPq+nCjd5g=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -204,16 +204,6 @@
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} docker-compose > docker-compose.json
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} template
-          '';
-
-        dotfiles-build =
-          pkgs.writeShellScriptBin "dotfiles-build"
-          ''
-            ${lib.getExe' pkgs.coreutils "mkdir"} -p bins
-            ${lib.getExe' pkgs.coreutils "env"} GOOS=windows GOARCH=amd64 ${lib.getExe' pkgs.go "go"} build -o bins/dotfiles-cli-windows_amd64.exe github.com/hanselrd/dotfiles/scripts/dotfiles-cli
-            ${lib.getExe' pkgs.coreutils "env"} GOOS=linux GOARCH=amd64 ${lib.getExe' pkgs.go "go"} build -o bins/dotfiles-cli-linux_amd64 github.com/hanselrd/dotfiles/scripts/dotfiles-cli
-            ${lib.getExe' pkgs.coreutils "env"} GOOS=darwin GOARCH=amd64 ${lib.getExe' pkgs.go "go"} build -o bins/dotfiles-cli-darwin_amd64 github.com/hanselrd/dotfiles/scripts/dotfiles-cli
-            ${lib.getExe' pkgs.coreutils "env"} GOOS=darwin GOARCH=arm64 ${lib.getExe' pkgs.go "go"} build -o bins/dotfiles-cli-darwin_arm64 github.com/hanselrd/dotfiles/scripts/dotfiles-cli
           '';
 
         dotfiles-update =

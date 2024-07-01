@@ -10,7 +10,7 @@ require (
 	github.com/itchyny/timefmt-go v0.1.6
 	github.com/rs/zerolog v1.33.0
 	github.com/samber/lo v1.44.0
-	github.com/samber/slog-zerolog/v2 v2.4.0
+	github.com/samber/slog-zerolog/v2 v2.5.0
 	github.com/spf13/cobra v1.8.1
 )
 
@@ -21,7 +21,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/pascaldekloe/name v1.0.0 // indirect
-	github.com/samber/slog-common v0.16.0 // indirect
+	github.com/samber/slog-common v0.17.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect

@@ -28,10 +28,10 @@ github.com/rs/zerolog v1.33.0/go.mod h1:/7mN4D5sKwJLZQ2b/znpjC3/GQWY/xaDXUM0kKWR
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/samber/lo v1.44.0 h1:5il56KxRE+GHsm1IR+sZ/6J42NODigFiqCWpSc2dybA=
 github.com/samber/lo v1.44.0/go.mod h1:RmDH9Ct32Qy3gduHQuKJ3gW1fMHAnE/fAzQuf6He5cU=
-github.com/samber/slog-common v0.16.0 h1:2/t1EcFd1Ru77mh2ab+8B6NBHnEXsBBHtOJc7PSH0aI=
-github.com/samber/slog-common v0.16.0/go.mod h1:Qjrfhwk79XiCIhBj8+jTq1Cr0u9rlWbjawh3dWXzaHk=
-github.com/samber/slog-zerolog/v2 v2.4.0 h1:W4TzT0u2T7Gg3G6CjGLkFZmg+lSXeENJPMP1DSrIbyg=
-github.com/samber/slog-zerolog/v2 v2.4.0/go.mod h1:wppqUvvyAa3OFW+Snn6x4v3Wf+aT1gSwh19T2CraIuE=
+github.com/samber/slog-common v0.17.0 h1:HdRnk7QQTa9ByHlLPK3llCBo8ZSX3F/ZyeqVI5dfMtI=
+github.com/samber/slog-common v0.17.0/go.mod h1:mZSJhinB4aqHziR0SKPqpVZjJ0JO35JfH+dDIWqaCBk=
+github.com/samber/slog-zerolog/v2 v2.5.0 h1:AGQowz+d0LeQRkE4mEORpsIJNjDjaAtXYTRTdX2naek=
+github.com/samber/slog-zerolog/v2 v2.5.0/go.mod h1:vGzG7VhveVOnyHEpr7LpIuw28QxEOfV/dQxphJRB4iY=
 github.com/spf13/cobra v1.8.1 h1:e5/vxKd/rZsfSJMUX1agtjeTDf+qv1/JdBF8gg5k9ZM=
 github.com/spf13/cobra v1.8.1/go.mod h1:wHxEcudfqmLYa8iTfL+OuZPbBZkmvliBWKIezN3kD9Y=
 github.com/spf13/pflag v1.0.5 h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=

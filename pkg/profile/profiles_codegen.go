@@ -25,7 +25,6 @@ func main() {
 			for _, userProfile := range profile.UserProfileValues() {
 				g.Id(fmt.Sprintf("%s%s", strcase.ToCamel(systemProfile.String()), strcase.ToCamel(userProfile.String()))).
 					Op("=").
-					Op("*").
 					Id("NewProfileGroup").
 					Call(
 						Id(fmt.Sprintf("SystemProfile%s", strcase.ToCamel(systemProfile.String()))),

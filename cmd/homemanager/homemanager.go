@@ -5,13 +5,10 @@ import (
 	"log/slog"
 	"os"
 	"slices"
-	"strings"
 
-	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/log"
-	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
 
@@ -48,16 +45,6 @@ func init() {
 		},
 	)))
 
-	defaultProfile := func() profile.ProfileGroup {
-		stdout := lo.T2(lo.Must2(shell.Shell("uname -a"))).A
-		if strings.Contains(strings.ToLower(stdout), "microsoft") {
-			return profile.WslBase
-		}
-		if strings.Contains(stdout, "Darwin") {
-			return profile.DarwinBase
-		}
-		return profile.LinuxBase
-	}()
 	HomeManagerCmd.PersistentFlags().
-		StringVar(&_profile, "profile", defaultProfile.String(), "home manager profile")
+		StringVar(&_profile, "profile", profile.DefaultProfileGroup().String(), "home manager profile")
 }

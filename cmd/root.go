@@ -87,10 +87,7 @@ func init() {
 		CountVarP(&flags.Quiet, "quiet", "q", "quiet; do not generate unnecessary output")
 	rootCmd.MarkFlagsMutuallyExclusive("verbose", "quiet")
 
-	if runtime.GOOS != "windows" {
-		rootCmd.AddCommand(homeage.HomeageCmd)
-		rootCmd.AddCommand(homemanager.HomeManagerCmd)
-	} else {
-		rootCmd.AddCommand(windows.WindowsCmd)
-	}
+	rootCmd.AddCommand(homeage.HomeageCmd)
+	rootCmd.AddCommand(homemanager.HomeManagerCmd)
+	rootCmd.AddCommand(windows.WindowsCmd)
 }
