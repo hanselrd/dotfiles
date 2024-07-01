@@ -206,6 +206,16 @@
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} template
           '';
 
+        dotfiles-build =
+          pkgs.writeShellScriptBin "dotfiles-build"
+          ''
+            ${lib.getExe' pkgs.coreutils "mkdir"} -p bins
+            ${lib.getExe' pkgs.coreutils "env"} GOOS=windows GOARCH=amd64 go build -o bins/dotfiles-cli-windows_amd64.exe github.com/hanselrd/dotfiles/scripts/dotfiles-cli
+            ${lib.getExe' pkgs.coreutils "env"} GOOS=linux GOARCH=amd64 go build -o bins/dotfiles-cli-linux_amd64 github.com/hanselrd/dotfiles/scripts/dotfiles-cli
+            ${lib.getExe' pkgs.coreutils "env"} GOOS=darwin GOARCH=amd64 go build -o bins/dotfiles-cli-darwin_amd64 github.com/hanselrd/dotfiles/scripts/dotfiles-cli
+            ${lib.getExe' pkgs.coreutils "env"} GOOS=darwin GOARCH=arm64 go build -o bins/dotfiles-cli-darwin_arm64 github.com/hanselrd/dotfiles/scripts/dotfiles-cli
+          '';
+
         dotfiles-update =
           pkgs.writeShellScriptBin "dotfiles-update"
           ''

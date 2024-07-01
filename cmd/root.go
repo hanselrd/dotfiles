@@ -9,6 +9,7 @@ import (
 
 	"github.com/hanselrd/dotfiles/cmd/homeage"
 	"github.com/hanselrd/dotfiles/cmd/homemanager"
+	"github.com/hanselrd/dotfiles/cmd/windows"
 	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/pkg/flags"
 )
@@ -51,6 +52,10 @@ var rootCmd = &cobra.Command{
 		log.Log(
 			level,
 			"",
+			"os",
+			runtime.GOOS,
+			"arch",
+			runtime.GOARCH,
 			"version",
 			runtime.Version(),
 			"cpu",
@@ -82,6 +87,10 @@ func init() {
 		CountVarP(&flags.Quiet, "quiet", "q", "quiet; do not generate unnecessary output")
 	rootCmd.MarkFlagsMutuallyExclusive("verbose", "quiet")
 
-	rootCmd.AddCommand(homeage.HomeageCmd)
-	rootCmd.AddCommand(homemanager.HomeManagerCmd)
+	if runtime.GOOS != "windows" {
+		rootCmd.AddCommand(homeage.HomeageCmd)
+		rootCmd.AddCommand(homemanager.HomeManagerCmd)
+	} else {
+		rootCmd.AddCommand(windows.WindowsCmd)
+	}
 }

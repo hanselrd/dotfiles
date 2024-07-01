@@ -20,6 +20,7 @@
     coreutils
     cpio
     curl
+    file
     findutils
     gnugrep
     gnused
