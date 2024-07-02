@@ -61,7 +61,10 @@ in {
         vscodevim.vim
         zhuangtongfa.material-theme
       ];
-      userSettings = {};
+      userSettings = {
+        "files.autoSave" = "off";
+        "[nix]"."editor.tabSize" = 2;
+      };
     };
   };
 }

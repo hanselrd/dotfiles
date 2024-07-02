@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/itchyny/timefmt-go"
+	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/internal/shell"
@@ -39,9 +40,15 @@ type environmentProfiles struct {
 }
 
 type environmentExtra struct {
-	WithSystemd         bool             `json:"withSystemd"`
-	BackupFileExtension string           `json:"backupFileExtension"`
-	WinUser             *environmentUser `json:"winUser,omitempty"`
+	WithSystemd         bool                `json:"withSystemd"`
+	BackupFileExtension string              `json:"backupFileExtension"`
+	WinUser             *environmentWinUser `json:"winUser,omitempty"`
+}
+
+type environmentWinUser struct {
+	environmentUser
+	UserProfile string `json:"userProfile"`
+	AppData     string `json:"appData"`
 }
 
 var (
@@ -102,18 +109,24 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
-		WinUser: func() *environmentUser {
+		WinUser: func() *environmentWinUser {
 			if winUserName, _, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
 				winHomeDir := fmt.Sprintf("/mnt/c/Users/%s", winUserName)
 				winConfigDir := fmt.Sprintf("%s/.config", winHomeDir)
 				winCacheDir := fmt.Sprintf("%s/.cache", winHomeDir)
-				return &environmentUser{
-					UserName:        winUserName,
-					Name:            name,
-					Email:           email,
-					HomeDirectory:   winHomeDir,
-					ConfigDirectory: winConfigDir,
-					CacheDirectory:  winCacheDir,
+				return &environmentWinUser{
+					environmentUser: environmentUser{
+						UserName:        winUserName,
+						Name:            name,
+						Email:           email,
+						HomeDirectory:   winHomeDir,
+						ConfigDirectory: winConfigDir,
+						CacheDirectory:  winCacheDir,
+					},
+					UserProfile: lo.T2(
+						lo.Must2(shell.Shell("powershell.exe '$env:UserProfile'")),
+					).A,
+					AppData: lo.T2(lo.Must2(shell.Shell("powershell.exe '$env:AppData'"))).A,
 				}
 			}
 			return nil

@@ -19,13 +19,36 @@ var bootstrapCmd = &cobra.Command{
 		)
 		shell.Shell("choco.exe upgrade all {{.VerbosityVerboseShort}} -y")
 		shell.Shell("choco.exe install starship {{.VerbosityVerboseShort}} --force -y")
-		shell.Shell(
-			fmt.Sprintf(
-				"cp {{.VerbosityVerboseShortN}} %s/.config/starship.toml \"%s/.config/starship.toml\"",
-				environment.Environment.User.HomeDirectory,
-				environment.Environment.Extra.WinUser.HomeDirectory,
-			),
-		)
+		for _, f := range []string{".config/starship.toml", ".ssh/config"} {
+			shell.Shell(
+				fmt.Sprintf(
+					"cp {{.VerbosityVerboseShortN}} -a %s/%[3]s \"%[2]s/%[3]s\"",
+					environment.Environment.User.HomeDirectory,
+					environment.Environment.Extra.WinUser.HomeDirectory,
+					f,
+				),
+			)
+		}
+		for _, f := range []string{".vscode/extensions"} {
+			shell.Shell(
+				fmt.Sprintf(
+					"cp {{.VerbosityVerboseShortN}} -a %s/%[3]s \"%[2]s/%[3]s\"",
+					environment.Environment.User.HomeDirectory,
+					environment.Environment.Extra.WinUser.UserProfile,
+					f,
+				),
+			)
+		}
+		for _, f := range []string{"Code/User/settings.json"} {
+			shell.Shell(
+				fmt.Sprintf(
+					"cp {{.VerbosityVerboseShortN}} -a %s/%[3]s \"%[2]s/%[3]s\"",
+					environment.Environment.User.ConfigDirectory,
+					environment.Environment.Extra.WinUser.AppData,
+					f,
+				),
+			)
+		}
 	},
 }
 
