@@ -17,53 +17,124 @@ in {
       enable = true;
       extensions = with pkgs.vscode-extensions; [
         # agurodriguez.vscode-lbnf
+        # chouzz.vscode-better-align
         # cschlosser.doxdocgen
-        # EditorConfig.EditorConfig
-        # IronGeek.vscode-env
+        # eliverlara.andromeda
+        # guyutongxue.lalrpop-syntax-highlight
         # jeff-hykin.better-cpp-syntax
         # jkiviluoto.tws
         # joaompinto.vscode-graphviz
         # josef.rouge-theme
-        # mnxn.lalrpop-highlight
-        # ms-vscode-remote.remote-containers
-        # ms-vscode-remote.remote-ssh-edit
-        # ms-vscode-remote.remote-wsl
         # ms-vscode-remote.vscode-remote-extensionpack
-        # ms-vscode.cpptools-extension-pack
         # ms-vscode.cpptools-themes
+        # ms-vscode.remote-explorer
+        # ms-vscode.remote-server
         # mvakula.vscode-purty
         # nwolverson.ide-purescript
         # nwolverson.language-purescript
-        # PKief.material-icon-theme
-        # PolyMeilex.wgsl
-        # wmaurer.change-case
-        # wwm.better-align
+        # polymeilex.wgsl
+        # wayou.vscode-todo-highlight
         # xmonader.vscode-capnp
         bbenoist.nix
-        bungcip.better-toml
         dhall.dhall-lang
         dhall.vscode-dhall-lsp-server
         eamodio.gitlens
+        editorconfig.editorconfig
         haskell.haskell
+        irongeek.vscode-env
         justusadam.language-haskell
-        rust-lang.rust-analyzer
         ms-azuretools.vscode-docker
+        ms-python.black-formatter
+        ms-python.debugpy
+        ms-python.isort
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
-        # ms-toolsai.jupyter-keymap
+        ms-toolsai.jupyter-keymap
         ms-toolsai.jupyter-renderers
+        ms-toolsai.vscode-jupyter-cell-tags
+        ms-toolsai.vscode-jupyter-slideshow
+        ms-vscode-remote.remote-containers
         ms-vscode-remote.remote-ssh
-        # ms-vscode.cmake-tools
+        ms-vscode-remote.remote-ssh-edit
+        ms-vscode-remote.remote-wsl
+        ms-vscode.cmake-tools
         ms-vscode.cpptools
+        ms-vscode.cpptools-extension-pack
+        ms-vscode.hexeditor
+        ms-vscode.live-server
+        ms-vscode.makefile-tools
+        ms-vscode.powershell
         naumovs.color-highlight
-        # twxs.cmake
+        pkief.material-icon-theme
+        rust-lang.rust-analyzer
+        tamasfe.even-better-toml
+        twxs.cmake
         vscodevim.vim
+        wmaurer.change-case
         zhuangtongfa.material-theme
       ];
       userSettings = {
+        "workbench.colorTheme" = "Andromeda";
+        "workbench.iconTheme" = "material-icon-theme";
+        "color-highlight.enable" = false;
+        "diffEditor.ignoreTrimWhitespace" = false;
+        "editor.bracketPairColorization.enabled" = true;
+        "editor.fontFamily" = "'JetBrainsMono Nerd Font', Consolas, 'Courier New', monospace";
+        "editor.fontLigatures" = true;
+        "editor.fontSize" = 11;
+        "editor.fontWeight" = "normal";
+        "editor.guides.bracketPairs" = "active";
+        "editor.renderWhitespace" = "boundary";
         "files.autoSave" = "off";
-        "[nix]"."editor.tabSize" = 2;
+        "files.insertFinalNewline" = true;
+        "telemetry.telemetryLevel" = "off";
+        "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
+        "terminal.integrated.fontSize" = 10;
+        "terminal.integrated.fontWeight" = "normal";
+        "tws.highlightTrailingWhitespace" = true;
+        "vim.ignorecase" = false;
+        "vim.smartRelativeLine" = true;
+        "vim.leader" = "\\";
+        "vim.normalModeKeyBindings" = [
+          {
+            "before" = [
+              "<leader>"
+              "f"
+            ];
+            "commands" = ["editor.action.formatDocument"];
+          }
+        ];
+        "vim.visualModeKeyBindings" = [
+          {
+            "before" = [">"];
+            "commands" = ["editor.action.indentLines"];
+          }
+          {
+            "before" = ["<"];
+            "commands" = ["editor.action.outdentLines"];
+          }
+          {
+            "before" = [
+              "g"
+              "s"
+            ];
+            "commands" = [
+              "editor.action.sortLinesAscending"
+              "extension.vim_escape"
+            ];
+          }
+          {
+            "before" = [
+              "<leader>"
+              "f"
+            ];
+            "commands" = [
+              "editor.action.formatSelection"
+              "extension.vim_escape"
+            ];
+          }
+        ];
       };
     };
   };
