@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
+	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 	"github.com/hanselrd/dotfiles/pkg/theme"
 
@@ -40,6 +41,7 @@ type environmentProfiles struct {
 type environmentExtra struct {
 	WithSystemd         bool   `json:"withSystemd"`
 	BackupFileExtension string `json:"backupFileExtension"`
+	WinUserName         string `json:"winUsername"`
 }
 
 var (
@@ -98,5 +100,11 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
+		WinUserName: func() string {
+			if winUserName, _, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
+				return winUserName
+			}
+			return ""
+		}(),
 	},
 }
