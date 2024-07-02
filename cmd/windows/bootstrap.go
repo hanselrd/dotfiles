@@ -21,9 +21,9 @@ var bootstrapCmd = &cobra.Command{
 		shell.Shell("choco.exe install starship {{.VerbosityVerboseShort}} --force -y")
 		shell.Shell(
 			fmt.Sprintf(
-				"cp {{.VerbosityVerboseShortN}} %s/.config/starship.toml \"/mnt/c/Users/%s/.config/starship.toml\"",
+				"cp {{.VerbosityVerboseShortN}} %s/.config/starship.toml \"%s/.config/starship.toml\"",
 				environment.Environment.User.HomeDirectory,
-				environment.Environment.Extra.WinUserName,
+				environment.Environment.Extra.WinUser.HomeDirectory,
 			),
 		)
 	},
