@@ -25,8 +25,6 @@ in {
       show-trace = true;
     };
 
-    nixpkgs.config.allowUnfree = true;
-
     programs.nix-index.enable = true;
   };
 }

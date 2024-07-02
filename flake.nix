@@ -66,6 +66,11 @@
     pkgs = import nixpkgs {
       inherit system;
 
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
+
       overlays = [
         rust-overlay.overlays.default
         zig-overlay.overlays.default
@@ -153,7 +158,7 @@
             specialArgs =
               inputs
               // {
-                inherit lib env profile;
+                inherit lib pkgs env profile;
               };
           };
         }

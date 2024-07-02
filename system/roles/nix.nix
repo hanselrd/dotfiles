@@ -19,7 +19,5 @@ in {
       show-trace = true;
       trusted-users = ["root" "@wheel"];
     };
-
-    nixpkgs.config.allowUnfree = true;
   };
 }
