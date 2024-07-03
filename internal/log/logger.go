@@ -17,7 +17,7 @@ func SetupLogger(l slog.Level) {
 	once.Do(func() {
 		logger := slog.New(NewHandler(os.Stderr,
 			&slog.HandlerOptions{
-				AddSource: true,
+				AddSource: false,
 				Level:     &level,
 			}))
 		slog.SetDefault(logger)
