@@ -44,12 +44,7 @@ var rootCmd = &cobra.Command{
 		default:
 			level = log.LevelPanic + slog.Level(flags.Quiet) - 4
 		}
-		logger := slog.New(log.NewHandler(os.Stderr,
-			&slog.HandlerOptions{
-				AddSource: false,
-				Level:     level,
-			}))
-		slog.SetDefault(logger)
+		log.SetupLogger(level)
 		log.Log(
 			level,
 			"",

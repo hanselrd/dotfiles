@@ -9,6 +9,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
+	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 	"github.com/hanselrd/dotfiles/pkg/theme"
@@ -110,6 +111,8 @@ var Environment = environment{
 		}(),
 		BackupFileExtension: backupFileExt,
 		WinUser: func() *environmentWinUser {
+			log.SetupLogger(log.LevelDisabled)
+
 			if winUserName, _, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
 				winHomeDir := fmt.Sprintf("/mnt/c/Users/%s", winUserName)
 				winConfigDir := fmt.Sprintf("%s/.config", winHomeDir)

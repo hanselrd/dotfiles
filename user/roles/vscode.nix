@@ -92,7 +92,7 @@ in {
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
         "terminal.integrated.fontSize" = 10;
         "terminal.integrated.fontWeight" = "normal";
-        "tws.highlightTrailingWhitespace" = true;
+        "tws.highlightTrailingWhiteSpace" = true;
         "vim.ignorecase" = false;
         "vim.smartRelativeLine" = true;
         "vim.leader" = "\\";

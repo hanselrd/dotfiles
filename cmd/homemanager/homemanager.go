@@ -3,12 +3,10 @@ package homemanager
 import (
 	"fmt"
 	"log/slog"
-	"os"
 	"slices"
 
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
 
@@ -39,12 +37,6 @@ var HomeManagerCmd = &cobra.Command{
 }
 
 func init() {
-	slog.SetDefault(slog.New(log.NewHandler(os.Stderr,
-		&slog.HandlerOptions{
-			Level: log.LevelDisabled,
-		},
-	)))
-
 	HomeManagerCmd.PersistentFlags().
 		StringVar(&_profile, "profile", profile.DefaultProfileGroup().String(), "home manager profile")
 }
