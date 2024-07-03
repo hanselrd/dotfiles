@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/itchyny/timefmt-go"
-	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/internal/log"
@@ -117,6 +116,7 @@ var Environment = environment{
 				winHomeDir := fmt.Sprintf("/mnt/c/Users/%s", winUserName)
 				winConfigDir := fmt.Sprintf("%s/.config", winHomeDir)
 				winCacheDir := fmt.Sprintf("%s/.cache", winHomeDir)
+				appData := fmt.Sprintf("%s/AppData/Roaming", winHomeDir)
 				return &environmentWinUser{
 					environmentUser: environmentUser{
 						UserName:        winUserName,
@@ -126,10 +126,8 @@ var Environment = environment{
 						ConfigDirectory: winConfigDir,
 						CacheDirectory:  winCacheDir,
 					},
-					UserProfile: lo.T2(
-						lo.Must2(shell.Shell("powershell.exe '$env:UserProfile'")),
-					).A,
-					AppData: lo.T2(lo.Must2(shell.Shell("powershell.exe '$env:AppData'"))).A,
+					UserProfile: winHomeDir,
+					AppData:     appData,
 				}
 			}
 			return nil

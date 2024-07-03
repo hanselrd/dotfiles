@@ -2,6 +2,7 @@ package windows
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 
@@ -22,32 +23,39 @@ var bootstrapCmd = &cobra.Command{
 		for _, f := range []string{".config/starship.toml", ".ssh/config"} {
 			shell.Shell(
 				fmt.Sprintf(
-					"cp {{.VerbosityVerboseShortN}} -a %s/%[3]s \"%[2]s/%[3]s\"",
+					"cp {{.VerbosityVerboseShortN}} %s/%[3]s \"%[2]s/%[3]s\"",
 					environment.Environment.User.HomeDirectory,
 					environment.Environment.Extra.WinUser.HomeDirectory,
 					f,
 				),
 			)
+			shell.Shell(fmt.Sprintf("chmod {{.VerbosityQuietLongVerboseShortN}} u+w \"%s/%s\"",
+				environment.Environment.Extra.WinUser.HomeDirectory,
+				f))
 		}
 		for _, f := range []string{".vscode/extensions"} {
 			shell.Shell(
 				fmt.Sprintf(
-					"cp {{.VerbosityVerboseShortN}} -a %s/%[3]s \"%[2]s/%[3]s\"",
+					"rsync {{.VerbosityVerboseShortN}} -CcavzPL %s/%s \"%s/%s\"",
 					environment.Environment.User.HomeDirectory,
-					environment.Environment.Extra.WinUser.UserProfile,
 					f,
+					environment.Environment.Extra.WinUser.UserProfile,
+					filepath.Dir(f),
 				),
 			)
 		}
 		for _, f := range []string{"Code/User/settings.json"} {
 			shell.Shell(
 				fmt.Sprintf(
-					"cp {{.VerbosityVerboseShortN}} -a %s/%[3]s \"%[2]s/%[3]s\"",
+					"cp {{.VerbosityVerboseShortN}} %s/%[3]s \"%[2]s/%[3]s\"",
 					environment.Environment.User.ConfigDirectory,
 					environment.Environment.Extra.WinUser.AppData,
 					f,
 				),
 			)
+			shell.Shell(fmt.Sprintf("chmod {{.VerbosityQuietLongVerboseShortN}} u+w \"%s/%s\"",
+				environment.Environment.Extra.WinUser.AppData,
+				f))
 		}
 	},
 }
