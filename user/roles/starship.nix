@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: let
   cfg = config.roles.user.starship;
@@ -112,7 +113,7 @@ in {
         };
         time = {
           format = "[{$time}]($style) ";
-          time_format = "%y-%-m-%-d %-H:%M";
+          time_format = env.extra.timeFormat;
           disabled = false;
         };
         username = {

@@ -32,7 +32,7 @@ in {
 
     home.sessionVariables = lib.mkMerge [
       {
-        HISTTIMEFORMAT = "%y-%-m-%-d %-H:%M:%S  ";
+        HISTTIMEFORMAT = "${env.extra.timeFormat}  ";
       }
       (lib.mkIf env.roles.user.shell.ldPreload {
         LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";

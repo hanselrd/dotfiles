@@ -42,6 +42,7 @@ type environmentProfiles struct {
 type environmentExtra struct {
 	WithSystemd         bool                `json:"withSystemd"`
 	BackupFileExtension string              `json:"backupFileExtension"`
+	TimeFormat          string              `json:"timeFormat"`
 	WinUser             *environmentWinUser `json:"winUser,omitempty"`
 }
 
@@ -109,6 +110,7 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
+		TimeFormat:          "%y-%-m-%-d T%-H:%M",
 		WinUser: func() *environmentWinUser {
 			log.SetupLogger(log.LevelDisabled)
 
