@@ -110,7 +110,7 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
-		TimeFormat:          "%y-%-m-%-d T%-H:%M",
+		TimeFormat:          "%y-%-m-%-d/%w T%-H:%M",
 		WinUser: func() *environmentWinUser {
 			log.SetupLogger(log.LevelDisabled)
 
