@@ -19,5 +19,16 @@ in {
       show-trace = true;
       trusted-users = ["root" "@wheel"];
     };
+
+    nix.optimise = {
+      automatic = true;
+      dates = ["weekly"];
+    };
+
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 }

@@ -25,6 +25,12 @@ in {
       show-trace = true;
     };
 
+    nix.gc = {
+      automatic = true;
+      frequency = "weekly";
+      options = "--delete-older-than 7d";
+    };
+
     programs.nix-index.enable = true;
   };
 }
