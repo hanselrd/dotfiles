@@ -33,7 +33,9 @@ in {
                 foreground = "lightYellow";
                 template = lib.concatStrings [
                   "<b>"
+                  "<darkGray>{</>"
                   "{{.CurrentDate | date .Format}}"
+                  "<darkGray>}</>"
                   "</b> "
                 ];
                 properties = {
@@ -213,7 +215,7 @@ in {
                 ];
                 template = lib.concatStrings [
                   "<b>"
-                  "{{\">\"}}"
+                  ">"
                   "</b>"
                 ];
               }
@@ -230,7 +232,7 @@ in {
         #     "<darkGray>{{.Shell}}</>"
         #     "<darkGray>|</>"
         #     "<lightYellow>{{.SHLVL}}</> "
-        #     "{{\">\"}}"
+        #     ">"
         #     "</b> "
         #   ];
         # };
