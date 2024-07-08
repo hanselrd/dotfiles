@@ -236,6 +236,20 @@ in {
         #     "</b> "
         #   ];
         # };
+        secondary_prompt = {
+          foreground = "lightCyan";
+          foreground_templates = [
+            "{{if not (eq .Code 0)}}lightRed{{end}}"
+          ];
+          template = lib.concatStrings [
+            "<b>"
+            "<darkGray>{{.Shell}}</>"
+            "<darkGray>|</>"
+            "<lightYellow>{{.SHLVL}}</> "
+            ">>"
+            "</b> "
+          ];
+        };
       };
     };
   };
