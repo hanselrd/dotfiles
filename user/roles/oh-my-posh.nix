@@ -110,10 +110,10 @@ in {
                   fetch_status = true;
                   # fetch_bare_info = true;
                   branch_icon = "";
-                  branch_identical_icon = "=";
+                  branch_identical_icon = "";
                   branch_ahead_icon = "^";
                   branch_behind_icon = "v";
-                  branch_gone_icon = "=/";
+                  branch_gone_icon = "";
                   truncate_symbol = "..";
                   commit_icon = "";
                   tag_icon = "";
