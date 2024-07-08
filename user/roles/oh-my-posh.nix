@@ -64,10 +64,8 @@ in {
                   "<b>"
                   "<darkGray>@</>"
                   "{{.HostName}}"
-                  # "{{if .Env.TMUX}}"
                   # "<darkGray>|</>"
-                  # "<lightYellow>tmux</>"
-                  # "{{end}}"
+                  # "<lightBlue>{{.OS}}</>"
                   "</b> "
                 ];
               }
