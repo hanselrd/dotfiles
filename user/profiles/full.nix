@@ -16,6 +16,7 @@
   roles.user.vscode.enable = true;
 
   home.packages = with pkgs; [
+    # renderdoc
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
     arandr
     dbeaver-bin
@@ -29,7 +30,6 @@
     noto-fonts-emoji
     noto-fonts-emoji-blob-bin
     noto-fonts-extra
-    renderdoc
     vulkan-tools
     zoom-us
   ];
