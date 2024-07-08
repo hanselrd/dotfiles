@@ -37,6 +37,7 @@ const (
 	UserRoleHtop
 	UserRoleNeovim
 	UserRoleNix
+	UserRoleOhMyPosh // oh-my-posh
 	UserRolePager
 	UserRoleRipgrep
 	UserRoleScripts

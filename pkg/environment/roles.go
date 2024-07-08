@@ -58,10 +58,11 @@ type (
 	environmentRolesUserNix    struct {
 		Sandbox bool `json:"sandbox"`
 	}
-	environmentRolesUserPager   struct{}
-	environmentRolesUserRipgrep struct{}
-	environmentRolesUserScripts struct{}
-	environmentRolesUserShell   struct {
+	environmentRolesUserOhMyPosh struct{}
+	environmentRolesUserPager    struct{}
+	environmentRolesUserRipgrep  struct{}
+	environmentRolesUserScripts  struct{}
+	environmentRolesUserShell    struct {
 		BashToZsh bool `json:"bashToZsh"`
 		LdPreload bool `json:"ldPreload"`
 		Rts       bool `json:"rts"`

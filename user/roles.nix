@@ -37,6 +37,7 @@
     ./roles/htop.nix
     ./roles/neovim.nix
     ./roles/nix.nix
+    ./roles/oh-my-posh.nix
     ./roles/pager.nix
     ./roles/ripgrep.nix
     ./roles/scripts.nix

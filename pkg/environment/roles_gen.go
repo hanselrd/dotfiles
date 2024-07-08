@@ -54,6 +54,7 @@ type environmentRolesUser struct {
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`
+	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`
 	Pager                 *environmentRolesUserPager                 `json:"pager,omitempty"`
 	Ripgrep               *environmentRolesUserRipgrep               `json:"ripgrep,omitempty"`
 	Scripts               *environmentRolesUserScripts               `json:"scripts,omitempty"`

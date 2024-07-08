@@ -43,6 +43,7 @@ type environmentExtra struct {
 	WithSystemd         bool                `json:"withSystemd"`
 	BackupFileExtension string              `json:"backupFileExtension"`
 	TimeFormat          string              `json:"timeFormat"`
+	GoTimeFormat        string              `json:"goTimeFormat"`
 	WinUser             *environmentWinUser `json:"winUser,omitempty"`
 }
 
@@ -110,7 +111,8 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
-		TimeFormat:          "%y-%-m-%-d/%w T%-H:%M",
+		TimeFormat:          "%y-%-m-%-d/%a T%-H:%M",
+		GoTimeFormat:        "06-1-2/Mon T15:04",
 		WinUser: func() *environmentWinUser {
 			log.SetupLogger(log.LevelDisabled)
 

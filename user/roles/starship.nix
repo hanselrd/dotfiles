@@ -17,7 +17,7 @@ in {
     programs.starship = {
       enable = true;
       settings = {
-        format = lib.strings.concatStrings [
+        format = lib.concatStrings [
           "\${custom.lock}"
           "\${custom.idle}"
           "$nix_shell"
@@ -131,7 +131,7 @@ in {
         };
         custom.idle = {
           format = "[<$symbol]($style)[@$output](bold bright-black)[>]($style) ";
-          command = "cat /etc/idle_terminate_threshold";
+          command = "${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold";
           when = "[ -f /etc/idle_terminate_threshold ]";
           symbol = "idle";
           style = "bold red";
