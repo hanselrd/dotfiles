@@ -12,20 +12,20 @@ var (
 	DarwinStandard = NewProfileGroup(SystemProfileDarwin, UserProfileStandard)
 	DarwinMinimal  = NewProfileGroup(SystemProfileDarwin, UserProfileMinimal)
 	DarwinFull     = NewProfileGroup(SystemProfileDarwin, UserProfileFull)
-	LinuxBase      = NewProfileGroup(SystemProfileLinux, UserProfileBase)
-	LinuxStandard  = NewProfileGroup(SystemProfileLinux, UserProfileStandard)
-	LinuxMinimal   = NewProfileGroup(SystemProfileLinux, UserProfileMinimal)
-	LinuxFull      = NewProfileGroup(SystemProfileLinux, UserProfileFull)
 	WslBase        = NewProfileGroup(SystemProfileWsl, UserProfileBase)
 	WslStandard    = NewProfileGroup(SystemProfileWsl, UserProfileStandard)
 	WslMinimal     = NewProfileGroup(SystemProfileWsl, UserProfileMinimal)
 	WslFull        = NewProfileGroup(SystemProfileWsl, UserProfileFull)
+	LinuxBase      = NewProfileGroup(SystemProfileLinux, UserProfileBase)
+	LinuxStandard  = NewProfileGroup(SystemProfileLinux, UserProfileStandard)
+	LinuxMinimal   = NewProfileGroup(SystemProfileLinux, UserProfileMinimal)
+	LinuxFull      = NewProfileGroup(SystemProfileLinux, UserProfileFull)
 )
 
 var (
 	NixosProfiles       = []ProfileGroup{NixosBase, NixosStandard, NixosMinimal, NixosFull}
 	DarwinProfiles      = []ProfileGroup{DarwinBase, DarwinStandard, DarwinMinimal, DarwinFull}
-	LinuxProfiles       = []ProfileGroup{LinuxBase, LinuxStandard, LinuxMinimal, LinuxFull}
 	WslProfiles         = []ProfileGroup{WslBase, WslStandard, WslMinimal, WslFull}
-	HomeManagerProfiles = slices.Concat(NixosProfiles, DarwinProfiles, LinuxProfiles, WslProfiles)
+	LinuxProfiles       = []ProfileGroup{LinuxBase, LinuxStandard, LinuxMinimal, LinuxFull}
+	HomeManagerProfiles = slices.Concat(NixosProfiles, DarwinProfiles, WslProfiles, LinuxProfiles)
 )

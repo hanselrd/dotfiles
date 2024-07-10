@@ -19,6 +19,7 @@ type environmentRolesSystem struct {
 	Time           *environmentRolesSystemTime           `json:"time,omitempty"`
 	User           *environmentRolesSystemUser           `json:"user,omitempty"`
 	Virtualization *environmentRolesSystemVirtualization `json:"virtualization,omitempty"`
+	Wsl            *environmentRolesSystemWsl            `json:"wsl,omitempty"`
 	X11            *environmentRolesSystemX11            `json:"x11,omitempty"`
 }
 type environmentRolesUser struct {

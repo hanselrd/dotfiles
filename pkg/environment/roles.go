@@ -18,6 +18,7 @@ type (
 	environmentRolesSystemTime           struct{}
 	environmentRolesSystemUser           struct{}
 	environmentRolesSystemVirtualization struct{}
+	environmentRolesSystemWsl            struct{}
 	environmentRolesSystemX11            struct{}
 )
 

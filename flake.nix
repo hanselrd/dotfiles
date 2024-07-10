@@ -29,6 +29,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,6 +59,7 @@
     homeage,
     nix-colors,
     nix-darwin,
+    nixos-wsl,
     rust-overlay,
     zig-overlay,
     zls,
@@ -78,7 +84,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-4b6qYzpvpIycAMZ1GZzQe7rwkFsPPMdhviKb230T0iw=";
+            vendorHash = "sha256-FpuQZfkPOtmjP6vn3Yp1YQs3Q0Ij/2cYUYOtWFTq2BU=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -126,12 +132,14 @@
           value = nixpkgs.lib.nixosSystem {
             inherit system;
 
-            modules = [
+            modules = lib.flatten [
               {
                 nixpkgs = {
                   inherit (pkgs) overlays;
                 };
               }
+              (lib.optional (profile.system == "wsl")
+                nixos-wsl.nixosModules.wsl)
               ./system/roles.nix
               ./system/profiles/${profile.system}.nix
               home-manager.nixosModules.home-manager
@@ -163,7 +171,7 @@
           };
         }
       )
-      env.profiles.nixos
+      (env.profiles.nixos ++ env.profiles.wsl)
     );
 
     homeConfigurations = builtins.listToAttrs (

@@ -18,6 +18,7 @@
     ./roles/time.nix
     ./roles/user.nix
     ./roles/virtualization.nix
+    ./roles/wsl.nix
     ./roles/x11.nix
   ];
 }

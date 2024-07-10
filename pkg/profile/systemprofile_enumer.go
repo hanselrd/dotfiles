@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _SystemProfileName = "nixosdarwinlinuxwsl"
+const _SystemProfileName = "nixosdarwinwsllinux"
 
-var _SystemProfileIndex = [...]uint8{0, 5, 11, 16, 19}
+var _SystemProfileIndex = [...]uint8{0, 5, 11, 14, 19}
 
-const _SystemProfileLowerName = "nixosdarwinlinuxwsl"
+const _SystemProfileLowerName = "nixosdarwinwsllinux"
 
 func (i SystemProfile) String() string {
 	if i >= SystemProfile(len(_SystemProfileIndex)-1) {
@@ -27,28 +27,28 @@ func _SystemProfileNoOp() {
 	var x [1]struct{}
 	_ = x[SystemProfileNixos-(0)]
 	_ = x[SystemProfileDarwin-(1)]
-	_ = x[SystemProfileLinux-(2)]
-	_ = x[SystemProfileWsl-(3)]
+	_ = x[SystemProfileWsl-(2)]
+	_ = x[SystemProfileLinux-(3)]
 }
 
-var _SystemProfileValues = []SystemProfile{SystemProfileNixos, SystemProfileDarwin, SystemProfileLinux, SystemProfileWsl}
+var _SystemProfileValues = []SystemProfile{SystemProfileNixos, SystemProfileDarwin, SystemProfileWsl, SystemProfileLinux}
 
 var _SystemProfileNameToValueMap = map[string]SystemProfile{
 	_SystemProfileName[0:5]:        SystemProfileNixos,
 	_SystemProfileLowerName[0:5]:   SystemProfileNixos,
 	_SystemProfileName[5:11]:       SystemProfileDarwin,
 	_SystemProfileLowerName[5:11]:  SystemProfileDarwin,
-	_SystemProfileName[11:16]:      SystemProfileLinux,
-	_SystemProfileLowerName[11:16]: SystemProfileLinux,
-	_SystemProfileName[16:19]:      SystemProfileWsl,
-	_SystemProfileLowerName[16:19]: SystemProfileWsl,
+	_SystemProfileName[11:14]:      SystemProfileWsl,
+	_SystemProfileLowerName[11:14]: SystemProfileWsl,
+	_SystemProfileName[14:19]:      SystemProfileLinux,
+	_SystemProfileLowerName[14:19]: SystemProfileLinux,
 }
 
 var _SystemProfileNames = []string{
 	_SystemProfileName[0:5],
 	_SystemProfileName[5:11],
-	_SystemProfileName[11:16],
-	_SystemProfileName[16:19],
+	_SystemProfileName[11:14],
+	_SystemProfileName[14:19],
 }
 
 // SystemProfileString retrieves an enum value from the enum constants string name.

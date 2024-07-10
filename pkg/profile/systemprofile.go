@@ -7,8 +7,8 @@ type SystemProfile uint
 const (
 	SystemProfileNixos SystemProfile = iota
 	SystemProfileDarwin
-	SystemProfileLinux
 	SystemProfileWsl
+	SystemProfileLinux
 )
 
 func (p SystemProfile) Type() string {

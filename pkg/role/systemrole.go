@@ -18,6 +18,7 @@ const (
 	SystemRoleTime
 	SystemRoleUser
 	SystemRoleVirtualization
+	SystemRoleWsl
 	SystemRoleX11
 )
 

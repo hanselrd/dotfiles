@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _SystemRoleName = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationx11"
+const _SystemRoleName = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationwslx11"
 
-var _SystemRoleIndex = [...]uint8{0, 9, 13, 17, 23, 33, 37, 47, 50, 57, 62, 66, 70, 84, 87}
+var _SystemRoleIndex = [...]uint8{0, 9, 13, 17, 23, 33, 37, 47, 50, 57, 62, 66, 70, 84, 87, 90}
 
-const _SystemRoleLowerName = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationx11"
+const _SystemRoleLowerName = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationwslx11"
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRoleIndex)-1) {
@@ -38,10 +38,11 @@ func _SystemRoleNoOp() {
 	_ = x[SystemRoleTime-(10)]
 	_ = x[SystemRoleUser-(11)]
 	_ = x[SystemRoleVirtualization-(12)]
-	_ = x[SystemRoleX11-(13)]
+	_ = x[SystemRoleWsl-(13)]
+	_ = x[SystemRoleX11-(14)]
 }
 
-var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleI18N, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleTime, SystemRoleUser, SystemRoleVirtualization, SystemRoleX11}
+var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleI18N, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleTime, SystemRoleUser, SystemRoleVirtualization, SystemRoleWsl, SystemRoleX11}
 
 var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleName[0:9]:        SystemRoleBootstrap,
@@ -70,8 +71,10 @@ var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleLowerName[66:70]: SystemRoleUser,
 	_SystemRoleName[70:84]:      SystemRoleVirtualization,
 	_SystemRoleLowerName[70:84]: SystemRoleVirtualization,
-	_SystemRoleName[84:87]:      SystemRoleX11,
-	_SystemRoleLowerName[84:87]: SystemRoleX11,
+	_SystemRoleName[84:87]:      SystemRoleWsl,
+	_SystemRoleLowerName[84:87]: SystemRoleWsl,
+	_SystemRoleName[87:90]:      SystemRoleX11,
+	_SystemRoleLowerName[87:90]: SystemRoleX11,
 }
 
 var _SystemRoleNames = []string{
@@ -89,6 +92,7 @@ var _SystemRoleNames = []string{
 	_SystemRoleName[66:70],
 	_SystemRoleName[70:84],
 	_SystemRoleName[84:87],
+	_SystemRoleName[87:90],
 }
 
 // SystemRoleString retrieves an enum value from the enum constants string name.
