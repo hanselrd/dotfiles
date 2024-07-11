@@ -12,6 +12,7 @@
   # roles.user.pandoc.enable = true;
 
   home.packages = with pkgs; [
+    # youtube-dl
     android-tools
     ansible
     atool
@@ -35,7 +36,7 @@
     ventoy-bin
     wtf
     xsv
-    youtube-dl
+    yt-dlp
     zlib
     zstd
   ];
