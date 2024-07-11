@@ -12,7 +12,6 @@
   # roles.user.pandoc.enable = true;
 
   home.packages = with pkgs; [
-    # youtube-dl
     android-tools
     ansible
     atool
