@@ -174,6 +174,56 @@
       (env.profiles.nixos ++ env.profiles.wsl)
     );
 
+    darwinConfigurations = builtins.listToAttrs (
+      builtins.map
+      (
+        profile: let
+          lib = mkLib {inherit profile;};
+        in {
+          name = profile.name;
+          value = nix-darwin.lib.darwinSystem {
+            inherit system;
+
+            modules = [
+              {
+                nixpkgs = {
+                  inherit (pkgs) overlays;
+                };
+              }
+              ./system/roles.nix
+              ./system/profiles/${profile.system}.nix
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.backupFileExtension = env.extra.backupFileExtension;
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
+
+                home-manager.sharedModules = [
+                  homeage.homeManagerModules.homeage
+                  nix-colors.homeManagerModules.default
+                  ./user/roles.nix
+                ];
+
+                home-manager.extraSpecialArgs =
+                  inputs
+                  // {
+                    inherit env profile;
+                  };
+              }
+            ];
+
+            specialArgs =
+              inputs
+              // {
+                inherit lib pkgs env profile;
+              };
+          };
+        }
+      )
+      env.profiles.darwin
+    );
+
     homeConfigurations = builtins.listToAttrs (
       builtins.map
       (
