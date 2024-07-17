@@ -12,7 +12,7 @@ import (
 func build(installables ...string) {
 	lo.Must2(shell.Shell(
 		fmt.Sprintf(
-			"nix build {{.VerbosityQuietLongVerboseShortN}} --no-link %s",
+			"nix build {{.VerbosityQuietLongVerboseShortN}} --no-link %s --impure",
 			strings.Join(installables, " "),
 		),
 	))
