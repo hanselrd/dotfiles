@@ -2,9 +2,16 @@ package codegen
 
 import (
 	"log/slog"
+	"text/template"
 
+	"github.com/iancoleman/strcase"
+	"github.com/samber/lo"
 	"github.com/spf13/cobra"
+
+	"github.com/hanselrd/dotfiles/internal/assets"
 )
+
+var tmpl *template.Template
 
 var CodegenCmd = &cobra.Command{
 	Use:   "codegen",
@@ -15,4 +22,9 @@ var CodegenCmd = &cobra.Command{
 	},
 }
 
-func init() {}
+func init() {
+	tmpl = lo.Must(template.New("").Funcs(template.FuncMap{
+		"camel":      strcase.ToCamel,
+		"lowerCamel": strcase.ToLowerCamel,
+	}).ParseFS(assets.TemplatesFS, "templates/*.gotmpl"))
+}
