@@ -116,7 +116,8 @@ var Environment = environment{
 		WinUser: func() *environmentWinUser {
 			log.SetupLogger(log.LevelDisabled)
 
-			if winUserName, _, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
+			if res, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
+				winUserName := res.Stdout
 				winHomeDir := fmt.Sprintf("/mnt/c/Users/%s", winUserName)
 				winConfigDir := fmt.Sprintf("%s/.config", winHomeDir)
 				winCacheDir := fmt.Sprintf("%s/.cache", winHomeDir)

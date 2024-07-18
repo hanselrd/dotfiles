@@ -30,11 +30,11 @@ func NewProfileGroup(system SystemProfile, user UserProfile) ProfileGroup {
 }
 
 func DefaultProfileGroup() ProfileGroup {
-	stdout := lo.T2(lo.Must2(shell.Shell("uname -a"))).A
-	if strings.Contains(strings.ToLower(stdout), "microsoft") {
+	res := lo.Must(shell.Shell("uname -a"))
+	if strings.Contains(strings.ToLower(res.Stdout), "microsoft") {
 		return WslBase
 	}
-	if strings.Contains(stdout, "Darwin") {
+	if strings.Contains(res.Stdout, "Darwin") {
 		return DarwinBase
 	}
 	return LinuxBase

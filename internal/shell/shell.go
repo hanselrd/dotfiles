@@ -29,7 +29,13 @@ func WithStdin(stdin string) ShellOpt {
 	}
 }
 
-func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) {
+type ShellResult struct {
+	Stdout   string
+	Stderr   string
+	ExitCode int
+}
+
+func Shell(command string, opts ...ShellOpt) (res ShellResult, err error) {
 	options := ShellOpts{}
 
 	for _, opt := range opts {
@@ -118,8 +124,11 @@ func Shell(command string, opts ...ShellOpt) (stdout, stderr string, err error) 
 
 	err = cmd.Wait()
 
-	stdout = strings.TrimSpace(stdoutBuf.String())
-	stderr = strings.TrimSpace(stderrBuf.String())
+	res.Stdout = strings.TrimSpace(stdoutBuf.String())
+	res.Stderr = strings.TrimSpace(stderrBuf.String())
+	if ee, ok := err.(*exec.ExitError); ok {
+		res.ExitCode = ee.ExitCode()
+	}
 
 	return
 }

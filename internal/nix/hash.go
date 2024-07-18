@@ -9,6 +9,6 @@ import (
 )
 
 func FakeHash(t time.Time) string {
-	root := strings.Join([]string{hash.Date(t), hash.TodNanoseconds(t)}, "+")
-	return fmt.Sprintf("sha256-%s+%s=", root, strings.Repeat("a", 42-len(root)))
+	root := strings.Join([]string{"hanselrd", hash.Date(t), hash.TodNanoseconds(t)}, "+")
+	return fmt.Sprintf("sha256-%s+%s=", root, strings.Repeat("A", 42-len(root)))
 }

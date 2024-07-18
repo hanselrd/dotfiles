@@ -7,6 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/hanselrd/dotfiles/cmd/codegen"
 	"github.com/hanselrd/dotfiles/cmd/homeage"
 	"github.com/hanselrd/dotfiles/cmd/homemanager"
 	"github.com/hanselrd/dotfiles/cmd/windows"
@@ -83,6 +84,7 @@ func init() {
 		CountVarP(&flags.Quiet, "quiet", "q", "quiet; do not generate unnecessary output")
 	rootCmd.MarkFlagsMutuallyExclusive("verbose", "quiet")
 
+	rootCmd.AddCommand(codegen.CodegenCmd)
 	rootCmd.AddCommand(homeage.HomeageCmd)
 	rootCmd.AddCommand(homemanager.HomeManagerCmd)
 	if profile.DefaultProfileGroup().SystemProfile() == profile.SystemProfileWsl {

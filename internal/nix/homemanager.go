@@ -3,28 +3,33 @@ package nix
 import (
 	"fmt"
 
-	"github.com/samber/lo"
-
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/environment"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
 
-func BuildHomeManagerConfiguration(pg profile.ProfileGroup) {
-	build(
+func BuildHomeManagerConfiguration(pg profile.ProfileGroup) (shell.ShellResult, error) {
+	return build(
 		fmt.Sprintf(".#homeConfigurations.%s.activationPackage", pg),
 	)
 }
 
-func FindHomeManagerConfiguration(pg profile.ProfileGroup) string {
-	return findStorePaths(
-		fmt.Sprintf(".#homeConfigurations.%s.activationPackage", pg))[0]
+func FindHomeManagerConfiguration(pg profile.ProfileGroup) (string, error) {
+	paths, err := findStorePaths(
+		fmt.Sprintf(".#homeConfigurations.%s.activationPackage", pg))
+	if err != nil {
+		return "", err
+	}
+	return paths[0], nil
 }
 
-func InstallHomeManagerConfiguration(pg profile.ProfileGroup) (string, error) {
-	hmc := FindHomeManagerConfiguration(pg)
+func InstallHomeManagerConfiguration(pg profile.ProfileGroup) (shell.ShellResult, error) {
+	hmc, err := FindHomeManagerConfiguration(pg)
+	if err != nil {
+		return shell.ShellResult{}, err
+	}
 	homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", hmc)
-	stdout, _, err := shell.Shell(
+	return shell.Shell(
 		fmt.Sprintf(
 			"%s switch {{.VerbosityVerboseShort}} --flake .#%s -b %s",
 			homeManagerExe,
@@ -32,25 +37,29 @@ func InstallHomeManagerConfiguration(pg profile.ProfileGroup) (string, error) {
 			environment.Environment.Extra.BackupFileExtension,
 		),
 	)
-	return stdout, err
 }
 
-func FindHomeManagerEjectPaths(pg profile.ProfileGroup) []string {
-	return []string{
-		FindHomeManagerConfiguration(pg),
-		lo.T2(
-			lo.Must2(
-				shell.Shell(
-					fmt.Sprintf(
-						"readlink {{.VerbosityQuietLongVerboseShortN}} -f %s/.nix-profile",
-						environment.Environment.User.HomeDirectory,
-					),
-				),
-			),
-		).A,
+func FindHomeManagerEjectPaths(pg profile.ProfileGroup) ([]string, error) {
+	hmc, err := FindHomeManagerConfiguration(pg)
+	if err != nil {
+		return nil, err
 	}
+	res, err := shell.Shell(
+		fmt.Sprintf(
+			"readlink {{.VerbosityQuietLongVerboseShortN}} -f %s/.nix-profile",
+			environment.Environment.User.HomeDirectory,
+		),
+	)
+	if err != nil {
+		return nil, err
+	}
+	return []string{hmc, res.Stdout}, nil
 }
 
-func FindHomeManagerEjectDependencies(pg profile.ProfileGroup) []string {
-	return findStoreDependencies(FindHomeManagerEjectPaths(pg)...)
+func FindHomeManagerEjectDependencies(pg profile.ProfileGroup) ([]string, error) {
+	paths, err := FindHomeManagerEjectPaths(pg)
+	if err != nil {
+		return nil, err
+	}
+	return findStoreDependencies(paths...)
 }

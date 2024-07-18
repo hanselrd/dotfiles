@@ -18,10 +18,10 @@ var bootstrapCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		nix.BuildHomeManagerConfiguration(profileGroup)
 
-		stdout, err := nix.InstallHomeManagerConfiguration(profileGroup)
+		res, err := nix.InstallHomeManagerConfiguration(profileGroup)
 		if err != nil {
 			re := regexp.MustCompile(`Existing file '(.*)' is in the way of '.*'\n`)
-			matches := re.FindAllStringSubmatch(stdout, -1)
+			matches := re.FindAllStringSubmatch(res.Stdout, -1)
 			lop.ForEach(matches, func(m []string, _ int) {
 				slog.Debug("removing", "file", m[1])
 				os.RemoveAll(m[1])

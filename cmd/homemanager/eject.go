@@ -36,8 +36,8 @@ var ejectCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		nix.BuildHomeManagerConfiguration(profileGroup)
 
-		paths := nix.FindHomeManagerEjectPaths(profileGroup)
-		deps := nix.FindHomeManagerEjectDependencies(profileGroup)
+		paths := lo.Must(nix.FindHomeManagerEjectPaths(profileGroup))
+		deps := lo.Must(nix.FindHomeManagerEjectDependencies(profileGroup))
 
 		if !strings.HasSuffix(outDir, "/") {
 			outDir += "/"
@@ -79,18 +79,15 @@ var ejectCmd = &cobra.Command{
 		shell.Shell(fmt.Sprintf("chmod {{.VerbosityQuietLongVerboseShortN}} -R u+w %s", outDir))
 
 		pathsNew := lo.Map(paths, func(p string, _ int) string {
-			return lo.T2(
-				lo.Must2(
-					shell.Shell(
-						fmt.Sprintf(
-							"sed {{.VerbosityQuietLong}} \"s@%s@%s@g\"",
-							sedSearch,
-							outDir,
-						),
-						shell.WithStdin(p),
+			return lo.Must(
+				shell.Shell(
+					fmt.Sprintf(
+						"sed {{.VerbosityQuietLong}} \"s@%s@%s@g\"",
+						sedSearch,
+						outDir,
 					),
-				),
-			).A
+					shell.WithStdin(p),
+				)).Stdout
 		})
 
 		shell.Shell(
