@@ -13,6 +13,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_cachyos;
   };
 }

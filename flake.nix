@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     gitignore = {
       url = "github:hercules-ci/gitignore.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,6 +59,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    chaotic,
     gitignore,
     home-manager,
     homeage,
@@ -135,9 +141,10 @@
             modules = lib.flatten [
               {
                 nixpkgs = {
-                  inherit (pkgs) overlays;
+                  inherit (pkgs) config overlays;
                 };
               }
+              chaotic.nixosModules.default
               (lib.optional (profile.system == "wsl")
                 nixos-wsl.nixosModules.wsl)
               ./system/roles.nix
@@ -150,6 +157,7 @@
                 home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
 
                 home-manager.sharedModules = [
+                  chaotic.homeManagerModules.default
                   homeage.homeManagerModules.homeage
                   nix-colors.homeManagerModules.default
                   ./user/roles.nix
@@ -166,7 +174,7 @@
             specialArgs =
               inputs
               // {
-                inherit lib pkgs env profile;
+                inherit lib env profile;
               };
           };
         }
@@ -187,7 +195,7 @@
             modules = [
               {
                 nixpkgs = {
-                  inherit (pkgs) overlays;
+                  inherit (pkgs) config overlays;
                 };
               }
               ./system/roles.nix
@@ -200,6 +208,7 @@
                 home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
 
                 home-manager.sharedModules = [
+                  chaotic.homeManagerModules.default
                   homeage.homeManagerModules.homeage
                   nix-colors.homeManagerModules.default
                   ./user/roles.nix
@@ -216,7 +225,7 @@
             specialArgs =
               inputs
               // {
-                inherit lib pkgs env profile;
+                inherit lib env profile;
               };
           };
         }
@@ -235,6 +244,7 @@
             inherit pkgs lib;
 
             modules = [
+              chaotic.homeManagerModules.default
               homeage.homeManagerModules.homeage
               nix-colors.homeManagerModules.default
               ./user/roles.nix
@@ -244,7 +254,7 @@
             extraSpecialArgs =
               inputs
               // {
-                inherit pkgs env profile;
+                inherit env profile;
               };
           };
         }

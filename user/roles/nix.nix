@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     nix.registry.nixpkgs.flake = nixpkgs;
 
-    nix.package = lib.mkDefault pkgs.nix;
+    nix.package = lib.mkForce pkgs.nix;
 
     nix.settings = {
       experimental-features = ["nix-command" "flakes"];
