@@ -264,6 +264,7 @@
           pkgs.writeShellScriptBin "dotfiles-codegen1"
           ''
             ${lib.getExe dotfiles-codegen0}
+            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen hash
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} docker-compose > docker-compose.json
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} template
