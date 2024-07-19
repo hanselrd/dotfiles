@@ -80,6 +80,46 @@
       },
       "image": "dotfiles-eject/darwin-standard"
     },
+    "dotfiles-eject-garuda-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "garuda-base"
+        }
+      },
+      "image": "dotfiles-eject/garuda-base"
+    },
+    "dotfiles-eject-garuda-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "garuda-full"
+        }
+      },
+      "image": "dotfiles-eject/garuda-full"
+    },
+    "dotfiles-eject-garuda-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "garuda-minimal"
+        }
+      },
+      "image": "dotfiles-eject/garuda-minimal"
+    },
+    "dotfiles-eject-garuda-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/eject.Dockerfile",
+        "args": {
+          "PROFILE": "garuda-standard"
+        }
+      },
+      "image": "dotfiles-eject/garuda-standard"
+    },
     "dotfiles-eject-linux-base": {
       "build": {
         "context": ".",
@@ -199,6 +239,46 @@
         }
       },
       "image": "dotfiles-eject/wsl-standard"
+    },
+    "dotfiles-garuda-base": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "garuda-base"
+        }
+      },
+      "image": "dotfiles/garuda-base"
+    },
+    "dotfiles-garuda-full": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "garuda-full"
+        }
+      },
+      "image": "dotfiles/garuda-full"
+    },
+    "dotfiles-garuda-minimal": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "garuda-minimal"
+        }
+      },
+      "image": "dotfiles/garuda-minimal"
+    },
+    "dotfiles-garuda-standard": {
+      "build": {
+        "context": ".",
+        "dockerfile": "docker/Dockerfile",
+        "args": {
+          "PROFILE": "garuda-standard"
+        }
+      },
+      "image": "dotfiles/garuda-standard"
     },
     "dotfiles-linux-base": {
       "build": {

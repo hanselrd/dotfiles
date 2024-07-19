@@ -13,17 +13,20 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    networking.hostName = env.roles.system.networking.hostName;
+  config = lib.mkIf cfg.enable (
+    {
+      networking.hostName = env.roles.system.networking.hostName;
+    }
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      networking.networkmanager.enable = true;
 
-    networking.networkmanager.enable = true;
-
-    networking.firewall.allowedTCPPorts = [5000 9443];
-    networking.firewall.allowedTCPPortRanges = [
-      {
-        from = 3000;
-        to = 3100;
-      }
-    ];
-  };
+      networking.firewall.allowedTCPPorts = [5000 9443];
+      networking.firewall.allowedTCPPortRanges = [
+        {
+          from = 3000;
+          to = 3100;
+        }
+      ];
+    }
+  );
 }

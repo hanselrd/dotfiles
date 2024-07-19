@@ -2,10 +2,15 @@
   description = "dotfiles";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    garuda = {
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -25,7 +30,7 @@
     };
 
     nix-colors = {
-      url = "github:misterio77/nix-colors";
+      url = "github:Misterio77/nix-colors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,6 +65,7 @@
     self,
     nixpkgs,
     chaotic,
+    garuda,
     gitignore,
     home-manager,
     homeage,
@@ -129,62 +135,64 @@
       });
   in rec {
     nixosConfigurations = builtins.listToAttrs (
-      builtins.map
-      (
+      builtins.map (
         profile: let
           lib = mkLib {inherit profile;};
         in {
           name = profile.name;
-          value = nixpkgs.lib.nixosSystem {
-            inherit system;
+          value =
+            (
+              if !lib.profiles.isSystemGaruda
+              then nixpkgs.lib.nixosSystem
+              else garuda.lib.garudaSystem
+            ) {
+              inherit system;
 
-            modules = lib.flatten [
-              {
-                nixpkgs = {
-                  inherit (pkgs) config overlays;
-                };
-              }
-              chaotic.nixosModules.default
-              (lib.optional (profile.system == "wsl")
-                nixos-wsl.nixosModules.wsl)
-              ./system/roles.nix
-              ./system/profiles/${profile.system}.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.backupFileExtension = env.extra.backupFileExtension;
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
-
-                home-manager.sharedModules = [
-                  chaotic.homeManagerModules.default
-                  homeage.homeManagerModules.homeage
-                  nix-colors.homeManagerModules.default
-                  ./user/roles.nix
-                ];
-
-                home-manager.extraSpecialArgs =
-                  inputs
-                  // {
-                    inherit env profile;
+              modules = lib.flatten [
+                {
+                  nixpkgs = {
+                    inherit (pkgs) config overlays;
                   };
-              }
-            ];
+                }
+                (lib.optional (!lib.profiles.isSystemGaruda) chaotic.nixosModules.default)
+                (lib.optional lib.profiles.isSystemWsl nixos-wsl.nixosModules.wsl)
+                ./system/roles.nix
+                ./system/profiles/${profile.system}.nix
+                (lib.optional (!lib.profiles.isSystemGaruda) home-manager.nixosModules.home-manager)
+                {
+                  home-manager.backupFileExtension = lib.mkForce env.extra.backupFileExtension;
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = lib.mkIf (!lib.profiles.isSystemGaruda) true;
+                  home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
 
-            specialArgs =
-              inputs
-              // {
-                inherit lib env profile;
-              };
-          };
+                  home-manager.sharedModules = lib.flatten [
+                    (lib.optional (!lib.profiles.isSystemGaruda) chaotic.homeManagerModules.default)
+                    homeage.homeManagerModules.homeage
+                    nix-colors.homeManagerModules.default
+                    ./user/roles.nix
+                  ];
+
+                  home-manager.extraSpecialArgs =
+                    inputs
+                    // {
+                      inherit env profile;
+                    };
+                }
+              ];
+
+              specialArgs =
+                inputs
+                // {
+                  inherit lib env profile;
+                };
+            };
         }
       )
-      (env.profiles.nixos ++ env.profiles.wsl)
+      (env.profiles.nixos ++ env.profiles.garuda ++ env.profiles.wsl)
     );
 
     darwinConfigurations = builtins.listToAttrs (
-      builtins.map
-      (
+      builtins.map (
         profile: let
           lib = mkLib {inherit profile;};
         in {
@@ -234,8 +242,7 @@
     );
 
     homeConfigurations = builtins.listToAttrs (
-      builtins.map
-      (
+      builtins.map (
         profile: let
           lib = mkLib {inherit profile;};
         in {
@@ -274,7 +281,7 @@
           pkgs.writeShellScriptBin "dotfiles-codegen1"
           ''
             ${lib.getExe dotfiles-codegen0}
-            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen hash
+            # ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen hash
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen profiles
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen roles
             ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json

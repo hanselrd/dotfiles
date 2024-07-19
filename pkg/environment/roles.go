@@ -5,6 +5,7 @@ package environment
 type (
 	environmentRolesSystemBootstrap  struct{}
 	environmentRolesSystemBoot       struct{}
+	environmentRolesSystemGaruda     struct{}
 	environmentRolesSystemI18N       struct{}
 	environmentRolesSystemKernel     struct{}
 	environmentRolesSystemMonitoring struct{}

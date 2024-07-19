@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -16,7 +15,7 @@ in {
 
   config = lib.mkIf cfg.enable (
     {}
-    // lib.optionalAttrs (builtins.hasAttr "wsl" options) {
+    // lib.optionalAttrs lib.profiles.isSystemWsl {
       wsl = {
         enable = true;
         defaultUser = env.user.name;

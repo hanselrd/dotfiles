@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _SystemProfileName = "nixosdarwinwsllinux"
+const _SystemProfileName = "nixosgarudawsldarwinlinux"
 
-var _SystemProfileIndex = [...]uint8{0, 5, 11, 14, 19}
+var _SystemProfileIndex = [...]uint8{0, 5, 11, 14, 20, 25}
 
-const _SystemProfileLowerName = "nixosdarwinwsllinux"
+const _SystemProfileLowerName = "nixosgarudawsldarwinlinux"
 
 func (i SystemProfile) String() string {
 	if i >= SystemProfile(len(_SystemProfileIndex)-1) {
@@ -26,29 +26,33 @@ func (i SystemProfile) String() string {
 func _SystemProfileNoOp() {
 	var x [1]struct{}
 	_ = x[SystemProfileNixos-(0)]
-	_ = x[SystemProfileDarwin-(1)]
+	_ = x[SystemProfileGaruda-(1)]
 	_ = x[SystemProfileWsl-(2)]
-	_ = x[SystemProfileLinux-(3)]
+	_ = x[SystemProfileDarwin-(3)]
+	_ = x[SystemProfileLinux-(4)]
 }
 
-var _SystemProfileValues = []SystemProfile{SystemProfileNixos, SystemProfileDarwin, SystemProfileWsl, SystemProfileLinux}
+var _SystemProfileValues = []SystemProfile{SystemProfileNixos, SystemProfileGaruda, SystemProfileWsl, SystemProfileDarwin, SystemProfileLinux}
 
 var _SystemProfileNameToValueMap = map[string]SystemProfile{
 	_SystemProfileName[0:5]:        SystemProfileNixos,
 	_SystemProfileLowerName[0:5]:   SystemProfileNixos,
-	_SystemProfileName[5:11]:       SystemProfileDarwin,
-	_SystemProfileLowerName[5:11]:  SystemProfileDarwin,
+	_SystemProfileName[5:11]:       SystemProfileGaruda,
+	_SystemProfileLowerName[5:11]:  SystemProfileGaruda,
 	_SystemProfileName[11:14]:      SystemProfileWsl,
 	_SystemProfileLowerName[11:14]: SystemProfileWsl,
-	_SystemProfileName[14:19]:      SystemProfileLinux,
-	_SystemProfileLowerName[14:19]: SystemProfileLinux,
+	_SystemProfileName[14:20]:      SystemProfileDarwin,
+	_SystemProfileLowerName[14:20]: SystemProfileDarwin,
+	_SystemProfileName[20:25]:      SystemProfileLinux,
+	_SystemProfileLowerName[20:25]: SystemProfileLinux,
 }
 
 var _SystemProfileNames = []string{
 	_SystemProfileName[0:5],
 	_SystemProfileName[5:11],
 	_SystemProfileName[11:14],
-	_SystemProfileName[14:19],
+	_SystemProfileName[14:20],
+	_SystemProfileName[20:25],
 }
 
 // SystemProfileString retrieves an enum value from the enum constants string name.

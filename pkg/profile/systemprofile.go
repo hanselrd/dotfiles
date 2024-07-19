@@ -6,8 +6,9 @@ type SystemProfile uint
 
 const (
 	SystemProfileNixos SystemProfile = iota
-	SystemProfileDarwin
+	SystemProfileGaruda
 	SystemProfileWsl
+	SystemProfileDarwin
 	SystemProfileLinux
 )
 

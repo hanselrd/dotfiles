@@ -7,6 +7,7 @@
   imports = [
     ./roles/bootstrap.nix
     ./roles/boot.nix
+    ./roles/garuda.nix
     ./roles/i18n.nix
     ./roles/kernel.nix
     ./roles/monitoring.nix

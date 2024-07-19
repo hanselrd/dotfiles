@@ -16,6 +16,9 @@ in {
   config = lib.mkIf cfg.enable {
     system.configurationRevision = self.rev or "dirty";
 
-    system.stateVersion = "22.05";
+    system.stateVersion =
+      if !lib.profiles.isSystemDarwin
+      then "22.05"
+      else 4;
   };
 }

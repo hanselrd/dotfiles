@@ -12,13 +12,16 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  config = lib.mkIf cfg.enable (
+    {}
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
-    chaotic.scx = {
-      enable = true;
-      scheduler = "scx_rusty";
-      # scheduler = "scx_lavd";
-    };
-  };
+      chaotic.scx = {
+        enable = true;
+        scheduler = "scx_rusty";
+        # scheduler = "scx_lavd";
+      };
+    }
+  );
 }

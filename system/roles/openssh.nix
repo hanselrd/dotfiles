@@ -12,12 +12,15 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    services.openssh = {
-      enable = true;
-      settings = {
-        X11Forwarding = config.roles.system.x11.enable;
+  config = lib.mkIf cfg.enable (
+    {}
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      services.openssh = {
+        enable = true;
+        settings = {
+          X11Forwarding = config.roles.system.x11.enable;
+        };
       };
-    };
-  };
+    }
+  );
 }

@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _SystemRoleName = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationwslx11"
+const _SystemRoleName = "bootstrapbootgarudai18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationwslx11"
 
-var _SystemRoleIndex = [...]uint8{0, 9, 13, 17, 23, 33, 37, 47, 50, 57, 62, 66, 70, 84, 87, 90}
+var _SystemRoleIndex = [...]uint8{0, 9, 13, 19, 23, 29, 39, 43, 53, 56, 63, 68, 72, 76, 90, 93, 96}
 
-const _SystemRoleLowerName = "bootstrapbooti18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationwslx11"
+const _SystemRoleLowerName = "bootstrapbootgarudai18nkernelmonitoringmotdnetworkingnixopensshshelltimeuservirtualizationwslx11"
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRoleIndex)-1) {
@@ -27,72 +27,76 @@ func _SystemRoleNoOp() {
 	var x [1]struct{}
 	_ = x[SystemRoleBootstrap-(0)]
 	_ = x[SystemRoleBoot-(1)]
-	_ = x[SystemRoleI18N-(2)]
-	_ = x[SystemRoleKernel-(3)]
-	_ = x[SystemRoleMonitoring-(4)]
-	_ = x[SystemRoleMotd-(5)]
-	_ = x[SystemRoleNetworking-(6)]
-	_ = x[SystemRoleNix-(7)]
-	_ = x[SystemRoleOpenSsh-(8)]
-	_ = x[SystemRoleShell-(9)]
-	_ = x[SystemRoleTime-(10)]
-	_ = x[SystemRoleUser-(11)]
-	_ = x[SystemRoleVirtualization-(12)]
-	_ = x[SystemRoleWsl-(13)]
-	_ = x[SystemRoleX11-(14)]
+	_ = x[SystemRoleGaruda-(2)]
+	_ = x[SystemRoleI18N-(3)]
+	_ = x[SystemRoleKernel-(4)]
+	_ = x[SystemRoleMonitoring-(5)]
+	_ = x[SystemRoleMotd-(6)]
+	_ = x[SystemRoleNetworking-(7)]
+	_ = x[SystemRoleNix-(8)]
+	_ = x[SystemRoleOpenSsh-(9)]
+	_ = x[SystemRoleShell-(10)]
+	_ = x[SystemRoleTime-(11)]
+	_ = x[SystemRoleUser-(12)]
+	_ = x[SystemRoleVirtualization-(13)]
+	_ = x[SystemRoleWsl-(14)]
+	_ = x[SystemRoleX11-(15)]
 }
 
-var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleI18N, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleTime, SystemRoleUser, SystemRoleVirtualization, SystemRoleWsl, SystemRoleX11}
+var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleGaruda, SystemRoleI18N, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleTime, SystemRoleUser, SystemRoleVirtualization, SystemRoleWsl, SystemRoleX11}
 
 var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleName[0:9]:        SystemRoleBootstrap,
 	_SystemRoleLowerName[0:9]:   SystemRoleBootstrap,
 	_SystemRoleName[9:13]:       SystemRoleBoot,
 	_SystemRoleLowerName[9:13]:  SystemRoleBoot,
-	_SystemRoleName[13:17]:      SystemRoleI18N,
-	_SystemRoleLowerName[13:17]: SystemRoleI18N,
-	_SystemRoleName[17:23]:      SystemRoleKernel,
-	_SystemRoleLowerName[17:23]: SystemRoleKernel,
-	_SystemRoleName[23:33]:      SystemRoleMonitoring,
-	_SystemRoleLowerName[23:33]: SystemRoleMonitoring,
-	_SystemRoleName[33:37]:      SystemRoleMotd,
-	_SystemRoleLowerName[33:37]: SystemRoleMotd,
-	_SystemRoleName[37:47]:      SystemRoleNetworking,
-	_SystemRoleLowerName[37:47]: SystemRoleNetworking,
-	_SystemRoleName[47:50]:      SystemRoleNix,
-	_SystemRoleLowerName[47:50]: SystemRoleNix,
-	_SystemRoleName[50:57]:      SystemRoleOpenSsh,
-	_SystemRoleLowerName[50:57]: SystemRoleOpenSsh,
-	_SystemRoleName[57:62]:      SystemRoleShell,
-	_SystemRoleLowerName[57:62]: SystemRoleShell,
-	_SystemRoleName[62:66]:      SystemRoleTime,
-	_SystemRoleLowerName[62:66]: SystemRoleTime,
-	_SystemRoleName[66:70]:      SystemRoleUser,
-	_SystemRoleLowerName[66:70]: SystemRoleUser,
-	_SystemRoleName[70:84]:      SystemRoleVirtualization,
-	_SystemRoleLowerName[70:84]: SystemRoleVirtualization,
-	_SystemRoleName[84:87]:      SystemRoleWsl,
-	_SystemRoleLowerName[84:87]: SystemRoleWsl,
-	_SystemRoleName[87:90]:      SystemRoleX11,
-	_SystemRoleLowerName[87:90]: SystemRoleX11,
+	_SystemRoleName[13:19]:      SystemRoleGaruda,
+	_SystemRoleLowerName[13:19]: SystemRoleGaruda,
+	_SystemRoleName[19:23]:      SystemRoleI18N,
+	_SystemRoleLowerName[19:23]: SystemRoleI18N,
+	_SystemRoleName[23:29]:      SystemRoleKernel,
+	_SystemRoleLowerName[23:29]: SystemRoleKernel,
+	_SystemRoleName[29:39]:      SystemRoleMonitoring,
+	_SystemRoleLowerName[29:39]: SystemRoleMonitoring,
+	_SystemRoleName[39:43]:      SystemRoleMotd,
+	_SystemRoleLowerName[39:43]: SystemRoleMotd,
+	_SystemRoleName[43:53]:      SystemRoleNetworking,
+	_SystemRoleLowerName[43:53]: SystemRoleNetworking,
+	_SystemRoleName[53:56]:      SystemRoleNix,
+	_SystemRoleLowerName[53:56]: SystemRoleNix,
+	_SystemRoleName[56:63]:      SystemRoleOpenSsh,
+	_SystemRoleLowerName[56:63]: SystemRoleOpenSsh,
+	_SystemRoleName[63:68]:      SystemRoleShell,
+	_SystemRoleLowerName[63:68]: SystemRoleShell,
+	_SystemRoleName[68:72]:      SystemRoleTime,
+	_SystemRoleLowerName[68:72]: SystemRoleTime,
+	_SystemRoleName[72:76]:      SystemRoleUser,
+	_SystemRoleLowerName[72:76]: SystemRoleUser,
+	_SystemRoleName[76:90]:      SystemRoleVirtualization,
+	_SystemRoleLowerName[76:90]: SystemRoleVirtualization,
+	_SystemRoleName[90:93]:      SystemRoleWsl,
+	_SystemRoleLowerName[90:93]: SystemRoleWsl,
+	_SystemRoleName[93:96]:      SystemRoleX11,
+	_SystemRoleLowerName[93:96]: SystemRoleX11,
 }
 
 var _SystemRoleNames = []string{
 	_SystemRoleName[0:9],
 	_SystemRoleName[9:13],
-	_SystemRoleName[13:17],
-	_SystemRoleName[17:23],
-	_SystemRoleName[23:33],
-	_SystemRoleName[33:37],
-	_SystemRoleName[37:47],
-	_SystemRoleName[47:50],
-	_SystemRoleName[50:57],
-	_SystemRoleName[57:62],
-	_SystemRoleName[62:66],
-	_SystemRoleName[66:70],
-	_SystemRoleName[70:84],
-	_SystemRoleName[84:87],
-	_SystemRoleName[87:90],
+	_SystemRoleName[13:19],
+	_SystemRoleName[19:23],
+	_SystemRoleName[23:29],
+	_SystemRoleName[29:39],
+	_SystemRoleName[39:43],
+	_SystemRoleName[43:53],
+	_SystemRoleName[53:56],
+	_SystemRoleName[56:63],
+	_SystemRoleName[63:68],
+	_SystemRoleName[68:72],
+	_SystemRoleName[72:76],
+	_SystemRoleName[76:90],
+	_SystemRoleName[90:93],
+	_SystemRoleName[93:96],
 }
 
 // SystemRoleString retrieves an enum value from the enum constants string name.

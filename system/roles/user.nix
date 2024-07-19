@@ -13,12 +13,18 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    users.users.${env.user.username} = {
-      isNormalUser = true;
-      description = env.user.name;
-      extraGroups = ["networkmanager" "wheel" "docker"];
-      initialPassword = "password";
-    };
-  };
+  config = lib.mkIf cfg.enable (
+    {
+      users.users.${env.user.username} = {
+        description = env.user.name;
+      };
+    }
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      users.users.${env.user.username} = {
+        isNormalUser = true;
+        extraGroups = ["networkmanager" "wheel" "docker"];
+        initialPassword = "password";
+      };
+    }
+  );
 }

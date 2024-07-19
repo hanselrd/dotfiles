@@ -4,8 +4,13 @@
   pkgs,
   ...
 }: {
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+  ];
+
   roles.system.bootstrap.enable = true;
-  roles.system.wsl.enable = true;
+  roles.system.boot.enable = true;
+  roles.system.garuda.enable = true;
   roles.system.kernel.enable = true;
   roles.system.motd.enable = true;
   roles.system.nix.enable = true;

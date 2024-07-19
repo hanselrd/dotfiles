@@ -12,11 +12,14 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  config = lib.mkIf cfg.enable (
+    {}
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
+      boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-    boot.tmp.cleanOnBoot = true;
-  };
+      boot.tmp.cleanOnBoot = true;
+    }
+  );
 }

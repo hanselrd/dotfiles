@@ -12,12 +12,15 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    roles.system.openssh.enable = true;
+  config = lib.mkIf cfg.enable (
+    {}
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      roles.system.openssh.enable = true;
 
-    services.cockpit = {
-      enable = true;
-      openFirewall = true;
-    };
-  };
+      services.cockpit = {
+        enable = true;
+        openFirewall = true;
+      };
+    }
+  );
 }

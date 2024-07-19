@@ -15,7 +15,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.username = env.user.username;
-    home.homeDirectory = env.user.homeDirectory;
+    home.homeDirectory = lib.mkForce env.user.homeDirectory;
 
     programs.home-manager.enable = true;
 

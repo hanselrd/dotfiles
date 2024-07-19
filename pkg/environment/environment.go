@@ -33,9 +33,10 @@ type environmentUser struct {
 
 type environmentProfiles struct {
 	Nixos       []profile.ProfileGroup `json:"nixos"`
+	Garuda      []profile.ProfileGroup `json:"garuda"`
+	Wsl         []profile.ProfileGroup `json:"wsl"`
 	Darwin      []profile.ProfileGroup `json:"darwin"`
 	Linux       []profile.ProfileGroup `json:"linux"`
-	Wsl         []profile.ProfileGroup `json:"wsl"`
 	HomeManager []profile.ProfileGroup `json:"homeManager"`
 }
 
@@ -98,9 +99,10 @@ var Environment = environment{
 	},
 	Profiles: environmentProfiles{
 		Nixos:       profile.NixosProfiles,
+		Garuda:      profile.GarudaProfiles,
+		Wsl:         profile.WslProfiles,
 		Darwin:      profile.DarwinProfiles,
 		Linux:       profile.LinuxProfiles,
-		Wsl:         profile.WslProfiles,
 		HomeManager: profile.HomeManagerProfiles,
 	},
 	Extra: environmentExtra{

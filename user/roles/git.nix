@@ -27,6 +27,7 @@ in {
           minus-style = "red bold ul";
         };
       };
+      difftastic.enable = lib.mkForce false;
       extraConfig = {
         safe = {directory = "*";};
         grep = {lineNumber = true;};

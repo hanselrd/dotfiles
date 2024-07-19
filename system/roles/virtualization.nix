@@ -12,14 +12,17 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    virtualisation.docker = {
-      enable = true;
-      autoPrune = {
+  config = lib.mkIf cfg.enable (
+    {}
+    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+      virtualisation.docker = {
         enable = true;
-        dates = "weekly";
-        flags = ["--all"];
+        autoPrune = {
+          enable = true;
+          dates = "weekly";
+          flags = ["--all"];
+        };
       };
-    };
-  };
+    }
+  );
 }
