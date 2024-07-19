@@ -3,14 +3,15 @@ package environment
 //go:generate go run roles_codegen.go
 
 type (
-	environmentRolesSystemBootstrap  struct{}
-	environmentRolesSystemBoot       struct{}
-	environmentRolesSystemGaruda     struct{}
-	environmentRolesSystemI18N       struct{}
-	environmentRolesSystemKernel     struct{}
-	environmentRolesSystemMonitoring struct{}
-	environmentRolesSystemMotd       struct{}
-	environmentRolesSystemNetworking struct {
+	environmentRolesSystemBootstrap   struct{}
+	environmentRolesSystemBoot        struct{}
+	environmentRolesSystemGaruda      struct{}
+	environmentRolesSystemHomeManager struct{}
+	environmentRolesSystemI18N        struct{}
+	environmentRolesSystemKernel      struct{}
+	environmentRolesSystemMonitoring  struct{}
+	environmentRolesSystemMotd        struct{}
+	environmentRolesSystemNetworking  struct {
 		HostName string `json:"hostName"`
 	}
 	environmentRolesSystemNix            struct{}

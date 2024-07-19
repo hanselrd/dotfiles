@@ -9,6 +9,7 @@ type environmentRolesSystem struct {
 	Bootstrap      *environmentRolesSystemBootstrap      `json:"bootstrap,omitempty"`
 	Boot           *environmentRolesSystemBoot           `json:"boot,omitempty"`
 	Garuda         *environmentRolesSystemGaruda         `json:"garuda,omitempty"`
+	HomeManager    *environmentRolesSystemHomeManager    `json:"home-manager,omitempty"`
 	I18N           *environmentRolesSystemI18N           `json:"i18n,omitempty"`
 	Kernel         *environmentRolesSystemKernel         `json:"kernel,omitempty"`
 	Monitoring     *environmentRolesSystemMonitoring     `json:"monitoring,omitempty"`

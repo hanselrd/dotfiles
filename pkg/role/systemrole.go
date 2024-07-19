@@ -8,6 +8,7 @@ const (
 	SystemRoleBootstrap SystemRole = iota
 	SystemRoleBoot
 	SystemRoleGaruda
+	SystemRoleHomeManager // home-manager
 	SystemRoleI18N
 	SystemRoleKernel
 	SystemRoleMonitoring

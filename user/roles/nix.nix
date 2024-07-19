@@ -1,5 +1,5 @@
 {
-  nixpkgs,
+  inputs,
   config,
   lib,
   pkgs,
@@ -7,6 +7,7 @@
   ...
 }: let
   cfg = config.roles.user.nix;
+  inherit (inputs) nixpkgs;
 in {
   options = {
     roles.user.nix = {

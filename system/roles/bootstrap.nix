@@ -1,11 +1,12 @@
 {
-  self,
+  inputs,
   config,
   lib,
   pkgs,
   ...
 }: let
   cfg = config.roles.system.bootstrap;
+  inherit (inputs) self;
 in {
   options = {
     roles.system.bootstrap = {
@@ -14,6 +15,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    roles.system.home-manager.enable = true;
+
     system.configurationRevision = self.rev or "dirty";
 
     system.stateVersion =

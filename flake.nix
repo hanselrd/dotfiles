@@ -117,13 +117,10 @@
 
     mkLib = {profile, ...}:
       nixpkgs.lib.extend (final: prev: {
-        vendor =
-          (import ./lib/vendor.nix)
-          (inputs
-            // {
-              inherit pkgs env;
-              lib = final;
-            });
+        vendor = (import ./lib/vendor.nix) {
+          inherit inputs pkgs env;
+          lib = final;
+        };
         common = (import ./lib/common.nix) {
           inherit pkgs env;
           lib = final;
@@ -159,32 +156,11 @@
                 ./system/roles.nix
                 ./system/profiles/${profile.system}.nix
                 (lib.optional (!lib.profiles.isSystemGaruda) home-manager.nixosModules.home-manager)
-                {
-                  home-manager.backupFileExtension = lib.mkForce env.extra.backupFileExtension;
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = lib.mkIf (!lib.profiles.isSystemGaruda) true;
-                  home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
-
-                  home-manager.sharedModules = lib.flatten [
-                    (lib.optional (!lib.profiles.isSystemGaruda) chaotic.homeManagerModules.default)
-                    homeage.homeManagerModules.homeage
-                    nix-colors.homeManagerModules.default
-                    ./user/roles.nix
-                  ];
-
-                  home-manager.extraSpecialArgs =
-                    inputs
-                    // {
-                      inherit env profile;
-                    };
-                }
               ];
 
-              specialArgs =
-                inputs
-                // {
-                  inherit lib env profile;
-                };
+              specialArgs = {
+                inherit inputs lib env profile;
+              };
             };
         }
       )
@@ -209,32 +185,11 @@
               ./system/roles.nix
               ./system/profiles/${profile.system}.nix
               home-manager.darwinModules.home-manager
-              {
-                home-manager.backupFileExtension = env.extra.backupFileExtension;
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.${env.user.username} = import ./user/profiles/${profile.user}.nix;
-
-                home-manager.sharedModules = [
-                  chaotic.homeManagerModules.default
-                  homeage.homeManagerModules.homeage
-                  nix-colors.homeManagerModules.default
-                  ./user/roles.nix
-                ];
-
-                home-manager.extraSpecialArgs =
-                  inputs
-                  // {
-                    inherit env profile;
-                  };
-              }
             ];
 
-            specialArgs =
-              inputs
-              // {
-                inherit lib env profile;
-              };
+            specialArgs = {
+              inherit inputs lib env profile;
+            };
           };
         }
       )
@@ -258,11 +213,9 @@
               ./user/profiles/${profile.user}.nix
             ];
 
-            extraSpecialArgs =
-              inputs
-              // {
-                inherit env profile;
-              };
+            extraSpecialArgs = {
+              inherit inputs env profile;
+            };
           };
         }
       )
