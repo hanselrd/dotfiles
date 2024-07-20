@@ -22,12 +22,7 @@ in {
     home-manager.useUserPackages = lib.mkIf (!lib.profiles.isSystemGaruda) true;
     home-manager.users.${env.user.username} = import ../../user/profiles/${profile.user}.nix;
 
-    home-manager.sharedModules = lib.flatten [
-      (lib.optional (!lib.profiles.isSystemGaruda) chaotic.homeManagerModules.default)
-      homeage.homeManagerModules.homeage
-      nix-colors.homeManagerModules.default
-      ../../user/roles.nix
-    ];
+    home-manager.sharedModules = lib.vendor.home-manager.modules;
 
     home-manager.extraSpecialArgs = {
       inherit inputs env profile;

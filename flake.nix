@@ -7,11 +7,14 @@
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
 
     garuda = {
       url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.chaotic-nyx.follows = "chaotic";
+      inputs.home-manager.follows = "home-manager";
     };
 
     gitignore = {
@@ -57,6 +60,7 @@
     zls = {
       url = "github:zigtools/zls";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.gitignore.follows = "gitignore";
       inputs.zig-overlay.follows = "zig-overlay";
     };
   };
@@ -205,13 +209,9 @@
           value = home-manager.lib.homeManagerConfiguration {
             inherit pkgs lib;
 
-            modules = [
-              chaotic.homeManagerModules.default
-              homeage.homeManagerModules.homeage
-              nix-colors.homeManagerModules.default
-              ./user/roles.nix
-              ./user/profiles/${profile.user}.nix
-            ];
+            modules =
+              lib.vendor.home-manager.modules
+              ++ (lib.singleton ./user/profiles/${profile.user}.nix);
 
             extraSpecialArgs = {
               inherit inputs env profile;
