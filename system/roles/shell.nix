@@ -14,14 +14,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
+    lib.recursiveUpdate
     {
       programs.zsh.enable = true;
       environment.shells = with pkgs; [zsh];
 
       users.users.${env.user.username}.shell = pkgs.zsh;
     }
-    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+    (lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
       users.defaultUserShell = pkgs.zsh;
-    }
+    })
   );
 }

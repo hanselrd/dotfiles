@@ -13,8 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
-    {}
-    // lib.optionalAttrs lib.profiles.isSystemGaruda {
+    lib.optionalAttrs lib.profiles.isSystemGaruda {
       garuda = {
         dr460nized.enable = true;
       };

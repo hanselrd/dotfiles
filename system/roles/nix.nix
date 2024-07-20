@@ -13,29 +13,30 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
-    {
-      nix.settings = {
-        auto-optimise-store = true;
-        experimental-features = ["nix-command" "flakes"];
-        show-trace = true;
-        trusted-users = ["root" "@wheel"];
-      };
+    lib.recursiveUpdate
+    ({
+        nix.settings = {
+          auto-optimise-store = true;
+          experimental-features = ["nix-command" "flakes"];
+          show-trace = true;
+          trusted-users = ["root" "@wheel"];
+        };
 
-      nix.optimise = {
-        automatic = true;
-        dates = lib.mkIf (!lib.profiles.isSystemDarwin) ["weekly"];
-      };
+        nix.optimise = {
+          automatic = true;
+          dates = lib.mkIf (!lib.profiles.isSystemDarwin) ["weekly"];
+        };
 
-      nix.gc = {
-        automatic = true;
-        dates = lib.mkIf (!lib.profiles.isSystemDarwin) "weekly";
-        options = "--delete-older-than 7d";
-      };
-    }
-    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
-      programs.nh.clean.enable = lib.mkForce false;
-    }
-    // lib.optionalAttrs lib.profiles.isSystemDarwin {
+        nix.gc = {
+          automatic = true;
+          dates = lib.mkIf (!lib.profiles.isSystemDarwin) "weekly";
+          options = "--delete-older-than 7d";
+        };
+      }
+      // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+        programs.nh.clean.enable = lib.mkForce false;
+      })
+    (lib.optionalAttrs lib.profiles.isSystemDarwin {
       nix.optimise.interval = [
         {
           Hour = 3;
@@ -51,6 +52,6 @@ in {
           Weekday = 7;
         }
       ];
-    }
+    })
   );
 }

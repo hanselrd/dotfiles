@@ -14,8 +14,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
-    {}
-    // lib.optionalAttrs lib.profiles.isSystemWsl {
+    lib.optionalAttrs lib.profiles.isSystemWsl {
       wsl = {
         enable = true;
         defaultUser = env.user.name;

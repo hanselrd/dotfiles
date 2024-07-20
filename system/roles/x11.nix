@@ -13,8 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
-    {}
-    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+    lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
       services.xserver = {
         xkb = {
           layout = "us";

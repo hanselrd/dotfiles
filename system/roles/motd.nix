@@ -17,8 +17,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
-    {}
-    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+    lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
       users.motd = with config; ''
 
         888                                          888              888

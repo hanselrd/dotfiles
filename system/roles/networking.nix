@@ -14,10 +14,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable (
+    lib.recursiveUpdate
     {
       networking.hostName = env.roles.system.networking.hostName;
     }
-    // lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+    (lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
       networking.networkmanager.enable = true;
 
       networking.firewall.allowedTCPPorts = [5000 9443];
@@ -27,6 +28,6 @@ in {
           to = 3100;
         }
       ];
-    }
+    })
   );
 }
