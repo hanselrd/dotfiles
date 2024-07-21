@@ -34,7 +34,7 @@
 
     nix-colors = {
       url = "github:Misterio77/nix-colors";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-darwin = {
