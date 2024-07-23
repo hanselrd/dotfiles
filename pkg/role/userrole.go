@@ -6,6 +6,7 @@ type UserRole uint
 
 const (
 	UserRoleBootstrap UserRole = iota
+	UserRoleAgenix
 	UserRoleAlacritty
 	UserRoleBash
 	UserRoleBat
@@ -33,7 +34,6 @@ const (
 	UserRoleEza
 	UserRoleFzf
 	UserRoleGit
-	UserRoleHomeage
 	UserRoleHtop
 	UserRoleNeovim
 	UserRoleNix

@@ -5,7 +5,7 @@
   env,
   ...
 }: let
-  inherit (inputs) chaotic homeage nix-colors;
+  inherit (inputs) agenix chaotic nix-colors;
 in {
   nix-colors = nix-colors.lib;
   nix-colors-contrib = nix-colors.lib.contrib {inherit pkgs;};
@@ -15,7 +15,7 @@ in {
 
   home-manager.modules = lib.flatten [
     (lib.optional (!lib.profiles.isSystemGaruda) chaotic.homeManagerModules.default)
-    homeage.homeManagerModules.homeage
+    agenix.homeManagerModules.default
     nix-colors.homeManagerModules.default
     ../user/roles.nix
   ];

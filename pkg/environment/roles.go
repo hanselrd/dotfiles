@@ -25,7 +25,10 @@ type (
 )
 
 type (
-	environmentRolesUserBootstrap             struct{}
+	environmentRolesUserBootstrap struct{}
+	environmentRolesUserAgenix    struct {
+		Decrypt bool `json:"decrypt"`
+	}
 	environmentRolesUserAlacritty             struct{}
 	environmentRolesUserBash                  struct{}
 	environmentRolesUserBat                   struct{}
@@ -53,12 +56,9 @@ type (
 	environmentRolesUserEza                   struct{}
 	environmentRolesUserFzf                   struct{}
 	environmentRolesUserGit                   struct{}
-	environmentRolesUserHomeage               struct {
-		Decrypt bool `json:"decrypt"`
-	}
-	environmentRolesUserHtop   struct{}
-	environmentRolesUserNeovim struct{}
-	environmentRolesUserNix    struct {
+	environmentRolesUserHtop                  struct{}
+	environmentRolesUserNeovim                struct{}
+	environmentRolesUserNix                   struct {
 		Sandbox bool `json:"sandbox"`
 	}
 	environmentRolesUserOhMyPosh struct{}

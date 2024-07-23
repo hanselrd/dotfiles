@@ -26,6 +26,7 @@ type environmentRolesSystem struct {
 }
 type environmentRolesUser struct {
 	Bootstrap             *environmentRolesUserBootstrap             `json:"bootstrap,omitempty"`
+	Agenix                *environmentRolesUserAgenix                `json:"agenix,omitempty"`
 	Alacritty             *environmentRolesUserAlacritty             `json:"alacritty,omitempty"`
 	Bash                  *environmentRolesUserBash                  `json:"bash,omitempty"`
 	Bat                   *environmentRolesUserBat                   `json:"bat,omitempty"`
@@ -53,7 +54,6 @@ type environmentRolesUser struct {
 	Eza                   *environmentRolesUserEza                   `json:"eza,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
-	Homeage               *environmentRolesUserHomeage               `json:"homeage,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`

@@ -1,4 +1,4 @@
-package homeage
+package agenix
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ var secretCmd = &cobra.Command{
 	Long:  "Secret command",
 	Run: func(cmd *cobra.Command, args []string) {
 		files := []string{}
-		err := filepath.Walk("user/roles/homeage/secrets",
+		err := filepath.Walk("user/roles/agenix/secrets",
 			func(path string, info fs.FileInfo, err error) error {
 				if info.IsDir() || filepath.Ext(path) == ".age" {
 					return nil
@@ -31,12 +31,12 @@ var secretCmd = &cobra.Command{
 
 		lop.ForEach(files, func(f string, _ int) {
 			shell.Shell(
-				fmt.Sprintf("age -a -R user/roles/homeage/keys/1.age.pub %[1]s > %[1]s.age", f),
+				fmt.Sprintf("age -a -R user/roles/agenix/keys/1.age.pub %[1]s > %[1]s.age", f),
 			)
 		})
 	},
 }
 
 func init() {
-	HomeageCmd.AddCommand(secretCmd)
+	AgenixCmd.AddCommand(secretCmd)
 }

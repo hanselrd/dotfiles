@@ -83,7 +83,7 @@ var Environment = environment{
 			},
 		},
 		User: &environmentRolesUser{
-			Homeage: &environmentRolesUserHomeage{
+			Agenix: &environmentRolesUserAgenix{
 				Decrypt: false,
 			},
 			Nix: &environmentRolesUserNix{

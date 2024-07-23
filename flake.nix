@@ -4,6 +4,13 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "nix-darwin";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,11 +31,6 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    homeage = {
-      url = "github:jordanisaacs/homeage/pull/43/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -68,11 +70,11 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    agenix,
     chaotic,
     garuda,
     gitignore,
     home-manager,
-    homeage,
     nix-colors,
     nix-darwin,
     nixos-wsl,
@@ -97,6 +99,7 @@
         rust-overlay.overlays.default
         zig-overlay.overlays.default
         (final: prev: {
+          agenix = agenix.packages.${system}.default;
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;

@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./roles/bootstrap.nix
+    ./roles/agenix.nix
     ./roles/alacritty.nix
     ./roles/bash.nix
     ./roles/bat.nix
@@ -33,7 +34,6 @@
     ./roles/eza.nix
     ./roles/fzf.nix
     ./roles/git.nix
-    ./roles/homeage.nix
     ./roles/htop.nix
     ./roles/neovim.nix
     ./roles/nix.nix

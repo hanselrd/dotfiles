@@ -1,4 +1,4 @@
-package homeage
+package agenix
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ var keyCmd = &cobra.Command{
 
 		shell.Shell(
 			fmt.Sprintf(
-				"age -d -i user/roles/homeage/keys/0.age user/roles/homeage/keys/1.age > %s/.keys/2.age",
+				"age -d -i user/roles/agenix/keys/0.age user/roles/agenix/keys/1.age > %s/.keys/2.age",
 				environment.Environment.User.HomeDirectory,
 			),
 		)
@@ -31,5 +31,5 @@ var keyCmd = &cobra.Command{
 }
 
 func init() {
-	HomeageCmd.AddCommand(keyCmd)
+	AgenixCmd.AddCommand(keyCmd)
 }
