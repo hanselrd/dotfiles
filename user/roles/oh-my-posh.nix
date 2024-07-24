@@ -65,7 +65,7 @@ in {
                 template = lib.concatStrings [
                   "<b>"
                   "<darkGray>@</>"
-                  "{{.HostName}}"
+                  "{{index (regexSplit `\\.` .HostName 2) 0}}"
                   # "<darkGray>|</>"
                   # "<lightBlue>{{.OS}}</>"
                   "</b> "
