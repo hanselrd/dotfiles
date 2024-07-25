@@ -198,8 +198,7 @@ in {
                 template = lib.concatStrings [
                   "<b>"
                   "{{.Name}}"
-                  "|"
-                  "<lightYellow>{{.SHLVL}}</>"
+                  "{{if gt .SHLVL 0}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}}"
                   "</b> "
                 ];
               }
@@ -227,8 +226,7 @@ in {
         #   template = lib.concatStrings [
         #     "<b>"
         #     "<darkGray>{{.Shell}}</>"
-        #     "<darkGray>|</>"
-        #     "<lightYellow>{{.SHLVL}}</> "
+        #     "{{if gt .SHLVL 0}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}} "
         #     ">"
         #     "</b> "
         #   ];
@@ -241,8 +239,7 @@ in {
           template = lib.concatStrings [
             "<b>"
             "<darkGray>{{.Shell}}</>"
-            "<darkGray>|</>"
-            "<lightYellow>{{.SHLVL}}</> "
+            "{{if gt .SHLVL 0}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}} "
             ">>"
             "</b> "
           ];
