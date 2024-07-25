@@ -22,7 +22,7 @@ in {
         "--group-directories-first"
         "--octal-permissions"
         "--time-style=iso"
-        "--total-size"
+        # "--total-size"
       ];
     };
   };

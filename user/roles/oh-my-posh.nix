@@ -28,6 +28,35 @@ in {
             alignment = "left";
             segments = [
               {
+                type = "command";
+                style = "plain";
+                foreground = "lightRed";
+                template = lib.concatStrings [
+                  "<b>"
+                  "{{.Output}}"
+                  "</b> "
+                ];
+                properties = {
+                  command = "[ -f /var/lock/prevent_idle_terminate ] && ${lib.getExe' pkgs.coreutils "echo"} \"lock\"";
+                  interpret = false;
+                };
+              }
+              {
+                type = "command";
+                style = "plain";
+                foreground = "lightRed";
+                template = lib.concatStrings [
+                  "<b>"
+                  "idle"
+                  "<darkGray>@</>"
+                  "{{.Output}}"
+                  "</b> "
+                ];
+                properties = {
+                  command = "${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold";
+                };
+              }
+              {
                 type = "time";
                 style = "plain";
                 foreground = "lightYellow";
@@ -81,8 +110,7 @@ in {
                 template = lib.concatStrings [
                   "<b>"
                   "{{.Path}}"
-                  "<darkGray>|</>"
-                  "<lightYellow>{{.StackCount}}</>"
+                  "{{if gt .StackCount 0}}<darkGray>|</><lightYellow>{{.StackCount}}</>{{end}}"
                   "</b> "
                 ];
                 properties = {
@@ -102,8 +130,7 @@ in {
                   "{{if .Working.Changed}}<lightRed>{{nospace .Working.String}}</>{{end}}"
                   "<darkGray>|</>"
                   "<lightGreen>{{trunc 6 .Commit.Sha}}</>"
-                  "<darkGray>|</>"
-                  "<lightYellow>{{.StashCount}}</>"
+                  "{{if gt .StashCount 0}}<darkGray>|</><lightYellow>{{.StashCount}}</>{{end}}"
                   "</b>"
                 ];
                 properties = {
@@ -145,35 +172,6 @@ in {
                 };
               }
               {
-                type = "command";
-                style = "plain";
-                foreground = "lightRed";
-                template = lib.concatStrings [
-                  "<b>"
-                  "<darkGray>|</>"
-                  "<lightRed>{{.Output}}</>"
-                  "</b>"
-                ];
-                properties = {
-                  command = "[ -f /var/lock/prevent_idle_terminate ] && ${lib.getExe' pkgs.coreutils "echo"} \"lock\"";
-                  interpret = false;
-                };
-              }
-              {
-                type = "command";
-                style = "plain";
-                foreground = "lightRed";
-                template = lib.concatStrings [
-                  "<b>"
-                  "<darkGray>|</>"
-                  "<lightRed>idle:{{.Output}}</>"
-                  "</b>"
-                ];
-                properties = {
-                  command = "${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold";
-                };
-              }
-              {
                 type = "text";
                 style = "plain";
                 foreground = "lightYellow";
@@ -182,8 +180,7 @@ in {
                 ];
                 template = lib.concatStrings [
                   "<b>"
-                  "<darkGray>|</>"
-                  "{{.Code}}"
+                  "{{if not (eq .Code 0)}}<darkGray>|</>{{.Code}}{{end}}"
                   "</b>"
                 ];
               }
