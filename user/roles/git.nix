@@ -45,7 +45,7 @@ in {
             # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
           ''
         }";
-        lgb = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches";
+        lgb = "log --graph --pretty=format:'%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %s %C(green bold)(%cr) %C(blue bold)<%an>%Creset%n' --abbrev-commit --date=relative --branches";
         l = "log --graph --oneline --decorate";
         ll = "log --graph --oneline --decorate --branches --tags";
         lll = "log --graph --oneline --decorate --all";
@@ -61,6 +61,7 @@ in {
             current = "yellow bold reverse";
             local = "yellow bold";
             remote = "green bold";
+            upstream = "magenta bold";
           };
           diff = {
             meta = "yellow bold";
