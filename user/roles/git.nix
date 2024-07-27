@@ -28,17 +28,39 @@ in {
         };
       };
       difftastic.enable = lib.mkForce false;
+      aliases = {
+        smart-clone = "!sh ${
+          pkgs.writeShellScript "git-smart-clone.sh"
+          ''
+            set -e
+
+            repository=$1
+            basename=''${repository##*/}
+            directory=''${2:-''${basename%.*}}
+
+            ${lib.getExe' pkgs.coreutils "mkdir"} -p $directory
+            ${lib.getExe' pkgs.git "git"} clone --bare --filter=blob:none $repository $directory/.bare
+            ${lib.getExe' pkgs.coreutils "echo"} "gitdir: ./.bare" > $directory/.git
+            ${lib.getExe' pkgs.git "git"} -C $directory config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
+          ''
+        }";
+        lgb = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches";
+        l = "log --graph --oneline --decorate";
+        ll = "log --graph --oneline --decorate --branches --tags";
+        lll = "log --graph --oneline --decorate --all";
+      };
       extraConfig = {
-        safe = {directory = "*";};
+        # core = {fsmonitor = true;};
+        feature = {manyFiles = true;};
         grep = {lineNumber = true;};
         merge = {conflictStyle = "diff3";};
-        advice = {detachedHead = false;};
+        safe = {directory = "*";};
         color = {
-          ui = "auto";
           branch = {
-            current = "yellow reverse";
-            local = "yellow";
-            remote = "green";
+            current = "yellow bold reverse";
+            local = "yellow bold";
+            remote = "green bold";
           };
           diff = {
             meta = "yellow bold";
@@ -47,28 +69,10 @@ in {
             new = "green bold";
           };
           status = {
-            added = "yellow";
-            changed = "green";
-            untracked = "cyan";
+            added = "yellow bold";
+            changed = "green bold";
+            untracked = "cyan bold";
           };
-        };
-        alias = {
-          smart-clone = "!sh ${
-            pkgs.writeShellScript "git-smart-clone.sh"
-            ''
-              set -e
-
-              repository=$1
-              basename=''${repository##*/}
-              directory=''${2:-''${basename%.*}}
-
-              ${lib.getExe' pkgs.coreutils "mkdir"} -p $directory
-              ${lib.getExe' pkgs.git "git"} clone --bare --filter=blob:none $repository $directory/.bare
-              ${lib.getExe' pkgs.coreutils "echo"} "gitdir: ./.bare" > $directory/.git
-              ${lib.getExe' pkgs.git "git"} -C $directory config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-              # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
-            ''
-          }";
         };
       };
     };
