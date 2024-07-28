@@ -56,25 +56,25 @@ in {
         grep = {lineNumber = true;};
         merge = {conflictStyle = "diff3";};
         safe = {directory = "*";};
-        color = {
-          branch = {
-            current = "yellow bold reverse";
-            local = "yellow bold";
-            remote = "green bold";
-            upstream = "magenta bold";
-          };
-          diff = {
-            meta = "yellow bold";
-            frag = "magenta bold";
-            old = "red bold";
-            new = "green bold";
-          };
-          status = {
-            added = "yellow bold";
-            changed = "green bold";
-            untracked = "cyan bold";
-          };
-        };
+        # color = {
+        #   branch = {
+        #     current = "yellow bold reverse";
+        #     local = "yellow bold";
+        #     remote = "green bold";
+        #     upstream = "magenta bold";
+        #   };
+        #   diff = {
+        #     meta = "yellow bold";
+        #     frag = "magenta bold";
+        #     old = "red bold";
+        #     new = "green bold";
+        #   };
+        #   status = {
+        #     added = "yellow bold";
+        #     changed = "green bold";
+        #     untracked = "cyan bold";
+        #   };
+        # };
       };
     };
 
