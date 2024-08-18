@@ -20,11 +20,14 @@
     coreutils
     cpio
     curl
+    dmidecode
     file
     findutils
     gnugrep
     gnused
+    gzip
     lm_sensors
+    lsb-release
     pfetch
     procps
     rsync
