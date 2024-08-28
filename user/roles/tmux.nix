@@ -44,14 +44,14 @@ in {
             set -g @continuum-save-interval '60' # minutes
           '';
         }
-        {
-          plugin = cpu;
-          extraConfig = ''
-            set -g status-justify 'centre'
-            set -g status-left-length '100'
-            set -g status-left '[#S] #[fg=black,bold]#W#F#[default] #{cpu_fg_color}#{cpu_icon}#{cpu_percentage}#[default] #{ram_fg_color}#{ram_icon}#{ram_percentage}#[default] #{cpu_temp_fg_color}#{cpu_temp_icon}#{cpu_temp}#[default]'
-          '';
-        }
+        # {
+        #   plugin = cpu;
+        #   extraConfig = ''
+        #     set -g status-justify 'centre'
+        #     set -g status-left-length '100'
+        #     set -g status-left '[#S] #[fg=black,bold]#W#F#[default] #{cpu_fg_color}#{cpu_icon}#{cpu_percentage}#[default] #{ram_fg_color}#{ram_icon}#{ram_percentage}#[default] #{cpu_temp_fg_color}#{cpu_temp_icon}#{cpu_temp}#[default]'
+        #   '';
+        # }
         {
           plugin = prefix-highlight;
           extraConfig = ''
