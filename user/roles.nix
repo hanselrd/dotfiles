@@ -34,7 +34,6 @@
     ./roles/eza.nix
     ./roles/fzf.nix
     ./roles/git.nix
-    ./roles/homeage.nix
     ./roles/htop.nix
     ./roles/neovim.nix
     ./roles/nix.nix

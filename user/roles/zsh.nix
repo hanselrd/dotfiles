@@ -44,16 +44,6 @@ in {
           ''
           else ""
         }
-
-        ${
-          if env.roles.user.shell.rts
-          then ''
-            if [ -e ${config.home.homeDirectory}/.secrets/rts.sh ]; then
-              . ${config.home.homeDirectory}/.secrets/rts.sh
-            fi
-          ''
-          else ""
-        }
       '';
       profileExtra = ''
         if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then

@@ -8,7 +8,6 @@
   ...
 }: let
   cfg = config.roles.system.home-manager;
-  inherit (inputs) chaotic homeage nix-colors;
 in {
   options = {
     roles.system.home-manager = {

@@ -352,27 +352,6 @@
         "type": "github"
       }
     },
-    "homeage": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1697874814,
-        "narHash": "sha256-q8U6hCnYmZAyyvxZIj7xLB0cOsXf/fB5tUh9/hDN7sk=",
-        "owner": "jordanisaacs",
-        "repo": "homeage",
-        "rev": "af9852e7234695f1b759a8c5d07d0fd35195a422",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jordanisaacs",
-        "ref": "pull/43/head",
-        "repo": "homeage",
-        "type": "github"
-      }
-    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -571,7 +550,6 @@
         "garuda": "garuda",
         "gitignore": "gitignore_2",
         "home-manager": "home-manager",
-        "homeage": "homeage",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
         "nixos-wsl": "nixos-wsl",
@@ -605,11 +583,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725416653,
-        "narHash": "sha256-iNBv7ILlZI6ubhW0ExYy8YgiLKUerudxY7n8R5UQK2E=",
+        "lastModified": 1725503082,
+        "narHash": "sha256-sgIkegun2+PwJEDHlvmADhSbxgjVR+8pYSMuXmB3/do=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "e5d3f9c2f24d852cddc79716daf0f65ce8468b28",
+        "rev": "17d3930e54a50df2afe52a2d1d1f506edb262bbe",
         "type": "github"
       },
       "original": {

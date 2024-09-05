@@ -90,16 +90,12 @@ var Environment = environment{
 			},
 		},
 		User: &environmentRolesUser{
-			Homeage: &environmentRolesUserHomeage{
-				Decrypt: false,
-			},
 			Nix: &environmentRolesUserNix{
 				Sandbox: true,
 			},
 			Shell: &environmentRolesUserShell{
 				BashToZsh: false,
 				LdPreload: false,
-				Rts:       false,
 				Theme:     false,
 			},
 		},

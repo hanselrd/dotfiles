@@ -35,7 +35,6 @@ const (
 	UserRoleEza
 	UserRoleFzf
 	UserRoleGit
-	UserRoleHomeage
 	UserRoleHtop
 	UserRoleNeovim
 	UserRoleNix

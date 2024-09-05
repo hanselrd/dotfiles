@@ -53,7 +53,6 @@ type environmentRolesUser struct {
 	Eza                   *environmentRolesUserEza                   `json:"eza,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
-	Homeage               *environmentRolesUserHomeage               `json:"homeage,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`

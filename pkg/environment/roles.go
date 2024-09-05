@@ -53,12 +53,9 @@ type (
 	environmentRolesUserEza                   struct{}
 	environmentRolesUserFzf                   struct{}
 	environmentRolesUserGit                   struct{}
-	environmentRolesUserHomeage               struct {
-		Decrypt bool `json:"decrypt"`
-	}
-	environmentRolesUserHtop   struct{}
-	environmentRolesUserNeovim struct{}
-	environmentRolesUserNix    struct {
+	environmentRolesUserHtop                  struct{}
+	environmentRolesUserNeovim                struct{}
+	environmentRolesUserNix                   struct {
 		Sandbox bool `json:"sandbox"`
 	}
 	environmentRolesUserOhMyPosh struct{}
@@ -69,7 +66,6 @@ type (
 	environmentRolesUserShell    struct {
 		BashToZsh bool `json:"bashToZsh"`
 		LdPreload bool `json:"ldPreload"`
-		Rts       bool `json:"rts"`
 		Theme     bool `json:"theme"`
 	}
 	environmentRolesUserSsh      struct{}

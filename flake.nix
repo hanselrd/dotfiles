@@ -27,11 +27,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    homeage = {
-      url = "github:jordanisaacs/homeage/pull/43/head";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-colors = {
       url = "github:Misterio77/nix-colors";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +67,6 @@
     garuda,
     gitignore,
     home-manager,
-    homeage,
     nix-colors,
     nix-darwin,
     nixos-wsl,
