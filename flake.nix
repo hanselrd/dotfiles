@@ -106,7 +106,9 @@
 
     env = builtins.fromJSON (
       builtins.readFile (
-        pkgs.runCommand "dotfiles-cli-environment-json" {}
+        pkgs.runCommand "dotfiles-cli-environment-json" {
+          DOTFILES_SRC_DIR = gitignore.lib.gitignoreSource ./.;
+        }
         "${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > $out"
       )
     );

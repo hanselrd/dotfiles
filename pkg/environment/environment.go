@@ -3,6 +3,7 @@ package environment
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/itchyny/timefmt-go"
@@ -109,7 +110,14 @@ var Environment = environment{
 		HomeManager: profile.HomeManagerProfiles,
 	},
 	Extra: environmentExtra{
-		Encrypted: lo.T2(shell.Shell("grep -vq \"false\" secrets/.encrypted")).A.ExitCode == 0,
+		Encrypted: lo.T2(
+			shell.Shell(
+				fmt.Sprintf(
+					"grep -vq \"false\" %s",
+					filepath.Join(os.Getenv("DOTFILES_SRC_DIR"), "secrets/.encrypted"),
+				),
+			),
+		).A.ExitCode == 0,
 		WithSystemd: func() bool {
 			if _, err := os.Stat("/run/systemd/system"); !os.IsNotExist(err) {
 				return true
