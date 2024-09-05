@@ -43,8 +43,7 @@
   #   '';
   # };
   # df-encrypt =
-  #   pkgs.writeShellScriptBin "df-encrypt"
-  #   ''
+  #   pkgs.writeShellScriptBin "df-encrypt" ''
   #     if [ -d $1 ]; then
   #       for file in $1/*; do
   #         if echo "$file" | grep -v -q '^.*\.age$'; then
@@ -59,8 +58,7 @@
   #     fi
   #   '';
   # df-decrypt =
-  #   pkgs.writeShellScriptBin "df-decrypt"
-  #   ''
+  #   pkgs.writeShellScriptBin "df-decrypt" ''
   #     if echo $1 | grep -q '^.*\.tar.gz.age$'; then
   #       archive=$(echo $1 | sed "s/\.tar\.gz\.age/\.tar\.gz/g")
   #       ${pkgs.age}/bin/age -d -i $2 -o $archive $1

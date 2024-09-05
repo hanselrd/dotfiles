@@ -1,5 +1,7 @@
 package role
 
+import "github.com/hanselrd/dotfiles/internal/accesslevel"
+
 type SystemRole uint
 
 //go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole -linecomment -json -text -transform lower
@@ -26,4 +28,8 @@ const (
 
 func (r SystemRole) Type() string {
 	return "system"
+}
+
+func (r SystemRole) AccessLevel() accesslevel.AccessLevel {
+	return accesslevel.AccessLevelPublic
 }

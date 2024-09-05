@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"path/filepath"
 
 	"github.com/samber/lo"
 	lop "github.com/samber/lo/parallel"
@@ -20,28 +21,31 @@ var profilesCmd = &cobra.Command{
 		for _, profiles := range [][]profile.Profile{
 			lo.Map(
 				profile.SystemProfileValues(),
-				func(r profile.SystemProfile, _ int) profile.Profile { return r },
+				func(p profile.SystemProfile, _ int) profile.Profile { return p },
 			),
 			lo.Map(
 				profile.UserProfileValues(),
-				func(r profile.UserProfile, _ int) profile.Profile { return r },
+				func(p profile.UserProfile, _ int) profile.Profile { return p },
 			),
 		} {
-			lop.ForEach(profiles, func(r profile.Profile, _ int) {
-				if _, err := os.Stat(fmt.Sprintf("%s/profiles/%s.nix", r.Type(), r)); !os.IsNotExist(
+			lop.ForEach(profiles, func(p profile.Profile, _ int) {
+				file := fmt.Sprintf("%s/profiles/%s.nix", p.Type(), p)
+				os.MkdirAll(filepath.Dir(file), 0o755)
+
+				if _, err := os.Stat(file); !os.IsNotExist(
 					err,
 				) {
 					slog.Debug(
 						"skipping, already exists",
 						"file",
-						fmt.Sprintf("%s/profiles/%s.nix", r.Type(), r),
+						file,
 					)
 					return
 				}
 
-				f, err := os.Create(fmt.Sprintf("%s/profiles/%s.nix", r.Type(), r))
+				f, err := os.Create(file)
 				cobra.CheckErr(err)
-				err = tmpl.ExecuteTemplate(f, "profile.nix.gotmpl", r)
+				err = tmpl.ExecuteTemplate(f, "profile.nix.gotmpl", p)
 				cobra.CheckErr(err)
 			})
 		}

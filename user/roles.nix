@@ -2,9 +2,10 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: {
-  imports = [
+  imports = lib.flatten [
     ./roles/bootstrap.nix
     ./roles/alacritty.nix
     ./roles/bash.nix
@@ -40,6 +41,7 @@
     ./roles/oh-my-posh.nix
     ./roles/pager.nix
     ./roles/ripgrep.nix
+    (lib.optional (!env.extra.encrypted) ../secrets/user/roles/rts.nix)
     ./roles/scripts.nix
     ./roles/shell.nix
     ./roles/ssh.nix

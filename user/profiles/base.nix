@@ -14,6 +14,7 @@
   roles.user.shell.enable = true;
   roles.user.theme.enable = true;
   roles.user.zzz.enable = true;
+  # roles.user.rts.enable = true;
 
   home.packages = with pkgs; [
     age

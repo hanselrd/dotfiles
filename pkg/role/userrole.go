@@ -1,5 +1,7 @@
 package role
 
+import "github.com/hanselrd/dotfiles/internal/accesslevel"
+
 type UserRole uint
 
 //go:generate go run github.com/dmarkham/enumer -type UserRole -trimprefix UserRole -linecomment -json -text -transform lower
@@ -40,6 +42,7 @@ const (
 	UserRoleOhMyPosh // oh-my-posh
 	UserRolePager
 	UserRoleRipgrep
+	UserRoleRts
 	UserRoleScripts
 	UserRoleShell
 	UserRoleSsh
@@ -55,4 +58,13 @@ const (
 
 func (r UserRole) Type() string {
 	return "user"
+}
+
+func (r UserRole) AccessLevel() accesslevel.AccessLevel {
+	switch r {
+	case UserRoleRts:
+		return accesslevel.AccessLevelPrivate
+	default:
+		return accesslevel.AccessLevelPublic
+	}
 }

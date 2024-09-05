@@ -22,3 +22,4 @@
 *.woff binary
 *.zip binary
 ancestry/** linguist-documentation
+secrets/** filter=git-crypt diff=git-crypt

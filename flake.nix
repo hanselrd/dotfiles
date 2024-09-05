@@ -100,7 +100,7 @@
           dotfiles-scripts = prev.buildGoModule {
             name = "dotfiles-scripts";
             src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-Y39uCcC1y/1g0ff7HxBdWbj+fYFxyadsfjP3V2yqaOA=";
+            vendorHash = "sha256-59sc/TWOoUf5FMO4Ba1Bl7KQ3Im+jjl8mAnjW6t/1ww=";
             subPackages = [
               "scripts/dotfiles-cli"
             ];
@@ -224,61 +224,51 @@
 
     packages = {
       ${system} = rec {
-        dotfiles-codegen0 =
-          pkgs.writeShellScriptBin "dotfiles-codegen0"
-          ''
-            ${lib.getExe' pkgs.go "go"} generate ./...
-          '';
+        dotfiles-codegen0 = pkgs.writeShellScriptBin "dotfiles-codegen0" ''
+          ${lib.getExe' pkgs.go "go"} generate ./...
+        '';
 
-        dotfiles-codegen1 =
-          pkgs.writeShellScriptBin "dotfiles-codegen1"
-          ''
-            ${lib.getExe dotfiles-codegen0}
-            # ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen hash
-            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen profiles
-            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen roles
-            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
-            ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} docker-compose > docker-compose.json
-          '';
+        dotfiles-codegen1 = pkgs.writeShellScriptBin "dotfiles-codegen1" ''
+          ${lib.getExe dotfiles-codegen0}
+          # ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen hash
+          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen profiles
+          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen roles
+          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
+          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} docker-compose > docker-compose.json
+        '';
 
-        dotfiles-update =
-          pkgs.writeShellScriptBin "dotfiles-update"
-          ''
-            nix flake update
+        dotfiles-update = pkgs.writeShellScriptBin "dotfiles-update" ''
+          nix flake update
 
-            ${lib.getExe' pkgs.go "go"} get -u ./...
-            ${lib.getExe' pkgs.go "go"} mod tidy
-            ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
-            ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
-            ${lib.getExe' pkgs.go "go"} get github.com/iancoleman/strcase
-          '';
+          ${lib.getExe' pkgs.go "go"} get -u ./...
+          ${lib.getExe' pkgs.go "go"} mod tidy
+          ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
+          ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
+          ${lib.getExe' pkgs.go "go"} get github.com/iancoleman/strcase
+        '';
         dotfiles-upgrade = dotfiles-update;
 
-        dotfiles-format =
-          pkgs.writeShellScriptBin "dotfiles-format"
-          ''
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.nix file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
+        dotfiles-format = pkgs.writeShellScriptBin "dotfiles-format" ''
+          ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.nix file(s)"
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
 
-            # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.sh file(s)"
-            # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
+          # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.sh file(s)"
+          # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
 
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.lua file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
+          ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.lua file(s)"
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
 
-            ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.gotools "goimports"} -w -local github.com/hanselrd/dotfiles {} \;
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe pkgs.gofumpt} -w -extra {} \;
-            ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.golines "golines"} -w -m 100 {} \;
-          '';
+          ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.gotools "goimports"} -w -local github.com/hanselrd/dotfiles {} \;
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe pkgs.gofumpt} -w -extra {} \;
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.golines "golines"} -w -m 100 {} \;
+        '';
 
-        dotfiles-all =
-          pkgs.writeShellScriptBin "dotfiles-all"
-          ''
-            ${lib.getExe dotfiles-upgrade}
-            ${lib.getExe dotfiles-codegen1}
-            ${lib.getExe dotfiles-format}
-          '';
+        dotfiles-all = pkgs.writeShellScriptBin "dotfiles-all" ''
+          ${lib.getExe dotfiles-upgrade}
+          ${lib.getExe dotfiles-codegen1}
+          ${lib.getExe dotfiles-format}
+        '';
       };
     };
 

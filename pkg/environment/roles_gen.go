@@ -60,6 +60,7 @@ type environmentRolesUser struct {
 	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`
 	Pager                 *environmentRolesUserPager                 `json:"pager,omitempty"`
 	Ripgrep               *environmentRolesUserRipgrep               `json:"ripgrep,omitempty"`
+	Rts                   *environmentRolesUserRts                   `json:"rts,omitempty"`
 	Scripts               *environmentRolesUserScripts               `json:"scripts,omitempty"`
 	Shell                 *environmentRolesUserShell                 `json:"shell,omitempty"`
 	Ssh                   *environmentRolesUserSsh                   `json:"ssh,omitempty"`

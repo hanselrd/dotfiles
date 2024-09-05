@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"path/filepath"
 
 	"github.com/samber/lo"
 	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
+	"github.com/hanselrd/dotfiles/internal/accesslevel"
 	"github.com/hanselrd/dotfiles/pkg/role"
 )
 
@@ -28,18 +30,27 @@ var rolesCmd = &cobra.Command{
 			),
 		} {
 			lop.ForEach(roles, func(r role.Role, _ int) {
-				if _, err := os.Stat(fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)); !os.IsNotExist(
+				file := fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)
+				switch r.AccessLevel() {
+				case accesslevel.AccessLevelDisabled:
+					return
+				case accesslevel.AccessLevelPrivate:
+					file = filepath.Join("secrets", file)
+				}
+				os.MkdirAll(filepath.Dir(file), 0o755)
+
+				if _, err := os.Stat(file); !os.IsNotExist(
 					err,
 				) {
 					slog.Debug(
 						"skipping, already exists",
 						"file",
-						fmt.Sprintf("%s/roles/%s.nix", r.Type(), r),
+						file,
 					)
 					return
 				}
 
-				f, err := os.Create(fmt.Sprintf("%s/roles/%s.nix", r.Type(), r))
+				f, err := os.Create(file)
 				cobra.CheckErr(err)
 				err = tmpl.ExecuteTemplate(f, "role.nix.gotmpl", r)
 				cobra.CheckErr(err)

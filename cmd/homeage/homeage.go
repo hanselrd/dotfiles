@@ -8,8 +8,8 @@ import (
 
 var HomeageCmd = &cobra.Command{
 	Use:   "homeage",
-	Short: "Homeage command",
-	Long:  "Homeage command",
+	Short: "Homeage command (deprecated)",
+	Long:  "Homeage command (deprecated)",
 	Run: func(cmd *cobra.Command, args []string) {
 		slog.Info("homeage called")
 	},

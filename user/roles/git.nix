@@ -30,8 +30,7 @@ in {
       difftastic.enable = lib.mkForce false;
       aliases = {
         smart-clone = "!sh ${
-          pkgs.writeShellScript "git-smart-clone.sh"
-          ''
+          pkgs.writeShellScript "git-smart-clone.sh" ''
             set -e
 
             repository=$1

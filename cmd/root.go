@@ -10,6 +10,7 @@ import (
 	"github.com/hanselrd/dotfiles/cmd/codegen"
 	"github.com/hanselrd/dotfiles/cmd/homeage"
 	"github.com/hanselrd/dotfiles/cmd/homemanager"
+	"github.com/hanselrd/dotfiles/cmd/secret"
 	"github.com/hanselrd/dotfiles/cmd/windows"
 	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/pkg/flags"
@@ -87,6 +88,7 @@ func init() {
 	rootCmd.AddCommand(codegen.CodegenCmd)
 	rootCmd.AddCommand(homeage.HomeageCmd)
 	rootCmd.AddCommand(homemanager.HomeManagerCmd)
+	rootCmd.AddCommand(secret.SecretCmd)
 	if profile.DefaultProfileGroup().SystemProfile() == profile.SystemProfileWsl {
 		rootCmd.AddCommand(windows.WindowsCmd)
 	}

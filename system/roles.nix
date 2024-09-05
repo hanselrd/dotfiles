@@ -2,9 +2,10 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: {
-  imports = [
+  imports = lib.flatten [
     ./roles/bootstrap.nix
     ./roles/boot.nix
     ./roles/garuda.nix

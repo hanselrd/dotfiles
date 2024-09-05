@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/itchyny/timefmt-go"
+	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
 	"github.com/hanselrd/dotfiles/internal/log"
@@ -41,6 +42,7 @@ type environmentProfiles struct {
 }
 
 type environmentExtra struct {
+	Encrypted           bool                `json:"encrypted"`
 	WithSystemd         bool                `json:"withSystemd"`
 	BackupFileExtension string              `json:"backupFileExtension"`
 	TimeFormat          string              `json:"timeFormat"`
@@ -65,6 +67,11 @@ var (
 	configDir     = fmt.Sprintf("%s/.config", homeDir)
 	cacheDir      = fmt.Sprintf("%s/.cache", homeDir)
 )
+
+var _ = func() int {
+	log.SetupLogger(log.LevelDisabled)
+	return 0
+}()
 
 var Environment = environment{
 	User: environmentUser{
@@ -106,6 +113,7 @@ var Environment = environment{
 		HomeManager: profile.HomeManagerProfiles,
 	},
 	Extra: environmentExtra{
+		Encrypted: lo.T2(shell.Shell("grep -vq \"false\" secrets/.encrypted")).A.ExitCode == 0,
 		WithSystemd: func() bool {
 			if _, err := os.Stat("/run/systemd/system"); !os.IsNotExist(err) {
 				return true
@@ -116,8 +124,6 @@ var Environment = environment{
 		TimeFormat:          "%a %y/%-m/%-d T%H:%M",
 		GoTimeFormat:        "Mon 06/1/2 T15:04",
 		WinUser: func() *environmentWinUser {
-			log.SetupLogger(log.LevelDisabled)
-
 			if res, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
 				winUserName := res.Stdout
 				winHomeDir := fmt.Sprintf("/mnt/c/Users/%s", winUserName)

@@ -64,6 +64,7 @@ type (
 	environmentRolesUserOhMyPosh struct{}
 	environmentRolesUserPager    struct{}
 	environmentRolesUserRipgrep  struct{}
+	environmentRolesUserRts      struct{}
 	environmentRolesUserScripts  struct{}
 	environmentRolesUserShell    struct {
 		BashToZsh bool `json:"bashToZsh"`
