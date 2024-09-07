@@ -248,8 +248,8 @@
           ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.nix file(s)"
           ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.nix" -print -exec ${lib.getExe pkgs.alejandra} -q {} \;
 
-          # ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.sh file(s)"
-          # ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -p -i 2 -sr {} \;
+          ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.sh file(s)"
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.sh" -print -exec ${lib.getExe pkgs.shfmt} -w -i 2 -sr {} \;
 
           ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.lua file(s)"
           ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
