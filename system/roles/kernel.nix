@@ -14,7 +14,7 @@ in {
 
   config = lib.mkIf cfg.enable (
     lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
-      boot.kernelPackages = pkgs.linuxPackages_cachyos;
+      boot.kernelPackages = pkgs.linuxPackages_cachyos-rc;
 
       chaotic.scx = {
         enable = true;
