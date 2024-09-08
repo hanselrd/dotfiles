@@ -276,11 +276,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1725711200,
-        "narHash": "sha256-fj9mZZJnhVxBnI0LX+IxpFvLHEvr0z/d1DqeTY/D9Tk=",
+        "lastModified": 1725768227,
+        "narHash": "sha256-YhjBekjj4qsC81vuYBGCG3gDTaz3WDn/O5kUo6IPQNg=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "d2c29f5dbfc0eb91aa73d3a3191c6e9811de9a24",
+        "rev": "9ddb47e25160d185ebd6a9a1e5d5029c0ce85c6c",
         "type": "gitlab"
       },
       "original": {
@@ -339,11 +339,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725694918,
-        "narHash": "sha256-+HsjshXpqNiJHLaJaK0JnIicJ/a1NquKcfn4YZ3ILgg=",
+        "lastModified": 1725781935,
+        "narHash": "sha256-o6LRtdpgBTzev9n243Ktu3rn0/qsv0frFyJwU6vJsdE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "aaebdea769a5c10f1c6e50ebdf5924c1a13f0cda",
+        "rev": "ec4c6928bbacc89cf10e9c959a7a47cbaad95344",
         "type": "github"
       },
       "original": {
@@ -445,11 +445,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725161148,
-        "narHash": "sha256-WfAHq3Ag3vLNFfWxKHjFBFdPI6JIideWFJod9mx1eoo=",
+        "lastModified": 1725765290,
+        "narHash": "sha256-hwX53i24KyWzp2nWpQsn8lfGQNCP0JoW/bvQmcR1DPY=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "32058e9138248874773630c846563b1a78ee7a5b",
+        "rev": "642275444c5a9defce57219c944b3179bf2adaa9",
         "type": "github"
       },
       "original": {
@@ -690,11 +690,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725755434,
-        "narHash": "sha256-ZNtqoYcdTcpZQQ8KWVNYYdXhx6Yvf3BQ8xvrn1pFNHI=",
+        "lastModified": 1725797370,
+        "narHash": "sha256-GswZOLyZft3fTwxoB7AeayoQex3/2rsBAhs0G4nFQn0=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "74a91dcc075aa0cb836f4a1af1dad159d3a6028e",
+        "rev": "9c4530900150ca9e00f70606c68ddd997f0ad12a",
         "type": "github"
       },
       "original": {
@@ -717,11 +717,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725202623,
-        "narHash": "sha256-+UdfnVQIMYEBNN5lVK/Pn6fs2YMohP+f/4XAU7qTTHo=",
+        "lastModified": 1725799221,
+        "narHash": "sha256-RtXOhNuO/Dj+RGE2CTd+AxNuLQQPKCUp6DSFmPxCcug=",
         "owner": "zigtools",
         "repo": "zls",
-        "rev": "ace6f6da90a4420cd6632363b30762e577e2b922",
+        "rev": "a5e803b2272080f226e28af1a1444d1a6b5ea3f8",
         "type": "github"
       },
       "original": {
