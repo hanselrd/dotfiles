@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     roles.system.home-manager.enable = true;
 
-    system.configurationRevision = self.rev or "dirty";
+    system.configurationRevision = self.shortRev or "<dirty>";
 
     system.stateVersion =
       if !lib.profiles.isSystemDarwin

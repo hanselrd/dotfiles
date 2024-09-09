@@ -51,6 +51,7 @@ type (
 	environmentRolesUserDocker                struct{}
 	environmentRolesUserEditor                struct{}
 	environmentRolesUserEza                   struct{}
+	environmentRolesUserFonts                 struct{}
 	environmentRolesUserFzf                   struct{}
 	environmentRolesUserGit                   struct{}
 	environmentRolesUserHtop                  struct{}

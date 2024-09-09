@@ -51,6 +51,7 @@ type environmentRolesUser struct {
 	Docker                *environmentRolesUserDocker                `json:"docker,omitempty"`
 	Editor                *environmentRolesUserEditor                `json:"editor,omitempty"`
 	Eza                   *environmentRolesUserEza                   `json:"eza,omitempty"`
+	Fonts                 *environmentRolesUserFonts                 `json:"fonts,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`

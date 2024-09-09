@@ -32,6 +32,7 @@
     ./roles/docker.nix
     ./roles/editor.nix
     ./roles/eza.nix
+    ./roles/fonts.nix
     ./roles/fzf.nix
     ./roles/git.nix
     ./roles/htop.nix

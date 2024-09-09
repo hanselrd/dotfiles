@@ -33,6 +33,7 @@ const (
 	UserRoleDocker
 	UserRoleEditor
 	UserRoleEza
+	UserRoleFonts
 	UserRoleFzf
 	UserRoleGit
 	UserRoleHtop
