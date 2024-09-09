@@ -19,6 +19,7 @@ const (
 	SystemRoleNix
 	SystemRoleOpenSsh
 	SystemRoleShell
+	SystemRoleSudo
 	SystemRoleTime
 	SystemRoleUser
 	SystemRoleVirtualization

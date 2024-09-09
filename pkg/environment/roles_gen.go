@@ -18,6 +18,7 @@ type environmentRolesSystem struct {
 	Nix            *environmentRolesSystemNix            `json:"nix,omitempty"`
 	Openssh        *environmentRolesSystemOpenssh        `json:"openssh,omitempty"`
 	Shell          *environmentRolesSystemShell          `json:"shell,omitempty"`
+	Sudo           *environmentRolesSystemSudo           `json:"sudo,omitempty"`
 	Time           *environmentRolesSystemTime           `json:"time,omitempty"`
 	User           *environmentRolesSystemUser           `json:"user,omitempty"`
 	Virtualization *environmentRolesSystemVirtualization `json:"virtualization,omitempty"`

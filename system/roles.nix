@@ -18,6 +18,7 @@
     ./roles/nix.nix
     ./roles/openssh.nix
     ./roles/shell.nix
+    ./roles/sudo.nix
     ./roles/time.nix
     ./roles/user.nix
     ./roles/virtualization.nix

@@ -17,6 +17,7 @@ type (
 	environmentRolesSystemNix            struct{}
 	environmentRolesSystemOpenssh        struct{}
 	environmentRolesSystemShell          struct{}
+	environmentRolesSystemSudo           struct{}
 	environmentRolesSystemTime           struct{}
 	environmentRolesSystemUser           struct{}
 	environmentRolesSystemVirtualization struct{}
