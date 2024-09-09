@@ -17,6 +17,7 @@ in {
     lib.recursiveUpdate
     {
       programs.zsh.enable = true;
+
       environment.shells = with pkgs; [zsh];
 
       users.users.${env.user.username}.shell = pkgs.zsh;

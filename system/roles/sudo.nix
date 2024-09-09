@@ -14,7 +14,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     security.sudo.extraConfig = ''
-      Defaults env_reset,pwfeedback
+      Defaults pwfeedback
+      Defaults insults
     '';
   };
 }
