@@ -66,11 +66,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726158374,
-        "narHash": "sha256-+se6WII0/RjHe9MoD4LgLB75hpF3cpr7SgFR4L0VfFQ=",
+        "lastModified": 1726248336,
+        "narHash": "sha256-e7gRQHB6dnvzjBZuAaWOO8adYZLodoxFir9YI0TyW6M=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "5e3dcdbbfd8b42ab6697d9d64c9fa967418964b5",
+        "rev": "f43f7397b3eec7a047783d384afe1faddebb6761",
         "type": "github"
       },
       "original": {
@@ -259,11 +259,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1726200211,
-        "narHash": "sha256-8yvq7zX2ti1QH9NBSmdZcB2xc+zTuHUj51ID5XDeS+g=",
+        "lastModified": 1726249250,
+        "narHash": "sha256-h+hsuyGp+wyxk3wBtFCTcuuQOCsx6LWVhjf1OMyt4qg=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "3ea0b2fd067026b4b50e581b00b03cfb0c90e765",
+        "rev": "6d4174b55849d718339d019b5eefb9c2ace74d4e",
         "type": "gitlab"
       },
       "original": {
