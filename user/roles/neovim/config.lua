@@ -225,7 +225,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   templ = {},
-  tsserver = {},
+  ts_ls = {},
   zls = {},
 }
 for lsp, setup in pairs(servers) do
