@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   lib,
   pkgs,
@@ -8,7 +7,6 @@
   ...
 }: let
   cfg = config.roles.system.motd;
-  inherit (inputs) self;
 in {
   options = {
     roles.system.motd = {

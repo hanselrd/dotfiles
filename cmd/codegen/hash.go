@@ -24,7 +24,7 @@ var hashCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		res := lo.Must(
 			shell.Shell(
-				`git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.*'`,
+				`git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'`,
 			),
 		)
 		lop.ForEach(strings.Split(res.Stdout, "\n"), func(s string, _ int) {
@@ -71,7 +71,7 @@ var hashCmd = &cobra.Command{
 						lo.Must(
 							shell.Shell(
 								fmt.Sprintf(
-									`git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.*' | xargs sed {{.VerbosityQuietLong}} -i 's@%s@%s@g'`,
+									`git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock' | xargs sed {{.VerbosityQuietLong}} -i 's@%s@%s@g'`,
 									oldHash,
 									newHash,
 								),

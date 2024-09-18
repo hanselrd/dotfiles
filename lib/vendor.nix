@@ -2,7 +2,6 @@
   inputs,
   lib,
   pkgs,
-  env,
   ...
 }: let
   inherit (inputs) chaotic nix-colors;

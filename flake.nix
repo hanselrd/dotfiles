@@ -91,15 +91,7 @@
         rust-overlay.overlays.default
         zig-overlay.overlays.default
         (final: prev: {
-          dotfiles-scripts = prev.buildGoModule {
-            name = "dotfiles-scripts";
-            src = gitignore.lib.gitignoreSource ./.;
-            vendorHash = "sha256-PL7r7NxDVS7loQ6N0ww0xNiHqUGBcS4r3JZB0N+VcIw=";
-            subPackages = [
-              "scripts/dotfiles-cli"
-            ];
-            CGO_ENABLED = 0;
-          };
+          dotfiles-cli = lib.common.buildGoScript "dotfiles-cli";
         })
       ];
     };
@@ -109,28 +101,29 @@
         pkgs.runCommand "dotfiles-cli-environment-json" {
           DOTFILES_SRC_DIR = gitignore.lib.gitignoreSource ./.;
         }
-        "${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > $out"
+        "${lib.getExe pkgs.dotfiles-cli} environment > $out"
       )
     );
 
-    lib = nixpkgs.lib;
+    lib = nixpkgs.lib.extend (final: prev: {
+      vendor = (import ./lib/vendor.nix) {
+        inherit inputs pkgs env;
+        lib = final;
+      };
+      common = (import ./lib/common.nix) {
+        inherit inputs pkgs env;
+        lib = final;
+      };
+    });
 
     mkLib = {profile, ...}:
-      nixpkgs.lib.extend (final: prev: {
-        vendor = (import ./lib/vendor.nix) {
-          inherit inputs pkgs env;
-          lib = final;
-        };
-        common = (import ./lib/common.nix) {
-          inherit pkgs env;
-          lib = final;
-        };
+      lib.extend (final: prev: {
         profiles = (import ./lib/profiles.nix) {
           inherit pkgs env profile;
           lib = final;
         };
       });
-  in rec {
+  in {
     nixosConfigurations = builtins.listToAttrs (
       builtins.map (
         profile: let
@@ -226,11 +219,11 @@
 
         dotfiles-codegen1 = pkgs.writeShellScriptBin "dotfiles-codegen1" ''
           ${lib.getExe dotfiles-codegen0}
-          # ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen hash
-          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen profiles
-          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} codegen roles
-          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} environment > environment.json
-          ${lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli"} docker-compose > docker-compose.json
+          # ${lib.getExe pkgs.dotfiles-cli} codegen hash
+          ${lib.getExe pkgs.dotfiles-cli} codegen profiles
+          ${lib.getExe pkgs.dotfiles-cli} codegen roles
+          ${lib.getExe pkgs.dotfiles-cli} environment > environment.json
+          ${lib.getExe pkgs.dotfiles-cli} docker-compose > docker-compose.json
         '';
 
         dotfiles-update = pkgs.writeShellScriptBin "dotfiles-update" ''
@@ -272,7 +265,7 @@
       ${system} = {
         dotfiles-cli = {
           type = "app";
-          program = lib.getExe' pkgs.dotfiles-scripts "dotfiles-cli";
+          program = lib.getExe pkgs.dotfiles-cli;
         };
       };
     };
