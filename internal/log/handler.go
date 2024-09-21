@@ -4,11 +4,17 @@ import (
 	"io"
 	"log/slog"
 	"strings"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/rs/zerolog"
+	"github.com/samber/lo"
 	slogzerolog "github.com/samber/slog-zerolog/v2"
+
+	"github.com/hanselrd/dotfiles/pkg/environment"
 )
+
+var now = time.Now()
 
 func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 	slogzerolog.LogLevels = map[slog.Level]zerolog.Level{
@@ -23,7 +29,17 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 	}
 	logger := zerolog.New(zerolog.ConsoleWriter{
 		Out: w,
-		// FormatTimestamp
+		FormatTimestamp: func(i interface{}) string {
+			if s, ok := i.(string); ok {
+				t := lo.Must(time.ParseInLocation(zerolog.TimeFieldFormat, s, time.Local))
+				return color.HiBlackString(
+					"%s <%s>",
+					t.In(time.Local).Format(environment.Environment.Extra.GoTimeFormat),
+					time.Since(now),
+				)
+			}
+			return color.HiBlackString("<%s>", time.Since(now))
+		},
 		FormatLevel: func(i interface{}) string {
 			var attrs []color.Attribute
 			switch i.(string) {

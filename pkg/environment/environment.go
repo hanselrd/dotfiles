@@ -10,7 +10,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
-	"github.com/hanselrd/dotfiles/internal/log"
+	_ "github.com/hanselrd/dotfiles/internal/logdisabled"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 	"github.com/hanselrd/dotfiles/pkg/theme"
@@ -68,11 +68,6 @@ var (
 	configDir     = fmt.Sprintf("%s/.config", homeDir)
 	cacheDir      = fmt.Sprintf("%s/.cache", homeDir)
 )
-
-var _ = func() int {
-	log.SetupLogger(log.LevelDisabled)
-	return 0
-}()
 
 var Environment = environment{
 	User: environmentUser{

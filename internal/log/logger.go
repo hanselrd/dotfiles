@@ -23,3 +23,7 @@ func SetupLogger(l slog.Level) {
 		slog.SetDefault(logger)
 	})
 }
+
+func init() {
+	SetupLogger(LevelDisabled)
+}
