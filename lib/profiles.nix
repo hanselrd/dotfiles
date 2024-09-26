@@ -8,7 +8,7 @@
   isSystemGaruda = profile.system == "garuda";
   isSystemWsl = profile.system == "wsl";
   isSystemDarwin = profile.system == "darwin";
-  isSystemLinux = profile.system == "linux";
+  isSystemGeneric = profile.system == "generic";
   isUserBase = profile.user == "base";
   isUserStandard = profile.user == "standard";
   isUserMinimal = profile.user == "minimal";

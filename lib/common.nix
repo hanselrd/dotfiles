@@ -28,11 +28,11 @@ in {
     pkgs.buildGoModule {
       name = "dotfiles-go-script-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-PL7r7NxDVS7loQ6N0ww0xNiHqUGBcS4r3JZB0N+VcIw=";
+      vendorHash = "sha256-uFaMdyKnzCCmhxzfbxBViPJFchZazSA6dJk+OJdebzA=";
       subPackages = [
         "scripts/${name}"
       ];
-      CGO_ENABLED = 0;
+      CGO_ENABLED = 1;
       meta.mainProgram = name;
     };
 }

@@ -40,6 +40,7 @@
     ./roles/nix.nix
     ./roles/oh-my-posh.nix
     ./roles/pager.nix
+    ./roles/ranger.nix
     ./roles/ripgrep.nix
     (lib.optional (!env.extra.encrypted) ../secrets/user/roles/rts.nix)
     ./roles/scripts.nix

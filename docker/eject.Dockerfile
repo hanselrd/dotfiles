@@ -3,7 +3,7 @@ FROM redhat/ubi8
 ARG USER=docker
 ARG UID=1000
 ARG GID=1000
-ARG PROFILE=linux-base
+ARG PROFILE=generic-base
 
 ENV USER=${USER}
 ENV HOME=/home/${USER}

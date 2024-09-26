@@ -120,45 +120,45 @@
       },
       "image": "dotfiles-eject/garuda-standard"
     },
-    "dotfiles-eject-linux-base": {
+    "dotfiles-eject-generic-base": {
       "build": {
         "context": ".",
         "dockerfile": "docker/eject.Dockerfile",
         "args": {
-          "PROFILE": "linux-base"
+          "PROFILE": "generic-base"
         }
       },
-      "image": "dotfiles-eject/linux-base"
+      "image": "dotfiles-eject/generic-base"
     },
-    "dotfiles-eject-linux-full": {
+    "dotfiles-eject-generic-full": {
       "build": {
         "context": ".",
         "dockerfile": "docker/eject.Dockerfile",
         "args": {
-          "PROFILE": "linux-full"
+          "PROFILE": "generic-full"
         }
       },
-      "image": "dotfiles-eject/linux-full"
+      "image": "dotfiles-eject/generic-full"
     },
-    "dotfiles-eject-linux-minimal": {
+    "dotfiles-eject-generic-minimal": {
       "build": {
         "context": ".",
         "dockerfile": "docker/eject.Dockerfile",
         "args": {
-          "PROFILE": "linux-minimal"
+          "PROFILE": "generic-minimal"
         }
       },
-      "image": "dotfiles-eject/linux-minimal"
+      "image": "dotfiles-eject/generic-minimal"
     },
-    "dotfiles-eject-linux-standard": {
+    "dotfiles-eject-generic-standard": {
       "build": {
         "context": ".",
         "dockerfile": "docker/eject.Dockerfile",
         "args": {
-          "PROFILE": "linux-standard"
+          "PROFILE": "generic-standard"
         }
       },
-      "image": "dotfiles-eject/linux-standard"
+      "image": "dotfiles-eject/generic-standard"
     },
     "dotfiles-eject-nixos-base": {
       "build": {
@@ -280,45 +280,45 @@
       },
       "image": "dotfiles/garuda-standard"
     },
-    "dotfiles-linux-base": {
+    "dotfiles-generic-base": {
       "build": {
         "context": ".",
         "dockerfile": "docker/Dockerfile",
         "args": {
-          "PROFILE": "linux-base"
+          "PROFILE": "generic-base"
         }
       },
-      "image": "dotfiles/linux-base"
+      "image": "dotfiles/generic-base"
     },
-    "dotfiles-linux-full": {
+    "dotfiles-generic-full": {
       "build": {
         "context": ".",
         "dockerfile": "docker/Dockerfile",
         "args": {
-          "PROFILE": "linux-full"
+          "PROFILE": "generic-full"
         }
       },
-      "image": "dotfiles/linux-full"
+      "image": "dotfiles/generic-full"
     },
-    "dotfiles-linux-minimal": {
+    "dotfiles-generic-minimal": {
       "build": {
         "context": ".",
         "dockerfile": "docker/Dockerfile",
         "args": {
-          "PROFILE": "linux-minimal"
+          "PROFILE": "generic-minimal"
         }
       },
-      "image": "dotfiles/linux-minimal"
+      "image": "dotfiles/generic-minimal"
     },
-    "dotfiles-linux-standard": {
+    "dotfiles-generic-standard": {
       "build": {
         "context": ".",
         "dockerfile": "docker/Dockerfile",
         "args": {
-          "PROFILE": "linux-standard"
+          "PROFILE": "generic-standard"
         }
       },
-      "image": "dotfiles/linux-standard"
+      "image": "dotfiles/generic-standard"
     },
     "dotfiles-nixos-base": {
       "build": {

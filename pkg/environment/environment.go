@@ -38,7 +38,7 @@ type environmentProfiles struct {
 	Garuda      []profile.ProfileGroup `json:"garuda"`
 	Wsl         []profile.ProfileGroup `json:"wsl"`
 	Darwin      []profile.ProfileGroup `json:"darwin"`
-	Linux       []profile.ProfileGroup `json:"linux"`
+	Generic     []profile.ProfileGroup `json:"generic"`
 	HomeManager []profile.ProfileGroup `json:"homeManager"`
 }
 
@@ -101,7 +101,7 @@ var Environment = environment{
 		Garuda:      profile.GarudaProfiles,
 		Wsl:         profile.WslProfiles,
 		Darwin:      profile.DarwinProfiles,
-		Linux:       profile.LinuxProfiles,
+		Generic:     profile.GenericProfiles,
 		HomeManager: profile.HomeManagerProfiles,
 	},
 	Extra: environmentExtra{

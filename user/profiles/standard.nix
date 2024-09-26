@@ -10,6 +10,7 @@
 
   # roles.user.jq.enable = true;
   # roles.user.pandoc.enable = true;
+  roles.user.ranger.enable = true;
 
   home.packages = with pkgs; [
     android-tools
@@ -25,7 +26,6 @@
     imagemagick
     lolcat
     nmap
-    ranger
     restic
     sshfs
     stow

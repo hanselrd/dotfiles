@@ -37,7 +37,7 @@ func DefaultProfileGroup() ProfileGroup {
 	if strings.Contains(res.Stdout, "Darwin") {
 		return DarwinBase
 	}
-	return LinuxBase
+	return GenericBase
 }
 
 func (p profileGroup) String() string {

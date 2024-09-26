@@ -60,6 +60,7 @@ type environmentRolesUser struct {
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`
 	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`
 	Pager                 *environmentRolesUserPager                 `json:"pager,omitempty"`
+	Ranger                *environmentRolesUserRanger                `json:"ranger,omitempty"`
 	Ripgrep               *environmentRolesUserRipgrep               `json:"ripgrep,omitempty"`
 	Rts                   *environmentRolesUserRts                   `json:"rts,omitempty"`
 	Scripts               *environmentRolesUserScripts               `json:"scripts,omitempty"`

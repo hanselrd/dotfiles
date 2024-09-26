@@ -62,6 +62,7 @@ type (
 	}
 	environmentRolesUserOhMyPosh struct{}
 	environmentRolesUserPager    struct{}
+	environmentRolesUserRanger   struct{}
 	environmentRolesUserRipgrep  struct{}
 	environmentRolesUserRts      struct{}
 	environmentRolesUserScripts  struct{}

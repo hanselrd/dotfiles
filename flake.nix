@@ -224,6 +224,9 @@
           ${lib.getExe pkgs.dotfiles-cli} codegen roles
           ${lib.getExe pkgs.dotfiles-cli} environment > environment.json
           ${lib.getExe pkgs.dotfiles-cli} docker-compose > docker-compose.json
+          ${lib.getExe pkgs.dotfiles-cli} graph > graph.dot
+          ${lib.getExe' pkgs.graphviz "dot"} -Tpng graph.dot -o graph.png
+          ${lib.getExe' pkgs.graphviz "dot"} -Tsvg graph.dot -o graph.svg
         '';
 
         dotfiles-update = pkgs.writeShellScriptBin "dotfiles-update" ''

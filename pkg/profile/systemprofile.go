@@ -9,7 +9,7 @@ const (
 	SystemProfileGaruda
 	SystemProfileWsl
 	SystemProfileDarwin
-	SystemProfileLinux
+	SystemProfileGeneric
 )
 
 func (p SystemProfile) Type() string {

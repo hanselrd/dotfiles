@@ -4,26 +4,26 @@ package profile
 import "slices"
 
 var (
-	NixosBase      = NewProfileGroup(SystemProfileNixos, UserProfileBase)
-	NixosStandard  = NewProfileGroup(SystemProfileNixos, UserProfileStandard)
-	NixosMinimal   = NewProfileGroup(SystemProfileNixos, UserProfileMinimal)
-	NixosFull      = NewProfileGroup(SystemProfileNixos, UserProfileFull)
-	GarudaBase     = NewProfileGroup(SystemProfileGaruda, UserProfileBase)
-	GarudaStandard = NewProfileGroup(SystemProfileGaruda, UserProfileStandard)
-	GarudaMinimal  = NewProfileGroup(SystemProfileGaruda, UserProfileMinimal)
-	GarudaFull     = NewProfileGroup(SystemProfileGaruda, UserProfileFull)
-	WslBase        = NewProfileGroup(SystemProfileWsl, UserProfileBase)
-	WslStandard    = NewProfileGroup(SystemProfileWsl, UserProfileStandard)
-	WslMinimal     = NewProfileGroup(SystemProfileWsl, UserProfileMinimal)
-	WslFull        = NewProfileGroup(SystemProfileWsl, UserProfileFull)
-	DarwinBase     = NewProfileGroup(SystemProfileDarwin, UserProfileBase)
-	DarwinStandard = NewProfileGroup(SystemProfileDarwin, UserProfileStandard)
-	DarwinMinimal  = NewProfileGroup(SystemProfileDarwin, UserProfileMinimal)
-	DarwinFull     = NewProfileGroup(SystemProfileDarwin, UserProfileFull)
-	LinuxBase      = NewProfileGroup(SystemProfileLinux, UserProfileBase)
-	LinuxStandard  = NewProfileGroup(SystemProfileLinux, UserProfileStandard)
-	LinuxMinimal   = NewProfileGroup(SystemProfileLinux, UserProfileMinimal)
-	LinuxFull      = NewProfileGroup(SystemProfileLinux, UserProfileFull)
+	NixosBase       = NewProfileGroup(SystemProfileNixos, UserProfileBase)
+	NixosStandard   = NewProfileGroup(SystemProfileNixos, UserProfileStandard)
+	NixosMinimal    = NewProfileGroup(SystemProfileNixos, UserProfileMinimal)
+	NixosFull       = NewProfileGroup(SystemProfileNixos, UserProfileFull)
+	GarudaBase      = NewProfileGroup(SystemProfileGaruda, UserProfileBase)
+	GarudaStandard  = NewProfileGroup(SystemProfileGaruda, UserProfileStandard)
+	GarudaMinimal   = NewProfileGroup(SystemProfileGaruda, UserProfileMinimal)
+	GarudaFull      = NewProfileGroup(SystemProfileGaruda, UserProfileFull)
+	WslBase         = NewProfileGroup(SystemProfileWsl, UserProfileBase)
+	WslStandard     = NewProfileGroup(SystemProfileWsl, UserProfileStandard)
+	WslMinimal      = NewProfileGroup(SystemProfileWsl, UserProfileMinimal)
+	WslFull         = NewProfileGroup(SystemProfileWsl, UserProfileFull)
+	DarwinBase      = NewProfileGroup(SystemProfileDarwin, UserProfileBase)
+	DarwinStandard  = NewProfileGroup(SystemProfileDarwin, UserProfileStandard)
+	DarwinMinimal   = NewProfileGroup(SystemProfileDarwin, UserProfileMinimal)
+	DarwinFull      = NewProfileGroup(SystemProfileDarwin, UserProfileFull)
+	GenericBase     = NewProfileGroup(SystemProfileGeneric, UserProfileBase)
+	GenericStandard = NewProfileGroup(SystemProfileGeneric, UserProfileStandard)
+	GenericMinimal  = NewProfileGroup(SystemProfileGeneric, UserProfileMinimal)
+	GenericFull     = NewProfileGroup(SystemProfileGeneric, UserProfileFull)
 )
 
 var (
@@ -31,6 +31,6 @@ var (
 	GarudaProfiles      = []ProfileGroup{GarudaBase, GarudaStandard, GarudaMinimal, GarudaFull}
 	WslProfiles         = []ProfileGroup{WslBase, WslStandard, WslMinimal, WslFull}
 	DarwinProfiles      = []ProfileGroup{DarwinBase, DarwinStandard, DarwinMinimal, DarwinFull}
-	LinuxProfiles       = []ProfileGroup{LinuxBase, LinuxStandard, LinuxMinimal, LinuxFull}
-	HomeManagerProfiles = slices.Concat(NixosProfiles, GarudaProfiles, WslProfiles, DarwinProfiles, LinuxProfiles)
+	GenericProfiles     = []ProfileGroup{GenericBase, GenericStandard, GenericMinimal, GenericFull}
+	HomeManagerProfiles = slices.Concat(NixosProfiles, GarudaProfiles, WslProfiles, DarwinProfiles, GenericProfiles)
 )

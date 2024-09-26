@@ -53,7 +53,7 @@ var hashCmd = &cobra.Command{
 		})
 
 		for _, t2 := range []lo.Tuple2[func(profile.ProfileGroup) (shell.ShellResult, error), profile.ProfileGroup]{
-			lo.T2(nix.BuildHomeManagerConfiguration, profile.LinuxBase),
+			lo.T2(nix.BuildHomeManagerConfiguration, profile.GenericBase),
 			lo.T2(nix.BuildNixOSConfiguration, profile.NixosBase),
 			lo.T2(nix.BuildNixOSConfiguration, profile.GarudaBase),
 			lo.T2(nix.BuildNixOSConfiguration, profile.WslBase),

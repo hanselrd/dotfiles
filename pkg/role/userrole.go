@@ -41,6 +41,7 @@ const (
 	UserRoleNix
 	UserRoleOhMyPosh // oh-my-posh
 	UserRolePager
+	UserRoleRanger
 	UserRoleRipgrep
 	UserRoleRts
 	UserRoleScripts
@@ -64,7 +65,6 @@ func (r UserRole) AccessLevel() accesslevel.AccessLevel {
 	switch r {
 	case UserRoleRts:
 		return accesslevel.AccessLevelPrivate
-	default:
-		return accesslevel.AccessLevelPublic
 	}
+	return accesslevel.AccessLevelPublic
 }
