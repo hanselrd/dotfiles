@@ -76,5 +76,4 @@ type environmentRolesUser struct {
 	Vscode                *environmentRolesUserVscode                `json:"vscode,omitempty"`
 	Zoxide                *environmentRolesUserZoxide                `json:"zoxide,omitempty"`
 	Zsh                   *environmentRolesUserZsh                   `json:"zsh,omitempty"`
-	Zzz                   *environmentRolesUserZzz                   `json:"zzz,omitempty"`
 }

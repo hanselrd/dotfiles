@@ -82,5 +82,4 @@ type (
 	environmentRolesUserVscode   struct{}
 	environmentRolesUserZoxide   struct{}
 	environmentRolesUserZsh      struct{}
-	environmentRolesUserZzz      struct{}
 )

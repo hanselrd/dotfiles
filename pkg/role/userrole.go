@@ -54,7 +54,6 @@ const (
 	UserRoleVscode
 	UserRoleZoxide
 	UserRoleZsh
-	UserRoleZzz
 )
 
 func (r UserRole) Type() string {

@@ -53,6 +53,5 @@
     ./roles/vscode.nix
     ./roles/zoxide.nix
     ./roles/zsh.nix
-    ./roles/zzz.nix
   ];
 }
