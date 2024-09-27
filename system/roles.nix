@@ -8,9 +8,12 @@
   imports = lib.flatten [
     ./roles/bootstrap.nix
     ./roles/boot.nix
+    ./roles/cockpit.nix
+    ./roles/docker.nix
     ./roles/garuda.nix
     ./roles/home-manager.nix
     ./roles/i18n.nix
+    ./roles/kde.nix
     ./roles/kernel.nix
     ./roles/monitoring.nix
     ./roles/motd.nix
@@ -21,8 +24,8 @@
     ./roles/sudo.nix
     ./roles/time.nix
     ./roles/user.nix
-    ./roles/virtualization.nix
     ./roles/wsl.nix
-    ./roles/x11.nix
+    ./roles/xserver.nix
+    ./roles/xrdp.nix
   ];
 }

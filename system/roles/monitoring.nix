@@ -12,14 +12,8 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable (
-    lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
-      roles.system.openssh.enable = true;
-
-      services.cockpit = {
-        enable = true;
-        openFirewall = true;
-      };
-    }
-  );
+  config = lib.mkIf cfg.enable {
+    roles.system.cockpit.enable = true;
+    roles.system.openssh.enable = true;
+  };
 }

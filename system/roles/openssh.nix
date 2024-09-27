@@ -17,7 +17,7 @@ in {
       services.openssh = {
         enable = true;
         settings = {
-          X11Forwarding = config.roles.system.x11.enable;
+          X11Forwarding = config.roles.system.xserver.enable;
         };
       };
     }

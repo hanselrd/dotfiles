@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.roles.system.virtualization;
+  cfg = config.roles.system.docker;
 in {
   options = {
-    roles.system.virtualization = {
-      enable = lib.mkEnableOption "roles.system.virtualization";
+    roles.system.docker = {
+      enable = lib.mkEnableOption "roles.system.docker";
     };
   };
 

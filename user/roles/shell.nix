@@ -14,10 +14,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    roles.user.bash.enable = true;
-    roles.user.zsh.enable = true;
     # roles.user.starship.enable = true;
+    roles.user.bash.enable = true;
     roles.user.oh-my-posh.enable = true;
+    roles.user.zsh.enable = true;
 
     home.shellAliases = {
       cd1 = "cd ..";

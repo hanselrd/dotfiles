@@ -9,9 +9,12 @@ type SystemRole uint
 const (
 	SystemRoleBootstrap SystemRole = iota
 	SystemRoleBoot
+	SystemRoleCockpit
+	SystemRoleDocker
 	SystemRoleGaruda
 	SystemRoleHomeManager // home-manager
 	SystemRoleI18N
+	SystemRoleKDE
 	SystemRoleKernel
 	SystemRoleMonitoring
 	SystemRoleMotd
@@ -22,9 +25,9 @@ const (
 	SystemRoleSudo
 	SystemRoleTime
 	SystemRoleUser
-	SystemRoleVirtualization
 	SystemRoleWsl
-	SystemRoleX11
+	SystemRoleXServer
+	SystemRoleXrdp
 )
 
 func (r SystemRole) Type() string {

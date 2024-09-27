@@ -6,24 +6,27 @@ type environmentRoles struct {
 	User   *environmentRolesUser   `json:"user,omitempty"`
 }
 type environmentRolesSystem struct {
-	Bootstrap      *environmentRolesSystemBootstrap      `json:"bootstrap,omitempty"`
-	Boot           *environmentRolesSystemBoot           `json:"boot,omitempty"`
-	Garuda         *environmentRolesSystemGaruda         `json:"garuda,omitempty"`
-	HomeManager    *environmentRolesSystemHomeManager    `json:"home-manager,omitempty"`
-	I18N           *environmentRolesSystemI18N           `json:"i18n,omitempty"`
-	Kernel         *environmentRolesSystemKernel         `json:"kernel,omitempty"`
-	Monitoring     *environmentRolesSystemMonitoring     `json:"monitoring,omitempty"`
-	Motd           *environmentRolesSystemMotd           `json:"motd,omitempty"`
-	Networking     *environmentRolesSystemNetworking     `json:"networking,omitempty"`
-	Nix            *environmentRolesSystemNix            `json:"nix,omitempty"`
-	Openssh        *environmentRolesSystemOpenssh        `json:"openssh,omitempty"`
-	Shell          *environmentRolesSystemShell          `json:"shell,omitempty"`
-	Sudo           *environmentRolesSystemSudo           `json:"sudo,omitempty"`
-	Time           *environmentRolesSystemTime           `json:"time,omitempty"`
-	User           *environmentRolesSystemUser           `json:"user,omitempty"`
-	Virtualization *environmentRolesSystemVirtualization `json:"virtualization,omitempty"`
-	Wsl            *environmentRolesSystemWsl            `json:"wsl,omitempty"`
-	X11            *environmentRolesSystemX11            `json:"x11,omitempty"`
+	Bootstrap   *environmentRolesSystemBootstrap   `json:"bootstrap,omitempty"`
+	Boot        *environmentRolesSystemBoot        `json:"boot,omitempty"`
+	Cockpit     *environmentRolesSystemCockpit     `json:"cockpit,omitempty"`
+	Docker      *environmentRolesSystemDocker      `json:"docker,omitempty"`
+	Garuda      *environmentRolesSystemGaruda      `json:"garuda,omitempty"`
+	HomeManager *environmentRolesSystemHomeManager `json:"home-manager,omitempty"`
+	I18N        *environmentRolesSystemI18N        `json:"i18n,omitempty"`
+	Kde         *environmentRolesSystemKde         `json:"kde,omitempty"`
+	Kernel      *environmentRolesSystemKernel      `json:"kernel,omitempty"`
+	Monitoring  *environmentRolesSystemMonitoring  `json:"monitoring,omitempty"`
+	Motd        *environmentRolesSystemMotd        `json:"motd,omitempty"`
+	Networking  *environmentRolesSystemNetworking  `json:"networking,omitempty"`
+	Nix         *environmentRolesSystemNix         `json:"nix,omitempty"`
+	Openssh     *environmentRolesSystemOpenssh     `json:"openssh,omitempty"`
+	Shell       *environmentRolesSystemShell       `json:"shell,omitempty"`
+	Sudo        *environmentRolesSystemSudo        `json:"sudo,omitempty"`
+	Time        *environmentRolesSystemTime        `json:"time,omitempty"`
+	User        *environmentRolesSystemUser        `json:"user,omitempty"`
+	Wsl         *environmentRolesSystemWsl         `json:"wsl,omitempty"`
+	Xserver     *environmentRolesSystemXserver     `json:"xserver,omitempty"`
+	Xrdp        *environmentRolesSystemXrdp        `json:"xrdp,omitempty"`
 }
 type environmentRolesUser struct {
 	Bootstrap             *environmentRolesUserBootstrap             `json:"bootstrap,omitempty"`

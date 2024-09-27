@@ -5,24 +5,27 @@ package environment
 type (
 	environmentRolesSystemBootstrap   struct{}
 	environmentRolesSystemBoot        struct{}
+	environmentRolesSystemCockpit     struct{}
+	environmentRolesSystemDocker      struct{}
 	environmentRolesSystemGaruda      struct{}
 	environmentRolesSystemHomeManager struct{}
 	environmentRolesSystemI18N        struct{}
+	environmentRolesSystemKde         struct{}
 	environmentRolesSystemKernel      struct{}
 	environmentRolesSystemMonitoring  struct{}
 	environmentRolesSystemMotd        struct{}
 	environmentRolesSystemNetworking  struct {
 		HostName string `json:"hostName"`
 	}
-	environmentRolesSystemNix            struct{}
-	environmentRolesSystemOpenssh        struct{}
-	environmentRolesSystemShell          struct{}
-	environmentRolesSystemSudo           struct{}
-	environmentRolesSystemTime           struct{}
-	environmentRolesSystemUser           struct{}
-	environmentRolesSystemVirtualization struct{}
-	environmentRolesSystemWsl            struct{}
-	environmentRolesSystemX11            struct{}
+	environmentRolesSystemNix     struct{}
+	environmentRolesSystemOpenssh struct{}
+	environmentRolesSystemShell   struct{}
+	environmentRolesSystemSudo    struct{}
+	environmentRolesSystemTime    struct{}
+	environmentRolesSystemUser    struct{}
+	environmentRolesSystemWsl     struct{}
+	environmentRolesSystemXrdp    struct{}
+	environmentRolesSystemXserver struct{}
 )
 
 type (
