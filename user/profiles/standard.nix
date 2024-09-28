@@ -33,6 +33,7 @@
     tokei
     udisks
     ventoy-bin
+    wireguard-tools
     wtf
     xsv
     yt-dlp
