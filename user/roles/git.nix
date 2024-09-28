@@ -48,6 +48,7 @@ in {
         l = "log --graph --oneline --decorate";
         ll = "log --graph --oneline --decorate --branches --tags";
         lll = "log --graph --oneline --decorate --all";
+        mnt = "!git fetch origin --no-auto-gc --prune --refetch && git gc --aggressive --prune=now && git fsck";
       };
       extraConfig = {
         # core = {fsmonitor = true;};

@@ -252,7 +252,7 @@
           ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.lua" -print -exec ${lib.getExe pkgs.stylua} --indent-type=Spaces --indent-width=2 {} \;
 
           ${lib.getExe' pkgs.coreutils "echo"} "Formatting *.go file(s)"
-          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.gotools "goimports"} -w -local github.com/hanselrd/dotfiles {} \;
+          ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.gotools "goimports"} -w -local "github.com/hanselrd/dotfiles" {} \;
           ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe pkgs.gofumpt} -w -extra {} \;
           ${lib.getExe' pkgs.findutils "find"} $PWD -type f ! -path "*/ancestry/*" -name "*.go" -print -exec ${lib.getExe' pkgs.golines "golines"} -w -m 100 {} \;
         '';
