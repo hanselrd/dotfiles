@@ -35,6 +35,7 @@
     dmidecode
     file
     findutils
+    gawk
     gnugrep
     gnused
     gzip
