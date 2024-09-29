@@ -33,8 +33,10 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 			if s, ok := i.(string); ok {
 				t := lo.Must(time.ParseInLocation(zerolog.TimeFieldFormat, s, time.Local))
 				return color.HiBlackString(
-					"%s <%s>",
+					"%s ",
 					t.In(time.Local).Format(environment.Environment.Extra.GoTimeFormat),
+				) + color.HiWhiteString(
+					"<%s>",
 					time.Since(now),
 				)
 			}

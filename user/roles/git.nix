@@ -29,7 +29,7 @@ in {
       };
       difftastic.enable = lib.mkForce false;
       aliases = {
-        smart-clone = "!sh ${
+        sclone = "!sh ${
           pkgs.writeShellScript "git-smart-clone.sh" ''
             set -e
 
@@ -44,11 +44,15 @@ in {
             # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
           ''
         }";
+
+        audit = "!${lib.getExe' pkgs.git "git"} count-objects --verbose --human-readable";
+        hydrate = "!${lib.getExe' pkgs.git "git"} fetch origin --no-auto-gc --prune --refetch";
+        mnt = "!${lib.getExe' pkgs.git "git"} hydrate && ${lib.getExe' pkgs.git "git"} gc --aggressive --prune=now && ${lib.getExe' pkgs.git "git"} fsck";
+
         lgb = "log --graph --pretty=format:'%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %s %C(green bold)(%cr) %C(blue bold)<%an>%Creset%n' --abbrev-commit --date=relative --branches";
         l = "log --graph --oneline --decorate";
         ll = "log --graph --oneline --decorate --branches --tags";
         lll = "log --graph --oneline --decorate --all";
-        mnt = "!git fetch origin --no-auto-gc --prune --refetch && git gc --aggressive --prune=now && git fsck";
       };
       extraConfig = {
         # core = {fsmonitor = true;};
