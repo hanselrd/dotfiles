@@ -68,7 +68,7 @@ in {
                   "</b> "
                 ];
                 properties = {
-                  time_format = env.extra.goTimeFormat;
+                  time_format = builtins.replaceStrings ["<"] ["<<>"] env.extra.goTimeFormat;
                 };
               }
               {
