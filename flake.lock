@@ -259,11 +259,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1727621151,
-        "narHash": "sha256-qvLPwlTWW+2cezdWxCiUTKVdqa1xoqXEWUbLsKJqOc0=",
+        "lastModified": 1727669010,
+        "narHash": "sha256-3dJMsxWtGejOrHocsZUyXyK+tb8PZZl/q2wQx+bA4Cc=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "718f49b9d73ff3052dfa498eef0a79aa17a2da3a",
+        "rev": "a5acf5618430ea07d8d178d407c80d210e64760d",
         "type": "gitlab"
       },
       "original": {
@@ -428,11 +428,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1727580512,
-        "narHash": "sha256-gEWoJ+027OwsNs6f1GkDPrCxBFr5Vky7vWKjHRJi60s=",
+        "lastModified": 1727658919,
+        "narHash": "sha256-YAePt2GldkkRJ08LvZNHcuS6shIVStj+K+1DZN3gbnM=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "a2ab1588541ae442bd3a682f8f6bbcbca2672f10",
+        "rev": "f9fdf8285690a351e8998f1e703ebdf9cdf51dee",
         "type": "github"
       },
       "original": {
