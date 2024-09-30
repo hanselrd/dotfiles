@@ -29,7 +29,7 @@ in {
       };
       difftastic.enable = lib.mkForce false;
       aliases = {
-        sclone = "!sh ${
+        sclone = "!${lib.getExe' pkgs.bash "sh"} ${
           pkgs.writeShellScript "git-smart-clone.sh" ''
             set -e
 
