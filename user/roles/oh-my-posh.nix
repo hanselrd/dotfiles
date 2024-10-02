@@ -68,7 +68,18 @@ in {
                   "</b> "
                 ];
                 properties = {
-                  time_format = builtins.replaceStrings ["<"] ["<<>"] env.extra.goTimeFormat;
+                  time_format =
+                    builtins.replaceStrings ["<" ">"] [
+                      (lib.concatStrings [
+                        "<darkGray><</>"
+                        "<lightRed>"
+                      ])
+                      (lib.concatStrings [
+                        "</>"
+                        "<darkGray>></>"
+                      ])
+                    ]
+                    env.extra.goTimeFormat;
                 };
               }
               {
