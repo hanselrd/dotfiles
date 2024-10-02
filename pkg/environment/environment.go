@@ -120,8 +120,8 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
-		TimeFormat:          "<%a>%y/%-m/%-d T%H:%M<%Z>",
-		GoTimeFormat:        "<Mon>06/1/2 T15:04<MST>",
+		TimeFormat:          "<%a>%-d/%-m/%y <%Z>T%H:%M",
+		GoTimeFormat:        "<Mon>2/1/06 <MST>T15:04",
 		WinUser: func() *environmentWinUser {
 			if res, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
 				winUserName := res.Stdout
