@@ -11,6 +11,7 @@
     ./roles/bash.nix
     ./roles/bat.nix
     ./roles/browser.nix
+    ./roles/btop.nix
     ./roles/development.nix
     ./roles/development.cpp.nix
     ./roles/development.dhall.nix

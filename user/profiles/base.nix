@@ -8,6 +8,7 @@
 (lib.recursiveUpdate {
     roles.user.bootstrap.enable = true;
     roles.user.bat.enable = true;
+    roles.user.btop.enable = true;
     roles.user.editor.enable = true;
     roles.user.eza.enable = true;
     roles.user.fzf.enable = true;

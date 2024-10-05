@@ -12,6 +12,7 @@ const (
 	UserRoleBash
 	UserRoleBat
 	UserRoleBrowser
+	UserRoleBtop
 	UserRoleDevelopment
 	UserRoleDevelopmentCpp        // development.cpp
 	UserRoleDevelopmentDhall      // development.dhall
