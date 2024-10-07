@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (inputs) gitignore;
-in {
+in rec {
   currentTimeUtcPretty = builtins.replaceStrings ["\n"] [""] (
     builtins.readFile (
       pkgs.runCommand "current-time-utc-pretty" {
@@ -23,6 +23,17 @@ in {
         } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
       )
     );
+
+  runExternal = script: {
+    text = script;
+    onChange = script;
+  };
+
+  runExternalAlways = script:
+    runExternal ''
+      # ${currentTimeUtcPretty}
+      ${script}
+    '';
 
   buildGoScript = name:
     pkgs.buildGoModule {
