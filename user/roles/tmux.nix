@@ -22,7 +22,7 @@ in {
           owner = "tmux";
           repo = finalAttrs.pname;
           rev = finalAttrs.version;
-          hash = "sha256-IXj3M2cwdJo57sQLdzUWpmSpg3E+R3GHWPMnindr4XI=";
+          hash = "sha256-SJXVk5erkkcaGX5Q3WhtzU3doSbxnBQDFTBL7gu0wrw=";
         };
         patches = [];
       });
