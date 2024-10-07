@@ -58,15 +58,25 @@ type environmentWinUser struct {
 }
 
 var (
-	now           = time.Now()
-	nowYmd        = timefmt.Format(now, "%Y%m%d")
-	backupFileExt = fmt.Sprintf("bkp.%s-%s", nowYmd, hash.TodSeconds(now))
-	userName      = "delacruz"
-	name          = "Hansel De La Cruz"
-	email         = "18725263+hanselrd@users.noreply.github.com"
-	homeDir       = fmt.Sprintf("/home/%s", userName)
-	configDir     = fmt.Sprintf("%s/.config", homeDir)
-	cacheDir      = fmt.Sprintf("%s/.cache", homeDir)
+	now            = time.Now()
+	nowYmd         = timefmt.Format(now, "%Y%m%d")
+	backupFileExt  = fmt.Sprintf("bkp.%s-%s", nowYmd, hash.TodSeconds(now))
+	homeDirFn      = func(userName string) string { return fmt.Sprintf("/home/%s", userName) }
+	configDirFn    = func(homeDir string) string { return fmt.Sprintf("%s/.config", homeDir) }
+	cacheDirFn     = func(homeDir string) string { return fmt.Sprintf("%s/.cache", homeDir) }
+	winHomeDirFn   = func(winUserName string) string { return fmt.Sprintf("/mnt/c/Users/%s", winUserName) }
+	winConfigDirFn = configDirFn
+	winCacheDirFn  = cacheDirFn
+	userName       = "delacruz"
+	name           = "Hansel De La Cruz"
+	email          = "18725263+hanselrd@users.noreply.github.com"
+	homeDir        = homeDirFn(userName)
+	configDir      = configDirFn(homeDir)
+	cacheDir       = cacheDirFn(homeDir)
+	winUserName    = name
+	winHomeDir     = winHomeDirFn(winUserName)
+	winConfigDir   = winConfigDirFn(winHomeDir)
+	winCacheDir    = winCacheDirFn(winHomeDir)
 )
 
 var Environment = environment{
@@ -122,27 +132,17 @@ var Environment = environment{
 		BackupFileExtension: backupFileExt,
 		TimeFormat:          "<%a>%-d/%-m/%y <%Z>T%H:%M",
 		GoTimeFormat:        "<Mon>2/1/06 <MST>T15:04",
-		WinUser: func() *environmentWinUser {
-			if res, err := shell.Shell("powershell.exe '$env:UserName'"); err == nil {
-				winUserName := res.Stdout
-				winHomeDir := fmt.Sprintf("/mnt/c/Users/%s", winUserName)
-				winConfigDir := fmt.Sprintf("%s/.config", winHomeDir)
-				winCacheDir := fmt.Sprintf("%s/.cache", winHomeDir)
-				appData := fmt.Sprintf("%s/AppData/Roaming", winHomeDir)
-				return &environmentWinUser{
-					environmentUser: environmentUser{
-						UserName:        winUserName,
-						Name:            name,
-						Email:           email,
-						HomeDirectory:   winHomeDir,
-						ConfigDirectory: winConfigDir,
-						CacheDirectory:  winCacheDir,
-					},
-					UserProfile: winHomeDir,
-					AppData:     appData,
-				}
-			}
-			return nil
-		}(),
+		WinUser: &environmentWinUser{
+			environmentUser: environmentUser{
+				UserName:        winUserName,
+				Name:            name,
+				Email:           email,
+				HomeDirectory:   winHomeDir,
+				ConfigDirectory: winConfigDir,
+				CacheDirectory:  winCacheDir,
+			},
+			UserProfile: winHomeDir,
+			AppData:     fmt.Sprintf("%s/AppData/Roaming", winHomeDir),
+		},
 	},
 }

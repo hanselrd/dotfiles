@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }: let
   cfg = config.roles.user.ssh;
@@ -24,6 +25,14 @@ in {
           };
         };
       };
+    };
+
+    home.file.".ssh/.keygen" = rec {
+      text = onChange;
+      onChange = ''
+        test -f ${env.user.homeDirectory}/.ssh/id_ed25519 || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t ed25519 -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_ed25519
+        # test -f ${env.user.homeDirectory}/.ssh/id_rsa || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t rsa -b 4096 -o -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_rsa
+      '';
     };
   };
 }

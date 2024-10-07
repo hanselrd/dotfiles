@@ -18,7 +18,7 @@ in {
       enable = true;
       settings = {
         clock_format = builtins.replaceStrings ["%-"] ["%"] env.extra.timeFormat;
-        force_tty = true;
+        force_tty = lib.profiles.isUserBase;
         update_ms = 3000;
       };
     };
