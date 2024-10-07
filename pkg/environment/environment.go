@@ -130,8 +130,8 @@ var Environment = environment{
 			return false
 		}(),
 		BackupFileExtension: backupFileExt,
-		TimeFormat:          "<%a>%-d/%-m/%y <%Z>T%H:%M",
-		GoTimeFormat:        "<Mon>2/1/06 <MST>T15:04",
+		TimeFormat:          "<%a>%-d-%b-%y <%Z>T%H:%M",
+		GoTimeFormat:        "<Mon>2-Jan-06 <MST>T15:04",
 		WinUser: &environmentWinUser{
 			environmentUser: environmentUser{
 				UserName:        winUserName,
