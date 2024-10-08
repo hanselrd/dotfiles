@@ -81,11 +81,11 @@
     "devshell": {
       "flake": false,
       "locked": {
-        "lastModified": 1722113426,
-        "narHash": "sha256-Yo/3loq572A8Su6aY5GP56knpuKYRvM2a1meP9oJZCw=",
+        "lastModified": 1728330715,
+        "narHash": "sha256-xRJ2nPOXb//u1jaBnDP56M7v5ldavjbtR6lfGqSvcKg=",
         "owner": "numtide",
         "repo": "devshell",
-        "rev": "67cce7359e4cd3c45296fb4aaf6a19e2a9c757ae",
+        "rev": "dd6b80932022cea34a019e2bb32f6fa9e494dfef",
         "type": "github"
       },
       "original": {
@@ -259,11 +259,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1728263662,
-        "narHash": "sha256-KGzJwV/W2dg6Lmx351rJ7Yivsv6BX9ZMdBa8erG0C6Q=",
+        "lastModified": 1728360194,
+        "narHash": "sha256-uzs4AUxCtwzCDHqOuP716VDsAnbeSIBHQhRP133Cfc4=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "58dc609f10dee701987cb5bd4a62f25f046e7cb5",
+        "rev": "17ae8dc8e7faebb9c97f152ec880f53bdaabe303",
         "type": "gitlab"
       },
       "original": {
@@ -582,11 +582,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728268235,
-        "narHash": "sha256-lJMFnMO4maJuNO6PQ5fZesrTmglze3UFTTBuKGwR1Nw=",
+        "lastModified": 1728354625,
+        "narHash": "sha256-r+Sa1NRRT7LXKzCaVaq75l1GdZcegODtF06uaxVVVbI=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "25685cc2c7054efc31351c172ae77b21814f2d42",
+        "rev": "d216ade5a0091ce60076bf1f8bc816433a1fc5da",
         "type": "github"
       },
       "original": {
