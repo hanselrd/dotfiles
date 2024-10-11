@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -48,9 +49,12 @@ var ejectCmd = &cobra.Command{
 		err := os.MkdirAll(outDir, 0o700)
 		cobra.CheckErr(err)
 
+		tmpDir := lo.Must(os.MkdirTemp("", "nix-e-*"))
+		defer os.RemoveAll(tmpDir)
+
 		lop.ForEach(deps, func(d string, i int) {
-			slog.Debug("archiving", "dep", d)
-			cpio := fmt.Sprintf("eject.cpio.%d", i)
+			cpio := filepath.Join(tmpDir, fmt.Sprintf("eject.cpio.%d", i))
+			slog.Debug("archiving", "in", d, "out", cpio)
 
 			shell.Shell(
 				fmt.Sprintf(
@@ -75,7 +79,6 @@ var ejectCmd = &cobra.Command{
 			)
 		})
 
-		shell.Shell(fmt.Sprintf("rm {{.VerbosityVerboseShortN}} -rf eject.cpio.*"))
 		shell.Shell(fmt.Sprintf("chmod {{.VerbosityQuietLongVerboseShortN}} -R u+w %s", outDir))
 
 		pathsNew := lo.Map(paths, func(p string, _ int) string {

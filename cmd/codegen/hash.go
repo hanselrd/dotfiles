@@ -36,9 +36,9 @@ var hashCmd = &cobra.Command{
 				split[0],
 				"line",
 				split[1],
-				"oldHash",
+				"old",
 				split[2],
-				"newHash",
+				"new",
 				newHash,
 			)
 			shell.Shell(
@@ -67,7 +67,7 @@ var hashCmd = &cobra.Command{
 					matches := re.FindAllStringSubmatch(res.Stderr, -1)
 					lop.ForEach(matches, func(m []string, _ int) {
 						oldHash, newHash := m[1], m[2]
-						slog.Debug("replacing hash", "oldHash", oldHash, "newHash", newHash)
+						slog.Debug("replacing hash", "old", oldHash, "new", newHash)
 						lo.Must(
 							shell.Shell(
 								fmt.Sprintf(
