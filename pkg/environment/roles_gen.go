@@ -58,6 +58,7 @@ type environmentRolesUser struct {
 	Eza                   *environmentRolesUserEza                   `json:"eza,omitempty"`
 	Fonts                 *environmentRolesUserFonts                 `json:"fonts,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`
+	Gdb                   *environmentRolesUserGdb                   `json:"gdb,omitempty"`
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
@@ -75,6 +76,7 @@ type environmentRolesUser struct {
 	Theme                 *environmentRolesUserTheme                 `json:"theme,omitempty"`
 	Tmux                  *environmentRolesUserTmux                  `json:"tmux,omitempty"`
 	Vscode                *environmentRolesUserVscode                `json:"vscode,omitempty"`
+	Xdg                   *environmentRolesUserXdg                   `json:"xdg,omitempty"`
 	Zoxide                *environmentRolesUserZoxide                `json:"zoxide,omitempty"`
 	Zsh                   *environmentRolesUserZsh                   `json:"zsh,omitempty"`
 }

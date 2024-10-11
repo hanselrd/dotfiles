@@ -22,6 +22,7 @@
     roles.user.ssh.enable = true;
     roles.user.theme.enable = true;
     roles.user.tmux.enable = true;
+    roles.user.xdg.enable = true;
     roles.user.zoxide.enable = true;
   }
   (lib.optionalAttrs (!env.extra.encrypted) {

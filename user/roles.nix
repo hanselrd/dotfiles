@@ -35,6 +35,7 @@
     ./roles/eza.nix
     ./roles/fonts.nix
     ./roles/fzf.nix
+    ./roles/gdb.nix
     ./roles/git.nix
     ./roles/htop.nix
     ./roles/neovim.nix
@@ -52,6 +53,7 @@
     ./roles/theme.nix
     ./roles/tmux.nix
     ./roles/vscode.nix
+    ./roles/xdg.nix
     ./roles/zoxide.nix
     ./roles/zsh.nix
   ];

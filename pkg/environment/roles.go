@@ -58,6 +58,7 @@ type (
 	environmentRolesUserEza                   struct{}
 	environmentRolesUserFonts                 struct{}
 	environmentRolesUserFzf                   struct{}
+	environmentRolesUserGdb                   struct{}
 	environmentRolesUserGit                   struct{}
 	environmentRolesUserHtop                  struct{}
 	environmentRolesUserNeovim                struct{}
@@ -81,6 +82,7 @@ type (
 	environmentRolesUserTheme    struct{}
 	environmentRolesUserTmux     struct{}
 	environmentRolesUserVscode   struct{}
+	environmentRolesUserXdg      struct{}
 	environmentRolesUserZoxide   struct{}
 	environmentRolesUserZsh      struct{}
 )

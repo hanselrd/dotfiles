@@ -14,6 +14,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    roles.user.gdb.enable = true;
+
     home.packages = with pkgs; [
       bear
       ccache
@@ -22,7 +24,6 @@ in {
       cmake-format
       emscripten
       gcc
-      gdb
       lldb
       llvm
       meson

@@ -36,6 +36,7 @@ const (
 	UserRoleEza
 	UserRoleFonts
 	UserRoleFzf
+	UserRoleGdb
 	UserRoleGit
 	UserRoleHtop
 	UserRoleNeovim
@@ -53,6 +54,7 @@ const (
 	UserRoleTheme
 	UserRoleTmux
 	UserRoleVscode
+	UserRoleXdg
 	UserRoleZoxide
 	UserRoleZsh
 )

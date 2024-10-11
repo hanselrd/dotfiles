@@ -31,6 +31,8 @@ type environmentUser struct {
 	HomeDirectory   string `json:"homeDirectory"`
 	ConfigDirectory string `json:"configDirectory"`
 	CacheDirectory  string `json:"cacheDirectory"`
+	DataDirectory   string `json:"dataDirectory"`
+	StateDirectory  string `json:"stateDirectory"`
 }
 
 type environmentProfiles struct {
@@ -64,19 +66,27 @@ var (
 	homeDirFn      = func(userName string) string { return fmt.Sprintf("/home/%s", userName) }
 	configDirFn    = func(homeDir string) string { return fmt.Sprintf("%s/.config", homeDir) }
 	cacheDirFn     = func(homeDir string) string { return fmt.Sprintf("%s/.cache", homeDir) }
+	dataDirFn      = func(homeDir string) string { return fmt.Sprintf("%s/.local/share", homeDir) }
+	stateDirFn     = func(homeDir string) string { return fmt.Sprintf("%s/.local/state", homeDir) }
 	winHomeDirFn   = func(winUserName string) string { return fmt.Sprintf("/mnt/c/Users/%s", winUserName) }
 	winConfigDirFn = configDirFn
 	winCacheDirFn  = cacheDirFn
+	winDataDirFn   = dataDirFn
+	winStateDirFn  = stateDirFn
 	userName       = "delacruz"
 	name           = "Hansel De La Cruz"
 	email          = "18725263+hanselrd@users.noreply.github.com"
 	homeDir        = homeDirFn(userName)
 	configDir      = configDirFn(homeDir)
 	cacheDir       = cacheDirFn(homeDir)
+	dataDir        = dataDirFn(homeDir)
+	stateDir       = stateDirFn(homeDir)
 	winUserName    = name
 	winHomeDir     = winHomeDirFn(winUserName)
 	winConfigDir   = winConfigDirFn(winHomeDir)
 	winCacheDir    = winCacheDirFn(winHomeDir)
+	winDataDir     = winDataDirFn(winHomeDir)
+	winStateDir    = winStateDirFn(winHomeDir)
 )
 
 var Environment = environment{
@@ -87,6 +97,8 @@ var Environment = environment{
 		HomeDirectory:   homeDir,
 		ConfigDirectory: configDir,
 		CacheDirectory:  cacheDir,
+		DataDirectory:   dataDir,
+		StateDirectory:  stateDir,
 	},
 	Theme: theme.Chalk,
 	Roles: environmentRoles{
@@ -140,6 +152,8 @@ var Environment = environment{
 				HomeDirectory:   winHomeDir,
 				ConfigDirectory: winConfigDir,
 				CacheDirectory:  winCacheDir,
+				DataDirectory:   winDataDir,
+				StateDirectory:  winStateDir,
 			},
 			UserProfile: winHomeDir,
 			AppData:     fmt.Sprintf("%s/AppData/Roaming", winHomeDir),
