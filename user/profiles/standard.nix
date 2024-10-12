@@ -38,6 +38,5 @@
     xsv
     yt-dlp
     zlib
-    zstd
   ];
 }

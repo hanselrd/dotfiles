@@ -51,5 +51,6 @@
     sysstat
     tree
     wget
+    zstd
   ];
 }
