@@ -32,10 +32,10 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 		FormatTimestamp: func(i interface{}) string {
 			if s, ok := i.(string); ok {
 				t := lo.Must(time.ParseInLocation(zerolog.TimeFieldFormat, s, time.Local))
-				return color.HiBlackString(
+				return color.HiWhiteString(
 					"%s ",
 					t.In(time.Local).Format(environment.Environment.Extra.GoTimeFormat),
-				) + color.HiWhiteString(
+				) + color.HiBlackString(
 					"<%s>",
 					time.Since(now),
 				)

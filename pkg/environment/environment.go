@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/itchyny/timefmt-go"
 	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/internal/hash"
@@ -61,8 +60,7 @@ type environmentWinUser struct {
 
 var (
 	now            = time.Now()
-	nowYmd         = timefmt.Format(now, "%Y%m%d")
-	backupFileExt  = fmt.Sprintf("bkp.%s-%s", nowYmd, hash.TodSeconds(now))
+	backupFileExt  = fmt.Sprintf("bkp.%s%s", hash.Date(now), hash.TodSeconds(now))
 	homeDirFn      = func(userName string) string { return fmt.Sprintf("/home/%s", userName) }
 	configDirFn    = func(homeDir string) string { return fmt.Sprintf("%s/.config", homeDir) }
 	cacheDirFn     = func(homeDir string) string { return fmt.Sprintf("%s/.cache", homeDir) }

@@ -22,7 +22,7 @@ in {
           owner = "tmux";
           repo = finalAttrs.pname;
           rev = finalAttrs.version;
-          hash = "sha256-JvTxpZ/TSUSH6VbyuB9DY1pWr5nyGzLe3Ps57KliR/M=";
+          hash = "sha256-31hwOF0SdWqXADE8lfGIBrTCzK6rUiXRdGrkpdqXeX0=";
         };
         patches = [];
       });
@@ -65,7 +65,7 @@ in {
             set -g @prefix_highlight_sync_mode_attr 'fg=white,bg=blue,bold'
 
             set -g status-right-length '100'
-            set -g status-right '#{prefix_highlight} #[fg=cyan,bold]#U#[default]#[fg=black,bold]@#[default]#{?#{pane_ssh_connected},#[fg=green#,bold],#[fg=black#,bold]}#H#[default] ${env.extra.timeFormat}'
+            set -g status-right '#{prefix_highlight} #[fg=cyan,bold]#U#[default]#[fg=black,bold]@#[default]#{?#{pane_ssh_connected},#[fg=green#,bold],#[fg=black#,bold]}#{hostname_short}#[default] ${env.extra.timeFormat}'
           '';
         }
         {

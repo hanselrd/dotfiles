@@ -34,7 +34,7 @@ in {
 
         ${profile.name}: rev: ${system.configurationRevision} @ ${lib.common.currentTimePretty time.timeZone} by ${env.user.username}
 
-        Host:    ${networking.hostName}
+        Host:    ${networking.fqdnOrHostName}
         OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})
         Version: ${system.nixos.version}
         Kernel:  ${boot.kernelPackages.kernel.version}

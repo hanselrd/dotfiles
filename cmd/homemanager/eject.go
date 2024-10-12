@@ -112,7 +112,7 @@ var ejectCmd = &cobra.Command{
 
 func init() {
 	ejectCmd.Flags().
-		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix-e/%s-%s", environment.Environment.User.HomeDirectory, hash.Date(now), hash.TodSeconds(now)), "eject output directory")
+		StringVar(&outDir, "out-dir", fmt.Sprintf("%s/.nix-e/%s%s", environment.Environment.User.HomeDirectory, hash.Date(now), hash.TodSeconds(now)), "eject output directory")
 
 	HomeManagerCmd.AddCommand(ejectCmd)
 }
