@@ -40,11 +40,9 @@ var ejectCmd = &cobra.Command{
 		paths := lo.Must(nix.FindHomeManagerEjectPaths(profileGroup))
 		deps := lo.Must(nix.FindHomeManagerEjectDependencies(profileGroup))
 
-		if !strings.HasSuffix(outDir, "/") {
-			outDir += "/"
-		}
+		outDirSlash := outDir + lo.Ternary(!strings.HasSuffix(outDir, "/"), "/", "")
 
-		sedSearch := fmt.Sprintf("/nix/store/%s-", strings.Repeat(".", 32))[:len(outDir)]
+		sedSearch := fmt.Sprintf("/nix/store/%s-", strings.Repeat(".", 32))[:len(outDirSlash)]
 
 		err := os.MkdirAll(outDir, 0o700)
 		cobra.CheckErr(err)
@@ -67,7 +65,7 @@ var ejectCmd = &cobra.Command{
 				fmt.Sprintf(
 					"sed {{.VerbosityQuietLong}} -i \"/\\/nix\\/store\\/.\\{32\\}-/s@%s@%s@g\" %s",
 					sedSearch,
-					outDir,
+					outDirSlash,
 					cpio,
 				),
 			)
@@ -87,7 +85,7 @@ var ejectCmd = &cobra.Command{
 					fmt.Sprintf(
 						"sed {{.VerbosityQuietLong}} \"s@%s@%s@g\"",
 						sedSearch,
-						outDir,
+						outDirSlash,
 					),
 					shell.WithStdin(p),
 				)).Stdout
