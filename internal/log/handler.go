@@ -43,22 +43,22 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 			return color.HiBlackString("<%s>", time.Since(now))
 		},
 		FormatLevel: func(i interface{}) string {
-			var attrs []color.Attribute
+			attrs := []color.Attribute{color.Bold}
 			switch i.(string) {
 			case zerolog.LevelTraceValue:
-				attrs = []color.Attribute{color.FgHiBlack}
+				attrs = append(attrs, color.FgHiBlack)
 			case zerolog.LevelDebugValue:
-				attrs = []color.Attribute{color.FgCyan}
+				attrs = append(attrs, color.FgCyan)
 			case zerolog.LevelInfoValue:
-				attrs = []color.Attribute{color.FgGreen}
+				attrs = append(attrs, color.FgGreen)
 			case zerolog.LevelWarnValue:
-				attrs = []color.Attribute{color.FgYellow}
+				attrs = append(attrs, color.FgYellow)
 			case zerolog.LevelErrorValue:
-				attrs = []color.Attribute{color.FgRed}
+				attrs = append(attrs, color.FgRed)
 			case zerolog.LevelFatalValue:
-				attrs = []color.Attribute{color.FgHiRed, color.BlinkSlow}
+				attrs = append(attrs, color.FgHiRed, color.BlinkSlow)
 			case zerolog.LevelPanicValue:
-				attrs = []color.Attribute{color.BgHiRed, color.BlinkRapid}
+				attrs = append(attrs, color.BgHiRed, color.BlinkRapid)
 			default:
 				attrs = []color.Attribute{color.Reset}
 			}
