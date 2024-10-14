@@ -36,13 +36,13 @@ in {
       history = {
         expireDuplicatesFirst = true;
       };
-      plugins = with pkgs; [
-        {
-          name = "zsh-vi-mode";
-          src = zsh-vi-mode;
-          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        }
-      ];
+      # plugins = with pkgs; [
+      #   {
+      #     name = "zsh-vi-mode";
+      #     src = zsh-vi-mode;
+      #     file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      #   }
+      # ];
       initExtra = ''
         ${
           if env.roles.user.shell.theme
