@@ -36,11 +36,18 @@ in {
       history = {
         expireDuplicatesFirst = true;
       };
+      plugins = with pkgs; [
+        {
+          name = "zsh-vi-mode";
+          src = zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
       initExtra = ''
         ${
           if env.roles.user.shell.theme
           then ''
-            sh ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
+            ${lib.getExe' pkgs.bash "sh"} ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
           ''
           else ""
         }

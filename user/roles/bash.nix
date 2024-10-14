@@ -20,7 +20,7 @@ in {
         ${
           if env.roles.user.shell.theme
           then ''
-            sh ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
+            ${lib.getExe' pkgs.bash "sh"} ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
           ''
           else ""
         }
