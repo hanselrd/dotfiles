@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"log/slog"
 	"path/filepath"
@@ -23,7 +24,8 @@ var graphCmd = &cobra.Command{
 	Short: "Graph command",
 	Long:  "Graph command",
 	Run: func(cmd *cobra.Command, args []string) {
-		g := graphviz.New()
+		ctx := context.Background()
+		g := lo.Must(graphviz.New(ctx))
 		graph := lo.Must(g.Graph())
 		defer func() {
 			lo.Must0(graph.Close())
@@ -58,7 +60,7 @@ var graphCmd = &cobra.Command{
 					"type",
 					p.Type(),
 				)
-				node := lo.Must(graph.CreateNode(nodeName))
+				node := lo.Must(graph.CreateNodeByName(nodeName))
 				node.SetShape(
 					lo.Ternary(p.Type() == "system", cgraph.DoubleCircleShape, cgraph.CircleShape),
 				)
@@ -93,7 +95,7 @@ var graphCmd = &cobra.Command{
 								strings.Split(edgeName, " -> ")[1],
 							)
 							lo.Must(
-								graph.CreateEdge(
+								graph.CreateEdgeByName(
 									edgeName,
 									profileNodeMap[p.Type()][d],
 									profileNodeMap[p.Type()][p.String()],
@@ -129,7 +131,7 @@ var graphCmd = &cobra.Command{
 					"type",
 					r.Type(),
 				)
-				node := lo.Must(graph.CreateNode(nodeName))
+				node := lo.Must(graph.CreateNodeByName(nodeName))
 				node.SetShape(
 					lo.Ternary(r.Type() == "system", cgraph.DoubleCircleShape, cgraph.CircleShape),
 				)
@@ -172,7 +174,7 @@ var graphCmd = &cobra.Command{
 								strings.Split(edgeName, " -> ")[1],
 							)
 							lo.Must(
-								graph.CreateEdge(
+								graph.CreateEdgeByName(
 									edgeName,
 									lo.Ternary(split[1] == "profiles", profileNodeMap[split[0]], roleNodeMap[split[0]])[d],
 									roleNodeMap[r.Type()][r.String()],
@@ -184,7 +186,7 @@ var graphCmd = &cobra.Command{
 		}
 
 		buf := new(bytes.Buffer)
-		lo.Must0(g.Render(graph, "dot", buf))
+		lo.Must0(g.Render(ctx, graph, "dot", buf))
 		fmt.Println(buf.String())
 	},
 }
