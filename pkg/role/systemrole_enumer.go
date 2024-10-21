@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _SystemRoleName = "bootstrapbootcockpitdockergarudahome-manageri18nkdekernelmonitoringmotdnetworkingnixopensshshellsudotimeuserwslxserverxrdp"
+const _SystemRoleName = "bootstrapbootcockpitdockergarudahome-manageri18nkdekernelmonitoringmotdnetworkingnixopensshshellsudotimeudisks2userwslxserverxrdp"
 
-var _SystemRoleIndex = [...]uint8{0, 9, 13, 20, 26, 32, 44, 48, 51, 57, 67, 71, 81, 84, 91, 96, 100, 104, 108, 111, 118, 122}
+var _SystemRoleIndex = [...]uint8{0, 9, 13, 20, 26, 32, 44, 48, 51, 57, 67, 71, 81, 84, 91, 96, 100, 104, 111, 115, 118, 125, 129}
 
-const _SystemRoleLowerName = "bootstrapbootcockpitdockergarudahome-manageri18nkdekernelmonitoringmotdnetworkingnixopensshshellsudotimeuserwslxserverxrdp"
+const _SystemRoleLowerName = "bootstrapbootcockpitdockergarudahome-manageri18nkdekernelmonitoringmotdnetworkingnixopensshshellsudotimeudisks2userwslxserverxrdp"
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRoleIndex)-1) {
@@ -42,13 +42,14 @@ func _SystemRoleNoOp() {
 	_ = x[SystemRoleShell-(14)]
 	_ = x[SystemRoleSudo-(15)]
 	_ = x[SystemRoleTime-(16)]
-	_ = x[SystemRoleUser-(17)]
-	_ = x[SystemRoleWsl-(18)]
-	_ = x[SystemRoleXServer-(19)]
-	_ = x[SystemRoleXrdp-(20)]
+	_ = x[SystemRoleUdisks2-(17)]
+	_ = x[SystemRoleUser-(18)]
+	_ = x[SystemRoleWsl-(19)]
+	_ = x[SystemRoleXServer-(20)]
+	_ = x[SystemRoleXrdp-(21)]
 }
 
-var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleCockpit, SystemRoleDocker, SystemRoleGaruda, SystemRoleHomeManager, SystemRoleI18N, SystemRoleKDE, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleSudo, SystemRoleTime, SystemRoleUser, SystemRoleWsl, SystemRoleXServer, SystemRoleXrdp}
+var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleCockpit, SystemRoleDocker, SystemRoleGaruda, SystemRoleHomeManager, SystemRoleI18N, SystemRoleKDE, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleSudo, SystemRoleTime, SystemRoleUdisks2, SystemRoleUser, SystemRoleWsl, SystemRoleXServer, SystemRoleXrdp}
 
 var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleName[0:9]:          SystemRoleBootstrap,
@@ -85,14 +86,16 @@ var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleLowerName[96:100]:  SystemRoleSudo,
 	_SystemRoleName[100:104]:      SystemRoleTime,
 	_SystemRoleLowerName[100:104]: SystemRoleTime,
-	_SystemRoleName[104:108]:      SystemRoleUser,
-	_SystemRoleLowerName[104:108]: SystemRoleUser,
-	_SystemRoleName[108:111]:      SystemRoleWsl,
-	_SystemRoleLowerName[108:111]: SystemRoleWsl,
-	_SystemRoleName[111:118]:      SystemRoleXServer,
-	_SystemRoleLowerName[111:118]: SystemRoleXServer,
-	_SystemRoleName[118:122]:      SystemRoleXrdp,
-	_SystemRoleLowerName[118:122]: SystemRoleXrdp,
+	_SystemRoleName[104:111]:      SystemRoleUdisks2,
+	_SystemRoleLowerName[104:111]: SystemRoleUdisks2,
+	_SystemRoleName[111:115]:      SystemRoleUser,
+	_SystemRoleLowerName[111:115]: SystemRoleUser,
+	_SystemRoleName[115:118]:      SystemRoleWsl,
+	_SystemRoleLowerName[115:118]: SystemRoleWsl,
+	_SystemRoleName[118:125]:      SystemRoleXServer,
+	_SystemRoleLowerName[118:125]: SystemRoleXServer,
+	_SystemRoleName[125:129]:      SystemRoleXrdp,
+	_SystemRoleLowerName[125:129]: SystemRoleXrdp,
 }
 
 var _SystemRoleNames = []string{
@@ -113,10 +116,11 @@ var _SystemRoleNames = []string{
 	_SystemRoleName[91:96],
 	_SystemRoleName[96:100],
 	_SystemRoleName[100:104],
-	_SystemRoleName[104:108],
-	_SystemRoleName[108:111],
-	_SystemRoleName[111:118],
-	_SystemRoleName[118:122],
+	_SystemRoleName[104:111],
+	_SystemRoleName[111:115],
+	_SystemRoleName[115:118],
+	_SystemRoleName[118:125],
+	_SystemRoleName[125:129],
 }
 
 // SystemRoleString retrieves an enum value from the enum constants string name.

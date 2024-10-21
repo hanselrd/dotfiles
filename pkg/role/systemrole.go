@@ -24,6 +24,7 @@ const (
 	SystemRoleShell
 	SystemRoleSudo
 	SystemRoleTime
+	SystemRoleUdisks2
 	SystemRoleUser
 	SystemRoleWsl
 	SystemRoleXServer

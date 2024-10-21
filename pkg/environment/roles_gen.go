@@ -23,6 +23,7 @@ type environmentRolesSystem struct {
 	Shell       *environmentRolesSystemShell       `json:"shell,omitempty"`
 	Sudo        *environmentRolesSystemSudo        `json:"sudo,omitempty"`
 	Time        *environmentRolesSystemTime        `json:"time,omitempty"`
+	Udisks2     *environmentRolesSystemUdisks2     `json:"udisks2,omitempty"`
 	User        *environmentRolesSystemUser        `json:"user,omitempty"`
 	Wsl         *environmentRolesSystemWsl         `json:"wsl,omitempty"`
 	Xserver     *environmentRolesSystemXserver     `json:"xserver,omitempty"`

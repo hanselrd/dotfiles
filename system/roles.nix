@@ -23,6 +23,7 @@
     ./roles/shell.nix
     ./roles/sudo.nix
     ./roles/time.nix
+    ./roles/udisks2.nix
     ./roles/user.nix
     ./roles/wsl.nix
     ./roles/xserver.nix

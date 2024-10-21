@@ -22,6 +22,7 @@ type (
 	environmentRolesSystemShell   struct{}
 	environmentRolesSystemSudo    struct{}
 	environmentRolesSystemTime    struct{}
+	environmentRolesSystemUdisks2 struct{}
 	environmentRolesSystemUser    struct{}
 	environmentRolesSystemWsl     struct{}
 	environmentRolesSystemXrdp    struct{}
