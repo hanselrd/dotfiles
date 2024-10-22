@@ -40,6 +40,7 @@
     gawk
     gnugrep
     gnused
+    gnutar
     gzip
     lm_sensors
     lsb-release
