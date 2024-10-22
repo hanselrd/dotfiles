@@ -57,8 +57,8 @@ vim.opt.background = "dark"
 
 -- git-blame-nvim
 vim.g.gitblame_display_virtual_text = 0
-vim.g.gitblame_message_template = "<sha> <author> <date>"
-vim.g.gitblame_date_format = "%Y-%m-%dT%T%z"
+vim.g.gitblame_message_template = "<sha> <author> (<date>)"
+vim.g.gitblame_date_format = "%r"
 vim.g.gitblame_message_when_not_committed = "Not committed yet"
 
 -- lualine-nvim
@@ -89,6 +89,7 @@ require("lualine").setup({
       "filename",
       "lsp_progress",
       { gitblame.get_current_blame_text, cond = gitblame.is_blame_text_available },
+      '%{tagbar#currenttag("[%s]", "", "f")}',
     },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },

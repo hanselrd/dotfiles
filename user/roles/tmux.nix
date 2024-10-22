@@ -16,16 +16,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.tmux = {
       enable = true;
-      package = pkgs.tmux.overrideAttrs (finalAttrs: prevAttrs: {
-        version = "master";
-        src = pkgs.fetchFromGitHub {
-          owner = "tmux";
-          repo = finalAttrs.pname;
-          rev = finalAttrs.version;
-          hash = "sha256-mHmO7pgtQvqokKETXbj5n1/eGlbkzBMe2WiuBtq6t5Q=";
-        };
-        patches = [];
-      });
       clock24 = true;
       customPaneNavigationAndResize = true;
       historyLimit = 50000;

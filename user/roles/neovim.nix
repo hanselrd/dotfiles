@@ -35,6 +35,7 @@ in {
         pears-nvim
         plenary-nvim
         rainbow-delimiters-nvim
+        tagbar
         telescope-fzf-native-nvim
         telescope-nvim
         treesj

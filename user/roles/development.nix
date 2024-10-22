@@ -32,10 +32,10 @@ in {
     roles.user.development.zig.enable = true;
 
     home.packages = with pkgs; [
-      ctags
       gnumake
       gnupatch
       objconv
+      universal-ctags
 
       # libGL
       # libGL.dev
