@@ -43,7 +43,7 @@ in rec {
       subPackages = [
         "scripts/${name}"
       ];
-      CGO_ENABLED = 1;
+      CGO_ENABLED = 0;
       meta.mainProgram = name;
     };
 }

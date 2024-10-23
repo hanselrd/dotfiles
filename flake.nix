@@ -233,7 +233,7 @@
         dotfiles-update = pkgs.writeShellScriptBin "dotfiles-update" ''
           nix flake update
 
-          ${lib.getExe' pkgs.go "go"} get -u ./...
+          # ${lib.getExe' pkgs.go "go"} get -u ./...
           ${lib.getExe' pkgs.go "go"} mod tidy
           ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
           ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
