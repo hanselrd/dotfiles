@@ -6,7 +6,7 @@ toolchain go1.23.2
 
 require (
 	github.com/fatih/color v1.18.0
-	github.com/goccy/go-graphviz v0.2.2
+	github.com/goccy/go-graphviz v0.2.4
 	github.com/iancoleman/strcase v0.3.0
 	github.com/rs/zerolog v1.33.0
 	github.com/samber/lo v1.47.0
@@ -16,6 +16,7 @@ require (
 
 require (
 	github.com/dave/jennifer v1.7.1 // indirect
+	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/dmarkham/enumer v1.5.10 // indirect
 	github.com/flopp/go-findfont v0.1.0 // indirect
 	github.com/fogleman/gg v1.3.0 // indirect
