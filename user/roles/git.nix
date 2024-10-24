@@ -44,6 +44,27 @@ in {
             # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
           ''
         }";
+        sworktree = "!${lib.getExe' pkgs.bash "sh"} ${
+          pkgs.writeShellScript "git-smart-worktree.sh" ''
+            set -e
+
+            branch=$1
+            directory=$(${lib.getExe' pkgs.coreutils "echo"} $branch | ${lib.getExe pkgs.gnused} "s@/@-@g")
+
+            ${lib.getExe' pkgs.git "git"} worktree add $directory $branch
+          ''
+        }";
+        sworktree-new = "!${lib.getExe' pkgs.bash "sh"} ${
+          pkgs.writeShellScript "git-smart-worktree-new.sh" ''
+            set -e
+
+            branch=$1
+            directory=$(${lib.getExe' pkgs.coreutils "echo"} $branch | ${lib.getExe pkgs.gnused} "s@/@-@g")
+            parent=$2
+
+            ${lib.getExe' pkgs.git "git"} worktree add -b $branch $directory $parent
+          ''
+        }";
 
         audit = "!${lib.getExe' pkgs.git "git"} count-objects --verbose --human-readable";
         hydrate = "!${lib.getExe' pkgs.git "git"} fetch origin --no-auto-gc --prune --refetch";
