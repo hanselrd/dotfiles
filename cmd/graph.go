@@ -185,8 +185,8 @@ var graphCmd = &cobra.Command{
 									edgeName,
 									lo.Ternary(
 										split[1] == "profiles",
-										profileNodeMap[pl][lo.Must(profile.NewProfile(pl, d))],
-										roleNodeMap[pl][lo.Must(role.NewRole(pl, d))],
+										profileNodeMap[pl][lo.T2(profile.NewProfile(pl, d)).A],
+										roleNodeMap[pl][lo.T2(role.NewRole(pl, d)).A],
 									),
 									roleNodeMap[r.PrivilegeLevel()][r],
 								),
