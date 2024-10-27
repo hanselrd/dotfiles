@@ -1,7 +1,6 @@
 package role
 
 import (
-	"github.com/hanselrd/dotfiles/internal/accesslevel"
 	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
@@ -39,8 +38,8 @@ func (r SystemRole) PrivilegeLevel() privilegelevel.PrivilegeLevel {
 	return privilegelevel.PrivilegeLevelSystem
 }
 
-func (r SystemRole) AccessLevel() accesslevel.AccessLevel {
-	return accesslevel.AccessLevelPublic
+func (r SystemRole) Enabled() bool {
+	return true
 }
 
 func (r SystemRole) Encryption() encryption.Encryption {

@@ -13,7 +13,6 @@ import (
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
-	"github.com/hanselrd/dotfiles/internal/accesslevel"
 	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 	"github.com/hanselrd/dotfiles/internal/shell"
@@ -142,16 +141,13 @@ var graphCmd = &cobra.Command{
 					node.SetShape(cgraph.CircleShape)
 				}
 				node.SetStyle(cgraph.FilledNodeStyle)
-				switch r.AccessLevel() {
-				case accesslevel.AccessLevelPublic:
+				switch r.Encryption() {
+				case encryption.EncryptionNone:
 					node.SetColor("#E6E6E9")
-				case accesslevel.AccessLevelSecret:
-					switch r.Encryption() {
-					case encryption.EncryptionDefault:
-						node.SetColor("#9999A1")
-					case encryption.EncryptionPrivate:
-						node.SetColor("#AF8F8A")
-					}
+				case encryption.EncryptionDefault:
+					node.SetColor("#9999A1")
+				case encryption.EncryptionPrivate:
+					node.SetColor("#AF8F8A")
 				}
 				roleNodeMap[r.PrivilegeLevel()][r] = node
 			})

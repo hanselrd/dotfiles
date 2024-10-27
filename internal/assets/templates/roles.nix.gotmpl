@@ -9,10 +9,10 @@
     {{- range .}}
     {{- $role := printf "%s" .}}
     {{- $privilege_level := printf "%s" .PrivilegeLevel}}
-    {{- if eq .AccessLevel 1}}
+    {{- if .Enabled}}
+    {{- if eq .Encryption 0}}
     ./roles/{{$role}}.nix
-    {{- else if eq .AccessLevel 2}}
-    {{- if eq .Encryption 1}}
+    {{- else if eq .Encryption 1}}
     (lib.optional (!env.extra.encrypted.default) ../secrets/{{$privilege_level}}/roles/{{$role}}.nix)
     {{- else if eq .Encryption 2}}
     (lib.optional (!env.extra.encrypted.private) ../secrets/private/{{$privilege_level}}/roles/{{$role}}.nix)

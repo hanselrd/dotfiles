@@ -3,7 +3,6 @@ package role
 import (
 	"fmt"
 
-	"github.com/hanselrd/dotfiles/internal/accesslevel"
 	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
@@ -11,7 +10,7 @@ import (
 type Role interface {
 	fmt.Stringer
 	PrivilegeLevel() privilegelevel.PrivilegeLevel
-	AccessLevel() accesslevel.AccessLevel
+	Enabled() bool
 	Encryption() encryption.Encryption
 }
 
