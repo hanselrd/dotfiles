@@ -32,9 +32,7 @@ var profilesCmd = &cobra.Command{
 				file := fmt.Sprintf("%s/profiles/%s.nix", p.PrivilegeLevel(), p)
 				os.MkdirAll(filepath.Dir(file), 0o755)
 
-				if _, err := os.Stat(file); !os.IsNotExist(
-					err,
-				) {
+				if _, err := os.Stat(file); !os.IsNotExist(err) {
 					slog.Debug(
 						"skipping, already exists",
 						"file",

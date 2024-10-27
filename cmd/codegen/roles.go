@@ -34,17 +34,17 @@ var rolesCmd = &cobra.Command{
 				if !r.Enabled() {
 					return
 				}
-				switch r.Encryption() {
+				switch e := r.Encryption(); e {
+				case encryption.EncryptionNone:
+					// do nothing
 				case encryption.EncryptionDefault:
 					file = filepath.Join("secrets", file)
-				case encryption.EncryptionPrivate:
-					file = filepath.Join("secrets/private", file)
+				default:
+					file = filepath.Join(fmt.Sprintf("secrets/%s", e), file)
 				}
 				os.MkdirAll(filepath.Dir(file), 0o755)
 
-				if _, err := os.Stat(file); !os.IsNotExist(
-					err,
-				) {
+				if _, err := os.Stat(file); !os.IsNotExist(err) {
 					slog.Debug(
 						"skipping, already exists",
 						"file",

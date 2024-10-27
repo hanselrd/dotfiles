@@ -144,21 +144,20 @@ var Environment = environment{
 			func(e encryption.Encryption) (encryption.Encryption, bool) {
 				file := ".encrypted"
 				switch e {
+				case encryption.EncryptionNone:
+					// do nothing
 				case encryption.EncryptionDefault:
 					file = filepath.Join("secrets", file)
-				case encryption.EncryptionPrivate:
-					file = filepath.Join("secrets/private", file)
 				default:
-					return e, true
+					file = filepath.Join(fmt.Sprintf("secrets/%s", e), file)
 				}
-				return e, lo.T2(
-					shell.Shell(
-						fmt.Sprintf(
-							"grep -vq \"false\" %s",
-							filepath.Join(os.Getenv("DOTFILES_SRC_DIR"), file),
-						),
-					),
-				).A.ExitCode == 0
+				file = filepath.Join(os.Getenv("DOTFILES_SRC_DIR"), file)
+				if _, err := os.Stat(file); !os.IsNotExist(err) {
+					return e, lo.T2(
+						shell.Shell(fmt.Sprintf("grep -vq \"false\" %s", file)),
+					).A.ExitCode == 0
+				}
+				return e, true
 			},
 		),
 		WithSystemd: func() bool {
