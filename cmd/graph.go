@@ -14,6 +14,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/accesslevel"
+	"github.com/hanselrd/dotfiles/internal/encryption"
+	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 	"github.com/hanselrd/dotfiles/internal/shell"
 	"github.com/hanselrd/dotfiles/pkg/profile"
 	"github.com/hanselrd/dotfiles/pkg/role"
@@ -35,9 +37,10 @@ var graphCmd = &cobra.Command{
 		graph.SetLabelLocation(cgraph.TopLocation)
 		graph.SetLabel("Dotfiles Profile(s)/Role(s) Architecture")
 
-		profileNodeMap := make(map[string]map[string]*cgraph.Node)
-		profileNodeMap[profile.SystemProfileValues()[0].Type()] = make(map[string]*cgraph.Node)
-		profileNodeMap[profile.UserProfileValues()[0].Type()] = make(map[string]*cgraph.Node)
+		profileNodeMap := make(map[privilegelevel.PrivilegeLevel]map[profile.Profile]*cgraph.Node)
+		for _, pl := range privilegelevel.PrivilegeLevelValues() {
+			profileNodeMap[pl] = make(map[profile.Profile]*cgraph.Node)
+		}
 
 		for _, profiles := range [][]profile.Profile{
 			lo.Map(
@@ -49,24 +52,25 @@ var graphCmd = &cobra.Command{
 				func(p profile.UserProfile, _ int) profile.Profile { return p },
 			),
 		} {
-			profileNodeMap[profiles[0].Type()] = make(map[string]*cgraph.Node)
-
 			lo.ForEach(profiles, func(p profile.Profile, _ int) {
-				nodeName := fmt.Sprintf("profiles.%s.%s", p.Type(), p)
+				nodeName := fmt.Sprintf("profiles.%s.%s", p.PrivilegeLevel(), p)
 				slog.Debug(
 					"creating profile node",
 					"name",
 					nodeName,
-					"type",
-					p.Type(),
+					"privilegeLevel",
+					p.PrivilegeLevel(),
 				)
 				node := lo.Must(graph.CreateNodeByName(nodeName))
-				node.SetShape(
-					lo.Ternary(p.Type() == "system", cgraph.DoubleCircleShape, cgraph.CircleShape),
-				)
+				switch p.PrivilegeLevel() {
+				case privilegelevel.PrivilegeLevelSystem:
+					node.SetShape(cgraph.DoubleCircleShape)
+				case privilegelevel.PrivilegeLevelUser:
+					node.SetShape(cgraph.CircleShape)
+				}
 				node.SetStyle(cgraph.FilledNodeStyle)
 				node.SetColor("#F4F4F6")
-				profileNodeMap[p.Type()][p.String()] = node
+				profileNodeMap[p.PrivilegeLevel()][p] = node
 			})
 
 			lo.ForEach(profiles, func(p profile.Profile, _ int) {
@@ -78,17 +82,17 @@ var graphCmd = &cobra.Command{
 							d = strings.TrimSuffix(d, filepath.Ext(d))
 							edgeName := fmt.Sprintf(
 								"profiles.%s.%s -> profiles.%s.%s",
-								p.Type(),
+								p.PrivilegeLevel(),
 								d,
-								p.Type(),
+								p.PrivilegeLevel(),
 								p,
 							)
 							slog.Debug(
 								"creating profile edge",
 								"name",
 								edgeName,
-								"type",
-								p.Type(),
+								"privilegeLevel",
+								p.PrivilegeLevel(),
 								"start",
 								strings.Split(edgeName, " -> ")[0],
 								"end",
@@ -97,8 +101,8 @@ var graphCmd = &cobra.Command{
 							lo.Must(
 								graph.CreateEdgeByName(
 									edgeName,
-									profileNodeMap[p.Type()][d],
-									profileNodeMap[p.Type()][p.String()],
+									profileNodeMap[p.PrivilegeLevel()][lo.Must(profile.NewProfile(p.PrivilegeLevel(), d))],
+									profileNodeMap[p.PrivilegeLevel()][p],
 								),
 							)
 						})
@@ -106,9 +110,10 @@ var graphCmd = &cobra.Command{
 			})
 		}
 
-		roleNodeMap := make(map[string]map[string]*cgraph.Node)
-		roleNodeMap[role.SystemRoleValues()[0].Type()] = make(map[string]*cgraph.Node)
-		roleNodeMap[role.UserRoleValues()[0].Type()] = make(map[string]*cgraph.Node)
+		roleNodeMap := make(map[privilegelevel.PrivilegeLevel]map[role.Role]*cgraph.Node)
+		for _, pl := range privilegelevel.PrivilegeLevelValues() {
+			roleNodeMap[pl] = make(map[role.Role]*cgraph.Node)
+		}
 
 		for _, roles := range [][]role.Role{
 			lo.Map(
@@ -120,34 +125,39 @@ var graphCmd = &cobra.Command{
 				func(r role.UserRole, _ int) role.Role { return r },
 			),
 		} {
-			roleNodeMap[roles[0].Type()] = make(map[string]*cgraph.Node)
-
 			lo.ForEach(roles, func(r role.Role, _ int) {
-				nodeName := fmt.Sprintf("roles.%s.%s", r.Type(), r)
+				nodeName := fmt.Sprintf("roles.%s.%s", r.PrivilegeLevel(), r)
 				slog.Debug(
 					"creating role node",
 					"name",
 					nodeName,
-					"type",
-					r.Type(),
+					"privilegeLevel",
+					r.PrivilegeLevel(),
 				)
 				node := lo.Must(graph.CreateNodeByName(nodeName))
-				node.SetShape(
-					lo.Ternary(r.Type() == "system", cgraph.DoubleCircleShape, cgraph.CircleShape),
-				)
+				switch r.PrivilegeLevel() {
+				case privilegelevel.PrivilegeLevelSystem:
+					node.SetShape(cgraph.DoubleCircleShape)
+				case privilegelevel.PrivilegeLevelUser:
+					node.SetShape(cgraph.CircleShape)
+				}
 				node.SetStyle(cgraph.FilledNodeStyle)
-				node.SetColor(
-					lo.Ternary(
-						r.AccessLevel() == accesslevel.AccessLevelPublic,
-						"#E6E6E9",
-						"#9999A1",
-					),
-				)
-				roleNodeMap[r.Type()][r.String()] = node
+				switch r.AccessLevel() {
+				case accesslevel.AccessLevelPublic:
+					node.SetColor("#E6E6E9")
+				case accesslevel.AccessLevelSecret:
+					switch r.Encryption() {
+					case encryption.EncryptionDefault:
+						node.SetColor("#9999A1")
+					case encryption.EncryptionPrivate:
+						node.SetColor("#AF8F8A")
+					}
+				}
+				roleNodeMap[r.PrivilegeLevel()][r] = node
 			})
 
 			lo.ForEach(roles, func(r role.Role, _ int) {
-				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "roles\.%s\.%s\.enable = true"`, r.Type(), r)); err == nil {
+				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "roles\.%s\.%s\.enable = true"`, r.PrivilegeLevel(), r)); err == nil {
 					lo.ForEach(
 						strings.Split(res.Stdout, "\n"),
 						func(d string, _ int) {
@@ -159,25 +169,30 @@ var graphCmd = &cobra.Command{
 								split[1],
 								split[0],
 								d,
-								r.Type(),
+								r.PrivilegeLevel(),
 								r,
 							)
 							slog.Debug(
 								"creating role edge",
 								"name",
 								edgeName,
-								"type",
-								r.Type(),
+								"privilegeLevel",
+								r.PrivilegeLevel(),
 								"start",
 								strings.Split(edgeName, " -> ")[0],
 								"end",
 								strings.Split(edgeName, " -> ")[1],
 							)
+							pl := lo.Must(privilegelevel.PrivilegeLevelString(split[0]))
 							lo.Must(
 								graph.CreateEdgeByName(
 									edgeName,
-									lo.Ternary(split[1] == "profiles", profileNodeMap[split[0]], roleNodeMap[split[0]])[d],
-									roleNodeMap[r.Type()][r.String()],
+									lo.Ternary(
+										split[1] == "profiles",
+										profileNodeMap[pl][lo.Must(profile.NewProfile(pl, d))],
+										roleNodeMap[pl][lo.Must(role.NewRole(pl, d))],
+									),
+									roleNodeMap[r.PrivilegeLevel()][r],
 								),
 							)
 						})

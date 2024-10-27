@@ -1,15 +1,16 @@
 {{$role := printf "%s" . -}}
+{{$privilege_level := printf "%s" .PrivilegeLevel -}}
 {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.roles.{{.Type}}.{{$role}};
+  cfg = config.roles.{{$privilege_level}}.{{$role}};
 in {
   options = {
-    roles.{{.Type}}.{{$role}} = {
-      enable = lib.mkEnableOption "roles.{{.Type}}.{{$role}}";
+    roles.{{$privilege_level}}.{{$role}} = {
+      enable = lib.mkEnableOption "roles.{{$privilege_level}}.{{$role}}";
     };
   };
 

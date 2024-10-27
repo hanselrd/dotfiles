@@ -1,8 +1,10 @@
 package profile
 
+import "github.com/hanselrd/dotfiles/internal/privilegelevel"
+
 type UserProfile uint
 
-//go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile -linecomment -json -text -transform title-lower
+//go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile -linecomment -json -text -transform lower
 
 const (
 	UserProfileBase UserProfile = iota
@@ -11,6 +13,6 @@ const (
 	UserProfileFull
 )
 
-func (p UserProfile) Type() string {
-	return "user"
+func (p UserProfile) PrivilegeLevel() privilegelevel.PrivilegeLevel {
+	return privilegelevel.PrivilegeLevelUser
 }

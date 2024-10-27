@@ -1,6 +1,10 @@
 package role
 
-import "github.com/hanselrd/dotfiles/internal/accesslevel"
+import (
+	"github.com/hanselrd/dotfiles/internal/accesslevel"
+	"github.com/hanselrd/dotfiles/internal/encryption"
+	"github.com/hanselrd/dotfiles/internal/privilegelevel"
+)
 
 type UserRole uint
 
@@ -11,6 +15,7 @@ const (
 	UserRoleAlacritty
 	UserRoleBash
 	UserRoleBat
+	UserRoleBrave
 	UserRoleBrowser
 	UserRoleBtop
 	UserRoleDevelopment
@@ -59,14 +64,22 @@ const (
 	UserRoleZsh
 )
 
-func (r UserRole) Type() string {
-	return "user"
+func (r UserRole) PrivilegeLevel() privilegelevel.PrivilegeLevel {
+	return privilegelevel.PrivilegeLevelUser
 }
 
 func (r UserRole) AccessLevel() accesslevel.AccessLevel {
 	switch r {
 	case UserRoleRts:
-		return accesslevel.AccessLevelPrivate
+		return accesslevel.AccessLevelSecret
 	}
 	return accesslevel.AccessLevelPublic
+}
+
+func (r UserRole) Encryption() encryption.Encryption {
+	switch r {
+	case UserRoleRts:
+		return encryption.EncryptionDefault
+	}
+	return encryption.EncryptionNone
 }

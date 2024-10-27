@@ -1,6 +1,10 @@
 package role
 
-import "github.com/hanselrd/dotfiles/internal/accesslevel"
+import (
+	"github.com/hanselrd/dotfiles/internal/accesslevel"
+	"github.com/hanselrd/dotfiles/internal/encryption"
+	"github.com/hanselrd/dotfiles/internal/privilegelevel"
+)
 
 type SystemRole uint
 
@@ -31,10 +35,14 @@ const (
 	SystemRoleXrdp
 )
 
-func (r SystemRole) Type() string {
-	return "system"
+func (r SystemRole) PrivilegeLevel() privilegelevel.PrivilegeLevel {
+	return privilegelevel.PrivilegeLevelSystem
 }
 
 func (r SystemRole) AccessLevel() accesslevel.AccessLevel {
 	return accesslevel.AccessLevelPublic
+}
+
+func (r SystemRole) Encryption() encryption.Encryption {
+	return encryption.EncryptionNone
 }

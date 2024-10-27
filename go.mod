@@ -6,7 +6,7 @@ toolchain go1.23.2
 
 require (
 	github.com/fatih/color v1.18.0
-	github.com/goccy/go-graphviz v0.2.4
+	github.com/goccy/go-graphviz v0.2.9
 	github.com/iancoleman/strcase v0.3.0
 	github.com/rs/zerolog v1.33.0
 	github.com/samber/lo v1.47.0

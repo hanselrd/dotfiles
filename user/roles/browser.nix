@@ -13,9 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      brave
-    ];
+    roles.user.brave.enable = true;
 
     home.sessionVariables = {
       BROWSER = "brave";

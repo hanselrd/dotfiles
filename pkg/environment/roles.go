@@ -34,6 +34,7 @@ type (
 	environmentRolesUserAlacritty             struct{}
 	environmentRolesUserBash                  struct{}
 	environmentRolesUserBat                   struct{}
+	environmentRolesUserBrave                 struct{}
 	environmentRolesUserBrowser               struct{}
 	environmentRolesUserBtop                  struct{}
 	environmentRolesUserDevelopment           struct{}

@@ -260,7 +260,7 @@ in {
 
     home.file.".tmp/oh-my-posh" = lib.mkIf lib.profiles.isSystemWsl (
       lib.common.runExternalAlways ''
-        ${lib.getExe' pkgs.coreutils "cp"} -L ${env.user.configDirectory}/oh-my-posh/config.json ${lib.escape [" "] env.extra.winUser.configDirectory}/oh-my-posh/.
+        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/oh-my-posh/config.json ${lib.escape [" "] env.extra.winUser.configDirectory}/oh-my-posh
       ''
     );
   };

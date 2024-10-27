@@ -25,5 +25,9 @@ in {
         # "--total-size"
       ];
     };
+
+    home.shellAliases = {
+      lta = "lt -a";
+    };
   };
 }

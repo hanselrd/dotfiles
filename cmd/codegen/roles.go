@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/accesslevel"
+	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/pkg/role"
 )
 
@@ -30,12 +31,17 @@ var rolesCmd = &cobra.Command{
 			),
 		} {
 			lop.ForEach(roles, func(r role.Role, _ int) {
-				file := fmt.Sprintf("%s/roles/%s.nix", r.Type(), r)
+				file := fmt.Sprintf("%s/roles/%s.nix", r.PrivilegeLevel(), r)
 				switch r.AccessLevel() {
 				case accesslevel.AccessLevelDisabled:
 					return
-				case accesslevel.AccessLevelPrivate:
-					file = filepath.Join("secrets", file)
+				case accesslevel.AccessLevelSecret:
+					switch r.Encryption() {
+					case encryption.EncryptionDefault:
+						file = filepath.Join("secrets", file)
+					case encryption.EncryptionPrivate:
+						file = filepath.Join("secrets/private", file)
+					}
 				}
 				os.MkdirAll(filepath.Dir(file), 0o755)
 
@@ -56,7 +62,7 @@ var rolesCmd = &cobra.Command{
 				cobra.CheckErr(err)
 			})
 
-			f, err := os.Create(fmt.Sprintf("%s/roles.nix", roles[0].Type()))
+			f, err := os.Create(fmt.Sprintf("%s/roles.nix", roles[0].PrivilegeLevel()))
 			cobra.CheckErr(err)
 			err = tmpl.ExecuteTemplate(f, "roles.nix.gotmpl", roles)
 			cobra.CheckErr(err)

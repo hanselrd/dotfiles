@@ -34,6 +34,7 @@ type environmentRolesUser struct {
 	Alacritty             *environmentRolesUserAlacritty             `json:"alacritty,omitempty"`
 	Bash                  *environmentRolesUserBash                  `json:"bash,omitempty"`
 	Bat                   *environmentRolesUserBat                   `json:"bat,omitempty"`
+	Brave                 *environmentRolesUserBrave                 `json:"brave,omitempty"`
 	Browser               *environmentRolesUserBrowser               `json:"browser,omitempty"`
 	Btop                  *environmentRolesUserBtop                  `json:"btop,omitempty"`
 	Development           *environmentRolesUserDevelopment           `json:"development,omitempty"`

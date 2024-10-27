@@ -10,6 +10,7 @@
     ./roles/alacritty.nix
     ./roles/bash.nix
     ./roles/bat.nix
+    ./roles/brave.nix
     ./roles/browser.nix
     ./roles/btop.nix
     ./roles/development.nix
@@ -44,7 +45,7 @@
     ./roles/pager.nix
     ./roles/ranger.nix
     ./roles/ripgrep.nix
-    (lib.optional (!env.extra.encrypted) ../secrets/user/roles/rts.nix)
+    (lib.optional (!env.extra.encrypted.default) ../secrets/user/roles/rts.nix)
     ./roles/scripts.nix
     ./roles/shell.nix
     ./roles/ssh.nix

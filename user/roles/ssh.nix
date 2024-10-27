@@ -28,13 +28,13 @@ in {
     };
 
     home.file = {
-      ".tmp/ssh0" = lib.common.runExternal ''
+      ".tmp/ssh0" = lib.common.runExternalOnce ''
         test -f ${env.user.homeDirectory}/.ssh/id_ed25519 || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t ed25519 -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_ed25519
         # test -f ${env.user.homeDirectory}/.ssh/id_rsa || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t rsa -b 4096 -o -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_rsa
       '';
       ".tmp/ssh1" = lib.mkIf lib.profiles.isSystemWsl (
         lib.common.runExternalAlways ''
-          ${lib.getExe' pkgs.coreutils "cp"} -L ${env.user.homeDirectory}/.ssh/config ${lib.escape [" "] env.extra.winUser.homeDirectory}/.ssh/.
+          ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.homeDirectory}/.ssh/config ${lib.escape [" "] env.extra.winUser.homeDirectory}/.ssh
         ''
       );
     };

@@ -24,13 +24,13 @@ in rec {
       )
     );
 
-  runExternal = script: {
+  runExternalOnce = script: {
     text = script;
     onChange = script;
   };
 
   runExternalAlways = script:
-    runExternal ''
+    runExternalOnce ''
       # ${currentTimeUtcPretty}
       ${script}
     '';
@@ -39,7 +39,7 @@ in rec {
     pkgs.buildGoModule {
       name = "dotfiles-go-script-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-PUVCB+9KHVKlp2uk/0CyWeXjumW5IG7R7w8iZRwfr+A=";
+      vendorHash = "sha256-6eB8NDOs+Ts8Jb0Cfx+KMDMkMdjWyzV0k7nb4LlC1aY=";
       subPackages = [
         "scripts/${name}"
       ];
