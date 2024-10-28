@@ -49,6 +49,24 @@ var encryptionCmd = &cobra.Command{
 			lo.DropByIndex(encryption.EncryptionValues(), 0),
 		)
 		cobra.CheckErr(err)
+		os.MkdirAll(".git/git-crypt/.keys", 0o700)
+		for _, e := range lo.DropByIndex(encryption.EncryptionValues(), 0) {
+			switch e {
+			case encryption.EncryptionNone:
+				// do nothing
+			case encryption.EncryptionDefault:
+				shell.Shell(
+					fmt.Sprintf("git-crypt export-key - | base64 > .git/git-crypt/.keys/%s", e),
+				)
+			default:
+				shell.Shell(
+					fmt.Sprintf(
+						"git-crypt export-key -k %[1]s - | base64 > .git/git-crypt/.keys/%[1]s",
+						e,
+					),
+				)
+			}
+		}
 	},
 }
 
