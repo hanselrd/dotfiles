@@ -39,7 +39,7 @@ var encryptionCmd = &cobra.Command{
 				shell.Shell(fmt.Sprintf("git-crypt init -k %s", e))
 			}
 			os.MkdirAll(filepath.Dir(file), 0o755)
-			os.WriteFile(file, []byte("false"), 0o644)
+			os.WriteFile(file, []byte("false\n"), 0o644)
 		}
 		f, err := os.Create(".gitattributes")
 		cobra.CheckErr(err)
