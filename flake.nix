@@ -220,6 +220,7 @@
 
         dotfiles-codegen1 = pkgs.writeShellScriptBin "dotfiles-codegen1" ''
           ${lib.getExe dotfiles-codegen0}
+          ${lib.getExe pkgs.dotfiles-cli} codegen encryption
           # ${lib.getExe pkgs.dotfiles-cli} codegen hash
           ${lib.getExe pkgs.dotfiles-cli} codegen profiles
           ${lib.getExe pkgs.dotfiles-cli} codegen roles
