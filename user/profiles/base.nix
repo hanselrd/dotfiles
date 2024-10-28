@@ -25,7 +25,7 @@
     roles.user.xdg.enable = true;
     roles.user.zoxide.enable = true;
   }
-  (lib.optionalAttrs (!env.extra.encrypted.default) {
+  (lib.optionalAttrs (!env.extra.encrypted.yellow) {
     # roles.user.rts.enable = true;
   }))
 // {

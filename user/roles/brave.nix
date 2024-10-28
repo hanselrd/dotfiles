@@ -18,18 +18,18 @@ in {
       brave
     ];
 
-    home.file = lib.mkIf (!env.extra.encrypted.private) {
+    home.file = lib.mkIf (!env.extra.encrypted.blue) {
       ".tmp/brave0" = lib.common.runExternalAlways ''
-        ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/private/user/roles/brave/Bookmarks} ${env.user.configDirectory}/BraveSoftware/Brave-Browser/Default/Bookmarks
+        ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${env.user.configDirectory}/BraveSoftware/Brave-Browser/Default/Bookmarks
       '';
       ".tmp/brave1" = lib.mkIf lib.profiles.isSystemDarwin (
         lib.common.runExternalAlways ''
-          ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/private/user/roles/brave/Bookmarks} ${lib.concatMapStringsSep "/" (x: lib.escape [" "] x) [env.user.homeDirectory "Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"]}
+          ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${lib.concatMapStringsSep "/" (x: lib.escape [" "] x) [env.user.homeDirectory "Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"]}
         ''
       );
       ".tmp/brave2" = lib.mkIf lib.profiles.isSystemWsl (
         lib.common.runExternalAlways ''
-          ${lib.getExe' pkgs.coreutils "install"} -DT ${../../secrets/private/user/roles/brave/Bookmarks} ${lib.concatMapStringsSep "/" (x: lib.escape [" "] x) [env.extra.winUser.localAppData "BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"]}
+          ${lib.getExe' pkgs.coreutils "install"} -DT ${../../secrets/blue/user/roles/brave/Bookmarks} ${lib.concatMapStringsSep "/" (x: lib.escape [" "] x) [env.extra.winUser.localAppData "BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"]}
         ''
       );
     };

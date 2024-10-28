@@ -23,4 +23,6 @@
 *.zip binary
 ancestry/** linguist-documentation
 secrets/** filter=git-crypt diff=git-crypt
-secrets/private/** filter=git-crypt-private diff=git-crypt-private
+secrets/red/** filter=git-crypt-red diff=git-crypt-red
+secrets/yellow/** filter=git-crypt-yellow diff=git-crypt-yellow
+secrets/blue/** filter=git-crypt-blue diff=git-crypt-blue

@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _EncryptionName = "nonedefaultprivate"
+const _EncryptionName = "nonedefaultredyellowblue"
 
-var _EncryptionIndex = [...]uint8{0, 4, 11, 18}
+var _EncryptionIndex = [...]uint8{0, 4, 11, 14, 20, 24}
 
-const _EncryptionLowerName = "nonedefaultprivate"
+const _EncryptionLowerName = "nonedefaultredyellowblue"
 
 func (i Encryption) String() string {
 	if i >= Encryption(len(_EncryptionIndex)-1) {
@@ -27,24 +27,32 @@ func _EncryptionNoOp() {
 	var x [1]struct{}
 	_ = x[EncryptionNone-(0)]
 	_ = x[EncryptionDefault-(1)]
-	_ = x[EncryptionPrivate-(2)]
+	_ = x[EncryptionRed-(2)]
+	_ = x[EncryptionYellow-(3)]
+	_ = x[EncryptionBlue-(4)]
 }
 
-var _EncryptionValues = []Encryption{EncryptionNone, EncryptionDefault, EncryptionPrivate}
+var _EncryptionValues = []Encryption{EncryptionNone, EncryptionDefault, EncryptionRed, EncryptionYellow, EncryptionBlue}
 
 var _EncryptionNameToValueMap = map[string]Encryption{
 	_EncryptionName[0:4]:        EncryptionNone,
 	_EncryptionLowerName[0:4]:   EncryptionNone,
 	_EncryptionName[4:11]:       EncryptionDefault,
 	_EncryptionLowerName[4:11]:  EncryptionDefault,
-	_EncryptionName[11:18]:      EncryptionPrivate,
-	_EncryptionLowerName[11:18]: EncryptionPrivate,
+	_EncryptionName[11:14]:      EncryptionRed,
+	_EncryptionLowerName[11:14]: EncryptionRed,
+	_EncryptionName[14:20]:      EncryptionYellow,
+	_EncryptionLowerName[14:20]: EncryptionYellow,
+	_EncryptionName[20:24]:      EncryptionBlue,
+	_EncryptionLowerName[20:24]: EncryptionBlue,
 }
 
 var _EncryptionNames = []string{
 	_EncryptionName[0:4],
 	_EncryptionName[4:11],
-	_EncryptionName[11:18],
+	_EncryptionName[11:14],
+	_EncryptionName[14:20],
+	_EncryptionName[20:24],
 }
 
 // EncryptionString retrieves an enum value from the enum constants string name.

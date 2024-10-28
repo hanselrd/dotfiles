@@ -143,11 +143,17 @@ var graphCmd = &cobra.Command{
 				node.SetStyle(cgraph.FilledNodeStyle)
 				switch r.Encryption() {
 				case encryption.EncryptionNone:
+					fallthrough
+				default:
 					node.SetColor("#E6E6E9")
 				case encryption.EncryptionDefault:
 					node.SetColor("#9999A1")
-				case encryption.EncryptionPrivate:
-					node.SetColor("#AF8F8A")
+				case encryption.EncryptionRed:
+					node.SetColor("#FFC09F")
+				case encryption.EncryptionYellow:
+					node.SetColor("#FFEE93")
+				case encryption.EncryptionBlue:
+					node.SetColor("#A0CED9")
 				}
 				roleNodeMap[r.PrivilegeLevel()][r] = node
 			})

@@ -74,7 +74,7 @@ func (r UserRole) Enabled() bool {
 func (r UserRole) Encryption() encryption.Encryption {
 	switch r {
 	case UserRoleRts:
-		return encryption.EncryptionDefault
+		return encryption.EncryptionYellow
 	}
 	return encryption.EncryptionNone
 }

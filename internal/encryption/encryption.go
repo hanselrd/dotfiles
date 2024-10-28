@@ -7,5 +7,7 @@ type Encryption uint
 const (
 	EncryptionNone Encryption = iota
 	EncryptionDefault
-	EncryptionPrivate
+	EncryptionRed
+	EncryptionYellow
+	EncryptionBlue
 )
