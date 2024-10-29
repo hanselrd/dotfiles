@@ -42,6 +42,7 @@
     gnused
     gnutar
     gzip
+    hexxy
     lm_sensors
     lsb-release
     pfetch
@@ -52,6 +53,7 @@
     sysstat
     tree
     wget
+    xxd
     zstd
   ];
 }
