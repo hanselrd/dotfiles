@@ -34,6 +34,7 @@
     coreutils
     cpio
     curl
+    diffutils
     dmidecode
     file
     findutils
