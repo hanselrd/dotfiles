@@ -20,6 +20,11 @@ in {
         enable = true;
         scheduler = "scx_lavd";
       };
+
+      boot.kernel.sysctl = {
+        "vm.swappiness" = 1;
+        "vm.vfs_cache_pressure" = 500;
+      };
     }
   );
 }
