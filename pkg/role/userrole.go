@@ -38,6 +38,7 @@ const (
 	UserRoleDocker
 	UserRoleEditor
 	UserRoleEza
+	UserRoleFlameshot
 	UserRoleFonts
 	UserRoleFzf
 	UserRoleGdb
@@ -48,12 +49,15 @@ const (
 	UserRoleOhMyPosh // oh-my-posh
 	UserRolePager
 	UserRoleRanger
+	UserRoleRedshift
 	UserRoleRipgrep
+	UserRoleRofi
 	UserRoleRts
 	UserRoleScripts
 	UserRoleShell
 	UserRoleSsh
 	UserRoleStarship
+	UserRoleSxhkd
 	UserRoleTerminal
 	UserRoleTheme
 	UserRoleTmux

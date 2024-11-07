@@ -16,6 +16,7 @@ const (
 	SystemRoleDocker
 	SystemRoleGaruda
 	SystemRoleHomeManager // home-manager
+	SystemRoleHyprland
 	SystemRoleI18N
 	SystemRoleKDE
 	SystemRoleKernel
@@ -24,6 +25,7 @@ const (
 	SystemRoleNetworking
 	SystemRoleNix
 	SystemRoleOpenSsh
+	SystemRolePulseAudio
 	SystemRoleShell
 	SystemRoleSudo
 	SystemRoleTime

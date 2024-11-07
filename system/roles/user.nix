@@ -23,7 +23,12 @@ in {
     (lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
       users.users.${env.user.username} = {
         isNormalUser = true;
-        extraGroups = ["networkmanager" "wheel" "docker"];
+        extraGroups = lib.flatten [
+          "wheel"
+          (lib.optional config.roles.system.docker.enable "docker")
+          (lib.optional config.roles.system.networking.enable "networkmanager")
+          (lib.optional config.roles.system.pulseaudio.enable "audio")
+        ];
         initialPassword = "password";
       };
     })

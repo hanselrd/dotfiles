@@ -44,7 +44,7 @@ var ejectCmd = &cobra.Command{
 
 		sedSearch := fmt.Sprintf("/nix/store/%s-", strings.Repeat(".", 32))[:len(outDirSlash)]
 
-		err := os.MkdirAll(outDir, 0o700)
+		err := os.MkdirAll(outDir, 0o711)
 		cobra.CheckErr(err)
 
 		tmpDir := lo.Must(os.MkdirTemp("", "nix-e-*"))

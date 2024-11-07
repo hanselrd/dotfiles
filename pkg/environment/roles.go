@@ -9,6 +9,7 @@ type (
 	environmentRolesSystemDocker      struct{}
 	environmentRolesSystemGaruda      struct{}
 	environmentRolesSystemHomeManager struct{}
+	environmentRolesSystemHyprland    struct{}
 	environmentRolesSystemI18N        struct{}
 	environmentRolesSystemKde         struct{}
 	environmentRolesSystemKernel      struct{}
@@ -17,16 +18,17 @@ type (
 	environmentRolesSystemNetworking  struct {
 		HostName string `json:"hostName"`
 	}
-	environmentRolesSystemNix     struct{}
-	environmentRolesSystemOpenssh struct{}
-	environmentRolesSystemShell   struct{}
-	environmentRolesSystemSudo    struct{}
-	environmentRolesSystemTime    struct{}
-	environmentRolesSystemUdisks2 struct{}
-	environmentRolesSystemUser    struct{}
-	environmentRolesSystemWsl     struct{}
-	environmentRolesSystemXrdp    struct{}
-	environmentRolesSystemXserver struct{}
+	environmentRolesSystemNix        struct{}
+	environmentRolesSystemOpenssh    struct{}
+	environmentRolesSystemPulseaudio struct{}
+	environmentRolesSystemShell      struct{}
+	environmentRolesSystemSudo       struct{}
+	environmentRolesSystemTime       struct{}
+	environmentRolesSystemUdisks2    struct{}
+	environmentRolesSystemUser       struct{}
+	environmentRolesSystemWsl        struct{}
+	environmentRolesSystemXrdp       struct{}
+	environmentRolesSystemXserver    struct{}
 )
 
 type (
@@ -58,6 +60,7 @@ type (
 	environmentRolesUserDocker                struct{}
 	environmentRolesUserEditor                struct{}
 	environmentRolesUserEza                   struct{}
+	environmentRolesUserFlameshot             struct{}
 	environmentRolesUserFonts                 struct{}
 	environmentRolesUserFzf                   struct{}
 	environmentRolesUserGdb                   struct{}
@@ -70,7 +73,9 @@ type (
 	environmentRolesUserOhMyPosh struct{}
 	environmentRolesUserPager    struct{}
 	environmentRolesUserRanger   struct{}
+	environmentRolesUserRedshift struct{}
 	environmentRolesUserRipgrep  struct{}
+	environmentRolesUserRofi     struct{}
 	environmentRolesUserRts      struct{}
 	environmentRolesUserScripts  struct{}
 	environmentRolesUserShell    struct {
@@ -80,6 +85,7 @@ type (
 	}
 	environmentRolesUserSsh      struct{}
 	environmentRolesUserStarship struct{}
+	environmentRolesUserSxhkd    struct{}
 	environmentRolesUserTerminal struct{}
 	environmentRolesUserTheme    struct{}
 	environmentRolesUserTmux     struct{}

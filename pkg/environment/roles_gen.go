@@ -12,6 +12,7 @@ type environmentRolesSystem struct {
 	Docker      *environmentRolesSystemDocker      `json:"docker,omitempty"`
 	Garuda      *environmentRolesSystemGaruda      `json:"garuda,omitempty"`
 	HomeManager *environmentRolesSystemHomeManager `json:"home-manager,omitempty"`
+	Hyprland    *environmentRolesSystemHyprland    `json:"hyprland,omitempty"`
 	I18N        *environmentRolesSystemI18N        `json:"i18n,omitempty"`
 	Kde         *environmentRolesSystemKde         `json:"kde,omitempty"`
 	Kernel      *environmentRolesSystemKernel      `json:"kernel,omitempty"`
@@ -20,6 +21,7 @@ type environmentRolesSystem struct {
 	Networking  *environmentRolesSystemNetworking  `json:"networking,omitempty"`
 	Nix         *environmentRolesSystemNix         `json:"nix,omitempty"`
 	Openssh     *environmentRolesSystemOpenssh     `json:"openssh,omitempty"`
+	Pulseaudio  *environmentRolesSystemPulseaudio  `json:"pulseaudio,omitempty"`
 	Shell       *environmentRolesSystemShell       `json:"shell,omitempty"`
 	Sudo        *environmentRolesSystemSudo        `json:"sudo,omitempty"`
 	Time        *environmentRolesSystemTime        `json:"time,omitempty"`
@@ -58,6 +60,7 @@ type environmentRolesUser struct {
 	Docker                *environmentRolesUserDocker                `json:"docker,omitempty"`
 	Editor                *environmentRolesUserEditor                `json:"editor,omitempty"`
 	Eza                   *environmentRolesUserEza                   `json:"eza,omitempty"`
+	Flameshot             *environmentRolesUserFlameshot             `json:"flameshot,omitempty"`
 	Fonts                 *environmentRolesUserFonts                 `json:"fonts,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`
 	Gdb                   *environmentRolesUserGdb                   `json:"gdb,omitempty"`
@@ -68,12 +71,15 @@ type environmentRolesUser struct {
 	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`
 	Pager                 *environmentRolesUserPager                 `json:"pager,omitempty"`
 	Ranger                *environmentRolesUserRanger                `json:"ranger,omitempty"`
+	Redshift              *environmentRolesUserRedshift              `json:"redshift,omitempty"`
 	Ripgrep               *environmentRolesUserRipgrep               `json:"ripgrep,omitempty"`
+	Rofi                  *environmentRolesUserRofi                  `json:"rofi,omitempty"`
 	Rts                   *environmentRolesUserRts                   `json:"rts,omitempty"`
 	Scripts               *environmentRolesUserScripts               `json:"scripts,omitempty"`
 	Shell                 *environmentRolesUserShell                 `json:"shell,omitempty"`
 	Ssh                   *environmentRolesUserSsh                   `json:"ssh,omitempty"`
 	Starship              *environmentRolesUserStarship              `json:"starship,omitempty"`
+	Sxhkd                 *environmentRolesUserSxhkd                 `json:"sxhkd,omitempty"`
 	Terminal              *environmentRolesUserTerminal              `json:"terminal,omitempty"`
 	Theme                 *environmentRolesUserTheme                 `json:"theme,omitempty"`
 	Tmux                  *environmentRolesUserTmux                  `json:"tmux,omitempty"`

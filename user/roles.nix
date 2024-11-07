@@ -34,6 +34,7 @@
     ./roles/docker.nix
     ./roles/editor.nix
     ./roles/eza.nix
+    ./roles/flameshot.nix
     ./roles/fonts.nix
     ./roles/fzf.nix
     ./roles/gdb.nix
@@ -44,12 +45,15 @@
     ./roles/oh-my-posh.nix
     ./roles/pager.nix
     ./roles/ranger.nix
+    ./roles/redshift.nix
     ./roles/ripgrep.nix
+    ./roles/rofi.nix
     (lib.optional (!env.extra.encrypted.yellow) ../secrets/yellow/user/roles/rts.nix)
     ./roles/scripts.nix
     ./roles/shell.nix
     ./roles/ssh.nix
     ./roles/starship.nix
+    ./roles/sxhkd.nix
     ./roles/terminal.nix
     ./roles/theme.nix
     ./roles/tmux.nix

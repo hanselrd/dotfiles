@@ -12,6 +12,7 @@
     ./roles/docker.nix
     ./roles/garuda.nix
     ./roles/home-manager.nix
+    ./roles/hyprland.nix
     ./roles/i18n.nix
     ./roles/kde.nix
     ./roles/kernel.nix
@@ -20,6 +21,7 @@
     ./roles/networking.nix
     ./roles/nix.nix
     ./roles/openssh.nix
+    ./roles/pulseaudio.nix
     ./roles/shell.nix
     ./roles/sudo.nix
     ./roles/time.nix

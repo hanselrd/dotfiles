@@ -44,6 +44,7 @@
     gnutar
     gzip
     hexxy
+    killall
     lm_sensors
     lsb-release
     pfetch
