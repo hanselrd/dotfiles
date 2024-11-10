@@ -21,7 +21,6 @@ type environmentRolesSystem struct {
 	Networking  *environmentRolesSystemNetworking  `json:"networking,omitempty"`
 	Nix         *environmentRolesSystemNix         `json:"nix,omitempty"`
 	Openssh     *environmentRolesSystemOpenssh     `json:"openssh,omitempty"`
-	Pulseaudio  *environmentRolesSystemPulseaudio  `json:"pulseaudio,omitempty"`
 	Shell       *environmentRolesSystemShell       `json:"shell,omitempty"`
 	Sudo        *environmentRolesSystemSudo        `json:"sudo,omitempty"`
 	Time        *environmentRolesSystemTime        `json:"time,omitempty"`

@@ -25,7 +25,6 @@ const (
 	SystemRoleNetworking
 	SystemRoleNix
 	SystemRoleOpenSsh
-	SystemRolePulseAudio
 	SystemRoleShell
 	SystemRoleSudo
 	SystemRoleTime

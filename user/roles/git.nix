@@ -104,6 +104,7 @@ in {
     };
 
     home.packages = with pkgs; [
+      # git-repair
       git-crypt
       git-filter-repo
     ];

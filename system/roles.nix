@@ -21,7 +21,6 @@
     ./roles/networking.nix
     ./roles/nix.nix
     ./roles/openssh.nix
-    ./roles/pulseaudio.nix
     ./roles/shell.nix
     ./roles/sudo.nix
     ./roles/time.nix

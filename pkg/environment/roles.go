@@ -18,17 +18,16 @@ type (
 	environmentRolesSystemNetworking  struct {
 		HostName string `json:"hostName"`
 	}
-	environmentRolesSystemNix        struct{}
-	environmentRolesSystemOpenssh    struct{}
-	environmentRolesSystemPulseaudio struct{}
-	environmentRolesSystemShell      struct{}
-	environmentRolesSystemSudo       struct{}
-	environmentRolesSystemTime       struct{}
-	environmentRolesSystemUdisks2    struct{}
-	environmentRolesSystemUser       struct{}
-	environmentRolesSystemWsl        struct{}
-	environmentRolesSystemXrdp       struct{}
-	environmentRolesSystemXserver    struct{}
+	environmentRolesSystemNix     struct{}
+	environmentRolesSystemOpenssh struct{}
+	environmentRolesSystemShell   struct{}
+	environmentRolesSystemSudo    struct{}
+	environmentRolesSystemTime    struct{}
+	environmentRolesSystemUdisks2 struct{}
+	environmentRolesSystemUser    struct{}
+	environmentRolesSystemWsl     struct{}
+	environmentRolesSystemXrdp    struct{}
+	environmentRolesSystemXserver struct{}
 )
 
 type (

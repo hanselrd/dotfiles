@@ -27,7 +27,6 @@ in {
           "wheel"
           (lib.optional config.roles.system.docker.enable "docker")
           (lib.optional config.roles.system.networking.enable "networkmanager")
-          (lib.optional config.roles.system.pulseaudio.enable "audio")
         ];
         initialPassword = "password";
       };
