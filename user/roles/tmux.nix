@@ -58,7 +58,7 @@ in {
             set -g status-right-length 100
             set -g status-right ""
             set -ga status-right "#{tmux_mode_indicator} "
-            set -ga status-right "#[fg=magenta]#{online_status}#[default] "
+            set -ga status-right "#{online_status} "
             set -ga status-right "#[fg=cyan]#U#[default]"
             set -ga status-right "#[fg=black]@#[default]"
             set -ga status-right "#{?pane_ssh_connected,#[fg=green],#[fg=black]}#{hostname_short}#[default] "
@@ -89,8 +89,8 @@ in {
             };
           });
           extraConfig = ''
-            set -g @online_icon "ONL"
-            set -g @offline_icon "OFFL"
+            set -g @online_icon "#[fg=green]ONL#[default]"
+            set -g @offline_icon "$[fg=red]OFFL#[default]"
           '';
         }
         {
