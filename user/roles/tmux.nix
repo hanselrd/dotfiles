@@ -114,14 +114,15 @@ in {
             set -g @resurrect-strategy-vim "session"
             set -g @resurrect-strategy-nvim "session"
             set -g @resurrect-capture-pane-contents "on"
+            set -g @resurrect-dir "${env.user.cacheDirectory}/tmux/resurrect"
           '';
         }
         {
           plugin = continuum;
           extraConfig = ''
+            # set -g @continuum-boot "on"
             set -g @continuum-restore "on"
-            set -g @continuum-boot "on"
-            set -g @continuum-save-interval "15"
+            set -g @continuum-save-interval "5"
           '';
         }
       ];
