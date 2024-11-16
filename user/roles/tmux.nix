@@ -41,14 +41,14 @@ in {
             };
           });
           extraConfig = ''
-            set -g @mode_indicator_prefix_mode_style "bg=red,fg=#000000"
-            set -g @mode_indicator_prefix_prompt "PRFX"
-            set -g @mode_indicator_copy_mode_style "bg=yellow,fg=#000000"
-            set -g @mode_indicator_copy_prompt "COPY"
-            set -g @mode_indicator_sync_mode_style "bg=cyan,fg=#000000"
-            set -g @mode_indicator_sync_prompt "SYNC"
-            set -g @mode_indicator_empty_mode_style "bg=green,fg=#000000"
-            set -g @mode_indicator_empty_prompt "TMUX"
+            set -g @mode_indicator_prefix_mode_style "fg=#000000,bg=red"
+            set -g @mode_indicator_prefix_prompt " PRFX "
+            set -g @mode_indicator_copy_mode_style "fg=#000000,bg=yellow"
+            set -g @mode_indicator_copy_prompt " COPY "
+            set -g @mode_indicator_sync_mode_style "fg=#000000,bg=cyan"
+            set -g @mode_indicator_sync_prompt " SYNC "
+            set -g @mode_indicator_empty_mode_style "fg=#000000,bg=blue"
+            set -g @mode_indicator_empty_prompt " TMUX "
 
             set -g status-left-length 100
             set -g status-left ""
@@ -89,8 +89,8 @@ in {
             };
           });
           extraConfig = ''
-            set -g @online_icon "#[fg=green]ONL#[default]"
-            set -g @offline_icon "$[fg=red]OFFL#[default]"
+            set -g @online_icon "#[fg=#000000,bg=green] ONLN #[default]"
+            set -g @offline_icon "$[fg=#000000,bg=red] OFFLN #[default]"
           '';
         }
         {
@@ -136,7 +136,7 @@ in {
         set -g status-style "fg=white,bg=black,bold"
         set -g window-status-activity-style "fg=black,bg=red"
         set -g window-status-bell-style "fg=black,bg=red,bold"
-        set -g window-status-current-format "#I:#W#F"
+        set -g window-status-current-format " #I:#W#F "
         set -g window-status-current-style "fg=#000000,bg=yellow,bold"
         set -g window-status-format "#I:#W#F"
         set -g window-status-last-style "fg=yellow,bg=black"
