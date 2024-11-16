@@ -595,33 +595,22 @@
   tmuxThemeFromScheme = {scheme}:
     with scheme.palette;
       pkgs.writeText "tmux-theme-${scheme.slug}.tmux" ''
-        # default statusbar colors
-        set-option -g status-style "fg=#${base04},bg=#${base01}"
+        set -g @thm_black "#${base00}"
+        set -g @thm_red "#${base08}"
+        set -g @thm_green "#${base0B}"
+        set -g @thm_yellow "#${base0A}"
+        set -g @thm_blue "#${base0D}"
+        set -g @thm_magenta "#${base0E}"
+        set -g @thm_cyan "#${base0C}"
+        set -g @thm_white "#${base05}"
 
-        # default window title colors
-        set-window-option -g window-status-style "fg=#${base04},bg=default"
-
-        # active window title colors
-        set-window-option -g window-status-current-style "fg=#${base0A},bg=default"
-
-        # pane border
-        set-option -g pane-border-style "fg=#${base01}"
-        set-option -g pane-active-border-style "fg=#${base02}"
-
-        # message text
-        set-option -g message-style "fg=#${base05},bg=#${base01}"
-
-        # pane number display
-        set-option -g display-panes-active-colour "#${base0B}"
-        set-option -g display-panes-colour "#${base0A}"
-
-        # clock
-        set-window-option -g clock-mode-colour "#${base0B}"
-
-        # copy mode highligh
-        set-window-option -g mode-style "fg=#${base04},bg=#${base02}"
-
-        # bell
-        set-window-option -g window-status-bell-style "fg=#${base01},bg=#${base08}"
+        set -g @thm_brightblack "#${base03}"
+        set -g @thm_brightred "#${base09}"
+        set -g @thm_brightgreen "#${base01}"
+        set -g @thm_brightyellow "#${base02}"
+        set -g @thm_brightblue "#${base04}"
+        set -g @thm_brightmagenta "#${base06}"
+        set -g @thm_brightcyan "#${base0F}"
+        set -g @thm_brightwhite "#${base07}"
       '';
 }
