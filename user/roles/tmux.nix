@@ -139,7 +139,7 @@ in {
         set -g window-status-current-style "fg=#000000,bg=yellow,bold"
         set -g window-status-format "[#I]:#W#F"
         set -g window-status-last-style "fg=yellow,bg=black"
-        set -g window-status-style "fg=magenta,bg=black"
+        set -g window-status-style "fg=yellow,bg=black"
         setw -g pane-active-border-style "fg=white,bg=black"
         setw -g pane-border-format ""
         setw -g pane-border-lines single
