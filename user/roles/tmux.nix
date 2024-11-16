@@ -52,7 +52,9 @@ in {
 
             set -g status-left-length 100
             set -g status-left ""
-            set -ga status-left "#{?client_prefix,#[fg=red],#[fg=green]}[#S]#[default] "
+            set -ga status-left "#[fg=black][#[default]"
+            set -ga status-left "#{?client_prefix,#[fg=red],#[fg=green]}#S#[default]"
+            set -ga status-left "#[fg=black]]#[default] "
             set -ga status-left "#[fg=blue]#(${lib.getExe' pkgs.coreutils "uname"} -r)#[default] "
 
             set -g status-right-length 100
@@ -62,6 +64,7 @@ in {
             set -ga status-right "#[fg=cyan]#U#[default]"
             set -ga status-right "#[fg=black]@#[default]"
             set -ga status-right "#{?pane_ssh_connected,#[fg=green],#[fg=black]}#{hostname_short}#[default] "
+            set -ga status-right "#[fg=black]{#[default]"
             set -ga status-right "#[fg=yellow]${
               builtins.replaceStrings ["<" ">"] [
                 (lib.concatStrings [
@@ -76,6 +79,7 @@ in {
               ]
               env.extra.timeFormat
             }#[default]"
+            set -ga status-right "#[fg=black]}#[default]"
           '';
         }
         {
