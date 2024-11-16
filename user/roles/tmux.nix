@@ -42,7 +42,7 @@ in {
           });
           extraConfig = ''
             set -g @mode_indicator_prefix_mode_style "bg=red,fg=#000000"
-            set -g @mode_indicator_prefix_prompt "WAIT"
+            set -g @mode_indicator_prefix_prompt "PRFX"
             set -g @mode_indicator_copy_mode_style "bg=yellow,fg=#000000"
             set -g @mode_indicator_copy_prompt "COPY"
             set -g @mode_indicator_sync_mode_style "bg=cyan,fg=#000000"
