@@ -43,7 +43,7 @@ in {
           extraConfig = ''
             set -g @mode_indicator_prefix_mode_style "fg=#000000,bg=red"
             set -g @mode_indicator_prefix_prompt " PRFX "
-            set -g @mode_indicator_copy_mode_style "fg=#000000,bg=yellow"
+            set -g @mode_indicator_copy_mode_style "fg=#000000,bg=brightyellow"
             set -g @mode_indicator_copy_prompt " COPY "
             set -g @mode_indicator_sync_mode_style "fg=#000000,bg=cyan"
             set -g @mode_indicator_sync_prompt " SYNC "
@@ -65,7 +65,7 @@ in {
             set -ga status-right "#[fg=black]@#[default]"
             set -ga status-right "#{?pane_ssh_connected,#[fg=green],#[fg=black]}#{hostname_short}#[default] "
             set -ga status-right "#[fg=black]{#[default]"
-            set -ga status-right "#[fg=yellow]${
+            set -ga status-right "#[fg=brightyellow]${
               builtins.replaceStrings ["<" ">"] [
                 (lib.concatStrings [
                   "#[fg=black]<#[default]"
@@ -74,7 +74,7 @@ in {
                 (lib.concatStrings [
                   "#[default]"
                   "#[fg=black]>#[default]"
-                  "#[fg=yellow]"
+                  "#[fg=brightyellow]"
                 ])
               ]
               env.extra.timeFormat
@@ -134,8 +134,8 @@ in {
         ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = config.colorScheme;})}
 
         set -g clock-mode-colour "white"
-        set -g message-command-style "fg=yellow,bg=black"
-        set -g message-style "fg=yellow,bg=black"
+        set -g message-command-style "fg=brightyellow,bg=black"
+        set -g message-style "fg=brightyellow,bg=black"
         set -g status-justify centre
         set -g status-style "fg=white,bg=black,bold"
         set -g window-status-activity-style "fg=black,bg=red"
@@ -143,9 +143,10 @@ in {
         set -g window-status-current-format " #I:#W#F "
         set -g window-status-current-style "fg=#000000,bg=brightyellow,bold"
         set -g window-status-format "#I:#W#F"
-        set -g window-status-last-style "fg=yellow,bg=black"
-        set -g window-status-style "fg=yellow,bg=black"
-        setw -g pane-active-border-style "fg=yellow,bg=black"
+        set -g window-status-last-style "fg=brightyellow,bg=black"
+        set -g window-status-style "fg=brightyellow,bg=black"
+        setw -g mode-style "fg=#000000,bg=brightyellow,bold"
+        setw -g pane-active-border-style "fg=brightyellow,bg=black"
         setw -g pane-border-format ""
         setw -g pane-border-lines single
         setw -g pane-border-style "fg=white,bg=black"
