@@ -141,7 +141,7 @@ in {
         set -g window-status-activity-style "fg=black,bg=red"
         set -g window-status-bell-style "fg=black,bg=red,bold"
         set -g window-status-current-format " #I:#W#F "
-        set -g window-status-current-style "fg=#000000,bg=yellow,bold"
+        set -g window-status-current-style "fg=#000000,bg=brightyellow,bold"
         set -g window-status-format "#I:#W#F"
         set -g window-status-last-style "fg=yellow,bg=black"
         set -g window-status-style "fg=yellow,bg=black"
