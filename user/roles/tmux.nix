@@ -59,7 +59,7 @@ in {
             set -ga status-left "#[fg=blue]#(${lib.getExe pkgs.fastfetch} -l none -s Kernel --kernel-format '{2}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
 
             set -g status-right-length 100
-            set -g status-right ""
+            set -g status-right " "
             set -ga status-right "#{tmux_mode_indicator} "
             set -ga status-right "#{online_status} "
             set -ga status-right "#[fg=cyan]#U#[default]"
