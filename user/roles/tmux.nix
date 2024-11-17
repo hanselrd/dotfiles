@@ -150,7 +150,7 @@ in {
         setw -g pane-active-border-style "fg=brightyellow,bg=black"
         setw -g pane-border-format ""
         setw -g pane-border-lines single
-        setw -g pane-border-style "fg=black,bg=black"
+        setw -g pane-border-style "fg=brightblack,bg=black"
       '';
       prefix = "C-a";
       tmuxp.enable = true;
