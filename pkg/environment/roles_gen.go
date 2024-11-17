@@ -59,6 +59,7 @@ type environmentRolesUser struct {
 	Docker                *environmentRolesUserDocker                `json:"docker,omitempty"`
 	Editor                *environmentRolesUserEditor                `json:"editor,omitempty"`
 	Eza                   *environmentRolesUserEza                   `json:"eza,omitempty"`
+	Fastfetch             *environmentRolesUserFastfetch             `json:"fastfetch,omitempty"`
 	Flameshot             *environmentRolesUserFlameshot             `json:"flameshot,omitempty"`
 	Fonts                 *environmentRolesUserFonts                 `json:"fonts,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`

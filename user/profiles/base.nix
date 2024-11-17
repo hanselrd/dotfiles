@@ -11,6 +11,7 @@
     roles.user.btop.enable = true;
     roles.user.editor.enable = true;
     roles.user.eza.enable = true;
+    roles.user.fastfetch.enable = true;
     roles.user.fzf.enable = true;
     roles.user.git.enable = true;
     roles.user.htop.enable = true;

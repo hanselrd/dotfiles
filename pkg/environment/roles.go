@@ -59,6 +59,7 @@ type (
 	environmentRolesUserDocker                struct{}
 	environmentRolesUserEditor                struct{}
 	environmentRolesUserEza                   struct{}
+	environmentRolesUserFastfetch             struct{}
 	environmentRolesUserFlameshot             struct{}
 	environmentRolesUserFonts                 struct{}
 	environmentRolesUserFzf                   struct{}

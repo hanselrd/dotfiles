@@ -34,6 +34,7 @@
     ./roles/docker.nix
     ./roles/editor.nix
     ./roles/eza.nix
+    ./roles/fastfetch.nix
     ./roles/flameshot.nix
     ./roles/fonts.nix
     ./roles/fzf.nix

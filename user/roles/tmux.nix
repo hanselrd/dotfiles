@@ -55,7 +55,8 @@ in {
             set -ga status-left "#[fg=black][#[default]"
             set -ga status-left "#{?client_prefix,#[fg=red],#[fg=green]}#S#[default]"
             set -ga status-left "#[fg=black]]#[default] "
-            set -ga status-left "#[fg=blue]#(${lib.getExe' pkgs.coreutils "uname"} -r)#[default] "
+            set -ga status-left "#[fg=magenta]#(${lib.getExe pkgs.fastfetch} -l none -s OS --os-format '{4}:{9}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
+            set -ga status-left "#[fg=blue]#(${lib.getExe pkgs.fastfetch} -l none -s Kernel --kernel-format '{2}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
 
             set -g status-right-length 100
             set -g status-right ""

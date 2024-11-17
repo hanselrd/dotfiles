@@ -38,6 +38,7 @@ const (
 	UserRoleDocker
 	UserRoleEditor
 	UserRoleEza
+	UserRoleFastfetch
 	UserRoleFlameshot
 	UserRoleFonts
 	UserRoleFzf
