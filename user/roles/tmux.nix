@@ -134,8 +134,8 @@ in {
         ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = config.colorScheme;})}
 
         set -g clock-mode-colour "white"
-        set -g message-command-style "fg=brightyellow,bg=black"
-        set -g message-style "fg=brightyellow,bg=black"
+        set -g message-command-style "fg=brightyellow,bg=black,bold"
+        set -g message-style "fg=brightyellow,bg=black,bold"
         set -g status-justify centre
         set -g status-style "fg=white,bg=black,bold"
         set -g window-status-activity-style "fg=black,bg=red"
