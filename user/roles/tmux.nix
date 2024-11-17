@@ -41,46 +41,46 @@ in {
             };
           });
           extraConfig = ''
-            set -g @mode_indicator_prefix_mode_style "fg=#000000,bg=red"
+            set -g @mode_indicator_prefix_mode_style "fg=#000000,bg=brightred"
             set -g @mode_indicator_prefix_prompt " PRFX "
             set -g @mode_indicator_copy_mode_style "fg=#000000,bg=brightyellow"
             set -g @mode_indicator_copy_prompt " COPY "
-            set -g @mode_indicator_sync_mode_style "fg=#000000,bg=cyan"
+            set -g @mode_indicator_sync_mode_style "fg=#000000,bg=brightcyan"
             set -g @mode_indicator_sync_prompt " SYNC "
-            set -g @mode_indicator_empty_mode_style "fg=#000000,bg=blue"
+            set -g @mode_indicator_empty_mode_style "fg=#000000,bg=brightblue"
             set -g @mode_indicator_empty_prompt " TMUX "
 
             set -g status-left-length 100
             set -g status-left ""
-            set -ga status-left "#[fg=black][#[default]"
-            set -ga status-left "#{?client_prefix,#[fg=red],#[fg=green]}#S#[default]"
-            set -ga status-left "#[fg=black]]#[default] "
-            set -ga status-left "#[fg=magenta]#(${lib.getExe pkgs.fastfetch} -l none -s OS --os-format '{4}:{9}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
-            set -ga status-left "#[fg=blue]#(${lib.getExe pkgs.fastfetch} -l none -s Kernel --kernel-format '{2}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
+            set -ga status-left "#[fg=brightblack][#[default]"
+            set -ga status-left "#{?client_prefix,#[fg=brightred],#[fg=brightgreen]}#S#[default]"
+            set -ga status-left "#[fg=brightblack]]#[default] "
+            set -ga status-left "#[fg=brightmagenta]#(${lib.getExe pkgs.fastfetch} -l none -s OS --os-format '{4}:{9}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
+            set -ga status-left "#[fg=brightblue]#(${lib.getExe pkgs.fastfetch} -l none -s Kernel --kernel-format '{2}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
 
             set -g status-right-length 100
             set -g status-right " "
             set -ga status-right "#{tmux_mode_indicator} "
             set -ga status-right "#{online_status} "
-            set -ga status-right "#[fg=cyan]#U#[default]"
-            set -ga status-right "#[fg=black]@#[default]"
-            set -ga status-right "#{?pane_ssh_connected,#[fg=green],#[fg=black]}#{hostname_short}#[default] "
-            set -ga status-right "#[fg=black]{#[default]"
+            set -ga status-right "#[fg=brightcyan]#U#[default]"
+            set -ga status-right "#[fg=brightblack]@#[default]"
+            set -ga status-right "#{?pane_ssh_connected,#[fg=brightgreen],#[fg=brightblack]}#{hostname_short}#[default] "
+            set -ga status-right "#[fg=brightblack]{#[default]"
             set -ga status-right "#[fg=brightyellow]${
               builtins.replaceStrings ["<" ">"] [
                 (lib.concatStrings [
-                  "#[fg=black]<#[default]"
-                  "#[fg=red]"
+                  "#[fg=brightblack]<#[default]"
+                  "#[fg=brightred]"
                 ])
                 (lib.concatStrings [
                   "#[default]"
-                  "#[fg=black]>#[default]"
+                  "#[fg=brightblack]>#[default]"
                   "#[fg=brightyellow]"
                 ])
               ]
               env.extra.timeFormat
             }#[default]"
-            set -ga status-right "#[fg=black]}#[default]"
+            set -ga status-right "#[fg=brightblack]}#[default]"
           '';
         }
         {
@@ -94,8 +94,8 @@ in {
             };
           });
           extraConfig = ''
-            set -g @online_icon "#[fg=#000000,bg=green] ONLN #[default]"
-            set -g @offline_icon "$[fg=#000000,bg=red] OFFLN #[default]"
+            set -g @online_icon "#[fg=#000000,bg=brightgreen] ONLN #[default]"
+            set -g @offline_icon "$[fg=#000000,bg=brightred] OFFLN #[default]"
           '';
         }
         {
@@ -139,8 +139,8 @@ in {
         set -g message-style "fg=brightyellow,bg=black,bold"
         set -g status-justify centre
         set -g status-style "fg=white,bg=black,bold"
-        set -g window-status-activity-style "fg=black,bg=red"
-        set -g window-status-bell-style "fg=black,bg=red,bold"
+        set -g window-status-activity-style "fg=#000000,bg=brightred"
+        set -g window-status-bell-style "fg=#000000,bg=brightred,bold"
         set -g window-status-current-format " #I:#W#F "
         set -g window-status-current-style "fg=#000000,bg=brightyellow,bold"
         set -g window-status-format "#I:#W#F"
