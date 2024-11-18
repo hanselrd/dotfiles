@@ -135,22 +135,22 @@ in {
         ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = config.colorScheme;})}
 
         set -g clock-mode-colour "white"
-        set -g message-command-style "fg=brightyellow,bg=black,bold"
-        set -g message-style "fg=brightyellow,bg=black,bold"
+        set -g message-command-style "fg=brightyellow,bg=#{@thm_black},bold"
+        set -g message-style "fg=brightyellow,bg=#{@thm_black},bold"
         set -g status-justify centre
-        set -g status-style "fg=white,bg=black,bold"
+        set -g status-style "fg=white,bg=#{@thm_black},bold"
         set -g window-status-activity-style "fg=#000000,bg=brightred"
         set -g window-status-bell-style "fg=#000000,bg=brightred,bold"
         set -g window-status-current-format " #I:#W#F "
         set -g window-status-current-style "fg=#000000,bg=brightyellow,bold"
         set -g window-status-format "#I:#W#F"
-        set -g window-status-last-style "fg=brightyellow,bg=black"
-        set -g window-status-style "fg=brightyellow,bg=black"
+        set -g window-status-last-style "fg=brightyellow"
+        set -g window-status-style "fg=brightyellow"
         setw -g mode-style "fg=#000000,bg=brightyellow,bold"
-        setw -g pane-active-border-style "fg=brightyellow,bg=black"
+        setw -g pane-active-border-style "fg=brightyellow"
         setw -g pane-border-format ""
         setw -g pane-border-lines single
-        setw -g pane-border-style "fg=brightblack,bg=black"
+        setw -g pane-border-style "fg=#{@thm_black}"
       '';
       prefix = "C-a";
       tmuxp.enable = true;
