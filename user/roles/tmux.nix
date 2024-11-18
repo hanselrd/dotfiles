@@ -64,7 +64,7 @@ in {
             set -ga status-right "#{online_status} "
             set -ga status-right "#[fg=brightcyan]#U#[default]"
             set -ga status-right "#[fg=brightblack]@#[default]"
-            set -ga status-right "#{?pane_ssh_connected,#[fg=brightgreen],#[fg=brightblack]}#{hostname_short}#[default] "
+            set -ga status-right "#{?#{pane_ssh_connected},#[fg=brightgreen],#[fg=brightblack]}#{hostname_short}#[default] "
             set -ga status-right "#[fg=brightblack]{#[default]"
             set -ga status-right "#[fg=brightyellow]${
               builtins.replaceStrings ["<" ">"] [
