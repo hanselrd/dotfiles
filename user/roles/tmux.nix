@@ -22,7 +22,7 @@ in {
       keyMode = "vi";
       # mouse = true;
       newSession = true;
-      terminal = "tmux-256color";
+      terminal = "screen-256color";
       plugins = with pkgs.tmuxPlugins; [
         # battery
         # better-mouse-mode
