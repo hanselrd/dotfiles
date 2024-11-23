@@ -53,7 +53,7 @@ in {
             set -g status-left-length 100
             set -g status-left ""
             set -ga status-left "#[fg=brightblack][#[default]"
-            set -ga status-left "#{?client_prefix,#[fg=brightred],#[fg=brightgreen]}#S#[default]"
+            set -ga status-left "#{?client_prefix,#[fg=brightred],#{?pane_in_mode,#[fg=brightyellow],#{?pane_synchronized,#[fg=brightcyan],#[fg=brightgreen]}}}#S#[default]"
             set -ga status-left "#[fg=brightblack]]#[default] "
             set -ga status-left "#[fg=brightmagenta]#(${lib.getExe pkgs.fastfetch} -l none -s OS --os-format '{4}:{9}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
             set -ga status-left "#[fg=brightblue]#(${lib.getExe pkgs.fastfetch} -l none -s Kernel --kernel-format '{2}' | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f 2-)#[default] "
