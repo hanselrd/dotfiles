@@ -27,7 +27,7 @@ require (
 	github.com/pascaldekloe/name v1.0.0 // indirect
 	github.com/samber/slog-common v0.17.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/tetratelabs/wazero v1.8.1 // indirect
+	github.com/tetratelabs/wazero v1.8.2 // indirect
 	golang.org/x/image v0.22.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/sync v0.9.0 // indirect
