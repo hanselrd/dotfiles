@@ -45,6 +45,7 @@ const (
 	UserRoleGdb
 	UserRoleGit
 	UserRoleHtop
+	UserRoleLldb
 	UserRoleNeovim
 	UserRoleNix
 	UserRoleOhMyPosh // oh-my-posh

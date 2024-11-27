@@ -66,6 +66,7 @@ type environmentRolesUser struct {
 	Gdb                   *environmentRolesUserGdb                   `json:"gdb,omitempty"`
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`
+	Lldb                  *environmentRolesUserLldb                  `json:"lldb,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`
 	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`

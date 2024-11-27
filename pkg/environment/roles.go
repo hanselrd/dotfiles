@@ -66,6 +66,7 @@ type (
 	environmentRolesUserGdb                   struct{}
 	environmentRolesUserGit                   struct{}
 	environmentRolesUserHtop                  struct{}
+	environmentRolesUserLldb                  struct{}
 	environmentRolesUserNeovim                struct{}
 	environmentRolesUserNix                   struct {
 		Sandbox bool `json:"sandbox"`
