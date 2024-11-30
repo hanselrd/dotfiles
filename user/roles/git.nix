@@ -79,7 +79,7 @@ in {
         # core = {fsmonitor = true;};
         feature = {manyFiles = true;};
         grep = {lineNumber = true;};
-        init = {defaultBranch = "master";};
+        init = {defaultBranch = lib.mkForce "master";};
         merge = {conflictStyle = "diff3";};
         safe = {directory = "*";};
         # color = {
