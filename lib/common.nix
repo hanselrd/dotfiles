@@ -39,7 +39,7 @@ in rec {
     pkgs.buildGoModule {
       name = "dotfiles-go-script-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-eAaSnuep4ztXDWNh0CngRmHKgFJ4eH2A28GU9A85sBQ=";
+      vendorHash = "sha256-zAtYu2GFn41ScWzPA3MiVhOcrN5CLWi7xhBmQ3OLaI8=";
       subPackages = [
         "scripts/${name}"
       ];
