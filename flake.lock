@@ -609,11 +609,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734696680,
-        "narHash": "sha256-c3ie+5GDvFff0yrRy0M4ecCm5o3v41DkRGF4UdS7MMw=",
+        "lastModified": 1734740962,
+        "narHash": "sha256-5YsE/uxeHJSa1S86553fgjjYDRJl7iLs41cSSXW/K04=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "cbbd25071e2725fbe5c15ddefc7af8aaec5758db",
+        "rev": "956fa2f98490537625f582122b6f7f8adabf9686",
         "type": "github"
       },
       "original": {
@@ -636,11 +636,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734652734,
-        "narHash": "sha256-keO1TL3HJVZZetd/xSG1na6DzIqpUczZai3sTa/mOkA=",
+        "lastModified": 1734717977,
+        "narHash": "sha256-wwHxXAmaf8wUs8b5gKOBIEz6XWnpz0rSPQrplqCOvGY=",
         "owner": "zigtools",
         "repo": "zls",
-        "rev": "fa650ca8a38808aa228086f83850f78517cb53b9",
+        "rev": "f5cd1111b38e2a8af1771adf8749269ff9ecabb1",
         "type": "github"
       },
       "original": {
