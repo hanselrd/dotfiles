@@ -10,7 +10,7 @@ require (
 	github.com/iancoleman/strcase v0.3.0
 	github.com/rs/zerolog v1.33.0
 	github.com/samber/lo v1.47.0
-	github.com/samber/slog-zerolog/v2 v2.7.1
+	github.com/samber/slog-zerolog/v2 v2.7.2
 	github.com/spf13/cobra v1.8.1
 )
 
