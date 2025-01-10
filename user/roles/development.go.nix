@@ -21,6 +21,7 @@ in {
 
     home.packages = with pkgs; [
       cobra-cli
+      delve
       enumer
       gofumpt
       golines
