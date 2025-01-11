@@ -42,7 +42,7 @@ vim.opt.listchars = {
   precedes = "<",
   lead = ".",
 }
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.errorbells = false

@@ -23,6 +23,7 @@ in {
       cobra-cli
       delve
       enumer
+      go-task
       gofumpt
       golines
       gotools
