@@ -28,6 +28,8 @@ in {
 
     home.shellAliases = {
       lta = "lt -a";
+      llt = "ll --tree";
+      llta = "llt -a";
     };
   };
 }
