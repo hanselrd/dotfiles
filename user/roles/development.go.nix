@@ -25,6 +25,7 @@ in {
       enumer
       go-task
       gofumpt
+      golangci-lint
       golines
       gotools
       templ
