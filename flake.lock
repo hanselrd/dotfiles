@@ -100,11 +100,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1736696124,
-        "narHash": "sha256-8UwGZ+hCmk5MC7M9b3/qcnYpgW0LRqEYd+u8w5s5vww=",
+        "lastModified": 1736703200,
+        "narHash": "sha256-RhxXigqTNPJtkb3Vf6aUJy1VeApVWJjJ+kzTPN/xtsY=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "8dca96dcfa4a176f58303c5ca8c3f717c27a2910",
+        "rev": "5ded9b1ae38545eb906b1cfd0a5181563f4db539",
         "type": "github"
       },
       "original": {
@@ -273,11 +273,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1736696247,
-        "narHash": "sha256-heZjUORayn3reo9b1c02fZCHpKUO798bDMiL8rc708U=",
+        "lastModified": 1736703470,
+        "narHash": "sha256-X8BwuYBGW6oNdX4ndUXnaSjrJN9alk4OiiXQTnTkIuw=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "71a7a63c719a8d64757b266980e0d03b32281b99",
+        "rev": "72dffdb4f42603dc3f2a573c12e805ee31cb2da8",
         "type": "gitlab"
       },
       "original": {
