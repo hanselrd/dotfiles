@@ -3,7 +3,7 @@ package theme
 type Theme struct {
 	Slug    string       `json:"slug"`
 	Name    string       `json:"name,omitempty"`
-	Email   string       `json:"author,omitempty"`
+	Author  string       `json:"author,omitempty"`
 	Palette ThemePalette `json:"palette"`
 }
 
