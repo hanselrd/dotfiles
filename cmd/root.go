@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 	"runtime"
@@ -49,10 +50,8 @@ var rootCmd = &cobra.Command{
 		log.Log(
 			level,
 			"",
-			"os",
-			runtime.GOOS,
-			"arch",
-			runtime.GOARCH,
+			"platform",
+			fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH),
 			"version",
 			runtime.Version(),
 			"cpu",
