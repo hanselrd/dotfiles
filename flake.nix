@@ -96,12 +96,10 @@
         ];
       };
 
-      env = builtins.fromJSON (
-        builtins.readFile (
-          pkgs.runCommand "dotfiles-cli-environment-json" {
-            DOTFILES_SRC_DIR = gitignore.lib.gitignoreSource ./.;
-          } "${lib.getExe pkgs.dotfiles-cli} environment > $out"
-        )
+      env = lib.importJSON (
+        pkgs.runCommand "dotfiles-cli-environment-json" {
+          DOTFILES_SRC_DIR = gitignore.lib.gitignoreSource ./.;
+        } "${lib.getExe pkgs.dotfiles-cli} environment > $out"
       );
 
       lib = nixpkgs.lib.extend (
