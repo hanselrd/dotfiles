@@ -6,6 +6,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/x/ansi"
 	"github.com/fatih/color"
 	"github.com/rs/zerolog"
 	"github.com/samber/lo"
@@ -32,15 +34,20 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 		FormatTimestamp: func(i interface{}) string {
 			if s, ok := i.(string); ok {
 				t := lo.Must(time.ParseInLocation(zerolog.TimeFieldFormat, s, time.Local))
+				w := 15
 				return color.HiWhiteString(
 					"%s ",
 					t.In(time.Local).Format(environment.Environment.Extra.GoTimeFormat),
 				) + color.HiBlackString(
-					"<%s>",
-					time.Since(now),
+					"[%s]",
+					lipgloss.PlaceHorizontal(
+						w,
+						lipgloss.Center,
+						ansi.Truncate(time.Since(now).String(), w, "+"),
+					),
 				)
 			}
-			return color.HiBlackString("<%s>", time.Since(now))
+			panic(i)
 		},
 		FormatLevel: func(i interface{}) string {
 			attrs := []color.Attribute{color.Bold}
