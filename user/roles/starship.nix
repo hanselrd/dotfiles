@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.starship;
-in {
+in
+{
   options = {
     roles.user.starship = {
       enable = lib.mkEnableOption "roles.user.starship";
@@ -142,7 +144,9 @@ in {
 
     home.file.".tmp/starship" = lib.mkIf lib.profiles.isSystemWsl (
       lib.common.runExternalAlways ''
-        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/starship.toml ${lib.escape [" "] env.extra.winUser.configDirectory}
+        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/starship.toml ${
+          lib.escape [ " " ] env.extra.winUser.configDirectory
+        }
       ''
     );
   };

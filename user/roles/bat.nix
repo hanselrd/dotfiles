@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.bat;
-in {
+in
+{
   options = {
     roles.user.bat = {
       enable = lib.mkEnableOption "roles.user.bat";
@@ -20,7 +22,7 @@ in {
       };
       themes = {
         "nix-${config.colorScheme.slug}" = {
-          src = lib.vendor.nix-colors-custom.batThemeFromScheme {scheme = config.colorScheme;};
+          src = lib.vendor.nix-colors-custom.batThemeFromScheme { scheme = config.colorScheme; };
         };
       };
     };

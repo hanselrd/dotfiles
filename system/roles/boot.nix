@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.boot;
-in {
+in
+{
   options = {
     roles.system.boot = {
       enable = lib.mkEnableOption "roles.system.boot";

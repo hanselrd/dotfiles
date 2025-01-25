@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.ranger;
-in {
+in
+{
   options = {
     roles.user.ranger = {
       enable = lib.mkEnableOption "roles.user.ranger";

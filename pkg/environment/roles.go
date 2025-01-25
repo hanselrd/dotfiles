@@ -35,6 +35,7 @@ type (
 	environmentRolesUserAlacritty             struct{}
 	environmentRolesUserBash                  struct{}
 	environmentRolesUserBat                   struct{}
+	environmentRolesUserBin                   struct{}
 	environmentRolesUserBrave                 struct{}
 	environmentRolesUserBrowser               struct{}
 	environmentRolesUserBtop                  struct{}
@@ -78,7 +79,6 @@ type (
 	environmentRolesUserRipgrep  struct{}
 	environmentRolesUserRofi     struct{}
 	environmentRolesUserRts      struct{}
-	environmentRolesUserScripts  struct{}
 	environmentRolesUserShell    struct {
 		BashToZsh bool `json:"bashToZsh"`
 		LdPreload bool `json:"ldPreload"`

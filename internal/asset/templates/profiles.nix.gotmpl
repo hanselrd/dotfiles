@@ -1,0 +1,13 @@
+{
+  lib,
+  pkgs,
+  profile,
+  ...
+}:
+{
+  {{- range .}}
+  {{- $profile := printf "%s" .}}
+  {{- $privilege_level := printf "%s" .PrivilegeLevel}}
+  is{{camelcase $privilege_level}}{{camelcase $profile}} = profile.{{$privilege_level}} == "{{$profile}}";
+  {{- end}}
+}

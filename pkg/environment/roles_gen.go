@@ -35,6 +35,7 @@ type environmentRolesUser struct {
 	Alacritty             *environmentRolesUserAlacritty             `json:"alacritty,omitempty"`
 	Bash                  *environmentRolesUserBash                  `json:"bash,omitempty"`
 	Bat                   *environmentRolesUserBat                   `json:"bat,omitempty"`
+	Bin                   *environmentRolesUserBin                   `json:"bin,omitempty"`
 	Brave                 *environmentRolesUserBrave                 `json:"brave,omitempty"`
 	Browser               *environmentRolesUserBrowser               `json:"browser,omitempty"`
 	Btop                  *environmentRolesUserBtop                  `json:"btop,omitempty"`
@@ -76,7 +77,6 @@ type environmentRolesUser struct {
 	Ripgrep               *environmentRolesUserRipgrep               `json:"ripgrep,omitempty"`
 	Rofi                  *environmentRolesUserRofi                  `json:"rofi,omitempty"`
 	Rts                   *environmentRolesUserRts                   `json:"rts,omitempty"`
-	Scripts               *environmentRolesUserScripts               `json:"scripts,omitempty"`
 	Shell                 *environmentRolesUserShell                 `json:"shell,omitempty"`
 	Ssh                   *environmentRolesUserSsh                   `json:"ssh,omitempty"`
 	Starship              *environmentRolesUserStarship              `json:"starship,omitempty"`

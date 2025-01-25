@@ -4,12 +4,14 @@
   pkgs,
   env,
   ...
-}: {
+}:
+{
   imports = lib.flatten [
     ./roles/bootstrap.nix
     ./roles/alacritty.nix
     ./roles/bash.nix
     ./roles/bat.nix
+    ./roles/bin.nix
     ./roles/brave.nix
     ./roles/browser.nix
     ./roles/btop.nix
@@ -51,7 +53,6 @@
     ./roles/ripgrep.nix
     ./roles/rofi.nix
     (lib.optional (!env.extra.encrypted.yellow) ../secrets/yellow/user/roles/rts.nix)
-    ./roles/scripts.nix
     ./roles/shell.nix
     ./roles/ssh.nix
     ./roles/starship.nix

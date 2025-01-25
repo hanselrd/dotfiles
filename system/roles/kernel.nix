@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.kernel;
-in {
+in
+{
   options = {
     roles.system.kernel = {
       enable = lib.mkEnableOption "roles.system.kernel";

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.shell;
-in {
+in
+{
   options = {
     roles.user.development.shell = {
       enable = lib.mkEnableOption "roles.user.development.shell";

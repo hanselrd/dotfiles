@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.go;
-in {
+in
+{
   options = {
     roles.user.development.go = {
       enable = lib.mkEnableOption "roles.user.development.go";

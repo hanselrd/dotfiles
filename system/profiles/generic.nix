@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   roles.system.bootstrap.enable = true;
   roles.system.docker.enable = true;
   roles.system.i18n.enable = true;

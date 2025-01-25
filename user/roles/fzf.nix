@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.fzf;
-in {
+in
+{
   options = {
     roles.user.fzf = {
       enable = lib.mkEnableOption "roles.user.fzf";
@@ -16,7 +18,7 @@ in {
     programs.fzf = {
       enable = true;
       tmux.enableShellIntegration = true;
-      colors = lib.vendor.nix-colors-custom.fzfThemeFromScheme {scheme = config.colorScheme;};
+      colors = lib.vendor.nix-colors-custom.fzfThemeFromScheme { scheme = config.colorScheme; };
     };
   };
 }

@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.xdg;
-in {
+in
+{
   options = {
     roles.user.xdg = {
       enable = lib.mkEnableOption "roles.user.xdg";

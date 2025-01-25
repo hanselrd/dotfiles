@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.fonts;
-in {
+in
+{
   options = {
     roles.user.fonts = {
       enable = lib.mkEnableOption "roles.user.fonts";

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.xserver;
-in {
+in
+{
   options = {
     roles.system.xserver = {
       enable = lib.mkEnableOption "roles.system.xserver";

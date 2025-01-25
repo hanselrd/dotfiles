@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (inputs) gitignore;
-in rec {
-  currentTimeUtcPretty = builtins.replaceStrings ["\n"] [""] (
+in
+rec {
+  currentTimeUtcPretty = builtins.replaceStrings [ "\n" ] [ "" ] (
     builtins.readFile (
       pkgs.runCommand "current-time-utc-pretty" {
         currentTime = builtins.currentTime;
@@ -14,11 +16,12 @@ in rec {
     )
   );
 
-  currentTimePretty = tz:
-    builtins.replaceStrings ["\n"] [""] (
+  currentTimePretty =
+    tz:
+    builtins.replaceStrings [ "\n" ] [ "" ] (
       builtins.readFile (
         pkgs.runCommand "current-time-pretty" {
-          buildInputs = [pkgs.tzdata];
+          buildInputs = [ pkgs.tzdata ];
           currentTime = builtins.currentTime;
         } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
       )
@@ -29,19 +32,21 @@ in rec {
     onChange = script;
   };
 
-  runExternalAlways = script:
+  runExternalAlways =
+    script:
     runExternalOnce ''
       # ${currentTimeUtcPretty}
       ${script}
     '';
 
-  buildGoScript = name:
+  buildGoBin =
+    name:
     pkgs.buildGoModule {
-      name = "dotfiles-go-script-${name}";
+      name = "dotfiles-go-bin-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-TaINHPFZAmWW0RFH113ys1vBQEeMy46zK2lXctz6/98=";
+      vendorHash = "sha256-WTBxNbNf5x4H/RWdFRahLvD7MNZDCBBh961yfR1gNg0=";
       subPackages = [
-        "scripts/${name}"
+        "cmd/${name}"
       ];
       env.CGO_ENABLED = 0;
       meta.mainProgram = name;

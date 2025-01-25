@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.zsh;
-in {
+in
+{
   options = {
     roles.user.zsh = {
       enable = lib.mkEnableOption "roles.user.zsh";
@@ -45,16 +47,19 @@ in {
       # ];
       initExtra = ''
         ${
-          if env.roles.user.shell.theme
-          then ''
-            ${lib.getExe' pkgs.bash "sh"} ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
-          ''
-          else ""
+          if env.roles.user.shell.theme then
+            ''
+              ${lib.getExe' pkgs.bash "sh"} ${
+                lib.vendor.nix-colors-contrib.shellThemeFromScheme { scheme = config.colorScheme; }
+              }
+            ''
+          else
+            ""
         }
       '';
       profileExtra = ''
-        if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
-          . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
+        if [ -e ${env.user.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
+          . ${env.user.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
         fi
       '';
     };

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.terminal;
-in {
+in
+{
   options = {
     roles.user.terminal = {
       enable = lib.mkEnableOption "roles.user.terminal";

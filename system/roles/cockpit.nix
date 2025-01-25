@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.cockpit;
-in {
+in
+{
   options = {
     roles.system.cockpit = {
       enable = lib.mkEnableOption "roles.system.cockpit";

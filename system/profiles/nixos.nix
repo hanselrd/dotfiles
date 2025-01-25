@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./generic.nix

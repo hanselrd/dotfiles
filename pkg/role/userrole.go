@@ -14,6 +14,7 @@ const (
 	UserRoleAlacritty
 	UserRoleBash
 	UserRoleBat
+	UserRoleBin
 	UserRoleBrave
 	UserRoleBrowser
 	UserRoleBtop
@@ -55,7 +56,6 @@ const (
 	UserRoleRipgrep
 	UserRoleRofi
 	UserRoleRts
-	UserRoleScripts
 	UserRoleShell
 	UserRoleSsh
 	UserRoleStarship

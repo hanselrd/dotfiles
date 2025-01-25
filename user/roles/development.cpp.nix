@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.cpp;
-in {
+in
+{
   options = {
     roles.user.development.cpp = {
       enable = lib.mkEnableOption "roles.user.development.cpp";

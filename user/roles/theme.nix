@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.theme;
-in {
+in
+{
   options = {
     roles.user.theme = {
       enable = lib.mkEnableOption "roles.user.theme";

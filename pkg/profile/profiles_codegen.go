@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	. "github.com/dave/jennifer/jen"
-	"github.com/iancoleman/strcase"
+	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/pkg/profile"
 )
@@ -23,13 +23,13 @@ func main() {
 	f.Var().DefsFunc(func(g *Group) {
 		for _, systemProfile := range profile.SystemProfileValues() {
 			for _, userProfile := range profile.UserProfileValues() {
-				g.Id(fmt.Sprintf("%s%s", strcase.ToCamel(systemProfile.String()), strcase.ToCamel(userProfile.String()))).
+				g.Id(fmt.Sprintf("%s%s", lo.PascalCase(systemProfile.String()), lo.PascalCase(userProfile.String()))).
 					Op("=").
 					Id("NewProfileGroup").
 					Call(
-						Id(fmt.Sprintf("SystemProfile%s", strcase.ToCamel(systemProfile.String()))),
+						Id(fmt.Sprintf("SystemProfile%s", lo.PascalCase(systemProfile.String()))),
 						Id(
-							fmt.Sprintf("UserProfile%s", strcase.ToCamel(userProfile.String())),
+							fmt.Sprintf("UserProfile%s", lo.PascalCase(userProfile.String())),
 						),
 					)
 			}
@@ -38,7 +38,7 @@ func main() {
 
 	f.Var().DefsFunc(func(g *Group) {
 		for _, systemProfile := range profile.SystemProfileValues() {
-			g.Id(fmt.Sprintf("%sProfiles", strcase.ToCamel(systemProfile.String()))).
+			g.Id(fmt.Sprintf("%sProfiles", lo.PascalCase(systemProfile.String()))).
 				Op("=").
 				Index().
 				Id("ProfileGroup").
@@ -47,8 +47,8 @@ func main() {
 						gg.Id(
 							fmt.Sprintf(
 								"%s%s",
-								strcase.ToCamel(systemProfile.String()),
-								strcase.ToCamel(userProfile.String()),
+								lo.PascalCase(systemProfile.String()),
+								lo.PascalCase(userProfile.String()),
 							),
 						)
 					}
@@ -56,7 +56,7 @@ func main() {
 		}
 		g.Id("HomeManagerProfiles").Op("=").Qual("slices", "Concat").CallFunc(func(gg *Group) {
 			for _, systemProfile := range profile.SystemProfileValues() {
-				gg.Id(fmt.Sprintf("%sProfiles", strcase.ToCamel(systemProfile.String())))
+				gg.Id(fmt.Sprintf("%sProfiles", lo.PascalCase(systemProfile.String())))
 			}
 		})
 	})

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.haskell;
-in {
+in
+{
   options = {
     roles.user.development.haskell = {
       enable = lib.mkEnableOption "roles.user.development.haskell";

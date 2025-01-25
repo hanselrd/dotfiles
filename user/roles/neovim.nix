@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.neovim;
-in {
+in
+{
   options = {
     roles.user.neovim = {
       enable = lib.mkEnableOption "roles.user.neovim";
@@ -55,7 +57,7 @@ in {
         vim-unimpaired
         vim-vsnip
         {
-          plugin = lib.vendor.nix-colors-contrib.vimThemeFromScheme {scheme = config.colorScheme;};
+          plugin = lib.vendor.nix-colors-contrib.vimThemeFromScheme { scheme = config.colorScheme; };
           config = ''
             lua << EOF
               vim.cmd [[ colorscheme nix-${config.colorScheme.slug} ]]
@@ -71,17 +73,16 @@ in {
         #       ]
         #   )
         # )
-        (pkgs.vimUtils.buildVimPlugin
-          rec {
-            name = "vim-textobj-indent";
-            version = "master";
-            src = pkgs.fetchFromGitHub {
-              owner = "kana";
-              repo = name;
-              rev = version;
-              hash = "sha256-oFzUPG+IOkbKZ2gU/kduQ3G/LsLDlEjFhRP0BHBE+1Q=";
-            };
-          })
+        (pkgs.vimUtils.buildVimPlugin rec {
+          name = "vim-textobj-indent";
+          version = "master";
+          src = pkgs.fetchFromGitHub {
+            owner = "kana";
+            repo = name;
+            rev = version;
+            hash = "sha256-oFzUPG+IOkbKZ2gU/kduQ3G/LsLDlEjFhRP0BHBE+1Q=";
+          };
+        })
       ];
       extraPackages = with pkgs; [
         # elixir-ls

@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.bootstrap;
-in {
+in
+{
   options = {
     roles.user.bootstrap = {
       enable = lib.mkEnableOption "roles.user.bootstrap";

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.docker;
-in {
+in
+{
   options = {
     roles.system.docker = {
       enable = lib.mkEnableOption "roles.system.docker";
@@ -19,7 +21,7 @@ in {
         autoPrune = {
           enable = true;
           dates = "weekly";
-          flags = ["--all"];
+          flags = [ "--all" ];
         };
       };
     }

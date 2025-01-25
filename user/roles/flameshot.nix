@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.flameshot;
-in {
+in
+{
   options = {
     roles.user.flameshot = {
       enable = lib.mkEnableOption "roles.user.flameshot";

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.time;
-in {
+in
+{
   options = {
     roles.system.time = {
       enable = lib.mkEnableOption "roles.system.time";

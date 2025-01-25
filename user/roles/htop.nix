@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.htop;
-in {
+in
+{
   options = {
     roles.user.htop = {
       enable = lib.mkEnableOption "roles.user.htop";
@@ -69,22 +71,26 @@ in {
           tree_view_always_by_pid = 0;
           update_process_names = 1;
         }
-        // (with config.lib.htop;
+        // (
+          with config.lib.htop;
           leftMeters [
             (bar "LeftCPUs2")
             (bar "CPU")
             (bar "Memory")
             (bar "Swap")
             (bar "HugePages")
-          ])
-        // (with config.lib.htop;
+          ]
+        )
+        // (
+          with config.lib.htop;
           rightMeters [
             (bar "RightCPUs2")
             (text "System")
             (text "Tasks")
             (text "LoadAverage")
             (text "Uptime")
-          ]);
+          ]
+        );
     };
   };
 }

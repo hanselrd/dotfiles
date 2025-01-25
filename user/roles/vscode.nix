@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.vscode;
-in {
+in
+{
   options = {
     roles.user.vscode = {
       enable = lib.mkEnableOption "roles.user.vscode";
@@ -102,17 +104,17 @@ in {
               "<leader>"
               "f"
             ];
-            "commands" = ["editor.action.formatDocument"];
+            "commands" = [ "editor.action.formatDocument" ];
           }
         ];
         "vim.visualModeKeyBindings" = [
           {
-            "before" = [">"];
-            "commands" = ["editor.action.indentLines"];
+            "before" = [ ">" ];
+            "commands" = [ "editor.action.indentLines" ];
           }
           {
-            "before" = ["<"];
-            "commands" = ["editor.action.outdentLines"];
+            "before" = [ "<" ];
+            "commands" = [ "editor.action.outdentLines" ];
           }
           {
             "before" = [

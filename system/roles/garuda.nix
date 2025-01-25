@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.garuda;
-in {
+in
+{
   options = {
     roles.system.garuda = {
       enable = lib.mkEnableOption "roles.system.garuda";

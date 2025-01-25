@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.ripgrep;
-in {
+in
+{
   options = {
     roles.user.ripgrep = {
       enable = lib.mkEnableOption "roles.user.ripgrep";

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.gleam;
-in {
+in
+{
   options = {
     roles.user.development.gleam = {
       enable = lib.mkEnableOption "roles.user.development.gleam";

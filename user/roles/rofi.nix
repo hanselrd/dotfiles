@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.rofi;
-in {
+in
+{
   options = {
     roles.user.rofi = {
       enable = lib.mkEnableOption "roles.user.rofi";

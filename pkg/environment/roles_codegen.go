@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	. "github.com/dave/jennifer/jen"
-	"github.com/iancoleman/strcase"
+	"github.com/samber/lo"
 
 	"github.com/hanselrd/dotfiles/pkg/role"
 )
@@ -31,18 +31,18 @@ func main() {
 
 	f.Type().Id("environmentRolesSystem").StructFunc(func(g *Group) {
 		for _, systemRole := range role.SystemRoleValues() {
-			g.Id(strcase.ToCamel(systemRole.String())).
+			g.Id(lo.PascalCase(systemRole.String())).
 				Op("*").
-				Id(fmt.Sprintf("environmentRolesSystem%s", strcase.ToCamel(systemRole.String()))).
+				Id(fmt.Sprintf("environmentRolesSystem%s", lo.PascalCase(systemRole.String()))).
 				Tag(map[string]string{"json": fmt.Sprintf("%s,omitempty", systemRole)})
 		}
 	})
 
 	f.Type().Id("environmentRolesUser").StructFunc(func(g *Group) {
 		for _, userRole := range role.UserRoleValues() {
-			g.Id(strcase.ToCamel(userRole.String())).
+			g.Id(lo.PascalCase(userRole.String())).
 				Op("*").
-				Id(fmt.Sprintf("environmentRolesUser%s", strcase.ToCamel(userRole.String()))).
+				Id(fmt.Sprintf("environmentRolesUser%s", lo.PascalCase(userRole.String()))).
 				Tag(map[string]string{"json": fmt.Sprintf("%s,omitempty", userRole)})
 		}
 	})

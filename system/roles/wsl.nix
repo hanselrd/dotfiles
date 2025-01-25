@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.wsl;
-in {
+in
+{
   options = {
     roles.system.wsl = {
       enable = lib.mkEnableOption "roles.system.wsl";

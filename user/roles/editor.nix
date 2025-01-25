@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.editor;
-in {
+in
+{
   options = {
     roles.user.editor = {
       enable = lib.mkEnableOption "roles.user.editor";

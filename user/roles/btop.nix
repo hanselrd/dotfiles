@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.btop;
-in {
+in
+{
   options = {
     roles.user.btop = {
       enable = lib.mkEnableOption "roles.user.btop";
@@ -17,7 +19,7 @@ in {
     programs.btop = {
       enable = true;
       settings = {
-        clock_format = builtins.replaceStrings ["%-"] ["%"] env.extra.timeFormat;
+        clock_format = builtins.replaceStrings [ "%-" ] [ "%" ] env.extra.timeFormat;
         update_ms = 3000;
       };
     };

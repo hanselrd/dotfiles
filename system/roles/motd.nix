@@ -5,9 +5,11 @@
   env,
   profile,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.motd;
-in {
+in
+{
   options = {
     roles.system.motd = {
       enable = lib.mkEnableOption "roles.system.motd";

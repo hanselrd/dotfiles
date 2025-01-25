@@ -4,10 +4,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.bootstrap;
   inherit (inputs) self;
-in {
+in
+{
   options = {
     roles.system.bootstrap = {
       enable = lib.mkEnableOption "roles.system.bootstrap";
@@ -19,9 +21,6 @@ in {
 
     system.configurationRevision = self.shortRev or "<dirty>";
 
-    system.stateVersion =
-      if !lib.profiles.isSystemDarwin
-      then "22.05"
-      else 4;
+    system.stateVersion = if !lib.profiles.isSystemDarwin then "22.05" else 4;
   };
 }

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.sxhkd;
-in {
+in
+{
   options = {
     roles.user.sxhkd = {
       enable = lib.mkEnableOption "roles.user.sxhkd";

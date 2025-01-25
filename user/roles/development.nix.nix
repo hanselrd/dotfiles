@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.nix;
-in {
+in
+{
   options = {
     roles.user.development.nix = {
       enable = lib.mkEnableOption "roles.user.development.nix";
@@ -15,6 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       alejandra
+      nixfmt-rfc-style
       nixpkgs-fmt
     ];
   };

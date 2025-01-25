@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.lldb;
-in {
+in
+{
   options = {
     roles.user.lldb = {
       enable = lib.mkEnableOption "roles.user.lldb";

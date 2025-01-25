@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.python;
-in {
+in
+{
   options = {
     roles.user.development.python = {
       enable = lib.mkEnableOption "roles.user.development.python";
@@ -14,14 +16,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      (python3.withPackages
-        (packages:
-          with packages; [
-            black
-            flake8
-            pylint
-            python-magic
-          ]))
+      (python3.withPackages (
+        packages: with packages; [
+          black
+          flake8
+          pylint
+          python-magic
+        ]
+      ))
       pipenv
       poetry
     ];

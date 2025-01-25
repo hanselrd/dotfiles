@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.fastfetch;
-in {
+in
+{
   options = {
     roles.user.fastfetch = {
       enable = lib.mkEnableOption "roles.user.fastfetch";

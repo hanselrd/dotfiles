@@ -3,7 +3,8 @@
   pkgs,
   profile,
   ...
-}: {
+}:
+{
   isSystemNixos = profile.system == "nixos";
   isSystemGaruda = profile.system == "garuda";
   isSystemWsl = profile.system == "wsl";

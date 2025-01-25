@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.eza;
-in {
+in
+{
   options = {
     roles.user.eza = {
       enable = lib.mkEnableOption "roles.user.eza";

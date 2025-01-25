@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.elixir;
-in {
+in
+{
   options = {
     roles.user.development.elixir = {
       enable = lib.mkEnableOption "roles.user.development.elixir";

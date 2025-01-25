@@ -6,9 +6,11 @@
   env,
   profile,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.home-manager;
-in {
+in
+{
   options = {
     roles.system.home-manager = {
       enable = lib.mkEnableOption "roles.system.home-manager";

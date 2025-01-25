@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.zoxide;
-in {
+in
+{
   options = {
     roles.user.zoxide = {
       enable = lib.mkEnableOption "roles.user.zoxide";
@@ -17,7 +19,7 @@ in {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      options = ["--cmd cd"];
+      options = [ "--cmd cd" ];
     };
   };
 }

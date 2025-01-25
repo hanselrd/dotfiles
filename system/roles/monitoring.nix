@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.monitoring;
-in {
+in
+{
   options = {
     roles.system.monitoring = {
       enable = lib.mkEnableOption "roles.system.monitoring";

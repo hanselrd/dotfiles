@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.rust;
-in {
+in
+{
   options = {
     roles.user.development.rust = {
       enable = lib.mkEnableOption "roles.user.development.rust";

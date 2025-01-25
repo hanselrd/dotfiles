@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.xrdp;
-in {
+in
+{
   options = {
     roles.system.xrdp = {
       enable = lib.mkEnableOption "roles.system.xrdp";

@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.tmux;
-in {
+in
+{
   options = {
     roles.user.tmux = {
       enable = lib.mkEnableOption "roles.user.tmux";
@@ -67,18 +69,20 @@ in {
             set -ga status-right "#{?#{pane_ssh_connected},#[fg=brightgreen],#[fg=brightblack]}#{hostname_short}#[default] "
             set -ga status-right "#[fg=brightblack]{#[default]"
             set -ga status-right "#[fg=brightyellow]${
-              builtins.replaceStrings ["<" ">"] [
-                (lib.concatStrings [
-                  "#[fg=brightblack]<#[default]"
-                  "#[fg=brightred]"
-                ])
-                (lib.concatStrings [
-                  "#[default]"
-                  "#[fg=brightblack]>#[default]"
-                  "#[fg=brightyellow]"
-                ])
-              ]
-              env.extra.timeFormat
+              builtins.replaceStrings
+                [ "<" ">" ]
+                [
+                  (lib.concatStrings [
+                    "#[fg=brightblack]<#[default]"
+                    "#[fg=brightred]"
+                  ])
+                  (lib.concatStrings [
+                    "#[default]"
+                    "#[fg=brightblack]>#[default]"
+                    "#[fg=brightyellow]"
+                  ])
+                ]
+                env.extra.timeFormat
             }#[default]"
             set -ga status-right "#[fg=brightblack]}#[default]"
           '';
@@ -99,19 +103,17 @@ in {
           '';
         }
         {
-          plugin =
-            mkTmuxPlugin
-            rec {
-              pluginName = "tmux-current-pane-hostname";
-              rtpFilePath = "current_pane_hostname.tmux";
-              version = "master";
-              src = pkgs.fetchFromGitHub {
-                owner = "soyuka";
-                repo = pluginName;
-                rev = version;
-                hash = "sha256-vmGdHAWpYwo95tJNZlu9M5ZaC0qazTP4vT7tUAZHPfA=";
-              };
+          plugin = mkTmuxPlugin rec {
+            pluginName = "tmux-current-pane-hostname";
+            rtpFilePath = "current_pane_hostname.tmux";
+            version = "master";
+            src = pkgs.fetchFromGitHub {
+              owner = "soyuka";
+              repo = pluginName;
+              rev = version;
+              hash = "sha256-vmGdHAWpYwo95tJNZlu9M5ZaC0qazTP4vT7tUAZHPfA=";
             };
+          };
         }
         {
           plugin = resurrect;
@@ -132,7 +134,9 @@ in {
         }
       ];
       extraConfig = ''
-        ${builtins.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme {scheme = config.colorScheme;})}
+        ${builtins.readFile (
+          lib.vendor.nix-colors-custom.tmuxThemeFromScheme { scheme = config.colorScheme; }
+        )}
 
         set -g clock-mode-colour "white"
         set -g display-panes-active-colour "brightyellow"

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.openssh;
-in {
+in
+{
   options = {
     roles.system.openssh = {
       enable = lib.mkEnableOption "roles.system.openssh";

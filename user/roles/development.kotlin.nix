@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.kotlin;
-in {
+in
+{
   options = {
     roles.user.development.kotlin = {
       enable = lib.mkEnableOption "roles.user.development.kotlin";

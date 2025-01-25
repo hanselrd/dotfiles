@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.kde;
-in {
+in
+{
   options = {
     roles.system.kde = {
       enable = lib.mkEnableOption "roles.system.kde";

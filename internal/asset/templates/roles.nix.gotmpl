@@ -1,0 +1,25 @@
+{
+  config,
+  lib,
+  pkgs,
+  env,
+  ...
+}:
+{
+  imports = lib.flatten [
+    {{- range .}}
+    {{- $role := printf "%s" .}}
+    {{- $privilege_level := printf "%s" .PrivilegeLevel}}
+    {{- $encryption := printf "%s" .Encryption}}
+    {{- if .Enabled}}
+    {{- if eq .Encryption 0}}
+    ./roles/{{$role}}.nix
+    {{- else if eq .Encryption 1}}
+    (lib.optional (!env.extra.encrypted.{{$encryption}}) ../secrets/{{$privilege_level}}/roles/{{$role}}.nix)
+    {{- else}}
+    (lib.optional (!env.extra.encrypted.{{$encryption}}) ../secrets/{{$encryption}}/{{$privilege_level}}/roles/{{$role}}.nix)
+    {{- end}}
+    {{- end}}
+    {{- end}}
+  ];
+}

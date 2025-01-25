@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.redshift;
-in {
+in
+{
   options = {
     roles.user.redshift = {
       enable = lib.mkEnableOption "roles.user.redshift";

@@ -2,10 +2,13 @@
   config,
   lib,
   pkgs,
+  env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.gdb;
-in {
+in
+{
   options = {
     roles.user.gdb = {
       enable = lib.mkEnableOption "roles.user.gdb";
@@ -23,7 +26,7 @@ in {
         set history save on
         set history size 10000
         set history remove-duplicates 100
-        set history filename ${config.home.homeDirectory}/.gdb_history
+        set history filename ${env.user.homeDirectory}/.gdb_history
         set print pretty on
         set pagination off
         set confirm off

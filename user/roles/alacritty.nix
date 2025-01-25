@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.alacritty;
-in {
+in
+{
   options = {
     roles.user.alacritty = {
       enable = lib.mkEnableOption "roles.user.alacritty";
@@ -32,7 +34,7 @@ in {
         #   };
         #   size = 10;
         # };
-        colors = lib.vendor.nix-colors-custom.alacrittyThemeFromScheme {scheme = config.colorScheme;};
+        colors = lib.vendor.nix-colors-custom.alacrittyThemeFromScheme { scheme = config.colorScheme; };
       };
     };
   };

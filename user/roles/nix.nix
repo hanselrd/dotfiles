@@ -5,10 +5,12 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.nix;
   inherit (inputs) nixpkgs;
-in {
+in
+{
   options = {
     roles.user.nix = {
       enable = lib.mkEnableOption "roles.user.nix";
@@ -21,7 +23,10 @@ in {
     nix.package = lib.mkForce pkgs.nix;
 
     nix.settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       sandbox = env.roles.user.nix.sandbox;
       show-trace = true;
     };

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.purescript;
-in {
+in
+{
   options = {
     roles.user.development.purescript = {
       enable = lib.mkEnableOption "roles.user.development.purescript";

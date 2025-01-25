@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.zig;
-in {
+in
+{
   options = {
     roles.user.development.zig = {
       enable = lib.mkEnableOption "roles.user.development.zig";

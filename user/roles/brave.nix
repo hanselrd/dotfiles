@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.brave;
-in {
+in
+{
   options = {
     roles.user.brave = {
       enable = lib.mkEnableOption "roles.user.brave";
@@ -24,12 +26,22 @@ in {
       '';
       ".tmp/brave1" = lib.mkIf lib.profiles.isSystemDarwin (
         lib.common.runExternalAlways ''
-          ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${lib.concatMapStringsSep "/" (x: lib.escape [" "] x) [env.user.homeDirectory "Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"]}
+          ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${
+            lib.concatMapStringsSep "/" (x: lib.escape [ " " ] x) [
+              env.user.homeDirectory
+              "Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
+            ]
+          }
         ''
       );
       ".tmp/brave2" = lib.mkIf lib.profiles.isSystemWsl (
         lib.common.runExternalAlways ''
-          ${lib.getExe' pkgs.coreutils "install"} -DT ${../../secrets/blue/user/roles/brave/Bookmarks} ${lib.concatMapStringsSep "/" (x: lib.escape [" "] x) [env.extra.winUser.localAppData "BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"]}
+          ${lib.getExe' pkgs.coreutils "install"} -DT ${../../secrets/blue/user/roles/brave/Bookmarks} ${
+            lib.concatMapStringsSep "/" (x: lib.escape [ " " ] x) [
+              env.extra.winUser.localAppData
+              "BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"
+            ]
+          }
         ''
       );
     };

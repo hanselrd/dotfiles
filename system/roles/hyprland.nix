@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.hyprland;
-in {
+in
+{
   options = {
     roles.system.hyprland = {
       enable = lib.mkEnableOption "roles.system.hyprland";

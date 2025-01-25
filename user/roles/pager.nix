@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.pager;
-in {
+in
+{
   options = {
     roles.user.pager = {
       enable = lib.mkEnableOption "roles.user.pager";

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.sudo;
-in {
+in
+{
   options = {
     roles.system.sudo = {
       enable = lib.mkEnableOption "roles.system.sudo";

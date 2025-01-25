@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.development.java;
-in {
+in
+{
   options = {
     roles.user.development.java = {
       enable = lib.mkEnableOption "roles.user.development.java";

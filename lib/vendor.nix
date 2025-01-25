@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (inputs) chaotic nix-colors;
-in {
+in
+{
   nix-colors = nix-colors.lib;
-  nix-colors-contrib = nix-colors.lib.contrib {inherit pkgs;};
+  nix-colors-contrib = nix-colors.lib.contrib { inherit pkgs; };
   nix-colors-custom = (import ./vendor/nix-colors-custom.nix) {
     inherit pkgs lib;
   };

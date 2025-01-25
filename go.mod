@@ -5,9 +5,9 @@ go 1.22.0
 toolchain go1.23.2
 
 require (
+	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/fatih/color v1.18.0
 	github.com/goccy/go-graphviz v0.2.9
-	github.com/iancoleman/strcase v0.3.0
 	github.com/rs/zerolog v1.33.0
 	github.com/samber/lo v1.47.0
 	github.com/samber/slog-zerolog/v2 v2.7.3
@@ -15,19 +15,29 @@ require (
 )
 
 require (
+	dario.cat/mergo v1.0.1 // indirect
+	github.com/Masterminds/goutils v1.1.1 // indirect
+	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/dave/jennifer v1.7.1 // indirect
 	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/dmarkham/enumer v1.5.10 // indirect
 	github.com/flopp/go-findfont v0.1.0 // indirect
 	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mitchellh/copystructure v1.2.0 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/pascaldekloe/name v1.0.0 // indirect
 	github.com/samber/slog-common v0.18.1 // indirect
+	github.com/shopspring/decimal v1.4.0 // indirect
+	github.com/spf13/cast v1.7.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/tetratelabs/wazero v1.8.2 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/image v0.23.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect

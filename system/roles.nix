@@ -4,7 +4,8 @@
   pkgs,
   env,
   ...
-}: {
+}:
+{
   imports = lib.flatten [
     ./roles/bootstrap.nix
     ./roles/boot.nix

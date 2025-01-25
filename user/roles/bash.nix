@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.bash;
-in {
+in
+{
   options = {
     roles.user.bash = {
       enable = lib.mkEnableOption "roles.user.bash";
@@ -18,27 +20,31 @@ in {
       enable = true;
       initExtra = ''
         ${
-          if env.roles.user.shell.theme
-          then ''
-            ${lib.getExe' pkgs.bash "sh"} ${lib.vendor.nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
-          ''
-          else ""
+          if env.roles.user.shell.theme then
+            ''
+              ${lib.getExe' pkgs.bash "sh"} ${
+                lib.vendor.nix-colors-contrib.shellThemeFromScheme { scheme = config.colorScheme; }
+              }
+            ''
+          else
+            ""
         }
       '';
       profileExtra = ''
-        if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
-          . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
+        if [ -e ${env.user.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
+          . ${env.user.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
         fi
 
         ${
-          if env.roles.user.shell.bashToZsh
-          then ''
-            if command -v zsh &> /dev/null; then
-              export SHELL=$(command -v zsh)
-              exec zsh -l
-            fi
-          ''
-          else ""
+          if env.roles.user.shell.bashToZsh then
+            ''
+              if command -v zsh &> /dev/null; then
+                export SHELL=$(command -v zsh)
+                exec zsh -l
+              fi
+            ''
+          else
+            ""
         }
       '';
     };

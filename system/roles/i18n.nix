@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.i18n;
-in {
+in
+{
   options = {
     roles.system.i18n = {
       enable = lib.mkEnableOption "roles.system.i18n";

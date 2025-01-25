@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.docker;
-in {
+in
+{
   options = {
     roles.user.docker = {
       enable = lib.mkEnableOption "roles.user.docker";

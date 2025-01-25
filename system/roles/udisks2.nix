@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.system.udisks2;
-in {
+in
+{
   options = {
     roles.system.udisks2 = {
       enable = lib.mkEnableOption "roles.system.udisks2";

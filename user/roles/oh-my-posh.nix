@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.oh-my-posh;
-in {
+in
+{
   options = {
     roles.user.oh-my-posh = {
       enable = lib.mkEnableOption "roles.user.oh-my-posh";
@@ -69,17 +71,19 @@ in {
                 ];
                 properties = {
                   time_format =
-                    builtins.replaceStrings ["<" ">"] [
-                      (lib.concatStrings [
-                        "<darkGray><</>"
-                        "<lightRed>"
-                      ])
-                      (lib.concatStrings [
-                        "</>"
-                        "<darkGray>></>"
-                      ])
-                    ]
-                    env.extra.goTimeFormat;
+                    builtins.replaceStrings
+                      [ "<" ">" ]
+                      [
+                        (lib.concatStrings [
+                          "<darkGray><</>"
+                          "<lightRed>"
+                        ])
+                        (lib.concatStrings [
+                          "</>"
+                          "<darkGray>></>"
+                        ])
+                      ]
+                      env.extra.goTimeFormat;
                 };
               }
               {
@@ -260,7 +264,9 @@ in {
 
     home.file.".tmp/oh-my-posh" = lib.mkIf lib.profiles.isSystemWsl (
       lib.common.runExternalAlways ''
-        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/oh-my-posh/config.json ${lib.escape [" "] env.extra.winUser.configDirectory}/oh-my-posh
+        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/oh-my-posh/config.json ${
+          lib.escape [ " " ] env.extra.winUser.configDirectory
+        }/oh-my-posh
       ''
     );
   };

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.browser;
-in {
+in
+{
   options = {
     roles.user.browser = {
       enable = lib.mkEnableOption "roles.user.browser";

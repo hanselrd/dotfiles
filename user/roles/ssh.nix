@@ -4,9 +4,11 @@
   pkgs,
   env,
   ...
-}: let
+}:
+let
   cfg = config.roles.user.ssh;
-in {
+in
+{
   options = {
     roles.user.ssh = {
       enable = lib.mkEnableOption "roles.user.ssh";
@@ -34,7 +36,9 @@ in {
       '';
       ".tmp/ssh1" = lib.mkIf lib.profiles.isSystemWsl (
         lib.common.runExternalAlways ''
-          ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.homeDirectory}/.ssh/config ${lib.escape [" "] env.extra.winUser.homeDirectory}/.ssh
+          ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.homeDirectory}/.ssh/config ${
+            lib.escape [ " " ] env.extra.winUser.homeDirectory
+          }/.ssh
         ''
       );
     };
