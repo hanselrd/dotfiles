@@ -15,6 +15,7 @@ const (
 	SystemRoleCockpit
 	SystemRoleDocker
 	SystemRoleGaruda
+	SystemRoleGlazeWM
 	SystemRoleHomeManager // home-manager
 	SystemRoleHyprland
 	SystemRoleI18N
@@ -30,6 +31,7 @@ const (
 	SystemRoleTime
 	SystemRoleUdisks2
 	SystemRoleUser
+	SystemRoleWinGet
 	SystemRoleWsl
 	SystemRoleXServer
 	SystemRoleXrdp

@@ -61,6 +61,7 @@
     ./roles/theme.nix
     ./roles/tmux.nix
     ./roles/vscode.nix
+    ./roles/wiztree.nix
     ./roles/xdg.nix
     ./roles/zoxide.nix
     ./roles/zsh.nix

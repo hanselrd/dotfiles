@@ -8,6 +8,7 @@ type (
 	environmentRolesSystemCockpit     struct{}
 	environmentRolesSystemDocker      struct{}
 	environmentRolesSystemGaruda      struct{}
+	environmentRolesSystemGlazewm     struct{}
 	environmentRolesSystemHomeManager struct{}
 	environmentRolesSystemHyprland    struct{}
 	environmentRolesSystemI18N        struct{}
@@ -25,6 +26,7 @@ type (
 	environmentRolesSystemTime    struct{}
 	environmentRolesSystemUdisks2 struct{}
 	environmentRolesSystemUser    struct{}
+	environmentRolesSystemWinget  struct{}
 	environmentRolesSystemWsl     struct{}
 	environmentRolesSystemXrdp    struct{}
 	environmentRolesSystemXserver struct{}
@@ -91,6 +93,7 @@ type (
 	environmentRolesUserTheme    struct{}
 	environmentRolesUserTmux     struct{}
 	environmentRolesUserVscode   struct{}
+	environmentRolesUserWiztree  struct{}
 	environmentRolesUserXdg      struct{}
 	environmentRolesUserZoxide   struct{}
 	environmentRolesUserZsh      struct{}

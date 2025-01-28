@@ -64,6 +64,7 @@ const (
 	UserRoleTheme
 	UserRoleTmux
 	UserRoleVscode
+	UserRoleWizTree
 	UserRoleXdg
 	UserRoleZoxide
 	UserRoleZsh

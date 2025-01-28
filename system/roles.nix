@@ -12,6 +12,7 @@
     ./roles/cockpit.nix
     ./roles/docker.nix
     ./roles/garuda.nix
+    ./roles/glazewm.nix
     ./roles/home-manager.nix
     ./roles/hyprland.nix
     ./roles/i18n.nix
@@ -27,6 +28,7 @@
     ./roles/time.nix
     ./roles/udisks2.nix
     ./roles/user.nix
+    ./roles/winget.nix
     ./roles/wsl.nix
     ./roles/xserver.nix
     ./roles/xrdp.nix

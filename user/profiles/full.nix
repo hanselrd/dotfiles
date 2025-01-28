@@ -16,6 +16,7 @@
   roles.user.rofi.enable = true;
   roles.user.terminal.enable = true;
   roles.user.vscode.enable = true;
+  roles.user.wiztree.enable = true;
 
   home.packages = with pkgs; [
     # renderdoc

@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _UserRoleName = "bootstrapalacrittybashbatbinbravebrowserbtopdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.gleamdevelopment.godevelopment.haskelldevelopment.javadevelopment.kotlindevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldevelopment.zigdockereditorezafastfetchflameshotfontsfzfgdbgithtoplldbneovimnixoh-my-poshpagerrangerredshiftripgreprofirtsshellsshstarshipsxhkdterminalthemetmuxvscodexdgzoxidezsh"
+const _UserRoleName = "bootstrapalacrittybashbatbinbravebrowserbtopdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.gleamdevelopment.godevelopment.haskelldevelopment.javadevelopment.kotlindevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldevelopment.zigdockereditorezafastfetchflameshotfontsfzfgdbgithtoplldbneovimnixoh-my-poshpagerrangerredshiftripgreprofirtsshellsshstarshipsxhkdterminalthemetmuxvscodewiztreexdgzoxidezsh"
 
-var _UserRoleIndex = [...]uint16{0, 9, 18, 22, 25, 28, 33, 40, 44, 55, 70, 87, 105, 122, 136, 155, 171, 189, 204, 222, 237, 255, 277, 295, 311, 328, 343, 349, 355, 358, 367, 376, 381, 384, 387, 390, 394, 398, 404, 407, 417, 422, 428, 436, 443, 447, 450, 455, 458, 466, 471, 479, 484, 488, 494, 497, 503, 506}
+var _UserRoleIndex = [...]uint16{0, 9, 18, 22, 25, 28, 33, 40, 44, 55, 70, 87, 105, 122, 136, 155, 171, 189, 204, 222, 237, 255, 277, 295, 311, 328, 343, 349, 355, 358, 367, 376, 381, 384, 387, 390, 394, 398, 404, 407, 417, 422, 428, 436, 443, 447, 450, 455, 458, 466, 471, 479, 484, 488, 494, 501, 504, 510, 513}
 
-const _UserRoleLowerName = "bootstrapalacrittybashbatbinbravebrowserbtopdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.gleamdevelopment.godevelopment.haskelldevelopment.javadevelopment.kotlindevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldevelopment.zigdockereditorezafastfetchflameshotfontsfzfgdbgithtoplldbneovimnixoh-my-poshpagerrangerredshiftripgreprofirtsshellsshstarshipsxhkdterminalthemetmuxvscodexdgzoxidezsh"
+const _UserRoleLowerName = "bootstrapalacrittybashbatbinbravebrowserbtopdevelopmentdevelopment.cppdevelopment.dhalldevelopment.elixirdevelopment.gleamdevelopment.godevelopment.haskelldevelopment.javadevelopment.kotlindevelopment.luadevelopment.nickeldevelopment.nixdevelopment.nodejsdevelopment.purescriptdevelopment.pythondevelopment.rustdevelopment.shelldevelopment.zigdockereditorezafastfetchflameshotfontsfzfgdbgithtoplldbneovimnixoh-my-poshpagerrangerredshiftripgreprofirtsshellsshstarshipsxhkdterminalthemetmuxvscodewiztreexdgzoxidezsh"
 
 func (i UserRole) String() string {
 	if i >= UserRole(len(_UserRoleIndex)-1) {
@@ -79,12 +79,13 @@ func _UserRoleNoOp() {
 	_ = x[UserRoleTheme-(51)]
 	_ = x[UserRoleTmux-(52)]
 	_ = x[UserRoleVscode-(53)]
-	_ = x[UserRoleXdg-(54)]
-	_ = x[UserRoleZoxide-(55)]
-	_ = x[UserRoleZsh-(56)]
+	_ = x[UserRoleWizTree-(54)]
+	_ = x[UserRoleXdg-(55)]
+	_ = x[UserRoleZoxide-(56)]
+	_ = x[UserRoleZsh-(57)]
 }
 
-var _UserRoleValues = []UserRole{UserRoleBootstrap, UserRoleAlacritty, UserRoleBash, UserRoleBat, UserRoleBin, UserRoleBrave, UserRoleBrowser, UserRoleBtop, UserRoleDevelopment, UserRoleDevelopmentCpp, UserRoleDevelopmentDhall, UserRoleDevelopmentElixir, UserRoleDevelopmentGleam, UserRoleDevelopmentGo, UserRoleDevelopmentHaskell, UserRoleDevelopmentJava, UserRoleDevelopmentKotlin, UserRoleDevelopmentLua, UserRoleDevelopmentNickel, UserRoleDevelopmentNix, UserRoleDevelopmentNodejs, UserRoleDevelopmentPurescript, UserRoleDevelopmentPython, UserRoleDevelopmentRust, UserRoleDevelopmentShell, UserRoleDevelopmentZig, UserRoleDocker, UserRoleEditor, UserRoleEza, UserRoleFastfetch, UserRoleFlameshot, UserRoleFonts, UserRoleFzf, UserRoleGdb, UserRoleGit, UserRoleHtop, UserRoleLldb, UserRoleNeovim, UserRoleNix, UserRoleOhMyPosh, UserRolePager, UserRoleRanger, UserRoleRedshift, UserRoleRipgrep, UserRoleRofi, UserRoleRts, UserRoleShell, UserRoleSsh, UserRoleStarship, UserRoleSxhkd, UserRoleTerminal, UserRoleTheme, UserRoleTmux, UserRoleVscode, UserRoleXdg, UserRoleZoxide, UserRoleZsh}
+var _UserRoleValues = []UserRole{UserRoleBootstrap, UserRoleAlacritty, UserRoleBash, UserRoleBat, UserRoleBin, UserRoleBrave, UserRoleBrowser, UserRoleBtop, UserRoleDevelopment, UserRoleDevelopmentCpp, UserRoleDevelopmentDhall, UserRoleDevelopmentElixir, UserRoleDevelopmentGleam, UserRoleDevelopmentGo, UserRoleDevelopmentHaskell, UserRoleDevelopmentJava, UserRoleDevelopmentKotlin, UserRoleDevelopmentLua, UserRoleDevelopmentNickel, UserRoleDevelopmentNix, UserRoleDevelopmentNodejs, UserRoleDevelopmentPurescript, UserRoleDevelopmentPython, UserRoleDevelopmentRust, UserRoleDevelopmentShell, UserRoleDevelopmentZig, UserRoleDocker, UserRoleEditor, UserRoleEza, UserRoleFastfetch, UserRoleFlameshot, UserRoleFonts, UserRoleFzf, UserRoleGdb, UserRoleGit, UserRoleHtop, UserRoleLldb, UserRoleNeovim, UserRoleNix, UserRoleOhMyPosh, UserRolePager, UserRoleRanger, UserRoleRedshift, UserRoleRipgrep, UserRoleRofi, UserRoleRts, UserRoleShell, UserRoleSsh, UserRoleStarship, UserRoleSxhkd, UserRoleTerminal, UserRoleTheme, UserRoleTmux, UserRoleVscode, UserRoleWizTree, UserRoleXdg, UserRoleZoxide, UserRoleZsh}
 
 var _UserRoleNameToValueMap = map[string]UserRole{
 	_UserRoleName[0:9]:          UserRoleBootstrap,
@@ -195,12 +196,14 @@ var _UserRoleNameToValueMap = map[string]UserRole{
 	_UserRoleLowerName[484:488]: UserRoleTmux,
 	_UserRoleName[488:494]:      UserRoleVscode,
 	_UserRoleLowerName[488:494]: UserRoleVscode,
-	_UserRoleName[494:497]:      UserRoleXdg,
-	_UserRoleLowerName[494:497]: UserRoleXdg,
-	_UserRoleName[497:503]:      UserRoleZoxide,
-	_UserRoleLowerName[497:503]: UserRoleZoxide,
-	_UserRoleName[503:506]:      UserRoleZsh,
-	_UserRoleLowerName[503:506]: UserRoleZsh,
+	_UserRoleName[494:501]:      UserRoleWizTree,
+	_UserRoleLowerName[494:501]: UserRoleWizTree,
+	_UserRoleName[501:504]:      UserRoleXdg,
+	_UserRoleLowerName[501:504]: UserRoleXdg,
+	_UserRoleName[504:510]:      UserRoleZoxide,
+	_UserRoleLowerName[504:510]: UserRoleZoxide,
+	_UserRoleName[510:513]:      UserRoleZsh,
+	_UserRoleLowerName[510:513]: UserRoleZsh,
 }
 
 var _UserRoleNames = []string{
@@ -258,9 +261,10 @@ var _UserRoleNames = []string{
 	_UserRoleName[479:484],
 	_UserRoleName[484:488],
 	_UserRoleName[488:494],
-	_UserRoleName[494:497],
-	_UserRoleName[497:503],
-	_UserRoleName[503:506],
+	_UserRoleName[494:501],
+	_UserRoleName[501:504],
+	_UserRoleName[504:510],
+	_UserRoleName[510:513],
 }
 
 // UserRoleString retrieves an enum value from the enum constants string name.

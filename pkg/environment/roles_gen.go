@@ -11,6 +11,7 @@ type environmentRolesSystem struct {
 	Cockpit     *environmentRolesSystemCockpit     `json:"cockpit,omitempty"`
 	Docker      *environmentRolesSystemDocker      `json:"docker,omitempty"`
 	Garuda      *environmentRolesSystemGaruda      `json:"garuda,omitempty"`
+	Glazewm     *environmentRolesSystemGlazewm     `json:"glazewm,omitempty"`
 	HomeManager *environmentRolesSystemHomeManager `json:"home-manager,omitempty"`
 	Hyprland    *environmentRolesSystemHyprland    `json:"hyprland,omitempty"`
 	I18N        *environmentRolesSystemI18N        `json:"i18n,omitempty"`
@@ -26,6 +27,7 @@ type environmentRolesSystem struct {
 	Time        *environmentRolesSystemTime        `json:"time,omitempty"`
 	Udisks2     *environmentRolesSystemUdisks2     `json:"udisks2,omitempty"`
 	User        *environmentRolesSystemUser        `json:"user,omitempty"`
+	Winget      *environmentRolesSystemWinget      `json:"winget,omitempty"`
 	Wsl         *environmentRolesSystemWsl         `json:"wsl,omitempty"`
 	Xserver     *environmentRolesSystemXserver     `json:"xserver,omitempty"`
 	Xrdp        *environmentRolesSystemXrdp        `json:"xrdp,omitempty"`
@@ -85,6 +87,7 @@ type environmentRolesUser struct {
 	Theme                 *environmentRolesUserTheme                 `json:"theme,omitempty"`
 	Tmux                  *environmentRolesUserTmux                  `json:"tmux,omitempty"`
 	Vscode                *environmentRolesUserVscode                `json:"vscode,omitempty"`
+	Wiztree               *environmentRolesUserWiztree               `json:"wiztree,omitempty"`
 	Xdg                   *environmentRolesUserXdg                   `json:"xdg,omitempty"`
 	Zoxide                *environmentRolesUserZoxide                `json:"zoxide,omitempty"`
 	Zsh                   *environmentRolesUserZsh                   `json:"zsh,omitempty"`

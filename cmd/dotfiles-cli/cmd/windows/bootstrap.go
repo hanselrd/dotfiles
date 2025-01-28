@@ -14,7 +14,7 @@ var bootstrapCmd = &cobra.Command{
 		shell.Shell(
 			"powershell.exe -Command \"& {Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))}\"",
 		)
-		shell.Shell("choco.exe upgrade all {{.VerbosityVerboseShort}} -y")
+		// shell.Shell("choco.exe upgrade all {{.VerbosityVerboseShort}} -y")
 		// shell.Shell("choco.exe install starship {{.VerbosityVerboseShort}} --force -y")
 		// for _, f := range []string{".config/starship.toml", ".ssh/config"} {
 		// 	shell.Shell(
