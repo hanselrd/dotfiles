@@ -15,9 +15,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.file.".tmp/wiztree0" = lib.mkIf lib.profiles.isSystemWsl (
-      lib.common.runExternalOnce ''
-        ${lib.getExe pkgs.flock} winget -c "winget.exe install --exact --id --disable-interactivity AntibodySoftware.WizTree"
+    home.activation.wiztree0 = lib.mkIf lib.profiles.isSystemWsl (
+      lib.common.runExternalOnceHome "wiztree0" ''
+        winget.exe install --exact --id --disable-interactivity AntibodySoftware.WizTree
         }
       ''
     );

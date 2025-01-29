@@ -17,9 +17,9 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       dotfiles-cli
-      (lib.common.buildGoBin "df-decrypt")
-      (lib.common.buildGoBin "df-encrypt")
-      (lib.common.buildGoBin "df-master-key")
+      # (lib.common.buildGoBin "df-decrypt")
+      # (lib.common.buildGoBin "df-encrypt")
+      # (lib.common.buildGoBin "df-master-key")
     ];
   };
 }

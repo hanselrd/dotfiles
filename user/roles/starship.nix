@@ -142,8 +142,8 @@ in
       };
     };
 
-    home.file.".tmp/starship0" = lib.mkIf lib.profiles.isSystemWsl (
-      lib.common.runExternalAlways ''
+    home.activation.starship0 = lib.mkIf lib.profiles.isSystemWsl (
+      lib.common.runExternalAlwaysHome "starship0" ''
         ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/starship.toml ${
           lib.escape [ " " ] env.extra.winUser.configDirectory
         }

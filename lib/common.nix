@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  env,
   ...
 }:
 let
@@ -27,24 +28,56 @@ rec {
       )
     );
 
-  runExternalOnce = script: {
-    text = script;
-    onChange = script;
-  };
+  runExternalOnceHome =
+    name: script:
+    lib.hm.dag.entryAfter [ "installPackages" ] ''
+      file=${env.user.cacheDirectory}/nix/activation/${name}
+      new_file=${pkgs.writeText "${name}.sh" script}
+      if ! ${lib.getExe' pkgs.diffutils "cmp"} -s "$file" "$new_file"; then
+        run ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
+        run ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
+        ${script}
+      fi
+    '';
 
-  runExternalAlways =
-    script:
-    runExternalOnce ''
-      # ${currentTimeUtcPretty}
+  runExternalAlwaysHome =
+    name: script:
+    lib.hm.dag.entryAfter [ "installPackages" ] ''
+      file=${env.user.cacheDirectory}/nix/activation/${name}
+      new_file=${pkgs.writeText "${name}.sh" script}
+      run ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
+      run ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
       ${script}
     '';
+
+  runExternalOnceSystem = name: script: {
+    text = ''
+      file=/root/.cache/nix/activation/${name}"
+      new_file=${pkgs.writeText "${name}.sh" script}
+      if ! ${lib.getExe' pkgs.diffutils "cmp"} -s "$file" "$new_file"; then
+        ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
+        ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
+        ${script}
+      fi
+    '';
+  };
+
+  runExternalAlwaysSystem = name: script: {
+    text = ''
+      file=/root/.cache/nix/activation/${name}"
+      new_file=${pkgs.writeText "${name}.sh" script}
+      ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
+      ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
+      ${script}
+    '';
+  };
 
   buildGoBin =
     name:
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-ShGQPXuZvQf0jiHKlwC2J0mC4JSBeHvT6z0YsIj78hk=";
+      vendorHash = "sha256-AEmWuHqOu+KCv89/3oX7oRJhUyzrIyyWHbj9Z7eGgbQ=";
       subPackages = [
         "cmd/${name}"
       ];
