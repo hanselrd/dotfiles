@@ -18,16 +18,21 @@ in
   config = lib.mkIf cfg.enable (
     lib.optionalAttrs lib.profiles.isSystemWsl {
       system.activationScripts = {
-        glazewm0 =
-          (lib.common.runExternalAlwaysSystem "glazewm0" ''
+        glazewm0 = lib.common.runExternalSystem "glazewm0" {
+          text = ''
             winget.exe install --exact --id --disable-interactivity lars-berger.GlazeWM
+          '';
+          deps = [ "winget0" ];
+        };
+        glazewm1 = lib.common.runExternalSystem "glazewm1" {
+          text = ''
             ${lib.getExe' pkgs.coreutils "install"} -DT ${./glazewm/config.yaml} ${
               lib.escape [ " " ] env.extra.winUser.userProfile
             }/.glzr/glazewm/config.yaml
-          '')
-          // {
-            deps = [ "winget0" ];
-          };
+          '';
+          runAlways = true;
+          deps = [ "glazewm0" ];
+        };
       };
     }
   );

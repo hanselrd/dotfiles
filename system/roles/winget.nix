@@ -17,9 +17,12 @@ in
   config = lib.mkIf cfg.enable (
     lib.optionalAttrs lib.profiles.isSystemWsl {
       system.activationScripts = {
-        winget0 = lib.common.runExternalAlwaysSystem "winget0" ''
-          winget.exe update --all --uninstall-previous --disable-interactivity
-        '';
+        winget0 = lib.common.runExternalSystem "winget0" {
+          text = ''
+            winget.exe update --all --uninstall-previous --disable-interactivity
+          '';
+          runAlways = true;
+        };
       };
     }
   );

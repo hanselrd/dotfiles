@@ -21,29 +21,34 @@ in
     ];
 
     home.activation = lib.mkIf (!env.extra.encrypted.blue) {
-      brave0 = lib.common.runExternalAlwaysHome "brave0" ''
-        ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${env.user.configDirectory}/BraveSoftware/Brave-Browser/Default/Bookmarks
-      '';
-      brave1 = lib.mkIf lib.profiles.isSystemDarwin (
-        lib.common.runExternalAlwaysHome "brave1" ''
-          ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${
-            lib.concatMapStringsSep "/" (x: lib.escape [ " " ] x) [
-              env.user.homeDirectory
-              "Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
-            ]
+      brave0 = lib.common.runExternalHome "brave0" {
+        text = ''
+          ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${env.user.configDirectory}/BraveSoftware/Brave-Browser/Default/Bookmarks
+          ${
+            if lib.profiles.isSystemDarwin then
+              ''
+                ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${
+                  lib.concatMapStringsSep "/" (x: lib.escape [ " " ] x) [
+                    env.user.homeDirectory
+                    "Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
+                  ]
+                }
+              ''
+            else if lib.profiles.isSystemWsl then
+              ''
+                ${lib.getExe' pkgs.coreutils "install"} -DT ${../../secrets/blue/user/roles/brave/Bookmarks} ${
+                  lib.concatMapStringsSep "/" (x: lib.escape [ " " ] x) [
+                    env.extra.winUser.localAppData
+                    "BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"
+                  ]
+                }
+              ''
+            else
+              ""
           }
-        ''
-      );
-      brave2 = lib.mkIf lib.profiles.isSystemWsl (
-        lib.common.runExternalAlwaysHome "brave2" ''
-          ${lib.getExe' pkgs.coreutils "install"} -DT ${../../secrets/blue/user/roles/brave/Bookmarks} ${
-            lib.concatMapStringsSep "/" (x: lib.escape [ " " ] x) [
-              env.extra.winUser.localAppData
-              "BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"
-            ]
-          }
-        ''
-      );
+        '';
+        runAlways = true;
+      };
     };
   };
 }

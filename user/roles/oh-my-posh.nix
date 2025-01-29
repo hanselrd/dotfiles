@@ -263,14 +263,21 @@ in
     };
 
     home.activation = lib.mkIf lib.profiles.isSystemWsl {
-      oh-my-posh0 = lib.common.runExternalOnceHome "oh-my-posh0" ''
-        winget.exe install --exact --id --disable-interactivity JanDeDobbeleer.OhMyPosh
-      '';
-      oh-my-posh1 = lib.common.runExternalAlwaysHome "oh-my-posh1" ''
-        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/oh-my-posh/config.json ${
-          lib.escape [ " " ] env.extra.winUser.configDirectory
-        }/oh-my-posh
-      '';
+      oh-my-posh0 = lib.common.runExternalHome "oh-my-posh0" {
+        text = ''
+          winget.exe install --exact --id --disable-interactivity JanDeDobbeleer.OhMyPosh
+        '';
+        deps = [ "winget0" ];
+      };
+      oh-my-posh1 = lib.common.runExternalHome "oh-my-posh1" {
+        text = ''
+          ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/oh-my-posh/config.json ${
+            lib.escape [ " " ] env.extra.winUser.configDirectory
+          }/oh-my-posh
+        '';
+        runAlways = true;
+        deps = [ "oh-my-posh0" ];
+      };
     };
   };
 }

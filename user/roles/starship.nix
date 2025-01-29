@@ -142,12 +142,22 @@ in
       };
     };
 
-    home.activation.starship0 = lib.mkIf lib.profiles.isSystemWsl (
-      lib.common.runExternalAlwaysHome "starship0" ''
-        ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/starship.toml ${
-          lib.escape [ " " ] env.extra.winUser.configDirectory
-        }
-      ''
-    );
+    home.activation = lib.mkIf lib.profiles.isSystemWsl {
+      starship0 = lib.common.runExternalHome "starship0" {
+        text = ''
+          winget.exe install --exact --id --disable-interactivity Starship.Starship
+        '';
+        deps = [ "winget0" ];
+      };
+      starship1 = lib.common.runExternalHome "starship1" {
+        text = ''
+          ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/starship.toml ${
+            lib.escape [ " " ] env.extra.winUser.configDirectory
+          }
+        '';
+        runAlways = true;
+        deps = [ "starship0" ];
+      };
+    };
   };
 }

@@ -8,6 +8,7 @@ type environmentRoles struct {
 type environmentRolesSystem struct {
 	Bootstrap   *environmentRolesSystemBootstrap   `json:"bootstrap,omitempty"`
 	Boot        *environmentRolesSystemBoot        `json:"boot,omitempty"`
+	Chocolatey  *environmentRolesSystemChocolatey  `json:"chocolatey,omitempty"`
 	Cockpit     *environmentRolesSystemCockpit     `json:"cockpit,omitempty"`
 	Docker      *environmentRolesSystemDocker      `json:"docker,omitempty"`
 	Garuda      *environmentRolesSystemGaruda      `json:"garuda,omitempty"`

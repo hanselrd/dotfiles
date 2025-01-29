@@ -30,16 +30,21 @@ in
     };
 
     home.activation = {
-      ssh0 = lib.common.runExternalOnceHome "ssh0" ''
-        test -f ${env.user.homeDirectory}/.ssh/id_ed25519 || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t ed25519 -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_ed25519
-        # test -f ${env.user.homeDirectory}/.ssh/id_rsa || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t rsa -b 4096 -o -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_rsa
-      '';
+      ssh0 = lib.common.runExternalHome "ssh0" {
+        text = ''
+          test -f ${env.user.homeDirectory}/.ssh/id_ed25519 || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t ed25519 -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_ed25519
+          # test -f ${env.user.homeDirectory}/.ssh/id_rsa || ${lib.getExe' pkgs.openssh "ssh-keygen"} -t rsa -b 4096 -o -a 100 -N "" -f ${env.user.homeDirectory}/.ssh/id_rsa
+        '';
+      };
       ssh1 = lib.mkIf lib.profiles.isSystemWsl (
-        lib.common.runExternalAlwaysHome "ssh1" ''
-          ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.homeDirectory}/.ssh/config ${
-            lib.escape [ " " ] env.extra.winUser.homeDirectory
-          }/.ssh
-        ''
+        lib.common.runExternalHome "ssh1" {
+          text = ''
+            ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.homeDirectory}/.ssh/config ${
+              lib.escape [ " " ] env.extra.winUser.homeDirectory
+            }/.ssh
+          '';
+          runAlways = true;
+        }
       );
     };
   };

@@ -12,6 +12,7 @@ type SystemRole uint
 const (
 	SystemRoleBootstrap SystemRole = iota
 	SystemRoleBoot
+	SystemRoleChocolatey
 	SystemRoleCockpit
 	SystemRoleDocker
 	SystemRoleGaruda

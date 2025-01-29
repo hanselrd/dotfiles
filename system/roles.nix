@@ -9,6 +9,7 @@
   imports = lib.flatten [
     ./roles/bootstrap.nix
     ./roles/boot.nix
+    ./roles/chocolatey.nix
     ./roles/cockpit.nix
     ./roles/docker.nix
     ./roles/garuda.nix
