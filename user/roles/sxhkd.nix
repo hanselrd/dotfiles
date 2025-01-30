@@ -25,10 +25,10 @@ in
           $TERMINAL
         '';
         "super + shift + Return" = lib.mkIf config.roles.user.ranger.enable ''
-          $TERMINAL -e ${lib.getExe' pkgs.bash "sh"} -c ranger
+          $TERMINAL -e ${lib.getExe pkgs.dash} -c ranger
         '';
         "super + shift + e" = lib.mkIf config.roles.user.editor.enable ''
-          $TERMINAL -e ${lib.getExe' pkgs.bash "sh"} -c $EDITOR
+          $TERMINAL -e ${lib.getExe pkgs.dash} -c $EDITOR
         '';
         "super + shift + z" = lib.mkIf config.roles.user.browser.enable ''
           $BROWSER

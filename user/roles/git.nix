@@ -31,35 +31,35 @@ in
       };
       difftastic.enable = lib.mkForce false;
       aliases = {
-        sclone = "!${lib.getExe' pkgs.bash "sh"} ${pkgs.writeShellScript "git-smart-clone.sh" ''
+        sclone = "!${lib.getExe pkgs.dash} ${pkgs.writeShellScript "git-smart-clone.sh" ''
           set -e
 
           repository=$1
           basename=''${repository##*/}
           directory=''${2:-''${basename%.*}}
 
-          ${lib.getExe' pkgs.coreutils "mkdir"} -p $directory
-          ${lib.getExe' pkgs.git "git"} clone --bare --filter=blob:none $repository $directory/.bare
-          ${lib.getExe' pkgs.coreutils "echo"} "gitdir: ./.bare" > $directory/.git
-          ${lib.getExe' pkgs.git "git"} -C $directory config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-          # ${lib.getExe' pkgs.git "git"} -C $directory fetch origin
+          ${lib.getExe' pkgs.coreutils "mkdir"} -p "$directory"
+          ${lib.getExe' pkgs.git "git"} clone --bare --filter=blob:none "$repository" "$directory/.bare"
+          ${lib.getExe' pkgs.coreutils "echo"} "gitdir: ./.bare" > "$directory/.git"
+          ${lib.getExe' pkgs.git "git"} -C "$directory" config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+          # ${lib.getExe' pkgs.git "git"} -C "$directory" fetch origin
         ''}";
-        sworktree = "!${lib.getExe' pkgs.bash "sh"} ${pkgs.writeShellScript "git-smart-worktree.sh" ''
+        sworktree = "!${lib.getExe pkgs.dash} ${pkgs.writeShellScript "git-smart-worktree.sh" ''
           set -e
 
           branch=$1
-          directory=$(${lib.getExe' pkgs.coreutils "echo"} $branch | ${lib.getExe pkgs.gnused} "s@/@-@g")
+          directory=$(${lib.getExe' pkgs.coreutils "echo"} "$branch" | ${lib.getExe pkgs.gnused} "s@/@-@g")
 
-          ${lib.getExe' pkgs.git "git"} worktree add $directory $branch
+          ${lib.getExe' pkgs.git "git"} worktree add "$directory" "$branch"
         ''}";
-        sworktree-new = "!${lib.getExe' pkgs.bash "sh"} ${pkgs.writeShellScript "git-smart-worktree-new.sh" ''
+        sworktree-new = "!${lib.getExe pkgs.dash} ${pkgs.writeShellScript "git-smart-worktree-new.sh" ''
           set -e
 
           branch=$1
-          directory=$(${lib.getExe' pkgs.coreutils "echo"} $branch | ${lib.getExe pkgs.gnused} "s@/@-@g")
+          directory=$(${lib.getExe' pkgs.coreutils "echo"} "$branch" | ${lib.getExe pkgs.gnused} "s@/@-@g")
           parent=$2
 
-          ${lib.getExe' pkgs.git "git"} worktree add -b $branch $directory $parent
+          ${lib.getExe' pkgs.git "git"} worktree add -b "$branch" "$directory" "$parent"
         ''}";
 
         audit = "!${lib.getExe' pkgs.git "git"} count-objects --verbose --human-readable";

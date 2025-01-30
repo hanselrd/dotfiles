@@ -33,11 +33,12 @@ rec {
     {
       text,
       runAlways ? false,
+      useSymlink ? true,
       deps ? [ ],
     }:
     lib.hm.dag.entryAfter ([ "installPackages" ] ++ deps) ''
       file=${env.user.cacheDirectory}/nix/activation/${name}
-      new_file=${pkgs.writeText "${name}.sh" text}
+      new_file=${pkgs.writeShellScript "${name}.sh" text}
       ${
         if !runAlways then
           ''
@@ -46,9 +47,18 @@ rec {
         else
           ""
       }
-      run ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
-      run ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
-      ${text}
+      ${
+        if useSymlink then
+          ''
+            run ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
+            run ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
+          ''
+        else
+          ''
+            run ${lib.getExe' pkgs.coreutils "install"} -DT -m 400 "$new_file" "$file"
+          ''
+      }
+      run ${lib.getExe pkgs.dash} "$new_file"
       ${
         if !runAlways then
           ''
@@ -64,12 +74,13 @@ rec {
     {
       text,
       runAlways ? false,
+      useSymlink ? true,
       deps ? [ ],
     }:
     {
       text = ''
-        file=/root/.cache/nix/activation/${name}"
-        new_file=${pkgs.writeText "${name}.sh" text}
+        file=/root/.cache/nix/activation/${name}
+        new_file=${pkgs.writeShellScript "${name}.sh" text}
         ${
           if !runAlways then
             ''
@@ -78,8 +89,17 @@ rec {
           else
             ""
         }
-        ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
-        ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
+        ${
+          if useSymlink then
+            ''
+              ${lib.getExe' pkgs.coreutils "mkdir"} -p $(${lib.getExe' pkgs.coreutils "dirname"} "$file")
+              ${lib.getExe' pkgs.coreutils "ln"} -sf "$new_file" "$file"
+            ''
+          else
+            ''
+              ${lib.getExe' pkgs.coreutils "install"} -DT -m 400 "$new_file" "$file"
+            ''
+        }
         ${text}
         ${
           if !runAlways then

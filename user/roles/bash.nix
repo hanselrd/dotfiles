@@ -22,7 +22,7 @@ in
         ${
           if env.roles.user.shell.theme then
             ''
-              ${lib.getExe' pkgs.bash "sh"} ${
+              ${lib.getExe pkgs.dash} ${
                 lib.vendor.nix-colors-contrib.shellThemeFromScheme { scheme = config.colorScheme; }
               }
             ''
