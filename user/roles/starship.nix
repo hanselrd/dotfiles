@@ -145,7 +145,7 @@ in
     home.activation = lib.mkIf lib.profiles.isSystemWsl {
       starship0 = lib.common.runExternalHome "starship0" {
         text = ''
-          winget.exe install --exact --id --disable-interactivity Starship.Starship
+          winget.exe install -e --id --disable-interactivity Starship.Starship
         '';
         deps = [ "winget0" ];
       };

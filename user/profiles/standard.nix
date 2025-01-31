@@ -36,7 +36,6 @@
     ventoy-bin
     wireguard-tools
     wtf
-    xsv
     yt-dlp
     zlib
   ];

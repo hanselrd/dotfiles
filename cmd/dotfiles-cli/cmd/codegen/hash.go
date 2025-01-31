@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/samber/lo"
-	lop "github.com/samber/lo/parallel"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/internal/nixutil"
@@ -21,51 +20,63 @@ var hashCmd = &cobra.Command{
 	Use:   "hash",
 	Short: "Hash command",
 	Long:  "Hash command",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		res := lo.Must(
 			shell.Shell(
 				`git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'`,
 			),
 		)
-		lop.ForEach(strings.Split(res.Stdout, "\n"), func(s string, _ int) {
+		seds := make(map[string][]string)
+		lo.ForEach(strings.Split(res.Stdout, "\n"), func(s string, _ int) {
 			split := strings.Split(s, ":")
+			if len(split) != 3 {
+				panic(split)
+			}
+			file, line, oldHash := split[0], split[1], split[2]
 			newHash := strconv.Quote(fmt.Sprintf(`%s`, nixutil.FakeHash(time.Now())))
 			slog.Debug(
 				"updating hash",
 				"file",
-				split[0],
+				file,
 				"line",
-				split[1],
+				line,
 				"old",
-				split[2],
+				oldHash,
 				"new",
 				newHash,
 			)
+			seds[file] = append(seds[file], fmt.Sprintf("%ss@%s@%s@", line, oldHash, newHash))
+		})
+		for file, sed := range seds {
 			shell.Shell(
 				fmt.Sprintf(
-					"sed {{.VerbosityQuietLong}} -i '%ss@%s@%s@' %s",
-					split[1],
-					split[2],
-					newHash,
-					split[0],
+					"sed {{.VerbosityQuietLong}} -i %s %s",
+					strings.Join(lo.Map(sed, func(s string, _ int) string {
+						return fmt.Sprintf("-e '%s'", s)
+					}), " "),
+					file,
 				),
 			)
-		})
+		}
 
+		re := regexp.MustCompile(`specified: (.*)\n\s*got:    (.*)\n`)
+		count := len(strings.Split(res.Stdout, "\n"))
 		for _, t2 := range []lo.Tuple2[func(profile.ProfileGroup) (shell.ShellResult, error), profile.ProfileGroup]{
 			lo.T2(nixutil.BuildHomeManagerConfiguration, profile.GenericBase),
 			lo.T2(nixutil.BuildNixOSConfiguration, profile.NixosBase),
-			// lo.T2(nixutil.BuildNixOSConfiguration, profile.GarudaBase),
+			lo.T2(nixutil.BuildNixOSConfiguration, profile.GarudaBase),
 			lo.T2(nixutil.BuildNixOSConfiguration, profile.WslBase),
 			lo.T2(nixutil.BuildDarwinConfiguration, profile.DarwinBase),
 		} {
-			for {
+			for count > 0 {
 				buildConfFn, pg := lo.Unpack2(t2)
 				res, err := buildConfFn(pg)
 				if err != nil {
-					re := regexp.MustCompile(`specified: (.*)\n\s*got:    (.*)\n`)
 					matches := re.FindAllStringSubmatch(res.Stderr, -1)
-					lop.ForEach(matches, func(m []string, _ int) {
+					if len(matches) == 0 {
+						return err
+					}
+					lo.ForEach(matches, func(m []string, _ int) {
 						oldHash, newHash := m[1], m[2]
 						slog.Debug("replacing hash", "old", oldHash, "new", newHash)
 						lo.Must(
@@ -77,12 +88,14 @@ var hashCmd = &cobra.Command{
 								),
 							),
 						)
+						count--
 					})
 					continue
 				}
 				break
 			}
 		}
+		return nil
 	},
 }
 

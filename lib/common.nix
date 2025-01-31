@@ -8,7 +8,7 @@
 let
   inherit (inputs) gitignore;
 in
-rec {
+{
   currentTimeUtcPretty = builtins.replaceStrings [ "\n" ] [ "" ] (
     builtins.readFile (
       pkgs.runCommand "current-time-utc-pretty" {
@@ -34,6 +34,7 @@ rec {
       text,
       runAlways ? false,
       useSymlink ? true,
+      ignoreError ? false,
       deps ? [ ],
     }:
     lib.hm.dag.entryAfter ([ "installPackages" ] ++ deps) ''
@@ -58,7 +59,9 @@ rec {
             run ${lib.getExe' pkgs.coreutils "install"} -DT -m 400 "$new_file" "$file"
           ''
       }
-      run ${lib.getExe pkgs.dash} "$new_file"
+      run ${lib.getExe pkgs.dash} "$new_file" ${
+        if ignoreError then "|| ${lib.getExe' pkgs.coreutils "true"}" else ""
+      }
       ${
         if !runAlways then
           ''
@@ -75,6 +78,7 @@ rec {
       text,
       runAlways ? false,
       useSymlink ? true,
+      ignoreError ? false,
       deps ? [ ],
     }:
     {
@@ -100,7 +104,9 @@ rec {
               ${lib.getExe' pkgs.coreutils "install"} -DT -m 400 "$new_file" "$file"
             ''
         }
-        ${text}
+        ${lib.getExe pkgs.dash} "$new_file" ${
+          if ignoreError then "|| ${lib.getExe' pkgs.coreutils "true"}" else ""
+        }
         ${
           if !runAlways then
             ''

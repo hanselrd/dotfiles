@@ -20,7 +20,7 @@ in
       system.activationScripts = {
         glazewm0 = lib.common.runExternalSystem "glazewm0" {
           text = ''
-            winget.exe install --exact --id --disable-interactivity lars-berger.GlazeWM
+            winget.exe install -e --id --disable-interactivity lars-berger.GlazeWM
           '';
           deps = [ "winget0" ];
         };

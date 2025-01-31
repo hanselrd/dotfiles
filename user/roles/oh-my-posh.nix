@@ -265,7 +265,7 @@ in
     home.activation = lib.mkIf lib.profiles.isSystemWsl {
       oh-my-posh0 = lib.common.runExternalHome "oh-my-posh0" {
         text = ''
-          winget.exe install --exact --id --disable-interactivity JanDeDobbeleer.OhMyPosh
+          winget.exe install -e --id --disable-interactivity JanDeDobbeleer.OhMyPosh
         '';
         deps = [ "winget0" ];
       };

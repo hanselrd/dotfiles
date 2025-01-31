@@ -21,7 +21,15 @@ in
     ];
 
     home.activation = lib.mkIf (!env.extra.encrypted.blue) {
-      brave0 = lib.common.runExternalHome "brave0" {
+      brave0 = lib.mkIf lib.profiles.isSystemWsl (
+        lib.common.runExternalHome "brave0" {
+          text = ''
+            winget.exe install -e --id --disable-interactivity Brave.Brave
+          '';
+          deps = [ "winget0" ];
+        }
+      );
+      brave1 = lib.common.runExternalHome "brave1" {
         text = ''
           ${lib.getExe' pkgs.coreutils "install"} -DT -m 600 ${../../secrets/blue/user/roles/brave/Bookmarks} ${env.user.configDirectory}/BraveSoftware/Brave-Browser/Default/Bookmarks
           ${
@@ -48,6 +56,7 @@ in
           }
         '';
         runAlways = true;
+        deps = [ "brave0" ];
       };
     };
   };
