@@ -17,7 +17,8 @@ in
 
   config = lib.mkIf cfg.enable {
     roles.user.gdb.enable = true;
-    roles.user.lldb.enable = true;
+    # BROKEN
+    # roles.user.lldb.enable = true;
 
     home.packages = with pkgs; [
       bear

@@ -69,7 +69,7 @@ in
             set -ga status-right "#{?#{pane_ssh_connected},#[fg=brightgreen],#[fg=brightblack]}#{hostname_short}#[default] "
             set -ga status-right "#[fg=brightblack]{#[default]"
             set -ga status-right "#[fg=brightyellow]${
-              builtins.replaceStrings
+              lib.replaceStrings
                 [ "<" ">" ]
                 [
                   (lib.concatStrings [
@@ -99,7 +99,7 @@ in
           });
           extraConfig = ''
             set -g @online_icon "#[fg=#000000,bg=brightgreen] ONLN #[default]"
-            set -g @offline_icon "$[fg=#000000,bg=brightred] OFFLN #[default]"
+            set -g @offline_icon "#[fg=#000000,bg=brightred] OFFLN #[default]"
           '';
         }
         {
@@ -134,9 +134,7 @@ in
         }
       ];
       extraConfig = ''
-        ${builtins.readFile (
-          lib.vendor.nix-colors-custom.tmuxThemeFromScheme { scheme = config.colorScheme; }
-        )}
+        ${lib.readFile (lib.vendor.nix-colors-custom.tmuxThemeFromScheme { scheme = config.colorScheme; })}
 
         set -g clock-mode-colour "white"
         set -g display-panes-active-colour "brightyellow"

@@ -127,8 +127,8 @@
         );
     in
     {
-      nixosConfigurations = builtins.listToAttrs (
-        builtins.map (
+      nixosConfigurations = lib.listToAttrs (
+        lib.map (
           profile:
           let
             lib = mkLib { inherit profile; };
@@ -166,8 +166,8 @@
         ) (env.profiles.nixos ++ env.profiles.garuda ++ env.profiles.wsl)
       );
 
-      darwinConfigurations = builtins.listToAttrs (
-        builtins.map (
+      darwinConfigurations = lib.listToAttrs (
+        lib.map (
           profile:
           let
             lib = mkLib { inherit profile; };
@@ -201,8 +201,8 @@
         ) env.profiles.darwin
       );
 
-      homeConfigurations = builtins.listToAttrs (
-        builtins.map (
+      homeConfigurations = lib.listToAttrs (
+        lib.map (
           profile:
           let
             lib = mkLib { inherit profile; };

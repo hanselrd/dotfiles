@@ -9,8 +9,8 @@ let
   inherit (inputs) gitignore;
 in
 {
-  currentTimeUtcPretty = builtins.replaceStrings [ "\n" ] [ "" ] (
-    builtins.readFile (
+  currentTimeUtcPretty = lib.replaceStrings [ "\n" ] [ "" ] (
+    lib.readFile (
       pkgs.runCommand "current-time-utc-pretty" {
         currentTime = builtins.currentTime;
       } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out"
@@ -19,8 +19,8 @@ in
 
   currentTimePretty =
     tz:
-    builtins.replaceStrings [ "\n" ] [ "" ] (
-      builtins.readFile (
+    lib.replaceStrings [ "\n" ] [ "" ] (
+      lib.readFile (
         pkgs.runCommand "current-time-pretty" {
           buildInputs = [ pkgs.tzdata ];
           currentTime = builtins.currentTime;

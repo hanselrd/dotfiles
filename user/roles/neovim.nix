@@ -107,7 +107,7 @@ in
       withNodeJs = true;
       extraConfig = ''
         lua << EOF
-          ${builtins.readFile ./neovim/config.lua}
+          ${lib.readFile ./neovim/config.lua}
         EOF
       '';
     };

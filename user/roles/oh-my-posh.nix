@@ -71,7 +71,7 @@ in
                 ];
                 properties = {
                   time_format =
-                    builtins.replaceStrings
+                    lib.replaceStrings
                       [ "<" ">" ]
                       [
                         (lib.concatStrings [

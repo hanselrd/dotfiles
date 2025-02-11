@@ -19,7 +19,7 @@ in
     programs.btop = {
       enable = true;
       settings = {
-        clock_format = builtins.replaceStrings [ "%-" ] [ "%" ] env.extra.timeFormat;
+        clock_format = lib.replaceStrings [ "%-" ] [ "%" ] env.extra.timeFormat;
         update_ms = 3000;
       };
     };
