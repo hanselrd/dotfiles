@@ -9,11 +9,11 @@ type (
 	environmentRolesSystemCockpit     struct{}
 	environmentRolesSystemDocker      struct{}
 	environmentRolesSystemGaruda      struct{}
-	environmentRolesSystemGlazewm     struct{}
+	environmentRolesSystemGlazeWM     struct{}
 	environmentRolesSystemHomeManager struct{}
 	environmentRolesSystemHyprland    struct{}
 	environmentRolesSystemI18N        struct{}
-	environmentRolesSystemKde         struct{}
+	environmentRolesSystemKDE         struct{}
 	environmentRolesSystemKernel      struct{}
 	environmentRolesSystemMonitoring  struct{}
 	environmentRolesSystemMotd        struct{}
@@ -21,16 +21,16 @@ type (
 		HostName string `json:"hostName"`
 	}
 	environmentRolesSystemNix     struct{}
-	environmentRolesSystemOpenssh struct{}
+	environmentRolesSystemOpenSsh struct{}
 	environmentRolesSystemShell   struct{}
 	environmentRolesSystemSudo    struct{}
 	environmentRolesSystemTime    struct{}
 	environmentRolesSystemUdisks2 struct{}
 	environmentRolesSystemUser    struct{}
-	environmentRolesSystemWinget  struct{}
+	environmentRolesSystemWinGet  struct{}
 	environmentRolesSystemWsl     struct{}
+	environmentRolesSystemXServer struct{}
 	environmentRolesSystemXrdp    struct{}
-	environmentRolesSystemXserver struct{}
 )
 
 type (
@@ -94,7 +94,7 @@ type (
 	environmentRolesUserTheme    struct{}
 	environmentRolesUserTmux     struct{}
 	environmentRolesUserVscode   struct{}
-	environmentRolesUserWiztree  struct{}
+	environmentRolesUserWizTree  struct{}
 	environmentRolesUserXdg      struct{}
 	environmentRolesUserZoxide   struct{}
 	environmentRolesUserZsh      struct{}

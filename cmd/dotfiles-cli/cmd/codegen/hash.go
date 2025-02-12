@@ -63,7 +63,7 @@ var hashCmd = &cobra.Command{
 		count := len(strings.Split(res.Stdout, "\n"))
 		for _, t2 := range []lo.Tuple2[func(profile.ProfileGroup) (shell.ShellResult, error), profile.ProfileGroup]{
 			lo.T2(nixutil.BuildHomeManagerConfiguration, profile.GenericBase),
-			lo.T2(nixutil.BuildNixOSConfiguration, profile.NixosBase),
+			lo.T2(nixutil.BuildNixOSConfiguration, profile.NixOSBase),
 			lo.T2(nixutil.BuildNixOSConfiguration, profile.GarudaBase),
 			lo.T2(nixutil.BuildNixOSConfiguration, profile.WslBase),
 			lo.T2(nixutil.BuildDarwinConfiguration, profile.DarwinBase),

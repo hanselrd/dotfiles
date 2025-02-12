@@ -1,13 +1,17 @@
 package role
 
 import (
+	"strings"
+
+	"github.com/samber/lo"
+
 	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
 
 type SystemRole uint
 
-//go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole -linecomment -json -text -transform lower
+//go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole -linecomment -json -text
 
 const (
 	SystemRoleBootstrap SystemRole = iota
@@ -17,7 +21,7 @@ const (
 	SystemRoleDocker
 	SystemRoleGaruda
 	SystemRoleGlazeWM
-	SystemRoleHomeManager // home-manager
+	SystemRoleHomeManager
 	SystemRoleHyprland
 	SystemRoleI18N
 	SystemRoleKDE
@@ -37,6 +41,14 @@ const (
 	SystemRoleXServer
 	SystemRoleXrdp
 )
+
+func (r SystemRole) NixString() string {
+	switch r {
+	case SystemRoleHomeManager:
+		return strings.ToLower(strings.Join(lo.Words(r.String()), "-"))
+	}
+	return strings.ToLower(r.String())
+}
 
 func (r SystemRole) PrivilegeLevel() privilegelevel.PrivilegeLevel {
 	return privilegelevel.PrivilegeLevelSystem

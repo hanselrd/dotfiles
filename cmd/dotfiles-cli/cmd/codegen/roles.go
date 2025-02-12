@@ -31,7 +31,7 @@ var rolesCmd = &cobra.Command{
 			),
 		} {
 			lop.ForEach(roles, func(r role.Role, _ int) {
-				file := fmt.Sprintf("%s/roles/%s.nix", r.PrivilegeLevel(), r)
+				file := fmt.Sprintf("%s/roles/%s.nix", r.PrivilegeLevel(), r.NixString())
 				if !r.Enabled() {
 					return
 				}

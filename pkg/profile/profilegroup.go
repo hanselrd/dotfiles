@@ -23,7 +23,7 @@ type profileGroup struct {
 
 func NewProfileGroup(system SystemProfile, user UserProfile) ProfileGroup {
 	return profileGroup{
-		Name:   fmt.Sprintf("%s-%s", system, user),
+		Name:   fmt.Sprintf("%s-%s", system.NixString(), user.NixString()),
 		System: system,
 		User:   user,
 	}

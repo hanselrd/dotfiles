@@ -8,6 +8,7 @@ import (
 
 type Profile interface {
 	fmt.Stringer
+	NixString() string
 	PrivilegeLevel() privilegelevel.PrivilegeLevel
 }
 

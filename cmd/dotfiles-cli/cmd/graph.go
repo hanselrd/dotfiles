@@ -52,7 +52,7 @@ var graphCmd = &cobra.Command{
 			),
 		} {
 			lo.ForEach(profiles, func(p profile.Profile, _ int) {
-				nodeName := fmt.Sprintf("profiles.%s.%s", p.PrivilegeLevel(), p)
+				nodeName := fmt.Sprintf("profiles.%s.%s", p.PrivilegeLevel(), p.NixString())
 				slog.Debug(
 					"creating profile node",
 					"name",
@@ -73,7 +73,7 @@ var graphCmd = &cobra.Command{
 			})
 
 			lo.ForEach(profiles, func(p profile.Profile, _ int) {
-				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "\./%s\.nix"`, p)); err == nil {
+				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "\./%s\.nix"`, p.NixString())); err == nil {
 					lo.ForEach(
 						strings.Split(res.Stdout, "\n"),
 						func(d string, _ int) {
@@ -84,7 +84,7 @@ var graphCmd = &cobra.Command{
 								p.PrivilegeLevel(),
 								d,
 								p.PrivilegeLevel(),
-								p,
+								p.NixString(),
 							)
 							slog.Debug(
 								"creating profile edge",
@@ -125,7 +125,7 @@ var graphCmd = &cobra.Command{
 			),
 		} {
 			lo.ForEach(roles, func(r role.Role, _ int) {
-				nodeName := fmt.Sprintf("roles.%s.%s", r.PrivilegeLevel(), r)
+				nodeName := fmt.Sprintf("roles.%s.%s", r.PrivilegeLevel(), r.NixString())
 				slog.Debug(
 					"creating role node",
 					"name",
@@ -159,7 +159,7 @@ var graphCmd = &cobra.Command{
 			})
 
 			lo.ForEach(roles, func(r role.Role, _ int) {
-				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "roles\.%s\.%s\.enable = true"`, r.PrivilegeLevel(), r)); err == nil {
+				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "roles\.%s\.%s\.enable = true"`, r.PrivilegeLevel(), r.NixString())); err == nil {
 					lo.ForEach(
 						strings.Split(res.Stdout, "\n"),
 						func(d string, _ int) {
@@ -172,7 +172,7 @@ var graphCmd = &cobra.Command{
 								split[0],
 								d,
 								r.PrivilegeLevel(),
-								r,
+								r.NixString(),
 							)
 							slog.Debug(
 								"creating role edge",

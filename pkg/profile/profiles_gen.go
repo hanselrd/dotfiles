@@ -4,10 +4,10 @@ package profile
 import "slices"
 
 var (
-	NixosBase       = NewProfileGroup(SystemProfileNixos, UserProfileBase)
-	NixosStandard   = NewProfileGroup(SystemProfileNixos, UserProfileStandard)
-	NixosMinimal    = NewProfileGroup(SystemProfileNixos, UserProfileMinimal)
-	NixosFull       = NewProfileGroup(SystemProfileNixos, UserProfileFull)
+	NixOSBase       = NewProfileGroup(SystemProfileNixOS, UserProfileBase)
+	NixOSStandard   = NewProfileGroup(SystemProfileNixOS, UserProfileStandard)
+	NixOSMinimal    = NewProfileGroup(SystemProfileNixOS, UserProfileMinimal)
+	NixOSFull       = NewProfileGroup(SystemProfileNixOS, UserProfileFull)
 	GarudaBase      = NewProfileGroup(SystemProfileGaruda, UserProfileBase)
 	GarudaStandard  = NewProfileGroup(SystemProfileGaruda, UserProfileStandard)
 	GarudaMinimal   = NewProfileGroup(SystemProfileGaruda, UserProfileMinimal)
@@ -27,10 +27,10 @@ var (
 )
 
 var (
-	NixosProfiles       = []ProfileGroup{NixosBase, NixosStandard, NixosMinimal, NixosFull}
+	NixOSProfiles       = []ProfileGroup{NixOSBase, NixOSStandard, NixOSMinimal, NixOSFull}
 	GarudaProfiles      = []ProfileGroup{GarudaBase, GarudaStandard, GarudaMinimal, GarudaFull}
 	WslProfiles         = []ProfileGroup{WslBase, WslStandard, WslMinimal, WslFull}
 	DarwinProfiles      = []ProfileGroup{DarwinBase, DarwinStandard, DarwinMinimal, DarwinFull}
 	GenericProfiles     = []ProfileGroup{GenericBase, GenericStandard, GenericMinimal, GenericFull}
-	HomeManagerProfiles = slices.Concat(NixosProfiles, GarudaProfiles, WslProfiles, DarwinProfiles, GenericProfiles)
+	HomeManagerProfiles = slices.Concat(NixOSProfiles, GarudaProfiles, WslProfiles, DarwinProfiles, GenericProfiles)
 )

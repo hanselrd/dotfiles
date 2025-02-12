@@ -9,6 +9,7 @@ import (
 
 type Role interface {
 	fmt.Stringer
+	NixString() string
 	PrivilegeLevel() privilegelevel.PrivilegeLevel
 	Enabled() bool
 	Encryption() encryption.Encryption

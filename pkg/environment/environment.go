@@ -37,7 +37,7 @@ type environmentUser struct {
 }
 
 type environmentProfiles struct {
-	Nixos       []profile.ProfileGroup `json:"nixos"`
+	NixOS       []profile.ProfileGroup `json:"nixos"`
 	Garuda      []profile.ProfileGroup `json:"garuda"`
 	Wsl         []profile.ProfileGroup `json:"wsl"`
 	Darwin      []profile.ProfileGroup `json:"darwin"`
@@ -131,7 +131,7 @@ var Environment = environment{
 		},
 	},
 	Profiles: environmentProfiles{
-		Nixos:       profile.NixosProfiles,
+		NixOS:       profile.NixOSProfiles,
 		Garuda:      profile.GarudaProfiles,
 		Wsl:         profile.WslProfiles,
 		Darwin:      profile.DarwinProfiles,
