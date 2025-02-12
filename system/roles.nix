@@ -33,5 +33,6 @@
     ./roles/wsl.nix
     ./roles/xserver.nix
     ./roles/xrdp.nix
+    ./roles/zram.nix
   ];
 }

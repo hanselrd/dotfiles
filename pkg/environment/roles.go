@@ -31,6 +31,7 @@ type (
 	environmentRolesSystemWsl     struct{}
 	environmentRolesSystemXServer struct{}
 	environmentRolesSystemXrdp    struct{}
+	environmentRolesSystemZram    struct{}
 )
 
 type (

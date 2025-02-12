@@ -32,6 +32,7 @@ type environmentRolesSystem struct {
 	Wsl         *environmentRolesSystemWsl         `json:"wsl,omitempty"`
 	XServer     *environmentRolesSystemXServer     `json:"xserver,omitempty"`
 	Xrdp        *environmentRolesSystemXrdp        `json:"xrdp,omitempty"`
+	Zram        *environmentRolesSystemZram        `json:"zram,omitempty"`
 }
 type environmentRolesUser struct {
 	Bootstrap             *environmentRolesUserBootstrap             `json:"bootstrap,omitempty"`

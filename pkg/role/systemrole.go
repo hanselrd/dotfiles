@@ -40,6 +40,7 @@ const (
 	SystemRoleWsl
 	SystemRoleXServer
 	SystemRoleXrdp
+	SystemRoleZram
 )
 
 func (r SystemRole) NixString() string {
