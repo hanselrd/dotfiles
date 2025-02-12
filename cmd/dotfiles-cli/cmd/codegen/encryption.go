@@ -26,7 +26,7 @@ var encryptionCmd = &cobra.Command{
 			case encryption.EncryptionDefault:
 				file = filepath.Join("secrets", file)
 			default:
-				file = filepath.Join(fmt.Sprintf("secrets/%s", e), file)
+				file = filepath.Join(fmt.Sprintf("secrets/%s", e.NixString()), file)
 			}
 			if _, err := os.Stat(file); !os.IsNotExist(err) {
 				continue
@@ -37,7 +37,7 @@ var encryptionCmd = &cobra.Command{
 			case encryption.EncryptionDefault:
 				shell.Shell("git-crypt init")
 			default:
-				shell.Shell(fmt.Sprintf("git-crypt init -k %s", e))
+				shell.Shell(fmt.Sprintf("git-crypt init -k %s", e.NixString()))
 			}
 			os.MkdirAll(filepath.Dir(file), 0o755)
 			os.WriteFile(file, []byte("false\n"), 0o644)
@@ -57,13 +57,16 @@ var encryptionCmd = &cobra.Command{
 				// do nothing
 			case encryption.EncryptionDefault:
 				shell.Shell(
-					fmt.Sprintf("git-crypt export-key - | base64 > .git/git-crypt/.keys/%s", e),
+					fmt.Sprintf(
+						"git-crypt export-key - | base64 > .git/git-crypt/.keys/%s",
+						e.NixString(),
+					),
 				)
 			default:
 				shell.Shell(
 					fmt.Sprintf(
 						"git-crypt export-key -k %[1]s - | base64 > .git/git-crypt/.keys/%[1]s",
-						e,
+						e.NixString(),
 					),
 				)
 			}

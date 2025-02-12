@@ -11,7 +11,8 @@ import (
 
 type UserRole uint
 
-//go:generate go run github.com/dmarkham/enumer -type UserRole -trimprefix UserRole -linecomment -json -text
+//go:generate go run github.com/dmarkham/enumer -type UserRole -trimprefix UserRole
+//go:generate go run ../../internal/codegen/nixstringee.go UserRole
 
 const (
 	UserRoleBootstrap UserRole = iota
@@ -76,39 +77,23 @@ const (
 
 func (r UserRole) NixString() string {
 	switch r {
-	case UserRoleDevelopmentCpp:
-		fallthrough
-	case UserRoleDevelopmentDhall:
-		fallthrough
-	case UserRoleDevelopmentElixir:
-		fallthrough
-	case UserRoleDevelopmentGleam:
-		fallthrough
-	case UserRoleDevelopmentGo:
-		fallthrough
-	case UserRoleDevelopmentHaskell:
-		fallthrough
-	case UserRoleDevelopmentJava:
-		fallthrough
-	case UserRoleDevelopmentKotlin:
-		fallthrough
-	case UserRoleDevelopmentLua:
-		fallthrough
-	case UserRoleDevelopmentNickel:
-		fallthrough
-	case UserRoleDevelopmentNix:
-		fallthrough
-	case UserRoleDevelopmentNodejs:
-		fallthrough
-	case UserRoleDevelopmentPurescript:
-		fallthrough
-	case UserRoleDevelopmentPython:
-		fallthrough
-	case UserRoleDevelopmentRust:
-		fallthrough
-	case UserRoleDevelopmentShell:
-		fallthrough
-	case UserRoleDevelopmentZig:
+	case UserRoleDevelopmentCpp,
+		UserRoleDevelopmentDhall,
+		UserRoleDevelopmentElixir,
+		UserRoleDevelopmentGleam,
+		UserRoleDevelopmentGo,
+		UserRoleDevelopmentHaskell,
+		UserRoleDevelopmentJava,
+		UserRoleDevelopmentKotlin,
+		UserRoleDevelopmentLua,
+		UserRoleDevelopmentNickel,
+		UserRoleDevelopmentNix,
+		UserRoleDevelopmentNodejs,
+		UserRoleDevelopmentPurescript,
+		UserRoleDevelopmentPython,
+		UserRoleDevelopmentRust,
+		UserRoleDevelopmentShell,
+		UserRoleDevelopmentZig:
 		return strings.ToLower(strings.Join(lo.Words(r.String()), "."))
 	case UserRoleOhMyPosh:
 		return strings.ToLower(strings.Join(lo.Words(r.String()), "-"))

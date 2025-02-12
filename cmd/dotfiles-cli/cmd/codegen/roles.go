@@ -31,7 +31,11 @@ var rolesCmd = &cobra.Command{
 			),
 		} {
 			lop.ForEach(roles, func(r role.Role, _ int) {
-				file := fmt.Sprintf("%s/roles/%s.nix", r.PrivilegeLevel(), r.NixString())
+				file := fmt.Sprintf(
+					"%s/roles/%s.nix",
+					r.PrivilegeLevel().NixString(),
+					r.NixString(),
+				)
 				if !r.Enabled() {
 					return
 				}
@@ -41,7 +45,7 @@ var rolesCmd = &cobra.Command{
 				case encryption.EncryptionDefault:
 					file = filepath.Join("secrets", file)
 				default:
-					file = filepath.Join(fmt.Sprintf("secrets/%s", e), file)
+					file = filepath.Join(fmt.Sprintf("secrets/%s", e.NixString()), file)
 				}
 				os.MkdirAll(filepath.Dir(file), 0o755)
 
@@ -60,7 +64,7 @@ var rolesCmd = &cobra.Command{
 				cobra.CheckErr(err)
 			})
 
-			f, err := os.Create(fmt.Sprintf("%s/roles.nix", roles[0].PrivilegeLevel()))
+			f, err := os.Create(fmt.Sprintf("%s/roles.nix", roles[0].PrivilegeLevel().NixString()))
 			cobra.CheckErr(err)
 			err = asset.Template.ExecuteTemplate(f, "roles.nix.gotmpl", roles)
 			cobra.CheckErr(err)

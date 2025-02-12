@@ -30,7 +30,11 @@ var profilesCmd = &cobra.Command{
 			),
 		} {
 			lop.ForEach(profiles, func(p profile.Profile, _ int) {
-				file := fmt.Sprintf("%s/profiles/%s.nix", p.PrivilegeLevel(), p.NixString())
+				file := fmt.Sprintf(
+					"%s/profiles/%s.nix",
+					p.PrivilegeLevel().NixString(),
+					p.NixString(),
+				)
 				os.MkdirAll(filepath.Dir(file), 0o755)
 
 				if _, err := os.Stat(file); !os.IsNotExist(err) {

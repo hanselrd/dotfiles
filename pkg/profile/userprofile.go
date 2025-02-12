@@ -8,7 +8,8 @@ import (
 
 type UserProfile uint
 
-//go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile -linecomment -json -text
+//go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile
+//go:generate go run ../../internal/codegen/nixstringee.go UserProfile
 
 const (
 	UserProfileBase UserProfile = iota

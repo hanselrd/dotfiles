@@ -11,7 +11,8 @@ import (
 
 type SystemRole uint
 
-//go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole -linecomment -json -text
+//go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole
+//go:generate go run ../../internal/codegen/nixstringee.go SystemRole
 
 const (
 	SystemRoleBootstrap SystemRole = iota

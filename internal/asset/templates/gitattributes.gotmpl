@@ -23,7 +23,7 @@
 *.zip binary
 ancestry/** linguist-documentation
 {{- range .}}
-{{- $encryption := printf "%s" .}}
+{{- $encryption := printf "%s" .NixString}}
 {{- if eq . 0}}
 {{- else if eq . 1}}
 secrets/** filter=git-crypt diff=git-crypt

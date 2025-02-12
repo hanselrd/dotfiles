@@ -8,7 +8,8 @@ import (
 
 type SystemProfile uint
 
-//go:generate go run github.com/dmarkham/enumer -type SystemProfile -trimprefix SystemProfile -linecomment -json -text
+//go:generate go run github.com/dmarkham/enumer -type SystemProfile -trimprefix SystemProfile
+//go:generate go run ../../internal/codegen/nixstringee.go SystemProfile
 
 const (
 	SystemProfileNixOS SystemProfile = iota

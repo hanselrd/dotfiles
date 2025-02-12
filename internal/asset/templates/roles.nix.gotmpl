@@ -9,8 +9,8 @@
   imports = lib.flatten [
     {{- range .}}
     {{- $role := printf "%s" .NixString}}
-    {{- $privilege_level := printf "%s" .PrivilegeLevel}}
-    {{- $encryption := printf "%s" .Encryption}}
+    {{- $privilege_level := printf "%s" .PrivilegeLevel.NixString}}
+    {{- $encryption := printf "%s" .Encryption.NixString}}
     {{- if .Enabled}}
     {{- if eq .Encryption 0}}
     ./roles/{{$role}}.nix

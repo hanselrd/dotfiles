@@ -1,8 +1,11 @@
 package encryption
 
+import "strings"
+
 type Encryption uint
 
-//go:generate go run github.com/dmarkham/enumer -type Encryption -trimprefix Encryption -linecomment -json -text -transform lower
+//go:generate go run github.com/dmarkham/enumer -type Encryption -trimprefix Encryption
+//go:generate go run ../codegen/nixstringee.go Encryption
 
 const (
 	EncryptionNone Encryption = iota
@@ -11,3 +14,7 @@ const (
 	EncryptionYellow
 	EncryptionBlue
 )
+
+func (e Encryption) NixString() string {
+	return strings.ToLower(e.String())
+}
