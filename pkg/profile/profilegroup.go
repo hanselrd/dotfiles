@@ -16,16 +16,20 @@ type ProfileGroup interface {
 }
 
 type profileGroup struct {
-	Name   string        `json:"name"`
-	System SystemProfile `json:"system"`
-	User   UserProfile   `json:"user"`
+	Name   string `json:"name"`
+	System string `json:"system"`
+	User   string `json:"user"`
+	system SystemProfile
+	user   UserProfile
 }
 
 func NewProfileGroup(system SystemProfile, user UserProfile) ProfileGroup {
 	return profileGroup{
 		Name:   fmt.Sprintf("%s-%s", system.NixString(), user.NixString()),
-		System: system,
-		User:   user,
+		System: system.NixString(),
+		User:   user.NixString(),
+		system: system,
+		user:   user,
 	}
 }
 
@@ -45,9 +49,9 @@ func (p profileGroup) String() string {
 }
 
 func (p profileGroup) SystemProfile() SystemProfile {
-	return p.System
+	return p.system
 }
 
 func (p profileGroup) UserProfile() UserProfile {
-	return p.User
+	return p.user
 }
