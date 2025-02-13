@@ -19,7 +19,7 @@ func build(installables ...string) (shell.ShellResult, error) {
 func findStorePaths(installables ...string) ([]string, error) {
 	res, err := shell.Shell(
 		fmt.Sprintf(
-			"nix path-info {{.VerbosityQuietLongVerboseShortN}} %s",
+			"nix path-info {{.VerbosityQuietLongVerboseShortN}} %s --impure",
 			strings.Join(installables, " "),
 		),
 	)

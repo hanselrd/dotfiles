@@ -107,7 +107,7 @@ in
               detailed_cpu_time = 0;
               enable_mouse = 1;
               find_comm_in_cmdline = 1;
-              header_margin = 1;
+              header_margin = 0;
               hide_function_bar = 2;
               hide_kernel_threads = 1;
               hide_running_in_container = 0;
