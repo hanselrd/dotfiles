@@ -9,6 +9,7 @@ import (
 
 	"github.com/samber/lo"
 
+	"github.com/hanselrd/dotfiles/internal/build"
 	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/internal/hash"
 	_ "github.com/hanselrd/dotfiles/internal/logdisabled"
@@ -149,9 +150,9 @@ var Environment = environment{
 				case encryption.EncryptionDefault:
 					file = filepath.Join("secrets", file)
 				default:
-					file = filepath.Join(fmt.Sprintf("secrets/%s", e), file)
+					file = filepath.Join(fmt.Sprintf("secrets/%s", e.NixString()), file)
 				}
-				file = filepath.Join(os.Getenv("DOTFILES_SRC_DIR"), file)
+				file = filepath.Join(build.RootDir, file)
 				if _, err := os.Stat(file); !os.IsNotExist(err) {
 					return e, lo.T2(
 						shell.Shell(fmt.Sprintf("grep -vq \"false\" %s", file)),

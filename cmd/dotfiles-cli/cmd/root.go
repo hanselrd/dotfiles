@@ -11,6 +11,7 @@ import (
 	"github.com/hanselrd/dotfiles/cmd/dotfiles-cli/cmd/codegen"
 	"github.com/hanselrd/dotfiles/cmd/dotfiles-cli/cmd/homemanager"
 	"github.com/hanselrd/dotfiles/cmd/dotfiles-cli/cmd/windows"
+	"github.com/hanselrd/dotfiles/internal/build"
 	"github.com/hanselrd/dotfiles/internal/log"
 	"github.com/hanselrd/dotfiles/pkg/flags"
 	"github.com/hanselrd/dotfiles/pkg/profile"
@@ -19,7 +20,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "dotfiles-cli",
 	Short: "Dotfiles CLI",
-	Long:  "Dotfiles CLI",
+	Long:  fmt.Sprintf("Dotfiles CLI [%s]", build.Version),
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		level := log.LevelDisabled
 		switch flags.Quiet {
@@ -51,10 +52,16 @@ var rootCmd = &cobra.Command{
 			"",
 			"platform",
 			fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH),
-			"version",
+			"runtime",
 			runtime.Version(),
 			"cpu",
 			runtime.NumCPU(),
+			"version",
+			build.Version,
+			"pureEvalMode",
+			build.PureEvalMode,
+			"rootDir",
+			build.RootDir,
 		)
 		slog.Info("flags",
 			"dryrun", flags.Dryrun,

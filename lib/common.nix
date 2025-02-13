@@ -128,7 +128,14 @@ in
       subPackages = [
         "cmd/${name}"
       ];
-      env.CGO_ENABLED = 0;
+      ldflags = [
+        "-s -w -linkmode=external"
+        "-X 'github.com/hanselrd/dotfiles/internal/build.Version=${lib.version}'"
+        "-X 'github.com/hanselrd/dotfiles/internal/build.PureEvalMode=${builtins.toString lib.inPureEvalMode}'"
+        "-X 'github.com/hanselrd/dotfiles/internal/build.RootDir=${
+          if !lib.inPureEvalMode then builtins.getEnv "PWD" else gitignore.lib.gitignoreSource ../.
+        }'"
+      ];
       meta.mainProgram = name;
     };
 }

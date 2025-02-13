@@ -97,9 +97,8 @@
       };
 
       env = lib.importJSON (
-        pkgs.runCommand "dotfiles-cli-environment-json" {
-          DOTFILES_SRC_DIR = gitignore.lib.gitignoreSource ./.;
-        } "${lib.getExe pkgs.dotfiles-cli} environment > $out"
+        pkgs.runCommand "dotfiles-cli-environment-json" { }
+          "${lib.getExe pkgs.dotfiles-cli} environment > $out"
       );
 
       lib = nixpkgs.lib.extend (
@@ -224,12 +223,12 @@
 
       packages = {
         ${system} = rec {
-          dotfiles-codegen0 = pkgs.writeShellScriptBin "dotfiles-codegen0" ''
+          dotfiles-codegen-fast = pkgs.writeShellScriptBin "dotfiles-codegen-fast" ''
             ${lib.getExe' pkgs.go "go"} generate ./...
           '';
 
-          dotfiles-codegen1 = pkgs.writeShellScriptBin "dotfiles-codegen1" ''
-            ${lib.getExe dotfiles-codegen0}
+          dotfiles-codegen = pkgs.writeShellScriptBin "dotfiles-codegen" ''
+            ${lib.getExe dotfiles-codegen-fast}
             ${lib.getExe pkgs.dotfiles-cli} codegen encryption
             # ${lib.getExe pkgs.dotfiles-cli} codegen hash
             ${lib.getExe pkgs.dotfiles-cli} codegen profiles
@@ -269,7 +268,7 @@
 
           dotfiles-all = pkgs.writeShellScriptBin "dotfiles-all" ''
             ${lib.getExe dotfiles-upgrade}
-            ${lib.getExe dotfiles-codegen1}
+            ${lib.getExe dotfiles-codegen}
             ${lib.getExe dotfiles-format}
           '';
         };
