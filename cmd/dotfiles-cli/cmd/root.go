@@ -6,6 +6,7 @@ import (
 	"os"
 	"runtime"
 
+	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
 	"github.com/hanselrd/dotfiles/cmd/dotfiles-cli/cmd/codegen"
@@ -18,9 +19,17 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "dotfiles-cli",
+	Use: "dotfiles-cli",
+	Version: fmt.Sprintf(
+		`%s
+pureEvalMode= %t
+rootDir= %s`,
+		build.Version,
+		lo.IsNotEmpty(build.PureEvalMode),
+		build.RootDir,
+	),
 	Short: "Dotfiles CLI",
-	Long:  fmt.Sprintf("Dotfiles CLI [%s]", build.Version),
+	Long:  "Dotfiles CLI",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		level := log.LevelDisabled
 		switch flags.Quiet {
