@@ -13,7 +13,7 @@ import (
 
 	"github.com/samber/lo"
 
-	"github.com/hanselrd/dotfiles/pkg/flags"
+	"github.com/hanselrd/dotfiles/internal/config"
 )
 
 type ShellOpt func(*ShellOpts) error
@@ -88,7 +88,7 @@ func Shell(command string, opts ...ShellOpt) (res ShellResult, err error) {
 
 	slog.Info("", "cmdline", command)
 
-	if flags.Dryrun {
+	if config.Dryrun {
 		return
 	}
 

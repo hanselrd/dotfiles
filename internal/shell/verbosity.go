@@ -5,15 +5,15 @@ import (
 
 	"github.com/samber/lo"
 
-	"github.com/hanselrd/dotfiles/pkg/flags"
+	"github.com/hanselrd/dotfiles/internal/config"
 )
 
 func verbosityQuietVerbose(quietFlag, verboseFlag string) string {
 	return lo.Ternary(
-		flags.Quiet > 0,
+		config.Quiet > 0,
 		quietFlag,
 		lo.Ternary(
-			flags.Verbose > 0,
+			config.Verbose > 0,
 			verboseFlag,
 			"",
 		),
@@ -22,20 +22,20 @@ func verbosityQuietVerbose(quietFlag, verboseFlag string) string {
 
 func verbosityQuietVerboseN(quietFlag, verboseFlag string) string {
 	return lo.Ternary(
-		flags.Quiet > 0,
+		config.Quiet > 0,
 		quietFlag,
 		lo.Ternary(
-			flags.Verbose > 0,
+			config.Verbose > 0,
 			strings.TrimSpace(
 				lo.TernaryF(
 					!strings.HasPrefix(verboseFlag, "--") && strings.HasPrefix(verboseFlag, "-") &&
 						len(verboseFlag) == 2,
 					func() string {
-						return "-" + strings.Repeat(verboseFlag[1:], flags.Verbose)
+						return "-" + strings.Repeat(verboseFlag[1:], config.Verbose)
 					},
 					func() string {
 						return strings.Join(
-							lo.RepeatBy(flags.Verbose, func(_ int) string {
+							lo.RepeatBy(config.Verbose, func(_ int) string {
 								return verboseFlag
 							}),
 							" ")
