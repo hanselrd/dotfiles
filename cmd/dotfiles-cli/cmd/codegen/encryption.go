@@ -11,6 +11,7 @@ import (
 	"github.com/hanselrd/dotfiles/internal/asset"
 	"github.com/hanselrd/dotfiles/internal/encryption"
 	"github.com/hanselrd/dotfiles/internal/shell"
+	"github.com/hanselrd/dotfiles/internal/shellx"
 )
 
 var encryptionCmd = &cobra.Command{
@@ -31,14 +32,7 @@ var encryptionCmd = &cobra.Command{
 			if _, err := os.Stat(file); !os.IsNotExist(err) {
 				continue
 			}
-			switch e {
-			case encryption.EncryptionNone:
-				// do nothing
-			case encryption.EncryptionDefault:
-				shell.Shell("git-crypt init")
-			default:
-				shell.Shell(fmt.Sprintf("git-crypt init -k %s", e.NixString()))
-			}
+			shellx.GitCryptInit(e)
 			os.MkdirAll(filepath.Dir(file), 0o755)
 			os.WriteFile(file, []byte("false\n"), 0o644)
 		}
