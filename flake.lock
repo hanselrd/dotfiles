@@ -226,11 +226,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1739541552,
-        "narHash": "sha256-g/JorsPZs2OJ7gSpUrccw7xzdB5IL/2N81wOV6CFBeQ=",
+        "lastModified": 1739595743,
+        "narHash": "sha256-/p77auNy8mLl6tQOI5xJGQgNnaWm7ry5I/RO22S4XXM=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "8e97ee2933db807c8d70dbe0ec26fcbdd1fa4ea1",
+        "rev": "ebc62330d4fca661356f1383d24dbf7ba4378475",
         "type": "gitlab"
       },
       "original": {
