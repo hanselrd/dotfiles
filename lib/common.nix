@@ -119,6 +119,18 @@ in
       inherit deps;
     };
 
+  winGetInstallExternal =
+    pkg:
+    {
+      deps ? [ "winget0" ],
+    }:
+    {
+      text = ''
+        winget.exe install -e --id --disable-interactivity ${pkg}
+      '';
+      inherit deps;
+    };
+
   buildGoBin =
     name:
     pkgs.buildGoModule {

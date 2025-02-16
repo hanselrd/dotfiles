@@ -143,12 +143,9 @@ in
     };
 
     home.activation = lib.mkIf lib.profiles.isSystemWsl {
-      starship0 = lib.common.runExternalHome "starship0" {
-        text = ''
-          winget.exe install -e --id --disable-interactivity Starship.Starship
-        '';
-        deps = [ "winget0" ];
-      };
+      starship0 = lib.common.runExternalHome "starship0" (
+        lib.common.winGetInstallExternal "Starship.Starship" { }
+      );
       starship1 = lib.common.runExternalHome "starship1" {
         text = ''
           ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/starship.toml ${

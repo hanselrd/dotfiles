@@ -263,12 +263,9 @@ in
     };
 
     home.activation = lib.mkIf lib.profiles.isSystemWsl {
-      oh-my-posh0 = lib.common.runExternalHome "oh-my-posh0" {
-        text = ''
-          winget.exe install -e --id --disable-interactivity JanDeDobbeleer.OhMyPosh
-        '';
-        deps = [ "winget0" ];
-      };
+      oh-my-posh0 = lib.common.runExternalHome "oh-my-posh0" (
+        lib.common.winGetInstallExternal "JanDeDobbeleer.OhMyPosh" { }
+      );
       oh-my-posh1 = lib.common.runExternalHome "oh-my-posh1" {
         text = ''
           ${lib.getExe' pkgs.coreutils "install"} -D ${env.user.configDirectory}/oh-my-posh/config.json ${

@@ -22,12 +22,7 @@ in
 
     home.activation = lib.mkIf (!env.extra.encrypted.blue) {
       brave0 = lib.mkIf lib.profiles.isSystemWsl (
-        lib.common.runExternalHome "brave0" {
-          text = ''
-            winget.exe install -e --id --disable-interactivity Brave.Brave
-          '';
-          deps = [ "winget0" ];
-        }
+        lib.common.runExternalHome "brave0" (lib.common.winGetInstallExternal "Brave.Brave" { })
       );
       brave1 = lib.common.runExternalHome "brave1" {
         text = ''
