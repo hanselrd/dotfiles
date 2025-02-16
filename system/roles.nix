@@ -12,6 +12,7 @@
     ./roles/chocolatey.nix
     ./roles/cockpit.nix
     ./roles/docker.nix
+    ./roles/fuse.nix
     ./roles/garuda.nix
     ./roles/glazewm.nix
     ./roles/home-manager.nix

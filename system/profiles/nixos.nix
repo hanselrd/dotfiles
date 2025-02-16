@@ -15,4 +15,5 @@
   roles.system.kernel.enable = true;
   roles.system.udisks2.enable = true;
   roles.system.zram.enable = true;
+  roles.system.fuse.enable = true;
 }

@@ -29,6 +29,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+
     nix-colors = {
       url = "github:Misterio77/nix-colors";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -70,6 +74,7 @@
       garuda,
       gitignore,
       home-manager,
+      impermanence,
       nix-colors,
       nix-darwin,
       nixos-wsl,
@@ -146,6 +151,7 @@
                         inherit (pkgs) config overlays;
                       };
                     }
+                    impermanence.nixosModules.impermanence
                     (lib.optional (!lib.profiles.isSystemGaruda) chaotic.nixosModules.default)
                     (lib.optional lib.profiles.isSystemWsl nixos-wsl.nixosModules.wsl)
                     ./system/roles.nix

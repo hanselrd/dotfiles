@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (inputs) chaotic nix-colors;
+  inherit (inputs) chaotic impermanence nix-colors;
 in
 {
   nix-colors = nix-colors.lib;
@@ -15,6 +15,7 @@ in
   };
 
   home-manager.modules = lib.flatten [
+    impermanence.homeManagerModules.impermanence
     (lib.optional (!lib.profiles.isSystemGaruda) chaotic.homeManagerModules.default)
     nix-colors.homeManagerModules.default
     ../user/roles.nix

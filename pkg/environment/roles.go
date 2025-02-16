@@ -8,6 +8,7 @@ type (
 	environmentRolesSystemChocolatey  struct{}
 	environmentRolesSystemCockpit     struct{}
 	environmentRolesSystemDocker      struct{}
+	environmentRolesSystemFuse        struct{}
 	environmentRolesSystemGaruda      struct{}
 	environmentRolesSystemGlazeWM     struct{}
 	environmentRolesSystemHomeManager struct{}

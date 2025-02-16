@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-const _SystemRoleName = "BootstrapBootChocolateyCockpitDockerGarudaGlazeWMHomeManagerHyprlandI18NKDEKernelMonitoringMotdNetworkingNixOpenSshShellSudoTimeUdisks2UserWinGetWslXServerXrdpZram"
+const _SystemRoleName = "BootstrapBootChocolateyCockpitDockerFuseGarudaGlazeWMHomeManagerHyprlandI18NKDEKernelMonitoringMotdNetworkingNixOpenSshShellSudoTimeUdisks2UserWinGetWslXServerXrdpZram"
 
-var _SystemRoleIndex = [...]uint8{0, 9, 13, 23, 30, 36, 42, 49, 60, 68, 72, 75, 81, 91, 95, 105, 108, 115, 120, 124, 128, 135, 139, 145, 148, 155, 159, 163}
+var _SystemRoleIndex = [...]uint8{0, 9, 13, 23, 30, 36, 40, 46, 53, 64, 72, 76, 79, 85, 95, 99, 109, 112, 119, 124, 128, 132, 139, 143, 149, 152, 159, 163, 167}
 
-const _SystemRoleLowerName = "bootstrapbootchocolateycockpitdockergarudaglazewmhomemanagerhyprlandi18nkdekernelmonitoringmotdnetworkingnixopensshshellsudotimeudisks2userwingetwslxserverxrdpzram"
+const _SystemRoleLowerName = "bootstrapbootchocolateycockpitdockerfusegarudaglazewmhomemanagerhyprlandi18nkdekernelmonitoringmotdnetworkingnixopensshshellsudotimeudisks2userwingetwslxserverxrdpzram"
 
 func (i SystemRole) String() string {
 	if i >= SystemRole(len(_SystemRoleIndex)-1) {
@@ -29,31 +29,32 @@ func _SystemRoleNoOp() {
 	_ = x[SystemRoleChocolatey-(2)]
 	_ = x[SystemRoleCockpit-(3)]
 	_ = x[SystemRoleDocker-(4)]
-	_ = x[SystemRoleGaruda-(5)]
-	_ = x[SystemRoleGlazeWM-(6)]
-	_ = x[SystemRoleHomeManager-(7)]
-	_ = x[SystemRoleHyprland-(8)]
-	_ = x[SystemRoleI18N-(9)]
-	_ = x[SystemRoleKDE-(10)]
-	_ = x[SystemRoleKernel-(11)]
-	_ = x[SystemRoleMonitoring-(12)]
-	_ = x[SystemRoleMotd-(13)]
-	_ = x[SystemRoleNetworking-(14)]
-	_ = x[SystemRoleNix-(15)]
-	_ = x[SystemRoleOpenSsh-(16)]
-	_ = x[SystemRoleShell-(17)]
-	_ = x[SystemRoleSudo-(18)]
-	_ = x[SystemRoleTime-(19)]
-	_ = x[SystemRoleUdisks2-(20)]
-	_ = x[SystemRoleUser-(21)]
-	_ = x[SystemRoleWinGet-(22)]
-	_ = x[SystemRoleWsl-(23)]
-	_ = x[SystemRoleXServer-(24)]
-	_ = x[SystemRoleXrdp-(25)]
-	_ = x[SystemRoleZram-(26)]
+	_ = x[SystemRoleFuse-(5)]
+	_ = x[SystemRoleGaruda-(6)]
+	_ = x[SystemRoleGlazeWM-(7)]
+	_ = x[SystemRoleHomeManager-(8)]
+	_ = x[SystemRoleHyprland-(9)]
+	_ = x[SystemRoleI18N-(10)]
+	_ = x[SystemRoleKDE-(11)]
+	_ = x[SystemRoleKernel-(12)]
+	_ = x[SystemRoleMonitoring-(13)]
+	_ = x[SystemRoleMotd-(14)]
+	_ = x[SystemRoleNetworking-(15)]
+	_ = x[SystemRoleNix-(16)]
+	_ = x[SystemRoleOpenSsh-(17)]
+	_ = x[SystemRoleShell-(18)]
+	_ = x[SystemRoleSudo-(19)]
+	_ = x[SystemRoleTime-(20)]
+	_ = x[SystemRoleUdisks2-(21)]
+	_ = x[SystemRoleUser-(22)]
+	_ = x[SystemRoleWinGet-(23)]
+	_ = x[SystemRoleWsl-(24)]
+	_ = x[SystemRoleXServer-(25)]
+	_ = x[SystemRoleXrdp-(26)]
+	_ = x[SystemRoleZram-(27)]
 }
 
-var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleChocolatey, SystemRoleCockpit, SystemRoleDocker, SystemRoleGaruda, SystemRoleGlazeWM, SystemRoleHomeManager, SystemRoleHyprland, SystemRoleI18N, SystemRoleKDE, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleSudo, SystemRoleTime, SystemRoleUdisks2, SystemRoleUser, SystemRoleWinGet, SystemRoleWsl, SystemRoleXServer, SystemRoleXrdp, SystemRoleZram}
+var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleChocolatey, SystemRoleCockpit, SystemRoleDocker, SystemRoleFuse, SystemRoleGaruda, SystemRoleGlazeWM, SystemRoleHomeManager, SystemRoleHyprland, SystemRoleI18N, SystemRoleKDE, SystemRoleKernel, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleShell, SystemRoleSudo, SystemRoleTime, SystemRoleUdisks2, SystemRoleUser, SystemRoleWinGet, SystemRoleWsl, SystemRoleXServer, SystemRoleXrdp, SystemRoleZram}
 
 var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleName[0:9]:          SystemRoleBootstrap,
@@ -66,50 +67,52 @@ var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleLowerName[23:30]:   SystemRoleCockpit,
 	_SystemRoleName[30:36]:        SystemRoleDocker,
 	_SystemRoleLowerName[30:36]:   SystemRoleDocker,
-	_SystemRoleName[36:42]:        SystemRoleGaruda,
-	_SystemRoleLowerName[36:42]:   SystemRoleGaruda,
-	_SystemRoleName[42:49]:        SystemRoleGlazeWM,
-	_SystemRoleLowerName[42:49]:   SystemRoleGlazeWM,
-	_SystemRoleName[49:60]:        SystemRoleHomeManager,
-	_SystemRoleLowerName[49:60]:   SystemRoleHomeManager,
-	_SystemRoleName[60:68]:        SystemRoleHyprland,
-	_SystemRoleLowerName[60:68]:   SystemRoleHyprland,
-	_SystemRoleName[68:72]:        SystemRoleI18N,
-	_SystemRoleLowerName[68:72]:   SystemRoleI18N,
-	_SystemRoleName[72:75]:        SystemRoleKDE,
-	_SystemRoleLowerName[72:75]:   SystemRoleKDE,
-	_SystemRoleName[75:81]:        SystemRoleKernel,
-	_SystemRoleLowerName[75:81]:   SystemRoleKernel,
-	_SystemRoleName[81:91]:        SystemRoleMonitoring,
-	_SystemRoleLowerName[81:91]:   SystemRoleMonitoring,
-	_SystemRoleName[91:95]:        SystemRoleMotd,
-	_SystemRoleLowerName[91:95]:   SystemRoleMotd,
-	_SystemRoleName[95:105]:       SystemRoleNetworking,
-	_SystemRoleLowerName[95:105]:  SystemRoleNetworking,
-	_SystemRoleName[105:108]:      SystemRoleNix,
-	_SystemRoleLowerName[105:108]: SystemRoleNix,
-	_SystemRoleName[108:115]:      SystemRoleOpenSsh,
-	_SystemRoleLowerName[108:115]: SystemRoleOpenSsh,
-	_SystemRoleName[115:120]:      SystemRoleShell,
-	_SystemRoleLowerName[115:120]: SystemRoleShell,
-	_SystemRoleName[120:124]:      SystemRoleSudo,
-	_SystemRoleLowerName[120:124]: SystemRoleSudo,
-	_SystemRoleName[124:128]:      SystemRoleTime,
-	_SystemRoleLowerName[124:128]: SystemRoleTime,
-	_SystemRoleName[128:135]:      SystemRoleUdisks2,
-	_SystemRoleLowerName[128:135]: SystemRoleUdisks2,
-	_SystemRoleName[135:139]:      SystemRoleUser,
-	_SystemRoleLowerName[135:139]: SystemRoleUser,
-	_SystemRoleName[139:145]:      SystemRoleWinGet,
-	_SystemRoleLowerName[139:145]: SystemRoleWinGet,
-	_SystemRoleName[145:148]:      SystemRoleWsl,
-	_SystemRoleLowerName[145:148]: SystemRoleWsl,
-	_SystemRoleName[148:155]:      SystemRoleXServer,
-	_SystemRoleLowerName[148:155]: SystemRoleXServer,
-	_SystemRoleName[155:159]:      SystemRoleXrdp,
-	_SystemRoleLowerName[155:159]: SystemRoleXrdp,
-	_SystemRoleName[159:163]:      SystemRoleZram,
-	_SystemRoleLowerName[159:163]: SystemRoleZram,
+	_SystemRoleName[36:40]:        SystemRoleFuse,
+	_SystemRoleLowerName[36:40]:   SystemRoleFuse,
+	_SystemRoleName[40:46]:        SystemRoleGaruda,
+	_SystemRoleLowerName[40:46]:   SystemRoleGaruda,
+	_SystemRoleName[46:53]:        SystemRoleGlazeWM,
+	_SystemRoleLowerName[46:53]:   SystemRoleGlazeWM,
+	_SystemRoleName[53:64]:        SystemRoleHomeManager,
+	_SystemRoleLowerName[53:64]:   SystemRoleHomeManager,
+	_SystemRoleName[64:72]:        SystemRoleHyprland,
+	_SystemRoleLowerName[64:72]:   SystemRoleHyprland,
+	_SystemRoleName[72:76]:        SystemRoleI18N,
+	_SystemRoleLowerName[72:76]:   SystemRoleI18N,
+	_SystemRoleName[76:79]:        SystemRoleKDE,
+	_SystemRoleLowerName[76:79]:   SystemRoleKDE,
+	_SystemRoleName[79:85]:        SystemRoleKernel,
+	_SystemRoleLowerName[79:85]:   SystemRoleKernel,
+	_SystemRoleName[85:95]:        SystemRoleMonitoring,
+	_SystemRoleLowerName[85:95]:   SystemRoleMonitoring,
+	_SystemRoleName[95:99]:        SystemRoleMotd,
+	_SystemRoleLowerName[95:99]:   SystemRoleMotd,
+	_SystemRoleName[99:109]:       SystemRoleNetworking,
+	_SystemRoleLowerName[99:109]:  SystemRoleNetworking,
+	_SystemRoleName[109:112]:      SystemRoleNix,
+	_SystemRoleLowerName[109:112]: SystemRoleNix,
+	_SystemRoleName[112:119]:      SystemRoleOpenSsh,
+	_SystemRoleLowerName[112:119]: SystemRoleOpenSsh,
+	_SystemRoleName[119:124]:      SystemRoleShell,
+	_SystemRoleLowerName[119:124]: SystemRoleShell,
+	_SystemRoleName[124:128]:      SystemRoleSudo,
+	_SystemRoleLowerName[124:128]: SystemRoleSudo,
+	_SystemRoleName[128:132]:      SystemRoleTime,
+	_SystemRoleLowerName[128:132]: SystemRoleTime,
+	_SystemRoleName[132:139]:      SystemRoleUdisks2,
+	_SystemRoleLowerName[132:139]: SystemRoleUdisks2,
+	_SystemRoleName[139:143]:      SystemRoleUser,
+	_SystemRoleLowerName[139:143]: SystemRoleUser,
+	_SystemRoleName[143:149]:      SystemRoleWinGet,
+	_SystemRoleLowerName[143:149]: SystemRoleWinGet,
+	_SystemRoleName[149:152]:      SystemRoleWsl,
+	_SystemRoleLowerName[149:152]: SystemRoleWsl,
+	_SystemRoleName[152:159]:      SystemRoleXServer,
+	_SystemRoleLowerName[152:159]: SystemRoleXServer,
+	_SystemRoleName[159:163]:      SystemRoleXrdp,
+	_SystemRoleLowerName[159:163]: SystemRoleXrdp,
+	_SystemRoleName[163:167]:      SystemRoleZram,
+	_SystemRoleLowerName[163:167]: SystemRoleZram,
 }
 
 var _SystemRoleNames = []string{
@@ -118,28 +121,29 @@ var _SystemRoleNames = []string{
 	_SystemRoleName[13:23],
 	_SystemRoleName[23:30],
 	_SystemRoleName[30:36],
-	_SystemRoleName[36:42],
-	_SystemRoleName[42:49],
-	_SystemRoleName[49:60],
-	_SystemRoleName[60:68],
-	_SystemRoleName[68:72],
-	_SystemRoleName[72:75],
-	_SystemRoleName[75:81],
-	_SystemRoleName[81:91],
-	_SystemRoleName[91:95],
-	_SystemRoleName[95:105],
-	_SystemRoleName[105:108],
-	_SystemRoleName[108:115],
-	_SystemRoleName[115:120],
-	_SystemRoleName[120:124],
+	_SystemRoleName[36:40],
+	_SystemRoleName[40:46],
+	_SystemRoleName[46:53],
+	_SystemRoleName[53:64],
+	_SystemRoleName[64:72],
+	_SystemRoleName[72:76],
+	_SystemRoleName[76:79],
+	_SystemRoleName[79:85],
+	_SystemRoleName[85:95],
+	_SystemRoleName[95:99],
+	_SystemRoleName[99:109],
+	_SystemRoleName[109:112],
+	_SystemRoleName[112:119],
+	_SystemRoleName[119:124],
 	_SystemRoleName[124:128],
-	_SystemRoleName[128:135],
-	_SystemRoleName[135:139],
-	_SystemRoleName[139:145],
-	_SystemRoleName[145:148],
-	_SystemRoleName[148:155],
-	_SystemRoleName[155:159],
+	_SystemRoleName[128:132],
+	_SystemRoleName[132:139],
+	_SystemRoleName[139:143],
+	_SystemRoleName[143:149],
+	_SystemRoleName[149:152],
+	_SystemRoleName[152:159],
 	_SystemRoleName[159:163],
+	_SystemRoleName[163:167],
 }
 
 // SystemRoleString retrieves an enum value from the enum constants string name.
