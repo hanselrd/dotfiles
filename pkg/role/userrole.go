@@ -23,6 +23,8 @@ const (
 	UserRoleBrave
 	UserRoleBrowser
 	UserRoleBtop
+	UserRoleCMake
+	UserRoleCcache
 	UserRoleDevelopment
 	UserRoleDevelopmentCpp
 	UserRoleDevelopmentDhall

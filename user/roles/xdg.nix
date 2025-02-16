@@ -16,11 +16,17 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    xdg.cacheHome = env.user.cacheDirectory;
-    xdg.configHome = env.user.configDirectory;
-    xdg.dataHome = env.user.dataDirectory;
-    xdg.stateHome = env.user.stateDirectory;
+    xdg = {
+      enable = true;
+      cacheHome = env.user.cacheDirectory;
+      configHome = env.user.configDirectory;
+      dataHome = env.user.dataDirectory;
+      stateHome = env.user.stateDirectory;
+    };
 
-    xdg.userDirs.createDirectories = lib.profiles.isUserStandard || lib.profiles.isUserFull;
+    xdg.userDirs = lib.mkIf (lib.profiles.isUserStandard || lib.profiles.isUserFull) {
+      enable = true;
+      createDirectories = true;
+    };
   };
 }

@@ -24,7 +24,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/85e9d1cc8fa7be999c6fb05818154806e4e053c1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

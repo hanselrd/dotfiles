@@ -43,6 +43,8 @@ type (
 	environmentRolesUserBrave                 struct{}
 	environmentRolesUserBrowser               struct{}
 	environmentRolesUserBtop                  struct{}
+	environmentRolesUserCMake                 struct{}
+	environmentRolesUserCcache                struct{}
 	environmentRolesUserDevelopment           struct{}
 	environmentRolesUserDevelopmentCpp        struct{}
 	environmentRolesUserDevelopmentDhall      struct{}

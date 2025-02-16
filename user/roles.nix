@@ -15,6 +15,8 @@
     ./roles/brave.nix
     ./roles/browser.nix
     ./roles/btop.nix
+    ./roles/cmake.nix
+    ./roles/ccache.nix
     ./roles/development.nix
     ./roles/development.cpp.nix
     ./roles/development.dhall.nix

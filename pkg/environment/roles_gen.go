@@ -43,6 +43,8 @@ type environmentRolesUser struct {
 	Brave                 *environmentRolesUserBrave                 `json:"brave,omitempty"`
 	Browser               *environmentRolesUserBrowser               `json:"browser,omitempty"`
 	Btop                  *environmentRolesUserBtop                  `json:"btop,omitempty"`
+	CMake                 *environmentRolesUserCMake                 `json:"cmake,omitempty"`
+	Ccache                *environmentRolesUserCcache                `json:"ccache,omitempty"`
 	Development           *environmentRolesUserDevelopment           `json:"development,omitempty"`
 	DevelopmentCpp        *environmentRolesUserDevelopmentCpp        `json:"development.cpp,omitempty"`
 	DevelopmentDhall      *environmentRolesUserDevelopmentDhall      `json:"development.dhall,omitempty"`
