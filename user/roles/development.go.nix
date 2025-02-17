@@ -30,6 +30,7 @@ in
       golangci-lint
       golines
       gotools
+      ragel
       templ
     ];
   };
