@@ -167,7 +167,7 @@ var graphCmd = &cobra.Command{
 			})
 
 			lo.ForEach(roles, func(r role.Role, _ int) {
-				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "roles\.%s\.%s\.enable = true"`, r.PrivilegeLevel().NixString(), r.NixString())); err == nil {
+				if res, err := shell.Shell(fmt.Sprintf(`git grep -l "roles\.%s\.%s\.enable = true"`, r.PrivilegeLevel().NixString(), strings.ReplaceAll(r.NixString(), ".", "\\."))); err == nil {
 					lo.ForEach(
 						strings.Split(res.Stdout, "\n"),
 						func(d string, _ int) {
