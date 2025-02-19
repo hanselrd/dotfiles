@@ -4,4 +4,5 @@ var (
 	Version      string
 	PureEvalMode string
 	RootDir      string
+	Dirty        string
 )

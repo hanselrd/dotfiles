@@ -21,10 +21,11 @@ import (
 var rootCmd = &cobra.Command{
 	Use: "dotfiles-cli",
 	Version: fmt.Sprintf(
-		`%s
+		`%s%s
 pureEvalMode= %t
 rootDir= %s`,
 		build.Version,
+		lo.Ternary(lo.IsNotEmpty(build.Dirty), "-dirty", ""),
 		lo.IsNotEmpty(build.PureEvalMode),
 		build.RootDir,
 	),

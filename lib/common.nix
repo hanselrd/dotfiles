@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (inputs) gitignore;
+  inherit (inputs) self gitignore;
 in
 {
   currentTimeUtcPretty = lib.replaceStrings [ "\n" ] [ "" ] (
@@ -136,7 +136,7 @@ in
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-c6cYSbck5ht0gfrgxhXR9xgEPeWirYZzYkGgRU5riFs=";
+      vendorHash = "sha256-NNpc2Etq8GFp70JnlvAaf4/nmXMZ14mvGGqUlbnP4DM=";
       subPackages = [
         "cmd/${name}"
       ];
@@ -146,6 +146,9 @@ in
         "-X 'github.com/hanselrd/dotfiles/internal/build.PureEvalMode=${builtins.toString lib.inPureEvalMode}'"
         "-X 'github.com/hanselrd/dotfiles/internal/build.RootDir=${
           if !lib.inPureEvalMode then builtins.getEnv "PWD" else gitignore.lib.gitignoreSource ../.
+        }'"
+        "-X 'github.com/hanselrd/dotfiles/internal/build.Dirty=${
+          builtins.toString (!(lib.hasAttr "shortRev" self))
         }'"
       ];
       meta.mainProgram = name;
