@@ -53,6 +53,7 @@
     lm_sensors
     lsb-release
     pfetch
+    pqrs
     procps
     rsync
     ssh-to-age
