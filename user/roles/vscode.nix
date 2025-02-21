@@ -35,6 +35,7 @@ in
         # nwolverson.ide-purescript
         # nwolverson.language-purescript
         # polymeilex.wgsl
+        # rust-lang.rust-analyzer
         # wayou.vscode-todo-highlight
         # xmonader.vscode-capnp
         bbenoist.nix
@@ -69,7 +70,6 @@ in
         ms-vscode.powershell
         naumovs.color-highlight
         pkief.material-icon-theme
-        rust-lang.rust-analyzer
         tamasfe.even-better-toml
         twxs.cmake
         vscodevim.vim

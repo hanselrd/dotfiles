@@ -59,6 +59,7 @@
     strace
     sysstat
     tree
+    unzip
     wget
     xxd
     zstd
