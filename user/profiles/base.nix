@@ -63,7 +63,7 @@
     tree
     unzip
     wget
-    xsv
+    xan
     xxd
     zstd
   ];
