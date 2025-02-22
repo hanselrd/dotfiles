@@ -52,6 +52,7 @@
     killall
     lm_sensors
     lsb-release
+    miller
     pfetch
     pqrs
     procps
