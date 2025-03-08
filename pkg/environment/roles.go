@@ -98,6 +98,7 @@ type (
 	environmentRolesUserTheme    struct{}
 	environmentRolesUserTmux     struct{}
 	environmentRolesUserVscode   struct{}
+	environmentRolesUserWine     struct{}
 	environmentRolesUserWizTree  struct{}
 	environmentRolesUserXdg      struct{}
 	environmentRolesUserZoxide   struct{}
