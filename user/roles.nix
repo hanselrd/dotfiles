@@ -12,6 +12,7 @@
     ./roles/bash.nix
     ./roles/bat.nix
     ./roles/bin.nix
+    ./roles/bottles.nix
     ./roles/brave.nix
     ./roles/browser.nix
     ./roles/btop.nix
@@ -42,6 +43,7 @@
     ./roles/flameshot.nix
     ./roles/fonts.nix
     ./roles/fzf.nix
+    ./roles/gaming.nix
     ./roles/gdb.nix
     ./roles/git.nix
     ./roles/htop.nix

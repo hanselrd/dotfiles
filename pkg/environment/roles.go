@@ -41,6 +41,7 @@ type (
 	environmentRolesUserBash                  struct{}
 	environmentRolesUserBat                   struct{}
 	environmentRolesUserBin                   struct{}
+	environmentRolesUserBottles               struct{}
 	environmentRolesUserBrave                 struct{}
 	environmentRolesUserBrowser               struct{}
 	environmentRolesUserBtop                  struct{}
@@ -71,6 +72,7 @@ type (
 	environmentRolesUserFlameshot             struct{}
 	environmentRolesUserFonts                 struct{}
 	environmentRolesUserFzf                   struct{}
+	environmentRolesUserGaming                struct{}
 	environmentRolesUserGdb                   struct{}
 	environmentRolesUserGit                   struct{}
 	environmentRolesUserHtop                  struct{}

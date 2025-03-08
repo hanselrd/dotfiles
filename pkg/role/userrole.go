@@ -20,6 +20,7 @@ const (
 	UserRoleBash
 	UserRoleBat
 	UserRoleBin
+	UserRoleBottles
 	UserRoleBrave
 	UserRoleBrowser
 	UserRoleBtop
@@ -50,6 +51,7 @@ const (
 	UserRoleFlameshot
 	UserRoleFonts
 	UserRoleFzf
+	UserRoleGaming
 	UserRoleGdb
 	UserRoleGit
 	UserRoleHtop

@@ -41,6 +41,7 @@ type environmentRolesUser struct {
 	Bash                  *environmentRolesUserBash                  `json:"bash,omitempty"`
 	Bat                   *environmentRolesUserBat                   `json:"bat,omitempty"`
 	Bin                   *environmentRolesUserBin                   `json:"bin,omitempty"`
+	Bottles               *environmentRolesUserBottles               `json:"bottles,omitempty"`
 	Brave                 *environmentRolesUserBrave                 `json:"brave,omitempty"`
 	Browser               *environmentRolesUserBrowser               `json:"browser,omitempty"`
 	Btop                  *environmentRolesUserBtop                  `json:"btop,omitempty"`
@@ -71,6 +72,7 @@ type environmentRolesUser struct {
 	Flameshot             *environmentRolesUserFlameshot             `json:"flameshot,omitempty"`
 	Fonts                 *environmentRolesUserFonts                 `json:"fonts,omitempty"`
 	Fzf                   *environmentRolesUserFzf                   `json:"fzf,omitempty"`
+	Gaming                *environmentRolesUserGaming                `json:"gaming,omitempty"`
 	Gdb                   *environmentRolesUserGdb                   `json:"gdb,omitempty"`
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`

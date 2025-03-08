@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-const _UserRoleName = "BootstrapAlacrittyBashBatBinBraveBrowserBtopCMakeCcacheDevelopmentDevelopmentCppDevelopmentDhallDevelopmentElixirDevelopmentGleamDevelopmentGoDevelopmentHaskellDevelopmentJavaDevelopmentKotlinDevelopmentLuaDevelopmentNickelDevelopmentNixDevelopmentNodejsDevelopmentPurescriptDevelopmentPythonDevelopmentRustDevelopmentShellDevelopmentZigDockerEditorEzaFastfetchFlameshotFontsFzfGdbGitHtopLldbNeovimNixOhMyPoshPagerRangerRedshiftRipgrepRofiRtsShellSshStarshipSxhkdTerminalThemeTmuxVscodeWineWizTreeXdgZoxideZsh"
+const _UserRoleName = "BootstrapAlacrittyBashBatBinBottlesBraveBrowserBtopCMakeCcacheDevelopmentDevelopmentCppDevelopmentDhallDevelopmentElixirDevelopmentGleamDevelopmentGoDevelopmentHaskellDevelopmentJavaDevelopmentKotlinDevelopmentLuaDevelopmentNickelDevelopmentNixDevelopmentNodejsDevelopmentPurescriptDevelopmentPythonDevelopmentRustDevelopmentShellDevelopmentZigDockerEditorEzaFastfetchFlameshotFontsFzfGamingGdbGitHtopLldbNeovimNixOhMyPoshPagerRangerRedshiftRipgrepRofiRtsShellSshStarshipSxhkdTerminalThemeTmuxVscodeWineWizTreeXdgZoxideZsh"
 
-var _UserRoleIndex = [...]uint16{0, 9, 18, 22, 25, 28, 33, 40, 44, 49, 55, 66, 80, 96, 113, 129, 142, 160, 175, 192, 206, 223, 237, 254, 275, 292, 307, 323, 337, 343, 349, 352, 361, 370, 375, 378, 381, 384, 388, 392, 398, 401, 409, 414, 420, 428, 435, 439, 442, 447, 450, 458, 463, 471, 476, 480, 486, 490, 497, 500, 506, 509}
+var _UserRoleIndex = [...]uint16{0, 9, 18, 22, 25, 28, 35, 40, 47, 51, 56, 62, 73, 87, 103, 120, 136, 149, 167, 182, 199, 213, 230, 244, 261, 282, 299, 314, 330, 344, 350, 356, 359, 368, 377, 382, 385, 391, 394, 397, 401, 405, 411, 414, 422, 427, 433, 441, 448, 452, 455, 460, 463, 471, 476, 484, 489, 493, 499, 503, 510, 513, 519, 522}
 
-const _UserRoleLowerName = "bootstrapalacrittybashbatbinbravebrowserbtopcmakeccachedevelopmentdevelopmentcppdevelopmentdhalldevelopmentelixirdevelopmentgleamdevelopmentgodevelopmenthaskelldevelopmentjavadevelopmentkotlindevelopmentluadevelopmentnickeldevelopmentnixdevelopmentnodejsdevelopmentpurescriptdevelopmentpythondevelopmentrustdevelopmentshelldevelopmentzigdockereditorezafastfetchflameshotfontsfzfgdbgithtoplldbneovimnixohmyposhpagerrangerredshiftripgreprofirtsshellsshstarshipsxhkdterminalthemetmuxvscodewinewiztreexdgzoxidezsh"
+const _UserRoleLowerName = "bootstrapalacrittybashbatbinbottlesbravebrowserbtopcmakeccachedevelopmentdevelopmentcppdevelopmentdhalldevelopmentelixirdevelopmentgleamdevelopmentgodevelopmenthaskelldevelopmentjavadevelopmentkotlindevelopmentluadevelopmentnickeldevelopmentnixdevelopmentnodejsdevelopmentpurescriptdevelopmentpythondevelopmentrustdevelopmentshelldevelopmentzigdockereditorezafastfetchflameshotfontsfzfgaminggdbgithtoplldbneovimnixohmyposhpagerrangerredshiftripgreprofirtsshellsshstarshipsxhkdterminalthemetmuxvscodewinewiztreexdgzoxidezsh"
 
 func (i UserRole) String() string {
 	if i >= UserRole(len(_UserRoleIndex)-1) {
@@ -29,65 +29,67 @@ func _UserRoleNoOp() {
 	_ = x[UserRoleBash-(2)]
 	_ = x[UserRoleBat-(3)]
 	_ = x[UserRoleBin-(4)]
-	_ = x[UserRoleBrave-(5)]
-	_ = x[UserRoleBrowser-(6)]
-	_ = x[UserRoleBtop-(7)]
-	_ = x[UserRoleCMake-(8)]
-	_ = x[UserRoleCcache-(9)]
-	_ = x[UserRoleDevelopment-(10)]
-	_ = x[UserRoleDevelopmentCpp-(11)]
-	_ = x[UserRoleDevelopmentDhall-(12)]
-	_ = x[UserRoleDevelopmentElixir-(13)]
-	_ = x[UserRoleDevelopmentGleam-(14)]
-	_ = x[UserRoleDevelopmentGo-(15)]
-	_ = x[UserRoleDevelopmentHaskell-(16)]
-	_ = x[UserRoleDevelopmentJava-(17)]
-	_ = x[UserRoleDevelopmentKotlin-(18)]
-	_ = x[UserRoleDevelopmentLua-(19)]
-	_ = x[UserRoleDevelopmentNickel-(20)]
-	_ = x[UserRoleDevelopmentNix-(21)]
-	_ = x[UserRoleDevelopmentNodejs-(22)]
-	_ = x[UserRoleDevelopmentPurescript-(23)]
-	_ = x[UserRoleDevelopmentPython-(24)]
-	_ = x[UserRoleDevelopmentRust-(25)]
-	_ = x[UserRoleDevelopmentShell-(26)]
-	_ = x[UserRoleDevelopmentZig-(27)]
-	_ = x[UserRoleDocker-(28)]
-	_ = x[UserRoleEditor-(29)]
-	_ = x[UserRoleEza-(30)]
-	_ = x[UserRoleFastfetch-(31)]
-	_ = x[UserRoleFlameshot-(32)]
-	_ = x[UserRoleFonts-(33)]
-	_ = x[UserRoleFzf-(34)]
-	_ = x[UserRoleGdb-(35)]
-	_ = x[UserRoleGit-(36)]
-	_ = x[UserRoleHtop-(37)]
-	_ = x[UserRoleLldb-(38)]
-	_ = x[UserRoleNeovim-(39)]
-	_ = x[UserRoleNix-(40)]
-	_ = x[UserRoleOhMyPosh-(41)]
-	_ = x[UserRolePager-(42)]
-	_ = x[UserRoleRanger-(43)]
-	_ = x[UserRoleRedshift-(44)]
-	_ = x[UserRoleRipgrep-(45)]
-	_ = x[UserRoleRofi-(46)]
-	_ = x[UserRoleRts-(47)]
-	_ = x[UserRoleShell-(48)]
-	_ = x[UserRoleSsh-(49)]
-	_ = x[UserRoleStarship-(50)]
-	_ = x[UserRoleSxhkd-(51)]
-	_ = x[UserRoleTerminal-(52)]
-	_ = x[UserRoleTheme-(53)]
-	_ = x[UserRoleTmux-(54)]
-	_ = x[UserRoleVscode-(55)]
-	_ = x[UserRoleWine-(56)]
-	_ = x[UserRoleWizTree-(57)]
-	_ = x[UserRoleXdg-(58)]
-	_ = x[UserRoleZoxide-(59)]
-	_ = x[UserRoleZsh-(60)]
+	_ = x[UserRoleBottles-(5)]
+	_ = x[UserRoleBrave-(6)]
+	_ = x[UserRoleBrowser-(7)]
+	_ = x[UserRoleBtop-(8)]
+	_ = x[UserRoleCMake-(9)]
+	_ = x[UserRoleCcache-(10)]
+	_ = x[UserRoleDevelopment-(11)]
+	_ = x[UserRoleDevelopmentCpp-(12)]
+	_ = x[UserRoleDevelopmentDhall-(13)]
+	_ = x[UserRoleDevelopmentElixir-(14)]
+	_ = x[UserRoleDevelopmentGleam-(15)]
+	_ = x[UserRoleDevelopmentGo-(16)]
+	_ = x[UserRoleDevelopmentHaskell-(17)]
+	_ = x[UserRoleDevelopmentJava-(18)]
+	_ = x[UserRoleDevelopmentKotlin-(19)]
+	_ = x[UserRoleDevelopmentLua-(20)]
+	_ = x[UserRoleDevelopmentNickel-(21)]
+	_ = x[UserRoleDevelopmentNix-(22)]
+	_ = x[UserRoleDevelopmentNodejs-(23)]
+	_ = x[UserRoleDevelopmentPurescript-(24)]
+	_ = x[UserRoleDevelopmentPython-(25)]
+	_ = x[UserRoleDevelopmentRust-(26)]
+	_ = x[UserRoleDevelopmentShell-(27)]
+	_ = x[UserRoleDevelopmentZig-(28)]
+	_ = x[UserRoleDocker-(29)]
+	_ = x[UserRoleEditor-(30)]
+	_ = x[UserRoleEza-(31)]
+	_ = x[UserRoleFastfetch-(32)]
+	_ = x[UserRoleFlameshot-(33)]
+	_ = x[UserRoleFonts-(34)]
+	_ = x[UserRoleFzf-(35)]
+	_ = x[UserRoleGaming-(36)]
+	_ = x[UserRoleGdb-(37)]
+	_ = x[UserRoleGit-(38)]
+	_ = x[UserRoleHtop-(39)]
+	_ = x[UserRoleLldb-(40)]
+	_ = x[UserRoleNeovim-(41)]
+	_ = x[UserRoleNix-(42)]
+	_ = x[UserRoleOhMyPosh-(43)]
+	_ = x[UserRolePager-(44)]
+	_ = x[UserRoleRanger-(45)]
+	_ = x[UserRoleRedshift-(46)]
+	_ = x[UserRoleRipgrep-(47)]
+	_ = x[UserRoleRofi-(48)]
+	_ = x[UserRoleRts-(49)]
+	_ = x[UserRoleShell-(50)]
+	_ = x[UserRoleSsh-(51)]
+	_ = x[UserRoleStarship-(52)]
+	_ = x[UserRoleSxhkd-(53)]
+	_ = x[UserRoleTerminal-(54)]
+	_ = x[UserRoleTheme-(55)]
+	_ = x[UserRoleTmux-(56)]
+	_ = x[UserRoleVscode-(57)]
+	_ = x[UserRoleWine-(58)]
+	_ = x[UserRoleWizTree-(59)]
+	_ = x[UserRoleXdg-(60)]
+	_ = x[UserRoleZoxide-(61)]
+	_ = x[UserRoleZsh-(62)]
 }
 
-var _UserRoleValues = []UserRole{UserRoleBootstrap, UserRoleAlacritty, UserRoleBash, UserRoleBat, UserRoleBin, UserRoleBrave, UserRoleBrowser, UserRoleBtop, UserRoleCMake, UserRoleCcache, UserRoleDevelopment, UserRoleDevelopmentCpp, UserRoleDevelopmentDhall, UserRoleDevelopmentElixir, UserRoleDevelopmentGleam, UserRoleDevelopmentGo, UserRoleDevelopmentHaskell, UserRoleDevelopmentJava, UserRoleDevelopmentKotlin, UserRoleDevelopmentLua, UserRoleDevelopmentNickel, UserRoleDevelopmentNix, UserRoleDevelopmentNodejs, UserRoleDevelopmentPurescript, UserRoleDevelopmentPython, UserRoleDevelopmentRust, UserRoleDevelopmentShell, UserRoleDevelopmentZig, UserRoleDocker, UserRoleEditor, UserRoleEza, UserRoleFastfetch, UserRoleFlameshot, UserRoleFonts, UserRoleFzf, UserRoleGdb, UserRoleGit, UserRoleHtop, UserRoleLldb, UserRoleNeovim, UserRoleNix, UserRoleOhMyPosh, UserRolePager, UserRoleRanger, UserRoleRedshift, UserRoleRipgrep, UserRoleRofi, UserRoleRts, UserRoleShell, UserRoleSsh, UserRoleStarship, UserRoleSxhkd, UserRoleTerminal, UserRoleTheme, UserRoleTmux, UserRoleVscode, UserRoleWine, UserRoleWizTree, UserRoleXdg, UserRoleZoxide, UserRoleZsh}
+var _UserRoleValues = []UserRole{UserRoleBootstrap, UserRoleAlacritty, UserRoleBash, UserRoleBat, UserRoleBin, UserRoleBottles, UserRoleBrave, UserRoleBrowser, UserRoleBtop, UserRoleCMake, UserRoleCcache, UserRoleDevelopment, UserRoleDevelopmentCpp, UserRoleDevelopmentDhall, UserRoleDevelopmentElixir, UserRoleDevelopmentGleam, UserRoleDevelopmentGo, UserRoleDevelopmentHaskell, UserRoleDevelopmentJava, UserRoleDevelopmentKotlin, UserRoleDevelopmentLua, UserRoleDevelopmentNickel, UserRoleDevelopmentNix, UserRoleDevelopmentNodejs, UserRoleDevelopmentPurescript, UserRoleDevelopmentPython, UserRoleDevelopmentRust, UserRoleDevelopmentShell, UserRoleDevelopmentZig, UserRoleDocker, UserRoleEditor, UserRoleEza, UserRoleFastfetch, UserRoleFlameshot, UserRoleFonts, UserRoleFzf, UserRoleGaming, UserRoleGdb, UserRoleGit, UserRoleHtop, UserRoleLldb, UserRoleNeovim, UserRoleNix, UserRoleOhMyPosh, UserRolePager, UserRoleRanger, UserRoleRedshift, UserRoleRipgrep, UserRoleRofi, UserRoleRts, UserRoleShell, UserRoleSsh, UserRoleStarship, UserRoleSxhkd, UserRoleTerminal, UserRoleTheme, UserRoleTmux, UserRoleVscode, UserRoleWine, UserRoleWizTree, UserRoleXdg, UserRoleZoxide, UserRoleZsh}
 
 var _UserRoleNameToValueMap = map[string]UserRole{
 	_UserRoleName[0:9]:          UserRoleBootstrap,
@@ -100,118 +102,122 @@ var _UserRoleNameToValueMap = map[string]UserRole{
 	_UserRoleLowerName[22:25]:   UserRoleBat,
 	_UserRoleName[25:28]:        UserRoleBin,
 	_UserRoleLowerName[25:28]:   UserRoleBin,
-	_UserRoleName[28:33]:        UserRoleBrave,
-	_UserRoleLowerName[28:33]:   UserRoleBrave,
-	_UserRoleName[33:40]:        UserRoleBrowser,
-	_UserRoleLowerName[33:40]:   UserRoleBrowser,
-	_UserRoleName[40:44]:        UserRoleBtop,
-	_UserRoleLowerName[40:44]:   UserRoleBtop,
-	_UserRoleName[44:49]:        UserRoleCMake,
-	_UserRoleLowerName[44:49]:   UserRoleCMake,
-	_UserRoleName[49:55]:        UserRoleCcache,
-	_UserRoleLowerName[49:55]:   UserRoleCcache,
-	_UserRoleName[55:66]:        UserRoleDevelopment,
-	_UserRoleLowerName[55:66]:   UserRoleDevelopment,
-	_UserRoleName[66:80]:        UserRoleDevelopmentCpp,
-	_UserRoleLowerName[66:80]:   UserRoleDevelopmentCpp,
-	_UserRoleName[80:96]:        UserRoleDevelopmentDhall,
-	_UserRoleLowerName[80:96]:   UserRoleDevelopmentDhall,
-	_UserRoleName[96:113]:       UserRoleDevelopmentElixir,
-	_UserRoleLowerName[96:113]:  UserRoleDevelopmentElixir,
-	_UserRoleName[113:129]:      UserRoleDevelopmentGleam,
-	_UserRoleLowerName[113:129]: UserRoleDevelopmentGleam,
-	_UserRoleName[129:142]:      UserRoleDevelopmentGo,
-	_UserRoleLowerName[129:142]: UserRoleDevelopmentGo,
-	_UserRoleName[142:160]:      UserRoleDevelopmentHaskell,
-	_UserRoleLowerName[142:160]: UserRoleDevelopmentHaskell,
-	_UserRoleName[160:175]:      UserRoleDevelopmentJava,
-	_UserRoleLowerName[160:175]: UserRoleDevelopmentJava,
-	_UserRoleName[175:192]:      UserRoleDevelopmentKotlin,
-	_UserRoleLowerName[175:192]: UserRoleDevelopmentKotlin,
-	_UserRoleName[192:206]:      UserRoleDevelopmentLua,
-	_UserRoleLowerName[192:206]: UserRoleDevelopmentLua,
-	_UserRoleName[206:223]:      UserRoleDevelopmentNickel,
-	_UserRoleLowerName[206:223]: UserRoleDevelopmentNickel,
-	_UserRoleName[223:237]:      UserRoleDevelopmentNix,
-	_UserRoleLowerName[223:237]: UserRoleDevelopmentNix,
-	_UserRoleName[237:254]:      UserRoleDevelopmentNodejs,
-	_UserRoleLowerName[237:254]: UserRoleDevelopmentNodejs,
-	_UserRoleName[254:275]:      UserRoleDevelopmentPurescript,
-	_UserRoleLowerName[254:275]: UserRoleDevelopmentPurescript,
-	_UserRoleName[275:292]:      UserRoleDevelopmentPython,
-	_UserRoleLowerName[275:292]: UserRoleDevelopmentPython,
-	_UserRoleName[292:307]:      UserRoleDevelopmentRust,
-	_UserRoleLowerName[292:307]: UserRoleDevelopmentRust,
-	_UserRoleName[307:323]:      UserRoleDevelopmentShell,
-	_UserRoleLowerName[307:323]: UserRoleDevelopmentShell,
-	_UserRoleName[323:337]:      UserRoleDevelopmentZig,
-	_UserRoleLowerName[323:337]: UserRoleDevelopmentZig,
-	_UserRoleName[337:343]:      UserRoleDocker,
-	_UserRoleLowerName[337:343]: UserRoleDocker,
-	_UserRoleName[343:349]:      UserRoleEditor,
-	_UserRoleLowerName[343:349]: UserRoleEditor,
-	_UserRoleName[349:352]:      UserRoleEza,
-	_UserRoleLowerName[349:352]: UserRoleEza,
-	_UserRoleName[352:361]:      UserRoleFastfetch,
-	_UserRoleLowerName[352:361]: UserRoleFastfetch,
-	_UserRoleName[361:370]:      UserRoleFlameshot,
-	_UserRoleLowerName[361:370]: UserRoleFlameshot,
-	_UserRoleName[370:375]:      UserRoleFonts,
-	_UserRoleLowerName[370:375]: UserRoleFonts,
-	_UserRoleName[375:378]:      UserRoleFzf,
-	_UserRoleLowerName[375:378]: UserRoleFzf,
-	_UserRoleName[378:381]:      UserRoleGdb,
-	_UserRoleLowerName[378:381]: UserRoleGdb,
-	_UserRoleName[381:384]:      UserRoleGit,
-	_UserRoleLowerName[381:384]: UserRoleGit,
-	_UserRoleName[384:388]:      UserRoleHtop,
-	_UserRoleLowerName[384:388]: UserRoleHtop,
-	_UserRoleName[388:392]:      UserRoleLldb,
-	_UserRoleLowerName[388:392]: UserRoleLldb,
-	_UserRoleName[392:398]:      UserRoleNeovim,
-	_UserRoleLowerName[392:398]: UserRoleNeovim,
-	_UserRoleName[398:401]:      UserRoleNix,
-	_UserRoleLowerName[398:401]: UserRoleNix,
-	_UserRoleName[401:409]:      UserRoleOhMyPosh,
-	_UserRoleLowerName[401:409]: UserRoleOhMyPosh,
-	_UserRoleName[409:414]:      UserRolePager,
-	_UserRoleLowerName[409:414]: UserRolePager,
-	_UserRoleName[414:420]:      UserRoleRanger,
-	_UserRoleLowerName[414:420]: UserRoleRanger,
-	_UserRoleName[420:428]:      UserRoleRedshift,
-	_UserRoleLowerName[420:428]: UserRoleRedshift,
-	_UserRoleName[428:435]:      UserRoleRipgrep,
-	_UserRoleLowerName[428:435]: UserRoleRipgrep,
-	_UserRoleName[435:439]:      UserRoleRofi,
-	_UserRoleLowerName[435:439]: UserRoleRofi,
-	_UserRoleName[439:442]:      UserRoleRts,
-	_UserRoleLowerName[439:442]: UserRoleRts,
-	_UserRoleName[442:447]:      UserRoleShell,
-	_UserRoleLowerName[442:447]: UserRoleShell,
-	_UserRoleName[447:450]:      UserRoleSsh,
-	_UserRoleLowerName[447:450]: UserRoleSsh,
-	_UserRoleName[450:458]:      UserRoleStarship,
-	_UserRoleLowerName[450:458]: UserRoleStarship,
-	_UserRoleName[458:463]:      UserRoleSxhkd,
-	_UserRoleLowerName[458:463]: UserRoleSxhkd,
-	_UserRoleName[463:471]:      UserRoleTerminal,
-	_UserRoleLowerName[463:471]: UserRoleTerminal,
-	_UserRoleName[471:476]:      UserRoleTheme,
-	_UserRoleLowerName[471:476]: UserRoleTheme,
-	_UserRoleName[476:480]:      UserRoleTmux,
-	_UserRoleLowerName[476:480]: UserRoleTmux,
-	_UserRoleName[480:486]:      UserRoleVscode,
-	_UserRoleLowerName[480:486]: UserRoleVscode,
-	_UserRoleName[486:490]:      UserRoleWine,
-	_UserRoleLowerName[486:490]: UserRoleWine,
-	_UserRoleName[490:497]:      UserRoleWizTree,
-	_UserRoleLowerName[490:497]: UserRoleWizTree,
-	_UserRoleName[497:500]:      UserRoleXdg,
-	_UserRoleLowerName[497:500]: UserRoleXdg,
-	_UserRoleName[500:506]:      UserRoleZoxide,
-	_UserRoleLowerName[500:506]: UserRoleZoxide,
-	_UserRoleName[506:509]:      UserRoleZsh,
-	_UserRoleLowerName[506:509]: UserRoleZsh,
+	_UserRoleName[28:35]:        UserRoleBottles,
+	_UserRoleLowerName[28:35]:   UserRoleBottles,
+	_UserRoleName[35:40]:        UserRoleBrave,
+	_UserRoleLowerName[35:40]:   UserRoleBrave,
+	_UserRoleName[40:47]:        UserRoleBrowser,
+	_UserRoleLowerName[40:47]:   UserRoleBrowser,
+	_UserRoleName[47:51]:        UserRoleBtop,
+	_UserRoleLowerName[47:51]:   UserRoleBtop,
+	_UserRoleName[51:56]:        UserRoleCMake,
+	_UserRoleLowerName[51:56]:   UserRoleCMake,
+	_UserRoleName[56:62]:        UserRoleCcache,
+	_UserRoleLowerName[56:62]:   UserRoleCcache,
+	_UserRoleName[62:73]:        UserRoleDevelopment,
+	_UserRoleLowerName[62:73]:   UserRoleDevelopment,
+	_UserRoleName[73:87]:        UserRoleDevelopmentCpp,
+	_UserRoleLowerName[73:87]:   UserRoleDevelopmentCpp,
+	_UserRoleName[87:103]:       UserRoleDevelopmentDhall,
+	_UserRoleLowerName[87:103]:  UserRoleDevelopmentDhall,
+	_UserRoleName[103:120]:      UserRoleDevelopmentElixir,
+	_UserRoleLowerName[103:120]: UserRoleDevelopmentElixir,
+	_UserRoleName[120:136]:      UserRoleDevelopmentGleam,
+	_UserRoleLowerName[120:136]: UserRoleDevelopmentGleam,
+	_UserRoleName[136:149]:      UserRoleDevelopmentGo,
+	_UserRoleLowerName[136:149]: UserRoleDevelopmentGo,
+	_UserRoleName[149:167]:      UserRoleDevelopmentHaskell,
+	_UserRoleLowerName[149:167]: UserRoleDevelopmentHaskell,
+	_UserRoleName[167:182]:      UserRoleDevelopmentJava,
+	_UserRoleLowerName[167:182]: UserRoleDevelopmentJava,
+	_UserRoleName[182:199]:      UserRoleDevelopmentKotlin,
+	_UserRoleLowerName[182:199]: UserRoleDevelopmentKotlin,
+	_UserRoleName[199:213]:      UserRoleDevelopmentLua,
+	_UserRoleLowerName[199:213]: UserRoleDevelopmentLua,
+	_UserRoleName[213:230]:      UserRoleDevelopmentNickel,
+	_UserRoleLowerName[213:230]: UserRoleDevelopmentNickel,
+	_UserRoleName[230:244]:      UserRoleDevelopmentNix,
+	_UserRoleLowerName[230:244]: UserRoleDevelopmentNix,
+	_UserRoleName[244:261]:      UserRoleDevelopmentNodejs,
+	_UserRoleLowerName[244:261]: UserRoleDevelopmentNodejs,
+	_UserRoleName[261:282]:      UserRoleDevelopmentPurescript,
+	_UserRoleLowerName[261:282]: UserRoleDevelopmentPurescript,
+	_UserRoleName[282:299]:      UserRoleDevelopmentPython,
+	_UserRoleLowerName[282:299]: UserRoleDevelopmentPython,
+	_UserRoleName[299:314]:      UserRoleDevelopmentRust,
+	_UserRoleLowerName[299:314]: UserRoleDevelopmentRust,
+	_UserRoleName[314:330]:      UserRoleDevelopmentShell,
+	_UserRoleLowerName[314:330]: UserRoleDevelopmentShell,
+	_UserRoleName[330:344]:      UserRoleDevelopmentZig,
+	_UserRoleLowerName[330:344]: UserRoleDevelopmentZig,
+	_UserRoleName[344:350]:      UserRoleDocker,
+	_UserRoleLowerName[344:350]: UserRoleDocker,
+	_UserRoleName[350:356]:      UserRoleEditor,
+	_UserRoleLowerName[350:356]: UserRoleEditor,
+	_UserRoleName[356:359]:      UserRoleEza,
+	_UserRoleLowerName[356:359]: UserRoleEza,
+	_UserRoleName[359:368]:      UserRoleFastfetch,
+	_UserRoleLowerName[359:368]: UserRoleFastfetch,
+	_UserRoleName[368:377]:      UserRoleFlameshot,
+	_UserRoleLowerName[368:377]: UserRoleFlameshot,
+	_UserRoleName[377:382]:      UserRoleFonts,
+	_UserRoleLowerName[377:382]: UserRoleFonts,
+	_UserRoleName[382:385]:      UserRoleFzf,
+	_UserRoleLowerName[382:385]: UserRoleFzf,
+	_UserRoleName[385:391]:      UserRoleGaming,
+	_UserRoleLowerName[385:391]: UserRoleGaming,
+	_UserRoleName[391:394]:      UserRoleGdb,
+	_UserRoleLowerName[391:394]: UserRoleGdb,
+	_UserRoleName[394:397]:      UserRoleGit,
+	_UserRoleLowerName[394:397]: UserRoleGit,
+	_UserRoleName[397:401]:      UserRoleHtop,
+	_UserRoleLowerName[397:401]: UserRoleHtop,
+	_UserRoleName[401:405]:      UserRoleLldb,
+	_UserRoleLowerName[401:405]: UserRoleLldb,
+	_UserRoleName[405:411]:      UserRoleNeovim,
+	_UserRoleLowerName[405:411]: UserRoleNeovim,
+	_UserRoleName[411:414]:      UserRoleNix,
+	_UserRoleLowerName[411:414]: UserRoleNix,
+	_UserRoleName[414:422]:      UserRoleOhMyPosh,
+	_UserRoleLowerName[414:422]: UserRoleOhMyPosh,
+	_UserRoleName[422:427]:      UserRolePager,
+	_UserRoleLowerName[422:427]: UserRolePager,
+	_UserRoleName[427:433]:      UserRoleRanger,
+	_UserRoleLowerName[427:433]: UserRoleRanger,
+	_UserRoleName[433:441]:      UserRoleRedshift,
+	_UserRoleLowerName[433:441]: UserRoleRedshift,
+	_UserRoleName[441:448]:      UserRoleRipgrep,
+	_UserRoleLowerName[441:448]: UserRoleRipgrep,
+	_UserRoleName[448:452]:      UserRoleRofi,
+	_UserRoleLowerName[448:452]: UserRoleRofi,
+	_UserRoleName[452:455]:      UserRoleRts,
+	_UserRoleLowerName[452:455]: UserRoleRts,
+	_UserRoleName[455:460]:      UserRoleShell,
+	_UserRoleLowerName[455:460]: UserRoleShell,
+	_UserRoleName[460:463]:      UserRoleSsh,
+	_UserRoleLowerName[460:463]: UserRoleSsh,
+	_UserRoleName[463:471]:      UserRoleStarship,
+	_UserRoleLowerName[463:471]: UserRoleStarship,
+	_UserRoleName[471:476]:      UserRoleSxhkd,
+	_UserRoleLowerName[471:476]: UserRoleSxhkd,
+	_UserRoleName[476:484]:      UserRoleTerminal,
+	_UserRoleLowerName[476:484]: UserRoleTerminal,
+	_UserRoleName[484:489]:      UserRoleTheme,
+	_UserRoleLowerName[484:489]: UserRoleTheme,
+	_UserRoleName[489:493]:      UserRoleTmux,
+	_UserRoleLowerName[489:493]: UserRoleTmux,
+	_UserRoleName[493:499]:      UserRoleVscode,
+	_UserRoleLowerName[493:499]: UserRoleVscode,
+	_UserRoleName[499:503]:      UserRoleWine,
+	_UserRoleLowerName[499:503]: UserRoleWine,
+	_UserRoleName[503:510]:      UserRoleWizTree,
+	_UserRoleLowerName[503:510]: UserRoleWizTree,
+	_UserRoleName[510:513]:      UserRoleXdg,
+	_UserRoleLowerName[510:513]: UserRoleXdg,
+	_UserRoleName[513:519]:      UserRoleZoxide,
+	_UserRoleLowerName[513:519]: UserRoleZoxide,
+	_UserRoleName[519:522]:      UserRoleZsh,
+	_UserRoleLowerName[519:522]: UserRoleZsh,
 }
 
 var _UserRoleNames = []string{
@@ -220,62 +226,64 @@ var _UserRoleNames = []string{
 	_UserRoleName[18:22],
 	_UserRoleName[22:25],
 	_UserRoleName[25:28],
-	_UserRoleName[28:33],
-	_UserRoleName[33:40],
-	_UserRoleName[40:44],
-	_UserRoleName[44:49],
-	_UserRoleName[49:55],
-	_UserRoleName[55:66],
-	_UserRoleName[66:80],
-	_UserRoleName[80:96],
-	_UserRoleName[96:113],
-	_UserRoleName[113:129],
-	_UserRoleName[129:142],
-	_UserRoleName[142:160],
-	_UserRoleName[160:175],
-	_UserRoleName[175:192],
-	_UserRoleName[192:206],
-	_UserRoleName[206:223],
-	_UserRoleName[223:237],
-	_UserRoleName[237:254],
-	_UserRoleName[254:275],
-	_UserRoleName[275:292],
-	_UserRoleName[292:307],
-	_UserRoleName[307:323],
-	_UserRoleName[323:337],
-	_UserRoleName[337:343],
-	_UserRoleName[343:349],
-	_UserRoleName[349:352],
-	_UserRoleName[352:361],
-	_UserRoleName[361:370],
-	_UserRoleName[370:375],
-	_UserRoleName[375:378],
-	_UserRoleName[378:381],
-	_UserRoleName[381:384],
-	_UserRoleName[384:388],
-	_UserRoleName[388:392],
-	_UserRoleName[392:398],
-	_UserRoleName[398:401],
-	_UserRoleName[401:409],
-	_UserRoleName[409:414],
-	_UserRoleName[414:420],
-	_UserRoleName[420:428],
-	_UserRoleName[428:435],
-	_UserRoleName[435:439],
-	_UserRoleName[439:442],
-	_UserRoleName[442:447],
-	_UserRoleName[447:450],
-	_UserRoleName[450:458],
-	_UserRoleName[458:463],
+	_UserRoleName[28:35],
+	_UserRoleName[35:40],
+	_UserRoleName[40:47],
+	_UserRoleName[47:51],
+	_UserRoleName[51:56],
+	_UserRoleName[56:62],
+	_UserRoleName[62:73],
+	_UserRoleName[73:87],
+	_UserRoleName[87:103],
+	_UserRoleName[103:120],
+	_UserRoleName[120:136],
+	_UserRoleName[136:149],
+	_UserRoleName[149:167],
+	_UserRoleName[167:182],
+	_UserRoleName[182:199],
+	_UserRoleName[199:213],
+	_UserRoleName[213:230],
+	_UserRoleName[230:244],
+	_UserRoleName[244:261],
+	_UserRoleName[261:282],
+	_UserRoleName[282:299],
+	_UserRoleName[299:314],
+	_UserRoleName[314:330],
+	_UserRoleName[330:344],
+	_UserRoleName[344:350],
+	_UserRoleName[350:356],
+	_UserRoleName[356:359],
+	_UserRoleName[359:368],
+	_UserRoleName[368:377],
+	_UserRoleName[377:382],
+	_UserRoleName[382:385],
+	_UserRoleName[385:391],
+	_UserRoleName[391:394],
+	_UserRoleName[394:397],
+	_UserRoleName[397:401],
+	_UserRoleName[401:405],
+	_UserRoleName[405:411],
+	_UserRoleName[411:414],
+	_UserRoleName[414:422],
+	_UserRoleName[422:427],
+	_UserRoleName[427:433],
+	_UserRoleName[433:441],
+	_UserRoleName[441:448],
+	_UserRoleName[448:452],
+	_UserRoleName[452:455],
+	_UserRoleName[455:460],
+	_UserRoleName[460:463],
 	_UserRoleName[463:471],
 	_UserRoleName[471:476],
-	_UserRoleName[476:480],
-	_UserRoleName[480:486],
-	_UserRoleName[486:490],
-	_UserRoleName[490:497],
-	_UserRoleName[497:500],
-	_UserRoleName[500:506],
-	_UserRoleName[506:509],
+	_UserRoleName[476:484],
+	_UserRoleName[484:489],
+	_UserRoleName[489:493],
+	_UserRoleName[493:499],
+	_UserRoleName[499:503],
+	_UserRoleName[503:510],
+	_UserRoleName[510:513],
+	_UserRoleName[513:519],
+	_UserRoleName[519:522],
 }
 
 // UserRoleString retrieves an enum value from the enum constants string name.
