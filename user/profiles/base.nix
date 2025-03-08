@@ -64,6 +64,7 @@
     unzip
     wget
     xan
+    xar
     xxd
     zstd
   ];

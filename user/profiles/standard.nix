@@ -35,7 +35,7 @@
     udisks
     ventoy-bin
     wireguard-tools
-    wtf
+    wtfutil
     yt-dlp
     zlib
   ];

@@ -47,11 +47,11 @@ in
         irongeek.vscode-env
         justusadam.language-haskell
         ms-azuretools.vscode-docker
-        ms-python.black-formatter
-        ms-python.debugpy
-        ms-python.isort
-        ms-python.python
-        ms-python.vscode-pylance
+        # ms-python.black-formatter
+        # ms-python.debugpy
+        # ms-python.isort
+        # ms-python.python
+        # ms-python.vscode-pylance
         ms-toolsai.jupyter
         ms-toolsai.jupyter-keymap
         ms-toolsai.jupyter-renderers
