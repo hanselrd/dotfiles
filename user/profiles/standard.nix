@@ -33,7 +33,7 @@
     tlp
     tokei
     udisks
-    ventoy-bin
+    ventoy
     wireguard-tools
     wtfutil
     yt-dlp
