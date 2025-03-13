@@ -5,32 +5,32 @@ import "slices"
 
 var (
 	NixOSBase       = NewProfileGroup(SystemProfileNixOS, UserProfileBase)
-	NixOSStandard   = NewProfileGroup(SystemProfileNixOS, UserProfileStandard)
 	NixOSMinimal    = NewProfileGroup(SystemProfileNixOS, UserProfileMinimal)
+	NixOSStandard   = NewProfileGroup(SystemProfileNixOS, UserProfileStandard)
 	NixOSFull       = NewProfileGroup(SystemProfileNixOS, UserProfileFull)
 	GarudaBase      = NewProfileGroup(SystemProfileGaruda, UserProfileBase)
-	GarudaStandard  = NewProfileGroup(SystemProfileGaruda, UserProfileStandard)
 	GarudaMinimal   = NewProfileGroup(SystemProfileGaruda, UserProfileMinimal)
+	GarudaStandard  = NewProfileGroup(SystemProfileGaruda, UserProfileStandard)
 	GarudaFull      = NewProfileGroup(SystemProfileGaruda, UserProfileFull)
 	WslBase         = NewProfileGroup(SystemProfileWsl, UserProfileBase)
-	WslStandard     = NewProfileGroup(SystemProfileWsl, UserProfileStandard)
 	WslMinimal      = NewProfileGroup(SystemProfileWsl, UserProfileMinimal)
+	WslStandard     = NewProfileGroup(SystemProfileWsl, UserProfileStandard)
 	WslFull         = NewProfileGroup(SystemProfileWsl, UserProfileFull)
 	DarwinBase      = NewProfileGroup(SystemProfileDarwin, UserProfileBase)
-	DarwinStandard  = NewProfileGroup(SystemProfileDarwin, UserProfileStandard)
 	DarwinMinimal   = NewProfileGroup(SystemProfileDarwin, UserProfileMinimal)
+	DarwinStandard  = NewProfileGroup(SystemProfileDarwin, UserProfileStandard)
 	DarwinFull      = NewProfileGroup(SystemProfileDarwin, UserProfileFull)
 	GenericBase     = NewProfileGroup(SystemProfileGeneric, UserProfileBase)
-	GenericStandard = NewProfileGroup(SystemProfileGeneric, UserProfileStandard)
 	GenericMinimal  = NewProfileGroup(SystemProfileGeneric, UserProfileMinimal)
+	GenericStandard = NewProfileGroup(SystemProfileGeneric, UserProfileStandard)
 	GenericFull     = NewProfileGroup(SystemProfileGeneric, UserProfileFull)
 )
 
 var (
-	NixOSProfiles       = []ProfileGroup{NixOSBase, NixOSStandard, NixOSMinimal, NixOSFull}
-	GarudaProfiles      = []ProfileGroup{GarudaBase, GarudaStandard, GarudaMinimal, GarudaFull}
-	WslProfiles         = []ProfileGroup{WslBase, WslStandard, WslMinimal, WslFull}
-	DarwinProfiles      = []ProfileGroup{DarwinBase, DarwinStandard, DarwinMinimal, DarwinFull}
-	GenericProfiles     = []ProfileGroup{GenericBase, GenericStandard, GenericMinimal, GenericFull}
+	NixOSProfiles       = []ProfileGroup{NixOSBase, NixOSMinimal, NixOSStandard, NixOSFull}
+	GarudaProfiles      = []ProfileGroup{GarudaBase, GarudaMinimal, GarudaStandard, GarudaFull}
+	WslProfiles         = []ProfileGroup{WslBase, WslMinimal, WslStandard, WslFull}
+	DarwinProfiles      = []ProfileGroup{DarwinBase, DarwinMinimal, DarwinStandard, DarwinFull}
+	GenericProfiles     = []ProfileGroup{GenericBase, GenericMinimal, GenericStandard, GenericFull}
 	HomeManagerProfiles = slices.Concat(NixOSProfiles, GarudaProfiles, WslProfiles, DarwinProfiles, GenericProfiles)
 )

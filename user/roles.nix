@@ -48,6 +48,7 @@
     ./roles/git.nix
     ./roles/htop.nix
     ./roles/lldb.nix
+    ./roles/misc.nix
     ./roles/neovim.nix
     ./roles/nix.nix
     ./roles/oh-my-posh.nix

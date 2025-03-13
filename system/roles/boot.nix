@@ -15,12 +15,17 @@ in
   };
 
   config = lib.mkIf cfg.enable (
-    lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-      boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    lib.recursiveUpdate
+      {
+        roles.system.grub.enable = true;
+        # roles.system.systemd-boot.enable = true;
+      }
+      (
+        lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
+          boot.loader.efi.canTouchEfiVariables = true;
 
-      boot.tmp.cleanOnBoot = true;
-    }
+          boot.tmp.cleanOnBoot = true;
+        }
+      )
   );
 }

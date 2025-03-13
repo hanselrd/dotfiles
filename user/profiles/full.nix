@@ -20,15 +20,4 @@
   roles.user.vscode.enable = true;
   roles.user.wine.enable = true;
   roles.user.wiztree.enable = true;
-
-  home.packages = with pkgs; [
-    # renderdoc
-    arandr
-    dbeaver-bin
-    libreoffice-fresh
-    mesa
-    mesa-demos
-    vulkan-tools
-    zoom-us
-  ];
 }

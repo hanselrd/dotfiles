@@ -15,6 +15,7 @@
     ./roles/fuse.nix
     ./roles/garuda.nix
     ./roles/glazewm.nix
+    ./roles/grub.nix
     ./roles/home-manager.nix
     ./roles/hyprland.nix
     ./roles/i18n.nix
@@ -25,8 +26,10 @@
     ./roles/networking.nix
     ./roles/nix.nix
     ./roles/openssh.nix
+    ./roles/qemuguest.nix
     ./roles/shell.nix
     ./roles/sudo.nix
+    ./roles/systemd-boot.nix
     ./roles/time.nix
     ./roles/udisks2.nix
     ./roles/user.nix

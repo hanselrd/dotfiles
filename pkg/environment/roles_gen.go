@@ -14,6 +14,7 @@ type environmentRolesSystem struct {
 	Fuse        *environmentRolesSystemFuse        `json:"fuse,omitempty"`
 	Garuda      *environmentRolesSystemGaruda      `json:"garuda,omitempty"`
 	GlazeWM     *environmentRolesSystemGlazeWM     `json:"glazewm,omitempty"`
+	Grub        *environmentRolesSystemGrub        `json:"grub,omitempty"`
 	HomeManager *environmentRolesSystemHomeManager `json:"home-manager,omitempty"`
 	Hyprland    *environmentRolesSystemHyprland    `json:"hyprland,omitempty"`
 	I18N        *environmentRolesSystemI18N        `json:"i18n,omitempty"`
@@ -24,8 +25,10 @@ type environmentRolesSystem struct {
 	Networking  *environmentRolesSystemNetworking  `json:"networking,omitempty"`
 	Nix         *environmentRolesSystemNix         `json:"nix,omitempty"`
 	OpenSsh     *environmentRolesSystemOpenSsh     `json:"openssh,omitempty"`
+	QemuGuest   *environmentRolesSystemQemuGuest   `json:"qemuguest,omitempty"`
 	Shell       *environmentRolesSystemShell       `json:"shell,omitempty"`
 	Sudo        *environmentRolesSystemSudo        `json:"sudo,omitempty"`
+	SystemdBoot *environmentRolesSystemSystemdBoot `json:"systemd-boot,omitempty"`
 	Time        *environmentRolesSystemTime        `json:"time,omitempty"`
 	Udisks2     *environmentRolesSystemUdisks2     `json:"udisks2,omitempty"`
 	User        *environmentRolesSystemUser        `json:"user,omitempty"`
@@ -77,6 +80,7 @@ type environmentRolesUser struct {
 	Git                   *environmentRolesUserGit                   `json:"git,omitempty"`
 	Htop                  *environmentRolesUserHtop                  `json:"htop,omitempty"`
 	Lldb                  *environmentRolesUserLldb                  `json:"lldb,omitempty"`
+	Misc                  *environmentRolesUserMisc                  `json:"misc,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`
 	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`

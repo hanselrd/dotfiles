@@ -56,6 +56,7 @@ const (
 	UserRoleGit
 	UserRoleHtop
 	UserRoleLldb
+	UserRoleMisc
 	UserRoleNeovim
 	UserRoleNix
 	UserRoleOhMyPosh

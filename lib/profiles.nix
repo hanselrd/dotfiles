@@ -11,7 +11,7 @@
   isSystemDarwin = profile.system == "darwin";
   isSystemGeneric = profile.system == "generic";
   isUserBase = profile.user == "base";
-  isUserStandard = profile.user == "standard";
   isUserMinimal = profile.user == "minimal";
+  isUserStandard = profile.user == "standard";
   isUserFull = profile.user == "full";
 }

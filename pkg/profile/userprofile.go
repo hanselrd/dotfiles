@@ -13,8 +13,8 @@ type UserProfile uint
 
 const (
 	UserProfileBase UserProfile = iota
-	UserProfileStandard
 	UserProfileMinimal
+	UserProfileStandard
 	UserProfileFull
 )
 

@@ -116,8 +116,14 @@ var Environment = environment{
 	Theme: theme.Chalk,
 	Roles: environmentRoles{
 		System: &environmentRolesSystem{
+			Grub: &environmentRolesSystemGrub{
+				Device: "/dev/sda",
+			},
 			Networking: &environmentRolesSystemNetworking{
 				HostName: "nohost0",
+			},
+			SystemdBoot: &environmentRolesSystemSystemdBoot{
+				Xbootldr: false,
 			},
 		},
 		User: &environmentRolesUser{

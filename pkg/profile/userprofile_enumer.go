@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-const _UserProfileName = "BaseStandardMinimalFull"
+const _UserProfileName = "BaseMinimalStandardFull"
 
-var _UserProfileIndex = [...]uint8{0, 4, 12, 19, 23}
+var _UserProfileIndex = [...]uint8{0, 4, 11, 19, 23}
 
-const _UserProfileLowerName = "basestandardminimalfull"
+const _UserProfileLowerName = "baseminimalstandardfull"
 
 func (i UserProfile) String() string {
 	if i >= UserProfile(len(_UserProfileIndex)-1) {
@@ -25,28 +25,28 @@ func (i UserProfile) String() string {
 func _UserProfileNoOp() {
 	var x [1]struct{}
 	_ = x[UserProfileBase-(0)]
-	_ = x[UserProfileStandard-(1)]
-	_ = x[UserProfileMinimal-(2)]
+	_ = x[UserProfileMinimal-(1)]
+	_ = x[UserProfileStandard-(2)]
 	_ = x[UserProfileFull-(3)]
 }
 
-var _UserProfileValues = []UserProfile{UserProfileBase, UserProfileStandard, UserProfileMinimal, UserProfileFull}
+var _UserProfileValues = []UserProfile{UserProfileBase, UserProfileMinimal, UserProfileStandard, UserProfileFull}
 
 var _UserProfileNameToValueMap = map[string]UserProfile{
 	_UserProfileName[0:4]:        UserProfileBase,
 	_UserProfileLowerName[0:4]:   UserProfileBase,
-	_UserProfileName[4:12]:       UserProfileStandard,
-	_UserProfileLowerName[4:12]:  UserProfileStandard,
-	_UserProfileName[12:19]:      UserProfileMinimal,
-	_UserProfileLowerName[12:19]: UserProfileMinimal,
+	_UserProfileName[4:11]:       UserProfileMinimal,
+	_UserProfileLowerName[4:11]:  UserProfileMinimal,
+	_UserProfileName[11:19]:      UserProfileStandard,
+	_UserProfileLowerName[11:19]: UserProfileStandard,
 	_UserProfileName[19:23]:      UserProfileFull,
 	_UserProfileLowerName[19:23]: UserProfileFull,
 }
 
 var _UserProfileNames = []string{
 	_UserProfileName[0:4],
-	_UserProfileName[4:12],
-	_UserProfileName[12:19],
+	_UserProfileName[4:11],
+	_UserProfileName[11:19],
 	_UserProfileName[19:23],
 }
 

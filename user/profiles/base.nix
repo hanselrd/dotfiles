@@ -5,7 +5,7 @@
   env,
   ...
 }:
-(lib.recursiveUpdate
+lib.recursiveUpdate
   {
     roles.user.bootstrap.enable = true;
     roles.user.bat.enable = true;
@@ -17,6 +17,7 @@
     roles.user.fzf.enable = true;
     roles.user.git.enable = true;
     roles.user.htop.enable = true;
+    roles.user.misc.enable = true;
     roles.user.nix.enable = true;
     roles.user.pager.enable = true;
     roles.user.ripgrep.enable = true;
@@ -32,40 +33,3 @@
       # roles.user.rts.enable = true;
     }
   )
-)
-// {
-  home.packages = with pkgs; [
-    age
-    coreutils
-    cpio
-    curl
-    diffutils
-    dmidecode
-    file
-    findutils
-    gawk
-    gnugrep
-    gnused
-    gnutar
-    gzip
-    hexxy
-    killall
-    lm_sensors
-    lsb-release
-    miller
-    pfetch
-    pqrs
-    procps
-    rsync
-    ssh-to-age
-    strace
-    sysstat
-    tree
-    unzip
-    wget
-    xan
-    xar
-    xxd
-    zstd
-  ];
-}

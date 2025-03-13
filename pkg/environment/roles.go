@@ -3,14 +3,17 @@ package environment
 //go:generate go run roles_codegen.go
 
 type (
-	environmentRolesSystemBootstrap   struct{}
-	environmentRolesSystemBoot        struct{}
-	environmentRolesSystemChocolatey  struct{}
-	environmentRolesSystemCockpit     struct{}
-	environmentRolesSystemDocker      struct{}
-	environmentRolesSystemFuse        struct{}
-	environmentRolesSystemGaruda      struct{}
-	environmentRolesSystemGlazeWM     struct{}
+	environmentRolesSystemBootstrap  struct{}
+	environmentRolesSystemBoot       struct{}
+	environmentRolesSystemChocolatey struct{}
+	environmentRolesSystemCockpit    struct{}
+	environmentRolesSystemDocker     struct{}
+	environmentRolesSystemFuse       struct{}
+	environmentRolesSystemGaruda     struct{}
+	environmentRolesSystemGlazeWM    struct{}
+	environmentRolesSystemGrub       struct {
+		Device string `json:"device"`
+	}
 	environmentRolesSystemHomeManager struct{}
 	environmentRolesSystemHyprland    struct{}
 	environmentRolesSystemI18N        struct{}
@@ -21,10 +24,14 @@ type (
 	environmentRolesSystemNetworking  struct {
 		HostName string `json:"hostName"`
 	}
-	environmentRolesSystemNix     struct{}
-	environmentRolesSystemOpenSsh struct{}
-	environmentRolesSystemShell   struct{}
-	environmentRolesSystemSudo    struct{}
+	environmentRolesSystemNix         struct{}
+	environmentRolesSystemOpenSsh     struct{}
+	environmentRolesSystemQemuGuest   struct{}
+	environmentRolesSystemShell       struct{}
+	environmentRolesSystemSudo        struct{}
+	environmentRolesSystemSystemdBoot struct {
+		Xbootldr bool `json:"xbootldr"`
+	}
 	environmentRolesSystemTime    struct{}
 	environmentRolesSystemUdisks2 struct{}
 	environmentRolesSystemUser    struct{}
@@ -77,6 +84,7 @@ type (
 	environmentRolesUserGit                   struct{}
 	environmentRolesUserHtop                  struct{}
 	environmentRolesUserLldb                  struct{}
+	environmentRolesUserMisc                  struct{}
 	environmentRolesUserNeovim                struct{}
 	environmentRolesUserNix                   struct {
 		Sandbox bool `json:"sandbox"`

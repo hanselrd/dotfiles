@@ -23,6 +23,7 @@ const (
 	SystemRoleFuse
 	SystemRoleGaruda
 	SystemRoleGlazeWM
+	SystemRoleGrub
 	SystemRoleHomeManager
 	SystemRoleHyprland
 	SystemRoleI18N
@@ -33,8 +34,10 @@ const (
 	SystemRoleNetworking
 	SystemRoleNix
 	SystemRoleOpenSsh
+	SystemRoleQemuGuest
 	SystemRoleShell
 	SystemRoleSudo
+	SystemRoleSystemdBoot
 	SystemRoleTime
 	SystemRoleUdisks2
 	SystemRoleUser
@@ -47,7 +50,7 @@ const (
 
 func (r SystemRole) NixString() string {
 	switch r {
-	case SystemRoleHomeManager:
+	case SystemRoleHomeManager, SystemRoleSystemdBoot:
 		return strings.ToLower(strings.Join(lo.Words(r.String()), "-"))
 	}
 	return strings.ToLower(r.String())
