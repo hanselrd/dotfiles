@@ -12,12 +12,8 @@ type Profile interface {
 	PrivilegeLevel() privilegelevel.PrivilegeLevel
 }
 
+//go:generate go run ../../internal/codegen/privilegelevelfuncmap.go Profile
+
 func NewProfile(pl privilegelevel.PrivilegeLevel, name string) (Profile, error) {
-	switch pl {
-	case privilegelevel.PrivilegeLevelSystem:
-		return SystemProfileString(name)
-	case privilegelevel.PrivilegeLevelUser:
-		return UserProfileString(name)
-	}
-	return nil, fmt.Errorf("could not create %s %s profile", name, pl)
+	return ProfilePrivilegeLevelFuncMap.String(pl, name)
 }

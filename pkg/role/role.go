@@ -15,12 +15,8 @@ type Role interface {
 	Encryption() encryption.Encryption
 }
 
+//go:generate go run ../../internal/codegen/privilegelevelfuncmap.go Role
+
 func NewRole(pl privilegelevel.PrivilegeLevel, name string) (Role, error) {
-	switch pl {
-	case privilegelevel.PrivilegeLevelSystem:
-		return SystemRoleString(name)
-	case privilegelevel.PrivilegeLevelUser:
-		return UserRoleString(name)
-	}
-	return nil, fmt.Errorf("could not create %s %s role", name, pl)
+	return RolePrivilegeLevelFuncMap.String(pl, name)
 }

@@ -111,7 +111,7 @@ in
               owner = "soyuka";
               repo = pluginName;
               rev = version;
-              hash = "sha256-APbopONO1sfHNAXizY6O8D6vn4CTz0LFzgXkbIQBXN0=";
+              hash = "sha256-K44WJxW+3lkCGp03grIJkbtRCOQTCqo0Dk5x/fg43kc=";
             };
           };
         }
