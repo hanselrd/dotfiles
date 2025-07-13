@@ -45,7 +45,7 @@ in
       #     file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       #   }
       # ];
-      initExtra = ''
+      initContent = ''
         ${
           if env.roles.user.shell.theme then
             ''

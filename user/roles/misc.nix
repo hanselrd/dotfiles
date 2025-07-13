@@ -70,6 +70,7 @@ in
           ]
         )
         (lib.optionals (lib.profiles.isUserStandard || lib.profiles.isUserFull) [
+          # ventoy
           android-tools
           ansible
           atool
@@ -89,7 +90,6 @@ in
           tlp
           tokei
           udisks
-          ventoy
           wireguard-tools
           wtfutil
           yt-dlp

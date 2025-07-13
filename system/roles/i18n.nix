@@ -16,7 +16,7 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
-      i18n.defaultLocale = "en_US.utf8";
+      i18n.defaultLocale = "en_US.UTF-8";
 
       i18n.extraLocaleSettings = {
         LC_ADDRESS = "en_US.UTF-8";
