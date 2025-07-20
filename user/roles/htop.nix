@@ -22,19 +22,18 @@ let
   };
 
   formatScreen = name: fields: {
-    "screen:${name}" =
-      [
-        "PGRP"
-        "PID"
-        "USER"
-        "PROCESSOR"
-        "PRIORITY"
-        "NICE"
-        "STATE"
-        "NLWP"
-      ]
-      ++ fields
-      ++ [ "Command" ];
+    "screen:${name}" = [
+      "PGRP"
+      "PID"
+      "USER"
+      "PROCESSOR"
+      "PRIORITY"
+      "NICE"
+      "STATE"
+      "NLWP"
+    ]
+    ++ fields
+    ++ [ "Command" ];
   };
 
   formatScreenSettings = sortKey: {

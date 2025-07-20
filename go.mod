@@ -45,7 +45,7 @@ require (
 	github.com/samber/slog-common v0.19.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/spf13/cast v1.9.2 // indirect
-	github.com/spf13/pflag v1.0.6 // indirect
+	github.com/spf13/pflag v1.0.7 // indirect
 	github.com/tetratelabs/wazero v1.9.0 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	golang.org/x/crypto v0.40.0 // indirect
