@@ -136,7 +136,7 @@ in
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-foqXAGOewlFkfQnwYnSSNkaLssMzAlU35FivUHiUins=";
+      vendorHash = "sha256-M2FgMcA2q/3U+f0son4nT7MBtCp+0edwSNXD7JnbRo8=";
       subPackages = [
         "cmd/${name}"
       ];
