@@ -18,9 +18,9 @@ in
   config = lib.mkIf cfg.enable {
     programs.ssh = {
       enable = true;
-      compression = true;
       matchBlocks = {
         "10.*.*.* 192.168.*.*" = {
+          compression = true;
           extraOptions = {
             StrictHostKeyChecking = "no";
             UserKnownHostsFile = "/dev/null";

@@ -113,6 +113,9 @@ in
               rev = version;
               hash = "sha256-TV98VVVfhmnsbIAzxSPBN+NpIR+c3jxCd1hV2i0Fv50=";
             };
+            patches = [
+              ./tmux/tmux-current-pane-hostname.patch
+            ];
           };
         }
         {

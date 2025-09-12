@@ -1,0 +1,13 @@
+diff --git a/scripts/shared.sh b/scripts/shared.sh
+index ff9a849..2e74e2a 100644
+--- a/scripts/shared.sh
++++ b/scripts/shared.sh
+@@ -25,7 +25,7 @@ get_info() {
+ 			echo "$host"
+ 			;;
+ 		"host_short")
+-			[[ -z "$host" ]] && __get_hostname_short || echo "$host"
++			__get_hostname_short || echo "$host"
+ 			;;
+ 		"port")
+ 			echo "$port"
