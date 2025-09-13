@@ -1,7 +1,7 @@
 vim.g.mapleader = "\\"
 
 -- Undo files
-vim.opt.undodir = vim.fn.expand("~/.cache/nvim/undo")
+vim.opt.undodir = vim.fn.expand(_nixgetenv("user.homeDirectory") .. "/.cache/nvim/undo")
 vim.opt.undofile = true
 
 -- Indentation

@@ -40,7 +40,7 @@ func Shell(command string, opts ...ShellOpt) (res ShellResult, err error) {
 
 	for _, opt := range opts {
 		if err = opt(&options); err != nil {
-			return
+			return res, err
 		}
 	}
 
@@ -82,14 +82,14 @@ func Shell(command string, opts ...ShellOpt) (res ShellResult, err error) {
 	}
 	commandBuf := new(bytes.Buffer)
 	if err = tmpl.Execute(commandBuf, data); err != nil {
-		return
+		return res, err
 	}
 	command = commandBuf.String()
 
 	slog.Info("", "cmdline", command)
 
 	if config.Dryrun {
-		return
+		return res, err
 	}
 
 	stdoutBuf := new(bytes.Buffer)
@@ -106,7 +106,7 @@ func Shell(command string, opts ...ShellOpt) (res ShellResult, err error) {
 
 	if err = cmd.Start(); err != nil {
 		slog.Debug(fmt.Sprintf("could not start command: \"%s\"", command))
-		return
+		return res, err
 	}
 
 	wg := sync.WaitGroup{}
@@ -130,7 +130,7 @@ func Shell(command string, opts ...ShellOpt) (res ShellResult, err error) {
 		res.ExitCode = ee.ExitCode()
 	}
 
-	return
+	return res, err
 }
 
 func scan(name string, pipe io.ReadCloser, buffer *bytes.Buffer) {

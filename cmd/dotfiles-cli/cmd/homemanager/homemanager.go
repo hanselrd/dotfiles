@@ -26,10 +26,10 @@ var HomeManagerCmd = &cobra.Command{
 		if idx == -1 {
 			err = fmt.Errorf("%s is not valid", _profile)
 			slog.Error("", "error", err)
-			return
+			return err
 		}
 		profileGroup = profile.HomeManagerProfiles[idx]
-		return
+		return err
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		slog.Info("home-manager called")

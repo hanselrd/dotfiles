@@ -18,12 +18,25 @@ in
   config = lib.mkIf cfg.enable {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
       matchBlocks = {
+        "*" = {
+          # addKeysToAgent = "no";
+          compression = false;
+          controlMaster = "no";
+          controlPath = "${env.user.homeDirectory}/.ssh/master-%r@%n:%p";
+          controlPersist = "no";
+          forwardAgent = false;
+          hashKnownHosts = false;
+          serverAliveCountMax = 3;
+          serverAliveInterval = 0;
+          userKnownHostsFile = "${env.user.homeDirectory}/.ssh/known_hosts";
+        };
         "10.*.*.* 192.168.*.*" = {
           compression = true;
+          userKnownHostsFile = "/dev/null";
           extraOptions = {
             StrictHostKeyChecking = "no";
-            UserKnownHostsFile = "/dev/null";
           };
         };
       };

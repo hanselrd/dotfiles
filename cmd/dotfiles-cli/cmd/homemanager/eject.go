@@ -32,7 +32,7 @@ var ejectCmd = &cobra.Command{
 			err = fmt.Errorf("%s is too long", outDir)
 			slog.Error("", "error", err)
 		}
-		return
+		return err
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		nixutil.BuildHomeManagerConfiguration(profileGroup)

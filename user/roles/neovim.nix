@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }:
 let
@@ -107,7 +108,9 @@ in
       withNodeJs = true;
       extraConfig = ''
         lua << EOF
-          ${lib.readFile ./neovim/config.lua}
+          ${lib.replaceStrings [ "_nixgetenv(\"user.homeDirectory\")" ] [ env.user.homeDirectory ] (
+            lib.readFile ./neovim/config.lua
+          )}
         EOF
       '';
     };
