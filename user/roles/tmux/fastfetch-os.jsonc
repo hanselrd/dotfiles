@@ -1,0 +1,14 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "display": {
+    "key": {
+      "type": "none"
+    }
+  },
+  "modules": [
+    {
+      "type": "os",
+      "format": "{id}:{version-id}"
+    }
+  ]
+}

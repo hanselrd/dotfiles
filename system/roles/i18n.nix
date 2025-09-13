@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }:
 let
@@ -16,19 +17,11 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.optionalAttrs (!lib.profiles.isSystemDarwin) {
-      i18n.defaultLocale = "en_US.UTF-8";
+      i18n.defaultLocale = env.roles.system.i18n.locale;
+      i18n.defaultCharset = env.roles.system.i18n.charset;
+      i18n.extraLocales = env.roles.system.i18n.extraLocales;
 
-      i18n.extraLocaleSettings = {
-        LC_ADDRESS = "en_US.UTF-8";
-        LC_IDENTIFICATION = "en_US.UTF-8";
-        LC_MEASUREMENT = "en_US.UTF-8";
-        LC_MONETARY = "en_US.UTF-8";
-        LC_NAME = "en_US.UTF-8";
-        LC_NUMERIC = "en_US.UTF-8";
-        LC_PAPER = "en_US.UTF-8";
-        LC_TELEPHONE = "en_US.UTF-8";
-        LC_TIME = "en_US.UTF-8";
-      };
+      home-manager.users.${env.user.username}.home.language.base = env.roles.system.i18n.locale;
     }
   );
 }

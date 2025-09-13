@@ -16,12 +16,16 @@ type (
 	}
 	environmentRolesSystemHomeManager struct{}
 	environmentRolesSystemHyprland    struct{}
-	environmentRolesSystemI18N        struct{}
-	environmentRolesSystemKDE         struct{}
-	environmentRolesSystemKernel      struct{}
-	environmentRolesSystemMonitoring  struct{}
-	environmentRolesSystemMotd        struct{}
-	environmentRolesSystemNetworking  struct {
+	environmentRolesSystemI18N        struct {
+		Locale       string   `json:"locale"`
+		Charset      string   `json:"charset"`
+		ExtraLocales []string `json:"extraLocales"`
+	}
+	environmentRolesSystemKDE        struct{}
+	environmentRolesSystemKernel     struct{}
+	environmentRolesSystemMonitoring struct{}
+	environmentRolesSystemMotd       struct{}
+	environmentRolesSystemNetworking struct {
 		HostName string `json:"hostName"`
 	}
 	environmentRolesSystemNix         struct{}

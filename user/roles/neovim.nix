@@ -100,6 +100,7 @@ in
         nodePackages.typescript-language-server
         pyright
         rust-analyzer
+        vscode-json-languageserver
         zls
       ];
       viAlias = true;
@@ -108,9 +109,9 @@ in
       withNodeJs = true;
       extraConfig = ''
         lua << EOF
-          ${lib.replaceStrings [ "_nixgetenv(\"user.homeDirectory\")" ] [ env.user.homeDirectory ] (
-            lib.readFile ./neovim/config.lua
-          )}
+          ${lib.replaceStrings [ "_nixgetenv(\"user.homeDirectory\")" ] [ "\"${env.user.homeDirectory}\"" ]
+            (lib.readFile ./neovim/config.lua)
+          }
         EOF
       '';
     };
