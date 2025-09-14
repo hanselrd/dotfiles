@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }:
 let
@@ -17,8 +18,10 @@ in
   config = lib.mkIf cfg.enable {
     programs.go = rec {
       enable = true;
-      goPath = ".go";
-      goBin = "${goPath}/bin";
+      env = rec {
+        GOPATH = "${env.user.homeDirectory}/.go";
+        GOBIN = "${GOPATH}/bin";
+      };
     };
 
     home.packages = with pkgs; [
