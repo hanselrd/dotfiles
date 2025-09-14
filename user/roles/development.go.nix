@@ -16,7 +16,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.go = rec {
+    programs.go = {
       enable = true;
       env = rec {
         GOPATH = "${env.user.homeDirectory}/.go";
