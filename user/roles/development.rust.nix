@@ -16,7 +16,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      # rust-bin.nightly.latest.default
+      # rust-bin.nightly.latest.default # BROKEN
       # rust-cbindgen
       # wasm-bindgen-cli
     ];
