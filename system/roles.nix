@@ -18,9 +18,9 @@
     ./roles/grub.nix
     ./roles/home-manager.nix
     ./roles/hyprland.nix
-    ./roles/i18n.nix
     ./roles/kde.nix
     ./roles/kernel.nix
+    ./roles/language.nix
     ./roles/monitoring.nix
     ./roles/motd.nix
     ./roles/networking.nix

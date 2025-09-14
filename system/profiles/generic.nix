@@ -7,7 +7,7 @@
 {
   roles.system.bootstrap.enable = true;
   roles.system.docker.enable = true;
-  roles.system.i18n.enable = true;
+  roles.system.language.enable = true;
   roles.system.monitoring.enable = true;
   roles.system.motd.enable = true;
   roles.system.networking.enable = true;

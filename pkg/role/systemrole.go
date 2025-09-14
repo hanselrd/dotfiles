@@ -26,9 +26,9 @@ const (
 	SystemRoleGrub
 	SystemRoleHomeManager
 	SystemRoleHyprland
-	SystemRoleI18N
 	SystemRoleKDE
 	SystemRoleKernel
+	SystemRoleLanguage
 	SystemRoleMonitoring
 	SystemRoleMotd
 	SystemRoleNetworking

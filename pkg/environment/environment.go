@@ -119,7 +119,7 @@ var Environment = environment{
 			Grub: &environmentRolesSystemGrub{
 				Device: "/dev/sda",
 			},
-			I18N: &environmentRolesSystemI18N{
+			Language: &environmentRolesSystemLanguage{
 				Locale:       "en_US.UTF-8",
 				Charset:      "UTF-8",
 				ExtraLocales: []string{"es_DO.UTF-8/UTF-8", "es_ES.UTF-8/UTF-8"},

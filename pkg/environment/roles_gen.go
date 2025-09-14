@@ -17,9 +17,9 @@ type environmentRolesSystem struct {
 	Grub        *environmentRolesSystemGrub        `json:"grub,omitempty"`
 	HomeManager *environmentRolesSystemHomeManager `json:"home-manager,omitempty"`
 	Hyprland    *environmentRolesSystemHyprland    `json:"hyprland,omitempty"`
-	I18N        *environmentRolesSystemI18N        `json:"i18n,omitempty"`
 	KDE         *environmentRolesSystemKDE         `json:"kde,omitempty"`
 	Kernel      *environmentRolesSystemKernel      `json:"kernel,omitempty"`
+	Language    *environmentRolesSystemLanguage    `json:"language,omitempty"`
 	Monitoring  *environmentRolesSystemMonitoring  `json:"monitoring,omitempty"`
 	Motd        *environmentRolesSystemMotd        `json:"motd,omitempty"`
 	Networking  *environmentRolesSystemNetworking  `json:"networking,omitempty"`
