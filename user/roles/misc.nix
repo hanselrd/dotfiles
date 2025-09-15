@@ -70,9 +70,9 @@ in
           ]
         )
         (lib.optionals (lib.profiles.isUserStandard || lib.profiles.isUserFull) [
+          # ansible
           # ventoy
           android-tools
-          ansible
           atool
           fd
           ffmpeg
