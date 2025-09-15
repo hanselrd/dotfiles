@@ -1,5 +1,5 @@
 diff --git a/scripts/shared.sh b/scripts/shared.sh
-index ff9a849..4c592c0 100644
+index ff9a849..7d5eea6 100644
 --- a/scripts/shared.sh
 +++ b/scripts/shared.sh
 @@ -25,7 +25,7 @@ get_info() {
@@ -11,3 +11,13 @@ index ff9a849..4c592c0 100644
  			;;
  		"port")
  			echo "$port"
+@@ -76,7 +76,8 @@ __get_remote_info() {
+ 	# Fetch configuration with given cmd
+ 	# Depending of ssh version, configuration output may or may not contain `host` directive
+ 	# Check both `host` and `hostname` for old ssh versions compatibility and prefer `host` if exists
+-	ssh -TGN $cmd 2>/dev/null | grep -E -e '^host(name)?\s' -e '^port\s' -e '^user\s' | sort --unique --key 1,1.4 | cut -f 2 -d ' ' | xargs
++	# ssh -TGN $cmd 2>/dev/null | grep -E -e '^host(name)?\s' -e '^port\s' -e '^user\s' | sort --unique --key 1,1.4 | cut -f 2 -d ' ' | xargs
++	ssh -T $cmd "echo \"\$(hostname) \${SSH_CONNECTION##* } \$(whoami)\"" 2>/dev/null
+ }
+ 
+ __get_container_info() {
