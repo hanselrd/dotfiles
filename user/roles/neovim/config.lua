@@ -197,7 +197,6 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.format({ async = true })
   end, bufopts)
 end
-local lspconfig = require("lspconfig")
 local servers = {
   -- elixirls = { cmd = { "elixir-ls" } },
   clangd = {},
@@ -231,12 +230,13 @@ local servers = {
   zls = {},
 }
 for lsp, setup in pairs(servers) do
-  lspconfig[lsp].setup({
+  vim.lsp.config(lsp, {
     capabilities = capabilities,
     on_attach = on_attach,
     cmd = setup["cmd"],
     settings = setup["settings"],
   })
+  vim.lsp.enable(lsp)
 end
 
 -- nvim-surround
