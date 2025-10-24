@@ -50,6 +50,7 @@ type environmentRolesUser struct {
 	Btop                  *environmentRolesUserBtop                  `json:"btop,omitempty"`
 	CMake                 *environmentRolesUserCMake                 `json:"cmake,omitempty"`
 	Ccache                *environmentRolesUserCcache                `json:"ccache,omitempty"`
+	Delta                 *environmentRolesUserDelta                 `json:"delta,omitempty"`
 	Development           *environmentRolesUserDevelopment           `json:"development,omitempty"`
 	DevelopmentCpp        *environmentRolesUserDevelopmentCpp        `json:"development.cpp,omitempty"`
 	DevelopmentDhall      *environmentRolesUserDevelopmentDhall      `json:"development.dhall,omitempty"`

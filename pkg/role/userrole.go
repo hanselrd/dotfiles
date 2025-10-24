@@ -26,6 +26,7 @@ const (
 	UserRoleBtop
 	UserRoleCMake
 	UserRoleCcache
+	UserRoleDelta
 	UserRoleDevelopment
 	UserRoleDevelopmentCpp
 	UserRoleDevelopmentDhall

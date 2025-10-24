@@ -58,6 +58,7 @@ type (
 	environmentRolesUserBtop                  struct{}
 	environmentRolesUserCMake                 struct{}
 	environmentRolesUserCcache                struct{}
+	environmentRolesUserDelta                 struct{}
 	environmentRolesUserDevelopment           struct{}
 	environmentRolesUserDevelopmentCpp        struct{}
 	environmentRolesUserDevelopmentDhall      struct{}
