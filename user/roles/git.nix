@@ -60,7 +60,7 @@ in
         #     untracked = "cyan bold";
         #   };
         # };
-        aliases = {
+        alias = {
           sclone = "!${lib.getExe pkgs.dash} ${pkgs.writeShellScript "git-smart-clone.sh" ''
             set -e
 
