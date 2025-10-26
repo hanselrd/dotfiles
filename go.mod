@@ -12,7 +12,7 @@ require (
 	github.com/goccy/go-graphviz v0.2.9
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0
-	github.com/samber/slog-zerolog/v2 v2.7.3
+	github.com/samber/slog-zerolog/v2 v2.8.0
 	github.com/spf13/cobra v1.10.1
 )
 
