@@ -130,6 +130,9 @@ var Environment = environment{
 			SystemdBoot: &environmentRolesSystemSystemdBoot{
 				Xbootldr: false,
 			},
+			Time: &environmentRolesSystemTime{
+				TimeZone: "Etc/UTC",
+			},
 		},
 		User: &environmentRolesUser{
 			Nix: &environmentRolesUserNix{
@@ -139,6 +142,7 @@ var Environment = environment{
 				BashToZsh: false,
 				LdPreload: false,
 				Theme:     false,
+				TimeZone:  "America/New_York",
 			},
 		},
 	},

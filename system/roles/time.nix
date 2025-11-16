@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }:
 let
@@ -15,6 +16,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    time.timeZone = "America/New_York";
+    time.timeZone = env.roles.system.time.timeZone;
   };
 }

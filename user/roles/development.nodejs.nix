@@ -17,7 +17,6 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       bun
-      nodePackages.ts-node
       nodejs
     ];
 

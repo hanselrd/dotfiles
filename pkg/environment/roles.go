@@ -36,7 +36,9 @@ type (
 	environmentRolesSystemSystemdBoot struct {
 		Xbootldr bool `json:"xbootldr"`
 	}
-	environmentRolesSystemTime    struct{}
+	environmentRolesSystemTime struct {
+		TimeZone string `json:"timeZone"`
+	}
 	environmentRolesSystemUdisks2 struct{}
 	environmentRolesSystemUser    struct{}
 	environmentRolesSystemWinGet  struct{}
@@ -102,9 +104,10 @@ type (
 	environmentRolesUserRofi     struct{}
 	environmentRolesUserRts      struct{}
 	environmentRolesUserShell    struct {
-		BashToZsh bool `json:"bashToZsh"`
-		LdPreload bool `json:"ldPreload"`
-		Theme     bool `json:"theme"`
+		BashToZsh bool   `json:"bashToZsh"`
+		LdPreload bool   `json:"ldPreload"`
+		Theme     bool   `json:"theme"`
+		TimeZone  string `json:"timeZone"`
 	}
 	environmentRolesUserSsh      struct{}
 	environmentRolesUserStarship struct{}

@@ -37,6 +37,7 @@ in
     home.sessionVariables = lib.mkMerge [
       {
         HISTTIMEFORMAT = "${env.extra.timeFormat}  ";
+        TZ = env.roles.user.shell.timeZone;
       }
       (lib.mkIf env.roles.user.shell.ldPreload {
         LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
