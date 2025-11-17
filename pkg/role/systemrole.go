@@ -33,7 +33,7 @@ const (
 	SystemRoleMotd
 	SystemRoleNetworking
 	SystemRoleNix
-	SystemRoleOpenSsh
+	SystemRoleOpenSSH
 	SystemRoleQemuGuest
 	SystemRoleShell
 	SystemRoleSudo

@@ -140,7 +140,7 @@ var Environment = environment{
 			},
 			Shell: &environmentRolesUserShell{
 				BashToZsh: false,
-				LdPreload: false,
+				NSSFix:    false,
 				Theme:     false,
 				TimeZone:  "America/New_York",
 			},

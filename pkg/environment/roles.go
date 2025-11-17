@@ -29,7 +29,7 @@ type (
 		HostName string `json:"hostName"`
 	}
 	environmentRolesSystemNix         struct{}
-	environmentRolesSystemOpenSsh     struct{}
+	environmentRolesSystemOpenSSH     struct{}
 	environmentRolesSystemQemuGuest   struct{}
 	environmentRolesSystemShell       struct{}
 	environmentRolesSystemSudo        struct{}
@@ -105,7 +105,7 @@ type (
 	environmentRolesUserRts      struct{}
 	environmentRolesUserShell    struct {
 		BashToZsh bool   `json:"bashToZsh"`
-		LdPreload bool   `json:"ldPreload"`
+		NSSFix    bool   `json:"nssFix"`
 		Theme     bool   `json:"theme"`
 		TimeZone  string `json:"timeZone"`
 	}

@@ -24,7 +24,7 @@ type environmentRolesSystem struct {
 	Motd        *environmentRolesSystemMotd        `json:"motd,omitempty"`
 	Networking  *environmentRolesSystemNetworking  `json:"networking,omitempty"`
 	Nix         *environmentRolesSystemNix         `json:"nix,omitempty"`
-	OpenSsh     *environmentRolesSystemOpenSsh     `json:"openssh,omitempty"`
+	OpenSSH     *environmentRolesSystemOpenSSH     `json:"openssh,omitempty"`
 	QemuGuest   *environmentRolesSystemQemuGuest   `json:"qemuguest,omitempty"`
 	Shell       *environmentRolesSystemShell       `json:"shell,omitempty"`
 	Sudo        *environmentRolesSystemSudo        `json:"sudo,omitempty"`

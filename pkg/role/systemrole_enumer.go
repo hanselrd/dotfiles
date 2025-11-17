@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const _SystemRoleName = "BootstrapBootChocolateyCockpitDockerFuseGarudaGlazeWMGrubHomeManagerHyprlandKDEKernelLanguageMonitoringMotdNetworkingNixOpenSshQemuGuestShellSudoSystemdBootTimeUdisks2UserWinGetWslXServerXrdpZram"
+const _SystemRoleName = "BootstrapBootChocolateyCockpitDockerFuseGarudaGlazeWMGrubHomeManagerHyprlandKDEKernelLanguageMonitoringMotdNetworkingNixOpenSSHQemuGuestShellSudoSystemdBootTimeUdisks2UserWinGetWslXServerXrdpZram"
 
 var _SystemRoleIndex = [...]uint8{0, 9, 13, 23, 30, 36, 40, 46, 53, 57, 68, 76, 79, 85, 93, 103, 107, 117, 120, 127, 136, 141, 145, 156, 160, 167, 171, 177, 180, 187, 191, 195}
 
@@ -42,7 +42,7 @@ func _SystemRoleNoOp() {
 	_ = x[SystemRoleMotd-(15)]
 	_ = x[SystemRoleNetworking-(16)]
 	_ = x[SystemRoleNix-(17)]
-	_ = x[SystemRoleOpenSsh-(18)]
+	_ = x[SystemRoleOpenSSH-(18)]
 	_ = x[SystemRoleQemuGuest-(19)]
 	_ = x[SystemRoleShell-(20)]
 	_ = x[SystemRoleSudo-(21)]
@@ -57,7 +57,7 @@ func _SystemRoleNoOp() {
 	_ = x[SystemRoleZram-(30)]
 }
 
-var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleChocolatey, SystemRoleCockpit, SystemRoleDocker, SystemRoleFuse, SystemRoleGaruda, SystemRoleGlazeWM, SystemRoleGrub, SystemRoleHomeManager, SystemRoleHyprland, SystemRoleKDE, SystemRoleKernel, SystemRoleLanguage, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSsh, SystemRoleQemuGuest, SystemRoleShell, SystemRoleSudo, SystemRoleSystemdBoot, SystemRoleTime, SystemRoleUdisks2, SystemRoleUser, SystemRoleWinGet, SystemRoleWsl, SystemRoleXServer, SystemRoleXrdp, SystemRoleZram}
+var _SystemRoleValues = []SystemRole{SystemRoleBootstrap, SystemRoleBoot, SystemRoleChocolatey, SystemRoleCockpit, SystemRoleDocker, SystemRoleFuse, SystemRoleGaruda, SystemRoleGlazeWM, SystemRoleGrub, SystemRoleHomeManager, SystemRoleHyprland, SystemRoleKDE, SystemRoleKernel, SystemRoleLanguage, SystemRoleMonitoring, SystemRoleMotd, SystemRoleNetworking, SystemRoleNix, SystemRoleOpenSSH, SystemRoleQemuGuest, SystemRoleShell, SystemRoleSudo, SystemRoleSystemdBoot, SystemRoleTime, SystemRoleUdisks2, SystemRoleUser, SystemRoleWinGet, SystemRoleWsl, SystemRoleXServer, SystemRoleXrdp, SystemRoleZram}
 
 var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleName[0:9]:          SystemRoleBootstrap,
@@ -96,8 +96,8 @@ var _SystemRoleNameToValueMap = map[string]SystemRole{
 	_SystemRoleLowerName[107:117]: SystemRoleNetworking,
 	_SystemRoleName[117:120]:      SystemRoleNix,
 	_SystemRoleLowerName[117:120]: SystemRoleNix,
-	_SystemRoleName[120:127]:      SystemRoleOpenSsh,
-	_SystemRoleLowerName[120:127]: SystemRoleOpenSsh,
+	_SystemRoleName[120:127]:      SystemRoleOpenSSH,
+	_SystemRoleLowerName[120:127]: SystemRoleOpenSSH,
 	_SystemRoleName[127:136]:      SystemRoleQemuGuest,
 	_SystemRoleLowerName[127:136]: SystemRoleQemuGuest,
 	_SystemRoleName[136:141]:      SystemRoleShell,
