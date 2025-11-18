@@ -73,6 +73,7 @@ const (
 	UserRoleSxhkd
 	UserRoleTerminal
 	UserRoleTheme
+	UserRoleTime
 	UserRoleTmux
 	UserRoleVscode
 	UserRoleWine

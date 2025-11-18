@@ -97,6 +97,7 @@ type environmentRolesUser struct {
 	Sxhkd                 *environmentRolesUserSxhkd                 `json:"sxhkd,omitempty"`
 	Terminal              *environmentRolesUserTerminal              `json:"terminal,omitempty"`
 	Theme                 *environmentRolesUserTheme                 `json:"theme,omitempty"`
+	Time                  *environmentRolesUserTime                  `json:"time,omitempty"`
 	Tmux                  *environmentRolesUserTmux                  `json:"tmux,omitempty"`
 	Vscode                *environmentRolesUserVscode                `json:"vscode,omitempty"`
 	Wine                  *environmentRolesUserWine                  `json:"wine,omitempty"`

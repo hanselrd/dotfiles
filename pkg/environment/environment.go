@@ -142,7 +142,25 @@ var Environment = environment{
 				BashToZsh: false,
 				NSSFix:    false,
 				Theme:     false,
-				TimeZone:  "America/New_York",
+			},
+			Time: &environmentRolesUserTime{
+				TimeZone: "America/New_York",
+				TimeZoneDirectory: func() string {
+					if val, ok := os.LookupEnv("TZDIR"); ok {
+						return val
+					} else {
+						for _, tzdir := range []string{
+							"/usr/share/zoneinfo",
+							"/share/zoneinfo",
+							"/etc/zoneinfo",
+						} {
+							if _, err := os.Stat(tzdir); !os.IsNotExist(err) {
+								return tzdir
+							}
+						}
+					}
+					return ""
+				}(),
 			},
 		},
 	},

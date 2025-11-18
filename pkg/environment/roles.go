@@ -104,21 +104,24 @@ type (
 	environmentRolesUserRofi     struct{}
 	environmentRolesUserRts      struct{}
 	environmentRolesUserShell    struct {
-		BashToZsh bool   `json:"bashToZsh"`
-		NSSFix    bool   `json:"nssFix"`
-		Theme     bool   `json:"theme"`
-		TimeZone  string `json:"timeZone"`
+		BashToZsh bool `json:"bashToZsh"`
+		NSSFix    bool `json:"nssFix"`
+		Theme     bool `json:"theme"`
 	}
 	environmentRolesUserSsh      struct{}
 	environmentRolesUserStarship struct{}
 	environmentRolesUserSxhkd    struct{}
 	environmentRolesUserTerminal struct{}
 	environmentRolesUserTheme    struct{}
-	environmentRolesUserTmux     struct{}
-	environmentRolesUserVscode   struct{}
-	environmentRolesUserWine     struct{}
-	environmentRolesUserWizTree  struct{}
-	environmentRolesUserXdg      struct{}
-	environmentRolesUserZoxide   struct{}
-	environmentRolesUserZsh      struct{}
+	environmentRolesUserTime     struct {
+		TimeZone          string `json:"timeZone"`
+		TimeZoneDirectory string `json:"timeZoneDirectory"`
+	}
+	environmentRolesUserTmux    struct{}
+	environmentRolesUserVscode  struct{}
+	environmentRolesUserWine    struct{}
+	environmentRolesUserWizTree struct{}
+	environmentRolesUserXdg     struct{}
+	environmentRolesUserZoxide  struct{}
+	environmentRolesUserZsh     struct{}
 )

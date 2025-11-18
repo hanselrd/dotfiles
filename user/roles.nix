@@ -65,6 +65,7 @@
     ./roles/sxhkd.nix
     ./roles/terminal.nix
     ./roles/theme.nix
+    ./roles/time.nix
     ./roles/tmux.nix
     ./roles/vscode.nix
     ./roles/wine.nix

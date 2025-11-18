@@ -24,6 +24,7 @@ lib.recursiveUpdate
     roles.user.shell.enable = true;
     roles.user.ssh.enable = true;
     roles.user.theme.enable = true;
+    roles.user.time.enable = true;
     roles.user.tmux.enable = true;
     roles.user.xdg.enable = true;
     roles.user.zoxide.enable = true;
