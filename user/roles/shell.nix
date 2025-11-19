@@ -34,13 +34,9 @@ in
       vi = "vim -u NONE -U NONE -N -i NONE";
     };
 
-    home.sessionVariables = lib.mkMerge [
-      {
-        HISTTIMEFORMAT = "${env.extra.timeFormat}  ";
-      }
-      (lib.mkIf env.roles.user.shell.nssFix {
-        LD_PRELOAD = "/usr/lib64/libnss_sss.so.2";
-      })
-    ];
+    home.sessionVariables = {
+      HISTTIMEFORMAT = "${env.extra.timeFormat}  ";
+      LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.sssd}/lib";
+    };
   };
 }

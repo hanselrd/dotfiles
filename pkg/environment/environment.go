@@ -140,7 +140,6 @@ var Environment = environment{
 			},
 			Shell: &environmentRolesUserShell{
 				BashToZsh: false,
-				NSSFix:    false,
 				Theme:     false,
 			},
 			Time: &environmentRolesUserTime{

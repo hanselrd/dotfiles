@@ -105,7 +105,6 @@ type (
 	environmentRolesUserRts      struct{}
 	environmentRolesUserShell    struct {
 		BashToZsh bool `json:"bashToZsh"`
-		NSSFix    bool `json:"nssFix"`
 		Theme     bool `json:"theme"`
 	}
 	environmentRolesUserSsh      struct{}
