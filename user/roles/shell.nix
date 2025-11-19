@@ -36,7 +36,7 @@ in
 
     home.sessionVariables = {
       HISTTIMEFORMAT = "${env.extra.timeFormat}  ";
-      LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.sssd}/lib";
+      LD_LIBRARY_PATH = "$LD_LIBRARY_PATH\${LD_LIBRARY_PATH:+:}${pkgs.sssd}/lib";
     };
   };
 }
