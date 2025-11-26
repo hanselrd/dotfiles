@@ -7,7 +7,7 @@ toolchain go1.24.6
 require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/charmbracelet/lipgloss v1.1.0
-	github.com/charmbracelet/x/ansi v0.11.1
+	github.com/charmbracelet/x/ansi v0.11.2
 	github.com/fatih/color v1.18.0
 	github.com/goccy/go-graphviz v0.2.9
 	github.com/rs/zerolog v1.34.0
