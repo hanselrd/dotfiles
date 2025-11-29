@@ -15,7 +15,7 @@ var dockerComposeCmd = &cobra.Command{
 	Short: "Docker Compose command",
 	Long:  "Docker Compose command",
 	Run: func(cmd *cobra.Command, args []string) {
-		data := lo.Must(json.MarshalIndent(dockercompose.DockerCompose, "", "  "))
+		data := lo.Must(json.Marshal(dockercompose.DockerCompose))
 		fmt.Println(string(data))
 	},
 }

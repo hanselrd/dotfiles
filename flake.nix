@@ -102,8 +102,7 @@
       };
 
       env = lib.importJSON (
-        pkgs.runCommand "dotfiles-cli-environment-json" { }
-          "${lib.getExe pkgs.dotfiles-cli} environment > $out"
+        pkgs.runCommand "dotfiles-cli-environment" { } "${lib.getExe pkgs.dotfiles-cli} environment > $out"
       );
 
       lib = nixpkgs.lib.extend (
@@ -239,8 +238,9 @@
             # ${lib.getExe pkgs.dotfiles-cli} codegen hash
             ${lib.getExe pkgs.dotfiles-cli} codegen profiles
             ${lib.getExe pkgs.dotfiles-cli} codegen roles
-            ${lib.getExe pkgs.dotfiles-cli} environment > environment.json
-            ${lib.getExe pkgs.dotfiles-cli} docker-compose > docker-compose.json
+            ${lib.getExe pkgs.dotfiles-cli} environment | ${lib.getExe' pkgs.nodejs "npx"} @toon-format/cli -o environment.toon --stats
+            ${lib.getExe pkgs.dotfiles-cli} docker-compose | ${lib.getExe' pkgs.nodejs "npx"} @toon-format/cli -o docker-compose.toon --stats
+            ${lib.getExe' pkgs.nodejs "npx"} @toon-format/cli docker-compose.toon -o docker-compose.json
             ${lib.getExe pkgs.dotfiles-cli} graph > graph.dot
             ${lib.getExe' pkgs.graphviz "dot"} -Tpng graph.dot -o graph.png
             ${lib.getExe' pkgs.graphviz "dot"} -Tsvg graph.dot -o graph.svg

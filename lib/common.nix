@@ -136,7 +136,7 @@ in
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-rturc8vWCaT6rWJWvJsWq1hjY+6SRwT7LCF0e+faqGY=";
+      vendorHash = "sha256-eNHnJ1zflFysrGCbqkILBvHHG8XlPRc4yAc55k4vtLg=";
       subPackages = [
         "cmd/${name}"
       ];
@@ -153,4 +153,11 @@ in
       ];
       meta.mainProgram = name;
     };
+
+  importTOON =
+    path:
+    lib.importJSON (
+      pkgs.runCommand "import-toon" { }
+        "${lib.getExe' pkgs.nodejs "npx"} @toon-format/cli -d ${path} -o $out"
+    );
 }
