@@ -74,6 +74,7 @@ in
           # ventoy
           android-tools
           atool
+          cowsay
           fd
           ffmpeg
           figlet
