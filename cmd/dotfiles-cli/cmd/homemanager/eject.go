@@ -51,7 +51,7 @@ var ejectCmd = &cobra.Command{
 		defer os.RemoveAll(tmpDir)
 
 		lop.ForEach(deps, func(d string, i int) {
-			cpio := filepath.Join(tmpDir, fmt.Sprintf("eject.cpio.%d", i))
+			cpio := filepath.Join(tmpDir, fmt.Sprintf("eject.%d.cpio", i))
 			slog.Debug("archiving", "in", d, "out", cpio)
 
 			shell.Shell(
