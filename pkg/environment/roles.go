@@ -93,6 +93,7 @@ type (
 	environmentRolesUserLldb                  struct{}
 	environmentRolesUserMisc                  struct{}
 	environmentRolesUserNeovim                struct{}
+	environmentRolesUserNh                    struct{}
 	environmentRolesUserNix                   struct {
 		Sandbox bool `json:"sandbox"`
 	}

@@ -27,8 +27,8 @@ RUN git config --global --add safe.directory ${HOME}/.dotfiles
 
 WORKDIR ${HOME}/.dotfiles
 
-RUN sed -i "s/delacruz/${USER}/g" pkg/environment/environment.go
-RUN sed -i "/BashToZsh/s/false/true/g" pkg/environment/environment.go
+RUN sed -i "s/delacruz/${USER}/g" pkg/environment/build.go
+RUN sed -i "/BashToZsh/s/false/true/g" pkg/environment/build.go
 
 USER ${USER}
 

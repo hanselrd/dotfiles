@@ -51,6 +51,7 @@
     ./roles/lldb.nix
     ./roles/misc.nix
     ./roles/neovim.nix
+    ./roles/nh.nix
     ./roles/nix.nix
     ./roles/oh-my-posh.nix
     ./roles/pager.nix

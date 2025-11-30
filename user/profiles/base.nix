@@ -18,6 +18,7 @@ lib.recursiveUpdate
     roles.user.git.enable = true;
     roles.user.htop.enable = true;
     roles.user.misc.enable = true;
+    roles.user.nh.enable = true;
     roles.user.nix.enable = true;
     roles.user.pager.enable = true;
     roles.user.ripgrep.enable = true;

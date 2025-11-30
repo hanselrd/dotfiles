@@ -59,6 +59,7 @@ const (
 	UserRoleLldb
 	UserRoleMisc
 	UserRoleNeovim
+	UserRoleNh
 	UserRoleNix
 	UserRoleOhMyPosh
 	UserRolePager

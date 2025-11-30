@@ -83,6 +83,7 @@ type environmentRolesUser struct {
 	Lldb                  *environmentRolesUserLldb                  `json:"lldb,omitempty"`
 	Misc                  *environmentRolesUserMisc                  `json:"misc,omitempty"`
 	Neovim                *environmentRolesUserNeovim                `json:"neovim,omitempty"`
+	Nh                    *environmentRolesUserNh                    `json:"nh,omitempty"`
 	Nix                   *environmentRolesUserNix                   `json:"nix,omitempty"`
 	OhMyPosh              *environmentRolesUserOhMyPosh              `json:"oh-my-posh,omitempty"`
 	Pager                 *environmentRolesUserPager                 `json:"pager,omitempty"`
