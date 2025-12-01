@@ -20,6 +20,7 @@ const (
 	SystemRoleChocolatey
 	SystemRoleCockpit
 	SystemRoleDocker
+	SystemRoleFail2Ban
 	SystemRoleFuse
 	SystemRoleGaruda
 	SystemRoleGlazeWM

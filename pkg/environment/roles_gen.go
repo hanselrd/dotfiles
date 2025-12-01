@@ -11,6 +11,7 @@ type environmentRolesSystem struct {
 	Chocolatey  *environmentRolesSystemChocolatey  `json:"chocolatey,omitempty"`
 	Cockpit     *environmentRolesSystemCockpit     `json:"cockpit,omitempty"`
 	Docker      *environmentRolesSystemDocker      `json:"docker,omitempty"`
+	Fail2Ban    *environmentRolesSystemFail2Ban    `json:"fail2ban,omitempty"`
 	Fuse        *environmentRolesSystemFuse        `json:"fuse,omitempty"`
 	Garuda      *environmentRolesSystemGaruda      `json:"garuda,omitempty"`
 	GlazeWM     *environmentRolesSystemGlazeWM     `json:"glazewm,omitempty"`

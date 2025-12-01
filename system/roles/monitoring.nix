@@ -17,5 +17,6 @@ in
   config = lib.mkIf cfg.enable {
     roles.system.cockpit.enable = true;
     roles.system.openssh.enable = true;
+    roles.system.fail2ban.enable = true;
   };
 }

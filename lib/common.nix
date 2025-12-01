@@ -8,25 +8,21 @@
 let
   inherit (inputs) self gitignore;
 in
-{
-  currentTimeUtcPretty = lib.replaceStrings [ "\n" ] [ "" ] (
-    lib.readFile (
-      pkgs.runCommand "current-time-utc-pretty" {
-        currentTime = builtins.currentTime;
-      } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out"
-    )
-  );
+rec {
+  readCommand =
+    name: env: buildCommand:
+    lib.removeSuffix "\n" (lib.readFile (pkgs.runCommand name env buildCommand));
+
+  currentTimeUtcPretty = readCommand "current-time-utc-pretty" {
+    currentTime = builtins.currentTime;
+  } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out";
 
   currentTimePretty =
     tz:
-    lib.replaceStrings [ "\n" ] [ "" ] (
-      lib.readFile (
-        pkgs.runCommand "current-time-pretty" {
-          buildInputs = [ pkgs.tzdata ];
-          currentTime = builtins.currentTime;
-        } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out"
-      )
-    );
+    readCommand "current-time-pretty" {
+      buildInputs = [ pkgs.tzdata ];
+      currentTime = builtins.currentTime;
+    } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out";
 
   runExternalHome =
     name:
