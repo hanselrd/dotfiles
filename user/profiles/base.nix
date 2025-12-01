@@ -27,6 +27,7 @@ lib.recursiveUpdate
     roles.user.theme.enable = true;
     roles.user.time.enable = true;
     roles.user.tmux.enable = true;
+    roles.user.user.enable = true;
     roles.user.xdg.enable = true;
     roles.user.zoxide.enable = true;
   }

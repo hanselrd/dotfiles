@@ -101,6 +101,7 @@ type environmentRolesUser struct {
 	Theme                 *environmentRolesUserTheme                 `json:"theme,omitempty"`
 	Time                  *environmentRolesUserTime                  `json:"time,omitempty"`
 	Tmux                  *environmentRolesUserTmux                  `json:"tmux,omitempty"`
+	User                  *environmentRolesUserUser                  `json:"user,omitempty"`
 	Vscode                *environmentRolesUserVscode                `json:"vscode,omitempty"`
 	Wine                  *environmentRolesUserWine                  `json:"wine,omitempty"`
 	WizTree               *environmentRolesUserWizTree               `json:"wiztree,omitempty"`

@@ -118,7 +118,10 @@ type (
 		TimeZone          string `json:"timeZone"`
 		TimeZoneDirectory string `json:"timeZoneDirectory"`
 	}
-	environmentRolesUserTmux    struct{}
+	environmentRolesUserTmux struct{}
+	environmentRolesUserUser struct {
+		Overwrite bool `json:"overwrite"`
+	}
 	environmentRolesUserVscode  struct{}
 	environmentRolesUserWine    struct{}
 	environmentRolesUserWizTree struct{}

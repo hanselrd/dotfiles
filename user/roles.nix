@@ -68,6 +68,7 @@
     ./roles/theme.nix
     ./roles/time.nix
     ./roles/tmux.nix
+    ./roles/user.nix
     ./roles/vscode.nix
     ./roles/wine.nix
     ./roles/wiztree.nix

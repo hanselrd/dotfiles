@@ -76,6 +76,7 @@ const (
 	UserRoleTheme
 	UserRoleTime
 	UserRoleTmux
+	UserRoleUser
 	UserRoleVscode
 	UserRoleWine
 	UserRoleWizTree

@@ -102,6 +102,9 @@ var Environment = environment{
 				TimeZone:          "America/New_York",
 				TimeZoneDirectory: "/usr/share/zoneinfo",
 			},
+			User: &environmentRolesUserUser{
+				Overwrite: false,
+			},
 		},
 	},
 	Profiles: environmentProfiles{
