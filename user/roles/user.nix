@@ -17,7 +17,11 @@ in
 
   config = lib.mkIf cfg.enable {
     home.sessionVariables = lib.mkMerge [
-      (lib.mkIf env.roles.user.user.overwrite { USER = env.user.username; })
+      (lib.mkIf env.roles.user.user.overwrite rec {
+        USER = env.user.username;
+        USERNAME = USER;
+        LOGNAME = USER;
+      })
     ];
   };
 }
