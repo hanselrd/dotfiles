@@ -18,7 +18,7 @@ in
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {
       TZ = env.roles.user.time.timeZone;
-      TZDIR = "\${TZDIR:-\"${env.roles.user.time.timeZoneDirectory}\"}";
+      TZDIR = "\${TZDIR:-${env.roles.user.time.timeZoneDirectory}}";
     };
   };
 }

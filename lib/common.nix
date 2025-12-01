@@ -13,6 +13,46 @@ rec {
     name: env: buildCommand:
     lib.removeSuffix "\n" (lib.readFile (pkgs.runCommand name env buildCommand));
 
+  bannerText =
+    text:
+    {
+      font ? "standard",
+      width ? 80,
+      justify ? "left",
+    }:
+    readCommand "banner-text" { }
+      "${lib.getExe pkgs.figlet} \"${text}\" -f ${font} -w ${builtins.toString width} ${
+        if justify == "left" then
+          "-l"
+        else if justify == "center" then
+          "-c"
+        else if "right" then
+          "-r"
+        else
+          "-x"
+      } > $out";
+
+  rainbowText =
+    text:
+    readCommand "rainbow-text" { }
+      "${lib.getExe pkgs.lolcat} -f ${pkgs.writeText "rainbow-text-file" text} > $out";
+
+  ansiText =
+    text:
+    {
+      style ? "clear",
+      escapeStyle ? "direct",
+    }:
+    let
+      ansiStyle =
+        readCommand "ansi-text-style" { }
+          "${lib.getExe pkgs.ansi} ${style} --escape-style=${escapeStyle} > $out";
+      ansiReset =
+        readCommand "ansi-text-reset" { }
+          "${lib.getExe pkgs.ansi} reset --escape-style=${escapeStyle} > $out";
+    in
+    lib.concatMapStringsSep "\n" (x: ansiStyle + x + ansiReset) (lib.splitString "\n" text);
+
   currentTimeUtcPretty = readCommand "current-time-utc-pretty" {
     currentTime = builtins.currentTime;
   } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out";

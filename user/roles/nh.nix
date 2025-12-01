@@ -20,5 +20,9 @@ in
       enable = true;
       flake = "${env.user.homeDirectory}/.dotfiles";
     };
+
+    home.sessionVariables = {
+      NH_SHOW_ACTIVATION_LOGS = 1;
+    };
   };
 }
