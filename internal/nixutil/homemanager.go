@@ -28,24 +28,24 @@ func InstallHomeManagerConfiguration(pg profile.ProfileGroup) (shell.ShellResult
 	if err != nil {
 		return shell.ShellResult{}, err
 	}
-	// homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", hmc)
-	// return shell.Shell(
-	// 	fmt.Sprintf(
-	// 		"%s switch {{.VerbosityVerboseShort}} --flake .#%s -b %s",
-	// 		homeManagerExe,
-	// 		pg,
-	// 		environment.Environment.Extra.BackupFileExtension,
-	// 	),
-	// )
-	nhExe := fmt.Sprintf("%s/home-path/bin/nh", hmc)
+	homeManagerExe := fmt.Sprintf("%s/home-path/bin/home-manager", hmc)
 	return shell.Shell(
 		fmt.Sprintf(
-			"%s home switch . {{.VerbosityQuietShortVerboseShortN}} -c %s -b %s",
-			nhExe,
+			"%s switch {{.VerbosityVerboseShort}} --flake .#%s -b %s",
+			homeManagerExe,
 			pg,
 			environment.Environment.Extra.BackupFileExtension,
 		),
 	)
+	// nhExe := fmt.Sprintf("%s/home-path/bin/nh", hmc)
+	// return shell.Shell(
+	// 	fmt.Sprintf(
+	// 		"%s home switch . {{.VerbosityQuietShortVerboseShortN}} -c %s -b %s",
+	// 		nhExe,
+	// 		pg,
+	// 		environment.Environment.Extra.BackupFileExtension,
+	// 	),
+	// )
 }
 
 func FindHomeManagerEjectPaths(pg profile.ProfileGroup) ([]string, error) {
