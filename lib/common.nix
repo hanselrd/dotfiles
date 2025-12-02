@@ -14,12 +14,12 @@ rec {
     lib.removeSuffix "\n" (lib.readFile (pkgs.runCommand name env buildCommand));
 
   bannerText =
-    text:
     {
       font ? "standard",
       width ? 80,
       justify ? "left",
     }:
+    text:
     readCommand "banner-text" { }
       "${lib.getExe pkgs.figlet} \"${text}\" -f ${font} -w ${builtins.toString width} ${
         if justify == "left" then
@@ -38,11 +38,11 @@ rec {
       "${lib.getExe pkgs.lolcat} -f ${pkgs.writeText "rainbow-text-file" text} > $out";
 
   ansiText =
-    text:
     {
       style ? "clear",
       escapeStyle ? "direct",
     }:
+    text:
     let
       ansiStyle =
         readCommand "ansi-text-style" { }

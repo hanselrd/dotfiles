@@ -20,6 +20,7 @@ in
         enable = true;
         settings = {
           X11Forwarding = config.roles.system.xserver.enable;
+          PrintLastLog = false;
         };
       };
     }
