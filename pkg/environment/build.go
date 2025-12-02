@@ -87,7 +87,7 @@ var Environment = environment{
 				Xbootldr: false,
 			},
 			Time: &environmentRolesSystemTime{
-				TimeZone: "Etc/UTC",
+				TimeZone: "America/New_York",
 			},
 		},
 		User: &environmentRolesUser{
