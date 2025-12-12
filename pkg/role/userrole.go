@@ -9,10 +9,10 @@ import (
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
 
-type UserRole uint
-
 //go:generate go run github.com/dmarkham/enumer -type UserRole -trimprefix UserRole
-//go:generate go run ../../internal/codegen/nixstringee.go UserRole
+//go:generate go run ../../internal/codegen/marshaler.go -type UserRole -stringer NixString
+
+type UserRole uint
 
 const (
 	UserRoleBootstrap UserRole = iota

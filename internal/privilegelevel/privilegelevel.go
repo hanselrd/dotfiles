@@ -2,10 +2,10 @@ package privilegelevel
 
 import "strings"
 
-type PrivilegeLevel uint
-
 //go:generate go run github.com/dmarkham/enumer -type PrivilegeLevel -trimprefix PrivilegeLevel
-//go:generate go run ../codegen/nixstringee.go PrivilegeLevel
+//go:generate go run ../codegen/marshaler.go -type PrivilegeLevel -stringer NixString
+
+type PrivilegeLevel uint
 
 const (
 	PrivilegeLevelSystem PrivilegeLevel = iota

@@ -6,10 +6,10 @@ import (
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
 
-type SystemProfile uint
-
 //go:generate go run github.com/dmarkham/enumer -type SystemProfile -trimprefix SystemProfile
-//go:generate go run ../../internal/codegen/nixstringee.go SystemProfile
+//go:generate go run ../../internal/codegen/marshaler.go -type SystemProfile -stringer NixString
+
+type SystemProfile uint
 
 const (
 	SystemProfileNixOS SystemProfile = iota

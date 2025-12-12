@@ -2,10 +2,10 @@ package encryption
 
 import "strings"
 
-type Encryption uint
-
 //go:generate go run github.com/dmarkham/enumer -type Encryption -trimprefix Encryption
-//go:generate go run ../codegen/nixstringee.go Encryption
+//go:generate go run ../codegen/marshaler.go -type Encryption -stringer NixString
+
+type Encryption uint
 
 const (
 	EncryptionNone Encryption = iota

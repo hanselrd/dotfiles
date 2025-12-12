@@ -9,10 +9,10 @@ import (
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
 
-type SystemRole uint
-
 //go:generate go run github.com/dmarkham/enumer -type SystemRole -trimprefix SystemRole
-//go:generate go run ../../internal/codegen/nixstringee.go SystemRole
+//go:generate go run ../../internal/codegen/marshaler.go -type SystemRole -stringer NixString
+
+type SystemRole uint
 
 const (
 	SystemRoleBootstrap SystemRole = iota

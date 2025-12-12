@@ -6,10 +6,10 @@ import (
 	"github.com/hanselrd/dotfiles/internal/privilegelevel"
 )
 
-type UserProfile uint
-
 //go:generate go run github.com/dmarkham/enumer -type UserProfile -trimprefix UserProfile
-//go:generate go run ../../internal/codegen/nixstringee.go UserProfile
+//go:generate go run ../../internal/codegen/marshaler.go -type UserProfile -stringer NixString
+
+type UserProfile uint
 
 const (
 	UserProfileBase UserProfile = iota

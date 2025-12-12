@@ -3,6 +3,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -12,15 +13,16 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		panic(os.Args)
+	typePtr := flag.String("type", "", "")
+	stringerPtr := flag.String("stringer", "String", "")
+	flag.Parse()
+
+	if *typePtr == "" {
+		panic(*typePtr)
 	}
 
-	typeT := os.Args[1]
 	goPackage := os.Getenv("GOPACKAGE")
-	goFile := os.Getenv("GOFILE")
-	baseFilename := goFile[0 : len(goFile)-len(filepath.Ext(goFile))]
-	targetFilename := baseFilename + "_nixstringee.go"
+	targetFilename := strings.ToLower(*typePtr) + "_marshaler.go"
 
 	f := jen.NewFile(goPackage)
 	f.PackageComment(
@@ -31,14 +33,14 @@ func main() {
 		),
 	)
 
-	f.Comment(fmt.Sprintf("MarshalJSON implements the json.Marshaler interface for %s", typeT))
+	f.Comment(fmt.Sprintf("MarshalJSON implements the json.Marshaler interface for %s", *typePtr))
 	f.Func().
-		Params(jen.Id("i").Id(typeT)).
+		Params(jen.Id("i").Id(*typePtr)).
 		Id("MarshalJSON").
 		Params().
 		Params(jen.Index().Byte(), jen.Error()).
 		Block(
-			jen.Return(jen.Qual("encoding/json", "Marshal").Call(jen.Id("i").Dot("NixString").Call())),
+			jen.Return(jen.Qual("encoding/json", "Marshal").Call(jen.Id("i").Dot(*stringerPtr).Call())),
 		)
 
 	// f.Comment(fmt.Sprintf("UnmarshalJSON implements the json.Unmarshaler interface for %s", typeT))
@@ -62,15 +64,15 @@ func main() {
 	// 	)
 
 	f.Comment(
-		fmt.Sprintf("MarshalText implements the encoding.TextMarshaler interface for %s", typeT),
+		fmt.Sprintf("MarshalText implements the encoding.TextMarshaler interface for %s", *typePtr),
 	)
 	f.Func().
-		Params(jen.Id("i").Id(typeT)).
+		Params(jen.Id("i").Id(*typePtr)).
 		Id("MarshalText").
 		Params().
 		Params(jen.Index().Byte(), jen.Error()).
 		Block(
-			jen.Return(jen.Index().Byte().Parens(jen.Id("i").Dot("NixString").Call()), jen.Nil()),
+			jen.Return(jen.Index().Byte().Parens(jen.Id("i").Dot(*stringerPtr).Call()), jen.Nil()),
 		)
 
 	// f.Comment(
