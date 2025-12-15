@@ -5,13 +5,22 @@ let
   TMPDIR = "\${XDG_RUNTIME_DIR:-\${TMPDIR:-/tmp}}/nix-$(id -u)";
 in
 rec {
+  getRandomString =
+    length:
+    exec [
+      "env"
+      "bash"
+      "-c"
+      "< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c ${builtins.toString length} | sed 's/.*/\"&\"/'"
+    ];
+
   getDevicePartition =
     path:
     exec [
       "env"
       "bash"
       "-c"
-      "findmnt -no source -T ${path} | sed -e 's/\\n$//' -e 's/.*/\"&\"/'"
+      "findmnt -no source -T ${path} | sed 's/.*/\"&\"/'"
     ];
 
   getDevice =
@@ -20,7 +29,7 @@ rec {
       "env"
       "bash"
       "-c"
-      "lsblk -dpno pkname ${getDevicePartition path} | sed -e 's/\\n$//' -e 's/.*/\"&\"/'"
+      "lsblk -dpno pkname ${getDevicePartition path} | sed 's/.*/\"&\"/'"
     ];
 
   decryptSecret =

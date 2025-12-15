@@ -15,7 +15,7 @@
 {
   imports = with inputs; [ home-manager.nixosModules.home-manager ];
 
-  home-manager.backupFileExtension = "bkp.${builtins.toString builtins.currentTime}";
+  home-manager.backupFileExtension = "bkp.${lib.x.getRandomString 5}";
   # home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.${env.username} = import (rootPath + "/homes/${env.homeName}");
