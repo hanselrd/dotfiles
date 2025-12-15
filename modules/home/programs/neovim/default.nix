@@ -77,7 +77,6 @@
       lua-language-server
       nixd
       nls
-      nodePackages.purescript-language-server
       nodePackages.typescript
       nodePackages.typescript-language-server
       pyright
