@@ -1,26 +1,35 @@
 {
+
   inputs,
   lib,
-  pkgs,
-  env,
+  rootPath,
   ...
 }:
 let
-  inherit (inputs) self gitignore;
+  inherit (inputs) self;
 in
 rec {
+  decryptSecretModule =
+    identity: secretModule: lib.x.decryptSecret identity (secretModule + "/default.nix.age");
+
+  readSecret =
+    identity: secret: lib.removeSuffix "\n" (lib.readFile (lib.x.decryptSecret identity secret));
+
   readCommand =
-    name: env: buildCommand:
-    lib.removeSuffix "\n" (lib.readFile (pkgs.runCommand name env buildCommand));
+    name:
+    { pkgs }:
+    buildEnv: buildCommand:
+    lib.removeSuffix "\n" (lib.readFile (pkgs.runCommand name buildEnv buildCommand));
 
   bannerText =
     {
+      pkgs,
       font ? "standard",
       width ? 80,
       justify ? "left",
     }:
     text:
-    readCommand "banner-text" { }
+    readCommand "banner-text" { inherit pkgs; } { }
       "${lib.getExe pkgs.figlet} \"${text}\" -f ${font} -w ${builtins.toString width} ${
         if justify == "left" then
           "-l"
@@ -33,33 +42,39 @@ rec {
       } > $out";
 
   rainbowText =
+    { pkgs }:
     text:
-    readCommand "rainbow-text" { }
-      "${lib.getExe pkgs.lolcat} -f ${pkgs.writeText "rainbow-text-file" text} > $out";
+    readCommand "rainbow-text" {
+      inherit pkgs;
+    } { } "${lib.getExe pkgs.lolcat} -f ${pkgs.writeText "rainbow-text-file" text} > $out";
 
   ansiText =
     {
+      pkgs,
       style ? "clear",
       escapeStyle ? "direct",
     }:
     text:
     let
-      ansiStyle =
-        readCommand "ansi-text-style" { }
-          "${lib.getExe pkgs.ansi} ${style} --escape-style=${escapeStyle} > $out";
-      ansiReset =
-        readCommand "ansi-text-reset" { }
-          "${lib.getExe pkgs.ansi} reset --escape-style=${escapeStyle} > $out";
+      ansiStyle = readCommand "ansi-text-style" {
+        inherit pkgs;
+      } { } "${lib.getExe pkgs.ansi} ${style} --escape-style=${escapeStyle} > $out";
+      ansiReset = readCommand "ansi-text-reset" {
+        inherit pkgs;
+      } { } "${lib.getExe pkgs.ansi} reset --escape-style=${escapeStyle} > $out";
     in
     lib.concatMapStringsSep "\n" (x: ansiStyle + x + ansiReset) (lib.splitString "\n" text);
 
-  currentTimeUtcPretty = readCommand "current-time-utc-pretty" {
-    currentTime = builtins.currentTime;
-  } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out";
+  currentTimeUtcPretty =
+    { pkgs }:
+    readCommand "current-time-utc-pretty" { inherit pkgs; } {
+      currentTime = builtins.currentTime;
+    } "${lib.getExe' pkgs.coreutils "date"} --utc \"+%Y-%m-%dT%H:%M:%SZ\" > $out";
 
   currentTimePretty =
+    { pkgs }:
     tz:
-    readCommand "current-time-pretty" {
+    readCommand "current-time-pretty" { inherit pkgs; } {
       buildInputs = [ pkgs.tzdata ];
       currentTime = builtins.currentTime;
     } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} \"+%Y-%m-%dT%H:%M:%S%z %Z\" > $out";
@@ -67,6 +82,8 @@ rec {
   runExternalHome =
     name:
     {
+      config,
+      pkgs,
       text,
       runAlways ? false,
       useSymlink ? true,
@@ -74,7 +91,7 @@ rec {
       deps ? [ ],
     }:
     lib.hm.dag.entryAfter ([ "installPackages" ] ++ deps) ''
-      file=${env.user.cacheDirectory}/nix/activation/${name}
+      file=${config.xdg.cacheHome}/nix/activation/${name}
       new_file=${pkgs.writeShellScript "${name}.sh" text}
       ${
         if !runAlways then
@@ -111,6 +128,8 @@ rec {
   runExternalSystem =
     name:
     {
+      config,
+      pkgs,
       text,
       runAlways ? false,
       useSymlink ? true,
@@ -169,28 +188,24 @@ rec {
 
   buildGoBin =
     name:
+    { pkgs }:
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
-      src = gitignore.lib.gitignoreSource ../.;
-      vendorHash = "sha256-NRnzYigXdx3QtK+hd87JHJrmpr4i5GiMmXExzrVktmw=";
-      subPackages = [
-        "cmd/${name}"
-      ];
+      src = rootPath;
+      vendorHash = "sha256-9Cm9qfZciZtsvssVtd7qQ+aezWhrqcH+JTKdEuFX23E=";
+      subPackages = [ "cmd/${name}" ];
       ldflags = [
         "-s -w -linkmode=external"
         "-X 'github.com/hanselrd/dotfiles/internal/build.Version=${lib.version}'"
         "-X 'github.com/hanselrd/dotfiles/internal/build.PureEvalMode=${builtins.toString lib.inPureEvalMode}'"
-        "-X 'github.com/hanselrd/dotfiles/internal/build.RootDir=${
-          if !lib.inPureEvalMode then builtins.getEnv "PWD" else gitignore.lib.gitignoreSource ../.
-        }'"
-        "-X 'github.com/hanselrd/dotfiles/internal/build.Dirty=${
-          builtins.toString (!(lib.hasAttr "shortRev" self))
-        }'"
+        "-X 'github.com/hanselrd/dotfiles/internal/build.RootDir=${builtins.toString rootPath}'"
+        "-X 'github.com/hanselrd/dotfiles/internal/build.Dirty=${builtins.toString (!(self ? shortRev))}'"
       ];
       meta.mainProgram = name;
     };
 
   importTOON =
+    { pkgs }:
     path:
     lib.importJSON (
       pkgs.runCommand "import-toon" { }

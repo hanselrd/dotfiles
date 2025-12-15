@@ -1,0 +1,62 @@
+{ pkgs, ... }:
+let
+  excludes = [
+    "ancestry/*"
+    "secrets/*"
+  ];
+in
+{
+  projectRootFile = "flake.nix";
+
+  programs.nixfmt.enable = true;
+  programs.nixfmt.width = 100;
+  programs.nixfmt.indent = 2;
+  programs.nixfmt.strict = true;
+  settings.formatter.nixfmt.excludes = excludes;
+  settings.formatter.nixfmt.includes = [
+    "secrets/secrets.nix"
+    "*.nix"
+  ];
+
+  programs.shfmt.enable = true;
+  programs.shfmt.indent_size = 2;
+  programs.shfmt.simplify = true;
+  settings.formatter.shfmt.includes = [ "*.sh" ];
+  settings.formatter.shfmt.excludes = excludes;
+  settings.formatter.shfmt.options = [ "-sr" ];
+
+  programs.stylua.enable = true;
+  programs.stylua.settings.column_width = 100;
+  programs.stylua.settings.indent_type = "Spaces";
+  programs.stylua.settings.indent_width = 2;
+  programs.stylua.settings.quote_style = "AutoPreferDouble";
+  programs.stylua.settings.call_parentheses = "Always";
+  programs.stylua.settings.collapse_simple_statement = "Never";
+  settings.formatter.stylua.excludes = excludes;
+  settings.formatter.stylua.includes = [ "*.lua" ];
+
+  programs.jsonfmt.enable = true;
+  settings.formatter.jsonfmt.excludes = excludes;
+  settings.formatter.jsonfmt.includes = [
+    "*.json"
+    "*.jsonc"
+  ];
+
+  programs.goimports.enable = true;
+  settings.formatter.goimports.excludes = excludes;
+  settings.formatter.goimports.includes = [ "*.go" ];
+  settings.formatter.goimports.options = [
+    "-local"
+    "github.com/hanselrd"
+  ];
+
+  programs.gofumpt.enable = true;
+  programs.gofumpt.extra = true;
+  settings.formatter.gofumpt.excludes = excludes;
+  settings.formatter.gofumpt.includes = [ "*.go" ];
+
+  programs.golines.enable = true;
+  programs.golines.maxLength = 100;
+  settings.formatter.golines.excludes = excludes;
+  settings.formatter.golines.includes = [ "*.go" ];
+}

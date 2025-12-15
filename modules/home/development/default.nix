@@ -1,0 +1,27 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./cpp
+    ./dhall
+    ./elixir
+    ./gleam
+    ./go
+    ./haskell
+    ./java
+    ./javascript
+    ./kotlin
+    ./lua
+    ./nickel
+    ./nix
+    ./purescript
+    ./python
+    ./rust
+    ./shell
+    ./zig
+  ];
+}

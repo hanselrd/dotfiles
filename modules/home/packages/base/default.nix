@@ -1,0 +1,48 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    age
+    agenix
+    coreutils
+    cpio
+    curl
+    diffutils
+    dmidecode
+    file
+    findutils
+    gawk
+    gnugrep
+    gnumake
+    gnupatch
+    gnused
+    gnutar
+    gzip
+    hexxy
+    killall
+    less
+    lm_sensors
+    lsb-release
+    miller
+    objconv
+    pfetch
+    pqrs
+    procps
+    rsync
+    ssh-to-age
+    strace
+    sysstat
+    tree
+    universal-ctags
+    unzip
+    wget
+    xan
+    xar
+    xxd
+    zstd
+  ];
+}

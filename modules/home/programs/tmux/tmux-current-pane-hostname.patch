@@ -1,0 +1,23 @@
+diff --git a/scripts/shared.sh b/scripts/shared.sh
+index 7c53a7c..449745e 100644
+--- a/scripts/shared.sh
++++ b/scripts/shared.sh
+@@ -28,7 +28,7 @@ get_info() {
+ 			echo "$host"
+ 			;;
+ 		"host_short")
+-			[[ -z "$host" ]] && __get_hostname_short || echo "$host"
++			echo "${host%%.*}"
+ 			;;
+ 		"port")
+ 			echo "$port"
+@@ -88,7 +88,8 @@ __get_ssh_info() {
+ 	# Fetch configuration with given cmd
+ 	# Depending of ssh version, configuration output may or may not contain `host` directive
+ 	# Check both `host` and `hostname` for old ssh versions compatibility and prefer `host` if exists
+-	ssh -TGN $cmd 2>/dev/null | grep -E -e '^host(name)?[[:space:]]' -e '^port[[:space:]]' -e '^user[[:space:]]' | sort --unique --key 1,1.4 | cut -f 2 -d ' ' | xargs
++	# ssh -TGN $cmd 2>/dev/null | grep -E -e '^host(name)?[[:space:]]' -e '^port[[:space:]]' -e '^user[[:space:]]' | sort --unique --key 1,1.4 | cut -f 2 -d ' ' | xargs
++	ssh -T $cmd "echo \"\$(hostname) \${SSH_CONNECTION##* } \$(whoami)\"" 2>/dev/null
+ }
+ 
+ # @see https://github.com/mobile-shell/mosh/blob/master/scripts/mosh.pl#L465
