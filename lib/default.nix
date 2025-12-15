@@ -1,7 +1,7 @@
 { lib, ... }@args:
 {
   x = lib.mergeAttrsList [
-    builtins.extraBuiltins
+    builtins.extraBuiltins or  {}
     (import ./build.nix args)
     (import ./common.nix args)
   ];

@@ -152,7 +152,6 @@
           lib.x.mkEnv {
             emailSecret = ./secrets/work_email.age;
             homeName = "work0";
-            nixRoot = "/home/delacruz/.nix";
           }
         );
         work1 = lib.x.mkHomeConfiguration (
@@ -160,15 +159,6 @@
             username = "hansel.delacruz";
             emailSecret = ./secrets/work_email.age;
             homeName = "work1";
-            nixRoot = "/home/${username}/.nix";
-          }
-        );
-        work2 = lib.x.mkHomeConfiguration (
-          lib.x.mkEnv rec {
-            username = "hansel.delacruz";
-            emailSecret = ./secrets/work_email.age;
-            homeName = "work2";
-            nixRoot = "/home/${username}/.nix";
           }
         );
       };
