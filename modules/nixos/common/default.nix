@@ -18,7 +18,6 @@
     ../home-manager-integration
     ../networking/networkmanager
     ../programs/fuse
-    ../programs/nh
     ../services/cockpit
     ../services/fail2ban
     ../services/openssh

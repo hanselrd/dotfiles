@@ -44,16 +44,14 @@
   home.username = env.username;
   home.homeDirectory = env.homeDirectory;
 
-  home.enableNixpkgsReleaseCheck = false;
-
   home.preferXdgDirectories = true;
 
   xdg.enable = true;
 
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-  };
+  # xdg.userDirs = {
+  #   enable = true;
+  #   createDirectories = true;
+  # };
 
   home.language.base = "en_US.UTF-8";
 
