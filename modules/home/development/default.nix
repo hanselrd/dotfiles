@@ -6,22 +6,22 @@
 }:
 {
   imports = [
+    # ./dhall
+    # ./elixir
+    # ./gleam
+    # ./haskell
+    # ./java
+    # ./kotlin
+    # ./lua
+    # ./nickel
+    # ./purescript
+    # ./rust
+    # ./zig
     ./cpp
-    ./dhall
-    ./elixir
-    ./gleam
     ./go
-    ./haskell
-    ./java
     ./javascript
-    ./kotlin
-    ./lua
-    ./nickel
     ./nix
-    ./purescript
     ./python
-    ./rust
     ./shell
-    ./zig
   ];
 }

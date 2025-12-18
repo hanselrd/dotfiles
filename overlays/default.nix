@@ -8,8 +8,8 @@ with inputs;
     nix = prev.nixVersions.latest;
     nix-plugins = prev.nix-plugins.overrideAttrs {
       buildInputs = with final; [
-        nix
         boost
+        nix
       ];
     };
   })

@@ -64,18 +64,9 @@
     {
       self,
       nixpkgs,
-      nixpkgs-stable,
-      agenix,
-      disko,
       home-manager,
-      impermanence,
-      nix-darwin,
-      nixos-hardware,
-      rust-overlay,
-      stylix,
       treefmt-nix,
-      zig-overlay,
-      zls,
+      ...
     }@inputs:
     let
       inherit (self) outputs;
@@ -147,6 +138,13 @@
       # darwinConfigurations = { };
 
       homeConfigurations = {
+        docker = lib.x.mkHomeConfiguration (
+          lib.x.mkEnv {
+            username = "root";
+            homeDirectory = "/root";
+            homeName = "docker";
+          }
+        );
         basic = lib.x.mkHomeConfiguration (lib.x.mkEnv { homeName = "basic"; });
         work0 = lib.x.mkHomeConfiguration (
           lib.x.mkEnv {
@@ -170,29 +168,74 @@
         in
         {
           codegen = lib.x.mkApp (
-            pkgs.writeShellScriptBin "codegen" ''
-              ${lib.getExe' pkgs.go "go"} generate ./...
-            ''
+            pkgs.writeShellApplication {
+              name = "codegen";
+              runtimeInputs = with pkgs; [ go ];
+              text = ''
+                go generate ./...
+              '';
+            }
           );
 
           update = lib.x.mkApp (
-            pkgs.writeShellScriptBin "update" ''
-              ${lib.getExe pkgs.nix} flake update
-              ${lib.getExe' pkgs.go "go"} get -u ./...
-              ${lib.getExe' pkgs.go "go"} mod tidy
-              ${lib.getExe' pkgs.go "go"} get github.com/dave/jennifer
-              ${lib.getExe' pkgs.go "go"} get github.com/dmarkham/enumer
-            ''
+            pkgs.writeShellApplication {
+              name = "update";
+              runtimeInputs = with pkgs; [
+                go
+                nix
+              ];
+              text = ''
+                nix flake update
+                go get -u ./...
+                go mod tidy
+                go get github.com/dave/jennifer
+                go get github.com/dmarkham/enumer
+              '';
+            }
           );
 
           all = lib.x.mkApp (
-            pkgs.writeShellScriptBin "all" ''
-              ${lib.getExe pkgs.nix} fmt
-              ${lib.getExe pkgs.nix} run .#update
-            ''
+            pkgs.writeShellApplication {
+              name = "all";
+              runtimeInputs = with pkgs; [ nix ];
+              text = ''
+                nix fmt
+                nix run .#update
+              '';
+            }
           );
+        }
+      );
 
-          cli = lib.x.mkApp (lib.x.buildGoBin "dotfiles-cli" { inherit pkgs; });
+      devShells = eachSystem (
+        system:
+        let
+          pkgs = legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShellNoCC {
+            packages = with pkgs; [
+              age
+              coreutils
+              gnused
+              nh
+              nix
+              nix-plugins
+              pkgs.home-manager
+            ];
+            NH_FLAKE = ./.;
+            shellHook = ''
+              . ${./bootstrap/nix-config.sh}
+              export NIX_CONFIG=$(
+                cat << EOF
+              $NIX_CONFIG
+              plugin-files = ${pkgs.nix-plugins}/lib/nix/plugins
+              extra-builtins-file = ${./lib/builtins.nix}
+              EOF
+              )
+              nix --version
+            '';
+          };
         }
       );
 

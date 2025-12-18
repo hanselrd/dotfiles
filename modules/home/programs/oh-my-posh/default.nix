@@ -39,14 +39,26 @@
               foreground = "lightRed";
               template = lib.concatStrings [
                 "<b>"
-                "idle"
-                "<darkGray>@</>"
-                "{{.Output}}"
+                "idle("
+                "<darkGray>{{.Output}}</>"
+                ")"
                 "</b> "
               ];
               properties = {
                 command = "${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold";
               };
+            }
+            {
+              type = "nix-shell";
+              style = "plain";
+              foreground = "lightMagenta";
+              template = lib.concatStrings [
+                "<b>"
+                "$nix("
+                "<darkGray>{{.Type}}</>"
+                ")"
+                "</b> "
+              ];
             }
             {
               type = "time";
@@ -195,7 +207,7 @@
               template = lib.concatStrings [
                 "<b>"
                 "{{.Name}}"
-                "{{if gt .SHLVL 0}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}}"
+                "{{if gt .SHLVL 1}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}}"
                 "</b> "
               ];
             }

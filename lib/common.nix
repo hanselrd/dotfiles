@@ -192,8 +192,9 @@ rec {
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = rootPath;
-      vendorHash = "sha256-9Cm9qfZciZtsvssVtd7qQ+aezWhrqcH+JTKdEuFX23E=";
+      vendorHash = "sha256-wAjlukeYu8+j+7uabObjG07o/uOXBvdBxjH4TR/t7Z8=";
       subPackages = [ "cmd/${name}" ];
+      goSum = rootPath + "/go.sum";
       ldflags = [
         "-s -w -linkmode=external"
         "-X 'github.com/hanselrd/dotfiles/internal/build.Version=${lib.version}'"

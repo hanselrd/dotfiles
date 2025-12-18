@@ -89,7 +89,7 @@
       };
       shlvl = {
         format = "[|](bold bright-black)[$shlvl]($style) ";
-        threshold = 1;
+        threshold = 2;
         style = "bold yellow";
         disabled = false;
       };

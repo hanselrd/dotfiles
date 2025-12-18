@@ -36,8 +36,6 @@
     tshark
     udisks
     wireguard-tools
-    wtfutil
     yt-dlp
-    zlib
   ];
 }

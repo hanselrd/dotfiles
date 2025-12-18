@@ -101,7 +101,7 @@
             owner = "soyuka";
             repo = pluginName;
             rev = version;
-            hash = "sha256-zZnvbWAPyNY/LaBo5GgbaApk7lwbjlKqpwMe6W0Y+5M=";
+            hash = "sha256-t5jRUvwiwym6f7vfKD/D0Vu1UXpxRMCLNyBbY0nZciw=";
           };
           patches = [ ./tmux-current-pane-hostname.patch ];
         };
@@ -125,9 +125,15 @@
       }
     ];
     extraConfig = ''
+      set -ga message-command-style "bold"
+      set -ga message-style "bold"
       set -g status-justify centre
-      set -g window-status-current-format " #I:#W#F "
+      set -ga status-style "bold"
+      set -ga window-status-bell-style "bold"
+      set -g window-status-current-format "#I:#W#F"
+      set -ga window-status-current-style "bold"
       set -g window-status-format "#I:#W#F"
+      set -ga mode-style "bold"
       setw -g pane-border-format ""
       setw -g pane-border-lines single
     '';

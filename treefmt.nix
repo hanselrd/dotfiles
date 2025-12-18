@@ -59,4 +59,13 @@ in
   programs.golines.maxLength = 100;
   settings.formatter.golines.excludes = excludes;
   settings.formatter.golines.includes = [ "*.go" ];
+
+  programs.dockerfmt.enable = true;
+  settings.formatter.dockerfmt.excludes = excludes;
+  settings.formatter.dockerfmt.includes = [ "Dockerfile" ];
+  settings.formatter.dockerfmt.options = [
+    "-i"
+    "2"
+    "-s"
+  ];
 }

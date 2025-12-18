@@ -27,10 +27,11 @@
     less
     lm_sensors
     lsb-release
-    miller
+    man-db
+    ncdu
+    nix
     objconv
     pfetch
-    pqrs
     procps
     rsync
     ssh-to-age
@@ -40,9 +41,9 @@
     universal-ctags
     unzip
     wget
-    xan
-    xar
+    which
     xxd
+    zlib
     zstd
   ];
 }

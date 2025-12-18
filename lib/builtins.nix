@@ -11,7 +11,7 @@ rec {
       "env"
       "bash"
       "-c"
-      "< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c ${builtins.toString length} | sed 's/.*/\"&\"/'"
+      "< /dev/urandom tr -dc 'a-z0-9' | head -c ${builtins.toString length} | sed 's/.*/\"&\"/'"
     ];
 
   getDevicePartition =
