@@ -35,6 +35,10 @@
     #     file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
     #   }
     # ];
-    profileExtra = config.programs.bash.profileExtra;
+    profileExtra = ''
+      if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then
+        . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
+      fi
+    '';
   };
 }

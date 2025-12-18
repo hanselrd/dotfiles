@@ -153,7 +153,7 @@
           }
         );
         work1 = lib.x.mkHomeConfiguration (
-          lib.x.mkEnv rec {
+          lib.x.mkEnv {
             username = "hansel.delacruz";
             emailSecret = ./secrets/work_email.age;
             homeName = "work1";
