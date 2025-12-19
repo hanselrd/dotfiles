@@ -32,20 +32,20 @@
             hash = "sha256-SAzsn4LoG8Ju5t13/U3/ctlJQPyPgv2FjpPkWSeKbP0=";
           };
         });
-        extraConfig = ''
-          set -g @mode_indicator_prefix_mode_style "fg=#000000,bg=brightred"
+        extraConfig = with config.lib.stylix.colors.withHashtag; ''
+          set -g @mode_indicator_prefix_mode_style "fg=${base01},bg=${bright-red}"
           set -g @mode_indicator_prefix_prompt " PRFX "
-          set -g @mode_indicator_copy_mode_style "fg=#000000,bg=brightyellow"
+          set -g @mode_indicator_copy_mode_style "fg=${base01},bg=${bright-yellow}"
           set -g @mode_indicator_copy_prompt " COPY "
-          set -g @mode_indicator_sync_mode_style "fg=#000000,bg=brightcyan"
+          set -g @mode_indicator_sync_mode_style "fg=${base01},bg=${bright-cyan}"
           set -g @mode_indicator_sync_prompt " SYNC "
-          set -g @mode_indicator_empty_mode_style "fg=#000000,bg=brightblue"
+          set -g @mode_indicator_empty_mode_style "fg=${base01},bg=${bright-blue}"
           set -g @mode_indicator_empty_prompt " TMUX "
 
           set -g status-left-length 100
           set -g status-left ""
           set -ga status-left "#[fg=brightblack][#[default]"
-          set -ga status-left "#{?client_prefix,#[fg=brightred],#{?pane_in_mode,#[fg=brightyellow],#{?pane_synchronized,#[fg=brightcyan],#[fg=brightblue]}}}#S#[default]"
+          set -ga status-left "#{?client_prefix,#[fg=${bright-red}],#{?pane_in_mode,#[fg=${bright-yellow}],#{?pane_synchronized,#[fg=${bright-cyan}],#[fg=${bright-blue}]}}}#S#[default]"
           set -ga status-left "#[fg=brightblack]]#[default] "
           set -ga status-left "#[fg=brightmagenta]#(${lib.getExe pkgs.fastfetch} -l none -c ${./fastfetch-os.jsonc})#[default]"
           set -ga status-left "#[fg=brightblack]@#(${lib.getExe pkgs.fastfetch} -l none -c ${./fastfetch-kernel.jsonc})#[default] "
@@ -87,9 +87,9 @@
             hash = "sha256-vsR/OfcXK2YL4VmdVku3XxGbR5exgnbmlPVIQ2LnWBg=";
           };
         });
-        extraConfig = ''
-          set -g @online_icon "#[fg=#000000,bg=brightgreen] ONLN #[default]"
-          set -g @offline_icon "#[fg=#000000,bg=brightred] OFFLN #[default]"
+        extraConfig = with config.lib.stylix.colors.withHashtag; ''
+          set -g @online_icon "#[fg=${base01},bg=${bright-green}] ONLN #[default]"
+          set -g @offline_icon "#[fg=${base01},bg=${bright-red}] OFFLN #[default]"
         '';
       }
       {
@@ -124,14 +124,14 @@
         '';
       }
     ];
-    extraConfig = ''
+    extraConfig = with config.lib.stylix.colors.withHashtag; ''
       set -ga message-command-style "bold"
       set -ga message-style "bold"
       set -g status-justify centre
       set -ga status-style "bold"
       set -ga window-status-bell-style "bold"
-      set -g window-status-current-format "#I:#W#F"
-      set -ga window-status-current-style "bold"
+      set -g window-status-current-format " #I:#W#F "
+      set -g window-status-current-style "fg=${base01},bg=${bright-yellow},bold"
       set -g window-status-format "#I:#W#F"
       set -ga mode-style "bold"
       setw -g pane-border-format ""
