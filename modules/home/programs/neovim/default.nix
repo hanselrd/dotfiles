@@ -90,6 +90,4 @@
     withNodeJs = true;
     extraLuaConfig = pkgs.replaceVars ./config.lua { inherit (config.xdg) cacheHome; } |> lib.readFile;
   };
-
-  stylix.targets.neovim.enable = true;
 }

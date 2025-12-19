@@ -11,6 +11,4 @@
     enable = true;
     # wayland.enable = true;
   };
-
-  stylix.targets.kde.enable = true;
 }

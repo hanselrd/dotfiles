@@ -16,6 +16,4 @@
     noto-fonts-color-emoji
     noto-fonts-lgc-plus
   ];
-
-  stylix.targets.fontconfig.enable = true;
 }

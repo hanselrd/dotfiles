@@ -140,6 +140,4 @@
     prefix = "C-a";
     tmuxp.enable = true;
   };
-
-  stylix.targets.tmux.enable = true;
 }
