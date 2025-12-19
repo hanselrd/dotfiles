@@ -204,6 +204,37 @@
               '';
             }
           );
+
+          eject = lib.x.mkApp (
+            pkgs.writeShellApplication {
+              name = "eject";
+              runtimeInputs = with pkgs; [
+                coreutils
+                cpio
+                findutils
+                gnused
+                nix
+              ];
+              text = ''
+                set -x
+                home=''${1:-basic}
+                hash_length=5
+                out_dir=$HOME/.nix/x/$(
+                  < /dev/urandom tr -dc 'a-z0-9' | head -c "$hash_length"
+                  echo
+                )
+                path0=$(nix build --no-link --print-out-paths ".#homeConfigurations.$home.activationPackage" --impure)
+                path1=$(readlink -f "$HOME/.nix-profile")
+                deps=$(nix-store -qR "$path0" "$path1")
+                sed_search="s@/nix/store/.{$((''${#out_dir} - 10))}@$out_dir/@g"
+                echo "$deps" | xargs -I {} -P 0 sh -c "find {} | cpio -ov | sed -E '$sed_search' | cpio -idmv"
+                path0_new=$(echo "$path0" | sed -E "$sed_search")
+                path1_new=$(echo "$path1" | sed -E "$sed_search")
+                cp -a "$path0_new/home-files/." "$HOME/"
+                ln -snfF "$path1_new" "$HOME/.nix-profile"
+              '';
+            }
+          );
         }
       );
 
