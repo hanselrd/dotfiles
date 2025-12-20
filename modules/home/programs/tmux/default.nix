@@ -16,11 +16,6 @@
     newSession = true;
     terminal = "screen-256color";
     plugins = with pkgs.tmuxPlugins; [
-      # battery
-      # better-mouse-mode
-      # cpu
-      # extrakto
-      # yank
       pain-control
       {
         plugin = mode-indicator.overrideAttrs (attrs: rec {
@@ -47,29 +42,29 @@
           set -ga status-left "#[fg=brightblack][#[default]"
           set -ga status-left "#{?client_prefix,#[fg=${bright-red}],#{?pane_in_mode,#[fg=${bright-yellow}],#{?pane_synchronized,#[fg=${bright-cyan}],#[fg=${bright-blue}]}}}#S#[default]"
           set -ga status-left "#[fg=brightblack]]#[default] "
-          set -ga status-left "#[fg=brightmagenta]#(${lib.getExe pkgs.fastfetch} -l none -c ${./fastfetch-os.jsonc})#[default]"
+          set -ga status-left "#[fg=${bright-magenta}]#(${lib.getExe pkgs.fastfetch} -l none -c ${./fastfetch-os.jsonc})#[default]"
           set -ga status-left "#[fg=brightblack]@#(${lib.getExe pkgs.fastfetch} -l none -c ${./fastfetch-kernel.jsonc})#[default] "
 
           set -g status-right-length 100
           set -g status-right " "
           set -ga status-right "#{tmux_mode_indicator} "
           set -ga status-right "#{online_status} "
-          set -ga status-right "#[fg=brightcyan]#U#[default]"
+          set -ga status-right "#[fg=${bright-cyan}]#U#[default]"
           set -ga status-right "#[fg=brightblack]@#[default]"
-          set -ga status-right "#{?#{pane_ssh_connected},#[fg=brightgreen],#[fg=brightblack]}#{hostname_short}#[default] "
+          set -ga status-right "#{?#{pane_ssh_connected},#[fg=${bright-green}],#[fg=brightblack]}#{hostname_short}#[default] "
           set -ga status-right "#[fg=brightblack]{#[default]"
-          set -ga status-right "#[fg=brightyellow]${
+          set -ga status-right "#[fg=${bright-yellow}]${
             lib.replaceStrings
               [ "<" ">" ]
               [
                 (lib.concatStrings [
                   "#[fg=brightblack]<#[default]"
-                  "#[fg=brightred]"
+                  "#[fg=${bright-red}]"
                 ])
                 (lib.concatStrings [
                   "#[default]"
                   "#[fg=brightblack]>#[default]"
-                  "#[fg=brightyellow]"
+                  "#[fg=${bright-yellow}]"
                 ])
               ]
               env.timeFormat
