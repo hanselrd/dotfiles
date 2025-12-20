@@ -59,7 +59,11 @@ require("mini.move").setup({
     line_up = "<M-Up>",
   },
 })
-require("mini.notify").setup()
+require("mini.notify").setup({
+  lsp_progress = {
+    enable = false,
+  },
+})
 require("mini.operators").setup()
 require("mini.pairs").setup()
 require("mini.pick").setup()
