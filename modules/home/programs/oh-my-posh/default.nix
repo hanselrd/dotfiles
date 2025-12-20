@@ -10,7 +10,7 @@
     enable = true;
     enableBashIntegration = config.programs.bash.enable;
     enableZshIntegration = config.programs.zsh.enable;
-    settings = {
+    settings = with config.lib.stylix.colors.withHashtag; {
       disable_notice = true;
       final_space = true;
       version = 2;
@@ -22,7 +22,7 @@
             {
               type = "command";
               style = "plain";
-              foreground = "lightRed";
+              foreground = bright-red;
               template = lib.concatStrings [
                 "<b>"
                 "{{.Output}}"
@@ -36,7 +36,7 @@
             {
               type = "command";
               style = "plain";
-              foreground = "lightRed";
+              foreground = bright-red;
               template = lib.concatStrings [
                 "<b>"
                 "idle("
@@ -51,7 +51,7 @@
             {
               type = "nix-shell";
               style = "plain";
-              foreground = "lightMagenta";
+              foreground = bright-magenta;
               template = lib.concatStrings [
                 "<b>"
                 "$nix("
@@ -63,7 +63,7 @@
             {
               type = "time";
               style = "plain";
-              foreground = "lightYellow";
+              foreground = bright-yellow;
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
@@ -78,7 +78,7 @@
                     [
                       (lib.concatStrings [
                         "<darkGray><</>"
-                        "<lightRed>"
+                        "<${bright-red}>"
                       ])
                       (lib.concatStrings [
                         "</>"
@@ -91,8 +91,8 @@
             {
               type = "session";
               style = "plain";
-              foreground = "lightCyan";
-              foreground_templates = [ "{{if .Root}}lightRed{{end}}" ];
+              foreground = bright-cyan;
+              foreground_templates = [ "{{if .Root}}${bright-red}{{end}}" ];
               template = lib.concatStrings [
                 "<b>"
                 "{{.UserName}}"
@@ -103,25 +103,25 @@
               type = "session";
               style = "plain";
               foreground = "darkGray";
-              foreground_templates = [ "{{if .SSHSession}}lightGreen{{end}}" ];
+              foreground_templates = [ "{{if .SSHSession}}${bright-green}{{end}}" ];
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>@</>"
                 "{{index (regexSplit `\\.` .HostName 2) 0}}"
                 # "<darkGray>|</>"
-                # "<lightBlue>{{.OS}}</>"
+                # "<${bright-blue}>{{.OS}}</>"
                 "</b> "
               ];
             }
             {
               type = "path";
               style = "plain";
-              foreground = "lightCyan";
-              foreground_templates = [ "{{if not .Writable}}lightRed{{end}}" ];
+              foreground = bright-cyan;
+              foreground_templates = [ "{{if not .Writable}}${bright-red}{{end}}" ];
               template = lib.concatStrings [
                 "<b>"
                 "{{.Path}}"
-                "{{if gt .StackCount 0}}<darkGray>|</><lightYellow>{{.StackCount}}</>{{end}}"
+                "{{if gt .StackCount 0}}<darkGray>|</><${bright-yellow}>{{.StackCount}}</>{{end}}"
                 "</b> "
               ];
               properties = {
@@ -131,17 +131,17 @@
             {
               type = "git";
               style = "plain";
-              foreground = "lightMagenta";
+              foreground = bright-magenta;
               template = lib.concatStrings [
                 "<b>"
                 "{{.HEAD}}"
                 "{{if or .BranchStatus .Staging.Changed .Working.Changed}}<darkGray>|</>{{end}}"
-                "{{if .BranchStatus}}<lightRed>{{.BranchStatus}}</>{{end}}"
-                "{{if .Staging.Changed}}<lightRed>{{nospace .Staging.String}}</>{{end}}"
-                "{{if .Working.Changed}}<lightRed>{{nospace .Working.String}}</>{{end}}"
+                "{{if .BranchStatus}}<${bright-red}>{{.BranchStatus}}</>{{end}}"
+                "{{if .Staging.Changed}}<${bright-red}>{{nospace .Staging.String}}</>{{end}}"
+                "{{if .Working.Changed}}<${bright-red}>{{nospace .Working.String}}</>{{end}}"
                 "<darkGray>|</>"
-                "<lightGreen>{{trunc 6 .Commit.Sha}}</>"
-                "{{if gt .StashCount 0}}<darkGray>|</><lightYellow>{{.StashCount}}</>{{end}}"
+                "<${bright-green}>{{trunc 6 .Commit.Sha}}</>"
+                "{{if gt .StashCount 0}}<darkGray>|</><${bright-yellow}>{{.StashCount}}</>{{end}}"
                 "</b>"
               ];
               properties = {
@@ -185,8 +185,8 @@
             {
               type = "text";
               style = "plain";
-              foreground = "lightYellow";
-              foreground_templates = [ "{{if not (eq .Code 0)}}lightRed{{end}}" ];
+              foreground = bright-yellow;
+              foreground_templates = [ "{{if not (eq .Code 0)}}${bright-red}{{end}}" ];
               template = lib.concatStrings [
                 "<b>"
                 "{{if not (eq .Code 0)}}<darkGray>|</>{{.Code}}{{end}}"
@@ -207,15 +207,15 @@
               template = lib.concatStrings [
                 "<b>"
                 "{{.Name}}"
-                "{{if gt .SHLVL 1}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}}"
+                "{{if gt .SHLVL 1}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}}"
                 "</b> "
               ];
             }
             {
               type = "text";
               style = "plain";
-              foreground = "lightCyan";
-              foreground_templates = [ "{{if not (eq .Code 0)}}lightRed{{end}}" ];
+              foreground = bright-cyan;
+              foreground_templates = [ "{{if not (eq .Code 0)}}${bright-red}{{end}}" ];
               template = lib.concatStrings [
                 "<b>"
                 ">"
@@ -226,25 +226,25 @@
         }
       ];
       # transient_prompt = {
-      #   foreground = "lightCyan";
+      #   foreground = bright-cyan;
       #   foreground_templates = [
-      #     "{{if not (eq .Code 0)}}lightRed{{end}}"
+      #     "{{if not (eq .Code 0)}}${bright-red}{{end}}"
       #   ];
       #   template = lib.concatStrings [
       #     "<b>"
       #     "<darkGray>{{.Shell}}</>"
-      #     "{{if gt .SHLVL 0}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}} "
+      #     "{{if gt .SHLVL 0}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}} "
       #     ">"
       #     "</b> "
       #   ];
       # };
       secondary_prompt = {
-        foreground = "lightCyan";
-        foreground_templates = [ "{{if not (eq .Code 0)}}lightRed{{end}}" ];
+        foreground = bright-cyan;
+        foreground_templates = [ "{{if not (eq .Code 0)}}${bright-red}{{end}}" ];
         template = lib.concatStrings [
           "<b>"
           "<darkGray>{{.Shell}}</>"
-          "{{if gt .SHLVL 0}}<darkGray>|</><lightYellow>{{.SHLVL}}</>{{end}} "
+          "{{if gt .SHLVL 0}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}} "
           ">>"
           "</b> "
         ];
