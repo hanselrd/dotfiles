@@ -61,18 +61,21 @@
               ];
             }
             {
-              type = "time";
+              # type = "time";
+              type = "command";
               style = "plain";
               foreground = bright-yellow;
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
-                "{{.CurrentDate | date .Format}}"
+                # "{{.CurrentDate | date .Format}}"
+                "{{.Output}}"
                 "<darkGray>}</>"
                 "</b> "
               ];
               properties = {
-                time_format =
+                # time_format =
+                command = "${lib.getExe' pkgs.coreutils "date"} +\"${
                   lib.replaceStrings
                     [ "<" ">" ]
                     [
@@ -85,7 +88,9 @@
                         "<darkGray>></>"
                       ])
                     ]
-                    env.goTimeFormat;
+                    # env.goTimeFormat;
+                    env.timeFormat
+                }\"";
               };
             }
             {
@@ -233,7 +238,7 @@
       #   template = lib.concatStrings [
       #     "<b>"
       #     "<darkGray>{{.Shell}}</>"
-      #     "{{if gt .SHLVL 0}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}} "
+      #     "{{if gt .SHLVL 1}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}} "
       #     ">"
       #     "</b> "
       #   ];
@@ -244,7 +249,7 @@
         template = lib.concatStrings [
           "<b>"
           "<darkGray>{{.Shell}}</>"
-          "{{if gt .SHLVL 0}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}} "
+          "{{if gt .SHLVL 1}}<darkGray>|</><${bright-yellow}>{{.SHLVL}}</>{{end}} "
           ">>"
           "</b> "
         ];

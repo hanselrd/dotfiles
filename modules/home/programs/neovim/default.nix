@@ -2,16 +2,13 @@
   config,
   lib,
   pkgs,
-  env,
   ...
 }:
 {
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-      cmp-nvim-lsp
       mini-nvim
-      nvim-cmp
       nvim-lspconfig
       rainbow-delimiters-nvim
       telescope-fzf-native-nvim
