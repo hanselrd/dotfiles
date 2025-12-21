@@ -38,6 +38,7 @@
     strace
     sysstat
     tree
+    tzdata
     universal-ctags
     unzip
     wget
