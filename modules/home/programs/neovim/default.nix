@@ -26,7 +26,7 @@
       jdt-language-server
       kotlin-language-server
       lua-language-server
-      nixd
+      nil
       nls
       nodePackages.typescript
       nodePackages.typescript-language-server

@@ -159,7 +159,7 @@ local servers = {
     },
   },
   nickel_ls = {},
-  nixd = {},
+  nil_ls = {},
   purescriptls = {},
   pyright = {},
   rust_analyzer = {},
