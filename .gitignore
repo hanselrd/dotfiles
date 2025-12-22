@@ -1,2 +1,4 @@
-/*.toon
-/graph.*
+/secrets/**
+!/secrets/secrets.nix
+!/secrets/**/
+!/secrets/**/*.age
