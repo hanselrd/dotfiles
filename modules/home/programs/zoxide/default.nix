@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, ... }:
 {
   programs.zoxide = {
     enable = true;

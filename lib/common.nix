@@ -128,7 +128,6 @@ rec {
   runExternalSystem =
     name:
     {
-      config,
       pkgs,
       text,
       runAlways ? false,
@@ -192,7 +191,7 @@ rec {
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = rootPath;
-      vendorHash = "sha256-wAjlukeYu8+j+7uabObjG07o/uOXBvdBxjH4TR/t7Z8=";
+      vendorHash = "sha256-QFkw9c2vRydOBdeqhdPTb1WtyxKxx2WeDTl7OruZOTY=";
       subPackages = [ "cmd/${name}" ];
       goSum = rootPath + "/go.sum";
       ldflags = [

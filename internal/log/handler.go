@@ -12,8 +12,6 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/samber/lo"
 	slogzerolog "github.com/samber/slog-zerolog/v2"
-
-	"github.com/hanselrd/dotfiles/pkg/environment"
 )
 
 var now = time.Now()
@@ -35,25 +33,9 @@ func NewHandler(w io.Writer, opts *slog.HandlerOptions) slog.Handler {
 			if s, ok := i.(string); ok {
 				t := lo.Must(time.ParseInLocation(zerolog.TimeFieldFormat, s, time.Local))
 				w := 15
-				c0 := color.New(color.Bold, color.FgHiYellow)
-				c1 := color.New(color.Bold, color.FgHiRed)
-				cj := color.New(color.Bold, color.FgHiBlack)
-				ss := lo.Map(
-					strings.Split(
-						t.In(time.Local).Format(environment.Environment.Extra.GoTimeFormat),
-						">",
-					),
-					func(s string, _ int) string {
-						ss := strings.Split(s, "<")
-						ss[0] = c0.Sprintf(ss[0])
-						if len(ss) == 2 {
-							ss[1] = c1.Sprintf(ss[1])
-						}
-						return strings.Join(ss, cj.Sprintf("<"))
-					},
-				)
-				return strings.Join(ss, cj.Sprintf(">")) + color.HiBlackString(
-					" [%s]",
+				return color.HiBlackString(
+					"%s [%s]",
+					t.In(time.Local).Format(time.Kitchen),
 					lipgloss.PlaceHorizontal(
 						w,
 						lipgloss.Center,

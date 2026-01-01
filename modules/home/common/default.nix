@@ -2,7 +2,6 @@
   inputs,
   config,
   lib,
-  pkgs,
   sharedModulesPath,
   env,
   ...

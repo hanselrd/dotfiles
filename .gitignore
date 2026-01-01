@@ -1,4 +1,4 @@
-# /secrets/**
-# !/secrets/secrets.nix
-# !/secrets/**/
-# !/secrets/**/*.age
+/secrets/**
+!/secrets/secrets.nix
+!/secrets/**/
+!/secrets/**/*.age

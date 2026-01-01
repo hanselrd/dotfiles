@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 let
   formatOption =
     n: v:
@@ -54,8 +49,11 @@ let
   meter = mode: name: { ${name} = mode; };
   bar = meter modes.Bar;
   text = meter modes.Text;
+  # deadnix: skip
   graph = meter modes.Graph;
+  # deadnix: skip
   led = meter modes.LED;
+  # deadnix: skip
   blank = text "Blank";
 in
 {

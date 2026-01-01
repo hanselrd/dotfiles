@@ -16,7 +16,7 @@
       vim-abolish
       vim-eunuch
       vim-textobj-entire
-      (nvim-treesitter.withPlugins (_: pkgs.stable.tree-sitter.allGrammars))
+      (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (_: pkgs.stable.tree-sitter.allGrammars))
     ];
     extraPackages = with pkgs; [
       clang-tools

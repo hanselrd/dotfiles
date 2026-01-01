@@ -1,9 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 let
-  excludes = [
-    "ancestry/*"
-    "secrets/*"
-  ];
+  excludes = [ "ancestry/*" ];
 in
 {
   projectRootFile = "flake.nix";
@@ -13,16 +10,18 @@ in
   programs.nixfmt.indent = 2;
   programs.nixfmt.strict = true;
   settings.formatter.nixfmt.excludes = excludes;
-  settings.formatter.nixfmt.includes = [
-    "secrets/secrets.nix"
-    "*.nix"
-  ];
+  settings.formatter.nixfmt.includes = [ "*.nix" ];
+
+  programs.deadnix.enable = true;
+  settings.formatter.deadnix.excludes = excludes;
+  settings.formatter.deadnix.includes = [ "*.nix" ];
+  settings.formatter.deadnix.options = [ "-W" ];
 
   programs.shfmt.enable = true;
   programs.shfmt.indent_size = 2;
   programs.shfmt.simplify = true;
-  settings.formatter.shfmt.includes = [ "*.sh" ];
   settings.formatter.shfmt.excludes = excludes;
+  settings.formatter.shfmt.includes = [ "*.sh" ];
   settings.formatter.shfmt.options = [ "-sr" ];
 
   programs.stylua.enable = true;

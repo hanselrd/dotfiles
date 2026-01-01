@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     age
@@ -23,6 +18,7 @@
     gnutar
     gzip
     hexxy
+    jq
     killall
     less
     lm_sensors

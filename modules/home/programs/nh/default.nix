@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  env,
-  ...
-}:
+{ config, ... }:
 {
   programs.nh = {
     enable = true;

@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  env,
-  ...
-}:
+{ config, ... }:
 {
   programs.bash = {
     enable = true;

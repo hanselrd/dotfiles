@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  env,
-  ...
-}:
+{ lib, ... }:
 {
   programs.bash.profileExtra = lib.mkAfter ''
     if command -v zsh &> /dev/null; then

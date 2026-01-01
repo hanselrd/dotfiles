@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  env,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     cmake

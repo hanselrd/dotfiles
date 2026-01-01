@@ -43,7 +43,7 @@
 
   nix.optimise = {
     automatic = true;
-    dates = config.nix.gc.dates;
+    dates = "weekly";
   };
 
   boot.loader.efi.canTouchEfiVariables = true;

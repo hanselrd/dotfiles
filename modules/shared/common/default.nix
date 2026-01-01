@@ -1,7 +1,6 @@
 {
   inputs,
   overlays,
-  config,
   lib,
   pkgs,
   rootPath,
@@ -38,7 +37,7 @@
 
   nix.gc = {
     automatic = true;
-    dates = "weekly";
+    # dates = "weekly";
     options = "--delete-older-than 7d";
   };
 

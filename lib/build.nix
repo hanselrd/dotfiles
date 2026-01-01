@@ -86,6 +86,7 @@ rec {
   mkDarwinConfiguration =
     env:
     inputs.nix-darwin.lib.darwinSystem {
+      inherit (env) system;
       modules = [ (rootPath + "/hosts/${env.hostName}") ];
       specialArgs = {
         inherit

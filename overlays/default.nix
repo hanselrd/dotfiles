@@ -13,7 +13,7 @@ with inputs;
       ];
     };
   })
-  (final: prev: {
+  (final: _prev: {
     stable = import nixpkgs-stable {
       inherit (final) system;
       config = {

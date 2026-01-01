@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  env,
-  ...
-}:
+{ lib, ... }:
 {
   boot.loader.grub = {
     enable = true;
