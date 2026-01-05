@@ -235,7 +235,7 @@
                 path1=$(readlink -f "$HOME/.nix-profile")
                 deps=$(nix-store -qR "$path0" "$path1")
                 sed_string="s@/nix/store/.{$((''${#out_dir} - 10))}@$out_dir/@g"
-                echo "$deps" | xargs -I {} -P 0 sh -c "find {} | cpio -ov | sed -E '$sed_string' | cpio -idmv"
+                echo "$deps" | xargs -I {} -P 0 sh -c "find {} | cpio -ov | sed -E '$sed_string' | cpio -idmv || true"
                 chmod -R u+w "$out_dir"
                 path0_new=$(echo "$path0" | sed -E "$sed_string")
                 path1_new=$(echo "$path1" | sed -E "$sed_string")
