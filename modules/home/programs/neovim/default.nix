@@ -39,6 +39,11 @@
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
-    extraLuaConfig = pkgs.replaceVars ./config.lua { inherit (config.xdg) cacheHome; } |> lib.readFile;
+    extraLuaConfig =
+      pkgs.replaceVars ./config.lua {
+        inherit (config.home) username;
+        inherit (config.xdg) cacheHome;
+      }
+      |> lib.readFile;
   };
 }

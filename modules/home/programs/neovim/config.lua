@@ -71,7 +71,15 @@ require("mini.pairs").setup()
 require("mini.pick").setup()
 require("mini.snippets").setup()
 require("mini.splitjoin").setup()
-require("mini.starter").setup()
+require("mini.starter").setup({
+  header = function()
+    local hour = tonumber(vim.fn.strftime("%H"))
+    -- [04:00, 12:00) - morning, [12:00, 20:00) - day, [20:00, 04:00) - evening
+    local part_id = math.floor((hour + 4) / 8) + 1
+    local day_part = ({ "evening", "morning", "afternoon", "evening" })[part_id]
+    return ("Good %s, @username@"):format(day_part)
+  end,
+})
 require("mini.statusline").setup()
 require("mini.surround").setup()
 require("mini.tabline").setup()
