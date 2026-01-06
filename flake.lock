@@ -602,11 +602,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1767573704,
-        "narHash": "sha256-rNGKx9KO30dKt1wfpf6F0DrUaqp4jRZoqUi6+Fy32yM=",
+        "lastModified": 1767659903,
+        "narHash": "sha256-Jc/KmlLyn2T8P/ZpgBoMkULsfmn8B4PjnwiXzlEA9Zg=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "501956cc4a633fdc744dc4cdd88ce12c65b7fc65",
+        "rev": "1508a4f84129c2824ee4fcbdec31c63bdcf08756",
         "type": "github"
       },
       "original": {
