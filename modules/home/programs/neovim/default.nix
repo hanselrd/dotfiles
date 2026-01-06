@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  env,
   ...
 }:
 {
@@ -41,6 +42,7 @@
     withNodeJs = true;
     extraLuaConfig =
       pkgs.replaceVars ./config.lua {
+        inherit (env) name;
         inherit (config.home) username;
         inherit (config.xdg) cacheHome;
       }
