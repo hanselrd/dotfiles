@@ -9,7 +9,6 @@
 {
   imports = with inputs; [
     agenix.homeManagerModules.default
-    impermanence.homeManagerModules.impermanence
     stylix.homeModules.stylix
     (sharedModulesPath + "/common")
     ../binaries
