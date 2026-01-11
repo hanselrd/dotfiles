@@ -3,19 +3,14 @@ package shell
 import (
 	"fmt"
 	"strings"
-
-	"github.com/samber/lo"
 )
 
 type CommandBuilder struct {
-	sb strings.Builder
+	strs []string
 }
 
 func (cb *CommandBuilder) Command(cmd string) *CommandBuilder {
-	if cb.sb.Len() > 0 {
-		lo.Must(cb.sb.WriteString("; "))
-	}
-	lo.Must(cb.sb.WriteString(cmd))
+	cb.strs = append(cb.strs, cmd)
 	return cb
 }
 
@@ -43,32 +38,32 @@ func (cb *CommandBuilder) Or(cmd string) *CommandBuilder {
 	return cb.operator("||", cmd)
 }
 
-func (cb *CommandBuilder) Group(cmds []string) *CommandBuilder {
-	lo.Must(cb.sb.WriteString(fmt.Sprintf("{ %s; }", strings.Join(cmds, "; "))))
-	return cb
-}
-
-func (cb *CommandBuilder) Subgroup(cmds []string) *CommandBuilder {
-	lo.Must(cb.sb.WriteString(fmt.Sprintf("(%s)", strings.Join(cmds, "; "))))
-	return cb
-}
-
-func (cb *CommandBuilder) String() string {
-	return cb.sb.String()
-}
-
 func (cb *CommandBuilder) operators(op string, cmds []string) *CommandBuilder {
-	paddedOp := fmt.Sprintf(" %s ", op)
-	if cb.sb.Len() > 0 {
-		lo.Must(cb.sb.WriteString(paddedOp))
+	if len(cb.strs) == 0 {
+		panic(cb)
 	}
-	lo.Must(cb.sb.WriteString(strings.Join(cmds, paddedOp)))
+	cb.strs[len(cb.strs)-1] += fmt.Sprintf(
+		" %s %s",
+		op,
+		strings.Join(cmds, fmt.Sprintf(" %s ", op)),
+	)
 	return cb
 }
 
 func (cb *CommandBuilder) operator(op, cmd string) *CommandBuilder {
-	if cb.sb.Len() == 0 {
-		panic(cb)
-	}
 	return cb.operators(op, []string{cmd})
+}
+
+func (cb *CommandBuilder) Group(cmds []string) *CommandBuilder {
+	cb.strs = append(cb.strs, fmt.Sprintf("{ %s; }", strings.Join(cmds, "; ")))
+	return cb
+}
+
+func (cb *CommandBuilder) Subgroup(cmds []string) *CommandBuilder {
+	cb.strs = append(cb.strs, fmt.Sprintf("(%s)", strings.Join(cmds, "; ")))
+	return cb
+}
+
+func (cb *CommandBuilder) String() string {
+	return strings.Join(cb.strs, "; ")
 }

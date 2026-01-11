@@ -31,11 +31,12 @@ func TestPipe(t *testing.T) {
 
 func TestPipes(t *testing.T) {
 	var cb CommandBuilder
-	cmd := cb.Pipes([]string{
-		"cat file.txt",
-		"sed -E 's/one/two/g'",
-		"wc -l",
-	}).String()
+	cmd := cb.Command("cat file.txt").
+		Pipes([]string{
+			"sed -E 's/one/two/g'",
+			"wc -l",
+		}).
+		String()
 	assert.Equal(t, "cat file.txt | sed -E 's/one/two/g' | wc -l", cmd, "")
 }
 
@@ -49,11 +50,12 @@ func TestAnd(t *testing.T) {
 
 func TestAnds(t *testing.T) {
 	var cb CommandBuilder
-	cmd := cb.Ands([]string{
-		"cat file.txt",
-		"sed -E 's/one/two/g'",
-		"wc -l",
-	}).String()
+	cmd := cb.Command("cat file.txt").
+		Ands([]string{
+			"sed -E 's/one/two/g'",
+			"wc -l",
+		}).
+		String()
 	assert.Equal(t, "cat file.txt && sed -E 's/one/two/g' && wc -l", cmd, "")
 }
 
@@ -67,11 +69,12 @@ func TestOr(t *testing.T) {
 
 func TestOrs(t *testing.T) {
 	var cb CommandBuilder
-	cmd := cb.Ors([]string{
-		"cat file.txt",
-		"sed -E 's/one/two/g'",
-		"wc -l",
-	}).String()
+	cmd := cb.Command("cat file.txt").
+		Ors([]string{
+			"sed -E 's/one/two/g'",
+			"wc -l",
+		}).
+		String()
 	assert.Equal(t, "cat file.txt || sed -E 's/one/two/g' || wc -l", cmd, "")
 }
 
