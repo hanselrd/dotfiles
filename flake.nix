@@ -243,6 +243,7 @@
                 path1_new=$(echo "$path1" | sed -E "$sed_string")
                 cp -a "$path0_new/home-files/." "$HOME/"
                 ln -snfF "$path1_new" "$HOME/.nix-profile"
+                find "$path0_new/home-files/" -type l > "$out_dir/manifest.txt"
               '';
             }
           );
