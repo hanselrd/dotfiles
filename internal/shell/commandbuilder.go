@@ -70,8 +70,16 @@ func (cb *CommandBuilder) Stderr(file string) *CommandBuilder {
 	return cb.redirect("2>", file)
 }
 
+func (cb *CommandBuilder) StderrAppend(file string) *CommandBuilder {
+	return cb.redirect("2>>", file)
+}
+
 func (cb *CommandBuilder) StdoutStderr(file string) *CommandBuilder {
 	return cb.redirect("&>", file)
+}
+
+func (cb *CommandBuilder) StdoutStderrAppend(file string) *CommandBuilder {
+	return cb.redirect("&>>", file)
 }
 
 func (cb *CommandBuilder) redirect(op, file string) *CommandBuilder {
