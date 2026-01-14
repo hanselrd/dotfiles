@@ -78,6 +78,62 @@ func TestOrs(t *testing.T) {
 	assert.Equal(t, "cat file.txt || sed -E 's/one/two/g' || wc -l", cmd, "")
 }
 
+func TestStdin(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("wc -l").
+		Stdin("file.txt").
+		String()
+	assert.Equal(t, "wc -l < file.txt", cmd, "")
+}
+
+func TestStdout(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("cat file.txt").
+		Stdout("file2.txt").
+		String()
+	assert.Equal(t, "cat file.txt > file2.txt", cmd, "")
+}
+
+func TestStdoutAppend(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("cat file.txt").
+		StdoutAppend("file2.txt").
+		String()
+	assert.Equal(t, "cat file.txt >> file2.txt", cmd, "")
+}
+
+func TestStderr(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("cat file.txt").
+		Stderr("file2.txt").
+		String()
+	assert.Equal(t, "cat file.txt 2> file2.txt", cmd, "")
+}
+
+func TestStderrAppend(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("cat file.txt").
+		StderrAppend("file2.txt").
+		String()
+	assert.Equal(t, "cat file.txt 2>> file2.txt", cmd, "")
+}
+
+func TestStdoutStderr(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("cat file.txt").
+		StdoutStderr("file2.txt").
+		String()
+	assert.Equal(t, "cat file.txt &> file2.txt", cmd, "")
+}
+
+func TestStdoutStderrAppend(t *testing.T) {
+	var cb CommandBuilder
+	cmd := cb.Command("cat file.txt").
+		StdoutStderrAppend("file2.txt").
+		String()
+	assert.Equal(t, "cat file.txt &>> file2.txt", cmd, "")
+}
+
 func TestGroup(t *testing.T) {
 	var cb CommandBuilder
 	cmd := cb.Group([]string{
