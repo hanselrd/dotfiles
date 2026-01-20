@@ -12,6 +12,7 @@
       mini-nvim
       nvim-lspconfig
       nvim-treesitter-context
+      plenary-nvim
       rainbow-delimiters-nvim
       telescope-fzf-native-nvim
       telescope-nvim

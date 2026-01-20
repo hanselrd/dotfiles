@@ -61,21 +61,21 @@
               ];
             }
             {
-              # type = "time";
-              type = "command";
+              type = "time";
+              # type = "command";
               style = "plain";
               foreground = bright-yellow;
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
-                # "{{.CurrentDate | date .Format}}"
-                "{{.Output}}"
+                "{{.CurrentDate | date .Format}}"
+                # "{{.Output}}"
                 "<darkGray>}</>"
                 "</b> "
               ];
               properties = {
-                # time_format =
-                command = "${lib.getExe' pkgs.coreutils "date"} +\"${
+                time_format =
+                  # command = "${lib.getExe' pkgs.coreutils "date"} +\"${
                   lib.replaceStrings
                     [ "<" ">" ]
                     [
@@ -88,9 +88,9 @@
                         "<darkGray>></>"
                       ])
                     ]
-                    # env.goTimeFormat;
-                    env.timeFormat
-                }\"";
+                    env.goTimeFormat;
+                # env.timeFormat
+                # }\"";
               };
             }
             {

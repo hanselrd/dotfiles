@@ -31,7 +31,7 @@ rec {
       system ? "x86_64-linux",
       timeZone ? "America/New_York",
       timeFormat ? "<%a>%-d-%b-%y <%Z>T%H:%M",
-      # goTimeFormat ? "<Mon>2-Jan-06 <MST>T15:04",
+      goTimeFormat ? "<Mon>2-Jan-06 <MST>T15:04",
       nixRoot ? null,
     }@args:
     assert lib.assertMsg (
@@ -54,7 +54,7 @@ rec {
         system
         timeZone
         timeFormat
-        # goTimeFormat
+        goTimeFormat
         nixRoot
         ;
       email = if emailSecret != null then lib.x.readSecret identity emailSecret else email;
