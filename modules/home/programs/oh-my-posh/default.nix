@@ -5,6 +5,14 @@
   env,
   ...
 }:
+let
+  poshContext = ''
+    set_poshcontext() {
+      export POSH_LOCK_INSTANCE=$(test -f /var/lock/prevent_idle_terminate && ${lib.getExe' pkgs.coreutils "echo"} "lock")
+      export POSH_IDLE_TERMINATE=$(${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold 2>/dev/null)
+    }
+  '';
+in
 {
   programs.oh-my-posh = {
     enable = true;
@@ -20,33 +28,30 @@
           alignment = "left";
           segments = [
             {
-              type = "command";
+              type = "text";
               style = "plain";
               foreground = bright-red;
               template = lib.concatStrings [
+                "{{if .Env.POSH_LOCK_INSTANCE}}"
                 "<b>"
-                "{{.Output}}"
+                "{{.Env.POSH_LOCK_INSTANCE}}"
                 "</b> "
+                "{{end}}"
               ];
-              properties = {
-                command = "[ -f /var/lock/prevent_idle_terminate ] && ${lib.getExe' pkgs.coreutils "echo"} \"lock\"";
-                interpret = false;
-              };
             }
             {
-              type = "command";
+              type = "text";
               style = "plain";
               foreground = bright-red;
               template = lib.concatStrings [
+                "{{if .Env.POSH_IDLE_TERMINATE}}"
                 "<b>"
                 "idle("
-                "<darkGray>{{.Output}}</>"
+                "<darkGray>{{.Env.POSH_IDLE_TERMINATE}}</>"
                 ")"
                 "</b> "
+                "{{end}}"
               ];
-              properties = {
-                command = "${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold";
-              };
             }
             {
               type = "nix-shell";
@@ -62,20 +67,17 @@
             }
             {
               type = "time";
-              # type = "command";
               style = "plain";
               foreground = bright-yellow;
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
                 "{{.CurrentDate | date .Format}}"
-                # "{{.Output}}"
                 "<darkGray>}</>"
                 "</b> "
               ];
               properties = {
                 time_format =
-                  # command = "${lib.getExe' pkgs.coreutils "date"} +\"${
                   lib.replaceStrings
                     [ "<" ">" ]
                     [
@@ -89,8 +91,6 @@
                       ])
                     ]
                     env.goTimeFormat;
-                # env.timeFormat
-                # }\"";
               };
             }
             {
@@ -256,4 +256,8 @@
       };
     };
   };
+
+  programs.bash.initExtra = lib.mkAfter poshContext;
+
+  programs.zsh.initContent = lib.mkAfter poshContext;
 }

@@ -11,7 +11,7 @@ with inputs;
         boost
         nix
       ];
-      patches = [./nix-plugins.patch];
+      patches = [ ./nix-plugins.patch ];
     };
   })
   (final: _prev: {
