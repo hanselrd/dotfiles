@@ -149,6 +149,7 @@ local servers = {
   emmet_ls = {},
   gleam = {},
   gopls = {},
+  hls = {},
   jdtls = {},
   jsonls = {},
   kotlin_language_server = {},

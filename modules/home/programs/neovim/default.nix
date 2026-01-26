@@ -22,27 +22,14 @@
       (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (_: pkgs.stable.tree-sitter.allGrammars))
     ];
     extraPackages = with pkgs; [
-      clang-tools
-      elixir-ls
       emmet-ls
-      gopls
-      jdt-language-server
-      kotlin-language-server
-      lua-language-server
-      nil
-      nls
-      nodePackages.typescript
-      nodePackages.typescript-language-server
-      pyright
-      rust-analyzer
       vscode-json-languageserver
-      zls
     ];
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
-    extraLuaConfig =
+    initLua =
       pkgs.replaceVars ./config.lua {
         inherit (env) name;
         inherit (config.home) username;

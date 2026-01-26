@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ zigpkgs.master ];
+  home.packages = with pkgs; [
+    zigpkgs.master
+    zls
+  ];
 }

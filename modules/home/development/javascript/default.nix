@@ -2,6 +2,8 @@
 {
   home.packages = with pkgs; [
     bun
+    nodePackages.typescript
+    nodePackages.typescript-language-server
     nodejs
   ];
 

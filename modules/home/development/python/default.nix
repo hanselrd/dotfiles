@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     (python3.withPackages (
-      packages: with packages; [
+      ppkgs: with ppkgs; [
         black
         flake8
         pylint
@@ -11,5 +11,6 @@
     ))
     pipenv
     poetry
+    pyright
   ];
 }

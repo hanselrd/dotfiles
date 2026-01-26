@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ elixir ];
+  home.packages = with pkgs; [
+    elixir
+    elixir-ls
+  ];
 }

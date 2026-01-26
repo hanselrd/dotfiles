@@ -16,6 +16,7 @@
     gofumpt
     golangci-lint
     golines
+    gopls
     gotools
     ragel
     templ
