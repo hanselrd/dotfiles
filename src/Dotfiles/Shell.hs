@@ -17,6 +17,7 @@ readShellWithStdin cmd stdin = do
 
   (exitCode, stdout, stderr) <- liftIO $ readProcessWithExitCode "bash" ["--norc", "--noprofile", "-c", cmd] stdin
 
+  logDebugN $ "cmdRc= " <> (pack $ show exitCode)
   (when $ not $ null stdout)
     $ mapM_
       (\x -> logDebugN $ "cmdOut= " <> pack x)
@@ -25,7 +26,6 @@ readShellWithStdin cmd stdin = do
     $ mapM_
       (\x -> logDebugN $ "cmdErr= " <> pack x)
     $ lines stderr
-  logDebugN $ "cmdRc= " <> (pack $ show exitCode)
 
   pure (exitCode, stdout, stderr)
 
