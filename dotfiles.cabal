@@ -1,0 +1,98 @@
+cabal-version:   3.0
+name:            dotfiles
+version:         0.1.0.0
+
+-- synopsis:
+-- description:
+license:         AGPL-3.0-or-later
+license-file:    LICENSE
+author:          Hansel De La Cruz
+maintainer:      18725263+hanselrd@users.noreply.github.com
+
+-- copyright:
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+-- extra-source-files:
+
+common ghc-options
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-uni-patterns -Wno-unused-matches
+    -fno-ignore-asserts -fno-warn-name-shadowing -haddock -threaded
+
+common exe-ghc-options
+  import:      ghc-options
+  ghc-options: -rtsopts -with-rtsopts=-N
+
+common default-extensions
+  default-extensions:
+    FlexibleContexts
+    GeneralizedNewtypeDeriving
+    LambdaCase
+    OverloadedStrings
+    TemplateHaskell
+
+common build-depends
+  build-depends:
+    , async
+    , monad-logger
+    , process
+    , template-haskell
+    , text
+
+common exe-build-depends
+  import:        build-depends
+  build-depends:
+    , monad-logger-extras
+    , optparse-applicative
+
+library
+  import:           ghc-options, default-extensions, build-depends
+  exposed-modules:
+    Dotfiles.Nix
+    Dotfiles.Shell
+
+  -- other-modules:
+  -- other-extensions:
+  build-depends:    base ^>=4.20.2.0
+  hs-source-dirs:   src
+  default-language: Haskell2010
+
+executable eject
+  import:           exe-ghc-options, default-extensions, exe-build-depends
+  main-is:          Main.hs
+
+  -- other-modules:
+  -- other-extensions:
+  build-depends:
+    , base      ^>=4.20.2.0
+    , dotfiles
+
+  hs-source-dirs:   app/eject
+  default-language: Haskell2010
+
+executable update-hashes
+  import:           exe-ghc-options, default-extensions, exe-build-depends
+  main-is:          Main.hs
+
+  -- other-modules:
+  -- other-extensions:
+  build-depends:
+    , base      ^>=4.20.2.0
+    , dotfiles
+
+  hs-source-dirs:   app/update-hashes
+  default-language: Haskell2010
+
+test-suite dotfiles-test
+  import:           ghc-options, default-extensions, build-depends
+  default-language: Haskell2010
+
+  -- other-modules:
+  -- other-extensions:
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Main.hs
+  build-depends:
+    , base      ^>=4.20.2.0
+    , dotfiles

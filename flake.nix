@@ -175,6 +175,8 @@
         system:
         let
           pkgs = legacyPackages.${system};
+
+          dotfiles = pkgs.haskellPackages.callCabal2nix "dotfiles" ./. { };
         in
         {
           codegen = lib.x.mkApp (
@@ -249,6 +251,9 @@
           );
 
           update-hashes = lib.x.mkApp (lib.x.buildGoBin "update-hashes" { inherit pkgs; });
+
+          eject2 = lib.x.mkApp' dotfiles "eject";
+          update-hashes2 = lib.x.mkApp' dotfiles "update-hashes";
         }
       );
 

@@ -41,6 +41,19 @@ in
     "*.jsonc"
   ];
 
+  programs.ormolu.enable = true;
+  programs.ormolu.ghcOpts = [
+    "BangPatterns"
+    "PatternSynonyms"
+    "TypeApplications"
+  ];
+  settings.formatter.ormolu.excludes = excludes;
+  settings.formatter.ormolu.includes = [ "*.hs" ];
+
+  programs.cabal-fmt.enable = true;
+  settings.formatter.cabal-fmt.excludes = excludes;
+  settings.formatter.cabal-fmt.includes = [ "*.cabal" ];
+
   programs.goimports.enable = true;
   settings.formatter.goimports.excludes = excludes;
   settings.formatter.goimports.includes = [ "*.go" ];
