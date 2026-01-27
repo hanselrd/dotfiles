@@ -30,15 +30,21 @@ common default-extensions
     GeneralizedNewtypeDeriving
     LambdaCase
     OverloadedStrings
+    QuasiQuotes
     TemplateHaskell
 
 common build-depends
   build-depends:
     , async
+    , bytestring
     , monad-logger
     , process
+    , raw-strings-qq
+    , split
     , template-haskell
     , text
+    , unliftio
+    , unliftio-core
 
 common exe-build-depends
   import:        build-depends

@@ -10,7 +10,9 @@ configurations :: String -> [String]
 configurations name = unsafePerformIO $ do
   runNoLoggingT $ do
     (exitCode, stdout, _) <- readShell $ "nix eval .#" ++ name ++ "Configurations --apply \"x: builtins.attrNames x\" --json | jq -r \".[]\""
-    assert (exitCode == ExitSuccess) $ pure $ lines stdout
+    assert (exitCode == ExitSuccess) $
+      return $
+        lines stdout
 
 nixosHosts :: [String]
 nixosHosts = configurations "nixos"
