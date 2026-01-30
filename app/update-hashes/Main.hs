@@ -1,42 +1,77 @@
 module Main (main) where
 
-import Control.Monad (forM_, void)
-import Control.Monad.Logger.CallStack (logDebugN)
+import Control.Monad (foldM_, forM_)
+import Control.Monad.Logger.CallStack (LoggingT, logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Data.List.Split (splitOn)
 import Data.Text (pack)
-import qualified Dotfiles.Nix (darwinHosts, homes, nixosHosts)
-import qualified Dotfiles.Shell (readShell, readShellWithStdin)
+import qualified Dotfiles.Nix (darwinHosts, fakeHash, homes, nixosHosts)
+import qualified Dotfiles.Shell (readShell)
 import Text.RawString.QQ
+import Text.Regex.TDFA
+
+processCommand :: Int -> String -> LoggingT IO Int
+processCommand 0 _ = return 0
+processCommand count cmd = do
+  (_, stdout, stderr) <- Dotfiles.Shell.readShell cmd
+
+  let regex = [r|specified: (.*)[[:space:]]*got:    (.*)[[:space:]]|] :: String
+
+      matches :: [[String]]
+      matches = (stdout ++ stderr) =~ regex
+
+  forM_
+    matches
+    $ \x -> do
+      logDebugN $ "match= " <> pack (show x)
+
+      let oldHash = x !! 1
+          newHash = x !! 2
+
+      Dotfiles.Shell.readShell $
+        [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
+          ++ " | xargs sed -i 's@"
+          ++ oldHash
+          ++ "@"
+          ++ newHash
+          ++ "@g'"
+
+  if length matches == 0
+    then return count
+    else processCommand (count - (length matches)) cmd
 
 main :: IO ()
 main = do
   let logger = colorize logToStderr
+
   flip runLoggerLoggingT logger $ do
     (_, stdout, _) <- Dotfiles.Shell.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
 
     forM_
       (map (splitOn ":") $ lines stdout)
-      $ \x -> Dotfiles.Shell.readShell $ "echo \"" ++ (x !! 0) ++ "\""
+      $ \x -> do
+        let file = x !! 0
+            lineNr = x !! 1
+            oldHash = x !! 2
 
-    void $ Dotfiles.Shell.readShellWithStdin "wc -c" "hello, world!"
-    void $ Dotfiles.Shell.readShell [r|printf "hello\nworld\nfrom\nupdate-hashes"|]
-    void $ Dotfiles.Shell.readShell [r|printf "hello\nworld\nfrom\nupdate-hashes\n"|]
+        newHash <- Dotfiles.Nix.fakeHash
+        Dotfiles.Shell.readShell $
+          "sed -i '"
+            ++ lineNr
+            ++ "s@"
+            ++ oldHash
+            ++ "@\""
+            ++ newHash
+            ++ "\"@' "
+            ++ file
 
-    logDebugN $
-      "nixosHosts= " <> (pack $ show Dotfiles.Nix.nixosHosts)
-    logDebugN $
-      "darwinHosts= " <> (pack $ show Dotfiles.Nix.darwinHosts)
-    logDebugN $
-      "homes= " <> (pack $ show Dotfiles.Nix.homes)
+    let count = length $ lines stdout
+        cmds =
+          "nix run .#canary"
+            : concat
+              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.nixosHosts),
+                (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.darwinHosts),
+                (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") Dotfiles.Nix.homes)
+              ]
 
-    void $ Dotfiles.Shell.readShell "nix run .#update-hashes -- --help"
-    -- forM_
-    --   Dotfiles.Nix.nixosHosts
-    --   $ \x -> Dotfiles.Shell.readShell $ "nh os build . -H " ++ x ++ " --impure --no-nom"
-    -- forM_
-    --   Dotfiles.Nix.darwinHosts
-    --   $ \x -> Dotfiles.Shell.readShell $ "nh darwin build . -H " ++ x ++ " --impure --no-nom"
-    forM_
-      Dotfiles.Nix.homes
-      $ \x -> Dotfiles.Shell.readShell $ "nh home build . -c " ++ x ++ " --impure --no-nom"
+    foldM_ processCommand count cmds

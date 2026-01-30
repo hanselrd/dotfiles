@@ -26,23 +26,30 @@ common exe-ghc-options
 
 common default-extensions
   default-extensions:
+    BangPatterns
     FlexibleContexts
     GeneralizedNewtypeDeriving
     LambdaCase
     OverloadedStrings
+    PatternSynonyms
     QuasiQuotes
     TemplateHaskell
+    TypeApplications
 
 common build-depends
   build-depends:
     , async
-    , bytestring
+    , exceptions
     , monad-logger
     , process
+    , random
     , raw-strings-qq
+    , regex-tdfa
     , split
     , template-haskell
+    , temporary
     , text
+    , time
     , unliftio
     , unliftio-core
 

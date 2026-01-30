@@ -44,7 +44,13 @@ in
   programs.ormolu.enable = true;
   programs.ormolu.ghcOpts = [
     "BangPatterns"
+    "FlexibleContexts"
+    "GeneralizedNewtypeDeriving"
+    "LambdaCase"
+    "OverloadedStrings"
     "PatternSynonyms"
+    "QuasiQuotes"
+    "TemplateHaskell"
     "TypeApplications"
   ];
   settings.formatter.ormolu.excludes = excludes;

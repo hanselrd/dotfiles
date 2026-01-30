@@ -6,7 +6,7 @@ import Control.Monad.IO.Unlift (MonadUnliftIO)
 import Control.Monad.Logger.CallStack (MonadLogger, logInfoN)
 import Data.Text (pack)
 import System.Exit (ExitCode)
-import System.IO (BufferMode (..), Handle, hClose, hGetLine, hIsEOF, hPutStr, hSetBuffering)
+import System.IO (BufferMode (..), Handle, hClose, hFlush, hGetLine, hIsEOF, hPutStr, hSetBuffering)
 import System.Process (CreateProcess (..), StdStream (..), createProcess, proc, waitForProcess)
 import UnliftIO.Async (async, wait)
 
@@ -21,6 +21,7 @@ hStreamLogCapture prefix stdH = loop []
           line <- liftIO $ hGetLine stdH
           logInfoN $
             pack prefix <> "= " <> pack line
+
           loop $ line : acc
 
 readShellWithStdin :: (MonadUnliftIO m, MonadFail m, MonadLogger m) => String -> String -> m (ExitCode, String, String)
@@ -40,11 +41,13 @@ readShellWithStdin cmd stdin = do
   (when $ not $ null stdin) $ do
     logInfoN $
       "cmdIn= " <> pack stdin
-    liftIO $
+    liftIO $ do
       hPutStr stdinH stdin
+      hFlush stdinH
 
-  liftIO $ hSetBuffering stdoutH LineBuffering
-  liftIO $ hSetBuffering stderrH LineBuffering
+  liftIO $ do
+    hSetBuffering stdoutH LineBuffering
+    hSetBuffering stderrH LineBuffering
 
   asyncStdout <- async $ hStreamLogCapture "cmdOut" stdoutH
   asyncStderr <- async $ hStreamLogCapture "cmdErr" stderrH

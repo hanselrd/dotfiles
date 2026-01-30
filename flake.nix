@@ -250,10 +250,10 @@
             }
           );
 
-          update-hashes = lib.x.mkApp (lib.x.buildGoBin "update-hashes" { inherit pkgs; });
+          canary = lib.x.mkApp (lib.x.buildGoBin "canary" { inherit pkgs; });
 
-          eject2 = lib.x.mkApp' dotfiles "eject";
-          update-hashes2 = lib.x.mkApp' dotfiles "update-hashes";
+          # eject2 = lib.x.mkApp' dotfiles "eject";
+          update-hashes = lib.x.mkApp' dotfiles "update-hashes";
         }
       );
 
