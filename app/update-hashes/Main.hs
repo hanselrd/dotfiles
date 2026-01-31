@@ -23,7 +23,8 @@ processCommand count cmd = do
   forM_
     matches
     $ \x -> do
-      logDebugN $ "match= " <> pack (show x)
+      logDebugN $
+        "match= " <> pack (show x)
 
       let oldHash = x !! 1
           newHash = x !! 2

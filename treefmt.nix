@@ -44,9 +44,11 @@ in
   programs.ormolu.enable = true;
   programs.ormolu.ghcOpts = [
     "BangPatterns"
+    "DuplicateRecordFields"
     "FlexibleContexts"
     "GeneralizedNewtypeDeriving"
     "LambdaCase"
+    "OverloadedRecordDot"
     "OverloadedStrings"
     "PatternSynonyms"
     "QuasiQuotes"

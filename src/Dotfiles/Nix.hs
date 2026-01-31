@@ -1,6 +1,5 @@
 module Dotfiles.Nix (nixosHosts, darwinHosts, homes, fakeHash) where
 
-import Control.Exception (assert)
 import Control.Monad.Catch (MonadMask)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
@@ -18,9 +17,11 @@ configurations name = unsafePerformIO $ do
   runNoLoggingT $ do
     (exitCode, stdout, _) <- readShell $ "nix eval .#" ++ name ++ "Configurations --apply \"x: builtins.attrNames x\" --json | jq -r \".[]\""
 
-    assert (exitCode == ExitSuccess) $
-      return $
-        lines stdout
+    if exitCode /= ExitSuccess
+      then error $ "failed to evaluate " ++ name ++ " configurations"
+      else
+        return $
+          lines stdout
 
 nixosHosts :: [String]
 nixosHosts = configurations "nixos"
@@ -41,8 +42,10 @@ fakeHash = withSystemTempFile "fake-hash.txt" $ \path fileH -> do
 
     (exitCode, stdout, _) <- readShell $ "nix hash file " ++ path
 
-    assert (exitCode == ExitSuccess) $
-      return $
-        unpack $
-          strip $
-            pack stdout
+    if exitCode /= ExitSuccess
+      then error "failed to generate fake hash"
+      else
+        return $
+          unpack $
+            strip $
+              pack stdout

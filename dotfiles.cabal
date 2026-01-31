@@ -18,7 +18,7 @@ extra-doc-files: CHANGELOG.md
 common ghc-options
   ghc-options:
     -Wall -Wcompat -Wincomplete-uni-patterns -Wno-unused-matches
-    -fno-ignore-asserts -fno-warn-name-shadowing -haddock -threaded
+    -fno-warn-name-shadowing -haddock -threaded
 
 common exe-ghc-options
   import:      ghc-options
@@ -27,9 +27,11 @@ common exe-ghc-options
 common default-extensions
   default-extensions:
     BangPatterns
+    DuplicateRecordFields
     FlexibleContexts
     GeneralizedNewtypeDeriving
     LambdaCase
+    OverloadedRecordDot
     OverloadedStrings
     PatternSynonyms
     QuasiQuotes
@@ -39,6 +41,7 @@ common default-extensions
 common build-depends
   build-depends:
     , async
+    , directory
     , exceptions
     , monad-logger
     , process

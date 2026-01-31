@@ -217,7 +217,7 @@
             }
           );
 
-          eject = lib.x.mkApp (
+          eject-legacy = lib.x.mkApp (
             pkgs.writeShellApplication {
               name = "eject";
               runtimeInputs = with pkgs; [
@@ -252,7 +252,7 @@
 
           canary = lib.x.mkApp (lib.x.buildGoBin "canary" { inherit pkgs; });
 
-          # eject2 = lib.x.mkApp' dotfiles "eject";
+          eject = lib.x.mkApp' dotfiles "eject";
           update-hashes = lib.x.mkApp' dotfiles "update-hashes";
         }
       );
