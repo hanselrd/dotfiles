@@ -10,7 +10,7 @@ require (
 	github.com/fatih/color v1.18.0
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0
-	github.com/samber/slog-zerolog/v2 v2.9.0
+	github.com/samber/slog-zerolog/v2 v2.9.1
 	github.com/stretchr/testify v1.11.1
 )
 
@@ -33,7 +33,7 @@ require (
 	github.com/pascaldekloe/name v1.0.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
-	github.com/samber/slog-common v0.19.0 // indirect
+	github.com/samber/slog-common v0.20.0 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	golang.org/x/mod v0.31.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
