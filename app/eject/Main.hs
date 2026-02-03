@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Control.Monad (forM,  replicateM, void)
+import Control.Monad (forM, replicateM, void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger.CallStack (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
