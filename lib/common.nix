@@ -191,7 +191,7 @@ rec {
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = rootPath;
-      vendorHash = "sha256-PeK1XgQO1l6zhXW1oacTH+Sgx3uGKpiJuJ4WCTDVvNg=";
+      vendorHash = "sha256-TNWf6jlw0ctO156M1XWbc7t6azbnHsbmNi4wbxQ582A=";
       subPackages = [ "cmd/${name}" ];
       goSum = rootPath + "/go.sum";
       ldflags = [
