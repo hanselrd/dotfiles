@@ -52,6 +52,7 @@ in
     "OverloadedStrings"
     "PatternSynonyms"
     "QuasiQuotes"
+    "RecordWildCards"
     "TemplateHaskell"
     "TypeApplications"
   ];

@@ -1,12 +1,16 @@
 module Main (main) where
 
 import Control.Monad (foldM_, forM_)
+import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger.CallStack (LoggingT, logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Data.List.Split (splitOn)
+import Data.Maybe (fromMaybe)
 import Data.Text (pack)
 import qualified Dotfiles.Nix (darwinHosts, fakeHash, homes, nixosHosts)
 import qualified Dotfiles.Shell (readShell)
+import System.Info (os)
+import System.OsRelease
 import Text.RawString.QQ
 import Text.Regex.TDFA
 
@@ -66,13 +70,16 @@ main = do
             ++ "\"@' "
             ++ file
 
+    maybeOsRelease <- fmap osRelease <$> liftIO parseOsRelease
+
     let count = length $ lines stdout
         cmds =
           "nix run .#canary"
-            : concat
-              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.nixosHosts),
-                (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.darwinHosts),
-                (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") Dotfiles.Nix.homes)
-              ]
+            : case os of
+              "linux" -> case (fromMaybe defaultOsRelease maybeOsRelease).id of
+                "nixos" -> map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.nixosHosts
+                _ -> map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") Dotfiles.Nix.homes
+              "darwin" -> map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.darwinHosts
+              _ -> []
 
     foldM_ processCommand count cmds
