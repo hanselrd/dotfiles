@@ -6,7 +6,7 @@ toolchain go1.24.6
 
 require (
 	github.com/charmbracelet/lipgloss v1.1.0
-	github.com/charmbracelet/x/ansi v0.11.5
+	github.com/charmbracelet/x/ansi v0.11.6
 	github.com/fatih/color v1.18.0
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0

@@ -12,6 +12,8 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = true
 vim.opt.termguicolors = true
+vim.opt.timeoutlen = 100
+vim.opt.ttimeoutlen = 0
 
 -- mini-nvim
 require("mini.ai").setup()
