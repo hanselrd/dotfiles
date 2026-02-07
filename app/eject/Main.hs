@@ -83,7 +83,11 @@ main = do
               ++ opts.home
               ++ ".activationPackage --impure"
 
-        let path0 = unpack <| strip <| pack stdout
+        let path0 =
+              stdout
+                |> pack
+                |> strip
+                |> unpack
         logDebugN <|
           "path0= " <> pack path0
 
@@ -94,7 +98,11 @@ main = do
               ++ homeDir
               ++ "/.nix-profile"
 
-        let path1 = unpack <| strip <| pack stdout
+        let path1 =
+              stdout
+                |> pack
+                |> strip
+                |> unpack
         logDebugN <|
           "path1= " <> pack path1
 
@@ -145,7 +153,11 @@ main = do
               ++ sedString
               ++ "'"
 
-        let path0New = unpack <| strip <| pack stdout
+        let path0New =
+              stdout
+                |> pack
+                |> strip
+                |> unpack
         logDebugN <|
           "path0New= " <> pack path0New
 
@@ -157,7 +169,11 @@ main = do
               ++ sedString
               ++ "'"
 
-        let path1New = unpack <| strip <| pack stdout
+        let path1New =
+              stdout
+                |> pack
+                |> strip
+                |> unpack
         logDebugN <|
           "path1New= " <> pack path1New
 

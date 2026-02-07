@@ -24,9 +24,11 @@ system =
         then error "failed to evaluate system"
         else
           return <|
-            unpack <|
-              strip <|
-                pack stdout
+            ( stdout
+                |> pack
+                |> strip
+                |> unpack
+            )
 
 configurations :: String -> [String]
 configurations name =
@@ -59,13 +61,27 @@ supportedConfigurations name =
               (exitCode, stdout, _) <- readShell <| "nix eval .#" ++ name ++ "Configurations." ++ x ++ ".config.nixpkgs.hostPlatform.system --impure --raw"
 
               if exitCode == ExitSuccess
-                then return <| (unpack <| strip <| pack stdout) == system
+                then
+                  return <|
+                    ( stdout
+                        |> pack
+                        |> strip
+                        |> unpack
+                    )
+                      == system
                 else do
                   (exitCode, stdout, _) <- readShell <| "nix eval .#" ++ name ++ "Configurations." ++ x ++ ".config.nixpkgs.system --impure --raw"
 
                   if exitCode /= ExitSuccess
                     then error <| "failed to evaluate supported " ++ name ++ " configurations"
-                    else return <| (unpack <| strip <| pack stdout) == system
+                    else
+                      return <|
+                        ( stdout
+                            |> pack
+                            |> strip
+                            |> unpack
+                        )
+                          == system
           )
       <| configurations name
 
@@ -93,6 +109,8 @@ fakeHash =
         then error "failed to generate fake hash"
         else
           return <|
-            unpack <|
-              strip <|
-                pack stdout
+            ( stdout
+                |> pack
+                |> strip
+                |> unpack
+            )
