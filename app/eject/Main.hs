@@ -4,10 +4,10 @@ import Control.Monad (forM, replicateM, void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger.CallStack (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
-import Data.List (intercalate)
 import Data.Text (pack, strip, unpack)
 import qualified Dotfiles.Nix (homes)
 import qualified Dotfiles.Shell (readShell)
+import Flow
 import Options.Applicative
 import System.Directory (getHomeDirectory)
 import System.Random (randomRIO)
@@ -25,13 +25,14 @@ optionsP = do
       hashLen = 5
 
   homeDir <- getHomeDirectory
-  hash <- replicateM hashLen $ do
-    index <- randomRIO (0, length chars - 1)
-    return $ chars !! index
+  hash <-
+    replicateM hashLen <| do
+      index <- randomRIO (0, length chars - 1)
+      return <| chars !! index
 
   let outDir = homeDir ++ "/.nix/x/" ++ hash
 
-  return $
+  return <|
     Options
       <$> strOption
         ( long "home"
@@ -52,7 +53,7 @@ optionsInfo :: IO (ParserInfo Options)
 optionsInfo = do
   optionsP <- optionsP
 
-  return $
+  return <|
     info
       (optionsP <**> helper)
       ( fullDesc
@@ -65,45 +66,45 @@ main :: IO ()
 main = do
   let logger = colorize logToStderr
 
-  flip runLoggerLoggingT logger $ do
-    logDebugN $
+  flip runLoggerLoggingT logger <| do
+    logDebugN <|
       "homes= " <> pack (show Dotfiles.Nix.homes)
 
-    opts <- liftIO $ optionsInfo >>= execParser
-    logDebugN $
+    opts <- liftIO <| optionsInfo >>= execParser
+    logDebugN <|
       "opts= " <> pack (show opts)
 
-    if not $ elem opts.home Dotfiles.Nix.homes
-      then error $ opts.home ++ " is not a valid home configuration"
+    if not <| elem opts.home Dotfiles.Nix.homes
+      then error <| opts.home ++ " is not a valid home configuration"
       else do
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell $
+          Dotfiles.Shell.readShell <|
             "nix build --no-link --print-out-paths .#homeConfigurations."
               ++ opts.home
               ++ ".activationPackage --impure"
 
-        let path0 = unpack $ strip $ pack stdout
-        logDebugN $
+        let path0 = unpack <| strip <| pack stdout
+        logDebugN <|
           "path0= " <> pack path0
 
-        homeDir <- liftIO $ getHomeDirectory
+        homeDir <- liftIO <| getHomeDirectory
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell $
+          Dotfiles.Shell.readShell <|
             "readlink -f "
               ++ homeDir
               ++ "/.nix-profile"
 
-        let path1 = unpack $ strip $ pack stdout
-        logDebugN $
+        let path1 = unpack <| strip <| pack stdout
+        logDebugN <|
           "path1= " <> pack path1
 
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell $
+          Dotfiles.Shell.readShell <|
             "nix-store -qR "
-              ++ intercalate " " [path0, path1]
+              ++ unwords [path0, path1]
 
         let deps = lines stdout
-        logDebugN $
+        logDebugN <|
           "deps= " <> pack (show deps)
 
         let storePrefix = "/nix/store/"
@@ -115,68 +116,69 @@ main = do
                 ++ "}@"
                 ++ opts.outDir
                 ++ "/@g"
-        logDebugN $
+        logDebugN <|
           "sedString= " <> pack sedString
 
-        asyncs <- forM
-          deps
-          $ \x -> do
-            async $
-              Dotfiles.Shell.readShell $
-                "find "
-                  ++ x
-                  ++ " | cpio -ov | sed -E '"
-                  ++ sedString
-                  ++ "' | cpio -idmv"
+        asyncs <-
+          forM
+            deps
+            <| \x -> do
+              async <|
+                Dotfiles.Shell.readShell <|
+                  "find "
+                    ++ x
+                    ++ " | cpio -ov | sed -E '"
+                    ++ sedString
+                    ++ "' | cpio -idmv"
         mapM_ wait asyncs
 
-        void $
-          Dotfiles.Shell.readShell $
+        void <|
+          Dotfiles.Shell.readShell <|
             "chmod -R u+w "
               ++ opts.outDir
 
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell $
+          Dotfiles.Shell.readShell <|
             "echo \""
               ++ path0
               ++ "\" | sed -E '"
               ++ sedString
               ++ "'"
 
-        let path0New = unpack $ strip $ pack stdout
-        logDebugN $
+        let path0New = unpack <| strip <| pack stdout
+        logDebugN <|
           "path0New= " <> pack path0New
 
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell $
+          Dotfiles.Shell.readShell <|
             "echo \""
               ++ path1
               ++ "\" | sed -E '"
               ++ sedString
               ++ "'"
 
-        let path1New = unpack $ strip $ pack stdout
-        logDebugN $
+        let path1New = unpack <| strip <| pack stdout
+        logDebugN <|
           "path1New= " <> pack path1New
 
-        void $
-          Dotfiles.Shell.readShell $
+        void <|
+          Dotfiles.Shell.readShell <|
             "cp -a "
               ++ path0New
               ++ "/home-files/. "
               ++ homeDir
               ++ "/"
 
-        void $
-          Dotfiles.Shell.readShell $
+        void <|
+          Dotfiles.Shell.readShell <|
             "ln -snfF "
               ++ path1New
               ++ " "
               ++ homeDir
               ++ "/.nix-profile"
 
-        void $
-          Dotfiles.Shell.readShell $
+        void <|
+          Dotfiles.Shell.readShell <|
             "find "
               ++ path0New
               ++ "/home-files/ -type l > "

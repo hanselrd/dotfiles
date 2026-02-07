@@ -4,6 +4,7 @@
     cabal-install
     ghc
     haskell-language-server
+    hlint
     stack
   ];
 }

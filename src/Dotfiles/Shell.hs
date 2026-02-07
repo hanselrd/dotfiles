@@ -5,6 +5,7 @@ import Control.Monad.IO.Class (MonadIO, liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
 import Control.Monad.Logger.CallStack (MonadLogger, logInfoN)
 import Data.Text (pack)
+import Flow
 import System.Exit (ExitCode)
 import System.IO (BufferMode (..), Handle, hClose, hFlush, hGetLine, hIsEOF, hPutStr, hSetBuffering)
 import System.Process (CreateProcess (..), StdStream (..), createProcess, proc, waitForProcess)
@@ -14,23 +15,23 @@ hStreamLogCapture :: (MonadIO m, MonadLogger m) => String -> Handle -> m [String
 hStreamLogCapture prefix stdH = loop []
   where
     loop acc = do
-      eof <- liftIO $ hIsEOF stdH
+      eof <- liftIO <| hIsEOF stdH
       if eof
-        then return $ reverse acc
+        then return <| reverse acc
         else do
-          line <- liftIO $ hGetLine stdH
-          logInfoN $
+          line <- liftIO <| hGetLine stdH
+          logInfoN <|
             pack prefix <> "= " <> pack line
 
-          loop $ line : acc
+          loop <| line : acc
 
 readShellWithStdin :: (MonadUnliftIO m, MonadFail m, MonadLogger m) => String -> String -> m (ExitCode, String, String)
 readShellWithStdin cmd stdin = do
-  logInfoN $
+  logInfoN <|
     "cmdLine= " <> pack cmd
 
   (Just stdinH, Just stdoutH, Just stderrH, processH) <-
-    liftIO $
+    liftIO <|
       createProcess
         (proc "bash" ["--norc", "--noprofile", "-c", cmd])
           { std_in = CreatePipe,
@@ -38,28 +39,28 @@ readShellWithStdin cmd stdin = do
             std_err = CreatePipe
           }
 
-  (when $ not $ null stdin) $ do
-    logInfoN $
+  (when <| not <| null stdin) <| do
+    logInfoN <|
       "cmdIn= " <> pack stdin
-    liftIO $ do
+    liftIO <| do
       hPutStr stdinH stdin
       hFlush stdinH
 
-  liftIO $ do
+  liftIO <| do
     hSetBuffering stdoutH LineBuffering
     hSetBuffering stderrH LineBuffering
 
-  asyncStdout <- async $ hStreamLogCapture "cmdOut" stdoutH
-  asyncStderr <- async $ hStreamLogCapture "cmdErr" stderrH
+  asyncStdout <- async <| hStreamLogCapture "cmdOut" stdoutH
+  asyncStderr <- async <| hStreamLogCapture "cmdErr" stderrH
 
-  liftIO $ hClose stdinH
+  liftIO <| hClose stdinH
 
   stdout <- wait asyncStdout
   stderr <- wait asyncStderr
 
-  exitCode <- liftIO $ waitForProcess processH
-  logInfoN $
-    "cmdRc= " <> (pack $ show exitCode)
+  exitCode <- liftIO <| waitForProcess processH
+  logInfoN <|
+    "cmdRc= " <> (pack <| show exitCode)
 
   return (exitCode, unlines stdout, unlines stderr)
 

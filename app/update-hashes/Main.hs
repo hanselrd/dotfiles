@@ -1,16 +1,13 @@
 module Main (main) where
 
 import Control.Monad (foldM_, forM_)
-import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger.CallStack (LoggingT, logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Data.List.Split (splitOn)
-import Data.Maybe (fromMaybe)
 import Data.Text (pack)
-import qualified Dotfiles.Nix (darwinHosts, fakeHash, homes, nixosHosts)
+import qualified Dotfiles.Nix (fakeHash, supportedDarwinHosts, supportedHomes, supportedNixosHosts)
 import qualified Dotfiles.Shell (readShell)
-import System.Info (os)
-import System.OsRelease
+import Flow
 import Text.RawString.QQ
 import Text.Regex.TDFA
 
@@ -26,14 +23,14 @@ processCommand count cmd = do
 
   forM_
     matches
-    $ \x -> do
-      logDebugN $
+    <| \x -> do
+      logDebugN <|
         "match= " <> pack (show x)
 
       let oldHash = x !! 1
           newHash = x !! 2
 
-      Dotfiles.Shell.readShell $
+      Dotfiles.Shell.readShell <|
         [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
           ++ " | xargs sed -i 's@"
           ++ oldHash
@@ -49,18 +46,18 @@ main :: IO ()
 main = do
   let logger = colorize logToStderr
 
-  flip runLoggerLoggingT logger $ do
+  flip runLoggerLoggingT logger <| do
     (_, stdout, _) <- Dotfiles.Shell.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
 
     forM_
-      (map (splitOn ":") $ lines stdout)
-      $ \x -> do
+      (map (splitOn ":") <| lines stdout)
+      <| \x -> do
         let file = x !! 0
             lineNr = x !! 1
             oldHash = x !! 2
 
         newHash <- Dotfiles.Nix.fakeHash
-        Dotfiles.Shell.readShell $
+        Dotfiles.Shell.readShell <|
           "sed -i '"
             ++ lineNr
             ++ "s@"
@@ -70,16 +67,13 @@ main = do
             ++ "\"@' "
             ++ file
 
-    maybeOsRelease <- fmap osRelease <$> liftIO parseOsRelease
-
-    let count = length $ lines stdout
+    let count = length <| lines stdout
         cmds =
           "nix run .#canary"
-            : case os of
-              "linux" -> case (fromMaybe defaultOsRelease maybeOsRelease).id of
-                "nixos" -> map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.nixosHosts
-                _ -> map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") Dotfiles.Nix.homes
-              "darwin" -> map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.darwinHosts
-              _ -> []
+            : concat
+              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.supportedNixosHosts),
+                (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.supportedDarwinHosts),
+                (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") Dotfiles.Nix.supportedHomes)
+              ]
 
     foldM_ processCommand count cmds

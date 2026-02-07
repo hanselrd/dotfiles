@@ -10,8 +10,8 @@ extra-doc-files: CHANGELOG.md
 
 common ghc-options
   ghc-options:
-    -Wall -Wcompat -Wincomplete-uni-patterns -Wno-unused-matches
-    -fno-warn-name-shadowing -haddock -threaded
+    -Wall -Wcompat -Wextra -Wincomplete-uni-patterns
+    -Wno-unused-matches -fno-warn-name-shadowing -haddock -threaded
 
 common exe-ghc-options
   import:      ghc-options
@@ -37,6 +37,7 @@ common build-depends
     , async
     , directory
     , exceptions
+    , flow
     , monad-logger
     , os-release
     , process

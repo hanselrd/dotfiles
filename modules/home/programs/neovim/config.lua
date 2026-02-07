@@ -12,7 +12,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = true
 vim.opt.termguicolors = true
-vim.opt.timeoutlen = 250
+vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 50
 
 -- mini-nvim
