@@ -5,8 +5,8 @@ import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger.CallStack (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Data.Text (pack, strip, unpack)
-import qualified Dotfiles.Nix (homes)
-import qualified Dotfiles.Shell (readShell)
+import qualified Dotfiles.Nix as DN (homes)
+import qualified Dotfiles.Shell as DS (readShell)
 import Flow
 import Options.Applicative
 import System.Directory (getHomeDirectory)
@@ -68,17 +68,17 @@ main = do
 
   flip runLoggerLoggingT logger <| do
     logDebugN <|
-      "homes= " <> pack (show Dotfiles.Nix.homes)
+      "homes= " <> pack (show DN.homes)
 
     opts <- liftIO <| optionsInfo >>= execParser
     logDebugN <|
       "opts= " <> pack (show opts)
 
-    if not <| elem opts.home Dotfiles.Nix.homes
+    if not <| elem opts.home DN.homes
       then error <| opts.home ++ " is not a valid home configuration"
       else do
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "nix build --no-link --print-out-paths .#homeConfigurations."
               ++ opts.home
               ++ ".activationPackage --impure"
@@ -93,7 +93,7 @@ main = do
 
         homeDir <- liftIO <| getHomeDirectory
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "readlink -f "
               ++ homeDir
               ++ "/.nix-profile"
@@ -107,7 +107,7 @@ main = do
           "path1= " <> pack path1
 
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "nix-store -qR "
               ++ unwords [path0, path1]
 
@@ -132,7 +132,7 @@ main = do
             deps
             <| \x -> do
               async <|
-                Dotfiles.Shell.readShell <|
+                DS.readShell <|
                   "find "
                     ++ x
                     ++ " | cpio -ov | sed -E '"
@@ -141,12 +141,12 @@ main = do
         mapM_ wait asyncs
 
         void <|
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "chmod -R u+w "
               ++ opts.outDir
 
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "echo \""
               ++ path0
               ++ "\" | sed -E '"
@@ -162,7 +162,7 @@ main = do
           "path0New= " <> pack path0New
 
         (_, stdout, _) <-
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "echo \""
               ++ path1
               ++ "\" | sed -E '"
@@ -178,7 +178,7 @@ main = do
           "path1New= " <> pack path1New
 
         void <|
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "cp -a "
               ++ path0New
               ++ "/home-files/. "
@@ -186,7 +186,7 @@ main = do
               ++ "/"
 
         void <|
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "ln -snfF "
               ++ path1New
               ++ " "
@@ -194,7 +194,7 @@ main = do
               ++ "/.nix-profile"
 
         void <|
-          Dotfiles.Shell.readShell <|
+          DS.readShell <|
             "find "
               ++ path0New
               ++ "/home-files/ -type l > "

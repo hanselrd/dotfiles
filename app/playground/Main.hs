@@ -3,7 +3,7 @@ module Main (main) where
 import Control.Monad.Logger.CallStack (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Data.Text (pack)
-import qualified Dotfiles.Nix (darwinHosts, homes, nixosHosts, supportedDarwinHosts, supportedHomes, supportedNixosHosts, system)
+import qualified Dotfiles.Nix as DN (darwinHosts, homes, nixosHosts, supportedDarwinHosts, supportedHomes, supportedNixosHosts, system)
 import Flow
 
 main :: IO ()
@@ -13,13 +13,13 @@ main = do
   flip runLoggerLoggingT logger <| do
     logDebugN "playground"
 
-    logDebugN <| "nix.system= " <> pack Dotfiles.Nix.system
-    logDebugN <| "nix.nixosHosts= " <> pack (show Dotfiles.Nix.nixosHosts)
-    logDebugN <| "nix.darwinHosts= " <> pack (show Dotfiles.Nix.darwinHosts)
-    logDebugN <| "nix.homes= " <> pack (show Dotfiles.Nix.homes)
-    logDebugN <| "nix.supportedNixosHosts= " <> pack (show Dotfiles.Nix.supportedNixosHosts)
-    logDebugN <| "nix.supportedDarwinHosts= " <> pack (show Dotfiles.Nix.supportedDarwinHosts)
-    logDebugN <| "nix.supportedHomes= " <> pack (show Dotfiles.Nix.supportedHomes)
+    logDebugN <| "nix.system= " <> pack DN.system
+    logDebugN <| "nix.nixosHosts= " <> pack (show DN.nixosHosts)
+    logDebugN <| "nix.darwinHosts= " <> pack (show DN.darwinHosts)
+    logDebugN <| "nix.homes= " <> pack (show DN.homes)
+    logDebugN <| "nix.supportedNixosHosts= " <> pack (show DN.supportedNixosHosts)
+    logDebugN <| "nix.supportedDarwinHosts= " <> pack (show DN.supportedDarwinHosts)
+    logDebugN <| "nix.supportedHomes= " <> pack (show DN.supportedHomes)
 
     logDebugN <|
       "<100= "

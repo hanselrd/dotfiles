@@ -5,8 +5,8 @@ import Control.Monad.Logger.CallStack (LoggingT, logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Data.List.Split (splitOn)
 import Data.Text (pack)
-import qualified Dotfiles.Nix (fakeHash, supportedDarwinHosts, supportedHomes, supportedNixosHosts)
-import qualified Dotfiles.Shell (readShell)
+import qualified Dotfiles.Nix as DN (fakeHash, supportedDarwinHosts, supportedHomes, supportedNixosHosts)
+import qualified Dotfiles.Shell as DS (readShell)
 import Flow
 import Text.RawString.QQ
 import Text.Regex.TDFA
@@ -14,7 +14,7 @@ import Text.Regex.TDFA
 processCommand :: Int -> String -> LoggingT IO Int
 processCommand 0 _ = return 0
 processCommand count cmd = do
-  (_, stdout, stderr) <- Dotfiles.Shell.readShell cmd
+  (_, stdout, stderr) <- DS.readShell cmd
 
   let regex = [r|specified: (.*)[[:space:]]*got:    (.*)[[:space:]]|] :: String
 
@@ -30,7 +30,7 @@ processCommand count cmd = do
       let oldHash = x !! 1
           newHash = x !! 2
 
-      Dotfiles.Shell.readShell <|
+      DS.readShell <|
         [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
           ++ " | xargs sed -i 's@"
           ++ oldHash
@@ -47,7 +47,7 @@ main = do
   let logger = colorize logToStderr
 
   flip runLoggerLoggingT logger <| do
-    (_, stdout, _) <- Dotfiles.Shell.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
+    (_, stdout, _) <- DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
 
     forM_
       (map (splitOn ":") <| lines stdout)
@@ -56,8 +56,8 @@ main = do
             lineNr = x !! 1
             oldHash = x !! 2
 
-        newHash <- Dotfiles.Nix.fakeHash
-        Dotfiles.Shell.readShell <|
+        newHash <- DN.fakeHash
+        DS.readShell <|
           "sed -i '"
             ++ lineNr
             ++ "s@"
@@ -71,9 +71,9 @@ main = do
         cmds =
           "nix run .#canary"
             : concat
-              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.supportedNixosHosts),
-                (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") Dotfiles.Nix.supportedDarwinHosts),
-                (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") Dotfiles.Nix.supportedHomes)
+              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") DN.supportedNixosHosts),
+                (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") DN.supportedDarwinHosts),
+                (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") DN.supportedHomes)
               ]
 
     foldM_ processCommand count cmds
