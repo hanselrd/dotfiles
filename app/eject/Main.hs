@@ -5,7 +5,7 @@ import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger (logDebugN)
 import Control.Monad.Reader (ask)
 import Data.Text (pack, strip, unpack)
-import qualified Dotfiles.Application as DA (runApp)
+import qualified Dotfiles.Application as DA (App, runAppWithParser)
 import qualified Dotfiles.Nix as DN (homes)
 import qualified Dotfiles.Shell as DS (readShell)
 import Flow
@@ -20,12 +20,12 @@ data Options = Options
   }
   deriving (Eq, Read, Show)
 
-optionsP :: IO (Parser Options)
+optionsP :: DA.App () (Parser Options)
 optionsP = do
   let chars = ['a' .. 'z'] ++ ['0' .. '9']
       hashLen = 5
 
-  homeDir <- getHomeDirectory
+  homeDir <- liftIO getHomeDirectory
   hash <-
     replicateM hashLen <| do
       index <- randomRIO (0, length chars - 1)
@@ -50,9 +50,9 @@ optionsP = do
             <> showDefault
         )
 
-optionsInfo :: IO (ParserInfo Options)
+optionsInfo :: DA.App (Parser Options) (ParserInfo Options)
 optionsInfo = do
-  optionsP <- optionsP
+  optionsP <- ask
 
   return
     <| info
@@ -65,9 +65,7 @@ optionsInfo = do
 
 main :: IO ()
 main = do
-  opts <- optionsInfo >>= execParser
-
-  DA.runApp "eject" opts <| do
+  DA.runAppWithParser optionsP optionsInfo <| do
     logDebugN
       <| "homes= " <> pack (show DN.homes)
 

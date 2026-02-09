@@ -1,14 +1,14 @@
-module Dotfiles.Application (App (..), runApp) where
+module Dotfiles.Application (App (..), runApp, runAppWithParser) where
 
 import Control.Monad.Catch (MonadCatch, MonadMask, MonadThrow)
 import Control.Monad.IO.Class (MonadIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
-import Control.Monad.Logger (LoggingT, MonadLogger, logDebugN)
+import Control.Monad.Logger (LoggingT, MonadLogger)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Control.Monad.Reader (MonadReader)
 import Control.Monad.Trans.Reader (ReaderT, runReaderT)
-import Data.Text (pack)
 import Flow
+import Options.Applicative
 
 newtype App r a = App
   { unApp :: LoggingT (ReaderT r IO) a
@@ -27,13 +27,18 @@ newtype App r a = App
     , MonadUnliftIO
     )
 
-runApp :: String -> r -> App r a -> IO a
-runApp name r (App action) = do
+runApp :: r -> App r a -> IO a
+runApp r (App action) = do
   let logger = colorize logToStderr
 
-  flip runReaderT r
-    <| flip runLoggerLoggingT logger
-    <| do
-      logDebugN <| "app= " <> pack name
+  action
+    |> flip runLoggerLoggingT logger
+    |> flip runReaderT r
 
-      action
+runAppWithParser :: App () (Parser r) -> App (Parser r) (ParserInfo r) -> App r a -> IO a
+runAppWithParser rP rInfo action = do
+  rP <- runApp () rP
+  rInfo <- runApp rP rInfo
+  r <- execParser rInfo
+
+  runApp r action

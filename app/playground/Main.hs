@@ -29,7 +29,7 @@ main = do
           , version = "1.0.0"
           }
 
-  DA.runApp "playground" env <| do
+  DA.runApp env <| do
     env <- ask
     logDebugN <| "env= " <> pack (show env)
 

@@ -41,6 +41,7 @@ common build-depends
     , monad-logger
     , monad-logger-extras
     , mtl
+    , optparse-applicative
     , os-release
     , process
     , random
@@ -57,7 +58,7 @@ common build-depends
 
 common exe-build-depends
   import:        build-depends
-  build-depends: optparse-applicative
+  build-depends:
 
 library
   import:           ghc-options, default-extensions, build-depends

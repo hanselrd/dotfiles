@@ -9,7 +9,7 @@ import System.OsRelease
 
 main :: IO ()
 main = do
-  DA.runApp "os-release" () <| do
+  DA.runApp () <| do
     Just (OsRelease {..}) <- fmap osRelease <$> liftIO parseOsRelease
     logDebugN <| "name= " <> pack name
     logDebugN <| "id= " <> pack id

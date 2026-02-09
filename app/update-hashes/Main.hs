@@ -49,7 +49,7 @@ processCommand count cmd = do
 
 main :: IO ()
 main = do
-  DA.runApp "update-hashes" () <| do
+  DA.runApp () <| do
     (_, stdout, _) <-
       DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
 
