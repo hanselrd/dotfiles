@@ -1,4 +1,4 @@
-module Dotfiles.Application (App (..), runApp, runAppWithParser) where
+module Dotfiles.Application (App (..), runAppWithParser, runApp) where
 
 import Control.Monad.Catch (MonadCatch, MonadMask, MonadThrow)
 import Control.Monad.IO.Class (MonadIO)
@@ -7,8 +7,11 @@ import Control.Monad.Logger (LoggingT, MonadLogger)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Control.Monad.Reader (MonadReader)
 import Control.Monad.Trans.Reader (ReaderT, runReaderT)
+import Data.Version (showVersion)
 import Flow
 import Options.Applicative
+import Paths_dotfiles (version)
+import System.Environment (getProgName)
 
 newtype App r a = App
   { unApp :: LoggingT (ReaderT r IO) a
@@ -27,18 +30,37 @@ newtype App r a = App
     , MonadUnliftIO
     )
 
-runApp :: r -> App r a -> IO a
-runApp r (App action) = do
-  let logger = colorize logToStderr
+runAppWithParser :: App r a -> App () (Parser r) -> IO a
+runAppWithParser action rP = do
+  rP <- runApp rP ()
+  progName <- getProgName
 
-  action
-    |> flip runLoggerLoggingT logger
-    |> flip runReaderT r
+  let rInfo =
+        info
+          ( rP
+              <**> helper
+              <**> (simpleVersioner <| unwords [progName, showVersion version])
+          )
+          ( fullDesc
+              <> header ("Dotfiles " ++ progName)
+              <> footer "(c) Dotfiles <hanselrd>"
+          )
 
-runAppWithParser :: App () (Parser r) -> App (Parser r) (ParserInfo r) -> App r a -> IO a
-runAppWithParser rP rInfo action = do
-  rP <- runApp () rP
-  rInfo <- runApp rP rInfo
   r <- execParser rInfo
 
-  runApp r action
+  runApp action r
+  where
+    logger = colorize logToStderr
+
+    runApp (App action) r =
+      action
+        |> flip runLoggerLoggingT logger
+        |> flip runReaderT r
+
+runApp :: App r a -> r -> IO a
+runApp action r =
+  action
+    |> ( flip runAppWithParser
+           <| return
+           <| pure r
+       )

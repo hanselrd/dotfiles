@@ -50,22 +50,9 @@ optionsP = do
             <> showDefault
         )
 
-optionsInfo :: DA.App (Parser Options) (ParserInfo Options)
-optionsInfo = do
-  optionsP <- ask
-
-  return
-    <| info
-      (optionsP <**> helper)
-      ( fullDesc
-          <> progDesc "Eject home to output directory"
-          <> header "Dotfiles Eject"
-          <> footer "(c) Dotfiles <hanselrd>"
-      )
-
 main :: IO ()
 main = do
-  DA.runAppWithParser optionsP optionsInfo <| do
+  flip DA.runAppWithParser optionsP <| do
     logDebugN
       <| "homes= " <> pack (show DN.homes)
 

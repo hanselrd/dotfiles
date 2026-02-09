@@ -1,13 +1,12 @@
 module Main (main) where
 
 import Control.Monad.Logger (logDebugN)
-import Control.Monad.Reader (ask)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (runApp)
 import qualified Dotfiles.Nix as DN
   ( darwinHosts
-  , homes
   , nixosHosts
+  , homes
   , supportedDarwinHosts
   , supportedHomes
   , supportedNixosHosts
@@ -15,24 +14,9 @@ import qualified Dotfiles.Nix as DN
   )
 import Flow
 
-data Env = Env
-  { name :: String
-  , version :: String
-  }
-  deriving (Eq, Read, Show)
-
 main :: IO ()
 main = do
-  let env =
-        Env
-          { name = "playground"
-          , version = "1.0.0"
-          }
-
-  DA.runApp env <| do
-    env <- ask
-    logDebugN <| "env= " <> pack (show env)
-
+  flip DA.runApp () <| do
     logDebugN <| "nix.system= " <> pack DN.system
     logDebugN <| "nix.nixosHosts= " <> pack (show DN.nixosHosts)
     logDebugN <| "nix.darwinHosts= " <> pack (show DN.darwinHosts)
