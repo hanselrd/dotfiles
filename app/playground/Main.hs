@@ -1,17 +1,41 @@
 module Main (main) where
 
-import Control.Monad.Logger.CallStack (logDebugN)
-import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
+import Control.Monad.Logger (logDebugN)
+import Control.Monad.Reader (ask)
 import Data.Text (pack)
-import qualified Dotfiles.Nix as DN (darwinHosts, homes, nixosHosts, supportedDarwinHosts, supportedHomes, supportedNixosHosts, system)
+import qualified Dotfiles.Application as DA (runApp)
+import qualified Dotfiles.Nix as DN
+  ( darwinHosts
+  , homes
+  , nixosHosts
+  , supportedDarwinHosts
+  , supportedHomes
+  , supportedNixosHosts
+  , system
+  )
 import Flow
+
+data Env = Env
+  { name :: String
+  , version :: String
+  }
+  deriving (Eq, Read, Show)
 
 main :: IO ()
 main = do
-  let logger = colorize logToStderr
+  let env =
+        Env
+          { name = "playground"
+          , version = "1.0.0"
+          }
 
-  flip runLoggerLoggingT logger <| do
-    logDebugN "playground"
+  DA.runApp "playground" env <| do
+    env <- ask
+    logDebugN
+      <| "env.name= "
+        <> pack env.name
+        <> " env.version= "
+        <> pack env.version
 
     logDebugN <| "nix.system= " <> pack DN.system
     logDebugN <| "nix.nixosHosts= " <> pack (show DN.nixosHosts)
@@ -21,8 +45,8 @@ main = do
     logDebugN <| "nix.supportedDarwinHosts= " <> pack (show DN.supportedDarwinHosts)
     logDebugN <| "nix.supportedHomes= " <> pack (show DN.supportedHomes)
 
-    logDebugN <|
-      "<100= "
+    logDebugN
+      <| "<100= "
         <> ( [100, 99 ..]
                |> take @Int 5
                |> show

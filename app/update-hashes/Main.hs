@@ -1,17 +1,22 @@
 module Main (main) where
 
 import Control.Monad (foldM_, forM_)
-import Control.Monad.Logger.CallStack (LoggingT, logDebugN)
-import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
+import Control.Monad.Logger (logDebugN)
 import Data.List.Split (splitOn)
 import Data.Text (pack)
-import qualified Dotfiles.Nix as DN (fakeHash, supportedDarwinHosts, supportedHomes, supportedNixosHosts)
+import qualified Dotfiles.Application as DA (App, runApp)
+import qualified Dotfiles.Nix as DN
+  ( fakeHash
+  , supportedDarwinHosts
+  , supportedHomes
+  , supportedNixosHosts
+  )
 import qualified Dotfiles.Shell as DS (readShell)
 import Flow
 import Text.RawString.QQ
 import Text.Regex.TDFA
 
-processCommand :: Int -> String -> LoggingT IO Int
+processCommand :: Int -> String -> DA.App () Int
 processCommand 0 _ = return 0
 processCommand count cmd = do
   (_, stdout, stderr) <- DS.readShell cmd
@@ -24,14 +29,14 @@ processCommand count cmd = do
   forM_
     matches
     <| \x -> do
-      logDebugN <|
-        "match= " <> pack (show x)
+      logDebugN
+        <| "match= " <> pack (show x)
 
       let oldHash = x !! 1
           newHash = x !! 2
 
-      DS.readShell <|
-        [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
+      DS.readShell
+        <| [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
           ++ " | xargs sed -i 's@"
           ++ oldHash
           ++ "@"
@@ -44,10 +49,9 @@ processCommand count cmd = do
 
 main :: IO ()
 main = do
-  let logger = colorize logToStderr
-
-  flip runLoggerLoggingT logger <| do
-    (_, stdout, _) <- DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
+  DA.runApp "update-hashes" () <| do
+    (_, stdout, _) <-
+      DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
 
     forM_
       (map (splitOn ":") <| lines stdout)
@@ -57,8 +61,8 @@ main = do
             oldHash = x !! 2
 
         newHash <- DN.fakeHash
-        DS.readShell <|
-          "sed -i '"
+        DS.readShell
+          <| "sed -i '"
             ++ lineNr
             ++ "s@"
             ++ oldHash
@@ -71,9 +75,9 @@ main = do
         cmds =
           "nix run .#canary"
             : concat
-              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") DN.supportedNixosHosts),
-                (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") DN.supportedDarwinHosts),
-                (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") DN.supportedHomes)
+              [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") DN.supportedNixosHosts)
+              , (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") DN.supportedDarwinHosts)
+              , (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") DN.supportedHomes)
               ]
 
     foldM_ processCommand count cmds

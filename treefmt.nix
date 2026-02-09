@@ -41,8 +41,8 @@ in
     "*.jsonc"
   ];
 
-  programs.ormolu.enable = true;
-  programs.ormolu.ghcOpts = [
+  programs.fourmolu.enable = true;
+  programs.fourmolu.ghcOpts = [
     "BangPatterns"
     "DuplicateRecordFields"
     "FlexibleContexts"
@@ -56,8 +56,32 @@ in
     "TemplateHaskell"
     "TypeApplications"
   ];
-  settings.formatter.ormolu.excludes = excludes;
-  settings.formatter.ormolu.includes = [ "*.hs" ];
+  settings.formatter.fourmolu.excludes = excludes;
+  settings.formatter.fourmolu.includes = [ "*.hs" ];
+  settings.formatter.fourmolu.options = [
+    "--indentation"
+    "2"
+    "--column-limit"
+    "100"
+    "--import-export-style"
+    "leading"
+    "--indent-wheres"
+    "true"
+    "--record-brace-space"
+    "true"
+    "--haddock-style"
+    "single-line"
+    "--let-style"
+    "inline"
+    "--sort-constraints"
+    "true"
+    "--sort-derived-classes"
+    "true"
+    "--sort-deriving-clauses"
+    "true"
+    "--trailing-section-operators"
+    "false"
+  ];
 
   programs.cabal-fmt.enable = true;
   settings.formatter.cabal-fmt.excludes = excludes;

@@ -3,7 +3,7 @@ module Dotfiles.Shell (readShellWithStdin, readShell) where
 import Control.Monad (when)
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
-import Control.Monad.Logger.CallStack (MonadLogger, logInfoN)
+import Control.Monad.Logger (MonadLogger, logInfoN)
 import Data.Text (pack)
 import Flow
 import System.Exit (ExitCode)
@@ -20,28 +20,29 @@ hStreamLogCapture prefix stdH = loop []
         then return <| reverse acc
         else do
           line <- liftIO <| hGetLine stdH
-          logInfoN <|
-            pack prefix <> "= " <> pack line
+          logInfoN
+            <| pack prefix <> "= " <> pack line
 
           loop <| line : acc
 
-readShellWithStdin :: (MonadUnliftIO m, MonadFail m, MonadLogger m) => String -> String -> m (ExitCode, String, String)
+readShellWithStdin ::
+  (MonadFail m, MonadLogger m, MonadUnliftIO m) => String -> String -> m (ExitCode, String, String)
 readShellWithStdin cmd stdin = do
-  logInfoN <|
-    "cmdLine= " <> pack cmd
+  logInfoN
+    <| "cmdLine= " <> pack cmd
 
   (Just stdinH, Just stdoutH, Just stderrH, processH) <-
-    liftIO <|
-      createProcess
+    liftIO
+      <| createProcess
         (proc "bash" ["--norc", "--noprofile", "-c", cmd])
-          { std_in = CreatePipe,
-            std_out = CreatePipe,
-            std_err = CreatePipe
+          { std_in = CreatePipe
+          , std_out = CreatePipe
+          , std_err = CreatePipe
           }
 
   (when <| not <| null stdin) <| do
-    logInfoN <|
-      "cmdIn= " <> pack stdin
+    logInfoN
+      <| "cmdIn= " <> pack stdin
     liftIO <| do
       hPutStr stdinH stdin
       hFlush stdinH
@@ -59,10 +60,10 @@ readShellWithStdin cmd stdin = do
   stderr <- wait asyncStderr
 
   exitCode <- liftIO <| waitForProcess processH
-  logInfoN <|
-    "cmdRc= " <> (pack <| show exitCode)
+  logInfoN
+    <| "cmdRc= " <> (pack <| show exitCode)
 
   return (exitCode, unlines stdout, unlines stderr)
 
-readShell :: (MonadUnliftIO m, MonadFail m, MonadLogger m) => String -> m (ExitCode, String, String)
+readShell :: (MonadFail m, MonadLogger m, MonadUnliftIO m) => String -> m (ExitCode, String, String)
 readShell = flip readShellWithStdin ""

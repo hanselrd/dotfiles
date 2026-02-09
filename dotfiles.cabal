@@ -39,6 +39,8 @@ common build-depends
     , exceptions
     , flow
     , monad-logger
+    , monad-logger-extras
+    , mtl
     , os-release
     , process
     , random
@@ -49,18 +51,18 @@ common build-depends
     , temporary
     , text
     , time
+    , transformers
     , unliftio
     , unliftio-core
 
 common exe-build-depends
   import:        build-depends
-  build-depends:
-    , monad-logger-extras
-    , optparse-applicative
+  build-depends: optparse-applicative
 
 library
   import:           ghc-options, default-extensions, build-depends
   exposed-modules:
+    Dotfiles.Application
     Dotfiles.Nix
     Dotfiles.Shell
 

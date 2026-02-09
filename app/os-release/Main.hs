@@ -1,19 +1,15 @@
 module Main (main) where
 
 import Control.Monad.IO.Class (liftIO)
-import Control.Monad.Logger.CallStack (logDebugN)
-import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
+import Control.Monad.Logger (logDebugN)
 import Data.Text (pack)
+import qualified Dotfiles.Application as DA (runApp)
 import Flow
 import System.OsRelease
 
 main :: IO ()
 main = do
-  let logger = colorize logToStderr
-
-  flip runLoggerLoggingT logger <| do
-    logDebugN "os-release"
-
+  DA.runApp "os-release" () <| do
     Just (OsRelease {..}) <- fmap osRelease <$> liftIO parseOsRelease
     logDebugN <| "name= " <> pack name
     logDebugN <| "id= " <> pack id

@@ -1,10 +1,20 @@
-module Dotfiles.Nix (system, nixosHosts, darwinHosts, homes, supportedNixosHosts, supportedDarwinHosts, supportedHomes, fakeHash) where
+module Dotfiles.Nix
+  ( system
+  , nixosHosts
+  , darwinHosts
+  , homes
+  , supportedNixosHosts
+  , supportedDarwinHosts
+  , supportedHomes
+  , fakeHash
+  )
+where
 
 import Control.Monad (filterM)
 import Control.Monad.Catch (MonadMask)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
-import Control.Monad.Logger.CallStack (runNoLoggingT)
+import Control.Monad.Logger (runNoLoggingT)
 import Data.Text (pack, strip, unpack)
 import Data.Time.Clock.POSIX (getPOSIXTime)
 import Dotfiles.Shell (readShell)
@@ -23,24 +33,26 @@ system =
       if exitCode /= ExitSuccess
         then error "failed to evaluate system"
         else
-          return <|
-            ( stdout
-                |> pack
-                |> strip
-                |> unpack
-            )
+          return
+            <| ( stdout
+                   |> pack
+                   |> strip
+                   |> unpack
+               )
 
 configurations :: String -> [String]
 configurations name =
   unsafePerformIO <| do
     runNoLoggingT <| do
-      (exitCode, stdout, _) <- readShell <| "nix eval .#" ++ name ++ "Configurations --apply \"x: builtins.attrNames x\" --json | jq -r \".[]\""
+      (exitCode, stdout, _) <-
+        readShell
+          <| "nix eval .#" ++ name ++ "Configurations --apply \"x: builtins.attrNames x\" --json | jq -r \".[]\""
 
       if exitCode /= ExitSuccess
         then error <| "failed to evaluate " ++ name ++ " configurations"
         else
-          return <|
-            lines stdout
+          return
+            <| lines stdout
 
 nixosHosts :: [String]
 nixosHosts = configurations "nixos"
@@ -58,29 +70,37 @@ supportedConfigurations name =
       <| do
         filterM
           ( \x -> do
-              (exitCode, stdout, _) <- readShell <| "nix eval .#" ++ name ++ "Configurations." ++ x ++ ".config.nixpkgs.hostPlatform.system --impure --raw"
+              (exitCode, stdout, _) <-
+                readShell
+                  <| "nix eval .#"
+                    ++ name
+                    ++ "Configurations."
+                    ++ x
+                    ++ ".config.nixpkgs.hostPlatform.system --impure --raw"
 
               if exitCode == ExitSuccess
                 then
-                  return <|
-                    ( stdout
-                        |> pack
-                        |> strip
-                        |> unpack
-                    )
+                  return
+                    <| ( stdout
+                           |> pack
+                           |> strip
+                           |> unpack
+                       )
                       == system
                 else do
-                  (exitCode, stdout, _) <- readShell <| "nix eval .#" ++ name ++ "Configurations." ++ x ++ ".config.nixpkgs.system --impure --raw"
+                  (exitCode, stdout, _) <-
+                    readShell
+                      <| "nix eval .#" ++ name ++ "Configurations." ++ x ++ ".config.nixpkgs.system --impure --raw"
 
                   if exitCode /= ExitSuccess
                     then error <| "failed to evaluate supported " ++ name ++ " configurations"
                     else
-                      return <|
-                        ( stdout
-                            |> pack
-                            |> strip
-                            |> unpack
-                        )
+                      return
+                        <| ( stdout
+                               |> pack
+                               |> strip
+                               |> unpack
+                           )
                           == system
           )
       <| configurations name
@@ -94,7 +114,7 @@ supportedDarwinHosts = supportedConfigurations "darwin"
 supportedHomes :: [String]
 supportedHomes = supportedConfigurations "home"
 
-fakeHash :: (MonadUnliftIO m, MonadFail m, MonadMask m) => m String
+fakeHash :: (MonadFail m, MonadMask m, MonadUnliftIO m) => m String
 fakeHash =
   withSystemTempFile "fake-hash.txt" <| \path fileH -> do
     runNoLoggingT <| do
@@ -108,9 +128,9 @@ fakeHash =
       if exitCode /= ExitSuccess
         then error "failed to generate fake hash"
         else
-          return <|
-            ( stdout
-                |> pack
-                |> strip
-                |> unpack
-            )
+          return
+            <| ( stdout
+                   |> pack
+                   |> strip
+                   |> unpack
+               )
