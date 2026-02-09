@@ -31,11 +31,7 @@ main = do
 
   DA.runApp "playground" env <| do
     env <- ask
-    logDebugN
-      <| "env.name= "
-        <> pack env.name
-        <> " env.version= "
-        <> pack env.version
+    logDebugN <| "env= " <> pack (show env)
 
     logDebugN <| "nix.system= " <> pack DN.system
     logDebugN <| "nix.nixosHosts= " <> pack (show DN.nixosHosts)
