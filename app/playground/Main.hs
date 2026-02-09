@@ -5,8 +5,8 @@ import Data.Text (pack)
 import qualified Dotfiles.Application as DA (runApp)
 import qualified Dotfiles.Nix as DN
   ( darwinHosts
-  , nixosHosts
   , homes
+  , nixosHosts
   , supportedDarwinHosts
   , supportedHomes
   , supportedNixosHosts

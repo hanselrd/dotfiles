@@ -43,6 +43,7 @@ runAppWithParser action rP = do
           )
           ( fullDesc
               <> header ("Dotfiles " ++ progName)
+              <> progDesc "a Dotfiles application"
               <> footer "(c) Dotfiles <hanselrd>"
           )
 

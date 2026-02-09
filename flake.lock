@@ -633,11 +633,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770662569,
-        "narHash": "sha256-S0ISrdS5/Dc2KoRaTx0aCBcQPyXmW7GButcOvIrIZbM=",
+        "lastModified": 1770669724,
+        "narHash": "sha256-LTW82mozAvlC6KK5JYYp7aEsNVpkEFoLDA/cMkVHF0o=",
         "owner": "zigtools",
         "repo": "zls",
-        "rev": "fbaa357bf37d36ee8f09c8addae4f585d60b1df7",
+        "rev": "3de57dd10be7c4ab6e4b518b10e21bf7116e79af",
         "type": "github"
       },
       "original": {
