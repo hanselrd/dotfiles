@@ -16,6 +16,7 @@ hStreamLogCapture prefix stdH = loop []
   where
     loop acc = do
       eof <- liftIO <| hIsEOF stdH
+
       if eof
         then return <| reverse acc
         else do
