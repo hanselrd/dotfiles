@@ -53,8 +53,9 @@ runAppWithParser action rP = do
   where
     logger = colorize logToStderr
 
-    runApp (App action) r =
+    runApp action r =
       action
+        |> unApp
         |> flip runLoggerLoggingT logger
         |> flip runReaderT r
 
