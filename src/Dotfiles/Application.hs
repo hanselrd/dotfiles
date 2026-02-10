@@ -40,7 +40,9 @@ runAppWithParser action rPmaybeInfoMod = do
         info
           ( rP
               <**> helper
-              <**> (simpleVersioner <| unwords [progName, showVersion version])
+              <**> ( simpleVersioner
+                       <| unwords [progName, showVersion version]
+                   )
           )
           ( fullDesc
               <> header ("Dotfiles " ++ progName)
