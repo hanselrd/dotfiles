@@ -4,7 +4,8 @@ import Control.Monad (forM, replicateM, void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger (logDebugN)
 import Control.Monad.Reader (ask)
-import Data.Text (pack, strip, unpack)
+import Data.String.Utils (strip)
+import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, runAppWithParser)
 import qualified Dotfiles.Nix as DN (homes)
 import qualified Dotfiles.Shell as DS (readShell)
@@ -69,11 +70,7 @@ main = do
               ++ opts.home
               ++ ".activationPackage --impure"
 
-        let path0 =
-              stdout
-                |> pack
-                |> strip
-                |> unpack
+        let path0 = strip stdout
         logDebugN
           <| "path0= " <> pack path0
 
@@ -84,11 +81,7 @@ main = do
               ++ homeDir
               ++ "/.nix-profile"
 
-        let path1 =
-              stdout
-                |> pack
-                |> strip
-                |> unpack
+        let path1 = strip stdout
         logDebugN
           <| "path1= " <> pack path1
 
@@ -139,11 +132,7 @@ main = do
               ++ sedString
               ++ "'"
 
-        let path0New =
-              stdout
-                |> pack
-                |> strip
-                |> unpack
+        let path0New = strip stdout
         logDebugN
           <| "path0New= " <> pack path0New
 
@@ -155,11 +144,7 @@ main = do
               ++ sedString
               ++ "'"
 
-        let path1New =
-              stdout
-                |> pack
-                |> strip
-                |> unpack
+        let path1New = strip stdout
         logDebugN
           <| "path1New= " <> pack path1New
 

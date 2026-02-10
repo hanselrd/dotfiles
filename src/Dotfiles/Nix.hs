@@ -15,7 +15,7 @@ import Control.Monad.Catch (MonadMask)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
 import Control.Monad.Logger (runNoLoggingT)
-import Data.Text (pack, strip, unpack)
+import Data.String.Utils (strip)
 import Data.Time.Clock.POSIX (getPOSIXTime)
 import Dotfiles.Shell (readShell)
 import Flow
@@ -34,11 +34,7 @@ system =
         then error "failed to evaluate system"
         else
           return
-            <| ( stdout
-                   |> pack
-                   |> strip
-                   |> unpack
-               )
+            <| strip stdout
 
 configurations :: String -> [String]
 configurations name =
@@ -81,12 +77,7 @@ supportedConfigurations name =
               if exitCode == ExitSuccess
                 then
                   return
-                    <| ( stdout
-                           |> pack
-                           |> strip
-                           |> unpack
-                       )
-                      == system
+                    <| strip stdout == system
                 else do
                   (exitCode, stdout, _) <-
                     readShell
@@ -96,12 +87,7 @@ supportedConfigurations name =
                     then error <| "failed to evaluate supported " ++ name ++ " configurations"
                     else
                       return
-                        <| ( stdout
-                               |> pack
-                               |> strip
-                               |> unpack
-                           )
-                          == system
+                        <| strip stdout == system
           )
       <| configurations name
 
@@ -129,8 +115,4 @@ fakeHash =
         then error "failed to generate fake hash"
         else
           return
-            <| ( stdout
-                   |> pack
-                   |> strip
-                   |> unpack
-               )
+            <| strip stdout

@@ -38,6 +38,7 @@ common build-depends
     , directory
     , exceptions
     , flow
+    , MissingH
     , monad-logger
     , monad-logger-extras
     , mtl
