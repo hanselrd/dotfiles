@@ -7,6 +7,7 @@ import Control.Monad.Logger (LoggingT, MonadLogger)
 import Control.Monad.Logger.Extras (colorize, logToStderr, runLoggerLoggingT)
 import Control.Monad.Reader (MonadReader)
 import Control.Monad.Trans.Reader (ReaderT, runReaderT)
+import Data.Maybe (fromMaybe)
 import Data.Version (showVersion)
 import Flow
 import Options.Applicative
@@ -30,9 +31,9 @@ newtype App r a = App
     , MonadUnliftIO
     )
 
-runAppWithParser :: App r a -> App () (Parser r) -> IO a
-runAppWithParser action rP = do
-  rP <- runApp rP ()
+runAppWithParser :: App r a -> App () (Parser r, Maybe (InfoMod r)) -> IO a
+runAppWithParser action rPmaybeInfoMod = do
+  (rP, rMaybeInfoMod) <- runApp rPmaybeInfoMod ()
   progName <- getProgName
 
   let rInfo =
@@ -45,6 +46,7 @@ runAppWithParser action rP = do
               <> header ("Dotfiles " ++ progName)
               <> progDesc "a Dotfiles application"
               <> footer "(c) Dotfiles <hanselrd>"
+              <> fromMaybe mempty rMaybeInfoMod
           )
 
   r <- execParser rInfo
@@ -64,5 +66,5 @@ runApp action r =
   action
     |> ( flip runAppWithParser
            <| return
-           <| pure r
+           <| (pure r, Nothing)
        )

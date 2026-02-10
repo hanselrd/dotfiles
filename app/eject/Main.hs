@@ -21,7 +21,7 @@ data Options = Options
   }
   deriving (Eq, Read, Show)
 
-optionsP :: DA.App () (Parser Options)
+optionsP :: DA.App () (Parser Options, Maybe (InfoMod Options))
 optionsP = do
   let chars = ['a' .. 'z'] ++ ['0' .. '9']
       hashLen = 5
@@ -35,21 +35,23 @@ optionsP = do
   let outDir = homeDir ++ "/.nix/x/" ++ hash
 
   return
-    <| Options
-      <$> strOption
-        ( long "home"
-            <> metavar "HOME"
-            <> help "Home name"
-            <> value "basic"
-            <> showDefault
-        )
-      <*> strOption
-        ( long "out-dir"
-            <> metavar "OUT_DIR"
-            <> help "Output directory"
-            <> value outDir
-            <> showDefault
-        )
+    <| ( Options
+           <$> strOption
+             ( long "home"
+                 <> metavar "HOME"
+                 <> help "Home name"
+                 <> value "basic"
+                 <> showDefault
+             )
+           <*> strOption
+             ( long "out-dir"
+                 <> metavar "OUT_DIR"
+                 <> help "Output directory"
+                 <> value outDir
+                 <> showDefault
+             )
+       , Just <| progDesc "Eject home configuration to output directory"
+       )
 
 main :: IO ()
 main = do
