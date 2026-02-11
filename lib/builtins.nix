@@ -3,13 +3,11 @@ let
   shell =
     cmd:
     exec [
-      "env"
       "bash"
       "-c"
       cmd
     ];
-  builtin =
-    name: args: shell <| "nix run .#builtins -- ${name} " + builtins.concatStringsSep " " args;
+  builtin = name: args: shell "nix run .#builtins -- ${name} ${builtins.concatStringsSep " " args}";
 
   assertMsg = pred: msg: pred || builtins.throw msg;
 in
