@@ -79,7 +79,7 @@ require("mini.starter").setup({
     -- [04:00, 12:00) - morning, [12:00, 20:00) - day, [20:00, 04:00) - evening
     local part_id = math.floor((hour + 4) / 8) + 1
     local day_part = ({ "evening", "morning", "afternoon", "evening" })[part_id]
-    return ("Good %s, @name@ (@username@)"):format(day_part)
+    return ("Good %s, @name@ <@username@>"):format(day_part)
   end,
 })
 require("mini.statusline").setup()
