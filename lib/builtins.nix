@@ -12,8 +12,6 @@ let
     name: args: shell <| "nix run .#builtins -- ${name} " + builtins.concatStringsSep " " args;
 
   assertMsg = pred: msg: pred || builtins.throw msg;
-
-  TMPDIR = "\${XDG_RUNTIME_DIR:-\${TMPDIR:-/tmp}}/nix-$(id -u)";
 in
 {
   getRandomString =
@@ -41,10 +39,10 @@ in
     identity: secret:
     assert assertMsg (builtins.isPath secret)
       "The file to decrypt must be given as a path to prevent impurity";
-    exec [
-      "env"
-      "bash"
-      "-c"
-      "umask 077 && mkdir -p \"${TMPDIR}\" && TMP=$(mktemp -p \"${TMPDIR}\") && age -d -i ${identity} -o \"$TMP\" ${secret} && echo \"$TMP\""
+    builtin "decrypt-secret" [
+      "--identity"
+      identity
+      "--secret"
+      secret
     ];
 }

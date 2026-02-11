@@ -7,7 +7,7 @@ import Data.String.Combinators (doubleQuotes)
 import Data.String.Utils (strip)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, runAppWithParser)
-import qualified Dotfiles.Builtins as DB (device, devicePartition, randomString)
+import qualified Dotfiles.Builtins as DB (decryptSecret, device, devicePartition, randomString)
 import qualified Dotfiles.Shell as DS (readShell)
 import Flow
 import Options.Applicative
@@ -123,4 +123,8 @@ main = do
         liftIO
           <| putStr
           <| doubleQuotes dev
-      _ -> logDebugN "Not implemented"
+      DecryptSecret {..} -> do
+        path <- DB.decryptSecret identity secret
+
+        liftIO
+          <| putStr path

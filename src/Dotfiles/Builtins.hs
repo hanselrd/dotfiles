@@ -3,15 +3,17 @@ module Dotfiles.Builtins
   , devicePartition
   , device
   , decryptSecret
-  ) where
+  )
+where
 
-import Control.Monad (replicateM)
+import Control.Monad (replicateM, void)
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
 import Control.Monad.Logger (MonadLogger)
 import Data.String.Utils (strip)
 import Dotfiles.Shell (readShell)
 import Flow
+import System.IO.Temp (emptySystemTempFile)
 import System.Random (randomRIO)
 
 randomString :: (MonadIO m) => Int -> m String
@@ -38,4 +40,17 @@ device path = do
   return <| strip stdout
 
 decryptSecret :: (MonadFail m, MonadLogger m, MonadUnliftIO m) => FilePath -> FilePath -> m String
-decryptSecret identity secret = return ""
+decryptSecret identity secret = do
+  tmp <- liftIO <| emptySystemTempFile "decrypt-secret"
+
+  void
+    <| readShell
+    <| unwords
+      [ "age -d -i"
+      , identity
+      , "-o"
+      , tmp
+      , secret
+      ]
+
+  return tmp
