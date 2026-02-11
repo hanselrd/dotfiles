@@ -1,35 +1,40 @@
 { exec, ... }:
 let
+  shell =
+    cmd:
+    exec [
+      "env"
+      "bash"
+      "-c"
+      cmd
+    ];
+  builtin =
+    name: args: shell <| "nix run .#builtins -- ${name} " + builtins.concatStringsSep " " args;
+
   assertMsg = pred: msg: pred || builtins.throw msg;
 
   TMPDIR = "\${XDG_RUNTIME_DIR:-\${TMPDIR:-/tmp}}/nix-$(id -u)";
 in
-rec {
+{
   getRandomString =
     length:
-    exec [
-      "env"
-      "bash"
-      "-c"
-      "< /dev/urandom tr -dc 'a-z0-9' | head -c ${builtins.toString length} | sed 's/.*/\"&\"/'"
+    builtin "random-string" [
+      "--length"
+      (builtins.toString length)
     ];
 
   getDevicePartition =
     path:
-    exec [
-      "env"
-      "bash"
-      "-c"
-      "findmnt -no source -T ${path} | sed 's/.*/\"&\"/'"
+    builtin "device-partition" [
+      "--path"
+      path
     ];
 
   getDevice =
     path:
-    exec [
-      "env"
-      "bash"
-      "-c"
-      "lsblk -dpno pkname ${getDevicePartition path} | sed 's/.*/\"&\"/'"
+    builtin "device" [
+      "--path"
+      path
     ];
 
   decryptSecret =

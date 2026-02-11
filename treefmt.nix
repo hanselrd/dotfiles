@@ -48,6 +48,7 @@ in
     "FlexibleContexts"
     "GeneralizedNewtypeDeriving"
     "LambdaCase"
+    "NamedFieldPuns"
     "OverloadedRecordDot"
     "OverloadedStrings"
     "PatternSynonyms"

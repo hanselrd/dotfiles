@@ -179,6 +179,8 @@
           dotfiles = pkgs.haskellPackages.callCabal2nix "dotfiles" ./. { };
         in
         {
+          builtins = lib.x.mkApp' dotfiles "builtins";
+
           codegen = lib.x.mkApp (
             pkgs.writeShellApplication {
               name = "codegen";
