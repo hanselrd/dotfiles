@@ -2,13 +2,12 @@ module Main (main) where
 
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger (logDebugN)
+import Control.Monad.Logger.Extras (colorize, logToStderr)
 import Control.Monad.Reader (ask)
 import Data.String.Combinators (doubleQuotes)
-import Data.String.Utils (strip)
 import Data.Text (pack)
-import qualified Dotfiles.Application as DA (App, runAppWithParser)
+import qualified Dotfiles.Application as DA (App, ParserInfoMod, runRAppWithParser)
 import qualified Dotfiles.Builtins as DB (decryptSecret, device, devicePartition, randomString)
-import qualified Dotfiles.Shell as DS (readShell)
 import Flow
 import Options.Applicative
 
@@ -90,17 +89,17 @@ builtinP =
             (progDesc "Decrypt secret")
         )
 
-optionsP :: DA.App () (Parser Options, Maybe (InfoMod Options))
+optionsP :: DA.App (DA.ParserInfoMod Options)
 optionsP = do
   return
     ( Options <$> builtinP
-    , Just <| progDesc "Builtins for nix"
+    , progDesc "Builtins for nix"
     )
 
 main :: IO ()
 main = do
-  flip DA.runAppWithParser optionsP <| do
-    opts <- ask
+  flip (flip DA.runRAppWithParser (colorize logToStderr)) optionsP <| do
+    (opts, _) <- ask
     logDebugN
       <| "opts= " <> pack (show opts)
 

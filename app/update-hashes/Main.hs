@@ -2,6 +2,7 @@ module Main (main) where
 
 import Control.Monad (foldM_, forM_)
 import Control.Monad.Logger (logDebugN)
+import Control.Monad.Logger.Extras (colorize, logToStderr)
 import Data.List.Split (splitOn)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, runApp)
@@ -16,7 +17,7 @@ import Flow
 import Text.RawString.QQ
 import Text.Regex.TDFA
 
-processCommand :: Int -> String -> DA.App () Int
+processCommand :: Int -> String -> DA.App Int
 processCommand 0 _ = return 0
 processCommand count cmd = do
   (_, stdout, stderr) <- DS.readShell cmd
@@ -49,7 +50,7 @@ processCommand count cmd = do
 
 main :: IO ()
 main = do
-  flip DA.runApp () <| do
+  flip DA.runApp (colorize logToStderr) <| do
     (_, stdout, _) <-
       DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
 

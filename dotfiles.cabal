@@ -51,6 +51,7 @@ common build-depends
     , raw-strings-qq
     , regex-tdfa
     , split
+    , stm
     , string-combinators
     , template-haskell
     , temporary

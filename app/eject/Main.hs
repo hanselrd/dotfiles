@@ -3,10 +3,11 @@ module Main (main) where
 import Control.Monad (forM, replicateM, void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger (logDebugN)
+import Control.Monad.Logger.Extras (colorize, logToStderr)
 import Control.Monad.Reader (ask)
 import Data.String.Utils (strip)
 import Data.Text (pack)
-import qualified Dotfiles.Application as DA (App, runAppWithParser)
+import qualified Dotfiles.Application as DA (App, ParserInfoMod, runRAppWithParser)
 import qualified Dotfiles.Nix as DN (homes)
 import qualified Dotfiles.Shell as DS (readShell)
 import Flow
@@ -21,7 +22,7 @@ data Options = Options
   }
   deriving (Eq, Read, Show)
 
-optionsP :: DA.App () (Parser Options, Maybe (InfoMod Options))
+optionsP :: DA.App (DA.ParserInfoMod Options)
 optionsP = do
   let chars = ['a' .. 'z'] ++ ['0' .. '9']
       hashLen = 5
@@ -50,16 +51,16 @@ optionsP = do
                  <> value outDir
                  <> showDefault
              )
-       , Just <| progDesc "Eject home configuration to output directory"
+       , progDesc "Eject home configuration to output directory"
        )
 
 main :: IO ()
 main = do
-  flip DA.runAppWithParser optionsP <| do
+  flip (flip DA.runRAppWithParser (colorize logToStderr)) optionsP <| do
     logDebugN
       <| "homes= " <> pack (show DN.homes)
 
-    opts <- ask
+    (opts, _) <- ask
     logDebugN
       <| "opts= " <> pack (show opts)
 
