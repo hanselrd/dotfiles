@@ -27,7 +27,7 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.3.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-runewidth v0.0.19 // indirect
+	github.com/mattn/go-runewidth v0.0.20 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/pascaldekloe/name v1.0.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
