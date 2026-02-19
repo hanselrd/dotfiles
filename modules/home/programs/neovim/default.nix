@@ -32,7 +32,7 @@
     withNodeJs = true;
     initLua =
       pkgs.replaceVars ./config.lua {
-        inherit (env) name;
+        inherit (env) name timeFormat;
         inherit (config.home) username;
         inherit (config.xdg) cacheHome;
       }

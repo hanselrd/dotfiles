@@ -17,7 +17,7 @@ vim.opt.ttimeoutlen = 50
 
 -- git-blame-nvim
 require("gitblame").setup({
-  date_format = "%c (%r)",
+  date_format = "@timeFormat@ (%r)",
   message_template = "  <sha> • <author> • <date>",
   message_when_not_committed = "  Not committed yet",
 })
