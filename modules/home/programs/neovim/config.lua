@@ -15,6 +15,11 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 50
 
+-- git-blame-nvim
+vim.g.gitblame_message_template = "<sha> • <author> • <date>"
+vim.g.gitblame_date_format = "%r"
+vim.g.gitblame_message_when_not_committed = "Not committed yet"
+
 -- mini-nvim
 require("mini.ai").setup()
 require("mini.align").setup()

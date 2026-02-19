@@ -9,6 +9,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      git-blame-nvim
       mini-nvim
       nvim-lspconfig
       nvim-treesitter-context
