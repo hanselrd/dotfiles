@@ -30,8 +30,8 @@ rec {
       hostName ? "nohost0",
       system ? "x86_64-linux",
       timeZone ? "America/New_York",
-      timeFormat ? "<%a>%-d-%b-%y <%Z>T%H:%M",
-      goTimeFormat ? "<Mon>2-Jan-06 <MST>T15:04",
+      timeFormat ? "<%a>%Y-%m-%d <%Z>%H:%M:%S",
+      goTimeFormat ? "<Mon>2006-01-02 <MST>15:04:05",
       nixRoot ? null,
     }@args:
     assert lib.assertMsg (
