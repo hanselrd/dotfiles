@@ -69,7 +69,7 @@ rec {
     { pkgs }:
     readCommand "current-time-utc-pretty" { inherit pkgs; } {
       currentTime = builtins.currentTime;
-    } "${lib.getExe' pkgs.coreutils "date"} --utc +\"%Y-%m-%dT%H:%M:%SZ\" > $out";
+    } "${lib.getExe' pkgs.coreutils "date"} --utc +\"%a %Y-%m-%dT%H:%M:%SZ\" > $out";
 
   currentTimePretty =
     { pkgs }:
@@ -77,7 +77,7 @@ rec {
     readCommand "current-time-pretty" { inherit pkgs; } {
       buildInputs = [ pkgs.tzdata ];
       currentTime = builtins.currentTime;
-    } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} +\"%Y-%m-%dT%H:%M:%S%z %Z\" > $out";
+    } "TZ=${tz} ${lib.getExe' pkgs.coreutils "date"} +\"%a %Y-%m-%dT%H:%M:%S%z %Z\" > $out";
 
   runExternalHome =
     name:
