@@ -133,6 +133,6 @@
       setw -g pane-border-lines single
     '';
     prefix = "C-a";
-    tmuxp.enable = true;
+    # tmuxp.enable = true;
   };
 }
