@@ -10,24 +10,13 @@
     settings = {
       user.name = env.name;
       user.email = env.email;
-      # core = {
-      #   fsmonitor = true;
-      # };
-      feature = {
-        manyFiles = true;
-      };
-      grep = {
-        lineNumber = true;
-      };
-      init = {
-        defaultBranch = lib.mkForce "master";
-      };
-      merge = {
-        conflictStyle = "diff3";
-      };
-      safe = {
-        directory = "*";
-      };
+      log.date = "format:${env.timeFormat}";
+      # core.fsmonitor = true;
+      feature.manyFiles = true;
+      grep.lineNumber = true;
+      init.defaultBranch = lib.mkForce "master";
+      merge.conflictStyle = "diff3";
+      safe.directory = "*";
       # color = {
       #   branch = {
       #     current = "yellow bold reverse";

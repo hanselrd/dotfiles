@@ -6,6 +6,6 @@
   };
 
   home.sessionVariables = {
-    NH_SHOW_ACTIVATION_LOGS = 1;
+    NH_SHOW_ACTIVATION_LOGS = "true";
   };
 }
