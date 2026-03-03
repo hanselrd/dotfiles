@@ -25,7 +25,7 @@ rec {
       emailSecret ? null,
       homeDirectory ? "/home/${username}",
       identity ? "${homeDirectory}/.ssh/id_ed25519",
-      theme ? "chalk",
+      theme ? "rose-pine",
       homeName ? "basic",
       hostName ? "nohost0",
       system ? "x86_64-linux",
