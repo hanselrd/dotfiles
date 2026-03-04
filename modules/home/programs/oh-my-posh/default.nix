@@ -73,12 +73,12 @@ in
                 "<b>"
                 "<darkGray>{</>"
                 # "{{.CurrentDate | date .Format}}"
-                (lib.concatMapStrings
+                (lib.concatImapStrings
                   (
-                    x:
+                    pos: x:
                     let
-                      sep = lib.substring 0 1 x;
-                      x' = "{{.CurrentDate | date `${lib.substring 1 (-1) x}`}}";
+                      sep = if pos > 1 then lib.substring 0 1 x else "";
+                      x' = "{{.CurrentDate | date `${if pos > 1 then lib.substring 1 (-1) x else x}`}}";
                     in
                     lib.concatStrings [
                       "<darkGray>${sep}</>"
