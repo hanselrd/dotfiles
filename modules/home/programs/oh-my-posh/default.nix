@@ -83,16 +83,19 @@ in
                         if lib.replaceStrings [ " " ] [ "" ] rest != "" then "{{.CurrentDate | date `${rest}`}}" else rest;
                     in
                     lib.concatStrings [
-                      "<darkGray>${sep}</>"
+                      (if sep != "" then "<darkGray>${sep}</>" else "")
                       (
-                        if sep == "<" then
-                          "<${bright-red}>${rest'}</>"
-                        else if sep == "(" then
-                          "<${bright-green}>${rest'}</>"
-                        else if sep == "[" then
-                          "<${bright-blue}>${rest'}</>"
+                        if rest' != "" then
+                          if sep == "<" then
+                            "<${bright-red}>${rest'}</>"
+                          else if sep == "(" then
+                            "<${bright-green}>${rest'}</>"
+                          else if sep == "[" then
+                            "<${bright-blue}>${rest'}</>"
+                          else
+                            rest'
                         else
-                          rest'
+                          ""
                       )
                     ]
                   )
