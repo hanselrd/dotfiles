@@ -72,26 +72,61 @@ in
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
-                "{{.CurrentDate | date .Format}}"
+                # "{{.CurrentDate | date .Format}}"
+                (lib.concatMapStrings
+                  (
+                    x:
+                    let
+                      sep = lib.substring 0 1 x;
+                      x' = "{{.CurrentDate | date `${lib.substring 1 (-1) x}`}}";
+                    in
+                    lib.concatStrings [
+                      "<darkGray>${sep}</>"
+                      (
+                        if sep == "<" then
+                          "<${bright-red}>${x'}</>"
+                        else if sep == "(" then
+                          "<${bright-green}>${x'}</>"
+                        else if sep == "[" then
+                          "<${bright-blue}>${x'}</>"
+                        else
+                          x'
+                      )
+                    ]
+                  )
+                  (
+                    lib.splitStringBy (
+                      _prev: curr:
+                      lib.elem curr [
+                        "<"
+                        ">"
+                        "("
+                        ")"
+                        "["
+                        "]"
+                      ]
+                    ) true env.goTimeFormat
+                  )
+                )
                 "<darkGray>}</>"
                 "</b> "
               ];
-              properties = {
-                time_format =
-                  lib.replaceStrings
-                    [ "<" ">" ]
-                    [
-                      (lib.concatStrings [
-                        "<darkGray><</>"
-                        "<${bright-red}>"
-                      ])
-                      (lib.concatStrings [
-                        "</>"
-                        "<darkGray>></>"
-                      ])
-                    ]
-                    env.goTimeFormat;
-              };
+              # properties = {
+              #   time_format =
+              #     lib.replaceStrings
+              #       [ "<" ">" ]
+              #       [
+              #         (lib.concatStrings [
+              #           "<darkGray><</>"
+              #           "<${bright-red}>"
+              #         ])
+              #         (lib.concatStrings [
+              #           "</>"
+              #           "<darkGray>></>"
+              #         ])
+              #       ]
+              #       env.goTimeFormat;
+              # };
             }
             {
               type = "session";
