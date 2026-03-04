@@ -55,7 +55,7 @@
           set -ga status-right "#[fg=brightblack]{#[default]"
           set -ga status-right "#[fg=${bright-yellow}]${
             lib.replaceStrings
-              [ "<" ">" ]
+              [ "<" ">" "(" ")" "[" "]" ]
               [
                 (lib.concatStrings [
                   "#[fg=brightblack]<#[default]"
@@ -64,6 +64,24 @@
                 (lib.concatStrings [
                   "#[default]"
                   "#[fg=brightblack]>#[default]"
+                  "#[fg=${bright-yellow}]"
+                ])
+                (lib.concatStrings [
+                  "#[fg=brightblack](#[default]"
+                  "#[fg=${bright-green}]"
+                ])
+                (lib.concatStrings [
+                  "#[default]"
+                  "#[fg=brightblack])#[default]"
+                  "#[fg=${bright-yellow}]"
+                ])
+                (lib.concatStrings [
+                  "#[fg=brightblack][#[default]"
+                  "#[fg=${bright-blue}]"
+                ])
+                (lib.concatStrings [
+                  "#[default]"
+                  "#[fg=brightblack]]#[default]"
                   "#[fg=${bright-yellow}]"
                 ])
               ]
