@@ -78,19 +78,21 @@ in
                     pos: x:
                     let
                       sep = if pos > 1 then lib.substring 0 1 x else "";
-                      x' = "{{.CurrentDate | date `${if pos > 1 then lib.substring 1 (-1) x else x}`}}";
+                      rest = if pos > 1 then lib.substring 1 (-1) x else x;
+                      rest' =
+                        if lib.replaceStrings [ " " ] [ "" ] rest != "" then "{{.CurrentDate | date `${rest}`}}" else rest;
                     in
                     lib.concatStrings [
                       "<darkGray>${sep}</>"
                       (
                         if sep == "<" then
-                          "<${bright-red}>${x'}</>"
+                          "<${bright-red}>${rest'}</>"
                         else if sep == "(" then
-                          "<${bright-green}>${x'}</>"
+                          "<${bright-green}>${rest'}</>"
                         else if sep == "[" then
-                          "<${bright-blue}>${x'}</>"
+                          "<${bright-blue}>${rest'}</>"
                         else
-                          x'
+                          rest'
                       )
                     ]
                   )
