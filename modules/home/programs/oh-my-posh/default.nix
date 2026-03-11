@@ -72,7 +72,6 @@ in
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
-                # "{{.CurrentDate | date .Format}}"
                 (lib.concatImapStrings
                   (
                     pos: x:
@@ -80,7 +79,10 @@ in
                       sep = if pos > 1 then lib.substring 0 1 x else "";
                       rest = if pos > 1 then lib.substring 1 (-1) x else x;
                       rest' =
-                        if lib.replaceStrings [ " " ] [ "" ] rest != "" then "{{.CurrentDate | date `${rest}`}}" else rest;
+                        if lib.replaceStrings [ " " ] [ "" ] rest != "" then
+                          "{{.CurrentDate | strftime `${rest}`}}"
+                        else
+                          rest;
                     in
                     lib.concatStrings [
                       (if sep != "" then "<darkGray>${sep}</>" else "")
@@ -110,28 +112,12 @@ in
                         "["
                         "]"
                       ]
-                    ) true env.goTimeFormat
+                    ) true env.timeFormat
                   )
                 )
                 "<darkGray>}</>"
                 "</b> "
               ];
-              # properties = {
-              #   time_format =
-              #     lib.replaceStrings
-              #       [ "<" ">" ]
-              #       [
-              #         (lib.concatStrings [
-              #           "<darkGray><</>"
-              #           "<${bright-red}>"
-              #         ])
-              #         (lib.concatStrings [
-              #           "</>"
-              #           "<darkGray>></>"
-              #         ])
-              #       ]
-              #       env.goTimeFormat;
-              # };
             }
             {
               type = "session";
@@ -294,6 +280,10 @@ in
           "</b> "
         ];
       };
+    };
+    package = pkgs.oh-my-posh.overrideAttrs {
+      patches = [ ./strftime.patch ];
+      vendorHash = "sha256-CTEzNEuPJV+54/ETWCITQFmSQJV+TWvOGpP8lyKqqE4=";
     };
   };
 
