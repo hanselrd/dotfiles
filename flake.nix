@@ -158,14 +158,14 @@
         basic = lib.x.mkHomeConfiguration (lib.x.mkEnv { homeName = "basic"; });
         work0 = lib.x.mkHomeConfiguration (
           lib.x.mkEnv {
-            emailSecret = ./secrets/work_email.age;
+            emailSecret = ./secrets/work-email.age;
             homeName = "work0";
           }
         );
         work1 = lib.x.mkHomeConfiguration (
           lib.x.mkEnv {
             username = "hansel.delacruz";
-            emailSecret = ./secrets/work_email.age;
+            emailSecret = ./secrets/work-email.age;
             homeName = "work1";
           }
         );
