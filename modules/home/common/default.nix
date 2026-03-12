@@ -11,13 +11,16 @@
     agenix.homeManagerModules.default
     stylix.homeModules.stylix
     (sharedModulesPath + "/common")
+    # ../programs/ccache
+    # ../programs/cmake
+    # ../programs/lldb
+    # ../programs/ranger
+    # ../programs/ripgrep
     ../binaries
     ../packages/base
     ../programs/bash
     ../programs/bat
     ../programs/btop
-    ../programs/ccache
-    ../programs/cmake
     ../programs/delta
     ../programs/eza
     ../programs/fastfetch
@@ -26,13 +29,10 @@
     ../programs/git
     ../programs/home-manager
     ../programs/htop
-    ../programs/lldb
     ../programs/neovim
     ../programs/nh
     ../programs/nix-index
     ../programs/oh-my-posh
-    ../programs/ranger
-    ../programs/ripgrep
     ../programs/ssh
     ../programs/tmux
     ../programs/zoxide
