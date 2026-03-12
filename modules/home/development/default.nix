@@ -4,7 +4,6 @@
     # ./dhall
     # ./elixir
     # ./gleam
-    # ./java
     # ./kotlin
     # ./lua
     # ./nickel
@@ -14,6 +13,7 @@
     ./cpp
     ./go
     ./haskell
+    ./java
     ./javascript
     ./nix
     ./python
