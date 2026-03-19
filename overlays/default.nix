@@ -5,7 +5,7 @@ with inputs;
   rust-overlay.overlays.default
   zig-overlay.overlays.default
   (final: prev: {
-    nix = prev.nixVersions.latest;
+    nix = prev.nixVersions.nix_2_33;
     nix-plugins = prev.nix-plugins.overrideAttrs {
       buildInputs = with final; [
         boost

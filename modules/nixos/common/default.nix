@@ -14,11 +14,11 @@
     impermanence.nixosModules.impermanence
     stylix.nixosModules.stylix
     (sharedModulesPath + "/common")
+    # ../services/cockpit
     ../boot-loader/grub
     ../home-manager-integration
     ../networking/networkmanager
     ../programs/fuse
-    ../services/cockpit
     ../services/fail2ban
     ../services/openssh
     ../services/scx
