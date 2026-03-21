@@ -1,4 +1,0 @@
-{ ... }:
-{
-  zramSwap.enable = true;
-}

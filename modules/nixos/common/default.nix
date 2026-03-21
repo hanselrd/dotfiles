@@ -24,8 +24,8 @@
     ../services/scx
     ../services/udisks2
     ../services/xserver
+    ../swap
     ../virtualisation/docker
-    ../zram-swap
   ];
 
   networking.hostName = env.hostName;
