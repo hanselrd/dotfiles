@@ -60,6 +60,7 @@
   users.users.${env.username} = {
     description = env.name;
     isNormalUser = true;
+    uid = 1000;
     extraGroups = lib.flatten [
       "wheel"
       (lib.optional config.virtualisation.docker.enable "docker")

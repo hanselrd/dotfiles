@@ -23,5 +23,6 @@ in
   "modules/home/work/default.nix.age".publicKeys = yellow;
   "modules/home/work/init.sh.age".publicKeys = yellow;
   "bookmarks.html.age".publicKeys = blue;
+  "smb-data-creds.age".publicKeys = blue;
   "work-email.age".publicKeys = yellow;
 }

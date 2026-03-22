@@ -4,7 +4,8 @@
     ./hardware-configuration.nix
     (nixosModulesPath + "/common")
     (nixosModulesPath + "/services/qemu-guest")
+    (nixosModulesPath + "/samba-shares")
   ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }
