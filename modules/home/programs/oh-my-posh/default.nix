@@ -10,6 +10,7 @@ let
     set_poshcontext() {
       export POSH_LOCK_INSTANCE=$(test -f /var/lock/prevent_idle_terminate && ${lib.getExe' pkgs.coreutils "echo"} "lock")
       export POSH_IDLE_TERMINATE=$(${lib.getExe' pkgs.coreutils "cat"} /etc/idle_terminate_threshold 2>/dev/null)
+      export POSH_SUDO_CACHED=$(sudo -Nn ${lib.getExe' pkgs.coreutils "echo"} "*" 2>/dev/null)
     }
   '';
 in
@@ -128,6 +129,18 @@ in
                 "<b>"
                 "{{.UserName}}"
                 "</b>"
+              ];
+            }
+            {
+              type = "text";
+              style = "plain";
+              foreground = bright-red;
+              template = lib.concatStrings [
+                "{{if .Env.POSH_SUDO_CACHED}}"
+                "<b>"
+                "{{.Env.POSH_SUDO_CACHED}}"
+                "</b>"
+                "{{end}}"
               ];
             }
             {
