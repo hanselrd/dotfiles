@@ -7,6 +7,7 @@
 {
   programs.git = {
     enable = true;
+    lfs.enable = true;
     settings = {
       user.name = env.name;
       user.email = env.email;
