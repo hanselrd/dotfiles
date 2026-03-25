@@ -8,7 +8,7 @@ require (
 	github.com/fatih/color v1.19.0
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.53.0
-	github.com/samber/slog-zerolog/v2 v2.9.1
+	github.com/samber/slog-zerolog/v2 v2.9.2
 	github.com/stretchr/testify v1.11.1
 )
 
