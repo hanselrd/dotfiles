@@ -178,6 +178,12 @@
         style = "gray bold";
       } boot.kernelPackages.kernel.version
     }
+    nix:     ${
+      lib.x.ansiText {
+        inherit pkgs;
+        style = "magenta bold";
+      } pkgs.nix.version
+    }
   '';
 
   system.configurationRevision = inputs.self.shortRev or "<dirty>";

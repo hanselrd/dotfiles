@@ -66,6 +66,9 @@ main = do
     forM_
       (map (splitOn ":") <| lines stdout)
       <| \x -> do
+        logDebugN
+          <| "match= " <> pack (show x)
+
         let file = x !! 0
             lineNr = x !! 1
             oldRev = x !! 2
