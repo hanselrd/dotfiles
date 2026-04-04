@@ -181,7 +181,7 @@
     nix:     ${
       lib.x.ansiText {
         inherit pkgs;
-        style = "magenta bold";
+        style = "blue bold";
       } pkgs.nix.version
     }
   '';
