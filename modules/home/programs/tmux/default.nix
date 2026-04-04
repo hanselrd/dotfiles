@@ -19,7 +19,7 @@
       pain-control
       {
         plugin = mode-indicator.overrideAttrs (attrs: rec {
-          version = "master";
+          version = "7027903adca37c54cb8f5fa99fc113b11c23c2c4"; # github:MunifTanjim/tmux-mode-indicator/master
           src = pkgs.fetchFromGitHub {
             owner = "MunifTanjim";
             repo = "tmux-${attrs.pluginName}";
@@ -92,7 +92,7 @@
       }
       {
         plugin = online-status.overrideAttrs (attrs: rec {
-          version = "master";
+          version = "82f4fbcaee7ece775f37cf7ed201f9d4beab76b8"; # github:tmux-plugins/tmux-online-status/master
           src = pkgs.fetchFromGitHub {
             owner = "tmux-plugins";
             repo = "tmux-${attrs.pluginName}";
@@ -109,7 +109,7 @@
         plugin = mkTmuxPlugin rec {
           pluginName = "tmux-current-pane-hostname";
           rtpFilePath = "current_pane_hostname.tmux";
-          version = "master";
+          version = "0a8a187afcdf258e32a6b014105c12d344b670a5"; # github:soyuka/tmux-current-pane-hostname/master
           src = pkgs.fetchFromGitHub {
             owner = "soyuka";
             repo = pluginName;

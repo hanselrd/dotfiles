@@ -5,13 +5,13 @@ with inputs;
   rust-overlay.overlays.default
   zig-overlay.overlays.default
   (final: prev: {
-    nix = prev.nixVersions.nix_2_33;
+    nix = prev.nixVersions.nix_2_31;
     nix-plugins = prev.nix-plugins.overrideAttrs {
       buildInputs = with final; [
         boost
         nix
       ];
-      patches = [ ./nix-plugins.patch ];
+      # patches = [ ./nix-plugins.patch ];
     };
   })
   (final: _prev: {

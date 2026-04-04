@@ -1,9 +1,11 @@
 module Main (main) where
 
-import Control.Monad (foldM_, forM_)
+import Control.Monad (foldM_, forM_, void)
 import Control.Monad.Logger (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr)
 import Data.List.Split (splitOn)
+import Data.String.Combinators (doubleQuotes)
+import Data.String.Utils (strip)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, runApp)
 import qualified Dotfiles.Nix as DN
@@ -37,7 +39,7 @@ processCommand count cmd = do
           newHash = x !! 2
 
       DS.readShell
-        <| [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
+        <| [r|git grep -Pl "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)"|]
           ++ " | xargs sed -i 's@"
           ++ oldHash
           ++ "@"
@@ -51,8 +53,54 @@ processCommand count cmd = do
 main :: IO ()
 main = do
   flip DA.runApp (colorize logToStderr) <| do
+    let regex = [r|=\s*(.*)\s*;\s*#\s*github:(.*)\/(.*)\/(.*)|]
+
     (_, stdout, _) <-
-      DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)" -- ':!flake.lock'|]
+      DS.readShell
+        <| "git grep -Po \""
+          ++ regex
+          ++ [r|" | perl -nle 'print "$1:$2:$3:$4:$5:$6" if /(.*):(.*):\s*|]
+          ++ regex
+          ++ "/'"
+
+    forM_
+      (map (splitOn ":") <| lines stdout)
+      <| \x -> do
+        let file = x !! 0
+            lineNr = x !! 1
+            oldRev = x !! 2
+            owner = x !! 3
+            repo = x !! 4
+            branch = x !! 5
+
+        (_, stdout, _) <-
+          DS.readShell
+            <| "git ls-remote https://github.com/"
+              ++ owner
+              ++ "/"
+              ++ repo
+              ++ ".git "
+              ++ branch
+              ++ " | awk '{print $1}'"
+
+        let newRev = doubleQuotes <| strip stdout
+
+        if oldRev == newRev
+          then return ()
+          else
+            void
+              <| DS.readShell
+              <| "sed -i '"
+                ++ lineNr
+                ++ "s/"
+                ++ oldRev
+                ++ "/"
+                ++ newRev
+                ++ "/' "
+                ++ file
+
+    (_, stdout, _) <-
+      DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)"|]
 
     forM_
       (map (splitOn ":") <| lines stdout)
@@ -61,15 +109,15 @@ main = do
             lineNr = x !! 1
             oldHash = x !! 2
 
-        newHash <- DN.fakeHash
+        newHash <- fmap doubleQuotes DN.fakeHash
         DS.readShell
           <| "sed -i '"
             ++ lineNr
             ++ "s@"
             ++ oldHash
-            ++ "@\""
+            ++ "@"
             ++ newHash
-            ++ "\"@' "
+            ++ "@' "
             ++ file
 
     let count = length <| lines stdout
