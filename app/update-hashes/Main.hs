@@ -47,8 +47,10 @@ processCommand count cmd = do
           ++ "@g'"
 
   if length matches == 0
-    then return count
-    else processCommand (count - (length matches)) cmd
+    -- then return count
+    -- else processCommand (count - (length matches)) cmd
+    then return (count - 1)
+    else processCommand count cmd
 
 main :: IO ()
 main = do
@@ -102,34 +104,35 @@ main = do
                 ++ "/' "
                 ++ file
 
-    (_, stdout, _) <-
-      DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)"|]
+    -- (_, stdout, _) <-
+    --   DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)"|]
 
-    forM_
-      (map (splitOn ":") <| lines stdout)
-      <| \x -> do
-        let file = x !! 0
-            lineNr = x !! 1
-            oldHash = x !! 2
+    -- forM_
+    --   (map (splitOn ":") <| lines stdout)
+    --   <| \x -> do
+    --     let file = x !! 0
+    --         lineNr = x !! 1
+    --         oldHash = x !! 2
+    --
+    --     newHash <- fmap doubleQuotes DN.fakeHash
+    --     DS.readShell
+    --       <| "sed -i '"
+    --         ++ lineNr
+    --         ++ "s@"
+    --         ++ oldHash
+    --         ++ "@"
+    --         ++ newHash
+    --         ++ "@' "
+    --         ++ file
 
-        newHash <- fmap doubleQuotes DN.fakeHash
-        DS.readShell
-          <| "sed -i '"
-            ++ lineNr
-            ++ "s@"
-            ++ oldHash
-            ++ "@"
-            ++ newHash
-            ++ "@' "
-            ++ file
-
-    let count = length <| lines stdout
-        cmds =
+    -- let count = length <| lines stdout
+    let cmds =
           "nix run .#canary"
             : concat
               [ (map (\x -> "nh os build . -H " ++ x ++ " --impure --no-nom") DN.supportedNixosHosts)
               , (map (\x -> "nh darwin build . -H " ++ x ++ " --impure --no-nom") DN.supportedDarwinHosts)
               , (map (\x -> "nh home build . -c " ++ x ++ " --impure --no-nom") DN.supportedHomes)
               ]
+        count = length cmds
 
     foldM_ processCommand count cmds
