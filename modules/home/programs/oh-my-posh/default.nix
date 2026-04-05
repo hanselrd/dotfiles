@@ -294,10 +294,10 @@ in
         ];
       };
     };
-    package = pkgs.oh-my-posh.overrideAttrs {
-      patches = [ ./strftime.patch ];
+    package = pkgs.oh-my-posh.overrideAttrs (attrs: {
+      patches = (attrs.patches or [ ]) ++ [ ./strftime.patch ];
       vendorHash = "sha256-QjYh8qljYKjwW4Z/GiksOKEZXKQwUeiEOGIxgDUWnFw=";
-    };
+    });
   };
 
   programs.bash.initExtra = lib.mkAfter poshContext;

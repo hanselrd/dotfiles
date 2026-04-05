@@ -6,13 +6,13 @@ with inputs;
   zig-overlay.overlays.default
   (final: prev: {
     nix = prev.nixVersions.nix_2_31;
-    nix-plugins = prev.nix-plugins.overrideAttrs {
+    nix-plugins = prev.nix-plugins.overrideAttrs (attrs: {
       buildInputs = with final; [
         boost
         nix
       ];
-      # patches = [ ./nix-plugins.patch ];
-    };
+      # patches = (attrs.patches or [ ]) ++ [ ./nix-plugins-nix-2.33.patch ];
+    });
   })
   (final: _prev: {
     stable = import nixpkgs-stable {
