@@ -1,4 +1,5 @@
 vim.g.mapleader = "\\"
+vim.g.c_syntax_for_h = 1
 vim.opt.undodir = vim.fn.expand("@cacheHome@/nvim/undo")
 vim.opt.undofile = true
 vim.opt.smartindent = true
