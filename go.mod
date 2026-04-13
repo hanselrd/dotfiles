@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/charmbracelet/lipgloss v1.1.0
-	github.com/charmbracelet/x/ansi v0.11.6
+	github.com/charmbracelet/x/ansi v0.11.7
 	github.com/fatih/color v1.19.0
 	github.com/rs/zerolog v1.35.0
 	github.com/samber/lo v1.53.0
