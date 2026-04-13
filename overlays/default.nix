@@ -6,7 +6,7 @@ with inputs;
   zig-overlay.overlays.default
   (final: prev: {
     nix = prev.nixVersions.nix_2_31;
-    nix-plugins = prev.nix-plugins.overrideAttrs (attrs: {
+    nix-plugins = prev.nix-plugins.overrideAttrs (_attrs: {
       buildInputs = with final; [
         boost
         nix

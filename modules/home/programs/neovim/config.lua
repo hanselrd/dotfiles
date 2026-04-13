@@ -191,9 +191,14 @@ for server, opts in pairs(servers) do
 end
 
 -- nvim-treesitter
-require("nvim-treesitter.configs").setup({
-  highlight = {
-    enable = true,
-    -- additional_vim_regex_highlighting = { "nix" },
-  },
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(args.match)
+    local ok = pcall(vim.treesitter.start, args.buf, lang)
+    if ok then
+      vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo.foldmethod = "expr"
+    end
+  end,
 })

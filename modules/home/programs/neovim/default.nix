@@ -20,7 +20,7 @@
       vim-abolish
       vim-eunuch
       vim-textobj-entire
-      (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (_: pkgs.stable.tree-sitter.allGrammars))
+      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     ];
     extraPackages = with pkgs; [
       emmet-ls
