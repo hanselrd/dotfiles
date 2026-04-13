@@ -14,6 +14,7 @@ vim.opt.wrap = true
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 50
+vim.opt.foldenable = false
 
 -- git-blame-nvim
 require("gitblame").setup({
