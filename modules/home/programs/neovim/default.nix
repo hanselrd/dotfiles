@@ -13,6 +13,7 @@
       mini-nvim
       nvim-lspconfig
       nvim-treesitter-context
+      nvim-treesitter.withAllGrammars
       plenary-nvim
       rainbow-delimiters-nvim
       telescope-fzf-native-nvim
@@ -20,7 +21,6 @@
       vim-abolish
       vim-eunuch
       vim-textobj-entire
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     ];
     extraPackages = with pkgs; [
       emmet-ls
