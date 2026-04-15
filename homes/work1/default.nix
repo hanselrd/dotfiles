@@ -5,5 +5,5 @@
     (homeModulesPath + "/bash-to-zsh-override")
   ];
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 }

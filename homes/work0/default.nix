@@ -12,5 +12,5 @@
     (lib.x.decryptSecretModule env.identity (secretHomeModulesPath + "/work"))
   ];
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 }

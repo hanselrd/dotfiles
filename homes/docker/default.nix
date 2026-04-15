@@ -7,5 +7,5 @@
 
   nix.settings.sandbox = lib.mkForce false;
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 }
