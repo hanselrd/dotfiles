@@ -26,6 +26,7 @@
     man-db
     ncdu
     nix
+    nix-diff
     objconv
     pfetch
     procps

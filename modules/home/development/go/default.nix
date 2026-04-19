@@ -9,6 +9,7 @@
   };
 
   home.packages = with pkgs; [
+    # gotools
     cobra-cli
     delve
     enumer
@@ -17,7 +18,6 @@
     golangci-lint
     golines
     gopls
-    gotools
     ragel
     templ
   ];
