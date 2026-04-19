@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.go = {
     enable = true;
@@ -9,7 +14,7 @@
   };
 
   home.packages = with pkgs; [
-    # gotools
+    (lib.lowPrio gotools)
     cobra-cli
     delve
     enumer
