@@ -1,5 +1,4 @@
-{ nixosModulesPath, ... }:
-{
+{ nixosModulesPath, ... }: {
   imports = [
     ./hardware-configuration.nix
     (nixosModulesPath + "/common")
@@ -7,5 +6,5 @@
     (nixosModulesPath + "/samba-shares")
   ];
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

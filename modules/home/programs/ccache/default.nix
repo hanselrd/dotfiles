@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home.packages = with pkgs; [ ccache ];
 
   xdg.configFile."ccache/ccache.conf" = {

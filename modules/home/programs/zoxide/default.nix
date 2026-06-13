@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   programs.zoxide = {
     enable = true;
     enableBashIntegration = config.programs.bash.enable;

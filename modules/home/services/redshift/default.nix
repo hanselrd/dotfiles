@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   services.redshift = {
     enable = true;
     temperature.day = 5500;

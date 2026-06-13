@@ -1,5 +1,4 @@
-{ lib, homeModulesPath, ... }:
-{
+{ lib, homeModulesPath, ... }: {
   imports = [
     (homeModulesPath + "/common")
     (homeModulesPath + "/bash-to-zsh-override")

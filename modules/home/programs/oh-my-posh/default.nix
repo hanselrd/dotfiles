@@ -296,7 +296,7 @@ in
     };
     package = pkgs.oh-my-posh.overrideAttrs (attrs: {
       patches = (attrs.patches or [ ]) ++ [ ./strftime.patch ];
-      vendorHash = "sha256-e3le3yMbCADiAyKbKRINi6vdAUWdLsyW5Wy56/3dUgk=";
+      vendorHash = "sha256-MtH0nO9eiMwJn0//XrXn0rf5P7QREV5rzNHxg+JcUoc=";
     });
   };
 

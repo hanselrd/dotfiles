@@ -8,25 +8,23 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
-      "*" = {
-        # addKeysToAgent = "no";
-        compression = false;
-        controlMaster = "no";
-        controlPath = "${config.home.homeDirectory}/.ssh/master-%r@%n:%p";
-        controlPersist = "no";
-        forwardAgent = false;
-        hashKnownHosts = false;
-        serverAliveCountMax = 3;
-        serverAliveInterval = 0;
-        userKnownHostsFile = "${config.home.homeDirectory}/.ssh/known_hosts";
-      };
+    settings = {
       "10.*.*.* 192.168.*.*" = {
-        compression = true;
-        userKnownHostsFile = "/dev/null";
-        extraOptions = {
-          StrictHostKeyChecking = "no";
-        };
+        Compression = true;
+        StrictHostKeyChecking = "no";
+        UserKnownHostsFile = "/dev/null";
+      };
+      "*" = {
+        # AddKeysToAgent = "no";
+        Compression = false;
+        ControlMaster = "no";
+        ControlPath = "${config.home.homeDirectory}/.ssh/master-%r@%n:%p";
+        ControlPersist = "no";
+        ForwardAgent = false;
+        HashKnownHosts = false;
+        ServerAliveCountMax = 3;
+        ServerAliveInterval = 0;
+        UserKnownHostsFile = "${config.home.homeDirectory}/.ssh/known_hosts";
       };
     };
   };

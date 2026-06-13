@@ -59,7 +59,7 @@ main = do
 
     (_, stdout, _) <-
       DS.readShell
-        <| "git grep -Po \""
+        <| "git grep -nPo \""
           ++ regex
           ++ [r|" | perl -nle 'print "$1:$2:$3:$4:$5:$6" if /(.*):(.*):\s*|]
           ++ regex

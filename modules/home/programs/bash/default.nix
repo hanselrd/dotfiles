@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   programs.bash = {
     enable = true;
     profileExtra = ''

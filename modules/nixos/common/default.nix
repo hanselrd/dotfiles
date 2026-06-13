@@ -15,6 +15,7 @@
     stylix.nixosModules.stylix
     (sharedModulesPath + "/common")
     # ../services/cockpit
+    # ../services/xserver
     ../boot-loader/grub
     ../home-manager-integration
     ../networking/networkmanager
@@ -23,7 +24,6 @@
     ../services/openssh
     ../services/scx
     ../services/udisks2
-    ../services/xserver
     ../swap
     ../virtualisation/docker
   ];

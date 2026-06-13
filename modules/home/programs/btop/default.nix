@@ -1,5 +1,4 @@
-{ lib, env, ... }:
-{
+{ lib, env, ... }: {
   programs.btop = {
     enable = true;
     settings = {

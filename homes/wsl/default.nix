@@ -1,5 +1,4 @@
-{ homeModulesPath, ... }:
-{
+{ homeModulesPath, ... }: {
   imports = [ (homeModulesPath + "/common") ];
 
   # home.activation = lib.mkIf (!env.extra.encrypted.blue) {

@@ -1,5 +1,4 @@
-{ lib, pkgs, ... }:
-{
+{ lib, pkgs, ... }: {
   imports = [ ../base ];
 
   home.packages = with pkgs; [

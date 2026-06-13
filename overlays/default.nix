@@ -1,5 +1,4 @@
-{ inputs, ... }:
-with inputs;
+{ inputs, ... }: with inputs;
 [
   agenix.overlays.default
   rust-overlay.overlays.default

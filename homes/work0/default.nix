@@ -9,6 +9,7 @@
   imports = [
     (homeModulesPath + "/common")
     (homeModulesPath + "/bash-to-zsh-override")
+    (homeModulesPath + "/development/cpp")
     (lib.x.decryptSecretModule env.identity (secretHomeModulesPath + "/work"))
   ];
 

@@ -1,5 +1,4 @@
-{ lib, pkgs, ... }:
-{
+{ lib, pkgs, ... }: {
   services.sxhkd = {
     enable = true;
     keybindings = {
