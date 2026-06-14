@@ -155,8 +155,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 local servers = {
-  elixirls = { cmd = { "elixir-ls" } },
+  basedpyright = {},
   clangd = {},
+  elixirls = { cmd = { "elixir-ls" } },
   emmet_ls = {},
   gleam = {},
   gopls = {},
@@ -181,7 +182,6 @@ local servers = {
   nickel_ls = {},
   nil_ls = {},
   purescriptls = {},
-  pyright = {},
   rust_analyzer = {},
   templ = {},
   ts_ls = {},
