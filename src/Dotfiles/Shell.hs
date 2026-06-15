@@ -60,6 +60,9 @@ readShellWithStdin cmd stdin = do
   stdout <- wait asyncStdout
   stderr <- wait asyncStderr
 
+  liftIO <| hClose stdoutH
+  liftIO <| hClose stderrH
+
   exitCode <- liftIO <| waitForProcess processH
   logInfoN
     <| "cmdRc= " <> (pack <| show exitCode)
