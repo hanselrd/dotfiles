@@ -14,7 +14,7 @@ import Flow
 import Options.Applicative
 import System.Directory (getHomeDirectory)
 import System.Random (randomRIO)
-import UnliftIO.Async (async, wait)
+import UnliftIO.Async (pooledForConcurrently_)
 
 data Options = Options
   { home :: String
@@ -109,18 +109,15 @@ main = do
         logDebugN
           <| "sedString= " <> pack sedString
 
-        asyncs <-
-          forM
-            deps
-            <| \x -> do
-              async
-                <| DS.readShell
-                <| "find "
-                  ++ x
-                  ++ " | cpio -ov | sed -E '"
-                  ++ sedString
-                  ++ "' | cpio -idmv"
-        mapM_ wait asyncs
+        pooledForConcurrently_
+          deps
+          <| \x -> do
+            DS.readShell
+              <| "find "
+                ++ x
+                ++ " | cpio -ov | sed -E '"
+                ++ sedString
+                ++ "' | cpio -idmv"
 
         void
           <| DS.readShell
