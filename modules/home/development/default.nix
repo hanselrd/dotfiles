@@ -9,6 +9,7 @@
     # ./purescript
     # ./rust
     # ./zig
+    ./amber
     ./cpp
     ./go
     ./haskell
