@@ -21,7 +21,7 @@
       vim-abolish
       vim-eunuch
       vim-textobj-entire
-      (pkgs.vimUtils.buildVimPlugin rec{
+      (pkgs.vimUtils.buildVimPlugin rec {
         pname = "amber-vim";
         version = "0cd0acda4e3d168ac7a3d1a8fa6a361e37bbb6bc"; # github:amber-lang/amber-vim/main
         src = pkgs.fetchFromGitHub {
