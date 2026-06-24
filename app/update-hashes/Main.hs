@@ -105,7 +105,7 @@ main = do
                 ++ file
 
     -- (_, stdout, _) <-
-    --   DS.readShell [r|git grep -Po "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)"|]
+    --   DS.readShell [r|git grep -nPo "[Hh]ash\s*=\s*\K(\"sha256-.{43}=\"|lib\.fakeHash)"|]
 
     -- forM_
     --   (map (splitOn ":") <| lines stdout)
