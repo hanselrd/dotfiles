@@ -183,8 +183,14 @@
           codegen = lib.x.mkApp (
             pkgs.writeShellApplication {
               name = "codegen";
-              runtimeInputs = with pkgs; [ go ];
+              runtimeInputs = with pkgs; [
+                amber-lang
+                bc
+                findutils
+                go
+              ];
               text = ''
+                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec amber build --minify {} \;
                 go generate ./...
               '';
             }
@@ -213,6 +219,7 @@
               runtimeInputs = with pkgs; [ nix ];
               text = ''
                 nix fmt
+                nix run .#codegen
                 nix run .#update
               '';
             }
@@ -277,7 +284,7 @@
             ];
             NH_FLAKE = ./.;
             shellHook = ''
-              . ${./bootstrap/nix-config.sh}
+              . ${./scripts/nix-config.sh}
               export NIX_CONFIG=$(
                 cat << EOF
               $NIX_CONFIG

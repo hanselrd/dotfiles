@@ -204,6 +204,26 @@ rec {
       meta.mainProgram = name;
     };
 
+  buildAmberScript =
+    name:
+    { pkgs }:
+    pkgs.stdenv.mkDerivation {
+      name = "dotfiles-amber-script-${name}";
+      src = rootPath;
+      buildInputs = with pkgs; [
+        amber-lang
+        bc
+      ];
+      buildPhase = ''
+        amber build --minify scripts/${name}.ab ${name}.sh
+      '';
+      installPhase = ''
+        mkdir -p $out/bin
+        cp ${name}.sh $out/bin
+      '';
+      meta.mainProgram = "${name}.sh";
+    };
+
   importTOON =
     { pkgs }:
     path:

@@ -1,0 +1,23 @@
+import { printf } from "std/env"
+import { file_chmod, temp_dir_create } from "std/fs"
+import { file_download } from "std/http"
+
+fun nix_install_download(version, path): Null? {
+    if {
+        version is Text: return file_download("https://releases.nixos.org/nix/nix-{version}/install", path)?
+        version is Null: return file_download("https://nixos.org/nix/install", path)?
+    }
+}
+
+main {
+    const tmp_dir = temp_dir_create("nix.XXXXXX", true, true)?
+    const install_sh = "{tmp_dir}/install.sh"
+
+    // nix_install_download("2.33.0", install_sh)?
+    nix_install_download(null, install_sh)?
+    file_chmod(install_sh, "755")?
+
+    $ {install_sh} --no-daemon $ failed {
+        echo("Failed to run install script")
+    }
+}

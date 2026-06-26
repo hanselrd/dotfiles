@@ -1,0 +1,16 @@
+import { env_var_get } from "std/env"
+import { dir_create, file_chmod } from "std/fs"
+import { file_download } from "std/http"
+
+fun nix_user_chroot_download(version: Text, arch: Text, path: Text): Null? {
+    return file_download("https://github.com/nix-community/nix-user-chroot/releases/download/{version}/nix-user-chroot-bin-{version}-{arch}-unknown-linux-musl", path)?
+}
+
+main {
+    const install_dir = "{env_var_get("HOME")?}/.bootstrap"
+    const nix_user_chroot_bin = "{install_dir}/nix-user-chroot"
+
+    dir_create(install_dir)?
+    nix_user_chroot_download("1.2.2", "x86_64", nix_user_chroot_bin)?
+    file_chmod(nix_user_chroot_bin, "755")?
+}
