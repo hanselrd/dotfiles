@@ -24,7 +24,7 @@ data Options = Options
 optionsP :: DA.App (DA.ParserInfoMod Options)
 optionsP = do
   homeDir <- liftIO getHomeDirectory
-  (_, stdout, _) <- readShell "git rev-parse --short=6 HEAD"
+  (_, stdout, _) <- DS.readShell "git rev-parse --short=6 HEAD"
 
   let hash = strip stdout
       outDir = homeDir ++ "/.nix/x/" ++ hash
