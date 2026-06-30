@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Control.Monad (forM, replicateM, void)
+import Control.Monad (void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr)
@@ -8,12 +8,12 @@ import Control.Monad.Reader (ask)
 import Data.String.Utils (strip)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, ParserInfoMod, runRAppWithParser)
+import qualified Dotfiles.Builtins as DB (randomString)
 import qualified Dotfiles.Nix as DN (homes)
 import qualified Dotfiles.Shell as DS (readShell)
 import Flow
 import Options.Applicative
 import System.Directory (getHomeDirectory)
-import System.Random (randomRIO)
 import UnliftIO.Async (pooledForConcurrently_)
 
 data Options = Options
@@ -24,14 +24,8 @@ data Options = Options
 
 optionsP :: DA.App (DA.ParserInfoMod Options)
 optionsP = do
-  let chars = ['a' .. 'z'] ++ ['0' .. '9']
-      hashLen = 5
-
   homeDir <- liftIO getHomeDirectory
-  hash <-
-    replicateM hashLen <| do
-      index <- randomRIO (0, length chars - 1)
-      return <| chars !! index
+  hash <- DB.randomString 5
 
   let outDir = homeDir ++ "/.nix/x/" ++ hash
 
