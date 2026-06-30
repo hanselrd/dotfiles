@@ -8,7 +8,6 @@ import Control.Monad.Reader (ask)
 import Data.String.Utils (strip)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, ParserInfoMod, runRAppWithParser)
-import qualified Dotfiles.Builtins as DB (randomString)
 import qualified Dotfiles.Nix as DN (homes)
 import qualified Dotfiles.Shell as DS (readShell)
 import Flow
@@ -25,9 +24,10 @@ data Options = Options
 optionsP :: DA.App (DA.ParserInfoMod Options)
 optionsP = do
   homeDir <- liftIO getHomeDirectory
-  hash <- DB.randomString 5
+  (_, stdout, _) <- readShell "git rev-parse --short=6 HEAD"
 
-  let outDir = homeDir ++ "/.nix/x/" ++ hash
+  let hash = strip stdout
+      outDir = homeDir ++ "/.nix/x/" ++ hash
 
   return
     <| ( Options
