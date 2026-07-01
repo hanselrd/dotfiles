@@ -5,6 +5,12 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    amber = {
+      url = "github:amber-lang/amber";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +45,7 @@
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {
@@ -190,7 +197,8 @@
                 go
               ];
               text = ''
-                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec amber build --minify {} \;
+                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target bash "$0" "''${0%ab}bash"' {} \;
+                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target zsh "$0" "''${0%ab}zsh"' {} \;
                 go generate ./...
               '';
             }

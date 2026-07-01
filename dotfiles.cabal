@@ -6,7 +6,7 @@ license-file:    LICENSE
 author:          Hansel De La Cruz
 maintainer:      18725263+hanselrd@users.noreply.github.com
 build-type:      Simple
-extra-doc-files: CHANGELOG.md
+extra-doc-files: README.md
 
 common ghc-options
   ghc-options:

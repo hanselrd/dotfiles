@@ -22,4 +22,5 @@
       };
     };
   })
+  (final: _prev: { amber-lang = amber.packages.${final.stdenv.hostPlatform.system}.default; })
 ]

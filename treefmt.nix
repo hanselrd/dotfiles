@@ -20,7 +20,7 @@ in
   programs.shfmt.enable = true;
   programs.shfmt.indent_size = 2;
   programs.shfmt.simplify = true;
-  settings.formatter.shfmt.excludes = excludes;
+  settings.formatter.shfmt.excludes = excludes ++ [ "*.bash" ];
   settings.formatter.shfmt.includes = [ "*.sh" ];
   settings.formatter.shfmt.options = [ "-sr" ];
 
