@@ -292,7 +292,7 @@
             ];
             NH_FLAKE = ./.;
             shellHook = ''
-              . ${./scripts/nix-config.sh}
+              . ${./scripts/nix-config.bash}
               export NIX_CONFIG=$(
                 cat << EOF
               $NIX_CONFIG
