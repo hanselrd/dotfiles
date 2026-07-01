@@ -197,7 +197,7 @@
                 go
               ];
               text = ''
-                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target bash "$0" "''${0%ab}bash"' {} \;
+                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target bash-3.2 "$0" "''${0%ab}bash"' {} \;
                 find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target zsh "$0" "''${0%ab}zsh"' {} \;
                 go generate ./...
               '';
