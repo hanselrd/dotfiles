@@ -210,12 +210,9 @@ rec {
     pkgs.stdenv.mkDerivation {
       name = "dotfiles-amber-script-${name}";
       src = rootPath;
-      buildInputs = with pkgs; [
-        amber-lang
-        bc
-      ];
+      buildInputs = with pkgs; [ amber-lang ];
       buildPhase = ''
-        amber build --minify scripts/${name}.ab ${name}.sh
+        amber build --minify --target bash scripts/${name}.ab ${name}.sh
       '';
       installPhase = ''
         mkdir -p $out/bin
