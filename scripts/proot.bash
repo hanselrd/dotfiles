@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Written in [Amber](https://amber-lang.com/)
-# version: 0.6.0-alpha-nix-4a8f161
+# version: 0.6.0-alpha-nix-75e16de
 [ "$EUID" -ne 0 ] && { { command -v sudo >/dev/null 2>&1 && __sudo=sudo; } || { command -v doas >/dev/null 2>&1 && __sudo=doas; }; }
 if [ -n "$ZSH_VERSION" ]; then
     EXEC_SHELL="zsh"

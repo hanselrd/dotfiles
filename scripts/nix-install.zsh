@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # Written in [Amber](https://amber-lang.com/)
-# version: 0.6.0-alpha-nix-4a8f161
+# version: 0.6.0-alpha-nix-75e16de
 emulate ksh
 setopt BSD_echo
 __read_args='-A'
