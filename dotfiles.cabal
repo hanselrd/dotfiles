@@ -11,8 +11,8 @@ extra-doc-files: README.md
 common ghc-options
   ghc-options:
     -Wall -Wcompat -Werror=incomplete-patterns -Wextra
-    -Wincomplete-uni-patterns -Wno-unused-matches
-    -fno-warn-name-shadowing -threaded
+    -Wincomplete-uni-patterns -Wno-type-defaults -Wno-unused-matches
+    -fno-warn-name-shadowing -fprint-potential-instances -threaded
 
 common exe-ghc-options
   import:      ghc-options
@@ -22,6 +22,7 @@ common default-extensions
   default-extensions:
     BangPatterns
     DuplicateRecordFields
+    ExtendedDefaultRules
     FlexibleContexts
     GeneralizedNewtypeDeriving
     LambdaCase
@@ -50,6 +51,7 @@ common build-depends
     , random
     , raw-strings-qq
     , regex-tdfa
+    , shell-monad
     , split
     , stm
     , string-combinators
@@ -58,6 +60,7 @@ common build-depends
     , text
     , time
     , transformers
+    , unix
     , unliftio
     , unliftio-core
 
@@ -71,6 +74,7 @@ library
     Dotfiles.Application
     Dotfiles.Builtins
     Dotfiles.Nix
+    Dotfiles.Scripts
     Dotfiles.Shell
 
   other-modules:    Paths_dotfiles
@@ -87,6 +91,17 @@ executable builtins
     , dotfiles
 
   hs-source-dirs:   app/builtins
+  default-language: Haskell2010
+
+executable scripts
+  import:           exe-ghc-options, default-extensions, exe-build-depends
+  main-is:          Main.hs
+  other-modules:    Paths_dotfiles
+  build-depends:
+    , base      ^>=4.20.2.0
+    , dotfiles
+
+  hs-source-dirs:   app/scripts
   default-language: Haskell2010
 
 executable playground

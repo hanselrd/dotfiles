@@ -186,18 +186,17 @@
         in
         {
           builtins = lib.x.mkApp' dotfiles "builtins";
+          scripts = lib.x.mkApp' dotfiles "scripts";
 
           codegen = lib.x.mkApp (
             pkgs.writeShellApplication {
               name = "codegen";
               runtimeInputs = with pkgs; [
-                amber-lang
-                findutils
                 go
+                nix
               ];
               text = ''
-                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target bash-3.2 "$0" "''${0%ab}bash"' {} \;
-                find "$PWD" -type f ! -path "*/ancestry/*" -name "*.ab" -exec bash -c 'amber build --minify --target zsh "$0" "''${0%ab}zsh"' {} \;
+                nix run .#scripts
                 go generate ./...
               '';
             }
@@ -225,8 +224,8 @@
               name = "all";
               runtimeInputs = with pkgs; [ nix ];
               text = ''
-                nix fmt
                 nix run .#codegen
+                nix fmt
                 nix run .#update
               '';
             }
@@ -258,7 +257,7 @@
             ];
             NH_FLAKE = ./.;
             shellHook = ''
-              . ${./scripts/nix-config.bash}
+              . ${./scripts/nix-config.sh}
               export NIX_CONFIG=$(
                 cat << EOF
               $NIX_CONFIG

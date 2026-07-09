@@ -45,6 +45,7 @@ in
   programs.fourmolu.ghcOpts = [
     "BangPatterns"
     "DuplicateRecordFields"
+    "ExtendedDefaultRules"
     "FlexibleContexts"
     "GeneralizedNewtypeDeriving"
     "LambdaCase"

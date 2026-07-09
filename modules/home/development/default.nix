@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    # ./amber
     # ./dhall
     # ./elixir
     # ./gleam
@@ -9,7 +10,6 @@
     # ./purescript
     # ./rust
     # ./zig
-    ./amber
     ./cpp
     ./go
     ./haskell

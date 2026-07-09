@@ -71,7 +71,7 @@ main = do
         logDebugN
           <| "path0= " <> pack path0
 
-        homeDir <- liftIO <| getHomeDirectory
+        homeDir <- liftIO getHomeDirectory
         (_, stdout, _) <-
           DS.readShell
             <| "readlink -f "
