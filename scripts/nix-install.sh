@@ -1,7 +1,5 @@
 #!/bin/sh
 set '-euxo' pipefail
-_version="$1"
-shift
 _v() {
   :
   _v="$TMPDIR"
@@ -19,6 +17,6 @@ trap 'rm -rf '"$_tmpDir" EXIT
 _template="$(printf '%s/%s' "$_tmpDir" 'nix-install.XXXXXX')"
 _tempDir="$(mktemp '-d' "$_template")"
 _installPath="$_tempDir"'/install.sh'
-curl '-Lo' "$_installPath" "$(printf 'https://releases.nixos.org/nix/nix-%s/install' "$_version")"
+curl '-Lo' "$_installPath" 'https://nixos.org/nix/install'
 chmod '+x' "$_installPath"
 "$_installPath" '--no-daemon'

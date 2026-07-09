@@ -72,7 +72,7 @@ nixInstall :: Script ()
 nixInstall = do
   cmd "set" "-euxo" "pipefail"
 
-  version <- takeParameter (NamedLike "version")
+  -- version <- takeParameter (NamedLike "version")
   tmpDir <- mkTmpDir
 
   cmd "trap" (WithVar tmpDir ("rm -rf " <>)) "EXIT"
@@ -80,12 +80,12 @@ nixInstall = do
   tempDir <- mkTemp tmpDir "nix-install.XXXXXX" TempDir
   installPath <- newVarFrom (WithVar tempDir (<> "/install.sh")) (NamedLike "installPath")
 
-  cmd
-    "curl"
-    "-Lo"
-    installPath
-    (Output <| cmd "printf" "https://releases.nixos.org/nix/nix-%s/install" version)
-  -- cmd "curl" "-Lo" installPath "https://nixos.org/nix/install"
+  -- cmd
+  --   "curl"
+  --   "-Lo"
+  --   installPath
+  --   (Output <| cmd "printf" "https://releases.nixos.org/nix/nix-%s/install" version)
+  cmd "curl" "-Lo" installPath "https://nixos.org/nix/install"
   cmd "chmod" "+x" installPath
   cmd installPath "--no-daemon"
 
