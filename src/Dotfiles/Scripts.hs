@@ -1,12 +1,10 @@
 module Dotfiles.Scripts
   ( nixConfig
-  , nixBindMount
+  , nixChroot
   , nixInstall
-  , chroot
   )
 where
 
-import Control.Monad (forM_)
 import Control.Monad.Shell
   ( NamedLike (..)
   , Output (..)
@@ -14,25 +12,21 @@ import Control.Monad.Shell
   , Term
   , Var
   , WithVar (..)
+  , caseOf
   , cmd
   , defaultVar
+  , glob
   , globalVar
   , newVarFrom
+  , quote
+  , static
   , takeParameter
   )
+import Data.String.Utils (strip)
 import qualified Data.Text.Lazy as T
 import Flow
 
 default (T.Text)
-
-nixConfig :: Script ()
-nixConfig = do
-  cfg <-
-    newVarFrom
-      "experimental-features = nix-command flakes pipe-operators\nshow-trace = true"
-      (NamedLike "nixConfig")
-
-  cmd "export" <| WithVar cfg ("NIX_CONFIG=" <>)
 
 mkTmpDir :: Script (Term Var String)
 mkTmpDir = do
@@ -69,16 +63,67 @@ mkTemp tmpDir template temp = do
         TempFile -> "tempFile"
     )
 
-nixBindMount :: Script ()
-nixBindMount = do
+nixConfig :: Script ()
+nixConfig = do
+  cfg <-
+    newVarFrom
+      ( strip
+          <| unlines
+            [ "experimental-features = nix-command flakes pipe-operators"
+            , "show-trace = true"
+            ]
+      )
+      (NamedLike "nixConfig")
+
+  cmd "export" <| WithVar cfg ("NIX_CONFIG=" <>)
+
+nixChroot :: Script ()
+nixChroot = do
   cmd "set" "-euxo" "pipefail"
 
+  type' <- takeParameter (NamedLike "type")
   dir <- takeParameter (NamedLike "dir")
-  user <- globalVar "USER"
+  home <- globalVar "HOME"
+  installDir <- newVarFrom (WithVar home (<> "/.nix-chroot")) (NamedLike "installDir")
 
-  cmd "sudo" "mkdir" "-pm" "0755" "/nix" dir
-  cmd "sudo" "chown" user "/nix" dir
-  cmd "sudo" "mount" "--bind" dir "/nix"
+  caseOf
+    type'
+    [
+      ( quote "bindmnt"
+      , do
+          user <- globalVar "USER"
+
+          cmd "sudo" "mkdir" "-pm" "0755" "/nix" dir
+          cmd "sudo" "chown" user "/nix" dir
+          cmd "sudo" "mount" "--bind" dir "/nix"
+      )
+    ,
+      ( quote "nix-user-chroot"
+      , do
+          nixUserChrootPath <-
+            newVarFrom (WithVar installDir (<> "/nix-user-chroot")) (NamedLike "nixUserChrootPath")
+
+          cmd
+            "curl"
+            "-Lo"
+            nixUserChrootPath
+            "https://github.com/nix-community/nix-user-chroot/releases/download/2.1.1/nix-user-chroot-bin-2.1.1-x86_64-unknown-linux-musl"
+          cmd "chmod" "+x" nixUserChrootPath
+          cmd "mkdir" "-p" dir
+          cmd nixUserChrootPath dir "bash" "-l"
+      )
+    ,
+      ( quote "proot"
+      , do
+          prootPath <- newVarFrom (WithVar installDir (<> "/proot")) (NamedLike "prootPath")
+
+          cmd "curl" "-Lo" prootPath "https://proot.gitlab.io/proot/bin/proot"
+          cmd "chmod" "+x" prootPath
+          cmd "mkdir" "-p" dir
+          cmd prootPath "-b" (WithVar dir (<> ":/nix")) "bash"
+      )
+    , (glob "*", cmd "exit" (static @Int 1))
+    ]
 
 nixInstall :: Script ()
 nixInstall = do
@@ -100,27 +145,3 @@ nixInstall = do
   cmd "curl" "-Lo" installPath "https://nixos.org/nix/install"
   cmd "chmod" "+x" installPath
   cmd installPath "--no-daemon"
-
-chroot :: Script ()
-chroot = do
-  cmd "set" "-euxo" "pipefail"
-
-  home <- globalVar "HOME"
-  installDir <- newVarFrom (WithVar home (<> "/.bootstrap")) (NamedLike "installDir")
-  nixUserChrootPath <-
-    newVarFrom (WithVar installDir (<> "/nix-user-chroot")) (NamedLike "nixUserChrootPath")
-  prootPath <- newVarFrom (WithVar installDir (<> "/proot")) (NamedLike "prootPath")
-
-  let chroots =
-        [
-          ( nixUserChrootPath
-          , "https://github.com/nix-community/nix-user-chroot/releases/download/2.1.1/nix-user-chroot-bin-2.1.1-x86_64-unknown-linux-musl"
-          )
-        , (prootPath, "https://proot.gitlab.io/proot/bin/proot")
-        ]
-
-  forM_
-    chroots
-    <| \(installPath, url) -> do
-      cmd "curl" "-Lo" installPath url
-      cmd "chmod" "+x" installPath

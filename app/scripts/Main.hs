@@ -9,7 +9,7 @@ import Data.Bits ((.|.))
 import Data.Text (pack)
 import qualified Data.Text.Lazy.IO as TIO (writeFile)
 import qualified Dotfiles.Application as DA (runApp)
-import qualified Dotfiles.Scripts as DS (chroot, nixBindMount, nixConfig, nixInstall)
+import qualified Dotfiles.Scripts as DS (nixChroot, nixConfig, nixInstall)
 import Flow
 import System.Posix.Files
   ( groupExecuteMode
@@ -25,9 +25,8 @@ main = do
   flip DA.runApp (colorize logToStderr) <| do
     let scripts =
           [ ("nix-config.sh", DS.nixConfig)
-          , ("nix-bind-mount.sh", DS.nixBindMount)
+          , ("nix-chroot.sh", DS.nixChroot)
           , ("nix-install.sh", DS.nixInstall)
-          , ("chroot.sh", DS.chroot)
           ]
 
     forM_
