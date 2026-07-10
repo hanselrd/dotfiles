@@ -30,6 +30,8 @@ default (T.Text)
 
 mkTmpDir :: Script (Term Var String)
 mkTmpDir = do
+  cmd "set" "+u"
+
   xdgRuntimeDir <- globalVar "XDG_RUNTIME_DIR"
   tmpDir <- globalVar "TMPDIR"
   tmpDir <- defaultVar xdgRuntimeDir =<< defaultVar tmpDir "/tmp"
@@ -38,6 +40,7 @@ mkTmpDir = do
       (Output <| cmd "printf" "%s/nix-%s" tmpDir (Output <| cmd "id" "-u"))
       (NamedLike "tmpDir")
 
+  cmd "set" "-u"
   cmd "umask" "077"
   cmd "mkdir" "-p" tmpDir
 

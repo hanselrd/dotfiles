@@ -1,5 +1,6 @@
 #!/bin/sh
 set '-euxo' pipefail
+set '+u'
 _v() {
   :
   _v="$TMPDIR"
@@ -11,6 +12,7 @@ _v2() {
   echo "${_v2:-"$(_v)"}"
 }
 _tmpDir="$(printf '%s/nix-%s' "$(_v2)" "$(id '-u')")"
+set '-u'
 umask 077
 mkdir '-p' "$_tmpDir"
 trap 'rm -rf '"$_tmpDir" EXIT
