@@ -1,5 +1,6 @@
 module Dotfiles.Scripts
   ( nixConfig
+  , nixBindMount
   , nixInstall
   , chroot
   )
@@ -67,6 +68,17 @@ mkTemp tmpDir template temp = do
         TempDir -> "tempDir"
         TempFile -> "tempFile"
     )
+
+nixBindMount :: Script ()
+nixBindMount = do
+  cmd "set" "-euxo" "pipefail"
+
+  dir <- takeParameter (NamedLike "dir")
+  user <- globalVar "USER"
+
+  cmd "sudo" "mkdir" "-pm" "0755" "/nix" dir
+  cmd "sudo" "chown" user "/nix" dir
+  cmd "sudo" "mount" "--bind" dir "/nix"
 
 nixInstall :: Script ()
 nixInstall = do
