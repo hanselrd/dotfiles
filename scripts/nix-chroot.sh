@@ -5,6 +5,7 @@ shift
 _dir="$1"
 shift
 _installDir="$HOME"'/.nix-chroot'
+mkdir '-p' "$_installDir"
 case "$_type" in bindmnt)
   :
   sudo mkdir '-pm' 0755 '/nix' "$_dir"

@@ -86,6 +86,8 @@ nixChroot = do
   home <- globalVar "HOME"
   installDir <- newVarFrom (WithVar home (<> "/.nix-chroot")) (NamedLike "installDir")
 
+  cmd "mkdir" "-p" installDir
+
   caseOf
     type'
     [
