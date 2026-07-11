@@ -61,6 +61,7 @@
     cd5 = "cd ../../../../..";
     rcp = "rsync -CcavzP";
     rmv = "rsync -CcavzP --remove-source-files";
+    rrm = "mkdir -p ${config.xdg.cacheHome}/rsync/empty && rsync -avP --delete ${config.xdg.cacheHome}/rsync/empty/";
     shroot = "sudo -E $SHELL";
     sudo = "sudo ";
     vi = "vim -u NONE -U NONE -N -i NONE";
