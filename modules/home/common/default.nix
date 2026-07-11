@@ -59,8 +59,8 @@
     cd3 = "cd ../../..";
     cd4 = "cd ../../../..";
     cd5 = "cd ../../../../..";
-    rcp = "rsync -CcavzP";
-    rmv = "rsync -CcavzP --remove-source-files";
+    rcp = "rsync -cavzP";
+    rmv = "rsync -cavzP --remove-source-files";
     rrm = "mkdir -p ${config.xdg.cacheHome}/rsync/empty && rsync -avP --delete ${config.xdg.cacheHome}/rsync/empty/";
     shroot = "sudo -E $SHELL";
     sudo = "sudo ";
