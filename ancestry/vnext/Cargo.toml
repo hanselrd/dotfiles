@@ -1,7 +1,0 @@
-[workspace]
-members = [
-    "dotfiles-ansible",
-    "dotfiles-build",
-    "dotfiles-core",
-    "dotfiles-types",
-]
