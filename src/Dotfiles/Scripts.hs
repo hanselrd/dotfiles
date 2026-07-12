@@ -43,6 +43,7 @@ mkTmpDir = do
   cmd "set" "-u"
   cmd "umask" "077"
   cmd "mkdir" "-p" tmpDir
+  cmd "trap" (WithVar tmpDir ("rm -rf " <>)) "EXIT"
 
   return tmpDir
 
@@ -136,9 +137,6 @@ nixInstall = do
 
   -- version <- takeParameter (NamedLike "version")
   tmpDir <- mkTmpDir
-
-  cmd "trap" (WithVar tmpDir ("rm -rf " <>)) "EXIT"
-
   tempDir <- mkTemp tmpDir "nix-install.XXXXXX" TempDir
   installPath <- newVarFrom (WithVar tempDir (<> "/install.sh")) (NamedLike "installPath")
 
