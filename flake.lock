@@ -677,11 +677,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1783602957,
-        "narHash": "sha256-rL/e7IbJ+HuesyODo7Zo1Zexq53964gwYw6O5mFACl0=",
+        "lastModified": 1783903916,
+        "narHash": "sha256-qucgX8V44JxH3RekopDq4+5cubcggu2PA6NVUqKrAaw=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "8735a91b48d73a00c2deaa3e61259b91ceff359b",
+        "rev": "126dae7bae117ec87a053a213af979f885d7f031",
         "type": "github"
       },
       "original": {
