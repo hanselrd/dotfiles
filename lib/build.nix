@@ -22,7 +22,6 @@ rec {
       username ? "delacruz",
       name ? "Hansel De La Cruz",
       email ? "18725263+hanselrd@users.noreply.github.com",
-      emailSecret ? null,
       homeDirectory ? "/home/${username}",
       identity ? "${homeDirectory}/.ssh/id_ed25519",
       theme ? "catppuccin-mocha",
@@ -33,18 +32,12 @@ rec {
       timeFormat ? "<%a>%Y-%m-%d <%z>%H:%M:%S",
       nixRoot ? null,
     }@args:
-    assert lib.assertMsg (
-      (!(args ? email) && !(args ? emailSecret))
-      || (!(args ? email) && (args ? emailSecret))
-      || ((args ? email) && !(args ? emailSecret))
-    ) "email and emailSecret are mutually exclusive";
     args
     // {
       inherit
         username
         name
-        # email
-        # emailSecret
+        email
         homeDirectory
         identity
         theme
@@ -55,7 +48,6 @@ rec {
         timeFormat
         nixRoot
         ;
-      email = if emailSecret != null then lib.x.readSecret identity emailSecret else email;
     };
 
   mkNixosConfiguration =

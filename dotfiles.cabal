@@ -8,6 +8,10 @@ maintainer:      18725263+hanselrd@users.noreply.github.com
 build-type:      Simple
 extra-doc-files: README.md
 
+flag secrets
+  default: False
+  manual:  True
+
 common ghc-options
   ghc-options:
     -Wall -Wcompat -Werror=incomplete-patterns -Wextra
@@ -21,6 +25,7 @@ common exe-ghc-options
 common default-extensions
   default-extensions:
     BangPatterns
+    CPP
     DuplicateRecordFields
     ExtendedDefaultRules
     FlexibleContexts
@@ -68,8 +73,12 @@ common exe-build-depends
   import:        build-depends
   build-depends:
 
+common cpp-options
+  if flag(secrets)
+    cpp-options: -DSECRETS
+
 library
-  import:           ghc-options, default-extensions, build-depends
+  import:           ghc-options, default-extensions, build-depends, cpp-options
   exposed-modules:
     Dotfiles.Application
     Dotfiles.Builtins
@@ -77,13 +86,22 @@ library
     Dotfiles.Scripts
     Dotfiles.Shell
 
+  if flag(secrets)
+    exposed-modules: Dotfiles.Secrets.Scripts
+
   other-modules:    Paths_dotfiles
   build-depends:    base ^>=4.20.2.0
   hs-source-dirs:   src
+
+  if flag(secrets)
+    hs-source-dirs: secrets/src
+
   default-language: Haskell2010
 
 executable builtins
-  import:           exe-ghc-options, default-extensions, exe-build-depends
+  import:
+    exe-ghc-options, default-extensions, exe-build-depends, cpp-options
+
   main-is:          Main.hs
   other-modules:    Paths_dotfiles
   build-depends:
@@ -94,7 +112,9 @@ executable builtins
   default-language: Haskell2010
 
 executable scripts
-  import:           exe-ghc-options, default-extensions, exe-build-depends
+  import:
+    exe-ghc-options, default-extensions, exe-build-depends, cpp-options
+
   main-is:          Main.hs
   other-modules:    Paths_dotfiles
   build-depends:
@@ -105,7 +125,9 @@ executable scripts
   default-language: Haskell2010
 
 executable playground
-  import:           exe-ghc-options, default-extensions, exe-build-depends
+  import:
+    exe-ghc-options, default-extensions, exe-build-depends, cpp-options
+
   main-is:          Main.hs
   other-modules:    Paths_dotfiles
   build-depends:
@@ -116,7 +138,9 @@ executable playground
   default-language: Haskell2010
 
 executable os-release
-  import:           exe-ghc-options, default-extensions, exe-build-depends
+  import:
+    exe-ghc-options, default-extensions, exe-build-depends, cpp-options
+
   main-is:          Main.hs
   other-modules:    Paths_dotfiles
   build-depends:
@@ -127,7 +151,9 @@ executable os-release
   default-language: Haskell2010
 
 executable eject
-  import:           exe-ghc-options, default-extensions, exe-build-depends
+  import:
+    exe-ghc-options, default-extensions, exe-build-depends, cpp-options
+
   main-is:          Main.hs
   other-modules:    Paths_dotfiles
   build-depends:
@@ -138,7 +164,9 @@ executable eject
   default-language: Haskell2010
 
 executable update-hashes
-  import:           exe-ghc-options, default-extensions, exe-build-depends
+  import:
+    exe-ghc-options, default-extensions, exe-build-depends, cpp-options
+
   main-is:          Main.hs
   other-modules:    Paths_dotfiles
   build-depends:
@@ -149,7 +177,7 @@ executable update-hashes
   default-language: Haskell2010
 
 test-suite dotfiles-test
-  import:           ghc-options, default-extensions, build-depends
+  import:           ghc-options, default-extensions, build-depends, cpp-options
   default-language: Haskell2010
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test

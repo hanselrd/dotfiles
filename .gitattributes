@@ -1,24 +1,7 @@
 * text=auto eol=lf
-*.7z binary
-*.bz2 binary
-*.eot binary
-*.ez binary
-*.fla binary
-*.flv binary
-*.gif binary
-*.gz binary
-*.ico binary
-*.jpeg binary
-*.jpg binary
-*.mov binary
-*.mp3 binary
-*.mp4 binary
-*.pdf binary
-*.png binary
-*.pyc binary
-*.swf binary
-*.swp binary
-*.ttf binary
-*.woff binary
-*.zip binary
+
 ancestry/** linguist-documentation
+
+secrets/** filter=secrets
+secrets/secrets.nix !filter
+secrets/**/*.age !filter

@@ -12,31 +12,18 @@
       user.name = env.name;
       user.email = env.email;
       log.date = "format:${env.timeFormat}";
-      # core.fsmonitor = true;
       feature.manyFiles = true;
       grep.lineNumber = true;
       init.defaultBranch = lib.mkForce "master";
       merge.conflictStyle = "diff3";
       safe.directory = "*";
-      # color = {
-      #   branch = {
-      #     current = "yellow bold reverse";
-      #     local = "yellow bold";
-      #     remote = "green bold";
-      #     upstream = "magenta bold";
-      #   };
-      #   diff = {
-      #     meta = "yellow bold";
-      #     frag = "magenta bold";
-      #     old = "red bold";
-      #     new = "green bold";
-      #   };
-      #   status = {
-      #     added = "yellow bold";
-      #     changed = "green bold";
-      #     untracked = "cyan bold";
-      #   };
-      # };
+      filter = {
+        secrets = {
+          smudge = lib.getExe' pkgs.coreutils "cat";
+          clean = "${lib.getExe' pkgs.coreutils "printf"} ''";
+          required = true;
+        };
+      };
       alias = {
         sclone = "!${lib.getExe pkgs.dash} ${pkgs.writeShellScript "git-smart-clone.sh" ''
           set -e

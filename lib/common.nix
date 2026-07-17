@@ -12,14 +12,12 @@ rec {
   decryptSecretModule =
     identity: secretModule: lib.x.decryptSecret identity (secretModule + "/default.nix.age");
 
-  readSecret =
-    identity: secret: lib.removeSuffix "\n" (lib.readFile (lib.x.decryptSecret identity secret));
+  readSecret = identity: secret: lib.fileContents (lib.x.decryptSecret identity secret);
 
   readCommand =
     name:
     { pkgs }:
-    buildEnv: buildCommand:
-    lib.removeSuffix "\n" (lib.readFile (pkgs.runCommand name buildEnv buildCommand));
+    buildEnv: buildCommand: lib.fileContents (pkgs.runCommand name buildEnv buildCommand);
 
   bannerText =
     {
@@ -191,7 +189,7 @@ rec {
     pkgs.buildGoModule {
       name = "dotfiles-go-bin-${name}";
       src = rootPath;
-      vendorHash = "sha256-audZ/f9945jWTLDodIexaN+S+qJ07o6/ovFJ0Nyb24M=";
+      vendorHash = "sha256-YdLIQaUSEj4ug/+uuIH10funf6Mxk2zF9UOymJAYSUs=";
       subPackages = [ "cmd/${name}" ];
       goSum = rootPath + "/go.sum";
       ldflags = [

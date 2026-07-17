@@ -164,14 +164,14 @@
         basic = lib.x.mkHomeConfiguration (lib.x.mkEnv { homeName = "basic"; });
         work0 = lib.x.mkHomeConfiguration (
           lib.x.mkEnv {
-            emailSecret = ./secrets/work-email.age;
+            email = lib.fileContents ./secrets/work-email;
             homeName = "work0";
           }
         );
         work1 = lib.x.mkHomeConfiguration (
           lib.x.mkEnv {
             username = "hansel.delacruz";
-            emailSecret = ./secrets/work-email.age;
+            email = lib.fileContents ./secrets/work-email;
             homeName = "work1";
           }
         );
@@ -180,13 +180,48 @@
       apps = eachSystem (
         system:
         let
+          rules = import ./secrets/secrets.nix;
+
           pkgs = legacyPackages.${system};
 
           dotfiles = pkgs.haskellPackages.callCabal2nix "dotfiles" ./. { };
+          dotfilesWithSecrets = pkgs.haskellPackages.callCabal2nixWithOptions "dotfiles" ./. "-f secrets" { };
         in
         {
           builtins = lib.x.mkApp' dotfiles "builtins";
-          scripts = lib.x.mkApp' dotfiles "scripts";
+          scripts = lib.x.mkApp' dotfilesWithSecrets "scripts";
+
+          encrypt-secrets = lib.x.mkApp (
+            pkgs.writeShellApplication {
+              name = "encrypt-secrets";
+              runtimeInputs = with pkgs; [ age ];
+              text = ''
+                ${lib.concatStringsSep "\n" (
+                  lib.mapAttrsToList (
+                    n: v:
+                    "test -s secrets/${lib.removeSuffix ".age" n} && age ${
+                      lib.concatMapStringsSep " " (x: "-r '${x}'") v.publicKeys
+                    } ${
+                      if lib.hasAttr "armor" v && v.armor then "--armor" else ""
+                    } -o secrets/${n} secrets/${lib.removeSuffix ".age" n} && sha256sum secrets/${n} || true"
+                  ) rules
+                )}
+              '';
+            }
+          );
+
+          decrypt-secrets = lib.x.mkApp (
+            pkgs.writeShellApplication {
+              name = "decrypt-secrets";
+              runtimeInputs = with pkgs; [ agenix ];
+              text = ''
+                ${lib.concatMapStringsSep "\n" (x: ''
+                  { env -C secrets agenix -d ${x} 2>/dev/null || true; } > secrets/${lib.removeSuffix ".age" x}
+                  sha256sum secrets/${lib.removeSuffix ".age" x}
+                '') (lib.attrNames rules)}
+              '';
+            }
+          );
 
           codegen = lib.x.mkApp (
             pkgs.writeShellApplication {

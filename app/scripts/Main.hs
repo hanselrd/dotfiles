@@ -19,32 +19,38 @@ import System.Posix.Files
   , ownerModes
   , setFileMode
   )
+#if defined(SECRETS)
+import qualified Dotfiles.Secrets.Scripts as DSS (workInit)
+#endif
 
+{- FOURMOLU_DISABLE -}
 main :: IO ()
 main = do
   flip DA.runApp (colorize logToStderr) <| do
     let scripts =
-          [ ("nix-config.sh", DS.nixConfig)
-          , ("nix-chroot.sh", DS.nixChroot)
-          , ("nix-install.sh", DS.nixInstall)
+          [ ("scripts/nix-config.sh", DS.nixConfig)
+          , ("scripts/nix-chroot.sh", DS.nixChroot)
+          , ("scripts/nix-install.sh", DS.nixInstall)
+#if defined(SECRETS)
+          , ("secrets/modules/home/work/init2.sh", DSS.workInit)
+#endif
           ]
 
     forM_
       scripts
-      <| \(name, script') -> do
+      <| \(path, script') -> do
         logDebugN
-          <| "script= " <> (pack name)
-
-        let scriptPath = "scripts/" ++ name
+          <| "script= " <> (pack path)
 
         liftIO
-          <| TIO.writeFile scriptPath
+          <| TIO.writeFile path
           <| script script'
 
         liftIO
-          <| setFileMode scriptPath
+          <| setFileMode path
           <| ownerModes
             .|. groupReadMode
             .|. groupExecuteMode
             .|. otherReadMode
             .|. otherExecuteMode
+{- FOURMOLU_ENABLE -}

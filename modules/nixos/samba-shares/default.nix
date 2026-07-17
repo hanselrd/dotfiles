@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   secretsPath,
   env,
@@ -13,7 +12,7 @@
     device = "//10.10.0.100/data";
     fsType = "cifs";
     options = [
-      "credentials=${lib.x.decryptSecret env.identity (secretsPath + "/smb-data-creds.age")}"
+      "credentials=${secretsPath + "/smb-data-creds"}"
       "uid=${builtins.toString config.users.users.${env.username}.uid}"
       "gid=${builtins.toString config.users.groups.${config.users.users.${env.username}.group}.gid}"
       "x-systemd.automount"

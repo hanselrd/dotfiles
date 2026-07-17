@@ -1,26 +1,25 @@
-{ ... }:
-let
-  excludes = [ "ancestry/*" ];
-in
-{
+{ ... }: {
   projectRootFile = "flake.nix";
+
+  settings.walk = "filesystem";
+  settings.excludes = [
+    ".git/**"
+    "ancestry/**"
+  ];
 
   programs.nixfmt.enable = true;
   programs.nixfmt.width = 100;
   programs.nixfmt.indent = 2;
   programs.nixfmt.strict = true;
-  settings.formatter.nixfmt.excludes = excludes;
   settings.formatter.nixfmt.includes = [ "*.nix" ];
 
   programs.deadnix.enable = true;
-  settings.formatter.deadnix.excludes = excludes;
   settings.formatter.deadnix.includes = [ "*.nix" ];
   settings.formatter.deadnix.options = [ "-W" ];
 
   programs.shfmt.enable = true;
   programs.shfmt.indent_size = 2;
   programs.shfmt.simplify = true;
-  settings.formatter.shfmt.excludes = excludes ++ [ "*.bash" ];
   settings.formatter.shfmt.includes = [ "*.sh" ];
   settings.formatter.shfmt.options = [ "-sr" ];
 
@@ -31,11 +30,9 @@ in
   programs.stylua.settings.quote_style = "AutoPreferDouble";
   programs.stylua.settings.call_parentheses = "Always";
   programs.stylua.settings.collapse_simple_statement = "Never";
-  settings.formatter.stylua.excludes = excludes;
   settings.formatter.stylua.includes = [ "*.lua" ];
 
   programs.jsonfmt.enable = true;
-  settings.formatter.jsonfmt.excludes = excludes;
   settings.formatter.jsonfmt.includes = [
     "*.json"
     "*.jsonc"
@@ -44,6 +41,7 @@ in
   programs.fourmolu.enable = true;
   programs.fourmolu.ghcOpts = [
     "BangPatterns"
+    "CPP"
     "DuplicateRecordFields"
     "ExtendedDefaultRules"
     "FlexibleContexts"
@@ -58,7 +56,6 @@ in
     "TemplateHaskell"
     "TypeApplications"
   ];
-  settings.formatter.fourmolu.excludes = excludes;
   settings.formatter.fourmolu.includes = [ "*.hs" ];
   settings.formatter.fourmolu.options = [
     "--indentation"
@@ -86,11 +83,9 @@ in
   ];
 
   programs.cabal-fmt.enable = true;
-  settings.formatter.cabal-fmt.excludes = excludes;
   settings.formatter.cabal-fmt.includes = [ "*.cabal" ];
 
   programs.goimports.enable = true;
-  settings.formatter.goimports.excludes = excludes;
   settings.formatter.goimports.includes = [ "*.go" ];
   settings.formatter.goimports.options = [
     "-local"
@@ -99,16 +94,13 @@ in
 
   programs.gofumpt.enable = true;
   programs.gofumpt.extra = true;
-  settings.formatter.gofumpt.excludes = excludes;
   settings.formatter.gofumpt.includes = [ "*.go" ];
 
   programs.golines.enable = true;
   programs.golines.maxLength = 100;
-  settings.formatter.golines.excludes = excludes;
   settings.formatter.golines.includes = [ "*.go" ];
 
   programs.dockerfmt.enable = true;
-  settings.formatter.dockerfmt.excludes = excludes;
   settings.formatter.dockerfmt.includes = [ "Dockerfile" ];
   settings.formatter.dockerfmt.options = [
     "-i"
