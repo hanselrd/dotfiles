@@ -53,40 +53,7 @@
           set -ga status-right "#[fg=brightblack]@#[default]"
           set -ga status-right "#{?#{pane_ssh_connected},#[fg=${bright-green}],#[fg=brightblack]}#{hostname_short}#[default] "
           set -ga status-right "#[fg=brightblack]{#[default]"
-          set -ga status-right "#[fg=${bright-yellow}]${
-            lib.replaceStrings
-              [ "<" ">" "(" ")" "[" "]" ]
-              [
-                (lib.concatStrings [
-                  "#[fg=brightblack]<#[default]"
-                  "#[fg=${bright-red}]"
-                ])
-                (lib.concatStrings [
-                  "#[default]"
-                  "#[fg=brightblack]>#[default]"
-                  "#[fg=${bright-yellow}]"
-                ])
-                (lib.concatStrings [
-                  "#[fg=brightblack](#[default]"
-                  "#[fg=${bright-green}]"
-                ])
-                (lib.concatStrings [
-                  "#[default]"
-                  "#[fg=brightblack])#[default]"
-                  "#[fg=${bright-yellow}]"
-                ])
-                (lib.concatStrings [
-                  "#[fg=brightblack][#[default]"
-                  "#[fg=${bright-blue}]"
-                ])
-                (lib.concatStrings [
-                  "#[default]"
-                  "#[fg=brightblack]]#[default]"
-                  "#[fg=${bright-yellow}]"
-                ])
-              ]
-              env.timeFormat
-          }#[default]"
+          set -ga status-right "#[fg=${bright-magenta}]${env.timeFormat}#[default]"
           set -ga status-right "#[fg=brightblack]}#[default]"
         '';
       }

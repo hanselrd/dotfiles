@@ -69,56 +69,17 @@ in
             {
               type = "time";
               style = "plain";
-              foreground = bright-yellow;
+              foreground = bright-magenta;
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
-                (lib.concatImapStrings
-                  (
-                    pos: x:
-                    let
-                      sep = if pos > 1 then lib.substring 0 1 x else "";
-                      rest = if pos > 1 then lib.substring 1 (-1) x else x;
-                      rest' =
-                        if lib.replaceStrings [ " " ] [ "" ] rest != "" then
-                          "{{.CurrentDate | strftime `${rest}`}}"
-                        else
-                          rest;
-                    in
-                    lib.concatStrings [
-                      (if sep != "" then "<darkGray>${sep}</>" else "")
-                      (
-                        if rest' != "" then
-                          if sep == "<" then
-                            "<${bright-red}>${rest'}</>"
-                          else if sep == "(" then
-                            "<${bright-green}>${rest'}</>"
-                          else if sep == "[" then
-                            "<${bright-blue}>${rest'}</>"
-                          else
-                            rest'
-                        else
-                          ""
-                      )
-                    ]
-                  )
-                  (
-                    lib.splitStringBy (
-                      _prev: curr:
-                      lib.elem curr [
-                        "<"
-                        ">"
-                        "("
-                        ")"
-                        "["
-                        "]"
-                      ]
-                    ) true env.timeFormat
-                  )
-                )
+                "{{.CurrentDate | date .Format}}"
                 "<darkGray>}</>"
                 "</b> "
               ];
+              properties = {
+                time_format = env.goTimeFormat;
+              };
             }
             {
               type = "session";
@@ -294,10 +255,6 @@ in
         ];
       };
     };
-    package = pkgs.oh-my-posh.overrideAttrs (attrs: {
-      patches = (attrs.patches or [ ]) ++ [ ./strftime.patch ];
-      vendorHash = "sha256-Ly53k6N91GeyiOd4KWrZCLO5LOH4NehmgjuQ3C+2XBw=";
-    });
   };
 
   programs.bash.initExtra = lib.mkAfter poshContext;

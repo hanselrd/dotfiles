@@ -29,7 +29,8 @@ rec {
       hostName ? "nohost0",
       system ? "x86_64-linux",
       timeZone ? "America/New_York",
-      timeFormat ? "<%a>%Y-%m-%d <%z>%H:%M:%S",
+      timeFormat ? "%a %Y-%m-%d %H:%M:%S %z",
+      goTimeFormat ? "Mon 2006-01-02 15:04:05 -0700",
       nixRoot ? null,
     }@args:
     args
@@ -46,6 +47,7 @@ rec {
         system
         timeZone
         timeFormat
+        goTimeFormat
         nixRoot
         ;
     };
