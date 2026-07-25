@@ -33,7 +33,7 @@ rec {
           "-l"
         else if justify == "center" then
           "-c"
-        else if "right" then
+        else if justify == "right" then
           "-r"
         else
           "-x"
@@ -45,6 +45,26 @@ rec {
     readCommand "rainbow-text" {
       inherit pkgs;
     } { } "${lib.getExe pkgs.lolcat} -f ${pkgs.writeText "rainbow-text-file" text} > $out";
+
+  pastelText =
+    {
+      pkgs,
+      fgColor ? "default",
+      bgColor ? null,
+      bold ? false,
+      italic ? false,
+      underline ? false,
+      noNewline ? true,
+    }:
+    text:
+    readCommand "pastel-text" { inherit pkgs; } { }
+      "${lib.getExe' pkgs.coreutils "cat"} ${pkgs.writeText "pastel-text-file" text} | ${lib.getExe pkgs.pastel} -f paint ${
+        if noNewline then "-n" else ""
+      } \"${fgColor}\" ${
+        if bgColor != null then "--on \"${bgColor}\"" else ""
+      } ${if bold then "--bold" else ""} ${if italic then "--italic" else ""} ${
+        if underline then "--underline" else ""
+      } > $out";
 
   ansiText =
     {

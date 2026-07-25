@@ -103,88 +103,108 @@
 
   time.timeZone = env.timeZone;
 
-  users.motd = with config; ''
-    ${lib.x.rainbowText { inherit pkgs; } (
-      lib.concatStrings [
-        (lib.x.bannerText {
-          inherit pkgs;
-          font = "small";
-        } "hanselrd")
-        (lib.x.bannerText {
-          inherit pkgs;
-          font = "mini";
-        } networking.fqdnOrHostName)
-      ]
-    )}
+  users.motd =
+    let
+      inherit (config)
+        boot
+        networking
+        system
+        time
+        ;
+    in
+    with config.lib.stylix.colors.withHashtag;
+    ''
+      ${lib.x.rainbowText { inherit pkgs; } (
+        lib.concatStrings [
+          (lib.x.bannerText {
+            inherit pkgs;
+            font = "small";
+          } "hanselrd")
+          (lib.x.bannerText {
+            inherit pkgs;
+            font = "mini";
+          } networking.fqdnOrHostName)
+        ]
+      )}
 
-    ${lib.x.ansiText
-      {
-        inherit pkgs;
-        style = "red bold";
+      ${lib.x.pastelText
+        {
+          inherit pkgs;
+          fgColor = bright-red;
+          bold = true;
+        }
+        ''
+          UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+
+          You must have explicit, authorized permission to access or configure this
+          device. Unauthorized attempts and actions to access or use this system may
+          result in civil and/or criminal penalties. All activities performed on this
+          device are logged and monitored.
+        ''
       }
-      ''
-        UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
 
-        You must have explicit, authorized permission to access or configure this
-        device. Unauthorized attempts and actions to access or use this system may
-        result in civil and/or criminal penalties. All activities performed on this
-        device are logged and monitored.
-      ''
-    }
+      ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = "gray";
+          bold = true;
+        } "${env.hostName}/${env.homeName}"
+      }: rev: ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = bright-green;
+          bold = true;
+        } system.configurationRevision
+      } @ ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = bright-magenta;
+          bold = true;
+        } (lib.x.currentTimePretty { inherit pkgs; } time.timeZone)
+      } by ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = bright-cyan;
+          bold = true;
+        } env.username
+      }
 
-    ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "gray bold";
-      } "${env.hostName}/${env.homeName}"
-    }: rev: ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "green bold";
-      } system.configurationRevision
-    } @ ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "yellow bold";
-      } (lib.x.currentTimePretty { inherit pkgs; } time.timeZone)
-    } by ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "cyan bold";
-      } env.username
-    }
-
-    host:    ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "gray bold";
-      } networking.fqdnOrHostName
-    }
-    os:      ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "blue bold";
-      } "NixOS ${system.nixos.release} (${system.nixos.codeName})"
-    }
-    version: ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "magenta bold";
-      } system.nixos.version
-    }
-    kernel:  ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "gray bold";
-      } boot.kernelPackages.kernel.version
-    }
-    nix:     ${
-      lib.x.ansiText {
-        inherit pkgs;
-        style = "blue bold";
-      } pkgs.nix.version
-    }
-  '';
+      host:    ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = "gray";
+          bold = true;
+        } networking.fqdnOrHostName
+      }
+      os:      ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = bright-blue;
+          bold = true;
+        } "NixOS ${system.nixos.release} (${system.nixos.codeName})"
+      }
+      version: ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = bright-magenta;
+          bold = true;
+        } system.nixos.version
+      }
+      kernel:  ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = "gray";
+          bold = true;
+        } boot.kernelPackages.kernel.version
+      }
+      nix:     ${
+        lib.x.pastelText {
+          inherit pkgs;
+          fgColor = bright-blue;
+          bold = true;
+        } pkgs.nix.version
+      }
+    '';
 
   system.configurationRevision = inputs.self.shortRev or "<dirty>";
 }
