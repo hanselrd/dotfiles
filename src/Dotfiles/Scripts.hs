@@ -23,7 +23,7 @@ import Control.Monad.Shell
   , takeParameter
   )
 import Data.String.Utils (strip)
-import qualified Data.Text.Lazy as T
+import qualified Data.Text.Lazy as T (Text)
 import Flow
 
 default (T.Text)
