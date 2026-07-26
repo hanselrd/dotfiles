@@ -13,7 +13,6 @@
     (sharedModulesPath + "/common")
     # ../programs/ccache
     # ../programs/cmake
-    # ../programs/lldb
     # ../programs/ranger
     # ../programs/ripgrep
     ../binaries
@@ -29,6 +28,7 @@
     ../programs/git
     ../programs/home-manager
     ../programs/htop
+    ../programs/lldb
     ../programs/neovim
     ../programs/nh
     ../programs/nix-index
