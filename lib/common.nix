@@ -55,6 +55,7 @@ rec {
       italic ? false,
       underline ? false,
       noNewline ? true,
+      escapeStyle ? null,
     }:
     text:
     readCommand "pastel-text" { inherit pkgs; } { }
@@ -64,7 +65,20 @@ rec {
         if bgColor != null then "--on \"${bgColor}\"" else ""
       } ${if bold then "--bold" else ""} ${if italic then "--italic" else ""} ${
         if underline then "--underline" else ""
-      } > $out";
+      } | ${lib.getExe pkgs.gnused} 's/\\x1b/${
+        if escapeStyle == "bash" then
+          "\\\\e"
+        else if escapeStyle == "octal" then
+          "\\\\033"
+        else if escapeStyle == "hex" then
+          "\\\\x1b"
+        else if escapeStyle == "unicode" then
+          "\\\\u001b"
+        else if escapeStyle == "unicode-rust" then
+          "\\\\u{1b}"
+        else
+          "\\x1b"
+      }/g' > $out";
 
   ansiText =
     {

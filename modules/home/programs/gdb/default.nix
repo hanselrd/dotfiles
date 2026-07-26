@@ -8,7 +8,7 @@
   home.packages = with pkgs; [ gdb ];
 
   xdg.configFile."gdb/gdbinit" = {
-    text = ''
+    text = with config.lib.stylix.colors.withHashtag; ''
       set disassembly-flavor intel
       set history save on
       set history size 10000
@@ -18,11 +18,12 @@
       set pagination off
       set confirm off
       set prompt ${
-        lib.replaceStrings [ "\\e" ] [ "\\033" ] (
-          lib.x.ansiText {
+        lib.replaceStrings [ "\\033" "m" ] [ "\\001\\033" "m\\002" ] (
+          lib.x.pastelText {
             inherit pkgs;
-            style = "yellow bold";
-            escapeStyle = "bash";
+            fgColor = bright-red;
+            bold = true;
+            escapeStyle = "octal";
           } "(gdb) "
         )
       }
