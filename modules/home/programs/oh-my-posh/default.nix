@@ -71,7 +71,7 @@ in
               style = "plain";
               # foreground = bright-magenta";
               # foreground = "dark-gradient(${bright-magenta})";
-              foreground = "linear-gradient(${bright-red},${bright-yellow},${bright-green},${bright-cyan},${bright-blue},${bright-magenta})";
+              foreground = "linear-gradient(${bright-magenta},${bright-red},${bright-yellow},${bright-green},${bright-cyan},${bright-blue},${bright-magenta})";
               template = lib.concatStrings [
                 "<b>"
                 "<darkGray>{</>"
