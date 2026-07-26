@@ -8,8 +8,8 @@
         python-magic
       ]
     ))
+    # poetry
     basedpyright
     pipenv
-    poetry
   ];
 }
