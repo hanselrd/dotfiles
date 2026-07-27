@@ -114,18 +114,32 @@
     in
     with config.lib.stylix.colors.withHashtag;
     ''
-      ${lib.x.rainbowText { inherit pkgs; } (
-        lib.concatStrings [
-          (lib.x.bannerText {
+      ${lib.x.pastelText
+        {
+          inherit pkgs;
+          fgColor = bright-blue;
+          bold = true;
+        }
+        (
+          lib.x.bannerText {
             inherit pkgs;
             font = "small";
-          } "hanselrd")
-          (lib.x.bannerText {
+          } "hanselrd"
+        )
+      }
+      ${lib.x.pastelText
+        {
+          inherit pkgs;
+          fgColor = "gray";
+          bold = true;
+        }
+        (
+          lib.x.bannerText {
             inherit pkgs;
             font = "mini";
-          } networking.fqdnOrHostName)
-        ]
-      )}
+          } networking.fqdnOrHostName
+        )
+      }
 
       ${lib.x.pastelText
         {
