@@ -3,5 +3,4 @@
 # !/secrets/**/
 # !/secrets/**/*.age
 
-dist
-dist-*
+dist*

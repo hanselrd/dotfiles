@@ -5,6 +5,7 @@
   settings.excludes = [
     ".git/**"
     "ancestry/**"
+    "dist*/**"
   ];
 
   programs.nixfmt.enable = true;
