@@ -23,6 +23,7 @@ builtins.mapAttrs (_n: v: v // { armor = true; }) {
   "modules/home/work/default.nix.age".publicKeys = yellow;
   "modules/home/work/init.sh.age".publicKeys = yellow;
   "modules/home/work/init2.sh.age".publicKeys = yellow;
+  "scripts/hello.hs.age".publicKeys = yellow;
   "src/Dotfiles/Secrets/Scripts.hs.age".publicKeys = yellow;
   "bookmarks.html.age".publicKeys = blue;
   "smb-data-creds.age".publicKeys = blue;
