@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    (haskellPackages.ghcWithPackages (hpkgs: with hpkgs; [ zlib ]))
     cabal-install
     fourmolu
-    ghc
     haskell-language-server
     hlint
     ormolu

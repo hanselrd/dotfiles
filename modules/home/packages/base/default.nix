@@ -28,6 +28,7 @@
     nix-diff
     objconv
     pfetch
+    pkg-config
     procps
     rsync
     ssh-to-age
