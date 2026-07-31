@@ -6,26 +6,46 @@ let
 
   dev = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH/s0GPuqU8oABuFz6ytahsSVHKWDHFGv1FLTBciBKcJ";
 
-  yellow = [
-    dev_user
-    work0_user
-    work1_user
-    work2_user
-    dev
-  ];
-
-  blue = [
-    dev_user
-    dev
+  matrix = [
+    {
+      secrets = [
+        "modules/home/work/default.nix"
+        "modules/home/work/init.sh"
+        "modules/home/work/init2.sh"
+        "modules/home/work/rts.hs"
+        "src/Dotfiles/Secrets/Scripts.hs"
+        "work-email"
+      ];
+      keys = [
+        dev_user
+        work0_user
+        work1_user
+        work2_user
+        dev
+      ];
+    }
+    {
+      secrets = [
+        "bookmarks.html"
+        "smb-data-creds"
+      ];
+      keys = [
+        dev_user
+        dev
+      ];
+    }
   ];
 in
-builtins.mapAttrs (_n: v: v // { armor = true; }) {
-  "modules/home/work/default.nix.age".publicKeys = yellow;
-  "modules/home/work/init.sh.age".publicKeys = yellow;
-  "modules/home/work/init2.sh.age".publicKeys = yellow;
-  "scripts/hello.hs.age".publicKeys = yellow;
-  "src/Dotfiles/Secrets/Scripts.hs.age".publicKeys = yellow;
-  "bookmarks.html.age".publicKeys = blue;
-  "smb-data-creds.age".publicKeys = blue;
-  "work-email.age".publicKeys = yellow;
-}
+builtins.foldl' (
+  acc: attrs:
+  acc
+  // (builtins.listToAttrs (
+    builtins.map (secret: {
+      name = "${secret}.age";
+      value = {
+        publicKeys = attrs.keys;
+        armor = true;
+      };
+    }) attrs.secrets
+  ))
+) { } matrix
