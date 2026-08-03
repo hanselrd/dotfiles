@@ -257,16 +257,6 @@ in
         ];
       };
     };
-    package = pkgs.oh-my-posh.overrideAttrs (attrs: rec {
-      version = "29.36.0";
-      src = pkgs.fetchFromGitHub {
-        owner = "JanDeDobbeleer";
-        repo = attrs.pname;
-        rev = "v${version}";
-        hash = "sha256-OCkatLHsBhoH4ZWakQ0pfNmTx/ABOBx1iqJQZUdyLek=";
-      };
-      vendorHash = "sha256-BRJvQwLeqXS30d5ZRSpc1as7DxMDq6ob4VgbP60Y94Q=";
-    });
   };
 
   programs.bash.initExtra = lib.mkAfter poshContext;
