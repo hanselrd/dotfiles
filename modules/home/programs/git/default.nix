@@ -58,7 +58,7 @@
 
         audit = "!${lib.getExe pkgs.git} count-objects --verbose --human-readable";
         hydrate = "!${lib.getExe pkgs.git} fetch origin --no-auto-gc --prune --refetch";
-        mnt = "!${lib.getExe pkgs.git} hydrate && ${lib.getExe pkgs.git} gc --aggressive --prune=now && ${lib.getExe pkgs.git} fsck";
+        mnt = "!${lib.getExe pkgs.git} hydrate && ${lib.getExe pkgs.git} reflog expire --expire=now --expire-unreachable=now --all && ${lib.getExe pkgs.git} gc --prune=now --aggressive && ${lib.getExe pkgs.git} fsck";
 
         lgb = "!${lib.getExe pkgs.git} log --graph --pretty=format:'%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %s %C(green bold)(%cr) %C(blue bold)<%an>%Creset%n' --abbrev-commit --date=relative --branches";
         l = "!${lib.getExe pkgs.git} log --graph --oneline --decorate";
