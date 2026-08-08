@@ -2,5 +2,6 @@
 # !/secrets/secrets.nix
 # !/secrets/**/
 # !/secrets/**/*.age
+/secrets/sha256sums.txt
 
 dist*

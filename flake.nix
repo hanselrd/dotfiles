@@ -191,21 +191,40 @@
           builtins = lib.x.mkApp' dotfiles "builtins";
           scripts = lib.x.mkApp' dotfilesWithSecrets "scripts";
 
+          checksum-secrets = lib.x.mkApp (
+            pkgs.writeShellApplication {
+              name = "checksum-secrets";
+              runtimeInputs = with pkgs; [ findutils ];
+              text = ''
+                find secrets -type f ! -path "*sha256sums.txt" -printf "%P\0" | sort -z | env -C secrets xargs -0 sha256sum > secrets/sha256sums.txt
+              '';
+            }
+          );
+
           encrypt-secrets = lib.x.mkApp (
             pkgs.writeShellApplication {
               name = "encrypt-secrets";
-              runtimeInputs = with pkgs; [ age ];
+              runtimeInputs = with pkgs; [
+                age
+                gnugrep
+                nix
+              ];
               text = ''
                 ${lib.concatStringsSep "\n" (
                   lib.mapAttrsToList (
                     n: v:
-                    "test -s secrets/${lib.removeSuffix ".age" n} && age ${
+                    let
+                      encrypted = n;
+                      cleartext = lib.removeSuffix ".age" n;
+                    in
+                    "test -s secrets/${cleartext} && { ! grep -s '${cleartext}$' secrets/sha256sums.txt | env -C secrets sha256sum -c -; } && age ${
                       lib.concatMapStringsSep " " (x: "-r '${x}'") v.publicKeys
                     } ${
                       if lib.hasAttr "armor" v && v.armor then "--armor" else ""
-                    } -o secrets/${n} secrets/${lib.removeSuffix ".age" n} && sha256sum secrets/${n} || true"
+                    } -o secrets/${encrypted} secrets/${cleartext} || true"
                   ) rules
                 )}
+                nix run .#checksum-secrets
               '';
             }
           );
@@ -213,12 +232,20 @@
           decrypt-secrets = lib.x.mkApp (
             pkgs.writeShellApplication {
               name = "decrypt-secrets";
-              runtimeInputs = with pkgs; [ agenix ];
+              runtimeInputs = with pkgs; [
+                agenix
+                nix
+              ];
               text = ''
-                ${lib.concatMapStringsSep "\n" (x: ''
-                  { env -C secrets agenix -d ${x} 2>/dev/null || true; } > secrets/${lib.removeSuffix ".age" x}
-                  sha256sum secrets/${lib.removeSuffix ".age" x}
-                '') (lib.attrNames rules)}
+                ${lib.concatMapStringsSep "\n" (
+                  x:
+                  let
+                    encrypted = x;
+                    cleartext = lib.removeSuffix ".age" x;
+                  in
+                  "{ env -C secrets agenix -d ${encrypted} 2>/dev/null || true; } > secrets/${cleartext}"
+                ) (lib.attrNames rules)}
+                nix run .#checksum-secrets
               '';
             }
           );
