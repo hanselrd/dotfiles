@@ -4,13 +4,13 @@
   rust-overlay.overlays.default
   zig-overlay.overlays.default
   (final: prev: {
-    nix = prev.nixVersions.nix_2_31;
-    nix-plugins = prev.nix-plugins.overrideAttrs (_attrs: {
+    nix = prev.nixVersions.nix_2_34;
+    nix-plugins = prev.nix-plugins.overrideAttrs (attrs: {
       buildInputs = with final; [
         boost
         nix
       ];
-      # patches = (attrs.patches or [ ]) ++ [ ./nix-plugins-nix-2.33.patch ];
+      patches = (attrs.patches or [ ]) ++ [ ./nix-plugins-nix-2.34.patch ];
     });
   })
   (final: _prev: {
