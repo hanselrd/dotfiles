@@ -234,6 +234,7 @@
               name = "decrypt-secrets";
               runtimeInputs = with pkgs; [
                 agenix
+                gnugrep
                 nix
               ];
               text = ''
@@ -243,7 +244,7 @@
                     encrypted = x;
                     cleartext = lib.removeSuffix ".age" x;
                   in
-                  "{ env -C secrets agenix -d ${encrypted} 2>/dev/null || true; } > secrets/${cleartext}"
+                  "{ ! grep -s '${encrypted}$' secrets/sha256sums.txt | env -C secrets sha256sum -c -; } && { env -C secrets agenix -d ${encrypted} 2>/dev/null || true; } > secrets/${cleartext}"
                 ) (lib.attrNames rules)}
                 nix run .#checksum-secrets
               '';
