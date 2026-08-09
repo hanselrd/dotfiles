@@ -39,11 +39,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1785854479,
+        "lastModified": 1786274667,
         "narHash": "sha256-QioqkygQ5gjkUKeq1JjNLyQmMA5BefHmaAlUSlsc63I=",
         "owner": "amber-lang",
         "repo": "amber",
-        "rev": "40452608ae6dac67584cc7cd8aa6ae289739e1f0",
+        "rev": "89b033ac77ddea52ea3bb190db61c02f7cf9dfa2",
         "type": "github"
       },
       "original": {
@@ -442,11 +442,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786160316,
-        "narHash": "sha256-oLoc3ZLg1LX/S5Jb3v6MrF415AzDyC4vgeWy9UcYTQk=",
+        "lastModified": 1786247265,
+        "narHash": "sha256-cVTcTqAhzSNMOVddtBhFpuv+Vx6/SgrhgZWJiI61H24=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "4e1c940c96560ceab7c547f89642231371a66646",
+        "rev": "6df7076ea0f5697e3242719a4c71211f00411cf5",
         "type": "github"
       },
       "original": {
@@ -680,11 +680,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1786148816,
-        "narHash": "sha256-y75mjZest5BUlIQKivSmvTCKE/HLEA5h5+QIuXDUFTk=",
+        "lastModified": 1786235394,
+        "narHash": "sha256-55z70JYNQ//49RpLcrUx+GYvb93qI25ulz9bTbVNMqY=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "e1882be2e2622d659c496332580fc3c3bdceb9b6",
+        "rev": "5d10019282a51ee0ebcbd51ad5599414841d69c0",
         "type": "github"
       },
       "original": {
