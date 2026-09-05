@@ -15,6 +15,7 @@ import Control.Monad.Catch (MonadMask)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.IO.Unlift (MonadUnliftIO)
 import Control.Monad.Logger (runNoLoggingT)
+import Data.String.Combinators (doubleQuotes)
 import Data.String.Utils (strip)
 import Data.Time.Clock.POSIX (getPOSIXTime)
 import Dotfiles.Shell (readShell)
@@ -66,6 +67,8 @@ supportedConfigurations name =
       <| do
         filterM
           ( \x -> do
+              let x = doubleQuotes x
+
               (exitCode, stdout, _) <-
                 readShell
                   <| "nix eval .#"

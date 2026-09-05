@@ -22,7 +22,7 @@ RUN nix develop -c sh -c " \
     nix \
     wget \
     which \
-  && { nh home switch -c docker -b bak || true; } \
+  && { nh home switch -c root@docker -b bak || true; } \
 "
 
 ENTRYPOINT ["/bin/sh", "-l"]

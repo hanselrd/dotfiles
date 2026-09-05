@@ -5,6 +5,7 @@ import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Logger (logDebugN)
 import Control.Monad.Logger.Extras (colorize, logToStderr)
 import Control.Monad.Reader (ask)
+import Data.String.Combinators (doubleQuotes)
 import Data.String.Utils (strip)
 import Data.Text (pack)
 import qualified Dotfiles.Application as DA (App, ParserInfoMod, runRAppWithParser)
@@ -35,8 +36,6 @@ optionsP = do
              ( long "home"
                  <> metavar "HOME"
                  <> help "Home name"
-                 <> value "basic"
-                 <> showDefault
              )
            <*> strOption
              ( long "out-dir"
@@ -64,7 +63,7 @@ main = do
         (_, stdout, _) <-
           DS.readShell
             <| "nix build --no-link --print-out-paths .#homeConfigurations."
-              ++ opts.home
+              ++ doubleQuotes opts.home
               ++ ".activationPackage --impure"
 
         let path0 = strip stdout

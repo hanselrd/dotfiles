@@ -1,0 +1,11 @@
+{
+  modules.nixos.openssh-service = { config, ... }: {
+    services.openssh = {
+      enable = true;
+      settings = {
+        X11Forwarding = config.services.xserver.enable;
+        PrintLastLog = false;
+      };
+    };
+  };
+}

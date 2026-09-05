@@ -30,10 +30,9 @@ builtinP =
       "random-string"
       ( info
           ( ( RandomString
-                <$> option
+                <$> argument
                   auto
-                  ( long "length"
-                      <> metavar "LENGTH"
+                  ( metavar "LENGTH"
                       <> help "Length of random string"
                   )
             )
@@ -45,9 +44,8 @@ builtinP =
         "device-partition"
         ( info
             ( ( DevicePartition
-                  <$> strOption
-                    ( long "path"
-                        <> metavar "PATH"
+                  <$> strArgument
+                    ( metavar "PATH"
                         <> help "Path to get device partition"
                     )
               )
@@ -59,11 +57,7 @@ builtinP =
         "device"
         ( info
             ( ( Device
-                  <$> strOption
-                    ( long "path"
-                        <> metavar "PATH"
-                        <> help "Path to get device"
-                    )
+                  <$> strArgument (metavar "PATH" <> help "Path to get device")
               )
                 <**> helper
             )
@@ -73,14 +67,12 @@ builtinP =
         "decrypt-secret"
         ( info
             ( ( DecryptSecret
-                  <$> strOption
-                    ( long "identity"
-                        <> metavar "IDENTITY"
+                  <$> strArgument
+                    ( metavar "IDENTITY"
                         <> help "Identity to decrypt secret"
                     )
-                  <*> strOption
-                    ( long "secret"
-                        <> metavar "SECRET"
+                  <*> strArgument
+                    ( metavar "SECRET"
                         <> help "Secret to decrypt"
                     )
               )
