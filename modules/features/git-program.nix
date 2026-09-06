@@ -8,6 +8,7 @@
           user.name = user.name;
           user.email = user.email;
           log.date = "format:${self.lib.timeFormat}";
+          commit.verbose = true;
           feature.manyFiles = true;
           grep.lineNumber = true;
           init.defaultBranch = lib.mkForce "master";

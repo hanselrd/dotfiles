@@ -4,6 +4,7 @@
   settings.walk = "filesystem";
   settings.excludes = [
     ".git/**"
+    "_build/**"
     "ancestry/**"
     "dist*/**"
   ];
@@ -38,6 +39,13 @@
     "*.json"
     "*.jsonc"
   ];
+
+  programs.ocamlformat.enable = true;
+  settings.formatter.ocamlformat.includes = [
+    "*.ml"
+    "*.mli"
+  ];
+  settings.formatter.ocamlformat.options = [ "--enable-outside-detected-project" ];
 
   programs.fourmolu.enable = true;
   programs.fourmolu.ghcOpts = [
