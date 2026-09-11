@@ -7,6 +7,7 @@
     "_build/**"
     "ancestry/**"
     "dist*/**"
+    "scripts/**/*.sh"
   ];
 
   programs.nixfmt.enable = true;
@@ -45,7 +46,10 @@
     "*.ml"
     "*.mli"
   ];
-  settings.formatter.ocamlformat.options = [ "--enable-outside-detected-project" ];
+  settings.formatter.ocamlformat.options = [
+    "--enable-outside-detected-project"
+    "--exp-grouping=parens"
+  ];
 
   programs.fourmolu.enable = true;
   programs.fourmolu.ghcOpts = [

@@ -32,7 +32,7 @@ main = do
           , ("scripts/nix-chroot.sh", DS.nixChroot)
           , ("scripts/nix-install.sh", DS.nixInstall)
 #if defined(SECRETS)
-          , ("secrets/modules/home/work/init2.sh", DSS.workInit)
+          , ("secrets/modules/features/work/init2.sh", DSS.workInit)
 #endif
           ]
 

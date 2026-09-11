@@ -4,6 +4,7 @@
       dune
       gcc
       ocaml
+      ocamlPackages.cppo
       ocamlPackages.ocaml-lsp
       ocamlPackages.odoc
       ocamlPackages.utop

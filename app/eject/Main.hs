@@ -62,9 +62,9 @@ main = do
       else do
         (_, stdout, _) <-
           DS.readShell
-            <| "nix build --no-link --print-out-paths .#homeConfigurations."
-              ++ doubleQuotes opts.home
-              ++ ".activationPackage --impure"
+            <| "nix build --no-link --print-out-paths "
+              ++ doubleQuotes (".#homeConfigurations.\\\"" ++ opts.home ++ "\\\".activationPackage")
+              ++ " --impure"
 
         let path0 = strip stdout
         logDebugN
