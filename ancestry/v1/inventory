@@ -1,4 +1,0 @@
-[all]
-desktop ansible_connection=local
-laptop ansible_connection=local
-remote ansible_connection=local

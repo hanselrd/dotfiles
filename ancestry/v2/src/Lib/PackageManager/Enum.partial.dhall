@@ -1,1 +1,0 @@
-< Pacman | Dnf | Apt >

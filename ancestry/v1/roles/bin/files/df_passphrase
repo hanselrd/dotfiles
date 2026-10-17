@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-cd "$(dirname "$0")" || exit
-
-shuf -n "$1" /usr/share/dict/words | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr '\n' '-' | head -c -1; echo
