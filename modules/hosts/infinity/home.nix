@@ -2,6 +2,7 @@
   modules.home.delacruz-infinity-home = {
     imports = [
       # self.modules.home.agenix-integration
+      self.modules.home.nix-index-database-integration
       self.modules.home.stylix-integration
 
       self.modules.home.america-new-york-time-zone
@@ -13,14 +14,13 @@
 
       # self.modules.home.ccache-program
       # self.modules.home.cmake-program
-      # self.modules.home.nix-index-program
+      # self.modules.home.codex-program
       # self.modules.home.ranger-program
       # self.modules.home.rofi-program
       self.modules.home.bash-program
       self.modules.home.bat-program
       self.modules.home.btop-program
       self.modules.home.claude-code-program
-      self.modules.home.codex-program
       self.modules.home.delacruz-git-program
       self.modules.home.delacruz-neovim-program
       self.modules.home.delta-program

@@ -41,6 +41,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-unit = {
       url = "github:nix-community/nix-unit";
       inputs.nixpkgs.follows = "nixpkgs";
