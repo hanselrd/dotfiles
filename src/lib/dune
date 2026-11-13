@@ -1,0 +1,15 @@
+(include_subdirs qualified)
+
+(library
+ (name dotfiles)
+ (preprocess (pps ppx_deriving.show))
+ (libraries
+  cmdliner
+  dune-build-info
+  eio
+  eio_main
+  fmt
+  fmt.tty
+  genspio
+  logs
+  logs.fmt))

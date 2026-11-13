@@ -3,6 +3,7 @@
     home.packages = with pkgs; [
       bear
       clang-tools
+      compiledb
       emscripten
       gcc
       llvm

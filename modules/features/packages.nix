@@ -13,6 +13,7 @@ let
         file
         findutils
         gawk
+        glow
         gnugrep
         gnumake
         gnupatch
@@ -33,6 +34,7 @@ let
         pfetch
         pkg-config
         procps
+        putter
         rsync
         ssh-to-age
         strace
@@ -44,6 +46,7 @@ let
         wget
         which
         xxd
+        xz
         zlib
         zstd
       ];

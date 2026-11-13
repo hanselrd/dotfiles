@@ -1,13 +1,17 @@
 { exec, ... }:
 let
-  shell =
-    cmd:
-    exec [
-      "bash"
-      "-c"
-      cmd
-    ];
-  builtin = name: args: shell "nix run .#builtins -- ${name} ${builtins.concatStringsSep " " args}";
+  builtin =
+    name: args:
+    exec (
+      [
+        "nix"
+        "run"
+        ".#builtins"
+        "--"
+        name
+      ]
+      ++ args
+    );
 
   assertMsg = pred: msg: pred || builtins.throw msg;
 in

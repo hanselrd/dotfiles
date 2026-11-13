@@ -25,7 +25,7 @@ in
             home-manager = {
               backupFileExtension = "bkp.${self.lib.builtins.getRandomString 5}";
               useGlobalPkgs = true;
-              useUserPackages = true;
+              useUserPackages = false;
             };
           }
         )

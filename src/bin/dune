@@ -1,0 +1,65 @@
+(executable
+ (name builtins)
+ (public_name builtins)
+ (preprocess (pps ppx_deriving.show))
+ (modules builtins)
+ (libraries
+  dotfiles
+  cmdliner
+  eio
+  eio_main
+  logs))
+
+(executable
+ (name codegen)
+ (public_name codegen)
+ (enabled_if (= %{env:DOTFILES_SECRETS=} 1))
+ (preprocess (pps ppx_deriving.show))
+ (modules codegen)
+ (libraries
+  dotfiles
+  dotfiles_secrets
+  eio
+  eio_main
+  genspio
+  logs
+  unix))
+
+(executable
+ (name update)
+ (public_name update)
+ (preprocess (pps ppx_deriving.show))
+ (modules update)
+ (libraries
+  dotfiles
+  cmdliner
+  eio
+  eio_main
+  logs
+  re))
+
+(executable
+ (name eject)
+ (public_name eject)
+ (preprocess (pps ppx_deriving.show))
+ (modules eject)
+ (libraries
+  dotfiles
+  cmdliner
+  eio
+  eio_main
+  logs
+  re))
+
+(executable
+ (name playground)
+ (public_name playground)
+ (preprocess (pps ppx_deriving.show))
+ (modules playground)
+ (libraries
+  dotfiles
+  cmdliner
+  eio
+  eio_main
+  genspio
+  logs))

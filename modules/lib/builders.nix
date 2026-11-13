@@ -33,6 +33,9 @@ in
       home-manager.lib.homeManagerConfiguration {
         pkgs = self.legacyPackages.${system};
         modules = [ module ];
+        extraSpecialArgs = {
+          osConfig = null;
+        };
       };
 
     mkApp' = drv: exeName: {
@@ -49,7 +52,7 @@ in
       pkgs.buildGoModule {
         name = "dotfiles-go-bin-${name}";
         src = self.outPath;
-        vendorHash = "sha256-3EzYAzCxUOrMDZN5cRq/b466vus0Dp5cpJ0Vct8ypgM=";
+        vendorHash = "sha256-adjadJE8vCix6bgf409TKluVgUHESmlQBzyBufRXDZI=";
         subPackages = [ "cmd/${name}" ];
         goSum = self.outPath + "/go.sum";
         ldflags = [

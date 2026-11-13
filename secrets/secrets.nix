@@ -12,8 +12,10 @@ let
         "modules/features/work/default.nix"
         "modules/features/work/init.sh"
         "modules/features/work/init2.sh"
-        "modules/features/work/rts.hs"
-        "src/Dotfiles/Secrets/Scripts.hs"
+        "src/bin/dune"
+        "src/bin/rts.ml"
+        "src/lib/dune"
+        "src/lib/scripts.ml"
         "work-email"
       ];
       keys = [

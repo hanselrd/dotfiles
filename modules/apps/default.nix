@@ -3,42 +3,35 @@
     system:
     let
       pkgs = self.legacyPackages.${system};
-      dotfiles = pkgs.haskellPackages.callCabal2nix "dotfiles" self.outPath { };
-      dotfilesWithSecrets =
-        pkgs.haskellPackages.callCabal2nixWithOptions "dotfiles" self.outPath "-f secrets"
-          { };
     in
     {
-      builtins = self.lib.mkApp' dotfiles "builtins";
-      scripts = self.lib.mkApp' dotfilesWithSecrets "scripts";
+      builtins = self.lib.mkApp' self.packages.${system}.dotfiles "builtins";
+
+      codegen-ocaml = self.lib.mkApp' self.packages.${system}.dotfiles-with-secrets "codegen";
 
       codegen = self.lib.mkApp (
         pkgs.writeShellApplication {
           name = "codegen";
           runtimeInputs = with pkgs; [
-            go
+            dune
             nix
           ];
           text = ''
-            nix run .#scripts
-            go generate ./...
+            dune build @opam --auto-promote || true
+            nix run .#codegen-ocaml
           '';
         }
       );
 
+      update-ocaml = self.lib.mkApp' self.packages.${system}.dotfiles "update";
+
       update = self.lib.mkApp (
         pkgs.writeShellApplication {
           name = "update";
-          runtimeInputs = with pkgs; [
-            go
-            nix
-          ];
+          runtimeInputs = with pkgs; [ nix ];
           text = ''
             nix flake update
-            go get -u ./...
-            go mod tidy
-            go get github.com/dave/jennifer
-            go get github.com/dmarkham/enumer
+            # nix run .#update-ocaml
           '';
         }
       );
@@ -55,10 +48,9 @@
         }
       );
 
-      canary = self.lib.mkApp (self.lib.buildGoBin "canary" { inherit pkgs; });
+      # canary = self.lib.mkApp (self.lib.buildGoBin "canary" { inherit pkgs; });
 
-      eject = self.lib.mkApp' dotfiles "eject";
-      update-hashes = self.lib.mkApp' dotfiles "update-hashes";
+      eject = self.lib.mkApp' self.packages.${system}.dotfiles "eject";
     }
   );
 }

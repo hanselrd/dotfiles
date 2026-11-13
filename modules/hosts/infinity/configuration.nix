@@ -19,11 +19,12 @@
       self.modules.nixos.en-us-utf-8-locale
       self.modules.nixos.grub-boot-loader
       self.modules.nixos.networkmanager-networking
-      self.modules.nixos.swap
+      self.modules.nixos.zram
 
       # self.modules.nixos.hyprland-desktop
       # self.modules.nixos.kde-desktop
       self.modules.nixos.fuse-program
+      self.modules.nixos.nix-ld-program
       self.modules.nixos.zsh-program
 
       # self.modules.nixos.cockpit-service
@@ -32,7 +33,7 @@
       self.modules.nixos.fail2ban-service
       self.modules.nixos.openssh-service
       self.modules.nixos.qemu-guest-service
-      self.modules.nixos.scx-service
+      self.modules.nixos.scx-loader-service
       self.modules.nixos.udisks2-service
     ];
 

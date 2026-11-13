@@ -22,6 +22,8 @@ require("gitblame").setup({
   date_format = "@timeFormat@ (%r)",
   message_template = " <sha> • <author> • <date> ",
   message_when_not_committed = " Not committed yet ",
+  -- schedule_event = "CursorHold",
+  -- clear_event = "CursorHoldI",
 })
 
 -- mini-nvim

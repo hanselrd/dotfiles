@@ -7,7 +7,7 @@
     "_build/**"
     "ancestry/**"
     "dist*/**"
-    "scripts/**/*.sh"
+    "scripts/**"
   ];
 
   programs.nixfmt.enable = true;

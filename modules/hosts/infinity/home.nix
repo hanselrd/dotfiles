@@ -39,10 +39,10 @@
 
       # self.modules.home.cpp-development
       # self.modules.home.go-development
-      # self.modules.home.java-development
+      # self.modules.home.haskell-development
       # self.modules.home.javascript-development
       # self.modules.home.python-development
-      # self.modules.home.haskell-development
+      self.modules.home.java-development
       self.modules.home.nix-development
       self.modules.home.ocaml-development
       self.modules.home.shell-development

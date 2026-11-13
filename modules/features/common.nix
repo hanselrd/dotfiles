@@ -97,12 +97,6 @@ in
 
           boot.kernelPackages = pkgs.linuxPackages_latest;
 
-          boot.kernel.sysctl = {
-            "vm.overcommit_memory" = 2;
-            "vm.swappiness" = 1;
-            "vm.vfs_cache_pressure" = 500;
-          };
-
           networking.firewall = {
             allowedTCPPorts = [
               5000
@@ -139,6 +133,8 @@ in
           xdg.configFile = lib.mapAttrs' (
             name: value: lib.nameValuePair "nix/path/${name}" { source = value.flake; }
           ) config.nix.registry;
+
+          # home.fileActivator = "putter";
 
           home.preferXdgDirectories = true;
 
