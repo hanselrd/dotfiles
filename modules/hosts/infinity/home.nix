@@ -19,6 +19,8 @@
       self.modules.home.bash-program
       self.modules.home.bat-program
       self.modules.home.btop-program
+      self.modules.home.claude-code-program
+      self.modules.home.codex-program
       self.modules.home.delacruz-git-program
       self.modules.home.delacruz-neovim-program
       self.modules.home.delta-program
@@ -31,6 +33,7 @@
       self.modules.home.lldb-program
       self.modules.home.nh-program
       self.modules.home.oh-my-posh-program
+      self.modules.home.opencode-program
       self.modules.home.ripgrep-program
       self.modules.home.ssh-program
       self.modules.home.tmux-program
