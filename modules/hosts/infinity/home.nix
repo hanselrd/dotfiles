@@ -32,6 +32,7 @@
       self.modules.home.htop-program
       self.modules.home.lldb-program
       self.modules.home.nh-program
+      self.modules.home.nix-index-program
       self.modules.home.oh-my-posh-program
       self.modules.home.opencode-program
       self.modules.home.ripgrep-program
