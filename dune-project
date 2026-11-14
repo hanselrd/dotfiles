@@ -23,6 +23,7 @@
  (description "A longer description")
  (depends
   (ocaml (>= 5.5.0))
+  (alcotest :with-test)
   cmdliner
   dune-build-info
   eio

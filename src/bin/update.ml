@@ -41,7 +41,7 @@ let[@warning "-8"] update pool env
             Switch.run @@ fun sw ->
             let pipe_source, pipe_sink = Eio.Process.pipe ~sw process_mgr in
             let _p1 =
-              Eio.Process.spawn ~sw process_mgr
+              Dotfiles.Shell.spawn ~copts ~sw process_mgr
                 [
                   "git";
                   "ls-remote";
@@ -88,7 +88,7 @@ let[@warning "-8"] update pool env
     | x :: xs ->
         let stderr_buf = Buffer.create 1024 in
         let stderr_sink = Eio.Flow.buffer_sink stderr_buf in
-        Eio.Process.run process_mgr x ~stderr:stderr_sink
+        Dotfiles.Shell.run ~copts process_mgr x ~stderr:stderr_sink
           ~is_success:(fun code -> List.mem code [ 0; 1 ]);
         let output = Buffer.contents stderr_buf in
         Logs.debug (fun m -> m "output= %s" output);

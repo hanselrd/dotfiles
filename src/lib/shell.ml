@@ -13,11 +13,24 @@ let log_source ~verbosity ~label source =
       with End_of_file -> ())
   | Normal | Quiet -> ()
 
-let spawn ?cwd ?stdin
-    (* ?stdout  *)
-    (* ?stderr  *)
-    ?env ?executable ~copts:{ Cli.dry_run; Cli.verbosity } ~sw process_mgr args
-    =
+let combine_sinks pipe user =
+  let module Sink = struct
+    type t = unit
+
+    let single_write () bufs =
+      Eio.Flow.write pipe bufs;
+      Option.iter (fun sink -> Eio.Flow.write sink bufs) user;
+      Cstruct.lenv bufs
+
+    let copy () ~src =
+      Fun.protect
+        ~finally:(fun () -> Eio.Flow.close pipe)
+        (fun () -> Eio.Flow.Pi.simple_copy ~single_write () ~src)
+  end in
+  Eio.Resource.T ((), Eio.Flow.Pi.sink (module Sink))
+
+let spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable
+    ~copts:{ Cli.dry_run; Cli.verbosity } ~sw process_mgr args =
   (match verbosity with
   | Normal | Verbose ->
       Logs.info (fun m ->
@@ -32,12 +45,11 @@ let spawn ?cwd ?stdin
     let stderr_source, stderr_sink = Eio.Process.pipe process_mgr ~sw in
 
     let child =
-      Eio.Process.spawn ?cwd ?stdin ~stdout:stdout_sink ~stderr:stderr_sink ?env
-        ?executable ~sw process_mgr args
+      Eio.Process.spawn ?cwd ?stdin
+        ~stdout:(combine_sinks stdout_sink stdout)
+        ~stderr:(combine_sinks stderr_sink stderr)
+        ?env ?executable ~sw process_mgr args
     in
-
-    Eio.Flow.close stdout_sink;
-    Eio.Flow.close stderr_sink;
 
     Fiber.all
       [
@@ -47,11 +59,8 @@ let spawn ?cwd ?stdin
 
     Some child
 
-let run ?cwd ?stdin
-    (* ?stdout  *)
-    (* ?stderr  *)
-    ?is_success ?env ?executable ~copts:{ Cli.dry_run; Cli.verbosity }
-    process_mgr args =
+let run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable
+    ~copts:{ Cli.dry_run; Cli.verbosity } process_mgr args =
   (match verbosity with
   | Normal | Verbose ->
       Logs.info (fun m ->
@@ -73,17 +82,16 @@ let run ?cwd ?stdin
               Eio.Flow.close stdout_sink;
               Eio.Flow.close stderr_sink)
             (fun () ->
-              Eio.Process.run ?cwd ?stdin ~stdout:stdout_sink
-                ~stderr:stderr_sink ?is_success ?env ?executable process_mgr
-                args));
+              Eio.Process.run ?cwd ?stdin
+                ~stdout:(combine_sinks stdout_sink stdout)
+                ~stderr:(combine_sinks stderr_sink stderr)
+                ?is_success ?env ?executable process_mgr args));
         (fun () -> log_source ~verbosity ~label:"stdout" stdout_source);
         (fun () -> log_source ~verbosity ~label:"stderr" stderr_source);
       ]
 
-let parse_out ?cwd ?stdin
-    (* ?stderr  *)
-    ?is_success ?env ?executable ~copts:{ Cli.dry_run; Cli.verbosity }
-    process_mgr parser args =
+let parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable
+    ~copts:{ Cli.dry_run; Cli.verbosity } process_mgr parser args =
   (match verbosity with
   | Normal | Verbose ->
       Logs.info (fun m ->
@@ -103,8 +111,9 @@ let parse_out ?cwd ?stdin
           Fun.protect
             ~finally:(fun () -> Eio.Flow.close stderr_sink)
             (fun () ->
-              Eio.Process.parse_out ?cwd ?stdin ~stderr:stderr_sink ?is_success
-                ?env ?executable process_mgr parser args))
+              Eio.Process.parse_out ?cwd ?stdin
+                ~stderr:(combine_sinks stderr_sink stderr)
+                ?is_success ?env ?executable process_mgr parser args))
         (fun () -> log_source ~verbosity ~label:"stderr" stderr_source)
     in
 

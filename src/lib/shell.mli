@@ -3,8 +3,8 @@ open Eio.Std
 val spawn :
   ?cwd:Eio.Fs.dir_ty Eio.Path.t ->
   ?stdin:_ Eio.Flow.source ->
-  (* ?stdout:_ Eio.Flow.sink -> *)
-  (* ?stderr:_ Eio.Flow.sink -> *)
+  ?stdout:_ Eio.Flow.sink ->
+  ?stderr:_ Eio.Flow.sink ->
   ?env:Eio.Process.Env.t ->
   ?executable:string ->
   copts:Cli.copts ->
@@ -16,8 +16,8 @@ val spawn :
 val run :
   ?cwd:_ Eio.Path.t ->
   ?stdin:_ Eio.Flow.source ->
-  (* ?stdout:_ Eio.Flow.sink -> *)
-  (* ?stderr:_ Eio.Flow.sink -> *)
+  ?stdout:_ Eio.Flow.sink ->
+  ?stderr:_ Eio.Flow.sink ->
   ?is_success:(int -> bool) ->
   ?env:Eio.Process.Env.t ->
   ?executable:string ->
@@ -29,7 +29,7 @@ val run :
 val parse_out :
   ?cwd:_ Eio.Path.t ->
   ?stdin:_ Eio.Flow.source ->
-  (* ?stderr:_ Eio.Flow.sink -> *)
+  ?stderr:_ Eio.Flow.sink ->
   ?is_success:(int -> bool) ->
   ?env:Eio.Process.Env.t ->
   ?executable:string ->
