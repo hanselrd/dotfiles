@@ -52,6 +52,19 @@
   re))
 
 (executable
+ (name git_alias)
+ (public_name git-alias)
+ (preprocess (pps ppx_deriving.show))
+ (modules git_alias)
+ (libraries
+  dotfiles
+  cmdliner
+  eio
+  eio_main
+  logs
+  re))
+
+(executable
  (name playground)
  (public_name playground)
  (preprocess (pps ppx_deriving.show))

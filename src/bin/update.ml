@@ -1,7 +1,7 @@
 open Eio.Std
 
-let[@warning "-8"] update pool env
-    (copts, Some (skip_nix_hashes, skip_git_hashes)) =
+let[@warning "-8"] main pool env (copts, Some (skip_nix_hashes, skip_git_hashes))
+    =
   Logs.debug (fun m -> m "copts= %s" (Dotfiles.Cli.show_copts copts));
 
   let process_mgr = Eio.Stdenv.process_mgr env in
@@ -129,4 +129,4 @@ let cmd _ =
 
 let () =
   Dotfiles.Application.run "update" ~doc:"Update project" ~cmd:(`RootCmd cmd)
-    update
+    main

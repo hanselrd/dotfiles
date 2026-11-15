@@ -1,6 +1,6 @@
 open Eio.Std
 
-let[@warning "-8"] eject pool env (copts, Some (home, output)) =
+let[@warning "-8"] main pool env (copts, Some (home, output)) =
   Logs.debug (fun m -> m "copts= %s" (Dotfiles.Cli.show_copts copts));
 
   let process_mgr = Eio.Stdenv.process_mgr env in
@@ -163,5 +163,4 @@ let cmd env =
 
 let () =
   Dotfiles.Application.run "eject"
-    ~doc:"Eject home configuration to output directory" ~cmd:(`RootCmd cmd)
-    eject
+    ~doc:"Eject home configuration to output directory" ~cmd:(`RootCmd cmd) main

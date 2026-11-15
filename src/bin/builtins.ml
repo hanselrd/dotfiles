@@ -5,8 +5,9 @@ type builtin =
   | DecryptSecret of { identity : string; secret : string }
 [@@deriving show]
 
-let rec builtin_task copts builtin env =
+let rec task copts builtin env =
   let process_mgr = Eio.Stdenv.process_mgr env in
+
   match builtin with
   | RandomString { length } ->
       let alphabet =
@@ -24,7 +25,7 @@ let rec builtin_task copts builtin env =
               [ "findmnt"; "-no"; "source"; "-T"; file ]))
   | Device { file } ->
       let[@warning "-8"] (Dotfiles.Nix.Value.String device_partition) =
-        builtin_task copts (DevicePartition { file }) env
+        task copts (DevicePartition { file }) env
       in
       Dotfiles.Nix.Value.String
         (Option.get
@@ -41,11 +42,11 @@ let rec builtin_task copts builtin env =
         [ "age"; "-d"; "-i"; identity; "-o"; temp; secret ];
       Dotfiles.Nix.Value.Path temp
 
-let[@warning "-8"] builtin pool env (copts, Some builtin) =
+let[@warning "-8"] main pool env (copts, Some builtin) =
   Logs.debug (fun m -> m "builtin= %s" (show_builtin builtin));
   let value =
     Eio.Executor_pool.submit_exn pool ~weight:1.0 (fun () ->
-        builtin_task copts builtin env)
+        task copts builtin env)
   in
   Logs.debug (fun m -> m "nix_value= %s" (Dotfiles.Nix.Value.show value));
   let stdout = Eio.Stdenv.stdout env in
@@ -112,4 +113,4 @@ let () =
            device_cmd;
            decrypt_secret_cmd;
          ])
-    builtin
+    main
