@@ -1,8 +1,17 @@
 open Eio.Std
 open Cli
 
+let drain source =
+  let buf = Cstruct.create 4096 in
+  try
+    while true do
+      ignore (Eio.Flow.single_read source buf)
+    done
+  with End_of_file -> ()
+
 let log_source ~verbosity ~label source =
   match verbosity with
+  | Normal | Quiet -> drain source
   | Verbose -> (
       let buf = Eio.Buf_read.of_flow source ~max_size:(64 * 1024) in
       try
@@ -10,8 +19,11 @@ let log_source ~verbosity ~label source =
           let line = Eio.Buf_read.line buf in
           Logs.debug (fun m -> m "%s= %s" label line)
         done
-      with End_of_file -> ())
-  | Normal | Quiet -> ()
+      with
+      | End_of_file -> ()
+      | Eio.Buf_read.Buffer_limit_exceeded ->
+          Logs.debug (fun m -> m "%s= (line too long; draining)" label);
+          drain source)
 
 let combine_sinks pipe user =
   let module Sink = struct

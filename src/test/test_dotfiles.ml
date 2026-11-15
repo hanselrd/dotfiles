@@ -36,6 +36,13 @@ let test_attrset () =
     "attributes preserve order" "{ answer = 42; enabled = true; }"
     (render value)
 
+let test_run_drains_large_output () =
+  Eio_main.run @@ fun env ->
+  let process_mgr = Eio.Stdenv.process_mgr env in
+  let copts = { Cli.dry_run = false; verbosity = Cli.Normal } in
+  Eio.Time.with_timeout_exn (Eio.Stdenv.clock env) 5.0 @@ fun () ->
+  Shell.run ~copts process_mgr [ "head"; "-c"; "1000000"; "/dev/zero" ]
+
 let () =
   Alcotest.run "dotfiles"
     [
@@ -48,5 +55,10 @@ let () =
           Alcotest.test_case "null" `Quick test_null;
           Alcotest.test_case "list" `Quick test_list;
           Alcotest.test_case "attribute set" `Quick test_attrset;
+        ] );
+      ( "Shell.run",
+        [
+          Alcotest.test_case "drains large output without deadlocking" `Quick
+            test_run_drains_large_output;
         ] );
     ]
