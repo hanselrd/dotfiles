@@ -646,11 +646,11 @@
     "opam-repository": {
       "flake": false,
       "locked": {
-        "lastModified": 1794771808,
-        "narHash": "sha256-UeCyIKeci1/upVwuM3UPMBjQTb0aU/n6PFUv+QAgfDA=",
+        "lastModified": 1794832591,
+        "narHash": "sha256-gbOEhxqSFQOJmbMtnGD1Z23f2iqyZ0JpJFN5wn9Wtl4=",
         "owner": "ocaml",
         "repo": "opam-repository",
-        "rev": "a20469e4e6ec4200c243b6ce3e4f3142990a43e7",
+        "rev": "9c532cc7df1a14b1d1e3c7789ab202e3a314d0d4",
         "type": "github"
       },
       "original": {
@@ -728,11 +728,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794733384,
-        "narHash": "sha256-VaXNWDU+9dXckN4BlZbrcYTTd9pIscLeiknbhHX4+lk=",
+        "lastModified": 1794820811,
+        "narHash": "sha256-z43rmhOmnCG4gN2EcSm4tzHUSRg7DG5SaGscYreafzg=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "67f1944c7c99d8dbb57fa3d83043bc0a92cbcc56",
+        "rev": "2ff7d39b901d79ee26d26f9fa32f90511eecaa0e",
         "type": "github"
       },
       "original": {
@@ -983,11 +983,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1794744917,
-        "narHash": "sha256-leSgSr0ecfdYLpATpsTtg0l1ODetDmj+WzXtP6xOLso=",
+        "lastModified": 1794831721,
+        "narHash": "sha256-ex/uxmlwMG6KLlx/yijSsbF90ajrgroYsXeiNaiIFcM=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "ef3cc5e634052295d94e2d4138c70378d924cd2c",
+        "rev": "d7648d844508715597475bdbc635d40915bb6ae1",
         "type": "github"
       },
       "original": {
