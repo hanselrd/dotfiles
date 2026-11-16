@@ -151,9 +151,9 @@ in
             cd3 = "cd ../../..";
             cd4 = "cd ../../../..";
             cd5 = "cd ../../../../..";
-            rcp = "rsync -cavzP";
-            rmv = "rsync -cavzP --remove-source-files";
-            rrm = "mkdir -p ${config.xdg.cacheHome}/rsync/empty && rsync -avP --delete ${config.xdg.cacheHome}/rsync/empty/";
+            rcp = "rsync -ahz --partial --info=name,progress2";
+            rmv = "rsync -ahz --partial --info=name,progress2 --remove-source-files";
+            rrm = "mkdir -p ${config.xdg.cacheHome}/rsync/empty && rsync -ah --partial --info=name,progress2 --delete ${config.xdg.cacheHome}/rsync/empty/";
             shroot = "sudo -E $SHELL";
             sudo = "sudo ";
             vi = "vim -u NONE -U NONE -N -i NONE";
