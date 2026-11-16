@@ -1,6 +1,8 @@
 open Eio.Std
 open Cli
 
+let is_verbose = function Verbose -> true | Normal | Quiet -> false
+
 let drain source =
   let buf = Cstruct.create 4096 in
   try
@@ -52,7 +54,7 @@ let spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable ?(tty = false)
   | Quiet -> ());
 
   if dry_run then None
-  else if tty then
+  else if tty && is_verbose verbosity then
     Some
       (Eio.Process.spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable ~sw
          process_mgr args)
@@ -86,7 +88,7 @@ let run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable ?(tty = false)
   | Quiet -> ());
 
   if not dry_run then
-    if tty then
+    if tty && is_verbose verbosity then
       Eio.Process.run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable
         process_mgr args
     else
@@ -121,7 +123,7 @@ let parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable ?(tty = false)
   | Quiet -> ());
 
   if dry_run then None
-  else if tty then
+  else if tty && is_verbose verbosity then
     Some
       (Eio.Process.parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable
          process_mgr parser args)
