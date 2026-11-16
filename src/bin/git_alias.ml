@@ -24,7 +24,7 @@ let task copts git_alias env =
       Dotfiles.Shell.run ~copts process_mgr
         [ "git"; "count-objects"; "--verbose"; "--human-readable" ]
   | Hydrate ->
-      Dotfiles.Shell.run ~copts process_mgr
+      Dotfiles.Shell.run ~copts ~tty:true process_mgr
         [ "git"; "fetch"; "origin"; "--no-auto-gc"; "--prune"; "--refetch" ]
   | Maintenance ->
       Dotfiles.Shell.run ~copts process_mgr [ "git"; "hydrate" ];

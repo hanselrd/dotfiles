@@ -7,6 +7,7 @@ val spawn :
   ?stderr:_ Eio.Flow.sink ->
   ?env:Eio.Process.Env.t ->
   ?executable:string ->
+  ?tty:bool ->
   copts:Cli.copts ->
   sw:Switch.t ->
   [> ([> `Generic ] as 'a) Eio.Process.mgr_ty ] Eio.Resource.t ->
@@ -21,6 +22,7 @@ val run :
   ?is_success:(int -> bool) ->
   ?env:Eio.Process.Env.t ->
   ?executable:string ->
+  ?tty:bool ->
   copts:Cli.copts ->
   _ Eio.Process.mgr ->
   string list ->
@@ -33,6 +35,7 @@ val parse_out :
   ?is_success:(int -> bool) ->
   ?env:Eio.Process.Env.t ->
   ?executable:string ->
+  ?tty:bool ->
   copts:Cli.copts ->
   _ Eio.Process.mgr ->
   'a Eio.Buf_read.parser ->

@@ -41,7 +41,7 @@ let combine_sinks pipe user =
   end in
   Eio.Resource.T ((), Eio.Flow.Pi.sink (module Sink))
 
-let spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable
+let spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable ?(tty = false)
     ~copts:{ Cli.dry_run; Cli.verbosity } ~sw process_mgr args =
   (match verbosity with
   | Normal | Verbose ->
@@ -52,6 +52,10 @@ let spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable
   | Quiet -> ());
 
   if dry_run then None
+  else if tty then
+    Some
+      (Eio.Process.spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable ~sw
+         process_mgr args)
   else
     let stdout_source, stdout_sink = Eio.Process.pipe process_mgr ~sw in
     let stderr_source, stderr_sink = Eio.Process.pipe process_mgr ~sw in
@@ -71,7 +75,7 @@ let spawn ?cwd ?stdin ?stdout ?stderr ?env ?executable
 
     Some child
 
-let run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable
+let run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable ?(tty = false)
     ~copts:{ Cli.dry_run; Cli.verbosity } process_mgr args =
   (match verbosity with
   | Normal | Verbose ->
@@ -82,27 +86,31 @@ let run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable
   | Quiet -> ());
 
   if not dry_run then
-    Switch.run @@ fun sw ->
-    let stdout_source, stdout_sink = Eio.Process.pipe process_mgr ~sw in
-    let stderr_source, stderr_sink = Eio.Process.pipe process_mgr ~sw in
+    if tty then
+      Eio.Process.run ?cwd ?stdin ?stdout ?stderr ?is_success ?env ?executable
+        process_mgr args
+    else
+      Switch.run @@ fun sw ->
+      let stdout_source, stdout_sink = Eio.Process.pipe process_mgr ~sw in
+      let stderr_source, stderr_sink = Eio.Process.pipe process_mgr ~sw in
 
-    Fiber.all
-      [
-        (fun () ->
-          Fun.protect
-            ~finally:(fun () ->
-              Eio.Flow.close stdout_sink;
-              Eio.Flow.close stderr_sink)
-            (fun () ->
-              Eio.Process.run ?cwd ?stdin
-                ~stdout:(combine_sinks stdout_sink stdout)
-                ~stderr:(combine_sinks stderr_sink stderr)
-                ?is_success ?env ?executable process_mgr args));
-        (fun () -> log_source ~verbosity ~label:"stdout" stdout_source);
-        (fun () -> log_source ~verbosity ~label:"stderr" stderr_source);
-      ]
+      Fiber.all
+        [
+          (fun () ->
+            Fun.protect
+              ~finally:(fun () ->
+                Eio.Flow.close stdout_sink;
+                Eio.Flow.close stderr_sink)
+              (fun () ->
+                Eio.Process.run ?cwd ?stdin
+                  ~stdout:(combine_sinks stdout_sink stdout)
+                  ~stderr:(combine_sinks stderr_sink stderr)
+                  ?is_success ?env ?executable process_mgr args));
+          (fun () -> log_source ~verbosity ~label:"stdout" stdout_source);
+          (fun () -> log_source ~verbosity ~label:"stderr" stderr_source);
+        ]
 
-let parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable
+let parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable ?(tty = false)
     ~copts:{ Cli.dry_run; Cli.verbosity } process_mgr parser args =
   (match verbosity with
   | Normal | Verbose ->
@@ -113,6 +121,10 @@ let parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable
   | Quiet -> ());
 
   if dry_run then None
+  else if tty then
+    Some
+      (Eio.Process.parse_out ?cwd ?stdin ?stderr ?is_success ?env ?executable
+         process_mgr parser args)
   else
     Switch.run @@ fun sw ->
     let stderr_source, stderr_sink = Eio.Process.pipe process_mgr ~sw in
