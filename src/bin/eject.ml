@@ -111,10 +111,19 @@ let[@warning "-8"] main pool env (copts, Some (home, output)) =
     deps;
 
   Eio.Path.rmtree Eio.Path.(fs / temp_dir);
-  Dotfiles.Shell.run ~copts process_mgr [ "zstdmt"; "--rm"; temp_file ];
+
+  let temp_file' =
+    Printf.sprintf "%s/nix-eject%s.tar"
+      (Filename.get_temp_dir_name ())
+      (Eio.Process.parse_out process_mgr Eio.Buf_read.line
+         [ "git"; "rev-parse"; "--short=6"; "HEAD" ])
+  in
+  Eio.Path.rename Eio.Path.(fs / temp_file) Eio.Path.(fs / temp_file');
+
+  Dotfiles.Shell.run ~copts process_mgr [ "zstdmt"; "--rm"; temp_file' ];
 
   Dotfiles.Shell.run ~copts process_mgr
-    [ "tar"; "-I"; "zstdmt"; "-xPf"; temp_file ^ ".zst" ];
+    [ "tar"; "-I"; "zstdmt"; "-xPf"; temp_file' ^ ".zst" ];
 
   let path0_new =
     Option.get
