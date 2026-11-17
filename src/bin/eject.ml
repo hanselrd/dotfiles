@@ -1,6 +1,6 @@
 open Eio.Std
 
-let[@warning "-8"] main pool env (copts, Some (home, output)) =
+let[@warning "-8"] main pool env (copts, Some (home, output, git_hash)) =
   Logs.debug (fun m -> m "copts= %s" (Dotfiles.Cli.show_copts copts));
 
   let process_mgr = Eio.Stdenv.process_mgr env in
@@ -113,10 +113,7 @@ let[@warning "-8"] main pool env (copts, Some (home, output)) =
   Eio.Path.rmtree Eio.Path.(fs / temp_dir);
 
   let temp_file' =
-    Printf.sprintf "%s/nix-eject%s.tar"
-      (Filename.get_temp_dir_name ())
-      (Eio.Process.parse_out process_mgr Eio.Buf_read.line
-         [ "git"; "rev-parse"; "--short=6"; "HEAD" ])
+    Printf.sprintf "%s/nix-eject%s.tar" (Filename.get_temp_dir_name ()) git_hash
   in
   Eio.Path.rename Eio.Path.(fs / temp_file) Eio.Path.(fs / temp_file');
 
@@ -150,6 +147,10 @@ open Cmdliner.Term.Syntax
 
 let cmd env =
   let process_mgr = Eio.Stdenv.process_mgr env in
+  let git_hash =
+    Eio.Process.parse_out process_mgr Eio.Buf_read.line
+      [ "git"; "rev-parse"; "--short=6"; "HEAD" ]
+  in
 
   let home =
     let doc = "Home configuration" in
@@ -161,15 +162,14 @@ let cmd env =
     let default =
       Printf.sprintf "%s/.nix/_/%s"
         (Option.get (Eio.Process.getenv_opt process_mgr "HOME"))
-        (Eio.Process.parse_out process_mgr Eio.Buf_read.line
-           [ "git"; "rev-parse"; "--short=6"; "HEAD" ])
+        git_hash
     in
     Arg.(
       value & opt string default & info [ "o"; "output" ] ~doc ~docv:"OUTPUT")
   in
 
   let+ home and+ output in
-  (home, output)
+  (home, output, git_hash)
 
 let () =
   Dotfiles.Application.run "eject"
