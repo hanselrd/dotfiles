@@ -7,19 +7,123 @@ type git_alias =
   | Maintenance
 [@@deriving show]
 
+let worktree_directory branch =
+  String.map (fun c -> if Char.equal c '/' then '-' else c) branch
+
 let task copts git_alias env =
   let process_mgr = Eio.Stdenv.process_mgr env in
+  let fs = Eio.Stdenv.fs env in
+  let cwd = Eio.Stdenv.cwd env in
 
   match git_alias with
   | SmartClone { url } ->
-      ignore url;
-      failwith "TODO: implement smart-clone"
-  | SmartWorktreeAdd { branch; new_branch } ->
-      ignore (branch, new_branch);
-      failwith "TODO: implement smart-worktree-add"
+      let directory = Filename.remove_extension (Filename.basename url) in
+      if not copts.Dotfiles.Cli.dry_run then
+        Eio.Path.mkdirs ~exists_ok:true ~perm:0o755 Eio.Path.(fs / directory);
+      Dotfiles.Shell.run ~copts process_mgr
+        [
+          "git";
+          "clone";
+          "--bare";
+          "--single-branch";
+          "--filter=blob:none";
+          url;
+          Filename.concat directory ".bare";
+        ];
+      if not copts.Dotfiles.Cli.dry_run then
+        Eio.Path.save ~create:(`Or_truncate 0o644)
+          Eio.Path.(fs / directory / ".git")
+          "gitdir: ./.bare\n";
+      Dotfiles.Shell.run ~copts process_mgr
+        ~is_success:(fun _ -> true)
+        [
+          "git"; "-C"; directory; "config"; "--unset-all"; "remote.origin.fetch";
+        ]
+  | SmartWorktreeAdd { branch; new_branch } -> (
+      match new_branch with
+      | None ->
+          let directory = worktree_directory branch in
+          Dotfiles.Shell.run ~copts process_mgr
+            [
+              "git";
+              "fetch";
+              "origin";
+              Printf.sprintf "%s:refs/remotes/origin/%s" branch branch;
+            ];
+          Dotfiles.Shell.run ~copts process_mgr
+            ~is_success:(fun _ -> true)
+            [ "git"; "branch"; branch; "origin/" ^ branch; "--track" ];
+          Dotfiles.Shell.run ~copts process_mgr
+            [ "git"; "remote"; "set-branches"; "--add"; "origin"; branch ];
+          Dotfiles.Shell.run ~copts process_mgr
+            [ "git"; "worktree"; "add"; directory; branch ]
+      | Some new_branch ->
+          let directory = worktree_directory new_branch in
+          Dotfiles.Shell.run ~copts process_mgr
+            ~is_success:(fun _ -> true)
+            [
+              "git";
+              "fetch";
+              "origin";
+              Printf.sprintf "%s:refs/remotes/origin/%s" branch new_branch;
+            ];
+          let origin_branch_exists =
+            match
+              Dotfiles.Shell.parse_out ~copts process_mgr Eio.Buf_read.take_all
+                ~is_success:(fun _ -> true)
+                [ "git"; "rev-parse"; "--verify"; "origin/" ^ branch ]
+            with
+            | Some output -> not (String.is_empty (String.trim output))
+            | None -> false
+          in
+          Dotfiles.Shell.run ~copts process_mgr
+            [
+              "git";
+              "branch";
+              new_branch;
+              (if origin_branch_exists then "origin/" ^ branch else branch);
+            ];
+          Dotfiles.Shell.run ~copts process_mgr
+            [ "git"; "remote"; "set-branches"; "--add"; "origin"; new_branch ];
+          Dotfiles.Shell.run ~copts process_mgr
+            [ "git"; "worktree"; "add"; directory; new_branch ];
+          Dotfiles.Shell.run ~copts process_mgr
+            ~is_success:(fun _ -> true)
+            [
+              "git";
+              "-C";
+              directory;
+              "--set-upstream-to=origin/" ^ new_branch;
+              "branch";
+              new_branch;
+            ])
   | SmartWorktreeRemove { branch } ->
-      ignore branch;
-      failwith "TODO: implement smart-worktree-remove"
+      let directory = worktree_directory branch in
+      Eio.Path.rmtree Eio.Path.(cwd / directory);
+      Dotfiles.Shell.run ~copts process_mgr [ "git"; "worktree"; "prune" ];
+      Dotfiles.Shell.run ~copts process_mgr
+        ~is_success:(fun _ -> true)
+        [ "git"; "branch"; "-D"; branch ];
+      Dotfiles.Shell.run ~copts process_mgr
+        ~is_success:(fun _ -> true)
+        [
+          "git";
+          "config";
+          "--unset";
+          "remote.origin.fetch";
+          Printf.sprintf "refs/heads/%s:refs/remotes/origin/%s" branch branch;
+        ];
+      Dotfiles.Shell.run ~copts process_mgr
+        ~is_success:(fun _ -> true)
+        [
+          "git";
+          "config";
+          "--unset";
+          "remote.origin.fetch";
+          Printf.sprintf "+refs/heads/%s:refs/remotes/origin/%s" branch branch;
+        ];
+      Dotfiles.Shell.run ~copts process_mgr [ "git"; "repack"; "-d"; "-l" ];
+      Dotfiles.Shell.run ~copts process_mgr [ "git"; "prune"; "--expire=now" ]
   | Audit ->
       Dotfiles.Shell.run ~copts process_mgr
         [ "git"; "count-objects"; "--verbose"; "--human-readable" ]
