@@ -113,7 +113,8 @@ let[@warning "-8"] main pool env (copts, Some (home, output)) =
   Eio.Path.rmtree Eio.Path.(fs / temp_dir);
   Dotfiles.Shell.run ~copts process_mgr [ "zstdmt"; "--rm"; temp_file ];
 
-  Dotfiles.Shell.run ~copts process_mgr [ "tar"; "-xPf"; temp_file ^ ".zst" ];
+  Dotfiles.Shell.run ~copts process_mgr
+    [ "tar"; "-I"; "zstdmt"; "-xPf"; temp_file ^ ".zst" ];
 
   let path0_new =
     Option.get
