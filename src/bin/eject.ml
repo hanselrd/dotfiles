@@ -47,7 +47,9 @@ let[@warning "-8"] main pool env (copts, Some (home, output, git_hash)) =
   in
 
   Switch.run @@ fun sw ->
-  let temp_dir = Filename.temp_dir "eject-deps" "" in
+  let temp_dir =
+    Filename.temp_dir (Printf.sprintf "eject-deps%s" git_hash) ""
+  in
   let promises =
     List.map
       (fun dep ->
@@ -97,7 +99,9 @@ let[@warning "-8"] main pool env (copts, Some (home, output, git_hash)) =
   in
   List.iter Promise.await_exn promises;
 
-  let temp_file = Filename.temp_file "eject-deps" ".tar" in
+  let temp_file =
+    Filename.temp_file (Printf.sprintf "eject-deps%s" git_hash) ".tar"
+  in
   Dotfiles.Shell.run ~copts process_mgr
     [ "tar"; "-cf"; temp_file; "-T"; "/dev/null" ];
 
@@ -112,15 +116,10 @@ let[@warning "-8"] main pool env (copts, Some (home, output, git_hash)) =
 
   Eio.Path.rmtree Eio.Path.(fs / temp_dir);
 
-  let temp_file' =
-    Printf.sprintf "%s/nix-eject%s.tar" (Filename.get_temp_dir_name ()) git_hash
-  in
-  Eio.Path.rename Eio.Path.(fs / temp_file) Eio.Path.(fs / temp_file');
-
-  Dotfiles.Shell.run ~copts process_mgr [ "zstdmt"; "--rm"; temp_file' ];
+  Dotfiles.Shell.run ~copts process_mgr [ "zstdmt"; "--rm"; temp_file ];
 
   Dotfiles.Shell.run ~copts process_mgr
-    [ "tar"; "-I"; "zstdmt"; "-xPf"; temp_file' ^ ".zst" ];
+    [ "tar"; "-I"; "zstdmt"; "-xPf"; temp_file ^ ".zst" ];
 
   let path0_new =
     Option.get

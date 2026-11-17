@@ -983,11 +983,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1794875490,
-        "narHash": "sha256-WkTMcPpKlxqMkG2T8cg1J0AC4xlrlH7UIJ8tjUFbTDE=",
+        "lastModified": 1794917860,
+        "narHash": "sha256-0Epvj0OYXITwRujI0KHIRnypHAruOGaw1RpQ45OS/ug=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "8cfac7a15e72c86f5bcdc57486c8762f5d508cbd",
+        "rev": "c26647c64be9e1a1b21087ce93dd3964751d6781",
         "type": "github"
       },
       "original": {
