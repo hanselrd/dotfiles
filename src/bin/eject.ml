@@ -94,7 +94,9 @@ let[@warning "-8"] main pool env (copts, Some (home, output, git_hash)) =
                 Printf.sprintf "--transform=s@%s@@" temp_dep;
                 temp_dep ^ output;
               ];
-            Eio.Path.rmtree Eio.Path.(fs / temp_dep)))
+            Eio.Path.rmtree Eio.Path.(fs / temp_dep);
+            Dotfiles.Shell.run ~copts process_mgr
+              [ "tar"; "-xPf"; temp_dep_tar ]))
       deps
   in
   List.iter Promise.await_exn promises;
@@ -117,9 +119,6 @@ let[@warning "-8"] main pool env (copts, Some (home, output, git_hash)) =
   Eio.Path.rmtree Eio.Path.(fs / temp_dir);
 
   Dotfiles.Shell.run ~copts process_mgr [ "zstdmt"; "--rm"; temp_file ];
-
-  Dotfiles.Shell.run ~copts process_mgr
-    [ "tar"; "-I"; "zstdmt"; "-xPf"; temp_file ^ ".zst" ];
 
   let path0_new =
     Option.get
