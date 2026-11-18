@@ -88,14 +88,13 @@ let task copts git_alias env =
           Dotfiles.Shell.run ~copts process_mgr
             [ "git"; "worktree"; "add"; directory; new_branch ];
           Dotfiles.Shell.run ~copts process_mgr
-            ~is_success:(fun _ -> true)
             [
               "git";
               "-C";
               directory;
-              "--set-upstream-to=origin/" ^ new_branch;
               "branch";
               new_branch;
+              "--set-upstream-to=origin/" ^ new_branch;
             ])
   | SmartWorktreeRemove { branch } ->
       let directory = worktree_directory branch in
