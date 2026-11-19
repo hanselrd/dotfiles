@@ -1,10 +1,10 @@
 let
+  dev = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH/s0GPuqU8oABuFz6ytahsSVHKWDHFGv1FLTBciBKcJ";
+
   devUser = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINnGYRLaLdzMnSoMtIfHCoo+OhlSI8TDFn4yaXcpVS5k";
   work0User = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHt/ws2NS0UocPs9ajUlXdzp8ndcJs74CynwtJM+ZHxY";
   work1User = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFS0MbdOSVFskkxILtRUDTkmmeX1Tz9iCYFm6hB8hXKE";
   work2User = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKqZkGOPwxJvoh7iSbmQZAVaHmjtzq1x2XBea4UWfNK";
-
-  dev = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH/s0GPuqU8oABuFz6ytahsSVHKWDHFGv1FLTBciBKcJ";
 
   matrix = [
     {
@@ -19,21 +19,22 @@ let
         "work-email"
       ];
       keys = [
+        dev
         devUser
         work0User
         work1User
         work2User
-        dev
       ];
     }
     {
       secrets = [
         "bookmarks.html"
+        "claude-code-oauth-token"
         "smb-data-creds"
       ];
       keys = [
-        devUser
         dev
+        devUser
       ];
     }
   ];

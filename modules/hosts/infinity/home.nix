@@ -13,7 +13,6 @@
       self.modules.home.en-us-utf-8-locale
 
       # self.modules.home.ccache-program
-      # self.modules.home.claude-code-program
       # self.modules.home.cmake-program
       # self.modules.home.codex-program
       # self.modules.home.ranger-program
@@ -21,6 +20,7 @@
       self.modules.home.bash-program
       self.modules.home.bat-program
       self.modules.home.btop-program
+      self.modules.home.claude-code-program
       self.modules.home.delacruz-git-program
       self.modules.home.delacruz-neovim-program
       self.modules.home.delta-program
